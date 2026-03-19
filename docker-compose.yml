@@ -1,0 +1,9 @@
+services:
+  shuvaloff-ssg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shuvaloff-ssg
+    ports:
+      - "5171:5171"
+    restart: unless-stopped
