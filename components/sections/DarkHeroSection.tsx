@@ -11,6 +11,7 @@ type DarkHeroSectionProps = {
     image: { src: string; alt: string };
     imageMobile?: { src: string; alt: string };
     size?: "xl" | "2xl" | "3xl";
+    imageGradient?: boolean;
 };
 
 const sizeClass: Record<NonNullable<DarkHeroSectionProps["size"]>, string> = {
@@ -24,6 +25,7 @@ export default function DarkHeroSection({
     image,
     imageMobile,
     size = "xl",
+    imageGradient = true,
 }: DarkHeroSectionProps) {
     const mobileImage = imageMobile ?? image;
 
@@ -39,13 +41,15 @@ export default function DarkHeroSection({
                     loading="lazy"
                     className="object-cover object-top"
                 />
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background:
-                            "linear-gradient(180deg, #161113 0%, rgba(21,17,19,0.85) 30%, rgba(20,16,19,0.4) 65%, rgba(20,16,19,0) 100%)",
-                    }}
-                />
+                {imageGradient ? (
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            background:
+                                "linear-gradient(180deg, #161113 0%, rgba(21,17,19,0.85) 30%, rgba(20,16,19,0.4) 65%, rgba(20,16,19,0) 100%)",
+                        }}
+                    />
+                ) : null}
             </div>
 
             {/* DESKTOP: фото на весь блок */}
@@ -58,13 +62,15 @@ export default function DarkHeroSection({
                     loading="lazy"
                     className="object-cover"
                 />
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        background:
-                            "linear-gradient(#161113, rgba(21,17,19,0.51), rgba(20,16,19,0))",
-                    }}
-                />
+                {imageGradient ? (
+                    <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                            background:
+                                "linear-gradient(#161113, rgba(21,17,19,0.51), rgba(20,16,19,0))",
+                        }}
+                    />
+                ) : null}
             </div>
 
             {/* Контент */}
