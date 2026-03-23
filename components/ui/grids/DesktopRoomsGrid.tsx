@@ -9,6 +9,7 @@ type RoomSlide = {
     area: string;
     guests: string;
     description: string;
+    bookingUrl: string;
 };
 
 type DesktopRoomsGridProps = {
@@ -43,13 +44,22 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
 
                     {/* Кнопка + характеристики */}
                     <div className="flex items-center gap-8 xl:mt-2">
-                        <Button
-                            href={`/rooms/${room.slug}/`}
-                            variant="primary"
-                            size="sm"
-                        >
-                            Подробнее
-                        </Button>
+                        <div className="flex gap-4">
+                            <Button
+                                href={`/rooms/${room.slug}/`}
+                                variant="primary"
+                                size="sm"
+                            >
+                                Подробнее
+                            </Button>
+                            <Button
+                                href={room.bookingUrl}
+                                variant="primary-outline"
+                                size="sm"
+                            >
+                                Выбрать
+                            </Button>
+                        </div>
                         <span className="flex items-center gap-2 text-sm text-zinc-600">
                             <SquareIcon size={16} color="#364D6B" />
                             {room.area}

@@ -24,7 +24,7 @@ export const AllRooms: Room[] = [
     {
         title: "Стандарт",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2025/10/shuvaloff-standard-1.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/03/standard.png",
             alt: "Стандарт",
         },
         gallery: [
@@ -82,7 +82,7 @@ export const AllRooms: Room[] = [
     {
         title: "Делюкс",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2025/10/shuvaloff-studio-1.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/03/deluxe.png",
             alt: "Делюкс",
         },
         gallery: [
@@ -155,7 +155,7 @@ export const AllRooms: Room[] = [
     {
         title: "Джуниор сьют",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2025/09/MMI2065_058_1_maxiimov.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/03/junior.png",
             alt: "Джуниор сьют",
         },
         gallery: [
@@ -223,7 +223,7 @@ export const AllRooms: Room[] = [
     {
         title: "Сьют",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/Rectangle-192.png",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/03/suite.png",
             alt: "Сьют",
         },
         gallery: [

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
 
@@ -11,6 +12,12 @@ type NavItem = {
     target?: "_blank";
     lineBelow?: boolean;
     submenu?: { label: string; href: string }[];
+};
+
+type SubNavItem = {
+    label: string;
+    href: string;
+    target?: "_blank";
 };
 
 const navItems: NavItem[] = [
@@ -38,7 +45,8 @@ const navItems: NavItem[] = [
     },
     {
         label: "История особняка",
-        href: "https://drive.google.com/file/d/1UeowKlfVMGaUTTaZAgNP_Ew0Sox2fj3n/",
+        href: "https://static.academia.spb.ru/files/История_Особняка_Шувалова.pdf",
+        target: "_blank",
     },
     {
         label: "Свадьба в особняке",
@@ -54,7 +62,21 @@ const navItems: NavItem[] = [
     },
 ];
 
+const subNavItems: SubNavItem[] = [
+    { label: "Категории номеров", href: "/rooms/" },
+    { label: "Исторические люксы", href: "/rooms/historical/" },
+    { label: "Специальные предложения", href: "/sales/" },
+    { label: "ACADEMIA REWARDS", href: "/rewards/" },
+    {
+        label: "Ресторан",
+        href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+        target: "_blank" as const,
+    },
+];
+
 export default function Header() {
+    const pathname = usePathname();
+    const isHome = pathname === "/";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -74,13 +96,13 @@ export default function Header() {
 
     return (
         <>
-            <div className="h-22 xl:h-26" />
+            <div className={`h-22 ${isHome ? "xl:h-26" : "xl:h-36"}`} />
 
             <header
-                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 xl:pb-10 ${
                     isLight
                         ? "bg-white"
-                        : "bg-linear-to-b from-black/80 via-black/50 to-transparent"
+                        : "bg-linear-to-b from-black/80 via-black/60 to-transparent"
                 }`}
             >
                 <div className="flex items-center h-14 xl:h-16 px-5 xl:px-8 relative">
@@ -117,10 +139,10 @@ export default function Header() {
                         <Image
                             src="/logo.svg"
                             alt="ACADEMIA Особняк Шувалова"
-                            width={140}
-                            height={40}
+                            width={150}
+                            height={38}
                             priority
-                            className={`h-7 xl:h-8 w-auto transition-all duration-300 ${
+                            className={`transition-all duration-300 ${
                                 isLight ? "" : "brightness-0 invert"
                             }`}
                         />
@@ -190,7 +212,7 @@ export default function Header() {
                     >
                         {/* Десктоп: текст на линии */}
                         <p
-                            className={`hidden xl:block absolute left-1/2 -translate-x-1/2 -translate-y-1/3 font-alistair text-3xl whitespace-nowrap transition-colors duration-300 ${
+                            className={`hidden ${isHome ? "xl:block" : "hidden"} absolute left-1/2 -translate-x-1/2 -translate-y-1/3 font-alistair text-3xl whitespace-nowrap transition-colors duration-300 ${
                                 isLight ? "text-[#96908D]" : "text-white/70"
                             }`}
                         >
@@ -198,6 +220,31 @@ export default function Header() {
                         </p>
                     </div>
                 </div>
+
+                {/* Десктоп: дополнительное меню — только не на главной */}
+                {!isHome && (
+                    <nav className="hidden xl:flex items-center justify-between gap-8 px-8 h-10">
+                        {subNavItems.map(({ label, href, target }) => (
+                            <Link
+                                key={href}
+                                href={href}
+                                target={target}
+                                rel={
+                                    target === "_blank"
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                }
+                                className={`tracking-wide whitespace-nowrap transition-colors duration-200 ${
+                                    isLight
+                                        ? "text-stone-500 hover:text-brand-blue"
+                                        : "text-white/70 hover:text-white/90"
+                                }`}
+                            >
+                                {label}
+                            </Link>
+                        ))}
+                    </nav>
+                )}
             </header>
 
             {/* Оверлей */}

@@ -82,9 +82,7 @@ export default function Rewards() {
                     ПРИСОЕДЕНИТЬСЯ К&nbsp;ПРОГРАММЕ ЛОЯЛЬНОСТИ
                 </Button>
             </section>
-            <section className="mx-6 xl:max-w-6xl xl:mx-auto xl:w-full">
-                <AcademiaRewards />
-            </section>
+            <AcademiaRewards />
             <Divider />
             <ContactsSection />
         </main>

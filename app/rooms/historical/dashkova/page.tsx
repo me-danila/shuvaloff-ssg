@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import AntiquesSection from "@/components/sections/AntiquesSection";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Divider from "@/components/ui/Divider";
@@ -105,6 +106,7 @@ export default function HistoricalRooms() {
                     alt: "Резиденция Дашковой",
                 }}
             />
+            <BookingForm />
             <p className="mx-6 my-2 xl:max-w-5xl xl:mx-auto xl:mt-6 xl:text-center">
                 Этот номер назван в&nbsp;честь графини Елизаветы Андреевны
                 Воронцовой-Дашковой (урождённой Шуваловой, 1845−1924).

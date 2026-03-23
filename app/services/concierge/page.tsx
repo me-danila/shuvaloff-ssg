@@ -45,7 +45,7 @@ export default function Concierge() {
                     и&nbsp;чуткость к&nbsp;вашим пожеланиям.
                     <br />
                     <br />
-                    Консьерж-служба ACADEMIA Особняк SHUVALOFF всегда готова
+                    Консьерж-служба ACADEMIA Особняк Шувалова всегда готова
                     помочь с&nbsp;решением любых, даже самых неожиданных, задач.
                 </p>
                 <SliderMobile images={heroImages} />
@@ -195,8 +195,7 @@ export default function Concierge() {
                 </p>
                 <div className="flex flex-col gap-3 mt-5 xl:flex-row">
                     <Button
-                        href="https://yandex.ru/maps/-/CHVxyC~g"
-                        target="_blank"
+                        href="/run/"
                         variant="primary-outline"
                         className="grow"
                         size="sm"

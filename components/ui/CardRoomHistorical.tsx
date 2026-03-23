@@ -84,14 +84,24 @@ export default function CardRoomHistorical({
             </p>
 
             {/* Кнопка */}
-            <Button
-                href={bookingUrl}
-                variant="primary"
-                size="sm"
-                className="self-start"
-            >
-                Забронировать
-            </Button>
+            <div className="flex items-center gap-3">
+                <Button
+                    href={`/rooms/historical/${slug}/`}
+                    variant="primary"
+                    size="sm"
+                    className="self-start"
+                >
+                    ПОДРОБНЕЕ
+                </Button>
+                <Button
+                    href={bookingUrl}
+                    variant="primary-outline"
+                    size="sm"
+                    className="self-start"
+                >
+                    ВЫБРАТЬ
+                </Button>
+            </div>
         </div>
     );
 }

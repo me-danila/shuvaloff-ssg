@@ -96,7 +96,7 @@ export default function TransportSlider() {
                         <Button
                             href={href}
                             target="_blank"
-                            variant="primary-outline"
+                            variant="primary"
                             className="self-start"
                         >
                             Посмотреть расписание

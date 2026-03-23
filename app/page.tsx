@@ -16,24 +16,24 @@ export const metadata: Metadata = {
 
 const heroImages: [HeroImage, HeroImage, HeroImage, HeroImage, HeroImage] = [
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/02/426fa6f9fc9b0d908645ab3d9c767d0ab01c8453.jpg",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/03/02_MMI_9908_327_@maxiimov_0-без-урны-1.png",
         alt: "Фасад отеля",
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/02/4.jpg",
-        alt: "Пара",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_27-1.png",
+        alt: "Невеста у окна",
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/02/3.jpg",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/03/v3-1.png",
         alt: "Номер",
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/02/5.jpg",
-        alt: "Чтение",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_163-1.png",
+        alt: "Пара",
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/02/2.jpg",
-        alt: "Невеста у окна",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_59-1.png",
+        alt: "Чтение",
     },
 ];
 
@@ -47,7 +47,7 @@ const descriptionImages = [
         alt: "Гости в отеле",
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/02/12121212.jpg",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/03/93776e5d6b0bebc07aa56cb4244e80cb1fa2e410.jpg",
         alt: "Ресторан в отеле",
     },
 ];
@@ -56,7 +56,7 @@ export default function Home() {
     return (
         <main className="flex flex-col gap-10">
             <HeroWithPictures
-                title="Отель-особняк Academia&nbsp;Shuvaloff"
+                title="Отель Academia Особняк&nbsp;Шувалова"
                 subtitle="Изысканный отель в&nbsp;особняке XIX&nbsp;века с&nbsp;богатой&nbsp;историей в&nbsp;центре Петербурга"
                 images={heroImages}
             />
@@ -73,7 +73,7 @@ export default function Home() {
                 </div>
                 <h2 className="mt-4">ОСОБНЯК С&nbsp;ИСТОРИЕЙ</h2>
                 <p className="my-2 xl:max-w-4xl xl:mx-auto">
-                    Отель-особняк ACADEMIA Шувалов&nbsp;— это бережно
+                    Отель-особняк ACADEMIA Шувалова&nbsp;— это бережно
                     отреставрированный объект культурного наследия, ранее
                     принадлежавший семье графа Шувалова. С&nbsp;уважением
                     к&nbsp;истории мы&nbsp;восстановили исторические детали,
@@ -123,7 +123,7 @@ export default function Home() {
                 </p>
                 <Image
                     src="https://academia.spb.ru/wp-content/uploads/2026/02/Group-126.png"
-                    alt="Герб Shuvaloff"
+                    alt="Герб Шувалова"
                     width={263}
                     height={234}
                     loading="lazy"
@@ -175,8 +175,13 @@ export default function Home() {
             </section>
             <Divider />
             <DarkHeroSection
+                imageMobile={{
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/hands.png",
+                    alt: "ACADEMIA Особняк Шувалова",
+                    position: "center",
+                }}
                 image={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/02/65b1e04b90ecd260af1d2cd2676a24d258d9d5d0.jpg",
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/Rectangle-122.png",
                     alt: "ACADEMIA Особняк Шувалова",
                 }}
                 blocks={[

@@ -201,7 +201,7 @@ export default function AllServices() {
                     </h2>
                     <ul className="space-y-1 my-3">
                         {[
-                            "Опубликуйте stories или пост с локации отеля ACADEMIA ОСОБНЯК SHUVALOFF и продукцией GESS из Beauty Bar",
+                            "Опубликуйте stories или пост с локации отеля ACADEMIA Особняк Шувалова и продукцией GESS из Beauty Bar",
                             "Отметьте аккаунты отеля @academia.hotels и @gessmarket.ru и поделитесь своими искренними впечатлениями",
                             "Покажите опубликованный материал менеджеру службы заботы на ресепшн и получите свой подарок",
                         ].map((item) => (

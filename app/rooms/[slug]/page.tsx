@@ -65,10 +65,16 @@ export default async function RoomPage({ params }: Props) {
                 <Button href={room.bookingUrl} variant="primary">
                     Забронировать
                 </Button>
+                <Button href="/rooms/" variant="primary-outline">
+                    ВСЕ КАТЕГОРИИ
+                </Button>
             </section>
             <section className="flex flex-col mx-6 my-4 gap-4 xl:max-w-6xl xl:mx-auto xl:my-2">
                 <p>{room.fullDescription}</p>
-                <ul className="columns-1 md:columns-2 xl:columns-3 gap-x-24 my-4 xl:max-w-6xl xl:mx-auto xl:w-full text-left space-y-4 xl:space-y-8 xl:mt-12">
+                <p className="font-alistair text-stone-400 text-3xl mt-2 xl:mt-4 xl:mb-3 xl:text-4xl">
+                    Оснащение:
+                </p>
+                <ul className="columns-1 md:columns-2 xl:columns-3 gap-x-24 xl:max-w-6xl xl:mx-auto xl:w-full text-left space-y-4 xl:space-y-8">
                     {room.amenities.map((item) => (
                         <li
                             key={item}

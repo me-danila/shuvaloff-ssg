@@ -9,8 +9,9 @@ type ContentBlock = {
 type DarkHeroSectionProps = {
     blocks: ContentBlock[];
     image: { src: string; alt: string };
-    imageMobile?: { src: string; alt: string };
+    imageMobile?: { src: string; alt: string; position?: string };
     size?: "xl" | "2xl" | "3xl";
+    mobileImageGradient?: boolean;
     imageGradient?: boolean;
 };
 
@@ -25,7 +26,8 @@ export default function DarkHeroSection({
     image,
     imageMobile,
     size = "xl",
-    imageGradient = true,
+    mobileImageGradient = true,
+    imageGradient = false,
 }: DarkHeroSectionProps) {
     const mobileImage = imageMobile ?? image;
 
@@ -39,14 +41,14 @@ export default function DarkHeroSection({
                     fill
                     sizes="100vw"
                     loading="lazy"
-                    className="object-cover object-top"
+                    className={`object-cover ${imageMobile?.position ? `object-${imageMobile.position}` : "object-top"}`}
                 />
-                {imageGradient ? (
+                {mobileImageGradient ? (
                     <div
                         className="absolute inset-0"
                         style={{
                             background:
-                                "linear-gradient(180deg, #161113 0%, rgba(21,17,19,0.85) 30%, rgba(20,16,19,0.4) 65%, rgba(20,16,19,0) 100%)",
+                                "linear-gradient(180deg, #161113 0%, rgba(21,17,19,0.85) 10%, rgba(20,16,19,0.4) 65%, rgba(20,16,19,0) 100%)",
                         }}
                     />
                 ) : null}

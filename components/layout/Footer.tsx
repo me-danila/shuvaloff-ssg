@@ -50,7 +50,7 @@ export default function Footer() {
                         <Link href="/" aria-label="На главную">
                             <Image
                                 src="/logo.svg"
-                                alt="ACADEMIA Особняк SHUVALOFF"
+                                alt="ACADEMIA Особняк Шувалова"
                                 width={130}
                                 height={44}
                                 className="brightness-0 invert opacity-70 hover:opacity-90 transition duration-200"

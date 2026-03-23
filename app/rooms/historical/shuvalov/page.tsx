@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import AntiquesSection from "@/components/sections/AntiquesSection";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Divider from "@/components/ui/Divider";
@@ -100,6 +101,7 @@ export default function HistoricalRooms() {
                     alt: "Резиденция графа Шувалова",
                 }}
             />
+            <BookingForm />
             <p className="mx-6 my-2 xl:max-w-5xl xl:mx-auto xl:mt-6 xl:text-center">
                 Номер посвящен графу Андрею Павловичу Шувалову&nbsp;— истинному
                 аристократу: образованному, деятельному, целеустремленному.

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import CardRoomHistorical from "@/components/ui/CardRoomHistorical";
 import Divider from "@/components/ui/Divider";
@@ -18,15 +19,15 @@ const historicalExtras: Record<
         description:
             "Изящный люкс, названный в честь Елизаветы Андреевны Воронцовой-Дашковой (урождённой Шуваловой, 1845-1924), с ярким, но утонченным интерьером, отражает многогранную личность хозяйки особняка.",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/Rectangle-130.png",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/03/dashkova.png",
             alt: "Резиденция Дашковой",
         },
     },
-    "Резиденция Шувалова": {
+    "Резиденция графа Шувалова": {
         description:
             "Просторный исторический люкс, посвященный графу Шувалову. Оформлен в стиле строгого неоклассицизма с подлинными антикварными деталями. Интерьер отражает эстетику зрелого вкуса, силу характера и уважение к традициям рода.",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/Rectangle-131.png",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/03/shuvalov.png",
             alt: "Резиденция графа Шувалова",
         },
     },
@@ -71,7 +72,9 @@ export default function HistoricalRooms() {
                 </p>
             </section>
 
-            <section className="flex flex-col gap-8 mx-4 mb-4 md:flex-row xl:w-full xl:max-w-6xl xl:mx-auto">
+            <BookingForm />
+
+            <section className="flex flex-col gap-8 mx-4 mb-4 md:flex-row xl:w-full xl:max-w-6xl xl:mx-auto xl:mt-6">
                 {historicalRooms.map((room) => (
                     <CardRoomHistorical
                         key={room.title}

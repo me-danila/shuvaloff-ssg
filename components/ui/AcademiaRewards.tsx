@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 const tiers = [
     {
         label: "BASE",
@@ -49,10 +45,8 @@ const tiers = [
 ];
 
 export default function AcademiaRewards() {
-    const [open, setOpen] = useState(false);
-
     return (
-        <div className="flex flex-col gap-4">
+        <section className="flex flex-col gap-4 xl:gap-8 px-6 xl:w-full xl:max-w-6xl xl:mx-auto">
             {/* Карточки */}
             <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
                 {tiers.map((tier) => (
@@ -79,28 +73,8 @@ export default function AcademiaRewards() {
                 ))}
             </div>
 
-            {/* Подробнее */}
-            <button
-                type="button"
-                onClick={() => setOpen((v) => !v)}
-                className="flex items-center gap-2 cursor-pointer self-start"
-            >
-                <span className="text-sm uppercase tracking-widest">
-                    {open ? "Скрыть" : "Подробнее"}
-                </span>
-                <span
-                    className={`text-xl transition-transform duration-300 ${open ? "rotate-90" : ""}`}
-                >
-                    &rsaquo;
-                </span>
-            </button>
-
             {/* Детали */}
-            <div
-                className={`grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8 overflow-hidden transition-all duration-500 ${
-                    open ? "max-h-250 opacity-100" : "max-h-0 opacity-0"
-                }`}
-            >
+            <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8">
                 {tiers.map((tier) => (
                     <div key={tier.label} className="flex flex-col gap-2">
                         <p className="uppercase font-baskerville text-xl">
@@ -132,6 +106,6 @@ export default function AcademiaRewards() {
                     * данные привилегии предоставляются при наличии возможности
                 </p>
             </div>
-        </div>
+        </section>
     );
 }
