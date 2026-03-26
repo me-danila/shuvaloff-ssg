@@ -21,7 +21,7 @@ export default function HeroWithPictures({
         <section className="xl:w-full xl:max-w-6xl xl:mx-auto xl:my-4">
             <div className="text-center m-4 xl:mb-8">
                 <h1>{title}</h1>
-                <p className="leading-5 mt-2 xl:w-md xl:mx-auto">{subtitle}</p>
+                <p className="leading-5 mt-2 xl:w-2xl xl:mx-auto">{subtitle}</p>
             </div>
             <DesktopHeroGrid images={images} />
             <SliderMobile images={images} />

@@ -28,7 +28,7 @@ const navItems: NavItem[] = [
             { label: "Категории номеров", href: "/rooms/" },
             { label: "Исторические люксы", href: "/rooms/historical/" },
             { label: "Специальные предложения", href: "/sales/" },
-            { label: "ACADEMIA REWARDS", href: "/rewards/" },
+            { label: "Программа привиллегий", href: "/rewards/" },
             { label: "Консьерж-сервис", href: "/services/concierge/" },
             { label: "Дополнительные услуги", href: "/services/" },
         ],
@@ -45,8 +45,7 @@ const navItems: NavItem[] = [
     },
     {
         label: "История особняка",
-        href: "https://static.academia.spb.ru/files/История_Особняка_Шувалова.pdf",
-        target: "_blank",
+        href: "/history/",
     },
     {
         label: "Свадьба в особняке",
@@ -66,7 +65,7 @@ const subNavItems: SubNavItem[] = [
     { label: "Категории номеров", href: "/rooms/" },
     { label: "Исторические люксы", href: "/rooms/historical/" },
     { label: "Специальные предложения", href: "/sales/" },
-    { label: "ACADEMIA REWARDS", href: "/rewards/" },
+    { label: "Программа привиллегий", href: "/rewards/" },
     {
         label: "Ресторан",
         href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
@@ -96,16 +95,16 @@ export default function Header() {
 
     return (
         <>
-            <div className={`h-22 ${isHome ? "xl:h-26" : "xl:h-36"}`} />
+            <div className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"}`} />
 
             <header
-                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 xl:pb-10 ${
+                className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 xl:pb-4 ${
                     isLight
                         ? "bg-white"
                         : "bg-linear-to-b from-black/80 via-black/60 to-transparent"
                 }`}
             >
-                <div className="flex items-center h-14 xl:h-16 px-5 xl:px-8 relative">
+                <div className="flex items-center h-14 px-5 xl:px-8 relative xl:h-20">
                     <div className="flex items-center gap-12">
                         <button
                             type="button"

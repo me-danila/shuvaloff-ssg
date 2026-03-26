@@ -92,8 +92,8 @@ export default function ContactsSection() {
                                     "ACADEMIA Особняк Шувалова",
                                 balloonContentBody:
                                     "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>" +
-                                    "<a href='tel:+78125659650'>+7 (812) 565-96-50</a><br>" +
-                                    "<a href='mailto:reservation@academia.spb.ru'>reservation@academia.spb.ru</a>",
+                                    "+7 (812) 565-96-50<br>" +
+                                    "reservation@academia.spb.ru",
                                 hintContent: "ACADEMIA Особняк Шувалова",
                             },
                             {
@@ -132,11 +132,9 @@ export default function ContactsSection() {
     return (
         <section className="flex flex-col gap-4 xl:flex-row xl:mx-auto xl:max-w-6xl xl:flex xl:gap-16 xl:items-center">
             {/* Левая колонка — контакты */}
-            <div className="flex flex-col gap-2 mx-6 my-4 xl:m-8 xl:min-w-84">
+            <div className="flex flex-col gap-2 mx-6 my-4 xl:mx-0 xl:my-8 xl:min-w-84">
                 <h2>КОНТАКТЫ</h2>
-                <p className="font-baskerville uppercase text-xl mt-2">
-                    Отдел бронирования
-                </p>
+                <p className="my-2 uppercase">Отдел бронирования</p>
                 {CONTACTS.map(
                     ({ href, label, Icon: ContactIcon, target, rel }) => (
                         <a
@@ -166,7 +164,7 @@ export default function ContactsSection() {
                 ref={mapRef}
                 className="relative w-full h-64 xl:w-185 xl:h-95 xl:shrink-0"
             >
-                <style>{`.ymaps-2-1-79-ground-pane { filter: grayscale(100%) contrast(1.2) sepia(15%); }`}</style>
+                <style>{`.ymaps-2-1-79-ground-pane { filter: grayscale(100%) contrast(1.2) sepia(8%); }`}</style>
                 <Image
                     src="https://academia.spb.ru/wp-content/uploads/2026/03/map-new.png"
                     alt="Контакты ACADEMIA Особняк Шувалова"

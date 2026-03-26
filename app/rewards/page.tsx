@@ -15,17 +15,16 @@ export const metadata: Metadata = {
 export default function Rewards() {
     return (
         <main className="flex flex-col gap-8">
-            <section className="flex flex-col gap-4 m-6 xl:max-w-3xl xl:mx-auto">
-                <h1 className="xl:text-center">ACADEMIA REWARDS</h1>
+            <section className="flex flex-col gap-4 m-6 xl:max-w-6xl xl:mx-auto">
+                <h1 className="xl:text-center">Программа особых привилегий</h1>
                 <p className="-mt-2 font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:text-center xl:-mt-4">
-                    Программа особых привилегий
+                    Academia Rewards
                 </p>
-                <p className="mt-2 xl:mt-4 xl:text-center">
+                <p className="mt-2 xl:mt-4 xl:text-center xl:max-w-3xl">
                     Путешествие запоминается не&nbsp;только маршрутами
                     и&nbsp;встречами, но&nbsp;и&nbsp;тем, где вы&nbsp;отдыхаете.
-                    Проживание в&nbsp;бутик-отелях ACADEMIA&nbsp;&mdash; это
-                    больше, чем просто номер в&nbsp;гостинице.
-                    <br />
+                    Проживание в&nbsp;особняке ACADEMIA&nbsp;&mdash; это больше,
+                    чем просто номер в&nbsp;гостинице.
                     <br />
                     Это атмосфера, в&nbsp;которой рождается настроение всей
                     поездки: комфорт, внимание к&nbsp;деталям и&nbsp;доступ

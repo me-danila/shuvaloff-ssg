@@ -58,12 +58,6 @@ export default function CardRoomHistorical({
                             {description}
                         </p>
                     </div>
-
-                    {/* Подробнее */}
-                    <p className="flex items-center gap-6 uppercase tracking-widest text-sm mt-2">
-                        Подробнее
-                        <span className="text-2xl mb-1">›</span>
-                    </p>
                 </div>
             </a>
 
@@ -83,7 +77,7 @@ export default function CardRoomHistorical({
                 </span>
             </p>
 
-            {/* Кнопка */}
+            {/* Кнопки */}
             <div className="flex items-center gap-3">
                 <Button
                     href={`/rooms/historical/${slug}/`}

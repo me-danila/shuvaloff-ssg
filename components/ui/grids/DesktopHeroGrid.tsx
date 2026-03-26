@@ -11,7 +11,7 @@ export default function DesktopHeroGrid({ images }: DesktopHeroGridProps) {
     const isFour = images.length === 4;
 
     return (
-        <div className="hidden xl:grid xl:mt-4 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-1200/575 w-full">
+        <div className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-1200/520 w-full">
             <div className="relative row-span-2 rounded-md overflow-hidden">
                 <Image
                     src={images[0].src}

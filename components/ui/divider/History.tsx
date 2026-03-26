@@ -37,7 +37,7 @@ export default function DividerHistory({ style }: DividerHistoryProps) {
     return (
         <Image
             src={divider.src}
-            alt="Исторический центр Санкт-Петербурга"
+            alt="Разделитель"
             width={divider.width}
             height={divider.height}
             loading="lazy"

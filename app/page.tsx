@@ -54,7 +54,7 @@ const descriptionImages = [
 
 export default function Home() {
     return (
-        <main className="flex flex-col gap-10">
+        <main className="flex flex-col gap-6">
             <HeroWithPictures
                 title="Отель Academia Особняк&nbsp;Шувалова"
                 subtitle="Изысканный отель в&nbsp;особняке XIX&nbsp;века с&nbsp;богатой&nbsp;историей в&nbsp;центре Петербурга"
@@ -113,7 +113,7 @@ export default function Home() {
                     </div>
                 </div>
             </section>
-            <section className="flex flex-col mx-6 gap-3 xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-6">
+            <section className="flex flex-col mx-6 gap-3 xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-8 xl:text-justify">
                 <p className="xl:flex-1">
                     Историческая лепнина, мрамор, парадная лестница, кессонный
                     потолок в&nbsp;ресторане и&nbsp;антикварные предметы
@@ -147,7 +147,7 @@ export default function Home() {
                     />
                 </div>
             </section>
-            <section className="flex flex-col gap-3 xl:text-center xl:mt-6">
+            <section className="flex flex-col gap-3 xl:text-center xl:mt-4">
                 <h2 className="mx-6">Исторический центр</h2>
                 <p className="mx-6 xl:max-w-4xl xl:mx-auto xl:mt-2">
                     Особняк ACADEMIA Шувалова находится в&nbsp;одном
@@ -168,7 +168,7 @@ export default function Home() {
                     и&nbsp;Дворцовый мосты и&nbsp;невероятные закаты.
                 </p>
                 <HistoricalMapSection />
-                <p className="mx-6 text-center font-alistair text-2xl text-stone-400 xl:text-[40px] xl:max-w-3xl xl:mx-auto xl:mt-4">
+                <p className="mx-6 text-center font-alistair text-2xl text-stone-400 xl:text-[40px] xl:max-w-3xl xl:mx-auto xl:mt-4 xl:-mb-2">
                     Идеальное расположение для тех, кто&nbsp;ценит исторический
                     Петербург.
                 </p>

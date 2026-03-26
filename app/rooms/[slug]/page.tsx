@@ -34,11 +34,11 @@ export default async function RoomPage({ params }: Props) {
     if (!room) notFound();
 
     return (
-        <main className="flex flex-col gap-4 xl:gap-10">
+        <main className="flex flex-col gap-4 xl:gap-6">
             <section className="flex flex-col gap-2 text-center xl:max-w-6xl xl:mx-auto xl:w-full">
-                <div className="m-4 xl:w-full">
+                <div className="m-4 xl:w-full xl:my-0">
                     <h1>{room.title}</h1>
-                    <p className="font-alistair text-2xl xl:text-[40px]">
+                    <p className="font-alistair text-2xl xl:text-[40px] xl:-mt-2">
                         {room.isHistorical
                             ? "Исторический люкс"
                             : "Классический номер"}
@@ -47,17 +47,17 @@ export default async function RoomPage({ params }: Props) {
                 <SliderMobile images={room.gallery} />
                 <DesktopHeroGrid images={room.gallery} />
             </section>
-            <section className="flex flex-col gap-4 mx-6 mt-4 md:flex-row xl:max-w-6xl xl:mx-auto xl:w-full xl:gap-12">
+            <section className="flex flex-col gap-4 mx-6 mt-4 md:flex-row xl:max-w-6xl xl:mx-auto xl:w-full xl:gap-8">
                 <div className="flex flex-col gap-6 bg-slate-100 rounded-md p-4 text-sm text-brand-blue md:flex-row md:items-center md:gap-8 md:min-w-xl md:px-6">
-                    <p className="flex items-center gap-3 md:gap-4">
+                    <p className="flex items-center gap-3 md:gap-4 xl:leading-6">
                         <BedIcon size={18} />
                         {room.bed}
                     </p>
-                    <p className="flex items-center gap-3 md:gap-4">
+                    <p className="flex items-center gap-3 md:gap-4 shrink-0">
                         <SquareIcon size={14} />
                         {room.area}
                     </p>
-                    <p className="flex items-center gap-3 md:gap-4">
+                    <p className="flex items-center gap-3 md:gap-4 shrink-0">
                         <UserIcon size={14} />
                         {room.guests}
                     </p>
@@ -65,7 +65,11 @@ export default async function RoomPage({ params }: Props) {
                 <Button href={room.bookingUrl} variant="primary">
                     Забронировать
                 </Button>
-                <Button href="/rooms/" variant="primary-outline">
+                <Button
+                    href="/rooms/"
+                    variant="primary-outline"
+                    className="shrink-0"
+                >
                     ВСЕ КАТЕГОРИИ
                 </Button>
             </section>

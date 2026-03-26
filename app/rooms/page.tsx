@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Rooms() {
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
-            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-3xl xl:mx-auto">
+            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-6xl xl:mx-auto">
                 <h1>Категории номеров</h1>
                 <p className="xl:mt-2">
                     Номера оформлены в&nbsp;стиле современного неоклассицизма:

@@ -49,6 +49,27 @@ export default function HistoricalRooms() {
                     и добавлены подлинные антикварные предметы эпохи конца XIX —
                     начала ХХ века.
                 </p>
+            </section>
+
+            <BookingForm />
+
+            <section className="flex flex-col gap-8 mx-4 mb-4 md:flex-row xl:w-full xl:max-w-6xl xl:mx-auto xl:mt-6">
+                {historicalRooms.map((room) => (
+                    <CardRoomHistorical
+                        key={room.title}
+                        title={room.title}
+                        description={room.description}
+                        image={room.image}
+                        slug={room.slug}
+                        bed={room.bed}
+                        area={room.area}
+                        guests={room.guests}
+                        bookingUrl={room.bookingUrl}
+                    />
+                ))}
+            </section>
+
+            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-5xl xl:mx-auto">
                 <p>
                     Это резиденции, отражающие характер владельцев особняка:
                     графа Андрея Шувалова и его дочери Елизаветы
@@ -71,25 +92,6 @@ export default function HistoricalRooms() {
                     Пространство, в котором дышит история Петербурга
                 </p>
             </section>
-
-            <BookingForm />
-
-            <section className="flex flex-col gap-8 mx-4 mb-4 md:flex-row xl:w-full xl:max-w-6xl xl:mx-auto xl:mt-6">
-                {historicalRooms.map((room) => (
-                    <CardRoomHistorical
-                        key={room.title}
-                        title={room.title}
-                        description={room.description}
-                        image={room.image}
-                        slug={room.slug}
-                        bed={room.bed}
-                        area={room.area}
-                        guests={room.guests}
-                        bookingUrl={room.bookingUrl}
-                    />
-                ))}
-            </section>
-
             <Divider />
             <ContactsSection />
         </main>

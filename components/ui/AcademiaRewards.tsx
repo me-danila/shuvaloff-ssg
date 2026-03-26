@@ -77,7 +77,7 @@ export default function AcademiaRewards() {
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8">
                 {tiers.map((tier) => (
                     <div key={tier.label} className="flex flex-col gap-2">
-                        <p className="uppercase font-baskerville text-xl">
+                        <p className="uppercase font-baskerville text-lg">
                             {tier.label}: Скидка {tier.discount}
                         </p>
                         <span className="font-alistair self-start text-3xl bg-brand-blue-100 rounded px-3 py-1 mb-1">

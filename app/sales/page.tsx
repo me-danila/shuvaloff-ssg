@@ -28,7 +28,7 @@ export default function SalesPage() {
                         выберите билеты на&nbsp;самолёт или «Сапсан» прямо
                         на&nbsp;сайте&nbsp;— и&nbsp;сосредоточьтесь
                         на&nbsp;главном&nbsp;— предвкушении встречи
-                        с&nbsp;городом и&nbsp;с&nbsp;Academia.
+                        с&nbsp;городом и&nbsp;с&nbsp;ACADEMIA.
                     </p>
                 </div>
                 <TransportSlider />
