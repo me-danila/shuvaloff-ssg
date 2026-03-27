@@ -71,7 +71,7 @@ export const AllServices: Service[] = [
     {
         title: "Завтрак от шефа",
         subtitle:
-            "Завтрак в ACADEMIA BAR SHUVALOFF — это не просто первый прием пищи, а часть изысканного и вкусного ритуала.",
+            "Завтрак в Бар-ресторан ACADEMIA Шувалова — это не просто первый прием пищи, а часть изысканного и вкусного ритуала.",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
         slug: "breakfast",
         fullDescription: (
@@ -132,7 +132,7 @@ export const AllServices: Service[] = [
     {
         title: "Ужин от шефа",
         subtitle:
-            "С радостью приглашаем вас провести время в ACADEMIA BAR SHUVALOFF — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
+            "С радостью приглашаем вас провести время в Бар-ресторан ACADEMIA Шувалова — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/cb49c80b30436e5033eadfc5e2b8d6b3eef8205c.jpg",
         slug: "dinner",
         fullDescription: (
@@ -305,7 +305,7 @@ export const AllServices: Service[] = [
     {
         title: "Обед от шефа",
         subtitle:
-            "С радостью приглашаем вас провести время в ACADEMIA BAR SHUVALOFF — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
+            "С радостью приглашаем вас провести время в Бар-ресторан ACADEMIA Шувалова — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/%D0%A1%D1%83%D0%BF%D1%8B%D0%9E%D1%82%D0%A8%D0%B5%D1%84%D0%B0-1.avif",
         slug: "lunch",
         fullDescription: (

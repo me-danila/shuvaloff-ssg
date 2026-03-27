@@ -1,14 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import {
-    type ComponentPropsWithoutRef,
     forwardRef,
     type ReactNode,
-    type UIEvent,
 } from "react";
 
-type BaseDivProps = Omit<ComponentPropsWithoutRef<"div">, "children">;
+type BaseDivProps = Omit<HTMLMotionProps<"div">, "children">;
 const GENTLE_EASE = [0.22, 1, 0.36, 1] as const;
 
 type MotionProps = BaseDivProps & {
@@ -81,7 +79,6 @@ export const StaggerContainer = forwardRef<
         mode?: "mount" | "inView";
         staggerChildren?: number;
         once?: boolean;
-        onScroll?: (e: UIEvent<HTMLDivElement>) => void;
     }
 >(
     (

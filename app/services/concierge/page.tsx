@@ -75,7 +75,7 @@ export default function Concierge() {
                     номера для дорогого вам человека. Мы&nbsp;предоставим вам
                     VIP-трансфер и&nbsp;поможем организовать любое
                     мероприятие&nbsp;&mdash; от&nbsp;фотосессии и&nbsp;девичника
-                    до&nbsp;изысканного банкета в&nbsp;ACADEMIA BAR SHUVALOFF.
+                    до&nbsp;изысканного банкета в&nbsp;Бар-ресторан ACADEMIA Шувалова.
                 </p>
             </FadeUp>
             <section className="mx-6 xl:max-w-6xl xl:mx-auto xl:w-full">
