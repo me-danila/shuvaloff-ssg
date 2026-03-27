@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 
 type DescriptionImage = {

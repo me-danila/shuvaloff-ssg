@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import type { RoomImage } from "@/data/RoomsData";
 
 type DesktopHeroGridProps = {
@@ -21,7 +21,7 @@ export default function DesktopHeroGrid({
             delay={isInner ? 0.22 : 0.15}
             mode="mount"
             staggerChildren={isInner ? 0.12 : 0.08}
-            className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-1200/520 w-full"
+            className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-21/9 w-full"
         >
             <StaggerItem
                 y={isInner ? 8 : 0}

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import type { ReactNode } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 export const metadata: Metadata = {
     title: "Девайсы для красоты и здоровья — ACADEMIA Особняк Шувалова",

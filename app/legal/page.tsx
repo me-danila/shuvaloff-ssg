@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import ContactsSection from "@/components/sections/ContactsSection";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 export const metadata: Metadata = {
     title: "Правовая информация — ACADEMIA Особняк Шувалова",

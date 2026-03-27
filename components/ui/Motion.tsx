@@ -1,13 +1,10 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
-import {
-    forwardRef,
-    type ReactNode,
-} from "react";
+import { type HTMLMotionProps, motion } from "framer-motion";
+import { forwardRef, type ReactNode } from "react";
 
 type BaseDivProps = Omit<HTMLMotionProps<"div">, "children">;
-const GENTLE_EASE = [0.22, 1, 0.36, 1] as const;
+export const GENTLE_EASE = [0.22, 1, 0.36, 1] as const;
 
 type MotionProps = BaseDivProps & {
     children: ReactNode;

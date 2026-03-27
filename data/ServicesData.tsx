@@ -390,7 +390,7 @@ export const AllServices: Service[] = [
     {
         title: "Приветственный сет в номер",
         subtitle: "Позвольте начать ваше пребывание с особого акцента.",
-        imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/638720452918249784-db5c3134-1100f-41e0-8487-575e96be39ef-1.avif",
+        imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/638720452918249784-db5c3134-880f-41e0-8487-575e96be39ef-1.avif",
         slug: "welcome-set",
         fullDescription: (
             <>

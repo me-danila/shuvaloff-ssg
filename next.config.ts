@@ -3,12 +3,27 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     output: "export",
     trailingSlash: true,
+    transpilePackages: ["next-image-export-optimizer"],
+    env: {
+        nextImageExportOptimizer_exportFolderPath: "out",
+        nextImageExportOptimizer_imageFolderPath: "public",
+        nextImageExportOptimizer_remoteImagesFilename:
+            "remoteOptimizedImages.cjs",
+        nextImageExportOptimizer_remoteImageCacheTTL: "604800",
+        nextImageExportOptimizer_storePicturesInWEBP: "true",
+    },
     images: {
-        unoptimized: true,
+        loader: "custom",
+        imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+        deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
         remotePatterns: [
             {
                 protocol: "https",
                 hostname: "academia.spb.ru",
+            },
+            {
+                protocol: "https",
+                hostname: "static.academia.spb.ru",
             },
         ],
     },

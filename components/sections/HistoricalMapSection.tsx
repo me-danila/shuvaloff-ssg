@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 // src — замени на реальные изображения из исходников
 const LANDMARKS = [

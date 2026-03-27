@@ -100,14 +100,12 @@ export default function AcademiaRewards() {
                             ))}
                         </ul>
                         {tier.note && (
-                            <p className="text-xs text-warm-gray">
-                                {tier.note}
-                            </p>
+                            <p className="text-warm-gray">{tier.note}</p>
                         )}
                     </StaggerItem>
                 ))}
 
-                <p className="xl:col-span-4 text-xs text-warm-gray border-t border-stone-200 pt-3">
+                <p className="xl:col-span-4 text-warm-gray border-t border-stone-200 pt-3">
                     * данные привилегии предоставляются при наличии возможности
                 </p>
             </StaggerContainer>

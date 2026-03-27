@@ -37,21 +37,24 @@ const heroImages: [HeroImage, HeroImage, HeroImage, HeroImage] = [
 export default function Concierge() {
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
-            <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 xl:gap-8 my-6 max-w-xl:px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto">
                 <FadeUp>
                     <h1>Консьерж сервис</h1>
                 </FadeUp>
-                <FadeUp delay={0.1} className="mx-auto xl:max-w-4xl">
+                <FadeUp
+                    delay={0.1}
+                    className="-mt-2 font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:text-center xl:-mt-6"
+                >
+                    Больше, чем сервис
+                </FadeUp>
+                <FadeUp delay={0.3} className="mx-auto xl:max-w-4xl">
                     <p>
                         Настоящее гостеприимство всегда больше, чем безупречный
                         сервис. Это искреннее желание сделать лучшее
                         из&nbsp;возможного, внимательность к&nbsp;деталям
-                        и&nbsp;чуткость к&nbsp;вашим пожеланиям.
-                        <br />
-                        <br />
-                        Консьерж-служба ACADEMIA Особняк Шувалова всегда готова
-                        помочь с&nbsp;решением любых, даже самых неожиданных,
-                        задач.
+                        и&nbsp;чуткость к&nbsp;вашим пожеланиям. Консьерж-служба
+                        ACADEMIA Особняк Шувалова всегда готова помочь
+                        с&nbsp;решением любых, даже самых неожиданных, задач.
                     </p>
                 </FadeUp>
                 <SliderMobile images={heroImages} />
@@ -75,7 +78,8 @@ export default function Concierge() {
                     номера для дорогого вам человека. Мы&nbsp;предоставим вам
                     VIP-трансфер и&nbsp;поможем организовать любое
                     мероприятие&nbsp;&mdash; от&nbsp;фотосессии и&nbsp;девичника
-                    до&nbsp;изысканного банкета в&nbsp;Бар-ресторан ACADEMIA Шувалова.
+                    до&nbsp;изысканного банкета в&nbsp;Бар-ресторан ACADEMIA
+                    Шувалова.
                 </p>
             </FadeUp>
             <section className="mx-6 xl:max-w-6xl xl:mx-auto xl:w-full">
@@ -207,7 +211,7 @@ export default function Concierge() {
                         href="/run/"
                         variant="primary-outline"
                         className="grow"
-                        size="sm"
+                        size="xl"
                         uppercase={false}
                     >
                         Для пробежек
@@ -217,7 +221,7 @@ export default function Concierge() {
                         target="_blank"
                         variant="primary-outline"
                         className="grow"
-                        size="sm"
+                        size="xl"
                         uppercase={false}
                     >
                         Для красивых прогулок поблизости
@@ -227,7 +231,7 @@ export default function Concierge() {
                         target="_blank"
                         variant="primary-outline"
                         className="grow"
-                        size="sm"
+                        size="xl"
                         uppercase={false}
                     >
                         Для прогулок с питомцем

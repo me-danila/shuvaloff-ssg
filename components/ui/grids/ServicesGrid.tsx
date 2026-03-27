@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import { AllServices } from "@/data/ServicesData";
 
 export default function ServicesGrid() {
@@ -22,7 +22,7 @@ export default function ServicesGrid() {
                             alt={service.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-cover"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/50" />
                         <div className="absolute inset-0 flex flex-col justify-between text-white p-6 xl:p-8">

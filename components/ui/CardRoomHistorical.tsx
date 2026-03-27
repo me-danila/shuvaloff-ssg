@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
+import Image from "@/components/ui/OptimizedImage";
 
 type CardRoomHistoricalProps = {
     title: string;

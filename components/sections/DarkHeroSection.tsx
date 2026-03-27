@@ -1,6 +1,6 @@
-import Image from "next/image";
 import type React from "react";
 import { FadeUp } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
 
 type ContentBlock = {

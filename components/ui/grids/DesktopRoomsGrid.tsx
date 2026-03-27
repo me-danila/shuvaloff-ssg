@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 type RoomSlide = {
     image: { src: string; alt: string };
@@ -33,7 +33,7 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
                             fill
                             sizes="50vw"
                             loading="lazy"
-                            className="object-cover transition-transform duration-700 hover:scale-105"
+                            className="object-cover"
                         />
                     </a>
 

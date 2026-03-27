@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/ui/OptimizedImage";
 import { useSlider } from "@/hooks/useSlider";
 
 type SliderImage = {

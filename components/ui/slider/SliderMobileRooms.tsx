@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
+import Image from "@/components/ui/OptimizedImage";
 import { useSlider } from "@/hooks/useSlider";
 
 type RoomSlide = {

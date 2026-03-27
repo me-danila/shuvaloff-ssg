@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import DividerHistory from "@/components/ui/divider/History";
 import { FadeUp } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 export const metadata: Metadata = {
     title: "История особняка графа Шувалова — ACADEMIA Особняк Шувалова",

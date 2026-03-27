@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 const NAV_LINKS = [
     {

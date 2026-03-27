@@ -19,7 +19,7 @@ export default function HeroWithPictures({
     images,
 }: HeroWithPicturesProps) {
     return (
-        <section className="xl:w-full xl:max-w-6xl xl:mx-auto xl:my-4">
+        <section className="xl:w-full xl:max-w-6xl xl:mx-auto">
             <div className="text-center m-4 xl:mb-8">
                 <FadeIn duration={0.7}>
                     <h1>{title}</h1>

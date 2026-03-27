@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import DarkHeroSection from "@/components/sections/DarkHeroSection";
@@ -8,11 +7,12 @@ import HeroWithPictures from "@/components/sections/HeroWithPictures";
 import HistoricalMapSection from "@/components/sections/HistoricalMapSection";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 export const metadata: Metadata = {
-    title: "Отель-особняк ACADEMIA Особняк Шувалова — Санкт-Петербург",
+    title: "Отель ACADEMIA Особняк Шувалова — Санкт-Петербург",
     description:
-        "Бутик-отель в историческом особняке XIX века в центре Санкт-Петербурга",
+        "Отель в историческом особняке XIX века в центре Санкт-Петербурга",
 };
 
 const heroImages: [HeroImage, HeroImage, HeroImage, HeroImage, HeroImage] = [
@@ -57,7 +57,7 @@ export default function Home() {
     return (
         <main className="flex flex-col gap-6">
             <HeroWithPictures
-                title="Отель Academia Особняк&nbsp;Шувалова"
+                title="Academia Особняк&nbsp;Шувалова"
                 subtitle="Изысканный отель в&nbsp;особняке XIX&nbsp;века с&nbsp;богатой&nbsp;историей в&nbsp;центре Петербурга"
                 images={heroImages}
             />
@@ -77,7 +77,7 @@ export default function Home() {
                 </FadeUp>
                 <FadeUp delay={0.1}>
                     <p className="my-2 xl:max-w-4xl xl:mx-auto">
-                        Отель-особняк ACADEMIA Шувалова&nbsp;— это бережно
+                        Отель ACADEMIA Шувалова&nbsp;— это бережно
                         отреставрированный объект культурного наследия, ранее
                         принадлежавший семье графа Шувалова. С&nbsp;уважением
                         к&nbsp;истории мы&nbsp;восстановили исторические детали,
@@ -294,11 +294,12 @@ export default function Home() {
                         <p>
                             Отдохнуть в&nbsp;уютном номере после прогулки,
                             оценить классическую кухню и&nbsp;коктейльную карту
-                            ресторана Бар-ресторан ACADEMIA Шувалова, расслабиться
-                            в&nbsp;руках мастеров массажа и&nbsp;ухода
-                            в&nbsp;ACADEMIA SPA, заказать трансфер или сюрприз
-                            для дорогого человека. Наша консьерж-служба готова
-                            помочь с&nbsp;решением любых вопросов.
+                            ресторана Бар-ресторан ACADEMIA Шувалова,
+                            расслабиться в&nbsp;руках мастеров массажа
+                            и&nbsp;ухода в&nbsp;ACADEMIA SPA, заказать трансфер
+                            или сюрприз для дорогого человека. Наша
+                            консьерж-служба готова помочь с&nbsp;решением любых
+                            вопросов.
                         </p>
                     </FadeUp>
                 </div>

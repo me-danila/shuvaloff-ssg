@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/OptimizedImage";
 
 type DividerHistoryStyle = 1 | 2 | 3;
 

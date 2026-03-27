@@ -1,11 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import Button from "@/components/ui/Button";
+import { GENTLE_EASE } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type NavItem = {
@@ -24,13 +26,13 @@ type SubNavItem = {
 
 const navItems: NavItem[] = [
     {
-        label: "Отель-Особняк",
+        label: "Отель",
         href: "/",
         submenu: [
             { label: "Категории номеров", href: "/rooms/" },
             { label: "Исторические люксы", href: "/rooms/historical/" },
             { label: "Специальные предложения", href: "/sales/" },
-            { label: "Программа привиллегий", href: "/rewards/" },
+            { label: "Программа привилегий", href: "/rewards/" },
             { label: "Консьерж-сервис", href: "/services/concierge/" },
             { label: "Дополнительные услуги", href: "/services/" },
         ],
@@ -67,13 +69,113 @@ const subNavItems: SubNavItem[] = [
     { label: "Категории номеров", href: "/rooms/" },
     { label: "Исторические люксы", href: "/rooms/historical/" },
     { label: "Специальные предложения", href: "/sales/" },
-    { label: "Программа привиллегий", href: "/rewards/" },
+    { label: "Программа привилегий", href: "/rewards/" },
     {
         label: "Ресторан",
         href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
         target: "_blank" as const,
     },
 ];
+
+const OVERLAY_TRANSITION = {
+    duration: 0.32,
+    ease: GENTLE_EASE,
+} as const;
+
+const PANEL_TRANSITION = {
+    duration: 0.58,
+    ease: GENTLE_EASE,
+} as const;
+
+const overlayVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+    exit: { opacity: 0 },
+};
+
+const mobilePanelVariants = {
+    hidden: { x: "-100%", opacity: 0.92, scale: 0.985 },
+    show: { x: 0, opacity: 1, scale: 1 },
+    exit: { x: "-100%", opacity: 0.96, scale: 0.99 },
+};
+
+const desktopPanelVariants = {
+    hidden: { x: -56, opacity: 0, scale: 0.97 },
+    show: { x: 0, opacity: 1, scale: 1 },
+    exit: { x: -40, opacity: 0, scale: 0.985 },
+};
+
+const submenuPanelVariants = {
+    hidden: { x: -18, opacity: 0, scale: 0.98 },
+    show: { x: 0, opacity: 1, scale: 1 },
+    exit: { x: -12, opacity: 0, scale: 0.985 },
+};
+
+const menuListVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.055,
+            delayChildren: 0.08,
+        },
+    },
+};
+
+const menuItemVariants = {
+    hidden: { opacity: 0, x: -18 },
+    show: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 0.42,
+            ease: GENTLE_EASE,
+        },
+    },
+};
+
+const submenuListVariants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.06,
+            delayChildren: 0.07,
+        },
+    },
+};
+
+const submenuItemVariants = {
+    hidden: { opacity: 0, x: -10, y: 10 },
+    show: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: {
+            duration: 0.42,
+            ease: GENTLE_EASE,
+        },
+    },
+};
+
+const mobileSubmenuVariants = {
+    closed: {
+        height: 0,
+        opacity: 0,
+        y: -6,
+        transition: {
+            duration: 0.26,
+            ease: GENTLE_EASE,
+        },
+    },
+    open: {
+        height: "auto",
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.34,
+            ease: GENTLE_EASE,
+        },
+    },
+};
 
 export default function Header() {
     const pathname = usePathname();
@@ -88,9 +190,24 @@ export default function Header() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
+    useEffect(() => {
+        if (!menuOpen) {
+            return;
+        }
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [menuOpen]);
+
     const closeMenu = () => {
+        flushSync(() => {
+            setSubmenuOpen(false);
+        });
         setMenuOpen(false);
-        setSubmenuOpen(false);
     };
 
     const isLight = !scrolled;
@@ -252,222 +369,324 @@ export default function Header() {
                 )}
             </motion.header>
 
-            {/* Оверлей */}
-            {menuOpen && (
-                <button
-                    type="button"
-                    className="fixed inset-0 z-50 bg-black/20 cursor-default"
-                    onClick={closeMenu}
-                    aria-label="Закрыть меню"
-                />
-            )}
-
-            {/* ===================== МОБАЙЛ offcanvas ===================== */}
-            <div
-                className={`xl:hidden fixed top-0 left-0 z-50 h-full w-72 bg-white flex flex-col transition-transform duration-300 ${
-                    menuOpen ? "translate-x-0" : "-translate-x-full"
-                }`}
-            >
-                <div className="flex items-center justify-between px-6 h-14 border-b border-stone-100 shrink-0">
-                    <span className="text-xs uppercase tracking-widest text-[#96908D]">
-                        Меню
-                    </span>
-                    <button
-                        type="button"
-                        onClick={closeMenu}
-                        className="text-2xl leading-none cursor-pointer text-stone-400"
-                        aria-label="Закрыть меню"
-                    >
-                        &times;
-                    </button>
-                </div>
-                <nav className="flex-1 overflow-y-auto flex flex-col px-6 py-4">
-                    {navItems.map((item) =>
-                        item.submenu ? (
-                            <div key={item.label}>
-                                <button
-                                    type="button"
-                                    onClick={() => setSubmenuOpen((v) => !v)}
-                                    className="flex items-center justify-between w-full py-3 text-left cursor-pointer"
-                                >
-                                    <span className="text-sm">
-                                        {item.label}
-                                    </span>
-                                    <span
-                                        className={`text-xl text-[#96908D] transition-transform duration-200 leading-none ${submenuOpen ? "rotate-90" : ""}`}
-                                    >
-                                        &rsaquo;
-                                    </span>
-                                </button>
-                                <div
-                                    className={`overflow-hidden transition-all duration-300 ${submenuOpen ? "max-h-96" : "max-h-0"}`}
-                                >
-                                    <div className="flex flex-col pl-3 pb-2">
-                                        {item.submenu.map((sub) => (
-                                            <Link
-                                                key={sub.href}
-                                                href={sub.href}
-                                                onClick={closeMenu}
-                                                className="py-2 text-sm text-[#96908D] hover:text-brand-blue transition-colors"
-                                            >
-                                                {sub.label}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        ) : (
-                            <div key={item.href}>
-                                <Link
-                                    href={item.href}
-                                    target={item.target}
-                                    onClick={closeMenu}
-                                    className="block py-3 text-sm hover:text-brand-blue transition-colors"
-                                >
-                                    {item.label}
-                                </Link>
-                                {item.lineBelow && (
-                                    <div className="border-b border-stone-200 my-1" />
-                                )}
-                            </div>
-                        ),
-                    )}
-                </nav>
-                <div className="px-6 py-5 border-t border-stone-100 flex flex-col gap-3 shrink-0">
-                    <Button href="/booking/" variant="primary">
-                        Забронировать
-                    </Button>
-                    <a
-                        href="https://guest.travelline.ru/guest-account/41018/profile/login"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm justify-center text-stone-600"
-                    >
-                        <svg
-                            width="15"
-                            height="15"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            aria-hidden="true"
-                            focusable="false"
-                        >
-                            <circle cx="12" cy="8" r="4" />
-                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                        </svg>
-                        Войти
-                    </a>
-                </div>
-            </div>
-
-            {/* ===================== ДЕСКТОП offcanvas ===================== */}
-            <div
-                className={`hidden xl:flex fixed top-0 left-0 z-50 transition-transform duration-300 ${
-                    menuOpen ? "translate-x-0" : "-translate-x-full"
-                }`}
-            >
-                {/* Основная панель — авто высота */}
-                <div
-                    className="relative bg-white w-64 flex flex-col min-h-137.5 rounded m-1"
-                    style={{ boxShadow: "0px 4px 4px rgba(0,0,0,0.25)" }}
-                >
-                    <div className="flex items-center justify-between px-6 h-16 shrink-0">
-                        <span className="text-xs uppercase tracking-widest text-[#96908D]">
-                            Меню
-                        </span>
-                        <button
+            <AnimatePresence>
+                {menuOpen && (
+                    <>
+                        <motion.button
                             type="button"
+                            initial="hidden"
+                            animate="show"
+                            exit="exit"
+                            variants={overlayVariants}
+                            transition={OVERLAY_TRANSITION}
+                            className="fixed inset-0 z-50 cursor-default bg-[rgba(14,18,24,0.24)] backdrop-blur-[3px]"
                             onClick={closeMenu}
-                            className="text-2xl leading-none cursor-pointer text-stone-400 hover:text-stone-700"
                             aria-label="Закрыть меню"
-                        >
-                            &times;
-                        </button>
-                    </div>
+                        />
 
-                    <nav className="flex flex-col px-6 pb-6">
-                        {navItems.map((item) =>
-                            item.submenu ? (
-                                <div key={item.label}>
+                        <motion.div
+                            initial="hidden"
+                            animate="show"
+                            exit="exit"
+                            variants={mobilePanelVariants}
+                            transition={PANEL_TRANSITION}
+                            className="xl:hidden fixed top-0 left-0 z-[60] h-full w-72 overflow-hidden rounded-r-[28px] border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                        >
+                            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_22%,rgba(150,144,141,0.06)_100%)]" />
+                            <div className="relative flex h-full flex-col">
+                                <div className="flex h-14 items-center justify-between border-b border-stone-100/80 px-6 shrink-0">
+                                    <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
+                                        Меню
+                                    </span>
                                     <button
                                         type="button"
-                                        onClick={() =>
-                                            setSubmenuOpen((v) => !v)
-                                        }
-                                        className="flex items-center justify-between w-full py-3 text-left cursor-pointer text-sm hover:text-brand-blue transition-colors"
+                                        onClick={closeMenu}
+                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-stone-700"
+                                        aria-label="Закрыть меню"
                                     >
-                                        <span>{item.label}</span>
-                                        <span className="text-xl text-[#96908D] leading-none">
-                                            &rsaquo;
-                                        </span>
+                                        &times;
                                     </button>
                                 </div>
-                            ) : (
-                                <div key={item.href}>
-                                    <Link
-                                        href={item.href}
-                                        target={item.target}
-                                        onClick={closeMenu}
-                                        className="block py-3 text-sm hover:text-brand-blue transition-colors"
-                                    >
-                                        {item.label}
-                                    </Link>
-                                    {item.lineBelow && (
-                                        <div className="border-b border-stone-200" />
+                                <motion.nav
+                                    variants={menuListVariants}
+                                    initial="hidden"
+                                    animate="show"
+                                    className="flex flex-1 flex-col overflow-y-auto px-6 py-5"
+                                >
+                                    {navItems.map((item) =>
+                                        item.submenu ? (
+                                            <motion.div
+                                                key={item.label}
+                                                variants={menuItemVariants}
+                                            >
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setSubmenuOpen(
+                                                            (v) => !v,
+                                                        )
+                                                    }
+                                                    className="flex w-full items-center justify-between py-3 text-left cursor-pointer"
+                                                >
+                                                    <span className="text-sm">
+                                                        {item.label}
+                                                    </span>
+                                                    <span
+                                                        className={`text-xl text-[#96908D] transition-transform duration-300 leading-none ${submenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                    >
+                                                        &rsaquo;
+                                                    </span>
+                                                </button>
+                                                <motion.div
+                                                    variants={
+                                                        mobileSubmenuVariants
+                                                    }
+                                                    initial={false}
+                                                    animate={
+                                                        submenuOpen
+                                                            ? "open"
+                                                            : "closed"
+                                                    }
+                                                    className="overflow-hidden"
+                                                >
+                                                    <div className="mb-2 ml-2 flex flex-col border-l border-stone-200/80 pl-4">
+                                                        {item.submenu.map(
+                                                            (sub) => (
+                                                                <Link
+                                                                    key={
+                                                                        sub.href
+                                                                    }
+                                                                    href={
+                                                                        sub.href
+                                                                    }
+                                                                    onClick={
+                                                                        closeMenu
+                                                                    }
+                                                                    className="py-2 text-sm text-[#96908D] transition-colors hover:text-brand-blue"
+                                                                >
+                                                                    {sub.label}
+                                                                </Link>
+                                                            ),
+                                                        )}
+                                                    </div>
+                                                </motion.div>
+                                            </motion.div>
+                                        ) : (
+                                            <motion.div
+                                                key={item.href}
+                                                variants={menuItemVariants}
+                                            >
+                                                <Link
+                                                    href={item.href}
+                                                    target={item.target}
+                                                    onClick={closeMenu}
+                                                    className="block py-3 text-sm transition-colors hover:text-brand-blue"
+                                                >
+                                                    {item.label}
+                                                </Link>
+                                                {item.lineBelow && (
+                                                    <div className="my-1 border-b border-stone-200" />
+                                                )}
+                                            </motion.div>
+                                        ),
                                     )}
+                                </motion.nav>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 14 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 10 }}
+                                    transition={{
+                                        duration: 0.42,
+                                        delay: 0.08,
+                                        ease: GENTLE_EASE,
+                                    }}
+                                    className="flex shrink-0 flex-col gap-3 border-t border-stone-100/80 px-6 py-5"
+                                >
+                                    <Button href="/booking/" variant="primary">
+                                        Забронировать
+                                    </Button>
+                                    <a
+                                        href="https://guest.travelline.ru/guest-account/41018/profile/login"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                                    >
+                                        <svg
+                                            width="15"
+                                            height="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        >
+                                            <circle cx="12" cy="8" r="4" />
+                                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                                        </svg>
+                                        Войти
+                                    </a>
+                                </motion.div>
+                            </div>
+                        </motion.div>
+
+                        <div className="pointer-events-none fixed inset-y-0 left-0 z-[60] hidden xl:flex items-start gap-2 p-2">
+                            <motion.div
+                                initial="hidden"
+                                animate="show"
+                                exit="exit"
+                                variants={desktopPanelVariants}
+                                transition={PANEL_TRANSITION}
+                                className="pointer-events-auto relative mt-1 flex min-h-[34.5rem] w-64 flex-col overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                            >
+                                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_24%,rgba(150,144,141,0.06)_100%)]" />
+                                <div className="relative flex h-16 items-center justify-between px-6 shrink-0">
+                                    <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
+                                        Меню
+                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={closeMenu}
+                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-stone-700"
+                                        aria-label="Закрыть меню"
+                                    >
+                                        &times;
+                                    </button>
                                 </div>
-                            ),
-                        )}
-                    </nav>
 
-                    <div className="px-6 pb-6 flex flex-col gap-3 mt-auto">
-                        <Button href="/booking/" variant="primary">
-                            Забронировать
-                        </Button>
-                        <a
-                            href="https://guest.travelline.ru/guest-account/41018/profile/login"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm justify-center text-stone-600"
-                        >
-                            <svg
-                                width="15"
-                                height="15"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                aria-hidden="true"
-                                focusable="false"
-                            >
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                            </svg>
-                            Войти
-                        </a>
-                    </div>
-                </div>
+                                <motion.nav
+                                    variants={menuListVariants}
+                                    initial="hidden"
+                                    animate="show"
+                                    className="relative flex flex-col px-6 pb-6"
+                                >
+                                    {navItems.map((item) =>
+                                        item.submenu ? (
+                                            <motion.div
+                                                key={item.label}
+                                                variants={menuItemVariants}
+                                            >
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setSubmenuOpen(
+                                                            (v) => !v,
+                                                        )
+                                                    }
+                                                    className="flex w-full items-center justify-between py-3 text-left cursor-pointer text-sm transition-colors hover:text-brand-blue"
+                                                >
+                                                    <span>{item.label}</span>
+                                                    <span
+                                                        className={`text-xl text-[#96908D] leading-none transition-transform duration-300 ${submenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                    >
+                                                        &rsaquo;
+                                                    </span>
+                                                </button>
+                                            </motion.div>
+                                        ) : (
+                                            <motion.div
+                                                key={item.href}
+                                                variants={menuItemVariants}
+                                            >
+                                                <Link
+                                                    href={item.href}
+                                                    target={item.target}
+                                                    onClick={closeMenu}
+                                                    className="block py-3 text-sm transition-colors hover:text-brand-blue"
+                                                >
+                                                    {item.label}
+                                                </Link>
+                                                {item.lineBelow && (
+                                                    <div className="border-b border-stone-200" />
+                                                )}
+                                            </motion.div>
+                                        ),
+                                    )}
+                                </motion.nav>
 
-                {/* Абсолютное подменю — рядом с панелью */}
-                {submenuOpen && (
-                    <div
-                        className="bg-white w-60 py-4 px-6 flex flex-col gap-1 self-start mt-20 -ml-2 z-1 rounded"
-                        style={{ boxShadow: "0px 0px 4px rgba(0,0,0,0.25)" }}
-                    >
-                        {navItems[0].submenu?.map((sub) => (
-                            <Link
-                                key={sub.href}
-                                href={sub.href}
-                                onClick={closeMenu}
-                                className="py-2 text-sm hover:text-brand-blue transition-colors"
-                            >
-                                {sub.label}
-                            </Link>
-                        ))}
-                    </div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 14 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 10 }}
+                                    transition={{
+                                        duration: 0.42,
+                                        delay: 0.12,
+                                        ease: GENTLE_EASE,
+                                    }}
+                                    className="relative mt-auto flex flex-col gap-3 px-6 pb-6"
+                                >
+                                    <Button href="/booking/" variant="primary">
+                                        Забронировать
+                                    </Button>
+                                    <a
+                                        href="https://guest.travelline.ru/guest-account/41018/profile/login"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                                    >
+                                        <svg
+                                            width="15"
+                                            height="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        >
+                                            <circle cx="12" cy="8" r="4" />
+                                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                                        </svg>
+                                        Войти
+                                    </a>
+                                </motion.div>
+                            </motion.div>
+
+                            <AnimatePresence>
+                                {submenuOpen && (
+                                    <motion.div
+                                        initial="hidden"
+                                        animate="show"
+                                        exit="exit"
+                                        variants={submenuPanelVariants}
+                                        transition={{
+                                            duration: 0.16,
+                                            ease: GENTLE_EASE,
+                                            delay: 0,
+                                        }}
+                                        className="pointer-events-auto relative mt-20 w-60 self-start overflow-hidden rounded-lg border border-white/70 bg-white/94 px-6 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.16)] backdrop-blur-xl"
+                                    >
+                                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.05)_0%,rgba(255,255,255,0)_100%)]" />
+                                        <motion.div
+                                            variants={submenuListVariants}
+                                            initial="hidden"
+                                            animate="show"
+                                            className="relative flex flex-col gap-1"
+                                        >
+                                            {navItems[0].submenu?.map((sub) => (
+                                                <motion.div
+                                                    key={sub.href}
+                                                    variants={
+                                                        submenuItemVariants
+                                                    }
+                                                >
+                                                    <Link
+                                                        href={sub.href}
+                                                        onClick={closeMenu}
+                                                        className="block py-2 text-sm transition-colors hover:text-brand-blue"
+                                                    >
+                                                        {sub.label}
+                                                    </Link>
+                                                </motion.div>
+                                            ))}
+                                        </motion.div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </>
                 )}
-            </div>
+            </AnimatePresence>
         </>
     );
 }
