@@ -23,9 +23,19 @@ function isAvifSource(src: OptimizedImageProps["src"]) {
 }
 
 export default function OptimizedImage(props: OptimizedImageProps) {
+    const sizes =
+        props.sizes ??
+        (props.fill
+            ? "100vw"
+            : typeof props.width === "number"
+              ? `${props.width}px`
+              : undefined);
+
     return (
         <ExportedImage
             {...props}
+            placeholder={props.placeholder ?? "empty"}
+            sizes={sizes}
             unoptimized={props.unoptimized ?? isAvifSource(props.src)}
         />
     );

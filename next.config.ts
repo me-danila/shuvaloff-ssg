@@ -9,13 +9,15 @@ const nextConfig: NextConfig = {
         nextImageExportOptimizer_imageFolderPath: "public",
         nextImageExportOptimizer_remoteImagesFilename:
             "remoteOptimizedImages.cjs",
-        nextImageExportOptimizer_remoteImageCacheTTL: "604800",
+        nextImageExportOptimizer_remoteImageCacheTTL: "2592000",
+        nextImageExportOptimizer_generateAndUseBlurImages: "false",
+        nextImageExportOptimizer_quality: "75",
         nextImageExportOptimizer_storePicturesInWEBP: "true",
     },
     images: {
         loader: "custom",
         imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-        deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+        deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
         remotePatterns: [
             {
                 protocol: "https",
