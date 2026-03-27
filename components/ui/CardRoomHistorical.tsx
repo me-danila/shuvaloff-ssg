@@ -36,7 +36,7 @@ export default function CardRoomHistorical({
                     fill
                     sizes="(max-width: 1200px) 100vw, 50vw"
                     loading="lazy"
-                    className="object-cover object-bottom"
+                    className="object-cover object-bottom transition-transform duration-700 hover:scale-105"
                 />
 
                 {/* Градиент */}

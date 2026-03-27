@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { AllServices } from "@/data/ServicesData";
 
 export default function ServicesGrid() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {AllServices.map((service) => {
                 const href = service.slug
                     ? `/services/${service.slug}/`
@@ -12,9 +13,9 @@ export default function ServicesGrid() {
                 const isExternal = Boolean(service.externalLink);
 
                 return (
-                    <div
+                    <StaggerItem
                         key={service.title}
-                        className="relative aspect-square rounded-md overflow-hidden group"
+                        className="relative aspect-square rounded-md overflow-hidden group flex"
                     >
                         <Image
                             src={service.imgUrl}
@@ -55,9 +56,9 @@ export default function ServicesGrid() {
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </StaggerItem>
                 );
             })}
-        </div>
+        </StaggerContainer>
     );
 }

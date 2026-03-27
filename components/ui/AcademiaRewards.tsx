@@ -1,3 +1,5 @@
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+
 const tiers = [
     {
         label: "BASE",
@@ -48,9 +50,9 @@ export default function AcademiaRewards() {
     return (
         <section className="flex flex-col gap-4 xl:gap-8 px-6 xl:w-full xl:max-w-6xl xl:mx-auto">
             {/* Карточки */}
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+            <StaggerContainer className="grid grid-cols-2 xl:grid-cols-4 gap-3">
                 {tiers.map((tier) => (
-                    <div
+                    <StaggerItem
                         key={tier.label}
                         className="relative aspect-square bg-brand-blue-100 rounded-xl p-4 flex flex-col justify-end"
                     >
@@ -69,14 +71,17 @@ export default function AcademiaRewards() {
                         <p className="text-xs text-warm-gray">
                             ACADEMIA REWARDS
                         </p>
-                    </div>
+                    </StaggerItem>
                 ))}
-            </div>
+            </StaggerContainer>
 
             {/* Детали */}
-            <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8">
+            <StaggerContainer className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8">
                 {tiers.map((tier) => (
-                    <div key={tier.label} className="flex flex-col gap-2">
+                    <StaggerItem
+                        key={tier.label}
+                        className="flex flex-col gap-2"
+                    >
                         <p className="uppercase font-baskerville text-lg">
                             {tier.label}: Скидка {tier.discount}
                         </p>
@@ -99,13 +104,13 @@ export default function AcademiaRewards() {
                                 {tier.note}
                             </p>
                         )}
-                    </div>
+                    </StaggerItem>
                 ))}
 
                 <p className="xl:col-span-4 text-xs text-warm-gray border-t border-stone-200 pt-3">
                     * данные привилегии предоставляются при наличии возможности
                 </p>
-            </div>
+            </StaggerContainer>
         </section>
     );
 }

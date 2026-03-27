@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 
 type DescriptionImage = {
@@ -20,14 +21,23 @@ export default function DescriptionWithPictures({
     return (
         <section>
             <div className="text-center m-4">
-                {title && <h2 className="mb-4">{title}</h2>}
-                <p className="max-w-2xl mx-auto">{subtitle}</p>
+                {title && (
+                    <FadeUp>
+                        <h2 className="mb-4">{title}</h2>
+                    </FadeUp>
+                )}
+                <FadeUp delay={0.1}>
+                    <p className="max-w-2xl mx-auto">{subtitle}</p>
+                </FadeUp>
             </div>
 
             {/* DESKTOP: flex 3 колонки */}
-            <div className="hidden xl:flex gap-3 max-w-6xl mx-auto mt-6">
+            <StaggerContainer
+                mode="inView"
+                className="hidden xl:flex gap-3 max-w-6xl mx-auto mt-6"
+            >
                 {images.slice(0, 3).map((img) => (
-                    <div
+                    <StaggerItem
                         key={img.src}
                         className="flex-1 aspect-3/4 rounded-xl overflow-hidden"
                     >
@@ -39,9 +49,9 @@ export default function DescriptionWithPictures({
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                             loading="lazy"
                         />
-                    </div>
+                    </StaggerItem>
                 ))}
-            </div>
+            </StaggerContainer>
 
             {/* MOBILE: слайдер */}
             <SliderMobile images={images} />

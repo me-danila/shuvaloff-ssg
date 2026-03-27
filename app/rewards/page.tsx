@@ -5,6 +5,7 @@ import DarkHeroSection from "@/components/sections/DarkHeroSection";
 import AcademiaRewards from "@/components/ui/AcademiaRewards";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
+import { FadeUp } from "@/components/ui/Motion";
 
 export const metadata: Metadata = {
     title: "Программа лояльности — ACADEMIA Особняк Шувалова",
@@ -16,21 +17,32 @@ export default function Rewards() {
     return (
         <main className="flex flex-col gap-8">
             <section className="flex flex-col gap-4 m-6 xl:max-w-6xl xl:mx-auto">
-                <h1 className="xl:text-center">Программа особых привилегий</h1>
-                <p className="-mt-2 font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:text-center xl:-mt-4">
+                <FadeUp className="xl:text-center">
+                    <h1>Программа особых привилегий</h1>
+                </FadeUp>
+                <FadeUp
+                    delay={0.1}
+                    className="-mt-2 font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:text-center xl:-mt-4"
+                >
                     Academia Rewards
-                </p>
-                <p className="mt-2 xl:mt-4 xl:text-center xl:max-w-3xl">
-                    Путешествие запоминается не&nbsp;только маршрутами
-                    и&nbsp;встречами, но&nbsp;и&nbsp;тем, где вы&nbsp;отдыхаете.
-                    Проживание в&nbsp;особняке ACADEMIA&nbsp;&mdash; это больше,
-                    чем просто номер в&nbsp;гостинице.
-                    <br />
-                    Это атмосфера, в&nbsp;которой рождается настроение всей
-                    поездки: комфорт, внимание к&nbsp;деталям и&nbsp;доступ
-                    к&nbsp;особым привилегиям делают каждый день путешествия
-                    действительно запоминающимся.
-                </p>
+                </FadeUp>
+                <FadeUp
+                    delay={0.2}
+                    className="mt-2 xl:mt-4 xl:text-center xl:max-w-3xl"
+                >
+                    <p>
+                        Путешествие запоминается не&nbsp;только маршрутами
+                        и&nbsp;встречами, но&nbsp;и&nbsp;тем, где
+                        вы&nbsp;отдыхаете. Проживание в&nbsp;особняке
+                        ACADEMIA&nbsp;&mdash; это больше, чем просто номер
+                        в&nbsp;гостинице.
+                        <br />
+                        Это атмосфера, в&nbsp;которой рождается настроение всей
+                        поездки: комфорт, внимание к&nbsp;деталям и&nbsp;доступ
+                        к&nbsp;особым привилегиям делают каждый день путешествия
+                        действительно запоминающимся.
+                    </p>
+                </FadeUp>
             </section>
             <BookingForm />
             <DarkHeroSection
@@ -65,21 +77,27 @@ export default function Rewards() {
                 ]}
             />
             <section className="flex flex-col gap-4 m-6 text-center xl:max-w-4xl items-center xl:mx-auto xl:my-8 xl:gap-6">
-                <h2>Ваш путь привилегий</h2>
-                <p className="mb-4">
-                    Присоединяйтесь к&nbsp;ACADEMIA REWARDS, бронируйте
-                    проживание в&nbsp;наших отелях и&nbsp;почувствуйте
-                    атмосферу, в&nbsp;которой рождается настроение всей поездки:
-                    высокий сервис, внимание к&nbsp;деталям и&nbsp;доступ
-                    к&nbsp;особым привилегиям.
-                </p>
-                <Button
-                    href="https://guest.travelline.ru/guest-account/41018/profile/login"
-                    target="_blank"
-                    variant="primary"
-                >
-                    ПРИСОЕДЕНИТЬСЯ К&nbsp;ПРОГРАММЕ ЛОЯЛЬНОСТИ
-                </Button>
+                <FadeUp>
+                    <h2>Ваш путь привилегий</h2>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                    <p className="mb-4">
+                        Присоединяйтесь к&nbsp;ACADEMIA REWARDS, бронируйте
+                        проживание в&nbsp;наших отелях и&nbsp;почувствуйте
+                        атмосферу, в&nbsp;которой рождается настроение всей
+                        поездки: высокий сервис, внимание к&nbsp;деталям
+                        и&nbsp;доступ к&nbsp;особым привилегиям.
+                    </p>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                    <Button
+                        href="https://guest.travelline.ru/guest-account/41018/profile/login"
+                        target="_blank"
+                        variant="primary"
+                    >
+                        ПРИСОЕДЕНИТЬСЯ К&nbsp;ПРОГРАММЕ ЛОЯЛЬНОСТИ
+                    </Button>
+                </FadeUp>
             </section>
             <AcademiaRewards />
             <Divider />

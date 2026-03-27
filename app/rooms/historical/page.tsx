@@ -3,6 +3,7 @@ import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import CardRoomHistorical from "@/components/ui/CardRoomHistorical";
 import Divider from "@/components/ui/Divider";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { AllRooms } from "@/data/RoomsData";
 
 export const metadata: Metadata = {
@@ -42,55 +43,74 @@ export default function HistoricalRooms() {
     return (
         <main className="flex flex-col gap-8">
             <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-5xl xl:mx-auto">
-                <h1>ИСТОРИЧЕСКИЕ ЛЮКСЫ</h1>
-                <p className="xl:mt-2">
-                    Исторические люксы — объекты культурного наследия, в которых
-                    сохранены детали отделки, восстановлен изначальный цвет стен
-                    и добавлены подлинные антикварные предметы эпохи конца XIX —
-                    начала ХХ века.
-                </p>
+                <FadeUp>
+                    <h1>ИСТОРИЧЕСКИЕ ЛЮКСЫ</h1>
+                </FadeUp>
+                <FadeUp delay={0.1} className="xl:mt-2">
+                    <p>
+                        Исторические люксы — объекты культурного наследия, в
+                        которых сохранены детали отделки, восстановлен
+                        изначальный цвет стен и добавлены подлинные антикварные
+                        предметы эпохи конца XIX — начала ХХ века.
+                    </p>
+                </FadeUp>
             </section>
 
             <BookingForm />
 
-            <section className="flex flex-col gap-8 mx-4 mb-4 md:flex-row xl:w-full xl:max-w-6xl xl:mx-auto xl:mt-6">
+            <StaggerContainer className="flex flex-col gap-8 mx-4 mb-4 md:flex-row md:items-stretch xl:w-full xl:max-w-6xl xl:mx-auto xl:mt-6">
                 {historicalRooms.map((room) => (
-                    <CardRoomHistorical
+                    <StaggerItem
                         key={room.title}
-                        title={room.title}
-                        description={room.description}
-                        image={room.image}
-                        slug={room.slug}
-                        bed={room.bed}
-                        area={room.area}
-                        guests={room.guests}
-                        bookingUrl={room.bookingUrl}
-                    />
+                        className="flex flex-1 basis-0 min-w-0"
+                    >
+                        <CardRoomHistorical
+                            title={room.title}
+                            description={room.description}
+                            image={room.image}
+                            slug={room.slug}
+                            bed={room.bed}
+                            area={room.area}
+                            guests={room.guests}
+                            bookingUrl={room.bookingUrl}
+                        />
+                    </StaggerItem>
                 ))}
-            </section>
+            </StaggerContainer>
 
             <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-5xl xl:mx-auto">
-                <p>
-                    Это резиденции, отражающие характер владельцев особняка:
-                    графа Андрея Шувалова и его дочери Елизаветы
-                    Воронцовой-Дашковой. Изысканные линии, глубокие цвета и
-                    изящные детали дают возможность почувствовать себя дорогим
-                    гостем одного из известных аристократических домов
-                    Российской Империи.
-                </p>
-                <p>
-                    Стены особняка хранят память о людях, которые здесь жили —
-                    не выдуманных персонажах, а реальных аристократах. Помнят их
-                    уклад жизни, вечерние разговоры при свечах, неспешные шаги
-                    по мраморной лестнице, звуки рояля, шелест парадного платья,
-                    мягкий свет люстры — всё это не декорации.
-                </p>
-                <p>
-                    Это отблески жизни, которой когда-то был наполнен особняк.
-                </p>
-                <p className="mx-4 text-center font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:mt-4">
+                <FadeUp>
+                    <p>
+                        Это резиденции, отражающие характер владельцев особняка:
+                        графа Андрея Шувалова и его дочери Елизаветы
+                        Воронцовой-Дашковой. Изысканные линии, глубокие цвета и
+                        изящные детали дают возможность почувствовать себя
+                        дорогим гостем одного из известных аристократических
+                        домов Российской Империи.
+                    </p>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                    <p>
+                        Стены особняка хранят память о людях, которые здесь жили
+                        — не выдуманных персонажах, а реальных аристократах.
+                        Помнят их уклад жизни, вечерние разговоры при свечах,
+                        неспешные шаги по мраморной лестнице, звуки рояля,
+                        шелест парадного платья, мягкий свет люстры — всё это не
+                        декорации.
+                    </p>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                    <p>
+                        Это отблески жизни, которой когда-то был наполнен
+                        особняк.
+                    </p>
+                </FadeUp>
+                <FadeUp
+                    delay={0.3}
+                    className="mx-4 text-center font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:mt-4"
+                >
                     Пространство, в котором дышит история Петербурга
-                </p>
+                </FadeUp>
             </section>
             <Divider />
             <ContactsSection />

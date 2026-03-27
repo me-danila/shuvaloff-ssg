@@ -1,10 +1,12 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type NavItem = {
     label: string;
@@ -92,12 +94,16 @@ export default function Header() {
     };
 
     const isLight = !scrolled;
+    const isDesktop = useMediaQuery("(min-width: 1024px)");
 
     return (
         <>
             <div className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"}`} />
 
-            <header
+            <motion.header
+                initial={isDesktop ? { y: -20, opacity: 0 } : false}
+                animate={isDesktop ? { y: 0, opacity: 1 } : false}
+                transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 xl:pb-4 ${
                     isLight
                         ? "bg-white"
@@ -244,7 +250,7 @@ export default function Header() {
                         ))}
                     </nav>
                 )}
-            </header>
+            </motion.header>
 
             {/* Оверлей */}
             {menuOpen && (

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Divider from "@/components/ui/Divider";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 
 export type AntiqueItem = {
     title: string;
@@ -77,9 +78,9 @@ export default function AntiquesSection({
     return (
         <section className="flex flex-col py-8 gap-6 bg-stone-200 xl:py-12">
             {intro && (
-                <p className="mx-8 text-neutral-900 xl:text-center xl:max-w-6xl xl:mx-auto">
+                <FadeUp className="mx-8 text-neutral-900 xl:text-center xl:max-w-6xl xl:mx-auto">
                     {intro}
-                </p>
+                </FadeUp>
             )}
 
             <Divider />
@@ -92,11 +93,11 @@ export default function AntiquesSection({
             </div>
 
             {/* Десктоп */}
-            <div className="hidden xl:grid xl:grid-cols-2 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full xl:mt-2">
+            <StaggerContainer className="hidden xl:grid xl:grid-cols-2 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full xl:mt-2">
                 {items.map((item, i) => {
                     const isLastAndOdd = isLastOdd && i === items.length - 1;
                     return (
-                        <div
+                        <StaggerItem
                             key={item.title}
                             className={`bg-white rounded-md p-8 flex flex-col items-center text-center gap-4 mt-2 ${isLastAndOdd ? "xl:col-span-2" : ""}`}
                         >
@@ -118,10 +119,10 @@ export default function AntiquesSection({
                             <p className="text-zinc-600 leading-relaxed">
                                 {item.description}
                             </p>
-                        </div>
+                        </StaggerItem>
                     );
                 })}
-            </div>
+            </StaggerContainer>
         </section>
     );
 }

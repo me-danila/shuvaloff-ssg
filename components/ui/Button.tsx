@@ -17,9 +17,9 @@ type ButtonProps = {
 };
 
 const variants: Record<ButtonVariant, string> = {
-    primary: "bg-brand-blue text-white hover:bg-slate-800",
+    primary: "bg-brand-blue text-white",
     "primary-outline":
-        "border border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white",
+        "border border-brand-blue text-brand-blue hover:text-white",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -31,7 +31,12 @@ const sizes: Record<ButtonSize, string> = {
 };
 
 const base =
-    "inline-flex items-center justify-center tracking-widest transition-colors rounded-md disabled:opacity-50 disabled:pointer-events-none";
+    "group relative inline-flex items-center justify-center overflow-hidden rounded-md tracking-widest transition-[color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] disabled:opacity-50 disabled:pointer-events-none";
+
+const fillVariants: Record<ButtonVariant, string> = {
+    primary: "bg-slate-800",
+    "primary-outline": "bg-brand-blue",
+};
 
 export default function Button({
     variant = "primary",
@@ -46,6 +51,17 @@ export default function Button({
     type = "button",
 }: ButtonProps) {
     const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;
+    const content = (
+        <>
+            <span
+                aria-hidden="true"
+                className={`absolute inset-0 origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100 ${fillVariants[variant]}`}
+            />
+            <span className={`relative z-10 ${uppercase ? "uppercase" : ""}`}>
+                {children}
+            </span>
+        </>
+    );
 
     if (href) {
         return (
@@ -53,9 +69,9 @@ export default function Button({
                 href={href}
                 target={target}
                 rel={target === "_blank" ? "noopener noreferrer" : undefined}
-                className={classes + (uppercase ? " uppercase" : "")}
+                className={classes}
             >
-                {children}
+                {content}
             </a>
         );
     }
@@ -67,7 +83,7 @@ export default function Button({
             disabled={disabled}
             className={classes}
         >
-            {children}
+            {content}
         </button>
     );
 }
