@@ -58,7 +58,10 @@ export default function RoomsSection() {
                 key={showHistorical ? "historical" : "classical"}
                 rooms={activeRooms}
             />
-            <DesktopRoomsGrid rooms={activeRooms} />
+            <DesktopRoomsGrid
+                key={showHistorical ? "historical-grid" : "classical-grid"}
+                rooms={activeRooms}
+            />
         </>
     );
 }

@@ -19,7 +19,7 @@ export function FadeIn({
     children,
     delay = 0,
     duration = 0.55,
-    mode = "mount",
+    mode = "inView",
     once = true,
     ...props
 }: MotionProps) {
@@ -45,7 +45,7 @@ export function FadeUp({
     children,
     delay = 0,
     duration = 0.7,
-    mode = "mount",
+    mode = "inView",
     y = 18,
     once = true,
     ...props
@@ -82,7 +82,7 @@ export const StaggerContainer = forwardRef<
         {
             children,
             delay = 0,
-            mode = "mount",
+            mode = "inView",
             staggerChildren = 0.1,
             once = true,
             onScroll,
