@@ -12,6 +12,7 @@ type RoomSlide = {
     area: string;
     guests: string;
     description: string;
+    bookingUrl: string;
 };
 
 type SliderMobileRoomsProps = {
