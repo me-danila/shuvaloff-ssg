@@ -8,6 +8,7 @@ import { flushSync } from "react-dom";
 import Button from "@/components/ui/Button";
 import { GENTLE_EASE } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import SocialLinks from "@/components/ui/SocialLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type NavItem = {
@@ -390,7 +391,7 @@ export default function Header() {
                             exit="exit"
                             variants={mobilePanelVariants}
                             transition={PANEL_TRANSITION}
-                            className="xl:hidden fixed top-0 left-0 z-[60] h-full w-72 overflow-hidden rounded-r-[28px] border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                            className="xl:hidden fixed top-0 left-0 z-[60] h-full w-72 overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
                         >
                             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_22%,rgba(150,144,141,0.06)_100%)]" />
                             <div className="relative flex h-full flex-col">
@@ -502,9 +503,6 @@ export default function Header() {
                                     }}
                                     className="flex shrink-0 flex-col gap-3 border-t border-stone-100/80 px-6 py-5"
                                 >
-                                    <Button href="/booking/" variant="primary">
-                                        Забронировать
-                                    </Button>
                                     <a
                                         href="https://guest.travelline.ru/guest-account/41018/profile/login"
                                         target="_blank"
@@ -526,6 +524,36 @@ export default function Header() {
                                         </svg>
                                         Войти
                                     </a>
+                                    <Button
+                                        href="/booking/"
+                                        variant="primary"
+                                        size="xs"
+                                    >
+                                        Забронировать
+                                    </Button>
+                                    <a
+                                        href="tel:+78125659650"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                                    >
+                                        <svg
+                                            width="15"
+                                            height="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        >
+                                            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
+                                        </svg>
+                                        +7 (812) 565-96-50
+                                    </a>
+                                    <SocialLinks className="justify-center" />
                                 </motion.div>
                             </div>
                         </motion.div>
@@ -615,9 +643,6 @@ export default function Header() {
                                     }}
                                     className="relative mt-auto flex flex-col gap-3 px-6 pb-6"
                                 >
-                                    <Button href="/booking/" variant="primary">
-                                        Забронировать
-                                    </Button>
                                     <a
                                         href="https://guest.travelline.ru/guest-account/41018/profile/login"
                                         target="_blank"
@@ -639,6 +664,32 @@ export default function Header() {
                                         </svg>
                                         Войти
                                     </a>
+                                    <Button href="/booking/" variant="primary">
+                                        Забронировать
+                                    </Button>
+                                    <a
+                                        href="tel:+78125659650"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                                    >
+                                        <svg
+                                            width="15"
+                                            height="15"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        >
+                                            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
+                                        </svg>
+                                        +7 (812) 565-96-50
+                                    </a>
+                                    <SocialLinks className="justify-center" />
                                 </motion.div>
                             </motion.div>
 

@@ -37,7 +37,7 @@ const heroImages: [HeroImage, HeroImage, HeroImage, HeroImage] = [
 export default function Concierge() {
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
-            <section className="flex flex-col gap-4 xl:gap-8 my-6 max-w-xl:px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto xl:px-0">
                 <FadeUp>
                     <h1>Консьерж сервис</h1>
                 </FadeUp>

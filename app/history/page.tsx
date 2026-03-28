@@ -13,8 +13,8 @@ export default function History() {
     return (
         <main className="flex flex-col gap-6 xl:gap-6">
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-6 mx-6 xl:mx-auto mt-6 xl:max-w-3xl">
-                    <FadeUp className="text-center">
+                <section className="flex flex-col gap-6 mx-6 text-center xl:mx-auto mt-6 xl:max-w-3xl">
+                    <FadeUp>
                         <h1>Путешествие во&nbsp;времени</h1>
                     </FadeUp>
                     <FadeUp
@@ -23,7 +23,7 @@ export default function History() {
                     >
                         Особняк Шувалова
                     </FadeUp>
-                    <FadeUp delay={0.2} className="text-center">
+                    <FadeUp delay={0.2}>
                         Путешествие запоминается не&nbsp;только маршрутами
                         и&nbsp;встречами, но&nbsp;и&nbsp;тем, где
                         вы&nbsp;отдыхаете. Проживание в&nbsp;особняке

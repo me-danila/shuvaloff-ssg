@@ -54,9 +54,7 @@ export default function CardRoomHistorical({
                         <h3 className="text-white font-baskerville uppercase text-2xl xl:text-[40px]/10">
                             {title}
                         </h3>
-                        <p className="text-white/80 hidden xl:block">
-                            {description}
-                        </p>
+                        <p className="text-white/80">{description}</p>
                     </div>
                 </div>
             </a>
