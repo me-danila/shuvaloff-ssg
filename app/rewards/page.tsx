@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 export default function Rewards() {
     return (
-        <main className="flex flex-col gap-8">
-            <section className="flex flex-col gap-4 m-6 xl:max-w-6xl xl:mx-auto">
+        <main className="flex flex-col gap-6">
+            <section className="flex flex-col gap-4 mx-6 my-2 xl:max-w-6xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>Программа особых привилегий</h1>
                 </FadeUp>

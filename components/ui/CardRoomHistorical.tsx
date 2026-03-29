@@ -60,8 +60,8 @@ export default function CardRoomHistorical({
             </a>
 
             {/* Характеристики */}
-            <p className="hidden text-sm text-brand-blue gap-8 xl:flex xl:items-center">
-                <span className="flex items-center gap-3">
+            <p className="flex text-sm text-brand-blue gap-8 xl:items-center">
+                <span className="hidden xl:flex items-center gap-3">
                     <BedIcon size={18} />
                     {bed}
                 </span>

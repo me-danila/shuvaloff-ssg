@@ -391,7 +391,7 @@ export default function Header() {
                             exit="exit"
                             variants={mobilePanelVariants}
                             transition={PANEL_TRANSITION}
-                            className="xl:hidden fixed top-0 left-0 z-[60] h-full w-72 overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                            className="xl:hidden fixed top-1 left-1 z-[60] w-72 overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
                         >
                             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_22%,rgba(150,144,141,0.06)_100%)]" />
                             <div className="relative flex h-full flex-col">
