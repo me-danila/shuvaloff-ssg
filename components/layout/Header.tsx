@@ -346,7 +346,7 @@ export default function Header() {
 
                 {/* Десктоп: дополнительное меню — только не на главной */}
                 {!isHome && (
-                    <nav className="hidden xl:flex items-center justify-between gap-8 px-8 h-10">
+                    <nav className="hidden xl:flex items-center justify-between gap-8 px-8 h-13">
                         {subNavItems.map(({ label, href, target }, index) => (
                             <Link
                                 key={href}
@@ -370,7 +370,7 @@ export default function Header() {
                                         viewBox="0 0 44 41"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="absolute -top-1.5 -left-5 w-7 h-auto -z-1"
+                                        className={`absolute -top-2.5 -left-1 w-9 h-auto -z-1 ${isLight ? "" : "opacity-50"}`}
                                         aria-hidden="true"
                                     >
                                         <path
