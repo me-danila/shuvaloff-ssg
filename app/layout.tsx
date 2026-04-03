@@ -36,6 +36,12 @@ export default function RootLayout({
                     {children}
                     <Footer />
                 </SmoothScroll>
+                <Script id="hotbot" strategy="lazyOnload">{`
+  var s = document.createElement('script');
+  s.src = 'https://cdn.hotbot.ai/w/hb.js';
+  s.onload = function() { HotBot.init({ appId: '66714551573a85001e63f919' }); };
+  document.body.appendChild(s);
+`}</Script>
             </body>
         </html>
     );
