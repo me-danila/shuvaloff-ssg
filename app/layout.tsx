@@ -3,7 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-import { SmoothScroll } from "@/components/ui/SmoothScroll";
+import { SmoothScroll } from "../components/ui/SmoothScroll";
 
 const baskerville = localFont({
     src: "../public/fonts/BaskervilleCyr.woff2",
