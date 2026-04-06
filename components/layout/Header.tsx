@@ -16,7 +16,7 @@ type NavItem = {
     href: string;
     target?: "_blank";
     lineBelow?: boolean;
-    submenu?: { label: string; href: string }[];
+    submenu?: { label: string; href: string; target?: "_blank" }[];
 };
 
 type SubNavItem = {
@@ -39,9 +39,20 @@ const navItems: NavItem[] = [
         ],
     },
     {
-        label: "Бутик-ресторан",
-        href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
-        target: "_blank",
+        label: "Ресторан",
+        href: "/",
+        submenu: [
+            {
+                label: "Бутик-ресторан",
+                href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+                target: "_blank",
+            },
+            {
+                label: "Графские завтраки",
+                href: "https://shuvaloff.academia-rest.ru/grafskie-zavtraki?utm_source=hotels",
+                target: "_blank",
+            },
+        ],
     },
     {
         label: "СПА",
@@ -183,7 +194,7 @@ export default function Header() {
     const isHome = pathname === "/";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [submenuOpen, setSubmenuOpen] = useState(false);
+    const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
@@ -206,13 +217,18 @@ export default function Header() {
 
     const closeMenu = () => {
         flushSync(() => {
-            setSubmenuOpen(false);
+            setActiveSubmenu(null);
         });
         setMenuOpen(false);
     };
 
     const isLight = !scrolled;
     const isDesktop = useMediaQuery("(min-width: 1024px)");
+    const activeSubmenuIndex = navItems.findIndex(
+        (item) => item.label === activeSubmenu,
+    );
+    const activeSubmenuItems =
+        navItems.find((item) => item.label === activeSubmenu)?.submenu ?? [];
 
     return (
         <>
@@ -432,8 +448,11 @@ export default function Header() {
                                     animate="show"
                                     className="flex flex-1 flex-col overflow-y-auto px-6 py-5"
                                 >
-                                    {navItems.map((item) =>
-                                        item.submenu ? (
+                                    {navItems.map((item) => {
+                                        const isSubmenuOpen =
+                                            activeSubmenu === item.label;
+
+                                        return item.submenu ? (
                                             <motion.div
                                                 key={item.label}
                                                 variants={menuItemVariants}
@@ -441,8 +460,10 @@ export default function Header() {
                                                 <button
                                                     type="button"
                                                     onClick={() =>
-                                                        setSubmenuOpen(
-                                                            (v) => !v,
+                                                        setActiveSubmenu(
+                                                            isSubmenuOpen
+                                                                ? null
+                                                                : item.label,
                                                         )
                                                     }
                                                     className="flex w-full items-center justify-between py-3 text-left cursor-pointer"
@@ -451,7 +472,7 @@ export default function Header() {
                                                         {item.label}
                                                     </span>
                                                     <span
-                                                        className={`text-xl text-[#96908D] transition-transform duration-300 leading-none ${submenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                        className={`text-xl text-[#96908D] transition-transform duration-300 leading-none ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
                                                     >
                                                         &rsaquo;
                                                     </span>
@@ -462,7 +483,7 @@ export default function Header() {
                                                     }
                                                     initial={false}
                                                     animate={
-                                                        submenuOpen
+                                                        isSubmenuOpen
                                                             ? "open"
                                                             : "closed"
                                                     }
@@ -477,6 +498,9 @@ export default function Header() {
                                                                     }
                                                                     href={
                                                                         sub.href
+                                                                    }
+                                                                    target={
+                                                                        sub.target
                                                                     }
                                                                     onClick={
                                                                         closeMenu
@@ -507,8 +531,8 @@ export default function Header() {
                                                     <div className="my-1 border-b border-stone-200" />
                                                 )}
                                             </motion.div>
-                                        ),
-                                    )}
+                                        );
+                                    })}
                                 </motion.nav>
                                 <motion.div
                                     initial={{ opacity: 0, y: 14 }}
@@ -606,8 +630,11 @@ export default function Header() {
                                     animate="show"
                                     className="relative flex flex-col px-6 pb-6"
                                 >
-                                    {navItems.map((item) =>
-                                        item.submenu ? (
+                                    {navItems.map((item) => {
+                                        const isSubmenuOpen =
+                                            activeSubmenu === item.label;
+
+                                        return item.submenu ? (
                                             <motion.div
                                                 key={item.label}
                                                 variants={menuItemVariants}
@@ -615,15 +642,17 @@ export default function Header() {
                                                 <button
                                                     type="button"
                                                     onClick={() =>
-                                                        setSubmenuOpen(
-                                                            (v) => !v,
+                                                        setActiveSubmenu(
+                                                            isSubmenuOpen
+                                                                ? null
+                                                                : item.label,
                                                         )
                                                     }
                                                     className="flex w-full items-center justify-between py-3 text-left cursor-pointer text-sm transition-colors hover:text-brand-blue"
                                                 >
                                                     <span>{item.label}</span>
                                                     <span
-                                                        className={`text-xl text-[#96908D] leading-none transition-transform duration-300 ${submenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                        className={`text-xl text-[#96908D] leading-none transition-transform duration-300 ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
                                                     >
                                                         &rsaquo;
                                                     </span>
@@ -646,8 +675,8 @@ export default function Header() {
                                                     <div className="border-b border-stone-200" />
                                                 )}
                                             </motion.div>
-                                        ),
-                                    )}
+                                        );
+                                    })}
                                 </motion.nav>
 
                                 <motion.div
@@ -712,7 +741,7 @@ export default function Header() {
                             </motion.div>
 
                             <AnimatePresence>
-                                {submenuOpen && (
+                                {activeSubmenuItems.length > 0 && (
                                     <motion.div
                                         initial="hidden"
                                         animate="show"
@@ -724,6 +753,15 @@ export default function Header() {
                                             delay: 0,
                                         }}
                                         className="pointer-events-auto relative mt-20 w-60 self-start overflow-hidden rounded-lg border border-white/70 bg-white/94 px-6 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.16)] backdrop-blur-xl"
+                                        style={{
+                                            marginTop:
+                                                80 +
+                                                Math.max(
+                                                    activeSubmenuIndex,
+                                                    0,
+                                                ) *
+                                                    48,
+                                        }}
                                     >
                                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.05)_0%,rgba(255,255,255,0)_100%)]" />
                                         <motion.div
@@ -732,7 +770,7 @@ export default function Header() {
                                             animate="show"
                                             className="relative flex flex-col gap-1"
                                         >
-                                            {navItems[0].submenu?.map((sub) => (
+                                            {activeSubmenuItems.map((sub) => (
                                                 <motion.div
                                                     key={sub.href}
                                                     variants={
@@ -741,6 +779,7 @@ export default function Header() {
                                                 >
                                                     <Link
                                                         href={sub.href}
+                                                        target={sub.target}
                                                         onClick={closeMenu}
                                                         className="block py-2 text-sm transition-colors hover:text-brand-blue"
                                                     >

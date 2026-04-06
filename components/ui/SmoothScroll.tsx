@@ -2,8 +2,8 @@
 
 import { ReactLenis } from "lenis/react";
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useState, useEffect } from "react";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
     const isDesktop = useMediaQuery("(min-width: 1024px)");
@@ -11,10 +11,15 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const check = () =>
-            setHasCert(new URLSearchParams(window.location.search).has("cert-open"));
+            setHasCert(
+                new URLSearchParams(window.location.search).has("cert-open"),
+            );
 
         const patch = (original: typeof history.pushState) =>
-            function (this: History, ...args: Parameters<typeof history.pushState>) {
+            function (
+                this: History,
+                ...args: Parameters<typeof history.pushState>
+            ) {
                 original.apply(this, args);
                 check();
             };
@@ -32,7 +37,10 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (!isDesktop || hasCert) return <>{children}</>;
 
     return (
-        <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+        <ReactLenis
+            root
+            options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
+        >
             {children}
         </ReactLenis>
     );
