@@ -39,20 +39,14 @@ const navItems: NavItem[] = [
         ],
     },
     {
-        label: "Ресторан",
-        href: "/",
-        submenu: [
-            {
-                label: "Бутик-ресторан",
-                href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
-                target: "_blank",
-            },
-            {
-                label: "Графские завтраки",
-                href: "https://shuvaloff.academia-rest.ru/grafskie-zavtraki?utm_source=hotels",
-                target: "_blank",
-            },
-        ],
+        label: "Бутик-ресторан",
+        href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+        target: "_blank",
+    },
+    {
+        label: "Графские завтраки",
+        href: "https://shuvaloff.academia-rest.ru/grafskie-zavtraki?utm_source=hotels",
+        target: "_blank",
     },
     {
         label: "СПА",
