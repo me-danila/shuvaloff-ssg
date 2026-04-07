@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useRef, useState } from "react";
 import Button from "@/components/ui/Button";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import type { Service } from "@/data/ServicesData";
 
 type ServicesSliderProps = {
@@ -45,15 +46,15 @@ export default function ServicesSlider({ services }: ServicesSliderProps) {
 
     return (
         <div className="flex flex-col gap-4">
-            <div
+            <StaggerContainer
                 ref={ref}
                 className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar rounded-md"
                 onScroll={handleScroll}
             >
                 {services.map((service) => (
-                    <div
+                    <StaggerItem
                         key={service.title}
-                        className="relative aspect-square rounded-md overflow-hidden shrink-0 w-full md:w-[calc(50%-8px)] xl:w-[calc(33.333%-11px)] snap-start"
+                        className="relative aspect-square rounded-md overflow-hidden shrink-0 w-full md:w-[calc(50%-8px)] xl:w-[calc(33.333%-11px)] snap-start flex"
                     >
                         <Image
                             src={service.imgUrl}
@@ -85,9 +86,9 @@ export default function ServicesSlider({ services }: ServicesSliderProps) {
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </StaggerItem>
                 ))}
-            </div>
+            </StaggerContainer>
 
             <div className="flex justify-center gap-8">
                 <button

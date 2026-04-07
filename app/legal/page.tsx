@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import ContactsSection from "@/components/sections/ContactsSection";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
+import { FadeUp } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 export const metadata: Metadata = {
     title: "Правовая информация — ACADEMIA Особняк Шувалова",
@@ -39,11 +40,13 @@ export default function LegalPage() {
     return (
         <main className="flex flex-col gap-8">
             <section className="flex flex-col gap-6 m-6 xl:w-full xl:max-w-6xl xl:mx-auto">
-                <h1 className="md:text-center my-4">Правовая информация</h1>
+                <FadeUp className="md:text-center my-4">
+                    <h1>Правовая информация</h1>
+                </FadeUp>
 
                 <div className="flex flex-col xl:flex-row-reverse xl:items-start gap-6 xl:gap-8">
                     {/* Сертификат */}
-                    <div className="w-full xl:flex-1">
+                    <FadeUp className="w-full xl:flex-1">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/03/cert.png"
                             alt="Свидетельство о присвоении категории звёзд"
@@ -53,10 +56,13 @@ export default function LegalPage() {
                             sizes="(max-width: 1280px) 100vw, 50vw"
                             className="w-full h-auto rounded-md"
                         />
-                    </div>
+                    </FadeUp>
 
                     {/* Реквизиты и ссылки */}
-                    <div className="flex flex-col gap-6 xl:flex-1 xl:self-stretch">
+                    <FadeUp
+                        delay={0.1}
+                        className="flex flex-col gap-6 xl:flex-1 xl:self-stretch"
+                    >
                         <div className="flex flex-col gap-1">
                             <p>ООО «ОТЕЛЬ АКАДЕМИЯ ОСОБНЯК ШУВАЛОВА»</p>
                         </div>
@@ -143,7 +149,7 @@ export default function LegalPage() {
                                 </a>
                             ))}
                         </div>
-                    </div>
+                    </FadeUp>
                 </div>
             </section>
 

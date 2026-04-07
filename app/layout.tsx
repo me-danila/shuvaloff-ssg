@@ -3,6 +3,7 @@ import "./globals.css";
 import Script from "next/script";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import { SmoothScroll } from "../components/ui/SmoothScroll";
 
 const baskerville = localFont({
     src: "../public/fonts/BaskervilleCyr.woff2",
@@ -30,9 +31,17 @@ export default function RootLayout({
                     src="/scripts/travelline.js"
                     strategy="beforeInteractive"
                 />
-                <Header />
-                {children}
-                <Footer />
+                <SmoothScroll>
+                    <Header />
+                    {children}
+                    <Footer />
+                </SmoothScroll>
+                <Script id="hotbot" strategy="lazyOnload">{`
+  var s = document.createElement('script');
+  s.src = 'https://cdn.hotbot.ai/w/hb.js';
+  s.onload = function() { HotBot.init({ appId: '66714551573a85001e63f919' }); };
+  document.body.appendChild(s);
+`}</Script>
             </body>
         </html>
     );

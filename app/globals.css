@@ -47,3 +47,25 @@ body {
         }
     }
 }
+
+/* HotBot */
+html body.hotbot-widget-container {
+    --font-family: CenturyGothic;
+}
+
+html body {
+    --hotbot-button-background: #243163;
+    --hotbot-shop-button-background: #ffffff;
+    --hotbot-user-message-background: #cfb180;
+    --hotbot-user-message-color: #2b241c;
+    --hotbot-menu-button-background: #243163;
+    --hotbot-menu-button-color: #ffffff;
+}
+
+.hotbot-widget-tooltip.hotbot-widget-tooltip--shop {
+    font-size: 20px;
+}
+
+.hotbot-widget-tooltip--shop {
+    display: none;
+}

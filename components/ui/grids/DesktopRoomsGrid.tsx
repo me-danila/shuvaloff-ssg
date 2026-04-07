@@ -1,6 +1,7 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 type RoomSlide = {
     image: { src: string; alt: string };
@@ -18,9 +19,9 @@ type DesktopRoomsGridProps = {
 
 export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
     return (
-        <div className="hidden xl:grid xl:grid-cols-2 xl:gap-8 xl:max-w-6xl xl:mx-auto xl:w-full">
+        <StaggerContainer className="hidden xl:grid xl:grid-cols-2 xl:gap-8 xl:max-w-6xl xl:mx-auto xl:w-full">
             {rooms.map((room) => (
-                <div key={room.title} className="flex flex-col gap-2">
+                <StaggerItem key={room.title} className="flex flex-col gap-2">
                     {/* Фото */}
                     <a
                         className="relative w-full h-90 overflow-hidden rounded-md"
@@ -69,8 +70,8 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
                             {room.guests}
                         </span>
                     </div>
-                </div>
+                </StaggerItem>
             ))}
-        </div>
+        </StaggerContainer>
     );
 }

@@ -6,6 +6,7 @@ import type { HeroImage } from "@/components/sections/HeroWithPictures";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import DesktopHeroGrid from "@/components/ui/grids/DesktopHeroGrid";
+import { FadeUp } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 
 export const metadata: Metadata = {
@@ -36,23 +37,31 @@ const heroImages: [HeroImage, HeroImage, HeroImage, HeroImage] = [
 export default function Concierge() {
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
-            <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto">
-                <h1>Консьерж сервис</h1>
-                <p className="mx-auto xl:max-w-4xl">
-                    Настоящее гостеприимство всегда больше, чем безупречный
-                    сервис. Это искреннее желание сделать лучшее
-                    из&nbsp;возможного, внимательность к&nbsp;деталям
-                    и&nbsp;чуткость к&nbsp;вашим пожеланиям.
-                    <br />
-                    <br />
-                    Консьерж-служба ACADEMIA Особняк Шувалова всегда готова
-                    помочь с&nbsp;решением любых, даже самых неожиданных, задач.
-                </p>
+            <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto xl:px-0">
+                <FadeUp>
+                    <h1>Консьерж сервис</h1>
+                </FadeUp>
+                <FadeUp
+                    delay={0.1}
+                    className="-mt-2 font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:text-center xl:-mt-6"
+                >
+                    Больше, чем сервис
+                </FadeUp>
+                <FadeUp delay={0.3} className="mx-auto xl:max-w-4xl">
+                    <p>
+                        Настоящее гостеприимство всегда больше, чем безупречный
+                        сервис. Это искреннее желание сделать лучшее
+                        из&nbsp;возможного, внимательность к&nbsp;деталям
+                        и&nbsp;чуткость к&nbsp;вашим пожеланиям. Консьерж-служба
+                        ACADEMIA Особняк Шувалова всегда готова помочь
+                        с&nbsp;решением любых, даже самых неожиданных, задач.
+                    </p>
+                </FadeUp>
                 <SliderMobile images={heroImages} />
-                <DesktopHeroGrid images={heroImages} />
+                <DesktopHeroGrid images={heroImages} tone="inner" />
             </section>
             <BookingForm />
-            <section className="px-6 w-full xl:max-w-6xl xl:mx-auto">
+            <FadeUp className="px-6 w-full xl:max-w-6xl xl:mx-auto">
                 <p>
                     Мы&nbsp;подготовим полноценный сценарий отдыха под ваш
                     запрос, удобно соберем, забронируем и&nbsp;организуем
@@ -69,12 +78,13 @@ export default function Concierge() {
                     номера для дорогого вам человека. Мы&nbsp;предоставим вам
                     VIP-трансфер и&nbsp;поможем организовать любое
                     мероприятие&nbsp;&mdash; от&nbsp;фотосессии и&nbsp;девичника
-                    до&nbsp;изысканного банкета в&nbsp;ACADEMIA BAR SHUVALOFF.
+                    до&nbsp;изысканного банкета в&nbsp;Бар-ресторан ACADEMIA
+                    Шувалова.
                 </p>
-            </section>
+            </FadeUp>
             <section className="mx-6 xl:max-w-6xl xl:mx-auto xl:w-full">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                    <div className="bg-brand-blue-100 rounded-md p-6 flex flex-col gap-6">
+                    <FadeUp className="bg-brand-blue-100 rounded-md p-6 flex flex-col gap-6">
                         <div className="flex flex-col gap-4 xl:flex-row grow">
                             <div className="flex flex-col">
                                 <div className="flex items-center gap-3 xl:flex-row xl:items-start">
@@ -127,9 +137,12 @@ export default function Concierge() {
                         >
                             Заказать
                         </Button>
-                    </div>
+                    </FadeUp>
 
-                    <div className="bg-brand-blue-100 rounded-md p-6 flex flex-col gap-6">
+                    <FadeUp
+                        delay={0.1}
+                        className="bg-brand-blue-100 rounded-md p-6 flex flex-col gap-6"
+                    >
                         <div className="flex flex-col gap-4 xl:flex-row grow">
                             <div className="flex flex-col">
                                 <div className="flex items-center gap-3 xl:flex-row xl:items-start">
@@ -182,10 +195,10 @@ export default function Concierge() {
                         >
                             Заказать
                         </Button>
-                    </div>
+                    </FadeUp>
                 </div>
             </section>
-            <section className="max-xl:px-6 my-4 w-full xl:text-center xl:max-w-4xl xl:mx-auto">
+            <FadeUp className="max-xl:px-6 my-4 w-full xl:text-center xl:max-w-4xl xl:mx-auto">
                 <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
                     Специально для гостей особняка
                 </h3>
@@ -198,7 +211,7 @@ export default function Concierge() {
                         href="/run/"
                         variant="primary-outline"
                         className="grow"
-                        size="sm"
+                        size="xl"
                         uppercase={false}
                     >
                         Для пробежек
@@ -208,7 +221,7 @@ export default function Concierge() {
                         target="_blank"
                         variant="primary-outline"
                         className="grow"
-                        size="sm"
+                        size="xl"
                         uppercase={false}
                     >
                         Для красивых прогулок поблизости
@@ -218,13 +231,13 @@ export default function Concierge() {
                         target="_blank"
                         variant="primary-outline"
                         className="grow"
-                        size="sm"
+                        size="xl"
                         uppercase={false}
                     >
                         Для прогулок с питомцем
                     </Button>
                 </div>
-            </section>
+            </FadeUp>
             <Divider />
             <ContactsSection />
         </main>

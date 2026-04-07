@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import AntiquesSection from "@/components/sections/AntiquesSection";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Divider from "@/components/ui/Divider";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 
 export const metadata: Metadata = {
@@ -102,19 +103,25 @@ export default function HistoricalRooms() {
                 }}
             />
             <BookingForm />
-            <p className="mx-6 my-2 xl:max-w-5xl xl:mx-auto xl:mt-6 xl:text-center">
-                Номер посвящен графу Андрею Павловичу Шувалову&nbsp;— истинному
-                аристократу: образованному, деятельному, целеустремленному.
-                Мы&nbsp;создавали это пространство, как отражение его вкуса
-                и&nbsp;взгляда на&nbsp;мир. В&nbsp;интерьере доминируют строгие
-                и&nbsp;ясные классические формы, что подчеркивает интеллигентную
-                сдержанность и&nbsp;благородство. Резиденция Шувалова&nbsp;— это
-                место, где дыхание истории и&nbsp;современный комфорт
-                не&nbsp;спорят, а&nbsp;дополняют друг друга.
-            </p>
+            <FadeUp className="mx-6 my-2 xl:max-w-5xl xl:mx-auto xl:mt-6 xl:text-center">
+                <p>
+                    Номер посвящен графу Андрею Павловичу Шувалову&nbsp;—
+                    истинному аристократу: образованному, деятельному,
+                    целеустремленному. Мы&nbsp;создавали это пространство, как
+                    отражение его вкуса и&nbsp;взгляда на&nbsp;мир.
+                    В&nbsp;интерьере доминируют строгие и&nbsp;ясные
+                    классические формы, что подчеркивает интеллигентную
+                    сдержанность и&nbsp;благородство. Резиденция Шувалова&nbsp;—
+                    это место, где дыхание истории и&nbsp;современный комфорт
+                    не&nbsp;спорят, а&nbsp;дополняют друг друга.
+                </p>
+            </FadeUp>
             <SliderMobile images={descriptionImages} />
-            <div className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full">
-                <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+            <StaggerContainer
+                mode="inView"
+                className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full"
+            >
+                <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
                         src={descriptionImages[0].src}
                         alt={descriptionImages[0].alt}
@@ -123,8 +130,8 @@ export default function HistoricalRooms() {
                         loading="lazy"
                         className="object-cover"
                     />
-                </div>
-                <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                </StaggerItem>
+                <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
                         src={descriptionImages[1].src}
                         alt={descriptionImages[1].alt}
@@ -133,8 +140,8 @@ export default function HistoricalRooms() {
                         loading="lazy"
                         className="object-cover"
                     />
-                </div>
-                <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                </StaggerItem>
+                <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
                         src={descriptionImages[2].src}
                         alt={descriptionImages[2].alt}
@@ -143,10 +150,12 @@ export default function HistoricalRooms() {
                         loading="lazy"
                         className="object-cover"
                     />
-                </div>
-            </div>
+                </StaggerItem>
+            </StaggerContainer>
             <section className="flex flex-col gap-3 m-6 xl:max-w-6xl xl:mx-auto xl:text-center xl:my-8">
-                <h2>Пространство с характером</h2>
+                <FadeUp>
+                    <h2>Пространство с характером</h2>
+                </FadeUp>
             </section>
             <AntiquesSection
                 intro="Чтобы подчеркнуть единство между прошлым и настоящим особняка мы дополнили современный комфорт яркими акцентами прошедшей эпохи. Антикварная мебель притягивает взгляды и наполняет пространство изысканным благородством, характерным для истинно аристократического дома. Номер наполнен подлинными антикварными предметами, которые мягко погружают в историческую эпоху."

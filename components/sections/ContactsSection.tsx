@@ -6,9 +6,9 @@ import {
     MapPinIcon,
     PhoneIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
+import Image from "@/components/ui/OptimizedImage";
 
 type YMaps = {
     ready: (fn: () => void) => void;

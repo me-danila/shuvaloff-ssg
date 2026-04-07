@@ -3,6 +3,7 @@
 import { AirplaneIcon, TrainIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 
 const transport = [
     {
@@ -56,7 +57,7 @@ export default function TransportSlider() {
                             <Button
                                 href={href}
                                 target="_blank"
-                                variant="primary-outline"
+                                variant="primary"
                                 className="mt-auto"
                             >
                                 Посмотреть расписание
@@ -75,9 +76,9 @@ export default function TransportSlider() {
             </div>
 
             {/* Десктоп: 2 колонки */}
-            <div className="hidden xl:grid xl:grid-cols-2 gap-4">
+            <StaggerContainer className="hidden xl:grid xl:grid-cols-2 gap-4">
                 {transport.map(({ Icon, label, route, href }) => (
-                    <div
+                    <StaggerItem
                         key={label}
                         className="flex flex-col gap-6 bg-brand-blue-100 rounded-sm p-8"
                     >
@@ -101,9 +102,9 @@ export default function TransportSlider() {
                         >
                             Посмотреть расписание
                         </Button>
-                    </div>
+                    </StaggerItem>
                 ))}
-            </div>
+            </StaggerContainer>
         </>
     );
 }

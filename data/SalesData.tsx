@@ -15,27 +15,26 @@ export const AllSales: Sale[] = [
         title: "Промокод GENIUS",
         subtitle: "Получите бонус при первом бронировании на сайте",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
-        bookingUrl: "/booking/?hotel_id=41018&promo-code-plain=genius",
+        bookingUrl: "/booking/?promo-code-plain=genius",
     },
-    {
-        title: "Раннее бронирование",
-        subtitle: "Скидка 15% при бронировании за 7 дней и более до заезда",
-        imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
-        bookingUrl: "/booking?hotel_id=41018&be-offer=5110665",
-    },
+    //    {
+    //        title: "Раннее бронирование",
+    //        subtitle: "Скидка 15% при бронировании за 7 дней и более до заезда",
+    //        imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
+    //        bookingUrl: "/booking?be-offer=5110665",
+    //    },
     {
         title: "Длительное проживание",
         subtitle: "Скидка 20% на проживание от 5 ночей",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
-        bookingUrl: "/booking?hotel_id=41018&be-offer=5110673",
+        bookingUrl: "/booking?be-offer=588673",
     },
     {
         title: "День рождения",
         subtitle:
             "Специальные привилегии для именинников и скидка 15% от 2 ночей",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
-        bookingUrl:
-            "/booking?hotel_id=41018&be-offer=5110931&promo-code-plain=birthday",
+        bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
     },
     {
         title: "ВАШ ВЫХОДНОЙ КАК ИСКУССТВО",
@@ -49,24 +48,21 @@ export const AllSales: Sale[] = [
         subtitle:
             "Скидка 15% на тариф Завтрак включен по программе лояльности РЖД",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
-        bookingUrl:
-            "/booking?hotel_id=41018&be-offer=5110963&promo-code-plain=rzd",
+        bookingUrl: "/booking?promo-code-plain=rzd",
     },
     {
         title: "Командировка",
         subtitle:
             "Специальные привилегии для именинников и скидка 15% от 2 ночей",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/23-1.avif",
-        bookingUrl:
-            "/booking?hotel_id=41018&be-offer=5110976&promo-code-plain=work",
+        bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
     },
     {
         title: "Свадебное предложение",
         subtitle:
             "Свадебное предложение ACADEMIA — это гармония исторических интерьеров и безупречного сервиса",
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
-        bookingUrl:
-            "/booking?hotel_id=41018&be-offer=51109110&promo-code-plain=wedding",
+        bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
     },
     {
         title: "Семейное путешествие",

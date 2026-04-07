@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import AntiquesSection from "@/components/sections/AntiquesSection";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Divider from "@/components/ui/Divider";
+import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 
 export const metadata: Metadata = {
@@ -107,18 +108,24 @@ export default function HistoricalRooms() {
                 }}
             />
             <BookingForm />
-            <p className="mx-6 my-2 xl:max-w-5xl xl:mx-auto xl:mt-6 xl:text-center">
-                Этот номер назван в&nbsp;честь графини Елизаветы Андреевны
-                Воронцовой-Дашковой (урождённой Шуваловой, 1845−1924).
-                <br className="block xl:hidden" />
-                <br />
-                Мы&nbsp;постарались передать самые яркие качества этой
-                неординарной женщины: изящество, тонкий вкус, интеллигентность,
-                внутреннюю силу и&nbsp;творческий подход к&nbsp;жизни.
-            </p>
+            <FadeUp className="mx-6 my-2 xl:max-w-5xl xl:mx-auto xl:mt-6 xl:text-center">
+                <p>
+                    Этот номер назван в&nbsp;честь графини Елизаветы Андреевны
+                    Воронцовой-Дашковой (урождённой Шуваловой, 1845−1924).
+                    <br className="block xl:hidden" />
+                    <br />
+                    Мы&nbsp;постарались передать самые яркие качества этой
+                    неординарной женщины: изящество, тонкий вкус,
+                    интеллигентность, внутреннюю силу и&nbsp;творческий подход
+                    к&nbsp;жизни.
+                </p>
+            </FadeUp>
             <SliderMobile images={descriptionImages} />
-            <div className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full">
-                <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+            <StaggerContainer
+                mode="inView"
+                className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full"
+            >
+                <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
                         src={descriptionImages[0].src}
                         alt={descriptionImages[0].alt}
@@ -127,8 +134,8 @@ export default function HistoricalRooms() {
                         loading="lazy"
                         className="object-cover"
                     />
-                </div>
-                <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                </StaggerItem>
+                <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
                         src={descriptionImages[1].src}
                         alt={descriptionImages[1].alt}
@@ -137,8 +144,8 @@ export default function HistoricalRooms() {
                         loading="lazy"
                         className="object-cover"
                     />
-                </div>
-                <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                </StaggerItem>
+                <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
                         src={descriptionImages[2].src}
                         alt={descriptionImages[2].alt}
@@ -147,29 +154,37 @@ export default function HistoricalRooms() {
                         loading="lazy"
                         className="object-cover"
                     />
-                </div>
-            </div>
+                </StaggerItem>
+            </StaggerContainer>
             <section className="flex flex-col gap-3 m-6 xl:max-w-6xl xl:mx-auto xl:text-center xl:my-8">
-                <h2>
-                    Строгие линии, исторические детали и&nbsp;безупречный
-                    комфорт
-                </h2>
+                <FadeUp>
+                    <h2>
+                        Строгие линии, исторические детали и&nbsp;безупречный
+                        комфорт
+                    </h2>
+                </FadeUp>
                 <div className="xl:mt-4 xl:max-w-5xl xl:mx-auto">
-                    <p>
-                        Исторический люкс Дашковой&nbsp;— просторный
-                        однокомнатный номер с&nbsp;изысканным сочетанием изящных
-                        и&nbsp;чётких линий неоклассицизма с&nbsp;современным
-                        комфортом. Идеален для романтических вечеров, долгих
-                        бесед на&nbsp;вечные темы и&nbsp;роскошных фотосессий.
-                    </p>
-                    <p className="xl:mt-4">
-                        Безупречное оснащение номера и&nbsp;необычная ванная
-                        комната со&nbsp;стеклянными стенами&nbsp;— дань нашему
-                        времени, несомненно, не&nbsp;просто создают ожидаемый
-                        комфорт, но&nbsp;и&nbsp;добавляют элемент неподвластной
-                        времени игры для двоих. Яркий насыщенный цвет стен
-                        резиденции был восстановлен по&nbsp;архивным материалам.
-                    </p>
+                    <FadeUp delay={0.1}>
+                        <p>
+                            Исторический люкс Дашковой&nbsp;— просторный
+                            однокомнатный номер with изысканным сочетанием
+                            изящных и&nbsp;чётких линий неоклассицизма
+                            с&nbsp;современным комфортом. Идеален для
+                            романтических вечеров, долгих бесед на&nbsp;вечные
+                            темы и&nbsp;роскошных фотосессий.
+                        </p>
+                    </FadeUp>
+                    <FadeUp delay={0.2} className="xl:mt-4">
+                        <p>
+                            Безупречное оснащение номера и&nbsp;необычная ванная
+                            комната со&nbsp;стеклянными стенами&nbsp;— дань
+                            нашему времени, несомненно, не&nbsp;просто создают
+                            ожидаемый комфорт, но&nbsp;и&nbsp;добавляют элемент
+                            неподвластной времени игры для двоих. Яркий
+                            насыщенный цвет стен резиденции был восстановлен
+                            по&nbsp;архивным материалам.
+                        </p>
+                    </FadeUp>
                 </div>
             </section>
             <AntiquesSection

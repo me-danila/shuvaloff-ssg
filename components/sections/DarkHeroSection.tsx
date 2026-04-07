@@ -1,5 +1,7 @@
-import Image from "next/image";
 import type React from "react";
+import { FadeUp } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
+import { Parallax } from "@/components/ui/Parallax";
 
 type ContentBlock = {
     title: React.ReactNode;
@@ -55,7 +57,10 @@ export default function DarkHeroSection({
             </div>
 
             {/* DESKTOP: фото на весь блок */}
-            <div className="hidden xl:block absolute inset-0">
+            <Parallax
+                className="hidden xl:block absolute inset-0 h-full w-full"
+                offset={100}
+            >
                 <Image
                     src={image.src}
                     alt={image.alt}
@@ -73,28 +78,32 @@ export default function DarkHeroSection({
                         }}
                     />
                 ) : null}
-            </div>
+            </Parallax>
 
             {/* Контент */}
             <div
                 className={`relative z-10 px-6 pt-12 pb-64 xl:pb-40 xl:px-20 xl:pt-20 ${sizeClass[size]} flex flex-col gap-8`}
             >
-                {blocks.map((block) => (
+                {blocks.map((block, index) => (
                     <div
                         key={block.paragraphs[0]}
                         className="flex flex-col gap-4"
                     >
-                        <h3 className="mt-4 font-baskerville text-2xl xl:text-4xl uppercase leading-tight">
-                            {block.title}
-                        </h3>
+                        <FadeUp delay={index * 0.1}>
+                            <h3 className="mt-4 font-baskerville text-2xl xl:text-4xl uppercase leading-tight">
+                                {block.title}
+                            </h3>
+                        </FadeUp>
                         <div className="flex flex-col gap-4">
-                            {block.paragraphs.map((text) => (
-                                <p
+                            {block.paragraphs.map((text, i) => (
+                                <FadeUp
                                     key={text}
-                                    className="text-zinc-300 leading-relaxed"
+                                    delay={index * 0.1 + (i + 1) * 0.1}
                                 >
-                                    {text}
-                                </p>
+                                    <p className="text-zinc-300 leading-relaxed">
+                                        {text}
+                                    </p>
+                                </FadeUp>
                             ))}
                         </div>
                     </div>

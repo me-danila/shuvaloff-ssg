@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
+import Image from "@/components/ui/OptimizedImage";
 
 type CardRoomHistoricalProps = {
     title: string;
@@ -36,7 +36,7 @@ export default function CardRoomHistorical({
                     fill
                     sizes="(max-width: 1200px) 100vw, 50vw"
                     loading="lazy"
-                    className="object-cover object-bottom"
+                    className="object-cover object-bottom transition-transform duration-700 hover:scale-105"
                 />
 
                 {/* Градиент */}
@@ -54,16 +54,14 @@ export default function CardRoomHistorical({
                         <h3 className="text-white font-baskerville uppercase text-2xl xl:text-[40px]/10">
                             {title}
                         </h3>
-                        <p className="text-white/80 hidden xl:block">
-                            {description}
-                        </p>
+                        <p className="text-white/80">{description}</p>
                     </div>
                 </div>
             </a>
 
             {/* Характеристики */}
-            <p className="hidden text-sm text-brand-blue gap-8 xl:flex xl:items-center">
-                <span className="flex items-center gap-3">
+            <p className="flex text-sm text-brand-blue gap-8 xl:items-center">
+                <span className="hidden xl:flex items-center gap-3">
                     <BedIcon size={18} />
                     {bed}
                 </span>

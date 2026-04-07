@@ -1,10 +1,11 @@
-import Image from "next/image";
 import Button from "@/components/ui/Button";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 import { AllServices } from "@/data/ServicesData";
 
 export default function ServicesGrid() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {AllServices.map((service) => {
                 const href = service.slug
                     ? `/services/${service.slug}/`
@@ -12,16 +13,16 @@ export default function ServicesGrid() {
                 const isExternal = Boolean(service.externalLink);
 
                 return (
-                    <div
+                    <StaggerItem
                         key={service.title}
-                        className="relative aspect-square rounded-md overflow-hidden group"
+                        className="relative aspect-square rounded-md overflow-hidden group flex"
                     >
                         <Image
                             src={service.imgUrl}
                             alt={service.title}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-cover"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/50" />
                         <div className="absolute inset-0 flex flex-col justify-between text-white p-6 xl:p-8">
@@ -55,9 +56,9 @@ export default function ServicesGrid() {
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </StaggerItem>
                 );
             })}
-        </div>
+        </StaggerContainer>
     );
 }

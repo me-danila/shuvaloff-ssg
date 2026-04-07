@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import Image from "@/components/ui/OptimizedImage";
 
 // src — замени на реальные изображения из исходников
 const LANDMARKS = [
@@ -72,38 +73,44 @@ export default function HistoricalMapSection() {
                     className="object-cover"
                 />
 
-                {/* Лого отеля */}
-                <div
-                    className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
-                    style={{ left: HOTEL_LOGO.left, top: HOTEL_LOGO.top }}
+                <StaggerContainer
+                    delay={0.5}
+                    staggerChildren={0.2}
+                    className="absolute inset-0"
                 >
-                    <Image
-                        src={HOTEL_LOGO.src}
-                        alt={HOTEL_LOGO.alt}
-                        width={HOTEL_LOGO.size}
-                        height={HOTEL_LOGO.size}
-                        className="rounded-full object-cover select-none"
-                        draggable={false}
-                    />
-                </div>
-
-                {/* Достопримечательности */}
-                {LANDMARKS.map(({ src, alt, left, top, size }) => (
-                    <div
-                        key={alt}
-                        className="absolute -translate-x-1/2 -translate-y-1/2 z-10 transition-transform duration-300 ease-out hover:scale-110 cursor-default"
-                        style={{ left, top }}
+                    {/* Лого отеля */}
+                    <StaggerItem
+                        className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
+                        style={{ left: HOTEL_LOGO.left, top: HOTEL_LOGO.top }}
                     >
                         <Image
-                            src={src}
-                            alt={alt}
-                            width={size}
-                            height={size}
+                            src={HOTEL_LOGO.src}
+                            alt={HOTEL_LOGO.alt}
+                            width={HOTEL_LOGO.size}
+                            height={HOTEL_LOGO.size}
                             className="rounded-full object-cover select-none"
                             draggable={false}
                         />
-                    </div>
-                ))}
+                    </StaggerItem>
+
+                    {/* Достопримечательности */}
+                    {LANDMARKS.map(({ src, alt, left, top, size }) => (
+                        <StaggerItem
+                            key={alt}
+                            className="absolute -translate-x-1/2 -translate-y-1/2 z-10 transition-transform duration-300 ease-out hover:scale-110 cursor-default"
+                            style={{ left, top }}
+                        >
+                            <Image
+                                src={src}
+                                alt={alt}
+                                width={size}
+                                height={size}
+                                className="rounded-full object-cover select-none"
+                                draggable={false}
+                            />
+                        </StaggerItem>
+                    ))}
+                </StaggerContainer>
             </div>
         </section>
     );

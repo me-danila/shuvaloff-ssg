@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
+import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
+import Image from "@/components/ui/OptimizedImage";
 import { useSlider } from "@/hooks/useSlider";
 
 type RoomSlide = {
@@ -11,6 +12,7 @@ type RoomSlide = {
     area: string;
     guests: string;
     description: string;
+    bookingUrl: string;
 };
 
 type SliderMobileRoomsProps = {
@@ -55,10 +57,6 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
                                 <h3 className="text-white font-baskerville uppercase text-2xl leading-tight">
                                     {room.title}
                                 </h3>
-                                <p className="flex items-center gap-3 text-white uppercase tracking-widest text-xs">
-                                    Подробнее
-                                    <span className="text-lg">›</span>
-                                </p>
                             </div>
                         </a>
                     ))}
@@ -92,6 +90,25 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
                     {rooms[current]?.guests}
                 </span>
             </div>
+
+            {/* Кнопки */}
+            <div className="flex gap-4">
+                <Button
+                    href={`/rooms/${rooms[current]?.slug}/`}
+                    variant="primary"
+                    size="xs"
+                >
+                    Подробнее
+                </Button>
+                <Button
+                    href={`${rooms[current]?.bookingUrl}`}
+                    variant="primary-outline"
+                    size="xs"
+                >
+                    Выбрать
+                </Button>
+            </div>
+
             <p className="text-zinc-700">{rooms[current]?.description}</p>
         </div>
     );
