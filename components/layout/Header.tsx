@@ -59,8 +59,7 @@ const navItems: NavItem[] = [
     },
     {
         label: "Свадьба в особняке",
-        href: "https://shuvaloff.academia-rest.ru/wedding?utm_source=hotels",
-        target: "_blank",
+        href: "/wedding/",
         lineBelow: true,
     },
     // { label: "Бутик-магазин", href: "/shop" },
@@ -186,6 +185,8 @@ const mobileSubmenuVariants = {
 export default function Header() {
     const pathname = usePathname();
     const isHome = pathname === "/";
+    const isWedding =
+        pathname === "/wedding/" || pathname === "/spasibo_wedding/";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -216,7 +217,10 @@ export default function Header() {
         setMenuOpen(false);
     };
 
-    const isLight = !scrolled;
+    const isLight =
+        !scrolled &&
+        pathname !== "/wedding/" &&
+        pathname !== "/spasibo_wedding/";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,
@@ -226,7 +230,9 @@ export default function Header() {
 
     return (
         <>
-            <div className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"}`} />
+            <div
+                className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"} ${isWedding ? "hidden" : ""}`}
+            />
 
             <motion.header
                 initial={isDesktop ? { y: -20, opacity: 0 } : false}
@@ -274,7 +280,6 @@ export default function Header() {
                             alt="ACADEMIA Особняк Шувалова"
                             width={150}
                             height={38}
-                            priority
                             className={`transition-all duration-300 ${
                                 isLight ? "" : "brightness-0 invert"
                             }`}

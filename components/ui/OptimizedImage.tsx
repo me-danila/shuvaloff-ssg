@@ -4,6 +4,7 @@ import type { ComponentProps } from "react";
 type OptimizedImageProps = ComponentProps<typeof ExportedImage>;
 
 const AVIF_EXTENSION_PATTERN = /\.avif(?:$|\?)/i;
+const isDevelopment = process.env.NODE_ENV === "development";
 
 function isAvifSource(src: OptimizedImageProps["src"]) {
     if (typeof src === "string") {
@@ -31,12 +32,13 @@ export default function OptimizedImage(props: OptimizedImageProps) {
               ? `${props.width}px`
               : undefined);
 
-    return (
-        <ExportedImage
-            {...props}
-            placeholder={props.placeholder ?? "empty"}
-            sizes={sizes}
-            unoptimized={props.unoptimized ?? isAvifSource(props.src)}
-        />
-    );
+    const sharedProps = {
+        ...props,
+        placeholder: props.placeholder ?? "empty",
+        sizes,
+        unoptimized:
+            props.unoptimized ?? (isDevelopment || isAvifSource(props.src)),
+    };
+
+    return <ExportedImage {...sharedProps} />;
 }

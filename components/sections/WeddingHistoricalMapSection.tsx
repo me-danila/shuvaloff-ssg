@@ -5,56 +5,62 @@ import Image from "@/components/ui/OptimizedImage";
 
 const LANDMARKS = [
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/03/Крепость.png",
-        alt: "Петропавловская крепость",
-        left: "55%",
-        top: "19%",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/687bdb8a-2635-4ce9-a.png",
+        alt: "Дворцовая Набережная",
+        left: "24%",
+        top: "10%",
         size: 110,
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/03/Мост.png",
-        alt: "Дворцовый мост",
-        left: "40%",
-        top: "59%",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/sad.png",
+        alt: "Летний сад",
+        left: "20%",
+        top: "32%",
         size: 110,
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/03/Спас.png",
-        alt: "Спас на Крови",
-        left: "56%",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/stig.png",
+        alt: "Академия Штиглица",
+        left: "31%",
+        top: "33%",
+        size: 110,
+    },
+    {
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/mih.png",
+        alt: "Михайловский замок",
+        left: "24%",
         top: "64%",
         size: 110,
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/03/Михайловский.png",
-        alt: "Михайловский замок",
-        left: "66%",
-        top: "59%",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/spas.png",
+        alt: "Спас на Крови",
+        left: "10%",
+        top: "68%",
         size: 110,
     },
     {
-        src: "https://academia.spb.ru/wp-content/uploads/2026/03/ЗАГС.png",
-        alt: "ЗАГС",
-        left: "82%",
-        top: "48%",
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/zags.png",
+        alt: "Дворец бракосочетания №2",
+        left: "77%",
+        top: "58%",
         size: 110,
+    },
+    {
+        src: "https://academia.spb.ru/wp-content/uploads/2026/04/fff6844c-461b-4cd5-a.png",
+        alt: "ACADEMIA Особняк Шувалова",
+        left: "41%",
+        top: "27%",
+        size: 130,
     },
 ];
 
-const HOTEL_LOGO = {
-    src: "https://academia.spb.ru/wp-content/uploads/2026/03/logohotel.png",
-    alt: "ACADEMIA Особняк Шувалова",
-    left: "65%",
-    top: "30%",
-    size: 190,
-};
-
-export default function HistoricalMapSection() {
+export default function WeddingHistoricalMapSection() {
     return (
-        <section className="relative h-60 mt-2 overflow-hidden rounded-lg xl:h-140 xl:mt-10">
+        <section className="relative h-60 -mt-6 overflow-hidden rounded-lg xl:h-180">
             {/* Мобайл — оригинальная картинка без изменений */}
             <Image
-                src="https://academia.spb.ru/wp-content/uploads/2026/02/Frame-141.png"
+                src="https://academia.spb.ru/wp-content/uploads/2026/04/map-mob.png"
                 alt="Исторический центр Санкт-Петербурга"
                 fill
                 loading="lazy"
@@ -65,8 +71,8 @@ export default function HistoricalMapSection() {
             <div className="hidden xl:block absolute inset-0">
                 {/* Фон — карта без кружков */}
                 <Image
-                    src="https://academia.spb.ru/wp-content/uploads/2026/03/map-1.png"
-                    alt="Карта исторического Петербурга"
+                    src="https://academia.spb.ru/wp-content/uploads/2026/04/map.png"
+                    alt="Карта Петербурга"
                     fill
                     loading="lazy"
                     className="object-cover"
@@ -77,21 +83,6 @@ export default function HistoricalMapSection() {
                     staggerChildren={0.2}
                     className="absolute inset-0"
                 >
-                    {/* Лого отеля */}
-                    <StaggerItem
-                        className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
-                        style={{ left: HOTEL_LOGO.left, top: HOTEL_LOGO.top }}
-                    >
-                        <Image
-                            src={HOTEL_LOGO.src}
-                            alt={HOTEL_LOGO.alt}
-                            width={HOTEL_LOGO.size}
-                            height={HOTEL_LOGO.size}
-                            className="rounded-full object-cover select-none"
-                            draggable={false}
-                        />
-                    </StaggerItem>
-
                     {/* Достопримечательности */}
                     {LANDMARKS.map(({ src, alt, left, top, size }) => (
                         <StaggerItem
@@ -107,6 +98,9 @@ export default function HistoricalMapSection() {
                                 className="rounded-full object-cover select-none"
                                 draggable={false}
                             />
+                            <p className="text-xs/4 max-w-[100px] text-center mx-auto -mt-1">
+                                {alt}
+                            </p>
                         </StaggerItem>
                     ))}
                 </StaggerContainer>

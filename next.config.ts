@@ -29,6 +29,14 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+    async rewrites() {
+        return [
+            {
+                source: "/myreviews-widget.js",
+                destination: "https://myreviews.dev/widget/dist/index.js",
+            },
+        ];
+    },
 };
 
 export default nextConfig;

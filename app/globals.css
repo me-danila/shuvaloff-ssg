@@ -48,6 +48,19 @@ body {
     }
 }
 
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@utility animate-marquee {
+    animation: marquee 120s linear infinite;
+}
+
 /* HotBot */
 html body.hotbot-widget-container {
     --font-family: CenturyGothic;

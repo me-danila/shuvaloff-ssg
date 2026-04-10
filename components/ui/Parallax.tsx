@@ -57,10 +57,7 @@ function ParallaxDesktop({
 
     return (
         <div ref={ref} className={`overflow-hidden ${className}`}>
-            <motion.div
-                className="relative h-full w-full"
-                style={{ y, scale: 1.1 }}
-            >
+            <motion.div className="relative h-full w-full" style={{ y }}>
                 {children}
             </motion.div>
         </div>
