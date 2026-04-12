@@ -1,34 +1,14 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import GeniusLink from "@/components/ui/GeniusLink";
-import { FadeUp } from "@/components/ui/Motion";
+import BookingPage from "@/components/pages/BookingPage";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Бронирование номеров — ACADEMIA Особняк Шувалова",
     description:
         "Гарантия лучшей цены при бронировании номеров в отеле ACADEMIA Особняк Шувалова на официальном сайте",
+    alternates: getLocaleAlternates("/booking/", "ru"),
 };
 
 export default function Booking() {
-    return (
-        <main className="flex flex-col gap-8 xl:gap-12 my-10 xl:my-12">
-            <FadeUp className="xl:w-full xl:max-w-6xl xl:mx-auto text-center px-4">
-                <h1>Бронирование номеров</h1>
-                <p className="leading-5 mt-2">
-                    Мы&nbsp;гарантируем Вам лучшие условия при бронировании
-                    на&nbsp;официальном сайте.
-                    <br />
-                    Кликните на&nbsp;
-                    <Suspense fallback={<span>GENIUS</span>}>
-                        <GeniusLink />
-                    </Suspense>{" "}
-                    для применения автоматической скидки.
-                </p>
-            </FadeUp>
-            <section
-                id="tl-booking-form"
-                className="max-w-xl:px-4 xl:w-full xl:mx-auto xl:max-w-6xl"
-            ></section>
-        </main>
-    );
+    return <BookingPage locale="ru" />;
 }

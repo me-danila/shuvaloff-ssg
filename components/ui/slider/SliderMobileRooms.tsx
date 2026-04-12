@@ -4,6 +4,8 @@ import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import Image from "@/components/ui/OptimizedImage";
 import { useSlider } from "@/hooks/useSlider";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type RoomSlide = {
     image: { src: string; alt: string };
@@ -20,6 +22,9 @@ type SliderMobileRoomsProps = {
 };
 
 export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
+    const locale = useLocale();
+    const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
+    const chooseLabel = locale === "ru" ? "Выбрать" : "Choose";
     const { current, sliderRef, scrollTo } = useSlider();
 
     return (
@@ -32,7 +37,7 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
                 >
                     {rooms.map((room) => (
                         <a
-                            href={`/rooms/${room.slug}/`}
+                            href={localizeHref(`/rooms/${room.slug}/`, locale)}
                             key={room.title}
                             className="relative snap-start shrink-0 w-full h-90 overflow-hidden"
                         >
@@ -94,18 +99,21 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
             {/* Кнопки */}
             <div className="flex gap-4">
                 <Button
-                    href={`/rooms/${rooms[current]?.slug}/`}
+                    href={localizeHref(
+                        `/rooms/${rooms[current]?.slug}/`,
+                        locale,
+                    )}
                     variant="primary"
                     size="xs"
                 >
-                    Подробнее
+                    {detailsLabel}
                 </Button>
                 <Button
                     href={`${rooms[current]?.bookingUrl}`}
                     variant="primary-outline"
                     size="xs"
                 >
-                    Выбрать
+                    {chooseLabel}
                 </Button>
             </div>
 

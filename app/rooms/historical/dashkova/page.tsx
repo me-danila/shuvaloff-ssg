@@ -7,11 +7,13 @@ import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Резиденция Дашковой — ACADEMIA Особняк Шувалова",
     description:
         "Исторический люкс «Резиденция Дашковой» в атмосфере классического Петербурга с подлинными антикварными элементами",
+    alternates: getLocaleAlternates("/rooms/historical/dashkova/", "ru"),
 };
 
 const descriptionImages = [

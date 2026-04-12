@@ -1,16 +1,27 @@
+"use client";
+
+import Link from "next/link";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { AllSales } from "@/data/SalesData";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 export default function SalesGrid() {
+    const locale = useLocale();
+    const sales = AllSales[locale];
+
     return (
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {AllSales.map((sale) => (
+            {sales.map((sale) => (
                 <StaggerItem
                     key={sale.title}
                     className="relative aspect-square rounded-md overflow-hidden group flex"
                 >
-                    <a href={sale.bookingUrl} className="w-full h-full">
+                    <Link
+                        href={localizeHref(sale.bookingUrl, locale)}
+                        className="w-full h-full"
+                    >
                         <Image
                             src={sale.imgUrl}
                             alt={sale.title}
@@ -34,7 +45,7 @@ export default function SalesGrid() {
                                 </p>
                             )}
                         </div>
-                    </a>
+                    </Link>
                 </StaggerItem>
             ))}
         </StaggerContainer>

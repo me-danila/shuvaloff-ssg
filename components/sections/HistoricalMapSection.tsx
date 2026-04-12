@@ -2,6 +2,7 @@
 
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 const LANDMARKS = [
     {
@@ -50,12 +51,33 @@ const HOTEL_LOGO = {
 };
 
 export default function HistoricalMapSection() {
+    const locale = useLocale();
+    const mobileAlt =
+        locale === "ru"
+            ? "Исторический центр Санкт-Петербурга"
+            : "Historic center of Saint Petersburg";
+    const desktopMapAlt =
+        locale === "ru"
+            ? "Карта исторического Петербурга"
+            : "Map of historic Saint Petersburg";
+    const hotelLogoAlt =
+        locale === "ru"
+            ? "ACADEMIA Особняк Шувалова"
+            : "ACADEMIA Mansion Shuvaloff";
+    const enAlts = {
+        "Петропавловская крепость": "Peter and Paul Fortress",
+        "Дворцовый мост": "Palace Bridge",
+        "Спас на Крови": "Church of the Savior on Spilled Blood",
+        "Михайловский замок": "Mikhailovsky Castle",
+        ЗАГС: "Wedding Palace",
+    } as const;
+
     return (
         <section className="relative h-60 mt-2 overflow-hidden rounded-lg xl:h-140 xl:mt-10">
             {/* Мобайл — оригинальная картинка без изменений */}
             <Image
                 src="https://academia.spb.ru/wp-content/uploads/2026/02/Frame-141.png"
-                alt="Исторический центр Санкт-Петербурга"
+                alt={mobileAlt}
                 fill
                 loading="lazy"
                 className="xl:hidden object-cover"
@@ -66,7 +88,7 @@ export default function HistoricalMapSection() {
                 {/* Фон — карта без кружков */}
                 <Image
                     src="https://academia.spb.ru/wp-content/uploads/2026/03/map-1.png"
-                    alt="Карта исторического Петербурга"
+                    alt={desktopMapAlt}
                     fill
                     loading="lazy"
                     className="object-cover"
@@ -84,7 +106,7 @@ export default function HistoricalMapSection() {
                     >
                         <Image
                             src={HOTEL_LOGO.src}
-                            alt={HOTEL_LOGO.alt}
+                            alt={hotelLogoAlt}
                             width={HOTEL_LOGO.size}
                             height={HOTEL_LOGO.size}
                             className="rounded-full object-cover select-none"
@@ -101,7 +123,11 @@ export default function HistoricalMapSection() {
                         >
                             <Image
                                 src={src}
-                                alt={alt}
+                                alt={
+                                    locale === "ru"
+                                        ? alt
+                                        : enAlts[alt as keyof typeof enAlts]
+                                }
                                 width={size}
                                 height={size}
                                 className="rounded-full object-cover select-none"

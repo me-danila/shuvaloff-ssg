@@ -1,7 +1,8 @@
 // biome-ignore-all lint: third-party script
 (function (w) {
+    var locale = w.location.pathname.startsWith("/en") ? "en" : "ru";
     var q = [
-        ["setContext", "TL-INT-academia-shuvaloff_2024-03-18.new", "ru"],
+        ["setContext", "TL-INT-academia-shuvaloff_2024-03-18.new", locale],
         [
             "embed",
             "booking-form",

@@ -7,6 +7,7 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -15,25 +16,26 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-    return AllServices.filter((s) => s.slug).map((s) => ({ slug: s.slug }));
+    return AllServices.ru.filter((s) => s.slug).map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const service = AllServices.find((s) => s.slug === slug);
+    const service = AllServices.ru.find((s) => s.slug === slug);
     if (!service) return {};
     return {
         title: `${service.title} — ACADEMIA Особняк Шувалова`,
         description: service.subtitle,
+        alternates: getLocaleAlternates(`/services/${slug}/`, "ru"),
     };
 }
 
 export default async function ServicePage({ params }: Props) {
     const { slug } = await params;
-    const service = AllServices.find((s) => s.slug === slug);
+    const service = AllServices.ru.find((s) => s.slug === slug);
     if (!service) notFound();
 
-    const otherServices = AllServices.filter(
+    const otherServices = AllServices.ru.filter(
         (s) => s.slug && !s.externalLink && s.slug !== slug,
     );
 

@@ -5,18 +5,20 @@ import CardRoomHistorical from "@/components/ui/CardRoomHistorical";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { AllRooms } from "@/data/RoomsData";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Исторические люксы — ACADEMIA Особняк Шувалова",
     description:
         "Уникальные исторические люксы отеля ACADEMIA Особняк Шувалова в Санкт-Петербурге",
+    alternates: getLocaleAlternates("/rooms/historical/", "ru"),
 };
 
 const historicalExtras: Record<
     string,
     { description: string; image: { src: string; alt: string } }
 > = {
-    "Резиденция Дашковой": {
+    dashkova: {
         description:
             "Изящный люкс, названный в честь Елизаветы Андреевны Воронцовой-Дашковой (урождённой Шуваловой, 1845-1924), с ярким, но утонченным интерьером, отражает многогранную личность хозяйки особняка.",
         image: {
@@ -24,7 +26,7 @@ const historicalExtras: Record<
             alt: "Резиденция Дашковой",
         },
     },
-    "Резиденция графа Шувалова": {
+    shuvalov: {
         description:
             "Просторный исторический люкс, посвященный графу Шувалову. Оформлен в стиле строгого неоклассицизма с подлинными антикварными деталями. Интерьер отражает эстетику зрелого вкуса, силу характера и уважение к традициям рода.",
         image: {
@@ -34,10 +36,12 @@ const historicalExtras: Record<
     },
 };
 
-const historicalRooms = AllRooms.filter((r) => r.isHistorical).map((r) => ({
-    ...r,
-    ...historicalExtras[r.title],
-}));
+const historicalRooms = AllRooms.ru
+    .filter((r) => r.isHistorical)
+    .map((r) => ({
+        ...r,
+        ...historicalExtras[r.slug],
+    }));
 
 export default function HistoricalRooms() {
     return (

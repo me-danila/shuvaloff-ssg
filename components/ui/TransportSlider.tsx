@@ -4,23 +4,43 @@ import { AirplaneIcon, TrainIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import { useLocale } from "@/lib/i18n/useLocale";
 
-const transport = [
-    {
-        Icon: AirplaneIcon,
-        label: "Авиарейсы",
-        route: "МОСКВА — САНКТ-ПЕТЕРБУРГ",
-        href: "https://travel.yandex.ru/avia/search/error/?adult_seats=2&children_seats=0&fromId=c213&infant_seats=0&klass=economy&oneway=1&toId=c2",
-    },
-    {
-        Icon: TrainIcon,
-        label: "Поезд «Сапсан»",
-        route: "МОСКВА — САНКТ-ПЕТЕРБУРГ",
-        href: "https://travel.yandex.ru/trains/moscow--saint-petersburg/?highSpeedTrain=25",
-    },
-];
+const transportByLocale = {
+    ru: [
+        {
+            Icon: AirplaneIcon,
+            label: "Авиарейсы",
+            route: "МОСКВА — САНКТ-ПЕТЕРБУРГ",
+            href: "https://travel.yandex.ru/avia/search/error/?adult_seats=2&children_seats=0&fromId=c213&infant_seats=0&klass=economy&oneway=1&toId=c2",
+        },
+        {
+            Icon: TrainIcon,
+            label: "Поезд «Сапсан»",
+            route: "МОСКВА — САНКТ-ПЕТЕРБУРГ",
+            href: "https://travel.yandex.ru/trains/moscow--saint-petersburg/?highSpeedTrain=25",
+        },
+    ],
+    en: [
+        {
+            Icon: AirplaneIcon,
+            label: "Flights",
+            route: "MOSCOW — SAINT PETERSBURG",
+            href: "https://travel.yandex.ru/avia/search/error/?adult_seats=2&children_seats=0&fromId=c213&infant_seats=0&klass=economy&oneway=1&toId=c2",
+        },
+        {
+            Icon: TrainIcon,
+            label: "Sapsan train",
+            route: "MOSCOW — SAINT PETERSBURG",
+            href: "https://travel.yandex.ru/trains/moscow--saint-petersburg/?highSpeedTrain=25",
+        },
+    ],
+} as const;
 
 export default function TransportSlider() {
+    const locale = useLocale();
+    const transport = transportByLocale[locale];
+    const cta = locale === "ru" ? "Посмотреть расписание" : "View schedule";
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -60,7 +80,7 @@ export default function TransportSlider() {
                                 variant="primary"
                                 className="mt-auto"
                             >
-                                Посмотреть расписание
+                                {cta}
                             </Button>
                         </div>
                     ))}
@@ -100,7 +120,7 @@ export default function TransportSlider() {
                             variant="primary"
                             className="self-start"
                         >
-                            Посмотреть расписание
+                            {cta}
                         </Button>
                     </StaggerItem>
                 ))}

@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import WeddingFormModal from "@/components/ui/modals/WeddingFormModal";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 export interface WeddingBigSlide {
     title: ReactNode;
     description: ReactNode;
     button: {
         label: string;
-        href: string;
     };
     image: {
         src: string;
@@ -23,6 +23,9 @@ interface Props {
 }
 
 export function WeddingBigSlider({ slides }: Props) {
+    const locale = useLocale();
+    const prevLabel = locale === "ru" ? "Предыдущий слайд" : "Previous slide";
+    const nextLabel = locale === "ru" ? "Следующий слайд" : "Next slide";
     const [current, setCurrent] = useState(0);
     const slide = slides[current];
 
@@ -37,12 +40,10 @@ export function WeddingBigSlider({ slides }: Props) {
                 <p className="max-w-md">{slide.description}</p>
 
                 {/* Button */}
-                <Link
-                    href={slide.button.href}
-                    className="border border-black bg-black px-8 py-4 rounded-md text-white font-baskerville uppercase hover:bg-white hover:text-black duration-200 max-w-xl:w-full"
-                >
-                    {slide.button.label}
-                </Link>
+                <WeddingFormModal
+                    triggerLabel={slide.button.label}
+                    variant="dark"
+                />
 
                 {/* Arrows */}
                 <div className="flex items-center gap-4 mt-2 xl:mt-8 xl:gap-6">
@@ -50,7 +51,7 @@ export function WeddingBigSlider({ slides }: Props) {
                         type="button"
                         onClick={() => setCurrent((c) => c - 1)}
                         disabled={current === 0}
-                        aria-label="Предыдущий слайд"
+                        aria-label={prevLabel}
                         className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-neutral-700 transition-colors duration-200 cursor-pointer"
                     >
                         ←
@@ -62,7 +63,7 @@ export function WeddingBigSlider({ slides }: Props) {
                         type="button"
                         onClick={() => setCurrent((c) => c + 1)}
                         disabled={current === slides.length - 1}
-                        aria-label="Следующий слайд"
+                        aria-label={nextLabel}
                         className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:bg-neutral-700 transition-colors duration-200 cursor-pointer"
                     >
                         →

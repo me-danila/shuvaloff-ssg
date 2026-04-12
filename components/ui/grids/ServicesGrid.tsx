@@ -1,14 +1,23 @@
+"use client";
+
 import Button from "@/components/ui/Button";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { AllServices } from "@/data/ServicesData";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 export default function ServicesGrid() {
+    const locale = useLocale();
+    const services = AllServices[locale];
+    const orderLabel = locale === "ru" ? "Заказать" : "Order";
+    const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
+
     return (
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {AllServices.map((service) => {
+            {services.map((service) => {
                 const href = service.slug
-                    ? `/services/${service.slug}/`
+                    ? localizeHref(`/services/${service.slug}/`, locale)
                     : (service.externalLink ?? "#");
                 const isExternal = Boolean(service.externalLink);
 
@@ -36,7 +45,7 @@ export default function ServicesGrid() {
                                         target="_blank"
                                         variant="primary"
                                     >
-                                        Заказать
+                                        {orderLabel}
                                     </Button>
                                 )}
                                 <a
@@ -49,7 +58,7 @@ export default function ServicesGrid() {
                                     }
                                     className="flex items-center gap-3 uppercase tracking-widest text-sm"
                                 >
-                                    Подробнее
+                                    {detailsLabel}
                                     <span className="text-2xl mb-1">
                                         &rsaquo;
                                     </span>

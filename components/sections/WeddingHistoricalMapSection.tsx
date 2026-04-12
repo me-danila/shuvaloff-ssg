@@ -2,6 +2,7 @@
 
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 const LANDMARKS = [
     {
@@ -56,12 +57,29 @@ const LANDMARKS = [
 ];
 
 export default function WeddingHistoricalMapSection() {
+    const locale = useLocale();
+    const mobileAlt =
+        locale === "ru"
+            ? "Исторический центр Санкт-Петербурга"
+            : "Historic center of Saint Petersburg";
+    const mapAlt =
+        locale === "ru" ? "Карта Петербурга" : "Saint Petersburg map";
+    const enAlts = {
+        "Дворцовая Набережная": "Palace Embankment",
+        "Летний сад": "Summer Garden",
+        "Академия Штиглица": "Stieglitz Academy",
+        "Михайловский замок": "Mikhailovsky Castle",
+        "Спас на Крови": "Church of the Savior on Spilled Blood",
+        "Дворец бракосочетания №2": "Wedding Palace No. 2",
+        "ACADEMIA Особняк Шувалова": "ACADEMIA Mansion Shuvaloff",
+    } as const;
+
     return (
         <section className="relative h-60 -mt-6 overflow-hidden rounded-lg xl:h-180">
             {/* Мобайл — оригинальная картинка без изменений */}
             <Image
                 src="https://academia.spb.ru/wp-content/uploads/2026/04/map-mob.png"
-                alt="Исторический центр Санкт-Петербурга"
+                alt={mobileAlt}
                 fill
                 loading="lazy"
                 className="xl:hidden object-cover"
@@ -72,7 +90,7 @@ export default function WeddingHistoricalMapSection() {
                 {/* Фон — карта без кружков */}
                 <Image
                     src="https://academia.spb.ru/wp-content/uploads/2026/04/map.png"
-                    alt="Карта Петербурга"
+                    alt={mapAlt}
                     fill
                     loading="lazy"
                     className="object-cover"
@@ -92,14 +110,20 @@ export default function WeddingHistoricalMapSection() {
                         >
                             <Image
                                 src={src}
-                                alt={alt}
+                                alt={
+                                    locale === "ru"
+                                        ? alt
+                                        : enAlts[alt as keyof typeof enAlts]
+                                }
                                 width={size}
                                 height={size}
                                 className="rounded-full object-cover select-none"
                                 draggable={false}
                             />
                             <p className="text-xs/4 max-w-[100px] text-center mx-auto -mt-1">
-                                {alt}
+                                {locale === "ru"
+                                    ? alt
+                                    : enAlts[alt as keyof typeof enAlts]}
                             </p>
                         </StaggerItem>
                     ))}

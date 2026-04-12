@@ -3,11 +3,13 @@ import ContactsSection from "@/components/sections/ContactsSection";
 import RoomsSection from "@/components/sections/RoomsSection";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Категории номеров — ACADEMIA Особняк Шувалова",
     description:
         "Номера и люксы отеля ACADEMIA Особняк Шувалова в Санкт-Петербурге",
+    alternates: getLocaleAlternates("/rooms/", "ru"),
 };
 
 export default function Rooms() {

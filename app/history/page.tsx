@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import DividerHistory from "@/components/ui/divider/History";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "История особняка графа Шувалова — ACADEMIA Особняк Шувалова",
     description:
         "Путешствие во времени — История особняка графа Шувалова в Санкт-Петербурге",
+    alternates: getLocaleAlternates("/history/", "ru"),
 };
 
 export default function History() {
