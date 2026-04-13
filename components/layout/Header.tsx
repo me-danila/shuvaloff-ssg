@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import Button from "@/components/ui/Button";
@@ -22,6 +22,7 @@ type NavItem = {
     label: string;
     href: string;
     target?: "_blank";
+    forceReload?: boolean;
     lineBelow?: boolean;
     submenu?: { label: string; href: string; target?: "_blank" }[];
 };
@@ -103,8 +104,8 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         },
         {
             label: "Подарочные сертификаты",
-            href: "/?cert-open=42761",
-            target: "_blank",
+            href: "?cert-open=42761",
+            forceReload: true,
         },
     ],
     en: [
@@ -146,8 +147,8 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         },
         {
             label: "Gift certificates",
-            href: "/?cert-open=42761",
-            target: "_blank",
+            href: "?cert-open=42761",
+            forceReload: true,
         },
     ],
 };
@@ -279,6 +280,7 @@ const mobileSubmenuVariants = {
 
 export default function Header() {
     const pathname = usePathname() || "/";
+    const searchParams = useSearchParams();
     const locale = detectLocaleFromPath(pathname);
     const copy = copyByLocale[locale];
     const navItems = navItemsByLocale[locale];
@@ -329,6 +331,51 @@ export default function Header() {
         navItems.find((item) => item.label === activeSubmenu)?.submenu ?? [];
     const ruHref = localizeHref(pathname, "ru");
     const enHref = localizeHref(pathname, "en");
+    const buildMenuHref = (item: NavItem) => {
+        if (!item.href.startsWith("?")) {
+            return localizeHref(item.href, locale);
+        }
+
+        const mergedParams = new URLSearchParams(searchParams.toString());
+        const nextParams = new URLSearchParams(item.href.slice(1));
+
+        nextParams.forEach((value, key) => {
+            mergedParams.set(key, value);
+        });
+
+        const query = mergedParams.toString();
+        return query ? `${pathname}?${query}` : pathname;
+    };
+    const getItemRel = (item: NavItem) =>
+        item.target === "_blank" ? "noopener noreferrer" : undefined;
+    const renderNavItemLink = (item: NavItem, className: string) => {
+        const href = buildMenuHref(item);
+
+        if (item.forceReload) {
+            return (
+                <a
+                    href={href}
+                    target={item.target}
+                    rel={getItemRel(item)}
+                    onClick={closeMenu}
+                    className={className}
+                >
+                    {item.label}
+                </a>
+            );
+        }
+
+        return (
+            <Link
+                href={href}
+                target={item.target}
+                onClick={closeMenu}
+                className={className}
+            >
+                {item.label}
+            </Link>
+        );
+    };
 
     return (
         <>
@@ -627,17 +674,10 @@ export default function Header() {
                                                 key={item.href}
                                                 variants={menuItemVariants}
                                             >
-                                                <Link
-                                                    href={localizeHref(
-                                                        item.href,
-                                                        locale,
-                                                    )}
-                                                    target={item.target}
-                                                    onClick={closeMenu}
-                                                    className="block py-3 text-sm transition-colors hover:text-brand-blue"
-                                                >
-                                                    {item.label}
-                                                </Link>
+                                                {renderNavItemLink(
+                                                    item,
+                                                    "block py-3 text-sm transition-colors hover:text-brand-blue",
+                                                )}
                                                 {item.lineBelow && (
                                                     <div className="my-1 border-b border-stone-200" />
                                                 )}
@@ -774,17 +814,10 @@ export default function Header() {
                                                 key={item.href}
                                                 variants={menuItemVariants}
                                             >
-                                                <Link
-                                                    href={localizeHref(
-                                                        item.href,
-                                                        locale,
-                                                    )}
-                                                    target={item.target}
-                                                    onClick={closeMenu}
-                                                    className="block py-3 text-sm transition-colors hover:text-brand-blue"
-                                                >
-                                                    {item.label}
-                                                </Link>
+                                                {renderNavItemLink(
+                                                    item,
+                                                    "block py-3 text-sm transition-colors hover:text-brand-blue",
+                                                )}
                                                 {item.lineBelow && (
                                                     <div className="border-b border-stone-200" />
                                                 )}

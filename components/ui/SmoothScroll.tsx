@@ -10,10 +10,16 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     const [hasCert, setHasCert] = useState(false);
 
     useEffect(() => {
-        const check = () =>
-            setHasCert(
-                new URLSearchParams(window.location.search).has("cert-open"),
+        const check = () => {
+            const next = new URLSearchParams(window.location.search).has(
+                "cert-open",
             );
+            setHasCert((prev) => (prev === next ? prev : next));
+        };
+        const scheduleCheck = () => window.setTimeout(check, 0);
+
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
 
         const patch = (original: typeof history.pushState) =>
             function (
@@ -21,16 +27,18 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
                 ...args: Parameters<typeof history.pushState>
             ) {
                 original.apply(this, args);
-                check();
+                scheduleCheck();
             };
 
-        history.pushState = patch(history.pushState);
-        history.replaceState = patch(history.replaceState);
-        window.addEventListener("popstate", check);
+        history.pushState = patch(originalPushState);
+        history.replaceState = patch(originalReplaceState);
+        window.addEventListener("popstate", scheduleCheck);
         check();
 
         return () => {
-            window.removeEventListener("popstate", check);
+            window.removeEventListener("popstate", scheduleCheck);
+            history.pushState = originalPushState;
+            history.replaceState = originalReplaceState;
         };
     }, []);
 
