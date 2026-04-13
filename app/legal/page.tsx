@@ -99,7 +99,7 @@ export default function LegalPage() {
                         <div className="flex flex-col gap-1">
                             <p>
                                 Номер записи в Едином реестре объектов
-                                классификации:{" "}
+                                классификации:
                                 <a
                                     href="https://tourism.fsa.gov.ru/ru/resorts/hotels/dff23e3a-c607-11ef-92da-8bd9107bdd5a/about-resort"
                                     target="_blank"
@@ -107,20 +107,40 @@ export default function LegalPage() {
                                     className="underline"
                                 >
                                     С782024020085
-                                </a>{" "}
+                                </a>
                                 действует до: 20.08.2028
                             </p>
                         </div>
 
-                        <Button
-                            href="https://static.academia.spb.ru/files/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%BF%D1%80%D0%BE%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20ACADEMIA%20%D0%9E%D1%81%D0%BE%D0%B1%D0%BD%D1%8F%D0%BA%20SHUVALOFF.pdf"
-                            target="_blank"
-                            variant="primary"
-                            className="self-start xl:mt-auto"
-                        >
-                            Правила проживания
-                        </Button>
+                        <div className="flex flex-col gap-2 my-auto">
+                            <Button
+                                href="https://static.academia.spb.ru/files/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%BF%D1%80%D0%BE%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%20ACADEMIA%20%D0%9E%D1%81%D0%BE%D0%B1%D0%BD%D1%8F%D0%BA%20SHUVALOFF.pdf"
+                                target="_blank"
+                                variant="primary"
+                                className="self-start xl:mt-auto"
+                            >
+                                Правила проживания
+                            </Button>
 
+                            <Button
+                                href="https://static.academia.spb.ru/files/Правила_проживания_гостей_с_животными_Особняк_Шувалова.pdf"
+                                target="_blank"
+                                variant="primary"
+                                className="self-start xl:mt-auto"
+                            >
+                                Правила проживания гостей с&nbsp;животными
+                            </Button>
+
+                            <Button
+                                href="https://static.academia.spb.ru/files/Сертификат_Pet_Friendly_Особняк_Шувалова.pdf"
+                                target="_blank"
+                                variant="primary"
+                                className="self-start xl:mt-auto"
+                            >
+                                Сертификат соответствия путешествие
+                                с&nbsp;питомцами
+                            </Button>
+                        </div>
                         <div className="flex flex-col gap-3 mt-auto">
                             {links.map((link) => (
                                 <a

@@ -8,7 +8,13 @@ export const metadata: Metadata = {
 export default function AbonementPage() {
     return (
         <main className="flex flex-col gap-8">
-            <a href="?tl-booking-open=true&tl-booking-scenario=42761-subscription" className="border-b-1 max-w-fit mx-auto mt-20">При клике на вот эту подчеркнутую ссылку будет открываться попап с абонементами.</a>
+            <a
+                href="?tl-booking-open=true&tl-booking-scenario=42761-subscription"
+                className="border-b-1 max-w-fit mx-auto mt-20"
+            >
+                При клике на вот эту подчеркнутую ссылку будет открываться попап
+                с абонементами.
+            </a>
         </main>
     );
 }
