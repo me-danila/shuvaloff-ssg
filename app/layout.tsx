@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
+import { Suspense } from "react";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
@@ -40,8 +41,10 @@ export default function RootLayout({
                     strategy="beforeInteractive"
                 />
                 <SmoothScroll>
-                    <Header />
-                    {children}
+                    <Suspense fallback={null}>
+                        <Header />
+                    </Suspense>
+                    <Suspense fallback={null}>{children}</Suspense>
                     <Footer />
                 </SmoothScroll>
                 <Script id="hotbot" strategy="lazyOnload">{`
