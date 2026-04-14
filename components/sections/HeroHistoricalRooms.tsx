@@ -9,7 +9,7 @@ type HeroHistoricalRoomsProps = {
     additionalTitle?: React.ReactNode;
     subtitle?: React.ReactNode;
     image: { src: string; alt: string };
-    button: { label: string; href: string };
+    button?: { label: string; href: string };
 };
 
 export default function HeroHistoricalRooms({
