@@ -350,7 +350,7 @@ export default function Meet() {
                 </div>
             </FadeUp>
 
-            <section duration={1.2} className="bg-gray-100">
+            <section className="bg-gray-100">
                 <StaggerContainer
                     mode="inView"
                     className="mx-6 my-8 text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10 xl:gap-6"
