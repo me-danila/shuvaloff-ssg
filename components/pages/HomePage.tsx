@@ -13,6 +13,8 @@ type HomeCopy = {
     heroTitle: string;
     heroSubtitle: string;
     mansionTitle: string;
+    countsSpbTitle: string;
+    countsSpbParagraphs: string;
     mansionDescription: string;
     mansionLeftText: string;
     mansionRightText: string;
@@ -117,6 +119,11 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         heroTitle: "Academia Особняк Шувалова",
         heroSubtitle:
             "Изысканный отель в особняке XIX века с богатой историей в центре Петербурга",
+        countsSpbTitle: "Графский Петербург",
+        countsSpbParagraphs: [
+            "Особый отдых в формате пышных аристократических традиций",
+            "Для тех, кто хочет прожить свой лучший опыт погружения в эпоху ХІХ века.",
+        ],
         mansionTitle: "ОСОБНЯК С ИСТОРИЕЙ",
         mansionDescription:
             "Отель ACADEMIA Шувалова — это бережно отреставрированный объект культурного наследия, ранее принадлежавший семье графа Шувалова. С уважением к истории мы восстановили исторические детали, чтобы вы могли погрузиться в неспешный ритм жизни аристократического Петербурга.",
@@ -153,6 +160,11 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         heroTitle: "Academia Mansion Shuvaloff",
         heroSubtitle:
             "An elegant hotel in a 19th-century mansion with a rich history in the heart of Saint Petersburg",
+        countsSpbTitle: "Aristocratic Saint Petersburg",
+        countsSpbParagraphs: [
+            "A unique getaway steeped in opulent aristocratic traditions",
+            "For those who wish to experience the ultimate immersion in the 19th century.",
+        ],
         mansionTitle: "A MANSION WITH HISTORY",
         mansionDescription:
             "ACADEMIA Shuvaloff is a carefully restored cultural heritage property that once belonged to Count Shuvalov's family. With deep respect for history, we restored original details so you can immerse yourself in the unhurried rhythm of aristocratic Saint Petersburg.",
@@ -200,6 +212,25 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 images={heroImages}
             />
             <BookingForm />
+            <DarkHeroSection
+                imageMobile={{
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",
+                    alt: "ACADEMIA Mansion Shuvaloff",
+                    position: "center",
+                }}
+                image={{
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",
+                    alt: "ACADEMIA Mansion Shuvaloff",
+                }}
+                blocks={[
+                    {
+                        title: <>{copy.countsSpbTitle}</>,
+                        paragraphs: copy.countsSpbParagraphs,
+                    },
+                ]}
+                imageGradient={false}
+                buttons={{ orderHref: "/booking/?&be-offer=910895/", detailsHref: "/aristocratic-spb/" }}
+            />
             <section className="flex flex-col gap-2 mx-6 relative xl:text-center xl:mx-0">
                 <div className="relative h-90 overflow-hidden rounded-lg xl:hidden">
                     <Image
