@@ -229,7 +229,10 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     },
                 ]}
                 imageGradient={false}
-                buttons={{ orderHref: "/booking/?&be-offer=910895/", detailsHref: "/aristocratic-spb/" }}
+                buttons={{
+                    orderHref: "/booking/?&be-offer=910895/",
+                    detailsHref: "/aristocratic-spb/",
+                }}
             />
             <section className="flex flex-col gap-2 mx-6 relative xl:text-center xl:mx-0">
                 <div className="relative h-90 overflow-hidden rounded-lg xl:hidden">

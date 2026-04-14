@@ -6,8 +6,8 @@ import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
-import { useLocale } from "@/lib/i18n/useLocale";
 import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type ContentBlock = {
     title: React.ReactNode;
@@ -21,7 +21,7 @@ type DarkHeroSectionProps = {
     size?: "xl" | "2xl" | "3xl";
     mobileImageGradient?: boolean;
     imageGradient?: boolean;
-    buttons?: { orderHref: string, detailsHref: string };
+    buttons?: { orderHref: string; detailsHref: string };
 };
 
 const sizeClass: Record<NonNullable<DarkHeroSectionProps["size"]>, string> = {
@@ -122,13 +122,17 @@ export default function DarkHeroSection({
 
                 {buttons && (
                     <div className="flex items-center gap-8">
-                        <Button href={localizeHref(`${buttons.orderHref}`, locale)}
+                        <Button
+                            href={localizeHref(`${buttons.orderHref}`, locale)}
                             variant="primary"
                         >
                             {orderLabel}
                         </Button>
                         <Link
-                            href={localizeHref(`${buttons.detailsHref}`, locale)}
+                            href={localizeHref(
+                                `${buttons.detailsHref}`,
+                                locale,
+                            )}
                             className="flex items-center gap-3 uppercase tracking-widest text-sm"
                         >
                             {detailsLabel}
