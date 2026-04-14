@@ -14,7 +14,7 @@ type HomeCopy = {
     heroSubtitle: string;
     mansionTitle: string;
     countsSpbTitle: string;
-    countsSpbParagraphs: string;
+    countsSpbParagraphs: [string, string];
     mansionDescription: string;
     mansionLeftText: string;
     mansionRightText: string;
