@@ -1,13 +1,17 @@
+import Link from "next/link";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import DarkHeroSection from "@/components/sections/DarkHeroSection";
 import type { HeroImage } from "@/components/sections/HeroWithPictures";
 import HeroWithPictures from "@/components/sections/HeroWithPictures";
 import HistoricalMapSection from "@/components/sections/HistoricalMapSection";
+import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import { Parallax } from "@/components/ui/Parallax";
 import type { Locale } from "@/lib/i18n/routing";
+import { localizeHref } from "@/lib/i18n/routing";
 
 type HomeCopy = {
     heroTitle: string;
@@ -15,6 +19,8 @@ type HomeCopy = {
     mansionTitle: string;
     countsSpbTitle: string;
     countsSpbParagraphs: [string, string];
+    orderLabel: string;
+    detailsLabel: string;
     mansionDescription: string;
     mansionLeftText: string;
     mansionRightText: string;
@@ -122,8 +128,10 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         countsSpbTitle: "Графский Петербург",
         countsSpbParagraphs: [
             "Особый отдых в формате пышных аристократических традиций",
-            "Для тех, кто хочет прожить свой лучший опыт погружения в эпоху ХІХ века.",
+            "Для тех, кто хочет прожить свой лучший опыт погружения в эпоху ХІХ века",
         ],
+        orderLabel: "Забронировать",
+        detailsLabel: "Подробнее",
         mansionTitle: "ОСОБНЯК С ИСТОРИЕЙ",
         mansionDescription:
             "Отель ACADEMIA Шувалова — это бережно отреставрированный объект культурного наследия, ранее принадлежавший семье графа Шувалова. С уважением к истории мы восстановили исторические детали, чтобы вы могли погрузиться в неспешный ритм жизни аристократического Петербурга.",
@@ -163,8 +171,10 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         countsSpbTitle: "Aristocratic Saint Petersburg",
         countsSpbParagraphs: [
             "A unique getaway steeped in opulent aristocratic traditions",
-            "For those who wish to experience the ultimate immersion in the 19th century.",
+            "For those who wish to experience the ultimate immersion in the 19th century",
         ],
+        orderLabel: "Order",
+        detailsLabel: "Details",
         mansionTitle: "A MANSION WITH HISTORY",
         mansionDescription:
             "ACADEMIA Shuvaloff is a carefully restored cultural heritage property that once belonged to Count Shuvalov's family. With deep respect for history, we restored original details so you can immerse yourself in the unhurried rhythm of aristocratic Saint Petersburg.",
@@ -212,28 +222,114 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 images={heroImages}
             />
             <BookingForm />
-            {/*<DarkHeroSection*/}
-            {/*    imageMobile={{*/}
-            {/*        src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",*/}
-            {/*        alt: "ACADEMIA Mansion Shuvaloff",*/}
-            {/*        position: "center",*/}
-            {/*    }}*/}
-            {/*    image={{*/}
-            {/*        src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",*/}
-            {/*        alt: "ACADEMIA Mansion Shuvaloff",*/}
-            {/*    }}*/}
-            {/*    blocks={[*/}
-            {/*        {*/}
-            {/*            title: <>{copy.countsSpbTitle}</>,*/}
-            {/*            paragraphs: copy.countsSpbParagraphs,*/}
-            {/*        },*/}
-            {/*    ]}*/}
-            {/*    imageGradient={false}*/}
-            {/*    buttons={{*/}
-            {/*        orderHref: "/booking/?&be-offer=910895/",*/}
-            {/*        detailsHref: "/aristocratic-spb/",*/}
-            {/*    }}*/}
-            {/*/>*/}
+
+            <section className="relative overflow-hidden">
+                {/* MOBILE: фото снизу 55% */}
+                <div className="mx-6 flex flex-col gap-4 mb-4 xl:hidden">
+                    <div className="relative h-60 overflow-hidden rounded-lg mb-1">
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/04/Frame-2.png"
+                            alt={copy.countsSpbTitle}
+                            fill
+                            loading="lazy"
+                            className="h-100 w-full rounded-lg object-cover"
+                        />
+                    </div>
+                    <h2 className="-mb-2">{copy.countsSpbTitle}</h2>
+                    <div className="flex flex-col gap-2">
+                        {copy.countsSpbParagraphs.map((text, index, i) => (
+                            <FadeUp
+                                key={text}
+                                delay={index * 0.1 + (i + 1) * 0.1}
+                            >
+                                <p>{text}</p>
+                            </FadeUp>
+                        ))}
+                    </div>
+                    <div className="flex items-center gap-4 mt-2">
+                        <Button
+                            href={localizeHref(
+                                `/booking?&be-offer=910895`,
+                                locale,
+                            )}
+                            variant="primary"
+                        >
+                            {copy.orderLabel}
+                        </Button>
+                        <Link
+                            href={localizeHref(`/aristocratic-spb/`, locale)}
+                            className="relative flex items-center gap-3 uppercase tracking-widest text-sm"
+                        >
+                            {copy.detailsLabel}
+                            <span className="text-2xl mb-1">&rsaquo;</span>
+                        </Link>
+                    </div>
+                </div>
+
+                {/*DESKTOP: фото на весь блок*/}
+                <div className="hidden xl:flex relative h-150 text-white">
+                    <Parallax className="w-full h-full absolute" offset={100}>
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/04/Frame-1.png"
+                            alt={copy.countsSpbTitle}
+                            fill
+                            sizes="100vw"
+                            loading="lazy"
+                            className="object-cover object-top"
+                        />
+                    </Parallax>
+                    <div
+                        duration={1.2}
+                        className="p-20 flex flex-col justify-between"
+                    >
+                        <FadeUp duration={1.2}>
+                            <h2 className="relative z-1 text-white">
+                                {copy.countsSpbTitle}
+                            </h2>
+                        </FadeUp>
+                        <div className="max-w-[390px] flex flex-col gap-6">
+                            {copy.countsSpbParagraphs.map((text, index, i) => (
+                                <FadeUp
+                                    key={text}
+                                    delay={index * 0.1 + (i + 1) * 0.1}
+                                    className="relative z-1"
+                                >
+                                    <p>{text}</p>
+                                </FadeUp>
+                            ))}
+                        </div>
+                        <div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                                background:
+                                    "linear-gradient(to right, rgba(0,0,0,.6) 20%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 80%)",
+                            }}
+                        />
+                        <div className="flex items-center gap-8 mt-2">
+                            <Button
+                                href={localizeHref(
+                                    `/booking?&be-offer=910895`,
+                                    locale,
+                                )}
+                                variant="primary"
+                            >
+                                {copy.orderLabel}
+                            </Button>
+                            <Link
+                                href={localizeHref(
+                                    `/aristocratic-spb/`,
+                                    locale,
+                                )}
+                                className="relative flex items-center gap-3 uppercase tracking-widest text-sm"
+                            >
+                                {copy.detailsLabel}
+                                <span className="text-2xl mb-1">&rsaquo;</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section className="flex flex-col gap-2 mx-6 relative xl:text-center xl:mx-0">
                 <div className="relative h-90 overflow-hidden rounded-lg xl:hidden">
                     <Image

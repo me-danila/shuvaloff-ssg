@@ -34,7 +34,7 @@ export default function ImageGrid({ images, className = "" }: ImageGridProps) {
             className={`
         grid gap-2
         grid-cols-2
-        md:grid-cols-[2fr_1fr] md:h-[480px]
+        md:grid-cols-[2fr_1fr] md:h-[384px]
         my-2
         ${className}
       `}

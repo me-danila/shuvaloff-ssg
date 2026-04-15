@@ -52,12 +52,12 @@ const cultureImages = [
 
 export default function Meet() {
     return (
-        <main className="flex flex-col gap-6">
+        <main className="flex flex-col gap-4 xl:-mt-4">
             <HeroHistoricalRooms
                 title="Графский Петербург"
                 additionalTitle="Особый отдых в формате пышных аристократических традиций"
                 image={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/offer.png",
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/pic.png",
                     alt: "Графский Петербург",
                 }}
                 button={{
@@ -81,15 +81,14 @@ export default function Meet() {
                 ))}
             </StaggerContainer>
 
-            <section className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-8 xl:my-8">
-                <div className="flex flex-col gap-4 xl:w-full xl:gap-8">
-                    <p className="font-alistair text-4xl xl:text-6xl xl:mb-2">
+            <section className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-8 my-4 xl:my-6">
+                <div className="flex flex-col gap-4 xl:w-full">
+                    <p className="font-baskerville uppercase text-3xl/2 xl:text-4xl/4">
                         Петербург —
                     </p>
                     <p>
-                        город многогранный, поэтому узнавать
-                        <br />
-                        его можно по-разному.
+                        город многогранный, поэтому узнавать его можно
+                        по—разному.
                     </p>
                     <div className="relative h-80 overflow-hidden rounded xl:h-full">
                         <Image
@@ -104,14 +103,14 @@ export default function Meet() {
 
                 <StaggerContainer
                     staggerChildren={0.1}
-                    className="p-4 xl:p-6 bg-gray-100 flex flex-col gap-4 xl:w-full xl:gap-8"
+                    className="p-4 xl:p-6 bg-gray-100 flex flex-col gap-2 xl:w-full"
                 >
                     <StaggerItem className="flex flex-col gap-2 flex-row xl:gap-4">
-                        <p className="font-alistair text-4xl xl:-mt-3 whitespace-nowrap">
-                            1 день:
+                        <p className="font-alistair text-2xl -mt-2 xl:text-4xl xl:-mt-3 w-[100px]">
+                            1 день.
                         </p>
                         <p>
-                            особая встреча
+                            Особая встреча
                             <span className="block h-2 xl:h-4"></span>
                             Трансфер вокзал/аэропорт — особняк
                             <br />
@@ -123,11 +122,11 @@ export default function Meet() {
                         </p>
                     </StaggerItem>
                     <StaggerItem className="flex flex-col gap-2 flex-row xl:gap-4">
-                        <p className="font-alistair text-4xl xl:-mt-3 whitespace-nowrap">
-                            2 день:
+                        <p className="font-alistair text-2xl -mt-2 xl:text-4xl xl:-mt-3 w-[100px]">
+                            2 день.
                         </p>
                         <p>
-                            отдых с размахом
+                            Отдых с размахом
                             <span className="block h-2 xl:h-4"></span>
                             Именитый “Графский завтрак” в баре-ресторане
                             <br />
@@ -139,11 +138,11 @@ export default function Meet() {
                         </p>
                     </StaggerItem>
                     <StaggerItem className="flex flex-col gap-2 flex-row xl:gap-4">
-                        <p className="font-alistair text-4xl xl:-mt-3 whitespace-nowrap">
-                            3 день:
+                        <p className="font-alistair text-2xl -mt-2 xl:text-4xl xl:-mt-3 w-[100px]">
+                            3 день.
                         </p>
                         <p>
-                            прощальная аудиенция
+                            Прощальная аудиенция
                             <span className="block h-2 xl:h-4"></span>
                             Завтрак в формате сет-меню от бренд-шефа Академиа
                             <br />
@@ -155,11 +154,11 @@ export default function Meet() {
                 </StaggerContainer>
             </section>
 
-            <section className="m-6 flex flex-col gap-6 xl:flex-row-reverse xl:w-full xl:max-w-6xl xl:mx-auto">
-                <FadeUp className="relative overflow-hidden rounded h-80 xl:w-360">
+            <section className="mx-6 mt-6 flex flex-col gap-8 xl:flex-row-reverse xl:w-full xl:max-w-6xl xl:mx-auto">
+                <FadeUp className="relative overflow-hidden rounded max-xl:h-60 w-full">
                     <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/04/герб-кириллица-наполовину-копия.png"
-                        alt="Греб ACADEMIA Особняк Шувалова"
+                        src="https://academia.spb.ru/wp-content/uploads/2026/04/герб-кириллица-наполовину-копия-1.png"
+                        alt="Герб ACADEMIA Особняк Шувалова"
                         fill
                         loading="lazy"
                         className="object-contain"
@@ -223,10 +222,10 @@ export default function Meet() {
                 </StaggerItem>
             </StaggerContainer>
 
-            <div className="flex flex-col gap-6 bg-gray-100 px-6 py-10 xl:-mt-20 xl:pt-28">
+            <div className="flex flex-col gap-4 bg-gray-100 px-6 py-8 xl:-mt-20 xl:pt-24 xl:pb-4">
                 <FadeUp
                     duration={1.2}
-                    className="flex flex-col gap-6 text-center xl:max-w-6xl xl:mx-auto"
+                    className="flex flex-col gap-4 xl:text-center xl:max-w-6xl xl:mx-auto"
                 >
                     <h2 className="uppercase">ИСТОРИЧЕСКИЙ антураж</h2>
                     <p>
@@ -243,8 +242,8 @@ export default function Meet() {
                 <DividerHistory style={2} />
             </div>
 
-            <FadeUp className="m-6 text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto">
-                <h2>Особная встреча</h2>
+            <FadeUp className="mx-6 my-2 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
+                <h2>Особая встреча</h2>
                 <p className="xl:max-w-4xl xl:mx-auto">
                     Ваш отдых начнется со&nbsp;встречи в&nbsp;аэропорту или
                     на&nbsp;вокзале и&nbsp;индивидуального трансфера
@@ -275,7 +274,7 @@ export default function Meet() {
             </FadeUp>
 
             <FadeUp duration={1.2} className="bg-gray-100">
-                <div className="mx-6 my-8 text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10">
+                <div className="mx-6 my-8 xl:text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10">
                     <h2>Отдых в АКАДЕМИА СПА</h2>
                     <p className="xl:max-w-4xl xl:mx-auto">
                         Чтобы отдохнуть после дороги и&nbsp;знакомства
@@ -308,7 +307,7 @@ export default function Meet() {
                 className="mx-6 my-8 flex flex-col gap-6 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-10 xl:my-10"
             >
                 <div className="relative w-full">
-                    <div className="relative overflow-hidden aspect-4/3 rounded xl:mt-12">
+                    <div className="relative overflow-hidden aspect-21/15 rounded xl:mt-12">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/04/breakfast.jpg"
                             alt="Графский завтрак"
@@ -323,7 +322,7 @@ export default function Meet() {
                         width={210}
                         height={200}
                         loading="lazy"
-                        className="object-cover hidden xl:block xl:absolute xl:top-0 xl:-right-16 rounded"
+                        className="object-cover hidden xl:block xl:absolute xl:top-1 xl:-right-16 rounded"
                     />
                 </div>
                 <div className="flex flex-col gap-4 w-full">
@@ -353,27 +352,32 @@ export default function Meet() {
             <section className="bg-gray-100">
                 <StaggerContainer
                     mode="inView"
-                    className="mx-6 my-8 text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10 xl:gap-6"
+                    className="m-6 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto"
                 >
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                    <StaggerItem>
                         <h2>ПРОГУЛКА-ФУРШЕТ на&nbsp;катере</h2>
                     </StaggerItem>
 
-                    <StaggerItem className="xl:max-w-4xl xl:mx-auto">
-                        После гастрономических впечатлений мы&nbsp;приглашаем
-                        вас отправиться за&nbsp;эстетическими&nbsp;&mdash;
-                        на&nbsp;водную прогулку по&nbsp;рекам и&nbsp;каналам
-                        Петербурга на&nbsp;фирменном катере. До&nbsp;причала
-                        и&nbsp;обратно в&nbsp;отель после водной прогулки
-                        вы&nbsp;отправитесь на&nbsp;эффектном ретроавтомобиле.
-                        <br />
-                        <br />
-                        Вас будет сопровождать наш лектор искусствовед
-                        со&nbsp;специально разработанной экскурсией. Вас ждут
-                        дворцовые тайны, невероятные интриги, секреты знатных
-                        семей, неписаные правила и&nbsp;традиции дворянской
-                        жизни XIX века, и, конечно, сам город во&nbsp;всем его
-                        имперском великолепии с&nbsp;лучшего ракурса.
+                    <StaggerItem className="flex flex-col gap-3 xl:max-w-4xl xl:mx-auto">
+                        <p>
+                            После гастрономических впечатлений
+                            мы&nbsp;приглашаем вас отправиться
+                            за&nbsp;эстетическими&nbsp;&mdash; на&nbsp;водную
+                            прогулку по&nbsp;рекам и&nbsp;каналам Петербурга
+                            на&nbsp;фирменном катере. До&nbsp;причала
+                            и&nbsp;обратно в&nbsp;отель после водной прогулки
+                            вы&nbsp;отправитесь на&nbsp;эффектном
+                            ретроавтомобиле.
+                        </p>
+                        <p>
+                            Вас будет сопровождать наш лектор искусствовед
+                            со&nbsp;специально разработанной экскурсией. Вас
+                            ждут дворцовые тайны, невероятные интриги, секреты
+                            знатных семей, неписаные правила и&nbsp;традиции
+                            дворянской жизни XIX века, и,&nbsp;конечно, сам
+                            город во&nbsp;всем его имперском великолепии
+                            с&nbsp;лучшего ракурса.
+                        </p>
                     </StaggerItem>
                     <StaggerItem>
                         <ImageGrid
@@ -401,7 +405,7 @@ export default function Meet() {
 
             <StaggerContainer
                 mode="inView"
-                className="text-center m-6 flex flex-col gap-4 xl:w-full xl:max-w-4xl xl:mx-auto"
+                className="xl:text-center m-6 flex flex-col gap-4 xl:w-full xl:max-w-4xl xl:mx-auto"
             >
                 <StaggerItem className="flex gap-3 justify-center">
                     <h2>Сюрприз от графа</h2>
@@ -439,9 +443,9 @@ export default function Meet() {
                 </StaggerItem>
             </StaggerContainer>
 
-            <section className="bg-gray-100 px-6 py-8 xl:py-12">
-                <div className="flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto">
-                    <div className="flex flex-col gap-4 xl:max-w-4xl xl:mx-auto xl:text-center">
+            <section className="bg-gray-100 p-6 xl:py-8">
+                <div className="flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
+                    <div className="flex flex-col gap-2 xl:max-w-4xl xl:mx-auto xl:text-center">
                         <h2>Культурный Петербург</h2>
                         <p>
                             Третий день вашего графского путешествия предлагаем
@@ -528,12 +532,13 @@ export default function Meet() {
 
             <StaggerContainer
                 mode="inView"
-                className="text-center m-6 flex flex-col gap-4 xl:w-full xl:max-w-2xl xl:mx-auto"
+                className="xl:text-center m-6 flex flex-col gap-4"
             >
                 <StaggerItem>
                     <p>
                         Специальное предложение &laquo;Графский Петербург&raquo;
                         от&nbsp;Академиа особняк Шувалова&nbsp;&mdash;
+                        <br />
                         это&nbsp;мостик к&nbsp;культурному и&nbsp;полноценному
                         отдыху.
                         <br />
@@ -542,8 +547,8 @@ export default function Meet() {
                         свой лучший опыт погружения в&nbsp;эпоху прошлых веков.
                     </p>
                 </StaggerItem>
-                <StaggerItem className="flex flex-col gap-3 my-6 xl:flex-row xl:justify-center">
-                    <Button href="/booking/?&be-offer=910895" variant="primary">
+                <StaggerItem className="flex flex-col gap-3 my-4 xl:flex-row xl:justify-center">
+                    <Button href="/booking?&be-offer=910895" variant="primary">
                         Забронировать
                     </Button>
                 </StaggerItem>
