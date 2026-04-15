@@ -1,5 +1,8 @@
 import Link from "next/link";
-import BookingForm from "@/components/sections/BookingForm";
+import {
+    BookingFormDesktop,
+    BookingFormMobile,
+} from "@/components/sections/BookingFormResponsive";
 import ContactsSection from "@/components/sections/ContactsSection";
 import DarkHeroSection from "@/components/sections/DarkHeroSection";
 import HistoricalMapSection from "@/components/sections/HistoricalMapSection";
@@ -75,7 +78,7 @@ const descriptionImagesByLocale = {
 
 const homeCopyByLocale: Record<Locale, HomeCopy> = {
     ru: {
-        heroTitle: <>Academia Особняк&nbsp;Шувалова</>,
+        heroTitle: <>Academia <span className="xl:whitespace-nowrap">Особняк Шувалова</span></>,
         heroSubtitle: "СПА, Отель, Ресторан в центре Петерурга",
         countsSpbTitle: "Графский Петербург",
         countsSpbParagraphs: [
@@ -117,8 +120,8 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             "Отдохнуть в уютном номере после прогулки, оценить классическую кухню и коктейльную карту ресторана Бар-ресторан ACADEMIA Шувалова, расслабиться в руках мастеров массажа и ухода в ACADEMIA SPA, заказать трансфер или сюрприз для дорогого человека. Наша консьерж-служба готова помочь с решением любых вопросов.",
     },
     en: {
-        heroTitle: <>Academia Mansion&nbsp;Shuvaloff</>,
-        heroSubtitle: "SPA, Hotels, Restaurant in the center of St. Petersburg",
+        heroTitle: <>Academia <span className="xl:whitespace-nowrap">Mansion Shuvaloff</span></>,
+        heroSubtitle: "SPA, Hotel, Restaurant in the center of St. Petersburg",
         countsSpbTitle: "Aristocratic Saint Petersburg",
         countsSpbParagraphs: [
             "A unique getaway steeped in opulent aristocratic traditions",
@@ -167,7 +170,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
     return (
         <main className="flex flex-col gap-6">
             <section>
-                <div className="relative overflow-hidden aspect-8/15 xl:aspect-[unset] xl:min-h-screen">
+                <div className="relative overflow-hidden aspect-8/9 xl:aspect-[unset] xl:min-h-screen">
                     <FadeIn
                         duration={0.9}
                         className="absolute inset-0 h-full w-full"
@@ -186,7 +189,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
                         <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-6xl xl:mx-auto xl:gap-6">
                             <StaggerItem>
-                                <h1 className="text-4xl xl:text-5xl xl:max-w-2xl xl:mx-auto">
+                                <h1 className="text-3xl xl:text-5xl xl:max-w-2xl xl:mx-auto">
                                     {copy.heroTitle}
                                 </h1>
                             </StaggerItem>
@@ -195,11 +198,13 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                     {copy.heroSubtitle}
                                 </p>
                             </StaggerItem>
-                            <BookingForm />
+                            <BookingFormDesktop />
                         </div>
                     </StaggerContainer>
                 </div>
             </section>
+
+            <BookingFormMobile />
 
             <section className="relative overflow-hidden">
                 {/* MOBILE: фото снизу 55% */}
@@ -254,7 +259,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                         />
                     </Parallax>
                     <div className="p-20 flex flex-col justify-between">
-                        <FadeUp duration={1.2}>
+                        <FadeUp duration={1}>
                             <h2 className="relative z-1 text-white">
                                 {copy.countsSpbTitle}
                             </h2>
@@ -277,7 +282,10 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                     "linear-gradient(to right, rgba(0,0,0,.6) 20%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 80%)",
                             }}
                         />
-                        <div className="flex items-center gap-8 mt-2">
+                        <FadeUp
+                            duration={1.2}
+                            className="flex items-center gap-8 mt-2"
+                        >
                             <Button
                                 href={localizeHref(
                                     `/booking?&be-offer=910895`,
@@ -297,7 +305,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                 {copy.detailsLabel}
                                 <span className="text-2xl mb-1">&rsaquo;</span>
                             </Link>
-                        </div>
+                        </FadeUp>
                     </div>
                 </div>
             </section>
