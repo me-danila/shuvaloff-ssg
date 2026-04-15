@@ -15,6 +15,13 @@ export type Sale = {
 export const AllSales: Record<Locale, Sale[]> = {
     ru: [
         {
+            title: "Графский Петербург",
+            subtitle:
+                "Особый отдых в формате пышных аристократических традиций",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
+            bookingUrl: "/booking?&be-offer=910895",
+        },
+        {
             title: "Промокод GENIUS",
             subtitle: "Получите бонус при первом бронировании на сайте",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
@@ -70,6 +77,13 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
     ],
     en: [
+        {
+            title: "Aristocratic St. Petersburg",
+            subtitle:
+                "A unique getaway steeped in opulent aristocratic traditions",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
+            bookingUrl: "/booking?&be-offer=910895",
+        },
         {
             title: "GENIUS Promocode",
             subtitle: "Get a bonus on your first booking on our website",

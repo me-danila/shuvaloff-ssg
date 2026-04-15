@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
@@ -7,11 +8,24 @@ import HeroWithPictures from "@/components/sections/HeroWithPictures";
 import HistoricalMapSection from "@/components/sections/HistoricalMapSection";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
-import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import {
+    FadeIn,
+    FadeUp,
+    StaggerContainer,
+    StaggerItem,
+} from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
+
+export const metadata: Metadata = {
+    title: "Отель ACADEMIA Особняк Шувалова — Санкт-Петербург",
+    description:
+        "Отель в историческом особняке XIX века в центре Санкт-Петербурга",
+    alternates: getLocaleAlternates("/", "ru"),
+};
 
 type HomeCopy = {
     heroTitle: string;
@@ -209,18 +223,38 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
     },
 };
 
-export default function HomePage({ locale }: { locale: Locale }) {
+export default function TestPage({ locale }: { locale: Locale }) {
     const copy = homeCopyByLocale[locale];
     const heroImages = heroImagesByLocale[locale];
     const descriptionImages = descriptionImagesByLocale[locale];
 
     return (
         <main className="flex flex-col gap-6">
-            <HeroWithPictures
-                title={copy.heroTitle}
-                subtitle={copy.heroSubtitle}
-                images={heroImages}
-            />
+            <section className="xl:w-full xl:max-w-6xl xl:mx-auto">
+                <div className="text-center m-4 xl:mb-8">
+                    <FadeIn duration={0.7}>
+                        <h1>Academia Особняк Шувалова</h1>
+                    </FadeIn>
+                    <FadeIn delay={0.1} duration={0.7}>
+                        <p className="leading-5 mt-2 xl:w-2xl xl:mx-auto">
+                            Изысканный отель в особняке XIX века с богатой
+                            историей в центре Петербурга
+                        </p>
+                    </FadeIn>
+                </div>
+                <FadeUp delay={0.2}>
+                    <video
+                        src="https://academia.spb.ru/wp-content/uploads/2026/04/video.webm"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        className="w-full h-80 my-2 rounded-xl object-cover xl:mt-8 xl:h-130 xl:rounded-md"
+                    />
+                </FadeUp>
+            </section>
+
             <BookingForm />
 
             <section className="relative overflow-hidden">
@@ -229,19 +263,24 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     <div className="relative h-60 overflow-hidden rounded-lg mb-1">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/04/Frame-2.png"
-                            alt={copy.countsSpbTitle}
+                            alt="Графский Петербург"
                             fill
                             loading="lazy"
                             className="h-100 w-full rounded-lg object-cover"
                         />
                     </div>
-                    <h2 className="-mb-2">{copy.countsSpbTitle}</h2>
+                    <h2 className="-mb-2">Графский Петербург</h2>
                     <div className="flex flex-col gap-2">
-                        {copy.countsSpbParagraphs.map((text, i) => (
-                            <FadeUp key={text} delay={i * 0.1 + (i + 1) * 0.1}>
-                                <p>{text}</p>
-                            </FadeUp>
-                        ))}
+                        <p>
+                            Особый отдых в формате пышных аристократических
+                            традиций
+                        </p>
+
+                        <p>
+                            {" "}
+                            Для тех, кто хочет прожить свой лучший опыт
+                            погружения в эпоху ХІХ века
+                        </p>
                     </div>
                     <div className="flex items-center gap-4 mt-2">
                         <Button
@@ -251,13 +290,13 @@ export default function HomePage({ locale }: { locale: Locale }) {
                             )}
                             variant="primary"
                         >
-                            {copy.orderLabel}
+                            Забронировать
                         </Button>
                         <Link
                             href={localizeHref(`/aristocratic-spb/`, locale)}
                             className="relative flex items-center gap-3 uppercase tracking-widest text-sm"
                         >
-                            {copy.detailsLabel}
+                            Подробнее
                             <span className="text-2xl mb-1">&rsaquo;</span>
                         </Link>
                     </div>
@@ -268,7 +307,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     <Parallax className="w-full h-full absolute" offset={100}>
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/04/Frame-1.png"
-                            alt={copy.countsSpbTitle}
+                            alt="Графский Петербург"
                             fill
                             sizes="100vw"
                             loading="lazy"
@@ -278,19 +317,20 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     <div className="p-20 flex flex-col justify-between">
                         <FadeUp duration={1.2}>
                             <h2 className="relative z-1 text-white">
-                                {copy.countsSpbTitle}
+                                Графский Петербург
                             </h2>
                         </FadeUp>
                         <div className="max-w-[390px] flex flex-col gap-6">
-                            {copy.countsSpbParagraphs.map((text, i) => (
-                                <FadeUp
-                                    key={text}
-                                    delay={i * 0.1 + (i + 1) * 0.1}
-                                    className="relative z-1"
-                                >
-                                    <p>{text}</p>
-                                </FadeUp>
-                            ))}
+                            <p>
+                                Особый отдых в формате пышных аристократических
+                                традиций
+                            </p>
+
+                            <p>
+                                {" "}
+                                Для тех, кто хочет прожить свой лучший опыт
+                                погружения в эпоху ХІХ века
+                            </p>
                         </div>
                         <div
                             className="absolute inset-0 pointer-events-none"
@@ -307,7 +347,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                 )}
                                 variant="primary"
                             >
-                                {copy.orderLabel}
+                                Забронировать
                             </Button>
                             <Link
                                 href={localizeHref(
@@ -316,204 +356,13 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                 )}
                                 className="relative flex items-center gap-3 uppercase tracking-widest text-sm"
                             >
-                                {copy.detailsLabel}
+                                Подробнее
                                 <span className="text-2xl mb-1">&rsaquo;</span>
                             </Link>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <section className="flex flex-col gap-2 mx-6 relative xl:text-center xl:mx-0">
-                <div className="relative h-90 overflow-hidden rounded-lg xl:hidden">
-                    <Image
-                        src={descriptionImages[0].src}
-                        alt={descriptionImages[0].alt}
-                        fill
-                        loading="lazy"
-                        className="h-100 w-full rounded-lg object-cover"
-                    />
-                </div>
-                <FadeUp>
-                    <h2 className="mt-4">{copy.mansionTitle}</h2>
-                </FadeUp>
-                <FadeUp delay={0.1}>
-                    <p className="my-2 xl:max-w-4xl xl:mx-auto">
-                        {copy.mansionDescription}
-                    </p>
-                </FadeUp>
-                <StaggerContainer className="flex gap-2 h-65 mt-2 xl:h-110 xl:mt-8 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full">
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg hidden xl:block xl:rounded-md">
-                        <Image
-                            src={descriptionImages[0].src}
-                            alt={descriptionImages[0].alt}
-                            fill
-                            sizes="33vw"
-                            loading="lazy"
-                            className="object-cover"
-                        />
-                    </StaggerItem>
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
-                        <Image
-                            src={descriptionImages[1].src}
-                            alt={descriptionImages[1].alt}
-                            fill
-                            sizes="(max-width: 1200px) 100vw, 33vw"
-                            loading="lazy"
-                            className="object-cover"
-                        />
-                    </StaggerItem>
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
-                        <Image
-                            src={descriptionImages[2].src}
-                            alt={descriptionImages[2].alt}
-                            fill
-                            sizes="(max-width: 1200px) 100vw, 33vw"
-                            loading="lazy"
-                            className="object-cover"
-                        />
-                    </StaggerItem>
-                </StaggerContainer>
-            </section>
-            <section className="flex flex-col mx-6 gap-3 xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-8 xl:text-justify">
-                <FadeUp className="xl:flex-1">
-                    <p>{copy.mansionLeftText}</p>
-                </FadeUp>
-                <FadeUp delay={0.2} className="hidden xl:block xl:flex-none">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/Group-126.png"
-                        alt="Shuvalov coat of arms"
-                        width={263}
-                        height={234}
-                        loading="lazy"
-                    />
-                </FadeUp>
-                <FadeUp delay={0.3} className="xl:flex-1">
-                    <p>{copy.mansionRightText}</p>
-                </FadeUp>
-                <div className="relative mt-2 overflow-hidden rounded-lg xl:hidden">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/%D1%84%D0%B0%D1%81%D0%B0%D0%B4-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F2-2.png"
-                        alt="Shuvaloff historic facade"
-                        width={340}
-                        height={405}
-                        loading="lazy"
-                        className="w-full h-auto"
-                    />
-                </div>
-            </section>
-            <section className="flex flex-col gap-3 xl:text-center xl:mt-4">
-                <FadeUp>
-                    <h2 className="mx-6">{copy.centerTitle}</h2>
-                </FadeUp>
-                <FadeUp delay={0.1}>
-                    <p className="mx-6 xl:max-w-4xl xl:mx-auto xl:mt-2">
-                        {copy.centerTextTop}
-                    </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                    <p className="mx-6 xl:max-w-4xl xl:mx-auto xl:mt-2">
-                        {copy.centerTextBottom}
-                    </p>
-                </FadeUp>
-                <HistoricalMapSection />
-                <FadeUp delay={0.3}>
-                    <p className="mx-6 text-center font-alistair text-2xl text-stone-400 xl:text-[40px] xl:max-w-3xl xl:mx-auto xl:mt-4 xl:-mb-2">
-                        {copy.centerCaption}
-                    </p>
-                </FadeUp>
-            </section>
-            <Divider />
-            <DarkHeroSection
-                imageMobile={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/hands.png",
-                    alt: "ACADEMIA Mansion Shuvaloff",
-                    position: "center",
-                }}
-                image={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/Rectangle-122.png",
-                    alt: "ACADEMIA Mansion Shuvaloff",
-                }}
-                blocks={[
-                    {
-                        title: (
-                            <>
-                                SOLE&SOUL
-                                <br />
-                                {copy.soulTitleBottom}
-                            </>
-                        ),
-                        paragraphs: copy.soulParagraphs,
-                    },
-                ]}
-            />
-            <section className="flex flex-col gap-3 mx-6 xl:max-w-6xl xl:mx-auto xl:text-center">
-                <FadeUp>
-                    <h2>{copy.impressionsTitle}</h2>
-                </FadeUp>
-                <FadeUp delay={0.1}>
-                    <p className="xl:max-w-3xl xl:mx-auto">
-                        {copy.impressionsTextTop}
-                    </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                    <video
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/horiz.mov"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        className="w-full h-90 my-2 rounded-xl object-cover xl:mt-8 xl:h-150 xl:rounded-md"
-                    />
-                </FadeUp>
-                <FadeUp delay={0.3}>
-                    <p className="xl:max-w-3xl xl:mx-auto">
-                        {copy.impressionsTextBottom}
-                    </p>
-                </FadeUp>
-                <FadeUp delay={0.4}>
-                    <p className="text-center font-alistair text-2xl text-stone-400 xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:mt-4">
-                        {copy.impressionsCaption}
-                    </p>
-                </FadeUp>
-            </section>
-            <section className="flex flex-col gap-4 mx-6 xl:flex-row xl:max-w-6xl xl:mx-auto xl:gap-8">
-                <FadeUp className="hidden xl:block xl:flex-1">
-                    <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded-lg">
-                        <Image
-                            src="https://academia.spb.ru/wp-content/uploads/2026/02/5235.jpg"
-                            alt="Your stay ecosystem"
-                            fill
-                            loading="lazy"
-                            sizes="(max-width: 1280px) 100vw, 50vw"
-                            className="object-cover xl:object-[50%_70%]"
-                        />
-                    </div>
-                </FadeUp>
-                <div className="flex flex-col gap-4 xl:my-4 xl:flex-1">
-                    <FadeUp>
-                        <h2>{copy.ecosystemTitle}</h2>
-                    </FadeUp>
-                    <FadeUp delay={0.1}>
-                        <p className="xl:mt-2">{copy.ecosystemTextTop}</p>
-                    </FadeUp>
-                    <FadeUp delay={0.2}>
-                        <p>{copy.ecosystemTextBottom}</p>
-                    </FadeUp>
-                </div>
-                <div className="relative mt-2 overflow-hidden rounded-lg xl:hidden">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/1e86635f1b9830245e5c69efe98d9745c21d4e4b.jpg"
-                        alt="Your stay ecosystem"
-                        width={340}
-                        height={405}
-                        loading="lazy"
-                        className="w-full h-auto"
-                    />
-                </div>
-            </section>
-            <ContactsSection />
         </main>
     );
 }

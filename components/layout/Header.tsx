@@ -79,6 +79,10 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             ],
         },
         {
+            label: "Графский Петербург",
+            href: "/aristocratic-spb/",
+        },
+        {
             label: "Бутик-ресторан",
             href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
             target: "_blank",
@@ -120,6 +124,10 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Concierge service", href: "/services/concierge/" },
                 { label: "Additional services", href: "/services/" },
             ],
+        },
+        {
+            label: "Aristocratic St. Petersburg",
+            href: "/aristocratic-spb/",
         },
         {
             label: "Boutique restaurant",

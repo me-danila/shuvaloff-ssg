@@ -8,22 +8,35 @@ import type { Locale } from "@/lib/i18n/routing";
 type SalesCopy = {
     title: string;
     transportTitle: string;
-    transportDescription: string;
+    transportDescription: React.ReactNode;
 };
 
 const copyByLocale: Record<Locale, SalesCopy> = {
     ru: {
         title: "Специальные предложения",
         transportTitle: "Путь в Петербург из Москвы — без лишних забот",
-        transportDescription:
-            "Мы сделали всё, чтобы поездка началась легко: выберите билеты на самолёт или «Сапсан» прямо на сайте — и сосредоточьтесь на главном — предвкушении встречи с городом и с ACADEMIA.",
+        transportDescription: (
+            <>
+                Мы&nbsp;сделали всё, чтобы поездка началась легко: выберите
+                билеты на&nbsp;самолёт или &laquo;Сапсан&raquo; прямо
+                на&nbsp;сайте&nbsp;&mdash; и&nbsp;сосредоточьтесь
+                на&nbsp;главном&nbsp;&mdash; предвкушении встречи с&nbsp;городом
+                и&nbsp;с&nbsp;ACADEMIA.
+            </>
+        ),
     },
     en: {
         title: "Special Offers",
         transportTitle:
             "The journey to St. Petersburg from Moscow — without extra worries",
-        transportDescription:
-            "We have made everything to ensure your trip starts easily: choose your plane or Sapsan train tickets right on the website — and focus on the main thing — the anticipation of meeting the city and ACADEMIA.",
+        transportDescription: (
+            <>
+                We have made everything to ensure your trip starts easily:
+                choose your plane or Sapsan train tickets right on the website —
+                and focus on the main thing — the anticipation of meeting the
+                city and ACADEMIA
+            </>
+        ),
     },
 };
 
