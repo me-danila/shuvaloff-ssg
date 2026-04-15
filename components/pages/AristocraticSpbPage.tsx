@@ -264,10 +264,10 @@ const copyByLocale: Record<Locale, PageCopy> = {
             <>
                 &laquo;Aristocratic St. Petersburg&raquo;&nbsp;&mdash; is an
                 invitation to visit Count Shuvalov in his 19th-century mansion
-                on Mokhovaya Street, located near the magnificent embankments
-                of the Fontanka and Neva, St. Michael's Castle, the Russian
-                Museum, and the Summer Garden. But beyond walks through the
-                most beautiful places of the historical center, a thoughtfully
+                on Mokhovaya Street, located near the magnificent embankments of
+                the Fontanka and Neva, St. Michael's Castle, the Russian Museum,
+                and the Summer Garden. But beyond walks through the most
+                beautiful places of the historical center, a thoughtfully
                 curated and experience-rich holiday program awaits you, worthy
                 of Count Shuvalov's guests.
                 <br />
@@ -451,7 +451,11 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                             src={src}
                             alt={copy.alts.mainHero}
                             fill
-                            sizes={i === 0 ? "33vw" : "(max-width: 1200px) 100vw, 33vw"}
+                            sizes={
+                                i === 0
+                                    ? "33vw"
+                                    : "(max-width: 1200px) 100vw, 33vw"
+                            }
                             loading="lazy"
                             className="object-cover"
                         />
@@ -632,7 +636,11 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                                 >
                                     <Image
                                         src={src}
-                                        alt={i === 0 ? copy.alts.culture1 : copy.alts.culture2}
+                                        alt={
+                                            i === 0
+                                                ? copy.alts.culture1
+                                                : copy.alts.culture2
+                                        }
                                         fill
                                         className="object-cover"
                                         sizes="50vw"
@@ -657,7 +665,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
 
                         {/* Правая колонка: текст + фото */}
                         <div className="flex-1 flex flex-col -ml-16">
-                            <p className="mb-8 pl-24">{copy.cultureConcierge}</p>
+                            <p className="mb-8 pl-24">
+                                {copy.cultureConcierge}
+                            </p>
 
                             {/* Правое фото */}
                             <div className="relative w-full h-90 overflow-hidden rounded">

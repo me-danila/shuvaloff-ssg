@@ -4,7 +4,8 @@ import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Aristocratic St. Petersburg — ACADEMIA Mansion Shuvaloff",
-    description: "A special getaway in the style of grand aristocratic traditions",
+    description:
+        "A special getaway in the style of grand aristocratic traditions",
     alternates: getLocaleAlternates("/aristocratic-spb/", "en"),
 };
 
