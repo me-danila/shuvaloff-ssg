@@ -79,7 +79,7 @@ const descriptionImagesByLocale = {
 const homeCopyByLocale: Record<Locale, HomeCopy> = {
     ru: {
         heroTitle: <>Academia <span className="xl:whitespace-nowrap">Особняк Шувалова</span></>,
-        heroSubtitle: "СПА, Отель, Ресторан в центре Петерурга",
+        heroSubtitle: "СПА, Отель, Ресторан в центре Петербурга",
         countsSpbTitle: "Графский Петербург",
         countsSpbParagraphs: [
             "Особый отдых в формате пышных аристократических традиций",
