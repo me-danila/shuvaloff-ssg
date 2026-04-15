@@ -212,28 +212,28 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 images={heroImages}
             />
             <BookingForm />
-            <DarkHeroSection
-                imageMobile={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",
-                    alt: "ACADEMIA Mansion Shuvaloff",
-                    position: "center",
-                }}
-                image={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",
-                    alt: "ACADEMIA Mansion Shuvaloff",
-                }}
-                blocks={[
-                    {
-                        title: <>{copy.countsSpbTitle}</>,
-                        paragraphs: copy.countsSpbParagraphs,
-                    },
-                ]}
-                imageGradient={false}
-                buttons={{
-                    orderHref: "/booking/?&be-offer=910895/",
-                    detailsHref: "/aristocratic-spb/",
-                }}
-            />
+            {/*<DarkHeroSection*/}
+            {/*    imageMobile={{*/}
+            {/*        src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",*/}
+            {/*        alt: "ACADEMIA Mansion Shuvaloff",*/}
+            {/*        position: "center",*/}
+            {/*    }}*/}
+            {/*    image={{*/}
+            {/*        src: "https://academia.spb.ru/wp-content/uploads/2026/04/027b342e7353d8f7706f21dcaa7c118ce29b4ba3.png",*/}
+            {/*        alt: "ACADEMIA Mansion Shuvaloff",*/}
+            {/*    }}*/}
+            {/*    blocks={[*/}
+            {/*        {*/}
+            {/*            title: <>{copy.countsSpbTitle}</>,*/}
+            {/*            paragraphs: copy.countsSpbParagraphs,*/}
+            {/*        },*/}
+            {/*    ]}*/}
+            {/*    imageGradient={false}*/}
+            {/*    buttons={{*/}
+            {/*        orderHref: "/booking/?&be-offer=910895/",*/}
+            {/*        detailsHref: "/aristocratic-spb/",*/}
+            {/*    }}*/}
+            {/*/>*/}
             <section className="flex flex-col gap-2 mx-6 relative xl:text-center xl:mx-0">
                 <div className="relative h-90 overflow-hidden rounded-lg xl:hidden">
                     <Image
