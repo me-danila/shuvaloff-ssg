@@ -284,10 +284,10 @@ export default function HomePage({ locale }: { locale: Locale }) {
                             </h2>
                         </FadeUp>
                         <div className="max-w-[390px] flex flex-col gap-6">
-                            {copy.countsSpbParagraphs.map((text, index, i) => (
+                            {copy.countsSpbParagraphs.map((text, i) => (
                                 <FadeUp
                                     key={text}
-                                    delay={index * 0.1 + (i + 1) * 0.1}
+                                    delay={i * 0.1 + (i + 1) * 0.1}
                                     className="relative z-1"
                                 >
                                     <p>{text}</p>
