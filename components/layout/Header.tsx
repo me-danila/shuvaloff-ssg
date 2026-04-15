@@ -296,7 +296,7 @@ export default function Header() {
     const normalizedPath = normalizePath(stripLocalePrefix(pathname));
     const isHome = normalizedPath === "/";
     const isWedding =
-        normalizedPath === "/wedding" || normalizedPath === "/spasibo_wedding";
+        normalizedPath === "/wedding" || normalizedPath === "/spasibo_wedding" || normalizedPath === "/test2";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -330,7 +330,8 @@ export default function Header() {
     const isLight =
         !scrolled &&
         normalizedPath !== "/wedding" &&
-        normalizedPath !== "/spasibo_wedding";
+        normalizedPath !== "/spasibo_wedding" &&
+        normalizedPath !== "/test2";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,
