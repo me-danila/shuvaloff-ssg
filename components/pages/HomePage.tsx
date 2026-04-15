@@ -276,7 +276,6 @@ export default function HomePage({ locale }: { locale: Locale }) {
                         />
                     </Parallax>
                     <div
-                        duration={1.2}
                         className="p-20 flex flex-col justify-between"
                     >
                         <FadeUp duration={1.2}>
