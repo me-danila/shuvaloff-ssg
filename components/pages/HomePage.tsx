@@ -237,7 +237,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     </div>
                     <h2 className="-mb-2">{copy.countsSpbTitle}</h2>
                     <div className="flex flex-col gap-2">
-                        {copy.countsSpbParagraphs.map((text, index, i) => (
+                        {copy.countsSpbParagraphs.map((text, i, index) => (
                             <FadeUp
                                 key={text}
                                 delay={index * 0.1 + (i + 1) * 0.1}
