@@ -295,8 +295,10 @@ export default function Header() {
     const subNavItems = subNavItemsByLocale[locale];
     const normalizedPath = normalizePath(stripLocalePrefix(pathname));
     const isHome = normalizedPath === "/";
-    const isWedding =
-        normalizedPath === "/wedding" || normalizedPath === "/spasibo_wedding" || normalizedPath === "/test2";
+    const isHeaderFixed =
+        normalizedPath === "/" ||
+        normalizedPath === "/wedding" ||
+        normalizedPath === "/spasibo_wedding";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -329,9 +331,9 @@ export default function Header() {
 
     const isLight =
         !scrolled &&
+        normalizedPath !== "/" &&
         normalizedPath !== "/wedding" &&
-        normalizedPath !== "/spasibo_wedding" &&
-        normalizedPath !== "/test2";
+        normalizedPath !== "/spasibo_wedding";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,
@@ -389,7 +391,7 @@ export default function Header() {
     return (
         <>
             <div
-                className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"} ${isWedding ? "hidden" : ""}`}
+                className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"} ${isHeaderFixed ? "hidden" : ""}`}
             />
 
             <motion.header

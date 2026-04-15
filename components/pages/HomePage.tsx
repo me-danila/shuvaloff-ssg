@@ -2,19 +2,22 @@ import Link from "next/link";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import DarkHeroSection from "@/components/sections/DarkHeroSection";
-import type { HeroImage } from "@/components/sections/HeroWithPictures";
-import HeroWithPictures from "@/components/sections/HeroWithPictures";
 import HistoricalMapSection from "@/components/sections/HistoricalMapSection";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
-import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import {
+    FadeIn,
+    FadeUp,
+    StaggerContainer,
+    StaggerItem,
+} from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 
 type HomeCopy = {
-    heroTitle: string;
+    heroTitle: React.ReactNode;
     heroSubtitle: string;
     mansionTitle: string;
     countsSpbTitle: string;
@@ -37,56 +40,6 @@ type HomeCopy = {
     ecosystemTitle: string;
     ecosystemTextTop: string;
     ecosystemTextBottom: string;
-};
-
-const heroImagesByLocale: Record<
-    Locale,
-    [HeroImage, HeroImage, HeroImage, HeroImage, HeroImage]
-> = {
-    ru: [
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/02_MMI_9908_327_@maxiimov_0-без-урны-1.png",
-            alt: "Фасад отеля",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_27-1.png",
-            alt: "Невеста у окна",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/v3-1.png",
-            alt: "Номер",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_163-1.png",
-            alt: "Пара",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_59-1.png",
-            alt: "Чтение",
-        },
-    ],
-    en: [
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/02_MMI_9908_327_@maxiimov_0-без-урны-1.png",
-            alt: "Hotel facade",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_27-1.png",
-            alt: "Bride by the window",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/v3-1.png",
-            alt: "Room interior",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_163-1.png",
-            alt: "Couple",
-        },
-        {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/AP_59-1.png",
-            alt: "Reading",
-        },
-    ],
 };
 
 const descriptionImagesByLocale = {
@@ -122,9 +75,8 @@ const descriptionImagesByLocale = {
 
 const homeCopyByLocale: Record<Locale, HomeCopy> = {
     ru: {
-        heroTitle: "Academia Особняк Шувалова",
-        heroSubtitle:
-            "Изысканный отель в особняке XIX века с богатой историей в центре Петербурга",
+        heroTitle: <>Academia Особняк&nbsp;Шувалова</>,
+        heroSubtitle: "СПА, Отель, Ресторан в центре Петерурга",
         countsSpbTitle: "Графский Петербург",
         countsSpbParagraphs: [
             "Особый отдых в формате пышных аристократических традиций",
@@ -165,9 +117,8 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             "Отдохнуть в уютном номере после прогулки, оценить классическую кухню и коктейльную карту ресторана Бар-ресторан ACADEMIA Шувалова, расслабиться в руках мастеров массажа и ухода в ACADEMIA SPA, заказать трансфер или сюрприз для дорогого человека. Наша консьерж-служба готова помочь с решением любых вопросов.",
     },
     en: {
-        heroTitle: "Academia Mansion Shuvaloff",
-        heroSubtitle:
-            "An elegant hotel in a 19th-century mansion with a rich history in the heart of Saint Petersburg",
+        heroTitle: <>Academia Mansion&nbsp;Shuvaloff</>,
+        heroSubtitle: "SPA, Hotels, Restaurant in the center of St. Petersburg",
         countsSpbTitle: "Aristocratic Saint Petersburg",
         countsSpbParagraphs: [
             "A unique getaway steeped in opulent aristocratic traditions",
@@ -211,17 +162,44 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
 
 export default function HomePage({ locale }: { locale: Locale }) {
     const copy = homeCopyByLocale[locale];
-    const heroImages = heroImagesByLocale[locale];
     const descriptionImages = descriptionImagesByLocale[locale];
 
     return (
         <main className="flex flex-col gap-6">
-            <HeroWithPictures
-                title={copy.heroTitle}
-                subtitle={copy.heroSubtitle}
-                images={heroImages}
-            />
-            <BookingForm />
+            <section>
+                <div className="relative overflow-hidden aspect-8/15 xl:aspect-[unset] xl:min-h-screen">
+                    <FadeIn
+                        duration={0.9}
+                        className="absolute inset-0 h-full w-full"
+                    >
+                        <video
+                            src="https://academia.spb.ru/wp-content/uploads/2026/04/video.webm"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="metadata"
+                            className="w-full h-full object-cover"
+                        />
+                    </FadeIn>
+
+                    <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
+                        <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-6xl xl:mx-auto xl:gap-6">
+                            <StaggerItem>
+                                <h1 className="text-4xl xl:text-5xl xl:max-w-2xl xl:mx-auto">
+                                    {copy.heroTitle}
+                                </h1>
+                            </StaggerItem>
+                            <StaggerItem>
+                                <p className="leading-5 mb-4">
+                                    {copy.heroSubtitle}
+                                </p>
+                            </StaggerItem>
+                            <BookingForm />
+                        </div>
+                    </StaggerContainer>
+                </div>
+            </section>
 
             <section className="relative overflow-hidden">
                 {/* MOBILE: фото снизу 55% */}
