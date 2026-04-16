@@ -233,7 +233,11 @@ const descriptionImages: Record<Locale, { src: string; alt: string }[]> = {
     ],
 };
 
-export default function AristocraticBreakfastPage({ locale }: { locale: Locale }) {
+export default function AristocraticBreakfastPage({
+    locale,
+}: {
+    locale: Locale;
+}) {
     const copy = copyByLocale[locale];
     const descImages = descriptionImages[locale];
 

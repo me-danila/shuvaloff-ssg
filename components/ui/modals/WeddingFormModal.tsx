@@ -102,11 +102,45 @@ export default function WeddingFormModal({
         setForm(INITIAL);
     };
 
+    //    const handleSubmit = async (e: React.FormEvent) => {
+    //        e.preventDefault();
+    //        setStatus("loading");
+    //        await new Promise((r) => setTimeout(r, 800));
+    //        setStatus("success");
+    //    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("loading");
-        await new Promise((r) => setTimeout(r, 800));
-        setStatus("success");
+
+        try {
+            const res = await fetch(
+                "https://sh-wedding-form-handler.plain-cake-fcd7.workers.dev",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Form-Secret": "cc4d848a1a202d50d74966102e3657db",
+                    },
+                    body: JSON.stringify({
+                        service: title,
+                        name: form.name,
+                        phone: form.phone,
+                        email: form.email,
+                        telegram: form.telegram,
+                    }),
+                },
+            );
+
+            const json = await res.json();
+            if (json.ok) {
+                setStatus("success");
+            } else {
+                setStatus("error");
+            }
+        } catch {
+            setStatus("error");
+        }
     };
 
     return (
