@@ -78,7 +78,12 @@ const descriptionImagesByLocale = {
 
 const homeCopyByLocale: Record<Locale, HomeCopy> = {
     ru: {
-        heroTitle: <>Academia <span className="xl:whitespace-nowrap">Особняк Шувалова</span></>,
+        heroTitle: (
+            <>
+                Academia{" "}
+                <span className="xl:whitespace-nowrap">Особняк Шувалова</span>
+            </>
+        ),
         heroSubtitle: "СПА | Отель | Ресторан в центре Петербурга",
         countsSpbTitle: "Графский Петербург",
         countsSpbParagraphs: [
@@ -120,8 +125,14 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             "Отдохнуть в уютном номере после прогулки, оценить классическую кухню и коктейльную карту ресторана Бар-ресторан ACADEMIA Шувалова, расслабиться в руках мастеров массажа и ухода в ACADEMIA SPA, заказать трансфер или сюрприз для дорогого человека. Наша консьерж-служба готова помочь с решением любых вопросов.",
     },
     en: {
-        heroTitle: <>Academia <span className="xl:whitespace-nowrap">Mansion Shuvaloff</span></>,
-        heroSubtitle: "SPA | Hotel | Restaurant in the center of St. Petersburg",
+        heroTitle: (
+            <>
+                Academia{" "}
+                <span className="xl:whitespace-nowrap">Mansion Shuvaloff</span>
+            </>
+        ),
+        heroSubtitle:
+            "SPA | Hotel | Restaurant in the center of St. Petersburg",
         countsSpbTitle: "Aristocratic Saint Petersburg",
         countsSpbParagraphs: [
             "A unique getaway steeped in opulent aristocratic traditions",

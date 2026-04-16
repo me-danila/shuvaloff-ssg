@@ -1,7 +1,7 @@
 "use client";
 
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import BookingForm from "./BookingForm";
 
 export function BookingFormDesktop() {
