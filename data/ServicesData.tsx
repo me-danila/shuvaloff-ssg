@@ -94,6 +94,13 @@ export const AllServices: Record<Locale, Service[]> = {
                 "Время подачи завтраков в бутик-ресторане: с 8:00 до 12:00.",
         },
         {
+            title: "Графский завтрак",
+            subtitle:
+                "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif",
+            slug: "aristocratic-breakfast",
+        },
+        {
             title: "ACADEMIA СПА",
             subtitle:
                 "Мы создали ACADEMIA СПА для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своём внутреннем комфорте",
@@ -617,6 +624,13 @@ export const AllServices: Record<Locale, Service[]> = {
             price: "1 800 ₽",
             comment:
                 "Breakfast serving hours in the boutique restaurant: 8:00 AM to 12:00 PM.",
+        },
+        {
+            title: "Aristocratic breakfast",
+            subtitle:
+                "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif",
+            slug: "aristocratic-breakfast",
         },
         {
             title: "ACADEMIA SPA",
