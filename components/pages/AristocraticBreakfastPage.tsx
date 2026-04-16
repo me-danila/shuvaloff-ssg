@@ -11,7 +11,7 @@ import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 
-type ConciergeCopy = {
+type BreakfastCopy = {
     title: string;
     subtitle: string;
     bookLabel: string;
@@ -31,18 +31,9 @@ type ConciergeCopy = {
     quoteDescription2: string;
     bookBreakfastLabel: string;
     bookHotelLabel: string;
-
-    orderLabel: string;
-    bellTitle: string;
-    heartTitle: string;
-    guidesTitle: string;
-    guidesSubtitle: string;
-    bellItems: string[];
-    heartItems: string[];
-    guideButtons: { label: string; href: string; external?: boolean }[];
 };
 
-const copyByLocale: Record<Locale, ConciergeCopy> = {
+const copyByLocale: Record<Locale, BreakfastCopy> = {
     ru: {
         title: "ГРАФСКИЕ ЗАВТРАКИ В АКАДЕМИА ОСОБНЯК ШУВАЛОВА",
         subtitle:
@@ -242,7 +233,7 @@ const descriptionImages: Record<Locale, { src: string; alt: string }[]> = {
     ],
 };
 
-export default function ConciergePage({ locale }: { locale: Locale }) {
+export default function AristocraticBreakfastPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const descImages = descriptionImages[locale];
 
