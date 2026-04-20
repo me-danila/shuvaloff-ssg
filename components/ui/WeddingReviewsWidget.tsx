@@ -49,7 +49,7 @@ export default function WeddingReviewsWidget() {
         } else {
             const script = document.createElement("script");
             script.id = "myreviews-script";
-            script.src = "/myreviews-widget.js";
+            script.src = "https://myreviews.dev/widget/dist/index.js";
             script.defer = true;
             script.onload = tryInit;
             document.body.appendChild(script);
