@@ -1,19 +1,35 @@
+"use client";
+
 import Image from "@/components/ui/OptimizedImage";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type CardServiceBigProps = {
     title: string;
     imgUrl: string;
     slug?: string;
+    externalLink?: string;
 };
 
 export default function CardServiceBig({
     title,
     imgUrl,
     slug,
+    externalLink,
 }: CardServiceBigProps) {
+    const locale = useLocale();
+    const details = locale === "ru" ? "Подробнее" : "Details";
+
+    const href = slug
+        ? localizeHref(`/services/${slug}/`, locale)
+        : (externalLink ?? "#");
+    const isExternal = Boolean(externalLink);
+
     return (
         <a
-            href={`/services/${slug}/`}
+            href={href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
             className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
         >
             <Image
@@ -38,7 +54,7 @@ export default function CardServiceBig({
                     {title}
                 </p>
                 <p className="flex items-center gap-6 uppercase tracking-widest text-sm">
-                    Подробнее
+                    {details}
                     <span className="text-2xl mb-1">›</span>
                 </p>
             </div>

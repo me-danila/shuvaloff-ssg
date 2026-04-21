@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Locale } from "@/lib/i18n/routing";
 
 export type RoomImage = {
     src: string;
@@ -20,7 +21,7 @@ export type Room = {
     isHistorical: boolean;
 };
 
-export const AllRooms: Room[] = [
+const roomsRu: Room[] = [
     {
         title: "Стандарт",
         image: {
@@ -80,34 +81,34 @@ export const AllRooms: Room[] = [
         isHistorical: false,
     },
     {
-        title: "Делюкс",
+        title: "Супериор",
         image: {
             src: "https://academia.spb.ru/wp-content/uploads/2026/03/deluxe.png",
-            alt: "Делюкс",
+            alt: "Супериор",
         },
         gallery: [
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/d1-1.jpg",
-                alt: "Делюкс",
+                alt: "Супериор",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/d2-1.jpg",
-                alt: "Делюкс",
+                alt: "Супериор",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/d3-1.jpg",
-                alt: "Делюкс",
+                alt: "Супериор",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/d4.jpg",
-                alt: "Делюкс",
+                alt: "Супериор",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/d5.jpg",
-                alt: "Делюкс",
+                alt: "Супериор",
             },
         ],
-        slug: "deluxe",
+        slug: "superior",
         bookingUrl: "/booking/?be-room=262213",
         bed: "Одна большая кровать",
         area: "18-25 м²",
@@ -153,31 +154,31 @@ export const AllRooms: Room[] = [
         isHistorical: false,
     },
     {
-        title: "Джуниор сьют",
+        title: "Полулюкс",
         image: {
             src: "https://academia.spb.ru/wp-content/uploads/2026/03/junior.png",
-            alt: "Джуниор сьют",
+            alt: "Полулюкс",
         },
         gallery: [
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/j1.jpg",
-                alt: "Джуниор сьют",
+                alt: "Полулюкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/j2.jpg",
-                alt: "Джуниор сьют",
+                alt: "Полулюкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/j3.jpg",
-                alt: "Джуниор сьют",
+                alt: "Полулюкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/j4.jpg",
-                alt: "Джуниор сьют",
+                alt: "Полулюкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/j5.jpg",
-                alt: "Джуниор сьют",
+                alt: "Полулюкс",
             },
         ],
         slug: "junior-suite",
@@ -186,7 +187,7 @@ export const AllRooms: Room[] = [
         area: "30-40 м²",
         guests: "х 1-4",
         description:
-            "Двухкомнатный люкс с изолированной спальней, гостиной и просторной ванной комнатой",
+            "Полулюкс с изолированной спальней, гостиной и просторной ванной комнатой",
         fullDescription: (
             <>
                 Номер с&nbsp;отдельной спальней и&nbsp;уютной гостиной
@@ -221,31 +222,31 @@ export const AllRooms: Room[] = [
         isHistorical: false,
     },
     {
-        title: "Сьют",
+        title: "Двухкомнатный люкс",
         image: {
             src: "https://academia.spb.ru/wp-content/uploads/2026/03/suite.png",
-            alt: "Сьют",
+            alt: "Двухкомнатный люкс",
         },
         gallery: [
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/su1.jpg",
-                alt: "Сьют",
+                alt: "Двухкомнатный люкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/su2.jpg",
-                alt: "Сьют",
+                alt: "Двухкомнатный люкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/su3.jpg",
-                alt: "Сьют",
+                alt: "Двухкомнатный люкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/su4.jpg",
-                alt: "Сьют",
+                alt: "Двухкомнатный люкс",
             },
             {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/03/su5.jpg",
-                alt: "Сьют",
+                alt: "Двухкомнатный люкс",
             },
         ],
         slug: "suite",
@@ -445,3 +446,254 @@ export const AllRooms: Room[] = [
         isHistorical: true,
     },
 ];
+
+type RoomTranslation = {
+    title: string;
+    imageAlt: string;
+    galleryAlt: string;
+    bed: string;
+    guests: string;
+    description: string;
+    fullDescription: ReactNode;
+    amenities: string[];
+};
+
+const roomTranslationsEn: Record<string, RoomTranslation> = {
+    standard: {
+        title: "Standard",
+        imageAlt: "Standard room",
+        galleryAlt: "Standard room",
+        bed: "One double bed",
+        guests: "x 1-2",
+        description:
+            "A classic room with a double bed, orthopedic mattress, and a spacious bathroom with a shower",
+        fullDescription: (
+            <>
+                A compact and bright room in a classic style with elegant
+                details. Everything you need for a calm and comfortable stay is
+                already here: a bathroom with shower and heated floor, air
+                conditioning, a double bed, a wardrobe, and a small table with
+                armchairs for work or tea.
+            </>
+        ),
+        amenities: [
+            "Bottled water upon arrival",
+            "Double bed with an orthopedic mattress and upholstered headboard",
+            "Spacious bathroom with shower, heated floor, bathrobes, slippers, and premium hotel toiletries",
+            "Tea station and capsule coffee machine",
+            "Smart TV, Wi-Fi, and writing essentials",
+            "Split-system air conditioning and multi-level lighting",
+            "Blackout curtains and mosquito screens",
+            "Iron, ironing board, hair dryer, safe, and mini fridge",
+            "24/7 room service, digital concierge, and dedicated guest care manager",
+        ],
+    },
+    superior: {
+        title: "Superior",
+        imageAlt: "Superior room",
+        galleryAlt: "Superior room",
+        bed: "One double bed",
+        guests: "x 1-2",
+        description:
+            "An upgraded room with a double bed, lounge area, and a spacious bathroom with a shower",
+        fullDescription: (
+            <>
+                The interior combines neoclassical aesthetics with modern
+                comfort, balancing visual elegance and functionality. Decorative
+                details create a historical mood, while modern room equipment
+                keeps everyday comfort effortless.
+                <br />
+                <br />A large bed with orthopedic mattress, premium linens, a
+                bright bathroom with bath or shower, air conditioning, blackout
+                curtains, and a cozy tea corner make this room a great choice
+                for a relaxed city stay.
+            </>
+        ),
+        amenities: [
+            "Bottled water",
+            "Bed with orthopedic mattress and upholstered headboard",
+            "Comfortable table with armchairs",
+            "Some rooms feature mansard windows",
+            "Bathroom with shower, heated floor, bathrobes, slippers, and hotel toiletries",
+            "Soft seating, dining table, luggage stand, full-length mirror, wardrobe, and pouf",
+            "Blackout curtains and mosquito screens",
+            "Smart TV, Wi-Fi, writing essentials, and multi-level lighting",
+            "Individual split-system air conditioning",
+            "Tea station, capsule coffee machine, and drink set",
+            "Vanity zone",
+            "Iron, ironing board, hair dryer, safe, and mini fridge",
+            "24/7 room service, digital concierge, and dedicated guest care manager",
+        ],
+    },
+    "junior-suite": {
+        title: "Junior Suite",
+        imageAlt: "Junior suite",
+        galleryAlt: "Junior suite",
+        bed: "One double bed and sofa bed / armchair bed",
+        guests: "x 1-4",
+        description:
+            "A junior suite with a separate bedroom, living room, and spacious bathroom",
+        fullDescription: (
+            <>
+                A suite with a separate bedroom and a cozy living area with a
+                sofa bed or armchair bed. It is ideal for guests who value
+                privacy and for families who need more space.
+                <br />
+                <br />
+                The interior blends neoclassical style with modern comfort:
+                ergonomic layout, elegant furniture, and thoughtful amenities
+                for longer and more comfortable stays in the city.
+            </>
+        ),
+        amenities: [
+            "Bottled water",
+            "Spacious two-room layout: separate bedroom and living room",
+            "Comfortable table with armchairs",
+            "Sofa bed or armchair bed for extra guests",
+            "Some rooms feature mansard windows with soft natural light",
+            "Blackout curtains and mosquito screens",
+            "Bathroom with bath or shower, heated floor, bathrobes, slippers, and hotel toiletries",
+            "Writing desk, full-length mirror, designer furniture, and luggage stand",
+            "Smart TV, Wi-Fi, multi-level lighting, and individual split-system air conditioning",
+            "Ironing amenities, safe, hair dryer, and mini fridge",
+            "24/7 room service, digital concierge, and dedicated guest care manager",
+            "Tea station, capsule coffee machine, and drink set",
+            "Vanity zone",
+        ],
+    },
+    suite: {
+        title: "Suite",
+        imageAlt: "Suite",
+        galleryAlt: "Suite",
+        bed: "One double bed and one double bed or two separate beds",
+        guests: "x 1-4",
+        description:
+            "A three-room suite with two separate bedrooms, a living room, and a spacious bathroom",
+        fullDescription: (
+            <>
+                A practical yet elegant layout for guests who value privacy,
+                generous space, and attentive service. The suite includes two
+                bright bedrooms and a comfortable living room with a sofa and
+                tea table.
+                <br />
+                <br />
+                The interior combines neoclassical details with modern
+                conveniences, creating a calm and well-balanced atmosphere for
+                both short and extended stays.
+            </>
+        ),
+        amenities: [
+            "Bottled water",
+            "Spacious three-room layout: two separate bedrooms and a living room",
+            "Living room with sofa, armchair, coffee table, and tea table",
+            "Writing desk with amenities, full-length mirror, wardrobe, luggage stand, chairs, poufs, and hangers",
+            "Bathroom with bath or shower, heated floor, bathrobes, slippers, and hotel toiletries",
+            "Smart TV, Wi-Fi, individual split-system air conditioning, and multi-level lighting",
+            "Blackout curtains and mosquito screens",
+            "Iron, ironing board, hair dryer, safe, and mini fridge",
+            "24/7 room service, digital concierge, and dedicated guest care manager",
+            "Tea station, capsule coffee machine, and drink set",
+            "Vanity zone",
+        ],
+    },
+    dashkova: {
+        title: "Dashkova Residence",
+        imageAlt: "Dashkova Residence",
+        galleryAlt: "Dashkova Residence",
+        bed: "One double bed",
+        guests: "x 1-2",
+        description:
+            "An elegant historical suite dedicated to Elizaveta Vorontsova-Dashkova with a bright and refined interior",
+        fullDescription: (
+            <>
+                This suite is dedicated to Countess Elizaveta Andreevna
+                Vorontsova-Dashkova (born Shuvalova, 1845-1924). The design
+                reflects her strongest qualities: grace, intellect, inner
+                strength, and refined taste.
+                <br />
+                <br />
+                Historic character and modern comfort are carefully combined
+                here. Preserved architectural elements, antique objects, and
+                contemporary amenities create a rare stay experience in a true
+                St. Petersburg mansion.
+            </>
+        ),
+        amenities: [
+            "Bed with orthopedic mattress",
+            "Workspace with writing desk, full-length mirror, wardrobe, luggage stand, chairs, and poufs",
+            "Smart TV, Wi-Fi, individual split-system air conditioning, and multi-level lighting",
+            "Spacious bathroom with bath and shower, heated floor, bathrobes, slippers, and extended toiletries set",
+            "Dyson hair dryer",
+            "Coffee machine, tea station, and drink set",
+            "Bottled water",
+            "Iron and ironing board",
+            "Antique details: 19th-century French fireplace screen, Art Nouveau floor lamp, collectible porcelain figurines, English Regency side table, mother-of-pearl fan, and rosewood bedside tables",
+        ],
+    },
+    shuvalov: {
+        title: "Count Shuvalov Residence",
+        imageAlt: "Count Shuvalov Residence",
+        galleryAlt: "Count Shuvalov Residence",
+        bed: "One double bed and sofa bed",
+        guests: "x 1-4",
+        description:
+            "A spacious historical suite dedicated to Count Shuvalov in strict neoclassical style with genuine antiques",
+        fullDescription: (
+            <>
+                This spacious historical suite is dedicated to Count Shuvalov,
+                one of the most influential figures of his time. The interior
+                follows strict neoclassical lines and includes original antique
+                details.
+                <br />
+                <br />
+                Protected heritage elements and historic wall tones were
+                carefully restored. Together with modern amenities, they create
+                a distinctive atmosphere where history and comfort coexist
+                naturally.
+            </>
+        ),
+        amenities: [
+            "Bed with orthopedic mattress",
+            "Spacious lounge area with sofa, armchair, and coffee table",
+            "Workspace with writing desk, full-length mirror, wardrobe, luggage stand, chairs, and poufs",
+            "Smart TV, Wi-Fi, individual split-system air conditioning, and multi-level lighting",
+            "Spacious bathroom with bath and shower, heated floor, bathrobes, slippers, and extended toiletries set",
+            "Dyson hair dryer",
+            "Coffee machine, tea station, and drink set",
+            "Bottled water",
+            "Iron and ironing board",
+            "Antique details: 19th-century bronze floor lamp with lion mascarons, coffered ceiling, Emile Tabary painting, French 19th-century candlesticks, and Unterweissbach porcelain figurines",
+        ],
+    },
+};
+
+const translateRoomToEn = (room: Room): Room => {
+    const translation = roomTranslationsEn[room.slug];
+
+    if (!translation) {
+        return room;
+    }
+
+    return {
+        ...room,
+        title: translation.title,
+        image: {
+            ...room.image,
+            alt: translation.imageAlt,
+        },
+        gallery: room.gallery.map((image) => ({
+            ...image,
+            alt: translation.galleryAlt,
+        })) as [RoomImage, RoomImage, RoomImage, RoomImage, RoomImage],
+        bed: translation.bed,
+        guests: translation.guests,
+        description: translation.description,
+        fullDescription: translation.fullDescription,
+        amenities: translation.amenities,
+    };
+};
+
+export const AllRooms: Record<Locale, Room[]> = {
+    ru: roomsRu,
+    en: roomsRu.map(translateRoomToEn),
+};

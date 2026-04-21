@@ -8,6 +8,7 @@ import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -16,22 +17,23 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-    return AllRooms.map((room) => ({ slug: room.slug }));
+    return AllRooms.ru.map((room) => ({ slug: room.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const room = AllRooms.find((r) => r.slug === slug);
+    const room = AllRooms.ru.find((r) => r.slug === slug);
     if (!room) return {};
     return {
         title: `${room.title} — ACADEMIA Особняк Шувалова`,
         description: room.description,
+        alternates: getLocaleAlternates(`/rooms/${slug}/`, "ru"),
     };
 }
 
 export default async function RoomPage({ params }: Props) {
     const { slug } = await params;
-    const room = AllRooms.find((r) => r.slug === slug);
+    const room = AllRooms.ru.find((r) => r.slug === slug);
     if (!room) notFound();
 
     return (

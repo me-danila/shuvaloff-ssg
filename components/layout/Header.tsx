@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import Button from "@/components/ui/Button";
@@ -10,11 +10,19 @@ import { GENTLE_EASE } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SocialLinks from "@/components/ui/SocialLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import {
+    detectLocaleFromPath,
+    type Locale,
+    localizeHref,
+    normalizePath,
+    stripLocalePrefix,
+} from "@/lib/i18n/routing";
 
 type NavItem = {
     label: string;
     href: string;
     target?: "_blank";
+    forceReload?: boolean;
     lineBelow?: boolean;
     submenu?: { label: string; href: string; target?: "_blank" }[];
 };
@@ -25,62 +33,158 @@ type SubNavItem = {
     target?: "_blank";
 };
 
-const navItems: NavItem[] = [
-    {
-        label: "Отель",
-        href: "/",
-        submenu: [
-            { label: "Категории номеров", href: "/rooms/" },
-            { label: "Исторические люксы", href: "/rooms/historical/" },
-            { label: "Специальные предложения", href: "/sales/" },
-            { label: "Программа привилегий", href: "/rewards/" },
-            { label: "Консьерж-сервис", href: "/services/concierge/" },
-            { label: "Дополнительные услуги", href: "/services/" },
-        ],
-    },
-    {
-        label: "Бутик-ресторан",
-        href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
-        target: "_blank",
-    },
-    {
-        label: "Графские завтраки",
-        href: "https://shuvaloff.academia-rest.ru/grafskie-zavtraki?utm_source=hotels",
-        target: "_blank",
-    },
-    {
-        label: "СПА",
-        href: "https://academia-spa.ru/?utm_source=hotels",
-        target: "_blank",
-    },
-    {
-        label: "История особняка",
-        href: "/history/",
-    },
-    {
-        label: "Свадьба в особняке",
-        href: "/wedding/",
-        lineBelow: true,
-    },
-    // { label: "Бутик-магазин", href: "/shop" },
-    {
-        label: "Подарочные сертификаты",
-        href: "/?cert-open=42761",
-        target: "_blank",
-    },
-];
+type HeaderCopy = {
+    openMenuAria: string;
+    closeMenuAria: string;
+    menuLabel: string;
+    bookButton: string;
+    loginButton: string;
+    slogan: string;
+    logoAlt: string;
+};
 
-const subNavItems: SubNavItem[] = [
-    { label: "Категории номеров", href: "/rooms/" },
-    { label: "Исторические люксы", href: "/rooms/historical/" },
-    { label: "Специальные предложения", href: "/sales/" },
-    { label: "Программа привилегий", href: "/rewards/" },
-    {
-        label: "Ресторан",
-        href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
-        target: "_blank" as const,
+const copyByLocale: Record<Locale, HeaderCopy> = {
+    ru: {
+        openMenuAria: "Открыть меню",
+        closeMenuAria: "Закрыть меню",
+        menuLabel: "Меню",
+        bookButton: "Забронировать",
+        loginButton: "Войти",
+        slogan: "Отдых с графским размахом!",
+        logoAlt: "ACADEMIA Особняк Шувалова",
     },
-];
+    en: {
+        openMenuAria: "Open menu",
+        closeMenuAria: "Close menu",
+        menuLabel: "Menu",
+        bookButton: "Book now",
+        loginButton: "Sign in",
+        slogan: "Relaxation on a grand scale!",
+        logoAlt: "ACADEMIA Mansion Shuvaloff",
+    },
+};
+
+const navItemsByLocale: Record<Locale, NavItem[]> = {
+    ru: [
+        {
+            label: "Отель",
+            href: "/",
+            submenu: [
+                { label: "Категории номеров", href: "/rooms/" },
+                { label: "Исторические люксы", href: "/rooms/historical/" },
+                { label: "Специальные предложения", href: "/sales/" },
+                { label: "Программа привилегий", href: "/rewards/" },
+                { label: "Консьерж-сервис", href: "/services/concierge/" },
+                { label: "Дополнительные услуги", href: "/services/" },
+            ],
+        },
+        {
+            label: "Графский Петербург",
+            href: "/aristocratic-spb/",
+        },
+        {
+            label: "Бутик-ресторан",
+            href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+            target: "_blank",
+        },
+        {
+            label: "Графские завтраки",
+            href: "https://shuvaloff.academia-rest.ru/grafskie-zavtraki?utm_source=hotels",
+            target: "_blank",
+        },
+        {
+            label: "СПА",
+            href: "https://academia-spa.ru/?utm_source=hotels",
+            target: "_blank",
+        },
+        {
+            label: "История особняка",
+            href: "/history/",
+        },
+        {
+            label: "Свадьба в особняке",
+            href: "/wedding/",
+            lineBelow: true,
+        },
+        {
+            label: "Подарочные сертификаты",
+            href: "?cert-open=42761",
+            forceReload: true,
+        },
+    ],
+    en: [
+        {
+            label: "Hotel",
+            href: "/",
+            submenu: [
+                { label: "Room categories", href: "/rooms/" },
+                { label: "Historical suites", href: "/rooms/historical/" },
+                { label: "Special offers", href: "/sales/" },
+                { label: "Rewards program", href: "/rewards/" },
+                { label: "Concierge service", href: "/services/concierge/" },
+                { label: "Additional services", href: "/services/" },
+            ],
+        },
+        {
+            label: "Aristocratic St. Petersburg",
+            href: "/aristocratic-spb/",
+        },
+        {
+            label: "Boutique restaurant",
+            href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+            target: "_blank",
+        },
+        {
+            label: "Count's breakfasts",
+            href: "https://shuvaloff.academia-rest.ru/grafskie-zavtraki?utm_source=hotels",
+            target: "_blank",
+        },
+        {
+            label: "SPA",
+            href: "https://academia-spa.ru/?utm_source=hotels",
+            target: "_blank",
+        },
+        {
+            label: "Mansion history",
+            href: "/history/",
+        },
+        {
+            label: "Wedding at the mansion",
+            href: "/wedding/",
+            lineBelow: true,
+        },
+        {
+            label: "Gift certificates",
+            href: "?cert-open=42761",
+            forceReload: true,
+        },
+    ],
+};
+
+const subNavItemsByLocale: Record<Locale, SubNavItem[]> = {
+    ru: [
+        { label: "Категории номеров", href: "/rooms/" },
+        { label: "Исторические люксы", href: "/rooms/historical/" },
+        { label: "Специальные предложения", href: "/sales/" },
+        { label: "Программа привилегий", href: "/rewards/" },
+        {
+            label: "Ресторан",
+            href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+            target: "_blank",
+        },
+    ],
+    en: [
+        { label: "Room categories", href: "/rooms/" },
+        { label: "Historical suites", href: "/rooms/historical/" },
+        { label: "Special offers", href: "/sales/" },
+        { label: "Rewards program", href: "/rewards/" },
+        {
+            label: "Restaurant",
+            href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+            target: "_blank",
+        },
+    ],
+};
 
 const OVERLAY_TRANSITION = {
     duration: 0.32,
@@ -183,10 +287,19 @@ const mobileSubmenuVariants = {
 };
 
 export default function Header() {
-    const pathname = usePathname();
-    const isHome = pathname === "/";
-    const isWedding =
-        pathname === "/wedding/" || pathname === "/spasibo_wedding/";
+    const pathname = usePathname() || "/";
+    const searchParams = useSearchParams();
+    const locale = detectLocaleFromPath(pathname);
+    const copy = copyByLocale[locale];
+    const navItems = navItemsByLocale[locale];
+    const subNavItems = subNavItemsByLocale[locale];
+    const normalizedPath = normalizePath(stripLocalePrefix(pathname));
+    const isHome = normalizedPath === "/";
+    const isHeaderFixed =
+        normalizedPath === "/" ||
+        normalizedPath === "/wedding" ||
+        normalizedPath === "/spasibo_wedding" ||
+        normalizedPath === "/services/aristocratic-breakfast";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -219,19 +332,68 @@ export default function Header() {
 
     const isLight =
         !scrolled &&
-        pathname !== "/wedding/" &&
-        pathname !== "/spasibo_wedding/";
+        normalizedPath !== "/" &&
+        normalizedPath !== "/wedding" &&
+        normalizedPath !== "/spasibo_wedding" &&
+        normalizedPath !== "/services/aristocratic-breakfast";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,
     );
     const activeSubmenuItems =
         navItems.find((item) => item.label === activeSubmenu)?.submenu ?? [];
+    const ruHref = localizeHref(pathname, "ru");
+    const enHref = localizeHref(pathname, "en");
+    const buildMenuHref = (item: NavItem) => {
+        if (!item.href.startsWith("?")) {
+            return localizeHref(item.href, locale);
+        }
+
+        const mergedParams = new URLSearchParams(searchParams.toString());
+        const nextParams = new URLSearchParams(item.href.slice(1));
+
+        nextParams.forEach((value, key) => {
+            mergedParams.set(key, value);
+        });
+
+        const query = mergedParams.toString();
+        return query ? `${pathname}?${query}` : pathname;
+    };
+    const getItemRel = (item: NavItem) =>
+        item.target === "_blank" ? "noopener noreferrer" : undefined;
+    const renderNavItemLink = (item: NavItem, className: string) => {
+        const href = buildMenuHref(item);
+
+        if (item.forceReload) {
+            return (
+                <a
+                    href={href}
+                    target={item.target}
+                    rel={getItemRel(item)}
+                    onClick={closeMenu}
+                    className={className}
+                >
+                    {item.label}
+                </a>
+            );
+        }
+
+        return (
+            <Link
+                href={href}
+                target={item.target}
+                onClick={closeMenu}
+                className={className}
+            >
+                {item.label}
+            </Link>
+        );
+    };
 
     return (
         <>
             <div
-                className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"} ${isWedding ? "hidden" : ""}`}
+                className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"} ${isHeaderFixed ? "hidden" : ""}`}
             />
 
             <motion.header
@@ -252,7 +414,7 @@ export default function Header() {
                             className={`hidden xl:flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
                                 isLight ? "text-stone-700" : "text-white"
                             }`}
-                            aria-label="Открыть меню"
+                            aria-label={copy.openMenuAria}
                         >
                             <span className="block w-5 h-px bg-current" />
                             <span className="block w-5 h-px bg-current" />
@@ -262,22 +424,28 @@ export default function Header() {
                                 isLight ? "text-[#96908D]" : "text-white/70"
                             }`}
                         >
-                            <span
-                                className={`font-medium ${isLight ? "text-brand-blue" : "text-white"}`}
+                            <Link
+                                href={ruHref}
+                                className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
                             >
                                 RU
-                            </span>
-                            <span>ENG</span>
+                            </Link>
+                            <Link
+                                href={enHref}
+                                className={`font-medium ${locale === "en" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                            >
+                                ENG
+                            </Link>
                         </div>
                     </div>
 
                     <Link
-                        href="/"
+                        href={localizeHref("/", locale)}
                         className="absolute left-1/2 -translate-x-1/2"
                     >
                         <Image
                             src="/logo.svg"
-                            alt="ACADEMIA Особняк Шувалова"
+                            alt={copy.logoAlt}
                             width={150}
                             height={38}
                             className={`transition-all duration-300 ${
@@ -289,15 +457,15 @@ export default function Header() {
                     <div className="flex items-center gap-12 ml-auto">
                         <div className="hidden xl:block">
                             <Button
-                                href="/booking/"
+                                href={localizeHref("/booking/", locale)}
                                 variant="primary"
                                 size="xs"
                             >
-                                Забронировать
+                                {copy.bookButton}
                             </Button>
                         </div>
                         <a
-                            href="https://guest.travelline.ru/guest-account/41018/profile/login"
+                            href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`hidden xl:flex items-center gap-1.5 text-sm transition-colors duration-300 ${
@@ -317,7 +485,7 @@ export default function Header() {
                                 <circle cx="12" cy="8" r="4" />
                                 <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                             </svg>
-                            Войти
+                            {copy.loginButton}
                         </a>
                         <button
                             type="button"
@@ -325,7 +493,7 @@ export default function Header() {
                             className={`xl:hidden flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
                                 isLight ? "text-stone-700" : "text-white"
                             }`}
-                            aria-label="Открыть меню"
+                            aria-label={copy.openMenuAria}
                         >
                             <span className="block w-5 h-px bg-current" />
                             <span className="block w-5 h-px bg-current" />
@@ -339,7 +507,7 @@ export default function Header() {
                             isLight ? "text-[#96908D]" : "text-white/70"
                         }`}
                     >
-                        Отдых с графским размахом!
+                        {copy.slogan}
                     </p>
 
                     {/* Общая линия */}
@@ -354,7 +522,7 @@ export default function Header() {
                                 isLight ? "text-[#96908D]" : "text-white/70"
                             }`}
                         >
-                            Отдых с графским размахом!
+                            {copy.slogan}
                         </p>
                     </div>
                 </div>
@@ -365,7 +533,7 @@ export default function Header() {
                         {subNavItems.map(({ label, href, target }, index) => (
                             <Link
                                 key={href}
-                                href={href}
+                                href={localizeHref(href, locale)}
                                 target={target}
                                 rel={
                                     target === "_blank"
@@ -415,7 +583,7 @@ export default function Header() {
                             transition={OVERLAY_TRANSITION}
                             className="fixed inset-0 z-50 cursor-default bg-[rgba(14,18,24,0.24)] backdrop-blur-[3px]"
                             onClick={closeMenu}
-                            aria-label="Закрыть меню"
+                            aria-label={copy.closeMenuAria}
                         />
 
                         <motion.div
@@ -430,13 +598,13 @@ export default function Header() {
                             <div className="relative flex h-full flex-col">
                                 <div className="flex h-14 items-center justify-between border-b border-stone-100/80 px-6 shrink-0">
                                     <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
-                                        Меню
+                                        {copy.menuLabel}
                                     </span>
                                     <button
                                         type="button"
                                         onClick={closeMenu}
                                         className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-stone-700"
-                                        aria-label="Закрыть меню"
+                                        aria-label={copy.closeMenuAria}
                                     >
                                         &times;
                                     </button>
@@ -495,9 +663,10 @@ export default function Header() {
                                                                     key={
                                                                         sub.href
                                                                     }
-                                                                    href={
-                                                                        sub.href
-                                                                    }
+                                                                    href={localizeHref(
+                                                                        sub.href,
+                                                                        locale,
+                                                                    )}
                                                                     target={
                                                                         sub.target
                                                                     }
@@ -518,14 +687,10 @@ export default function Header() {
                                                 key={item.href}
                                                 variants={menuItemVariants}
                                             >
-                                                <Link
-                                                    href={item.href}
-                                                    target={item.target}
-                                                    onClick={closeMenu}
-                                                    className="block py-3 text-sm transition-colors hover:text-brand-blue"
-                                                >
-                                                    {item.label}
-                                                </Link>
+                                                {renderNavItemLink(
+                                                    item,
+                                                    "block py-3 text-sm transition-colors hover:text-brand-blue",
+                                                )}
                                                 {item.lineBelow && (
                                                     <div className="my-1 border-b border-stone-200" />
                                                 )}
@@ -545,7 +710,7 @@ export default function Header() {
                                     className="flex shrink-0 flex-col gap-3 border-t border-stone-100/80 px-6 py-5"
                                 >
                                     <a
-                                        href="https://guest.travelline.ru/guest-account/41018/profile/login"
+                                        href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center justify-center gap-2 text-sm text-stone-600"
@@ -563,14 +728,14 @@ export default function Header() {
                                             <circle cx="12" cy="8" r="4" />
                                             <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                                         </svg>
-                                        Войти
+                                        {copy.loginButton}
                                     </a>
                                     <Button
-                                        href="/booking/"
+                                        href={localizeHref("/booking/", locale)}
                                         variant="primary"
                                         size="xs"
                                     >
-                                        Забронировать
+                                        {copy.bookButton}
                                     </Button>
                                     <a
                                         href="tel:+78125659650"
@@ -611,13 +776,13 @@ export default function Header() {
                                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_24%,rgba(150,144,141,0.06)_100%)]" />
                                 <div className="relative flex h-16 items-center justify-between px-6 shrink-0">
                                     <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
-                                        Меню
+                                        {copy.menuLabel}
                                     </span>
                                     <button
                                         type="button"
                                         onClick={closeMenu}
                                         className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-stone-700"
-                                        aria-label="Закрыть меню"
+                                        aria-label={copy.closeMenuAria}
                                     >
                                         &times;
                                     </button>
@@ -662,14 +827,10 @@ export default function Header() {
                                                 key={item.href}
                                                 variants={menuItemVariants}
                                             >
-                                                <Link
-                                                    href={item.href}
-                                                    target={item.target}
-                                                    onClick={closeMenu}
-                                                    className="block py-3 text-sm transition-colors hover:text-brand-blue"
-                                                >
-                                                    {item.label}
-                                                </Link>
+                                                {renderNavItemLink(
+                                                    item,
+                                                    "block py-3 text-sm transition-colors hover:text-brand-blue",
+                                                )}
                                                 {item.lineBelow && (
                                                     <div className="border-b border-stone-200" />
                                                 )}
@@ -690,7 +851,7 @@ export default function Header() {
                                     className="relative mt-auto flex flex-col gap-3 px-6 pb-6"
                                 >
                                     <a
-                                        href="https://guest.travelline.ru/guest-account/41018/profile/login"
+                                        href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center justify-center gap-2 text-sm text-stone-600"
@@ -708,10 +869,13 @@ export default function Header() {
                                             <circle cx="12" cy="8" r="4" />
                                             <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                                         </svg>
-                                        Войти
+                                        {copy.loginButton}
                                     </a>
-                                    <Button href="/booking/" variant="primary">
-                                        Забронировать
+                                    <Button
+                                        href={localizeHref("/booking/", locale)}
+                                        variant="primary"
+                                    >
+                                        {copy.bookButton}
                                     </Button>
                                     <a
                                         href="tel:+78125659650"
@@ -777,7 +941,10 @@ export default function Header() {
                                                     }
                                                 >
                                                     <Link
-                                                        href={sub.href}
+                                                        href={localizeHref(
+                                                            sub.href,
+                                                            locale,
+                                                        )}
                                                         target={sub.target}
                                                         onClick={closeMenu}
                                                         className="block py-2 text-sm transition-colors hover:text-brand-blue"

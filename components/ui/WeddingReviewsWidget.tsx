@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 declare global {
     interface Window {
@@ -17,6 +18,7 @@ declare global {
 }
 
 export default function WeddingReviewsWidget() {
+    const locale = useLocale();
     const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
@@ -35,7 +37,7 @@ export default function WeddingReviewsWidget() {
                 uuid: "80d132eb-c2a0-45cf-936e-cb27fd9a1c30",
                 name: "g17255827",
                 additionalFrame: "none",
-                lang: "ru",
+                lang: locale,
                 widgetId: "1",
             }).init();
         };
@@ -47,7 +49,7 @@ export default function WeddingReviewsWidget() {
         } else {
             const script = document.createElement("script");
             script.id = "myreviews-script";
-            script.src = "/myreviews-widget.js";
+            script.src = "https://myreviews.dev/widget/dist/index.js";
             script.defer = true;
             script.onload = tryInit;
             document.body.appendChild(script);
@@ -56,12 +58,16 @@ export default function WeddingReviewsWidget() {
         return () => {
             if (timerId.current) clearTimeout(timerId.current);
         };
-    }, []);
+    }, [locale]);
 
     return (
         <div className="flex justify-center mt-5">
             <iframe
-                title="Виджет с отзывами «Карусель» от MyReviews"
+                title={
+                    locale === "ru"
+                        ? "Виджет с отзывами «Карусель» от MyReviews"
+                        : "MyReviews carousel widget"
+                }
                 id="myReviews__block-widget"
                 style={{ width: "100%", maxWidth: 1170, border: "none" }}
             />

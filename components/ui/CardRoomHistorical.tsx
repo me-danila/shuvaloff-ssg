@@ -1,6 +1,10 @@
+"use client";
+
 import Button from "@/components/ui/Button";
 import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import Image from "@/components/ui/OptimizedImage";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type CardRoomHistoricalProps = {
     title: string;
@@ -23,11 +27,15 @@ export default function CardRoomHistorical({
     guests,
     bookingUrl,
 }: CardRoomHistoricalProps) {
+    const locale = useLocale();
+    const detailsLabel = locale === "ru" ? "ПОДРОБНЕЕ" : "DETAILS";
+    const chooseLabel = locale === "ru" ? "ВЫБРАТЬ" : "CHOOSE";
+
     return (
         <div className="flex flex-col gap-4 flex-1 xl:gap-6">
             {/* Фото с текстом поверх */}
             <a
-                href={`/rooms/historical/${slug}/`}
+                href={localizeHref(`/rooms/historical/${slug}/`, locale)}
                 className="relative rounded-md overflow-hidden aspect-4/5 md:aspect-square md:flex-1"
             >
                 <Image
@@ -78,12 +86,12 @@ export default function CardRoomHistorical({
             {/* Кнопки */}
             <div className="flex items-center gap-3">
                 <Button
-                    href={`/rooms/historical/${slug}/`}
+                    href={localizeHref(`/rooms/historical/${slug}/`, locale)}
                     variant="primary"
                     size="sm"
                     className="self-start"
                 >
-                    ПОДРОБНЕЕ
+                    {detailsLabel}
                 </Button>
                 <Button
                     href={bookingUrl}
@@ -91,7 +99,7 @@ export default function CardRoomHistorical({
                     size="sm"
                     className="self-start"
                 >
-                    ВЫБРАТЬ
+                    {chooseLabel}
                 </Button>
             </div>
         </div>

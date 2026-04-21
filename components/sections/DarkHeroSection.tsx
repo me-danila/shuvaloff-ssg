@@ -1,7 +1,13 @@
+"use client";
+
+import Link from "next/link";
 import type React from "react";
+import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type ContentBlock = {
     title: React.ReactNode;
@@ -15,6 +21,7 @@ type DarkHeroSectionProps = {
     size?: "xl" | "2xl" | "3xl";
     mobileImageGradient?: boolean;
     imageGradient?: boolean;
+    buttons?: { orderHref: string; detailsHref: string };
 };
 
 const sizeClass: Record<NonNullable<DarkHeroSectionProps["size"]>, string> = {
@@ -30,7 +37,11 @@ export default function DarkHeroSection({
     size = "xl",
     mobileImageGradient = true,
     imageGradient = false,
+    buttons,
 }: DarkHeroSectionProps) {
+    const locale = useLocale();
+    const orderLabel = locale === "ru" ? "Заказать" : "Order";
+    const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
     const mobileImage = imageMobile ?? image;
 
     return (
@@ -108,6 +119,27 @@ export default function DarkHeroSection({
                         </div>
                     </div>
                 ))}
+
+                {buttons && (
+                    <div className="flex items-center gap-8">
+                        <Button
+                            href={localizeHref(`${buttons.orderHref}`, locale)}
+                            variant="primary"
+                        >
+                            {orderLabel}
+                        </Button>
+                        <Link
+                            href={localizeHref(
+                                `${buttons.detailsHref}`,
+                                locale,
+                            )}
+                            className="flex items-center gap-3 uppercase tracking-widest text-sm"
+                        >
+                            {detailsLabel}
+                            <span className="text-2xl mb-1">&rsaquo;</span>
+                        </Link>
+                    </div>
+                )}
             </div>
         </section>
     );

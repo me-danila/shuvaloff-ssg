@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "@/components/ui/OptimizedImage";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type DividerHistoryStyle = 1 | 2 | 3;
 
@@ -32,12 +35,13 @@ const DIVIDER_HISTORY_MAP: Record<
 };
 
 export default function DividerHistory({ style }: DividerHistoryProps) {
+    const locale = useLocale();
     const divider = DIVIDER_HISTORY_MAP[style];
 
     return (
         <Image
             src={divider.src}
-            alt="Разделитель"
+            alt={locale === "ru" ? "Разделитель" : "Divider"}
             width={divider.width}
             height={divider.height}
             loading="lazy"

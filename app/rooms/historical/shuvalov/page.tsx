@@ -7,11 +7,13 @@ import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Резиденция графа Шувалова — ACADEMIA Особняк Шувалова",
     description:
         "Исторический люкс «Резиденция графа Шувалова» с антикварными деталями и атмосферой аристократического Петербурга",
+    alternates: getLocaleAlternates("/rooms/historical/shuvalov/", "ru"),
 };
 
 const descriptionImages = [

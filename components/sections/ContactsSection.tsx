@@ -9,6 +9,8 @@ import {
 import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
 import Image from "@/components/ui/OptimizedImage";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 type YMaps = {
     ready: (fn: () => void) => void;
@@ -34,27 +36,59 @@ type ContactLink = {
     rel?: string;
 };
 
-const CONTACTS: ContactLink[] = [
-    {
-        href: "tel:+78125659650",
-        label: "+7 (812) 565-96-50",
-        Icon: PhoneIcon,
-    },
-    {
-        href: "mailto:reservation@academia.spb.ru",
-        label: "reservation@academia.spb.ru",
-        Icon: EnvelopeIcon,
-    },
-    {
-        href: "https://yandex.com/maps/org/academia_mansion_shuvaloff/71619247470/",
-        label: "Санкт-Петербург, ул.\u00a0Моховая, д.\u00a010",
-        Icon: MapPinIcon,
-        target: "_blank",
-        rel: "noopener referrer",
-    },
-];
+const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
+    ru: [
+        {
+            href: "tel:+78125659650",
+            label: "+7 (812) 565-96-50",
+            Icon: PhoneIcon,
+        },
+        {
+            href: "mailto:reservation@academia.spb.ru",
+            label: "reservation@academia.spb.ru",
+            Icon: EnvelopeIcon,
+        },
+        {
+            href: "https://yandex.com/maps/org/academia_mansion_shuvaloff/71619247470/",
+            label: "Санкт-Петербург, ул.\u00a0Моховая, д.\u00a010",
+            Icon: MapPinIcon,
+            target: "_blank",
+            rel: "noopener referrer",
+        },
+    ],
+    en: [
+        {
+            href: "tel:+78125659650",
+            label: "+7 (812) 565-96-50",
+            Icon: PhoneIcon,
+        },
+        {
+            href: "mailto:reservation@academia.spb.ru",
+            label: "reservation@academia.spb.ru",
+            Icon: EnvelopeIcon,
+        },
+        {
+            href: "https://yandex.com/maps/org/academia_mansion_shuvaloff/71619247470/",
+            label: "10 Mokhovaya St, Saint Petersburg",
+            Icon: MapPinIcon,
+            target: "_blank",
+            rel: "noopener referrer",
+        },
+    ],
+};
 
 export default function ContactsSection() {
+    const locale = useLocale();
+    const contacts = CONTACTS[locale];
+    const contactsTitle = locale === "ru" ? "КОНТАКТЫ" : "CONTACTS";
+    const bookingDepartment =
+        locale === "ru" ? "Отдел бронирования" : "Booking department";
+    const bookLabel = locale === "ru" ? "Забронировать" : "Book now";
+    const mapAlt =
+        locale === "ru"
+            ? "Контакты ACADEMIA Особняк Шувалова"
+            : "ACADEMIA Mansion Shuvaloff contacts";
+
     const mapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -89,12 +123,19 @@ export default function ContactsSection() {
                             [59.945058, 30.345467],
                             {
                                 balloonContentHeader:
-                                    "ACADEMIA Особняк Шувалова",
+                                    locale === "ru"
+                                        ? "ACADEMIA Особняк Шувалова"
+                                        : "ACADEMIA Mansion Shuvaloff",
                                 balloonContentBody:
-                                    "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>" +
+                                    (locale === "ru"
+                                        ? "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>"
+                                        : "10 Mokhovaya St, Saint Petersburg<br>Open 24/7<br><br>") +
                                     "+7 (812) 565-96-50<br>" +
                                     "reservation@academia.spb.ru",
-                                hintContent: "ACADEMIA Особняк Шувалова",
+                                hintContent:
+                                    locale === "ru"
+                                        ? "ACADEMIA Особняк Шувалова"
+                                        : "ACADEMIA Mansion Shuvaloff",
                             },
                             {
                                 iconLayout: "default#image",
@@ -113,8 +154,7 @@ export default function ContactsSection() {
                     initMap();
                 } else {
                     const script = document.createElement("script");
-                    script.src =
-                        "https://api-maps.yandex.ru/2.1/?apikey=8d5dabf6-ffc8-46c7-89e6-ad8f95f78257&load=package.full&lang=ru-RU";
+                    script.src = `https://api-maps.yandex.ru/2.1/?apikey=8d5dabf6-ffc8-46c7-89e6-ad8f95f78257&load=package.full&lang=${locale === "ru" ? "ru-RU" : "en-US"}`;
                     script.onload = initMap;
                     document.head.appendChild(script);
                 }
@@ -127,15 +167,15 @@ export default function ContactsSection() {
             observer.disconnect();
             window._tlMap = false;
         };
-    }, []);
+    }, [locale]);
 
     return (
         <section className="flex flex-col gap-4 xl:flex-row xl:mx-auto xl:max-w-6xl xl:flex xl:gap-16 xl:items-center">
             {/* Левая колонка — контакты */}
             <div className="flex flex-col gap-2 mx-6 my-4 xl:mx-0 xl:my-8 xl:min-w-84">
-                <h2>КОНТАКТЫ</h2>
-                <p className="my-2 uppercase">Отдел бронирования</p>
-                {CONTACTS.map(
+                <h2>{contactsTitle}</h2>
+                <p className="my-2 uppercase">{bookingDepartment}</p>
+                {contacts.map(
                     ({ href, label, Icon: ContactIcon, target, rel }) => (
                         <a
                             key={href}
@@ -154,8 +194,12 @@ export default function ContactsSection() {
                         </a>
                     ),
                 )}
-                <Button href="/booking/" variant="primary" className="xl:mt-4">
-                    Забронировать
+                <Button
+                    href={localizeHref("/booking/", locale)}
+                    variant="primary"
+                    className="xl:mt-4"
+                >
+                    {bookLabel}
                 </Button>
             </div>
 
@@ -167,7 +211,7 @@ export default function ContactsSection() {
                 <style>{`.ymaps-2-1-79-ground-pane { filter: grayscale(100%) contrast(1.2) sepia(8%); }`}</style>
                 <Image
                     src="https://academia.spb.ru/wp-content/uploads/2026/03/map-new.png"
-                    alt="Контакты ACADEMIA Особняк Шувалова"
+                    alt={mapAlt}
                     fill
                     sizes="(max-width: 1200px) 100vw, 740px"
                     loading="lazy"

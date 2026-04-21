@@ -1,28 +1,38 @@
 import type React from "react";
+import Button from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
 
 type HeroHistoricalRoomsProps = {
     title: React.ReactNode;
-    subtitle: React.ReactNode;
+    additionalTitle?: React.ReactNode;
+    subtitle?: React.ReactNode;
     image: { src: string; alt: string };
+    button?: { label: string; href: string };
 };
 
 export default function HeroHistoricalRooms({
     title,
+    additionalTitle,
     subtitle,
     image,
+    button,
 }: HeroHistoricalRoomsProps) {
     return (
         <section>
             {/* Заголовок */}
             <div className="m-6 xl:text-center xl:my-6">
                 <h1>{title}</h1>
+                {additionalTitle && (
+                    <p className="xl:text-center font-alistair text-2xl/7 xl:text-[40px] xl:mx-auto xl:mt-2 xl:mb-10">
+                        {additionalTitle}
+                    </p>
+                )}
             </div>
 
             {/* Фото с подписью */}
-            <div className="relative mx-6 xl:mx-0 rounded-md overflow-hidden aspect-3/4 xl:aspect-16/7">
+            <div className="relative mx-6 xl:mx-0 rounded-md overflow-hidden aspect-3/4 xl:aspect-14/6 flex items-end p-6 justify-center">
                 <FadeIn
                     duration={0.9}
                     className="absolute inset-0 h-full w-full"
@@ -49,9 +59,18 @@ export default function HeroHistoricalRooms({
                 />
 
                 {/* Subtitle */}
-                <p className="absolute bottom-8 inset-x-0 text-center font-alistair text-2xl xl:text-4xl text-white z-10">
-                    {subtitle}
-                </p>
+                {subtitle && (
+                    <p className="absolute bottom-8 inset-x-0 text-center font-alistair text-2xl xl:text-4xl text-white z-10">
+                        {subtitle}
+                    </p>
+                )}
+
+                {/* Button */}
+                {button && (
+                    <Button href={button.href} variant="primary">
+                        {button.label}
+                    </Button>
+                )}
             </div>
         </section>
     );

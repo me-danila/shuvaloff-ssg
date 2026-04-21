@@ -1,52 +1,123 @@
-import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+"use client";
 
-const tiers = [
-    {
-        label: "BASE",
-        discount: "10%",
-        badgeBg: "#B3B3B3",
-        nights: "от 3 ночей",
-        perks: ["Поздний выезд*", "Скидка при бронировании нескольких номеров"],
-        note: "Станьте участником программы лояльности уже после первого визита!",
-    },
-    {
-        label: "SILVER",
-        discount: "15%",
-        badgeBg: "#909090",
-        nights: "от 8 ночей",
-        perks: [
-            "Поздний выезд*",
-            "Скидка 15% на все виды услуг в ACADEMIA SPA",
-            "Скидка при бронировании нескольких номеров",
-        ],
-    },
-    {
-        label: "GOLD",
-        discount: "20%",
-        badgeBg: "#94754E",
-        nights: "от 14 ночей",
-        perks: [
-            "Поздний выезд*",
-            "Фирменный трансфер в одну сторону*",
-            "Скидка 15% на все виды услуг в ACADEMIA SPA",
-            "Скидка при бронировании нескольких номеров",
-        ],
-    },
-    {
-        label: "DIAMOND",
-        discount: "25%",
-        badgeBg: "#597A87",
-        nights: "от 28 ночей",
-        perks: [
-            "Ранний заезд и поздний выезд*",
-            "Фирменный трансфер в одну сторону*",
-            "Скидка 20% на все виды услуг в ACADEMIA SPA",
-            "Скидка при бронировании нескольких номеров",
-        ],
-    },
-];
+import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import type { Locale } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
+
+type Tier = {
+    label: string;
+    discount: string;
+    badgeBg: string;
+    nights: string;
+    perks: string[];
+    note?: string;
+};
+
+const tiersByLocale: Record<Locale, Tier[]> = {
+    ru: [
+        {
+            label: "BASE",
+            discount: "10%",
+            badgeBg: "#B3B3B3",
+            nights: "от 3 ночей",
+            perks: [
+                "Поздний выезд*",
+                "Скидка при бронировании нескольких номеров",
+            ],
+            note: "Станьте участником программы лояльности уже после первого визита!",
+        },
+        {
+            label: "SILVER",
+            discount: "15%",
+            badgeBg: "#909090",
+            nights: "от 8 ночей",
+            perks: [
+                "Поздний выезд*",
+                "Скидка 15% на все виды услуг в ACADEMIA SPA",
+                "Скидка при бронировании нескольких номеров",
+            ],
+        },
+        {
+            label: "GOLD",
+            discount: "20%",
+            badgeBg: "#94754E",
+            nights: "от 14 ночей",
+            perks: [
+                "Поздний выезд*",
+                "Фирменный трансфер в одну сторону*",
+                "Скидка 15% на все виды услуг в ACADEMIA SPA",
+                "Скидка при бронировании нескольких номеров",
+            ],
+        },
+        {
+            label: "DIAMOND",
+            discount: "25%",
+            badgeBg: "#597A87",
+            nights: "от 28 ночей",
+            perks: [
+                "Ранний заезд и поздний выезд*",
+                "Фирменный трансфер в одну сторону*",
+                "Скидка 20% на все виды услуг в ACADEMIA SPA",
+                "Скидка при бронировании нескольких номеров",
+            ],
+        },
+    ],
+    en: [
+        {
+            label: "BASE",
+            discount: "10%",
+            badgeBg: "#B3B3B3",
+            nights: "from 3 nights",
+            perks: ["Late check-out*", "Discount for booking multiple rooms"],
+            note: "Join the loyalty program right after your first stay!",
+        },
+        {
+            label: "SILVER",
+            discount: "15%",
+            badgeBg: "#909090",
+            nights: "from 8 nights",
+            perks: [
+                "Late check-out*",
+                "15% off all ACADEMIA SPA services",
+                "Discount for booking multiple rooms",
+            ],
+        },
+        {
+            label: "GOLD",
+            discount: "20%",
+            badgeBg: "#94754E",
+            nights: "from 14 nights",
+            perks: [
+                "Late check-out*",
+                "One-way signature transfer*",
+                "15% off all ACADEMIA SPA services",
+                "Discount for booking multiple rooms",
+            ],
+        },
+        {
+            label: "DIAMOND",
+            discount: "25%",
+            badgeBg: "#597A87",
+            nights: "from 28 nights",
+            perks: [
+                "Early check-in and late check-out*",
+                "One-way signature transfer*",
+                "20% off all ACADEMIA SPA services",
+                "Discount for booking multiple rooms",
+            ],
+        },
+    ],
+} as const;
 
 export default function AcademiaRewards() {
+    const locale = useLocale();
+    const tiers = tiersByLocale[locale];
+    const discountLabel = locale === "ru" ? "Скидка" : "Discount";
+    const note =
+        locale === "ru"
+            ? "* данные привилегии предоставляются при наличии возможности"
+            : "* these privileges are subject to availability";
+
     return (
         <section className="flex flex-col gap-4 xl:gap-8 px-6 xl:w-full xl:max-w-6xl xl:mx-auto">
             {/* Карточки */}
@@ -83,7 +154,7 @@ export default function AcademiaRewards() {
                         className="flex flex-col gap-2"
                     >
                         <p className="uppercase font-baskerville text-lg">
-                            {tier.label}: Скидка {tier.discount}
+                            {tier.label}: {discountLabel} {tier.discount}
                         </p>
                         <span className="font-alistair self-start text-3xl bg-brand-blue-100 rounded px-3 py-1 mb-1">
                             {tier.nights}
@@ -106,7 +177,7 @@ export default function AcademiaRewards() {
                 ))}
 
                 <p className="xl:col-span-4 text-warm-gray border-t border-stone-200 pt-3">
-                    * данные привилегии предоставляются при наличии возможности
+                    {note}
                 </p>
             </StaggerContainer>
         </section>

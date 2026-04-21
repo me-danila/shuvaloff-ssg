@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Modal } from "@/components/ui/Modal";
+import { localizeHref } from "@/lib/i18n/routing";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 interface FormState {
     name: string;
@@ -39,10 +41,45 @@ const fillVariants: Record<ButtonVariant, string> = {
 };
 
 export default function WeddingFormModal({
-    triggerLabel = "Записаться на экскурсию",
+    triggerLabel,
     variant = "light",
     triggerClassName,
 }: Props) {
+    const locale = useLocale();
+    const defaultTrigger =
+        locale === "ru" ? "Записаться на экскурсию" : "Book a tour";
+    const title = triggerLabel ?? defaultTrigger;
+
+    const copy = {
+        successTitle:
+            locale === "ru" ? "Заявка отправлена" : "Request submitted",
+        successText:
+            locale === "ru"
+                ? "Мы свяжемся с вами в ближайшее время"
+                : "We will contact you shortly",
+        subtitle:
+            locale === "ru"
+                ? "Заполните контактные данные для связи"
+                : "Fill in your contact details",
+        namePlaceholder: locale === "ru" ? "Ваше имя" : "Your name",
+        emailPlaceholder: locale === "ru" ? "Ваш e-mail" : "Your e-mail",
+        tgPlaceholder:
+            locale === "ru" ? "Ваш ник в Telegram" : "Your Telegram username",
+        consentText:
+            locale === "ru"
+                ? "Выражаю согласие на обработку персональных данных в соответствии с"
+                : "I consent to the processing of personal data in accordance with",
+        consentLink:
+            locale === "ru"
+                ? "Политикой по обработке персональных данных"
+                : "Personal data policy",
+        loadingLabel: locale === "ru" ? "Отправка..." : "Sending...",
+        errorLabel:
+            locale === "ru"
+                ? "Что-то пошло не так. Попробуйте ещё раз."
+                : "Something went wrong. Please try again.",
+    } as const;
+
     const [open, setOpen] = useState(false);
     const [form, setForm] = useState<FormState>(INITIAL);
     const [status, setStatus] = useState<
@@ -65,12 +102,45 @@ export default function WeddingFormModal({
         setForm(INITIAL);
     };
 
+    //    const handleSubmit = async (e: React.FormEvent) => {
+    //        e.preventDefault();
+    //        setStatus("loading");
+    //        await new Promise((r) => setTimeout(r, 800));
+    //        setStatus("success");
+    //    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("loading");
-        // @TODO: подключить отправку
-        await new Promise((r) => setTimeout(r, 800));
-        setStatus("success");
+
+        try {
+            const res = await fetch(
+                "https://sh-wedding-form-handler.plain-cake-fcd7.workers.dev",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-Form-Secret": "cc4d848a1a202d50d74966102e3657db",
+                    },
+                    body: JSON.stringify({
+                        service: title,
+                        name: form.name,
+                        phone: form.phone,
+                        email: form.email,
+                        telegram: form.telegram,
+                    }),
+                },
+            );
+
+            const json = await res.json();
+            if (json.ok) {
+                setStatus("success");
+            } else {
+                setStatus("error");
+            }
+        } catch {
+            setStatus("error");
+        }
     };
 
     return (
@@ -80,21 +150,23 @@ export default function WeddingFormModal({
                 onClick={() => setOpen(true)}
                 className={`border p-4 rounded-md font-baskerville uppercase duration-200 cursor-pointer ${triggerClassName} ${fillVariants[variant]}`}
             >
-                {triggerLabel}
+                {title}
             </button>
 
             <Modal open={open} onClose={handleClose} maxWidth="2xl">
                 <div className="px-8 py-12">
                     {status === "success" ? (
                         <div className="flex flex-col items-center gap-4 py-12 text-center">
-                            <h3 className="font-baskerville uppercase text-xl xl:text-2xl">Заявка отправлена</h3>
-                            <p>Мы свяжемся с вами в ближайшее время</p>
+                            <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
+                                {copy.successTitle}
+                            </h3>
+                            <p>{copy.successText}</p>
                         </div>
                     ) : (
                         <>
-                            <h2 className="text-center">{triggerLabel}</h2>
+                            <h2 className="text-center">{title}</h2>
                             <p className="text-sm text-neutral-400 text-center mt-1 mb-6 xl:mb-10">
-                                Заполните контактные данные для связи
+                                {copy.subtitle}
                             </p>
 
                             <form
@@ -103,7 +175,7 @@ export default function WeddingFormModal({
                             >
                                 <input
                                     type="text"
-                                    placeholder="Ваше имя"
+                                    placeholder={copy.namePlaceholder}
                                     required
                                     value={form.name}
                                     onChange={set("name")}
@@ -119,14 +191,14 @@ export default function WeddingFormModal({
                                 />
                                 <input
                                     type="email"
-                                    placeholder="Ваш e-mail"
+                                    placeholder={copy.emailPlaceholder}
                                     value={form.email}
                                     onChange={set("email")}
                                     className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Ваш ник в Telegram"
+                                    placeholder={copy.tgPlaceholder}
                                     value={form.telegram}
                                     onChange={set("telegram")}
                                     className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
@@ -141,19 +213,20 @@ export default function WeddingFormModal({
                                         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-neutral-900"
                                     />
                                     <span className="text-xs text-neutral-500 leading-relaxed text-left">
-                                        Выражаю согласие на обработку
-                                        персональных данных в соответствии с{" "}
+                                        {copy.consentText}{" "}
                                         <Link
-                                            href="/policy/"
+                                            href={localizeHref(
+                                                "/policy/",
+                                                locale,
+                                            )}
                                             target="_blank"
                                             className="text-neutral-900 underline underline-offset-2"
                                         >
-                                            Политикой по обработке персональных
-                                            данных
+                                            {copy.consentLink}
                                         </Link>
                                     </span>
                                 </label>
-                                <input type="hidden" value={triggerLabel} />
+                                <input type="hidden" value={title} />
 
                                 <button
                                     type="submit"
@@ -161,13 +234,13 @@ export default function WeddingFormModal({
                                     className="mt-2 w-full bg-neutral-900 px-8 py-4 font-baskerville uppercase text-white hover:bg-neutral-800 disabled:opacity-50 transition-colors duration-200 rounded-md cursor-pointer"
                                 >
                                     {status === "loading"
-                                        ? "Отправка..."
-                                        : `${triggerLabel}`}
+                                        ? copy.loadingLabel
+                                        : title}
                                 </button>
 
                                 {status === "error" && (
                                     <p className="text-center text-xs text-red-500">
-                                        Что-то пошло не так. Попробуйте ещё раз.
+                                        {copy.errorLabel}
                                     </p>
                                 )}
                             </form>

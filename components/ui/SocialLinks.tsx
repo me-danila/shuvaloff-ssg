@@ -1,19 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import Image from "@/components/ui/OptimizedImage";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 const SOCIAL_LINKS = [
     {
-        label: "Telegram",
+        labels: { ru: "Telegram", en: "Telegram" },
         href: "https://t.me/academia_land_hotels",
         icon: "/icons/tg-icon.svg",
     },
     {
-        label: "ВКонтакте",
+        labels: { ru: "ВКонтакте", en: "VK" },
         href: "https://vk.com/academia.hotels",
         icon: "/icons/vk-icon.svg",
     },
     {
-        label: "Дзен",
+        labels: { ru: "Дзен", en: "Zen" },
         href: "https://dzen.ru/id/68d159b4a453c61d666c47fb",
         icon: "/icons/zen-icon.svg",
     },
@@ -30,20 +33,22 @@ export default function SocialLinks({
     iconSize = 28,
     className = "",
 }: SocialLinksProps) {
+    const locale = useLocale();
+
     return (
         <div className={`flex items-center gap-4 ${className}`}>
-            {SOCIAL_LINKS.map(({ label, href, icon }) => (
+            {SOCIAL_LINKS.map(({ labels, href, icon }) => (
                 <Link
-                    key={label}
+                    key={href}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={label}
+                    aria-label={labels[locale]}
                     className="opacity-60 hover:opacity-100 transition-opacity"
                 >
                     <Image
                         src={icon}
-                        alt={label}
+                        alt={labels[locale]}
                         width={iconSize}
                         height={iconSize}
                         className={`brightness-0 ${invert ? "invert" : ""}`}
