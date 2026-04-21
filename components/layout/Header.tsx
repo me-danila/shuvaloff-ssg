@@ -111,6 +111,11 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             href: "?cert-open=42761",
             forceReload: true,
         },
+        {
+            label: "Абонемент на проживание",
+            href: "/subscriptions/",
+            forceReload: true,
+        },
     ],
     en: [
         {
@@ -156,6 +161,11 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Gift certificates",
             href: "?cert-open=42761",
+            forceReload: true,
+        },
+        {
+            label: "Accommodation subscription",
+            href: "/subscriptions/",
             forceReload: true,
         },
     ],

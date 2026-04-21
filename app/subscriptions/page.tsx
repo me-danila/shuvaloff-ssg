@@ -1,20 +1,14 @@
 import type { Metadata } from "next";
+import SubscriptionsPage from "@/components/pages/SubscriptionsPage";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
-    title: "Абонементы — ACADEMIA Особняк Шувалова",
-    description: "Абоненты на проживание для гостей отелей сети ACADEMIA",
+    title: "Абонеменет на проживание в отеле — ACADEMIA Особняк Шувалова",
+    description:
+        "Единый абонемент на несколько проживаний по фиксированной цене с гибкими датами заезда.",
+    alternates: getLocaleAlternates("/abonements/", "ru"),
 };
 
-export default function AbonementPage() {
-    return (
-        <main className="flex flex-col gap-8">
-            <a
-                href="?tl-booking-open=true&tl-booking-scenario=42761-subscription"
-                className="border-b-1 max-w-fit mx-auto mt-20"
-            >
-                При клике на вот эту подчеркнутую ссылку будет открываться попап
-                с абонементами.
-            </a>
-        </main>
-    );
+export default function Rewards() {
+    return <SubscriptionsPage locale="ru" />;
 }
