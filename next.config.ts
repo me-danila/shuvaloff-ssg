@@ -11,13 +11,13 @@ const nextConfig: NextConfig = {
             "remoteOptimizedImages.cjs",
         nextImageExportOptimizer_remoteImageCacheTTL: "2592000",
         nextImageExportOptimizer_generateAndUseBlurImages: "false",
-        nextImageExportOptimizer_quality: "92",
+        nextImageExportOptimizer_quality: "100",
         nextImageExportOptimizer_storePicturesInWEBP: "true",
     },
     images: {
         loader: "custom",
         imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-        deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
+        deviceSizes: [640, 750, 828, 1200, 1600, 1920],
         remotePatterns: [
             {
                 protocol: "https",
