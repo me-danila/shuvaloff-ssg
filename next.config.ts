@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
             "remoteOptimizedImages.cjs",
         nextImageExportOptimizer_remoteImageCacheTTL: "2592000",
         nextImageExportOptimizer_generateAndUseBlurImages: "false",
-        nextImageExportOptimizer_quality: "100",
+        nextImageExportOptimizer_quality: "90",
         nextImageExportOptimizer_storePicturesInWEBP: "true",
     },
     images: {
@@ -28,14 +28,6 @@ const nextConfig: NextConfig = {
                 hostname: "static.academia.spb.ru",
             },
         ],
-    },
-    async rewrites() {
-        return [
-            {
-                source: "/myreviews-widget.js",
-                destination: "https://myreviews.dev/widget/dist/index.js",
-            },
-        ];
     },
 };
 
