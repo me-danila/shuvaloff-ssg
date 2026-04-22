@@ -561,10 +561,15 @@ export default function SubscriptionsPage({ locale }: { locale: Locale }) {
                 </h3>
                 <ul className="mt-1 list-disc space-y-1 pl-5 pb-4 xl:max-w-5xl">
                     {copy.rulesDescription.map((item) => (
-                        <li key={item.id} className="text-sm xl:text-base">{item.content}</li>
+                        <li key={item.id} className="text-sm xl:text-base">
+                            {item.content}
+                        </li>
                     ))}
                 </ul>
-                <Button href="?tl-booking-open=true&tl-booking-scenario=42761-subscription" className="xl:self-start">
+                <Button
+                    href="?tl-booking-open=true&tl-booking-scenario=42761-subscription"
+                    className="xl:self-start"
+                >
                     {copy.rulesButton}
                 </Button>
             </section>

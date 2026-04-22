@@ -83,28 +83,28 @@ const roomsRu: Room[] = [
     {
         title: "Супериор",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/deluxe.png",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/04/1.jpg",
             alt: "Супериор",
         },
         gallery: [
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/d1-1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/1.jpg",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/d2-1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/2.jpg",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/d3-1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/3.jpg",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/d4.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/4.jpg",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/d5.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/5.jpg",
                 alt: "Супериор",
             },
         ],
@@ -156,28 +156,28 @@ const roomsRu: Room[] = [
     {
         title: "Полулюкс",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/junior.png",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/04/1-1.jpg",
             alt: "Полулюкс",
         },
         gallery: [
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/j1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/1-1.jpg",
                 alt: "Полулюкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/j2.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/2-1.jpg",
                 alt: "Полулюкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/j3.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/3-1.jpg",
                 alt: "Полулюкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/j4.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/4-1.jpg",
                 alt: "Полулюкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/j5.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/5-1.jpg",
                 alt: "Полулюкс",
             },
         ],
@@ -224,28 +224,28 @@ const roomsRu: Room[] = [
     {
         title: "Двухкомнатный люкс",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/suite.png",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/04/1-2.jpg",
             alt: "Двухкомнатный люкс",
         },
         gallery: [
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/su1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/1-2.jpg",
                 alt: "Двухкомнатный люкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/su2.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/2-2.jpg",
                 alt: "Двухкомнатный люкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/su3.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/3-2.jpg",
                 alt: "Двухкомнатный люкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/su4.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/4-2.jpg",
                 alt: "Двухкомнатный люкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/03/su5.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/04/5-2.jpg",
                 alt: "Двухкомнатный люкс",
             },
         ],

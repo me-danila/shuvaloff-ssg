@@ -28,9 +28,10 @@ export default function EnRooms() {
                 </FadeUp>
                 <FadeUp delay={0.2}>
                     <p>
-                        The mansion hotel offers classic categories, spacious
-                        suites, and two unique historical residences named after
-                        the former owners of the house.
+                        The mansion hotel offers the following room categories:
+                        Classic Standard, Elegant Superior, Two-Room Junior
+                        Suite, Two-Room Suite, and two unique historic suites
+                        named after the mansion’s owners.
                     </p>
                 </FadeUp>
             </section>

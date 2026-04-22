@@ -357,7 +357,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                 title={copy.title}
                 additionalTitle={copy.additionalTitle}
                 image={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/pic.png",
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/from-rest.jpg",
                     alt: copy.alts.mainHero,
                 }}
                 button={{
