@@ -72,7 +72,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
         ],
         cityTitle: "Петербург —",
         cityDescription:
-            "город многогранный, поэтому узнавать его можно по—разному.",
+            "город многогранный, поэтому узнавать его можно по-разному.",
         days: [
             {
                 title: "1 день.",
