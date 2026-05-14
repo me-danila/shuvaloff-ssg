@@ -78,15 +78,13 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "1 день.",
                 content: (
                     <>
-                        Особая встреча
+                        <strong>Расслабление с&nbsp;дороги</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Трансфер вокзал/аэропорт — особняк
+                        Трансфер с вокзала или аэропорта до особняка
                         <br />
-                        Личное приветствие графом и рассказ об особняке
+                        Личное приветствие Графом и заселение
                         <br />
-                        Заселение в особняк
-                        <br />
-                        Велнес-ритуал от Академиа СПА
+                        Велнес-ритуал на ваш выбор в Академиа СПА
                     </>
                 ),
             },
@@ -94,15 +92,15 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "2 день.",
                 content: (
                     <>
-                        Отдых с размахом
+                        <strong>Отдых по-графски</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Графские завтраки: ритуал, захвативший Петербург
+                        Графские завтраки - лучшие в России по версии
                         <br />
-                        Эффектная поездка на ретроавтомобиле
+                        Where to eat'26
                         <br />
-                        Водная прогулка-фуршет с лекцией
+                        Ретро-кабриолет - эффектная поездка по Петербургу
                         <br />
-                        от уважаемого искусствоведа
+                        Катер с авторской лекцией от искусствоведа
                     </>
                 ),
             },
@@ -110,13 +108,13 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "3 день.",
                 content: (
                     <>
-                        Прощальная аудиенция
+                        <strong>Графский эпилог</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Завтрак в формате сет-меню от бренд-шефа Академиа
+                        Завтрак от шефа
                         <br />
-                        Личный прием графа Шувалова в связи с отъездом
+                        Памятный презент от графской семьи
                         <br />
-                        Трансфер особняк — вокзал/аэропорт
+                        Трансфер от особняка до вокзала/аэропорта
                     </>
                 ),
             },
@@ -214,16 +212,14 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "Day 1.",
                 content: (
                     <>
-                        A Special Meeting
+                        <strong>Relaxing after a long trip</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Transfer from station/airport to the mansion
-                        <br />
-                        Personal greeting by the Count and a story about the
+                        Transfer from the train station or airport to the
                         mansion
                         <br />
-                        Check-in at the mansion
-                        <br />
-                        Wellness ritual from ACADEMIA SPA
+                        Personal welcome by the Count and check-in
+                        <br />A wellness ritual of your choice at the Academia
+                        SPA
                     </>
                 ),
             },
@@ -231,15 +227,14 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "Day 2.",
                 content: (
                     <>
-                        Grand Getaway
+                        <strong>A Count's-Style Getaway</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Count's breakfasts: a ritual that conquered Petersburg
-                        <br />
-                        Spectacular ride in a retro car
-                        <br />
-                        Water cruise with a cocktail party and a lecture
-                        <br />
-                        by a respected art historian
+                        Count's Breakfasts—Voted the Best in Russia by Where to
+                        Eat '26
+                        <br />A Retro Convertible—A Spectacular Tour of St.
+                        Petersburg
+                        <br />A Boat Tour with a Special Lecture by an Art
+                        Historian
                     </>
                 ),
             },
@@ -247,14 +242,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "Day 3.",
                 content: (
                     <>
-                        Farewell Audience
+                        <strong>The Count’s Epilogue</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Set-menu breakfast from the ACADEMIA brand chef
+                        Breakfast by the chef
+                        <br />A commemorative gift from the count’s family
                         <br />
-                        Personal reception by Count Shuvalov on the occasion of
-                        departure
-                        <br />
-                        Transfer from the mansion to the station/airport
+                        Transfer from the mansion to the train station/airport
                     </>
                 ),
             },
@@ -337,8 +330,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
 };
 
 const descriptionImages = [
-    "https://academia.spb.ru/wp-content/uploads/2026/04/meet1.jpg",
-    "https://academia.spb.ru/wp-content/uploads/2026/04/Rectangle-217.png",
+    "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7225.avif",
+    "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_9173.avif",
     "https://academia.spb.ru/wp-content/uploads/2026/04/Rectangle-235.png",
 ];
 

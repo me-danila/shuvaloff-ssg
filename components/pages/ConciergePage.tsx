@@ -186,7 +186,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     </p>
                                 </div>
                                 <Button
-                                    href="https://t.me/+79668342743"
+                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                                     target="_blank"
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
@@ -207,7 +207,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                             </ul>
                         </div>
                         <Button
-                            href="https://t.me/+79668342743"
+                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                             target="_blank"
                             variant="primary"
                             className="xl:hidden"
@@ -234,7 +234,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     </p>
                                 </div>
                                 <Button
-                                    href="https://t.me/+79668342743"
+                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                                     target="_blank"
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
@@ -255,7 +255,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                             </ul>
                         </div>
                         <Button
-                            href="https://t.me/+79668342743"
+                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                             target="_blank"
                             variant="primary"
                             className="xl:hidden"
