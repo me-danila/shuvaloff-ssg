@@ -22,6 +22,9 @@ type PageCopy = {
         title: string;
         content: React.ReactNode;
     }[];
+    day1Title1: string,
+    day2Title1: string,
+    day2Title2: string,
     visitTitle: string;
     visitDescription: React.ReactNode;
     historicTitle: string;
@@ -75,50 +78,53 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "город многогранный, поэтому узнавать его можно по-разному.",
         days: [
             {
-                title: "1 день.",
+                title: "1 день:",
                 content: (
                     <>
                         <strong>Расслабление с&nbsp;дороги</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Трансфер с вокзала или аэропорта до особняка
+                        • Трансфер с вокзала или аэропорта до особняка
                         <br />
-                        Личное приветствие Графом и заселение
+                        • Личное приветствие Графом и заселение
                         <br />
-                        Велнес-ритуал на ваш выбор в Академиа СПА
+                        • Велнес-ритуал на ваш выбор в Академиа СПА
                     </>
                 ),
             },
             {
-                title: "2 день.",
+                title: "2 день:",
                 content: (
                     <>
                         <strong>Отдых по-графски</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Графские завтраки - лучшие в России по версии
+                        • Графские завтраки - лучшие в России по версии
                         <br />
                         Where to eat'26
                         <br />
-                        Ретро-кабриолет - эффектная поездка по Петербургу
+                        • Ретро-кабриолет - эффектная поездка по Петербургу
                         <br />
-                        Катер с авторской лекцией от искусствоведа
+                        • Катер с авторской лекцией от искусствоведа
                     </>
                 ),
             },
             {
-                title: "3 день.",
+                title: "3 день:",
                 content: (
                     <>
                         <strong>Графский эпилог</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Завтрак от шефа
+                        • Завтрак от шефа
                         <br />
-                        Памятный презент от графской семьи
+                        • Памятный презент от графской семьи
                         <br />
-                        Трансфер от особняка до вокзала/аэропорта
+                        • Трансфер от особняка до вокзала/аэропорта
                     </>
                 ),
             },
         ],
+        day1Title1: "1 день, вечернее время",
+        day2Title1: "2 день, позднее утро",
+        day2Title2: "2 день, дневное время",
         visitTitle: "В гости к графу",
         visitDescription: (
             <>
@@ -147,16 +153,16 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "После вашего отдыха граф непременно поинтересуется во время прощальной аудиенции, как прошло ваше погружение в «Графский Петербург».",
         spaTitle: "Отдых в АКАДЕМИА СПА",
         spaDescription:
-            "Чтобы отдохнуть после дороги и знакомства с особняком, предлагаем завершить ваш первый день в гостях у графа Шувалова расслабляющим массажем в камерном пространстве Академиа СПА на четвертом этаже вашего особняка, где все продумано в деталях: индивидуальный подход к выбору и комбинации техник для ухода и массажа.",
+            "Чтобы отдохнуть после дороги и знакомства с особняком, предлагаем завершить ваш первый день расслабляющим массажем в камерном пространстве Академиа СПА на четвертом этаже особняка, где все продумано в деталях: индивидуальный подход и техники массажа, подходящие именно вашему телу и лицу.",
         breakfastTitle: "ГРАФСКИЙ завтрак",
         breakfastQuote: "Это утро, которое вы запомните надолго!",
         breakfastDescription:
-            "Предлагаем вам красивое начало самого насыщенного дня вашей программы. Чтобы в полной мере ощутить истинно аристократический гедонизм и настроиться на неторопливый ритм жизни петербургского высшего общества, необходим настоящий графский завтрак — без суеты спешки, но с изысканным набором блюд по историческим рецептам, подлинной винтажной сервировкой и эффектной подачей неоклассическом интерьере бара-ресторана ACADEMIA Шувалова на первом этаже особняка.",
+            "Предлагаем вам красивое начало самого насыщенного дня вашей программы. Чтобы в полной мере ощутить истинно аристократический гедонизм и настроиться на неторопливый ритм жизни петербургского высшего общества, необходим настоящий графский завтрак — без суеты спешки, но с изысканным набором блюд, поданных на подлинной винтажной посуде в историческом интерьере бара-ресторана ACADEMIA Шувалова на первом этаже особняка.",
         cruiseTitle: "ПРОГУЛКА-ФУРШЕТ на катере",
         cruiseDescription1:
-            "После гастрономических впечатлений мы приглашаем вас отправиться за эстетическими — на водную прогулку по рекам и каналам Петербурга на фирменном катере. До причала и обратно в отель после водной прогулки вы отправитесь на эффектном ретроавтомобиле.",
+            "После гастрономических впечатлений мы приглашаем вас отправиться за эстетическими — на водную прогулку по рекам и каналам Петербурга на фирменном катере.",
         cruiseDescription2:
-            "Вас будет сопровождать наш лектор искусствовед со специально разработанной экскурсией. Вас ждут дворцовые тайны, невероятные интриги, секреты знатных семей, неписаные правила и традиции дворянской жизни XIX века, и, конечно, сам город во всем его имперском великолепии с лучшего ракурса.",
+            "Вас будет сопровождать наш лектор искусствовед со специально разработанной экскурсией. Вас ждут дворцовые тайны, невероятные интриги, секреты знатных семей, неписаные правила и традиции дворянской жизни XIX века, и, конечно, сам город во всем его имперском великолепии с лучшего ракурса и ваши фото на память.",
         cruiseDescription3:
             "В качестве приятного дополнения к пище духовной — легкий изысканный фуршет на катере в французском стиле от Брассери Академиа с традиционными закусками, сырами, десертами и вином.",
         surpriseTitle: "Сюрприз от графа",
@@ -209,49 +215,52 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "is a multifaceted city, so it can be experienced in many different ways.",
         days: [
             {
-                title: "Day 1.",
+                title: "Day 1:",
                 content: (
                     <>
                         <strong>Relaxing after a long trip</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Transfer from the train station or airport to the
+                        • Transfer from the train station or airport to the
                         mansion
                         <br />
-                        Personal welcome by the Count and check-in
-                        <br />A wellness ritual of your choice at the Academia
+                        • Personal welcome by the Count and check-in
+                        <br />• A wellness ritual of your choice at the Academia
                         SPA
                     </>
                 ),
             },
             {
-                title: "Day 2.",
+                title: "Day 2:",
                 content: (
                     <>
                         <strong>A Count's-Style Getaway</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Count's Breakfasts—Voted the Best in Russia by Where to
+                        • Count's Breakfasts—Voted the Best in Russia by Where to
                         Eat '26
-                        <br />A Retro Convertible—A Spectacular Tour of St.
+                        <br />• A Retro Convertible—A Spectacular Tour of St.
                         Petersburg
-                        <br />A Boat Tour with a Special Lecture by an Art
+                        <br />• A Boat Tour with a Special Lecture by an Art
                         Historian
                     </>
                 ),
             },
             {
-                title: "Day 3.",
+                title: "Day 3:",
                 content: (
                     <>
                         <strong>The Count’s Epilogue</strong>
                         <span className="block h-2 xl:h-4"></span>
-                        Breakfast by the chef
-                        <br />A commemorative gift from the count’s family
+                        • Breakfast by the chef
+                        <br />• A commemorative gift from the count’s family
                         <br />
-                        Transfer from the mansion to the train station/airport
+                        • Transfer from the mansion to the train station/airport
                     </>
                 ),
             },
         ],
+        day1Title1: "Day 1, evening",
+        day2Title1: "2 день, позднее утро",
+        day2Title2: "2 день, дневное время",
         visitTitle: "Visit the Count",
         visitDescription: (
             <>
@@ -280,16 +289,16 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "After your stay, the Count will certainly inquire during the farewell audience how your immersion into 'Aristocratic St. Petersburg' went.",
         spaTitle: "Rest at ACADEMIA SPA",
         spaDescription:
-            "To relax after your journey and getting to know the mansion, we suggest finishing your first day as a guest of Count Shuvalov with a relaxing massage in the cozy space of ACADEMIA SPA on the fourth floor of your mansion, where everything is thought out in detail: an individual approach to the selection and combination of techniques for care and massage.",
+            "To unwind after your journey and your tour of the mansion, we invite you to end your first day with a relaxing massage in the intimate setting of the Academia SPA on the fourth floor of the mansion, where every detail has been carefully considered: a personalized approach and massage techniques tailored specifically to your body and face.",
         breakfastTitle: "COUNT'S Breakfast",
         breakfastQuote: "This is a morning you will remember for a long time!",
         breakfastDescription:
-            "We offer you a beautiful start to the most eventful day of your program. To fully experience true aristocratic hedonism and tune into the leisurely pace of life of Petersburg's high society, you need a real Count's breakfast — without hustle and bustle, but with an exquisite set of dishes based on historical recipes, authentic vintage table setting, and spectacular presentation in the neoclassical interior of the ACADEMIA Shuvalov bar-restaurant on the first floor of the mansion.",
+            "We invite you to start the most eventful day of your itinerary on a beautiful note. To fully experience true aristocratic hedonism and attune yourself to the leisurely pace of St. Petersburg’s high society, you need a genuine count’s breakfast — free from the hustle and bustle, but featuring an exquisite selection of dishes served on authentic vintage tableware in the historic interior of the ACADEMIA Shuvalov bar-restaurant on the ground floor of the mansion.",
         cruiseTitle: "WATER CRUISE with Buffet",
         cruiseDescription1:
-            "After the gastronomic impressions, we invite you to go for aesthetic ones — on a water trip through the rivers and canals of St. Petersburg on a signature boat. You will travel to the pier and back to the hotel after the water trip in a spectacular retro car.",
+            "After indulging in some culinary delights, we invite you to enjoy a scenic cruise along St. Petersburg’s rivers and canals aboard our signature boat.",
         cruiseDescription2:
-            "You will be accompanied by our art historian lecturer with a specially developed excursion. You will find palace secrets, incredible intrigues, secrets of noble families, unwritten rules and traditions of 19th-century noble life, and, of course, the city itself in all its imperial splendor from the best perspective.",
+            "You will be accompanied by our art historian guide on a specially designed tour. Awaiting you are palace secrets, incredible intrigues, the secrets of noble families, the unwritten rules and traditions of 19th-century aristocratic life, and, of course, the city itself in all its imperial splendor, viewed from the best vantage points, along with photos to take home as a memento. ",
         cruiseDescription3:
             "As a pleasant addition to the spiritual food — a light exquisite buffet on the boat in French style from Brasserie ACADEMIA with traditional snacks, cheeses, desserts, and wine.",
         surpriseTitle: "Count's Surprise",
@@ -475,23 +484,24 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                 <ImageGrid
                     images={[
                         {
-                            src: "https://academia.spb.ru/wp-content/uploads/2026/04/Rectangle-205.png",
+                            src: "https://academia.spb.ru/wp-content/uploads/2026/05/hf_20260304_162946_4a58574c-6740-46bb-8658-bb6013a9b548.jpeg",
                             alt: copy.alts.entrance,
                         },
                         {
-                            src: "https://academia.spb.ru/wp-content/uploads/2026/04/Rectangle-206.png",
+                            src: "https://academia.spb.ru/wp-content/uploads/2026/05/2.png",
                             alt: copy.alts.lounge,
                         },
                     ]}
                 />
-                <p className="font-alistair text-2xl/7 xl:text-[40px]/10 xl:my-2">
-                    {copy.specialMeetingQuote}
-                </p>
+                {/*<p className="font-alistair text-2xl/7 xl:text-[40px]/10 xl:my-2">*/}
+                {/*    {copy.specialMeetingQuote}*/}
+                {/*</p>*/}
                 <DividerHistory style={3} />
             </FadeUp>
 
             <FadeUp duration={1.2} className="bg-gray-100">
                 <div className="mx-6 my-8 xl:text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10">
+                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">{copy.day1Title1}</p>
                     <h2>{copy.spaTitle}</h2>
                     <p className="xl:max-w-4xl xl:mx-auto">
                         {copy.spaDescription}
@@ -536,6 +546,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                     />
                 </div>
                 <div className="flex flex-col gap-4 w-full">
+                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">{copy.day2Title1}</p>
                     <h2 className="text-center">{copy.breakfastTitle}</h2>
                     <p className="font-alistair text-center text-2xl/7 xl:text-4xl/10">
                         {copy.breakfastQuote}
@@ -550,6 +561,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                     mode="inView"
                     className="m-6 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto"
                 >
+                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto mb-2">{copy.day2Title2}</p>
                     <StaggerItem>
                         <h2>{copy.cruiseTitle}</h2>
                     </StaggerItem>
@@ -562,7 +574,11 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                         <ImageGrid
                             images={[
                                 {
-                                    src: "https://academia.spb.ru/wp-content/uploads/2026/04/2b503ea69def5076a79d54eda646bdd6431c8db1-scaled.jpg",
+                                    src: "https://academia.spb.ru/wp-content/uploads/2026/05/e3cc398748884f36bc6b2f3a8ce9240a_img.avif",
+                                    alt: copy.alts.cruise,
+                                },
+                                {
+                                    src: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_6906-1.avif",
                                     alt: copy.alts.cruise,
                                 },
                             ]}
@@ -578,38 +594,38 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                 </StaggerContainer>
             </section>
 
-            <StaggerContainer
-                mode="inView"
-                className="xl:text-center m-6 flex flex-col gap-4 xl:w-full xl:max-w-4xl xl:mx-auto"
-            >
-                <StaggerItem className="flex gap-3 justify-center">
-                    <h2>{copy.surpriseTitle}</h2>
-                    <svg
-                        width="28"
-                        height="30"
-                        viewBox="0 0 28 30"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="xl:mt-1"
-                        role="img"
-                        aria-label="ACADEMIA Icon"
-                    >
-                        <title>ACADEMIA Icon</title>
-                        <path
-                            d="M27.929 6.91a6.8 6.8 0 0 0-.843-2.433C25.892 2.388 23.592.987 21.172.811c-2.961-.223-6.099 1.37-7.28 4.094l-.042.1a8.4 8.4 0 0 0-1.227-2.362C11.439 1.06 9.499-.015 7.473 0c-1.23-.002-2.45.35-3.51.959-1.638.923-2.777 2.415-3.369 4.164-.91 2.821-.735 5.874.25 8.641.972 2.692 2.784 5.052 4.991 6.879 1.233 1.033 2.629 1.948 4.235 2.265.294.051.485-.292.294-.508a6 6 0 0 0-.314-.326c-.967-.962-2.07-1.781-3.063-2.7C3.76 16.39 1.928 12.247 2.472 7.877c.174-1.475.606-2.908 1.63-4.003.898-.943 2.194-1.562 3.51-1.568 1.371.01 2.914.586 3.951 1.456.621.522 1.576 1.732 1.992 2.589.134.279.447.22.6 0 .13-.184.337-.49.46-.644C16.172 3.8 18.8 2.772 21.235 3.16c1.319.231 2.544.982 3.31 2.068a4.46 4.46 0 0 1 .808 2.863c-.207 4.735-4.851 8.88-8.046 12.125-2.573 2.62-6.035 5.652-6.539 9.452-.019.345.4.437.56.2 1.054-1.504 2.3-2.805 3.6-4.104 1.962-2.006 4.096-3.848 6.143-5.79 2.502-2.402 4.974-5.005 6.228-8.297.56-1.508.842-3.163.628-4.768"
-                            fill="#372a24"
-                        />
-                    </svg>
-                </StaggerItem>
-                <StaggerItem>
-                    <p>{copy.surpriseDescription}</p>
-                </StaggerItem>
-                <StaggerItem>
-                    <DividerHistory style={2} />
-                </StaggerItem>
-            </StaggerContainer>
+            {/*<StaggerContainer*/}
+            {/*    mode="inView"*/}
+            {/*    className="xl:text-center m-6 flex flex-col gap-4 xl:w-full xl:max-w-4xl xl:mx-auto"*/}
+            {/*>*/}
+            {/*    <StaggerItem className="flex gap-3 justify-center">*/}
+            {/*        <h2>{copy.surpriseTitle}</h2>*/}
+            {/*        <svg*/}
+            {/*            width="28"*/}
+            {/*            height="30"*/}
+            {/*            viewBox="0 0 28 30"*/}
+            {/*            fill="none"*/}
+            {/*            xmlns="http://www.w3.org/2000/svg"*/}
+            {/*            className="xl:mt-1"*/}
+            {/*            role="img"*/}
+            {/*            aria-label="ACADEMIA Icon"*/}
+            {/*        >*/}
+            {/*            <title>ACADEMIA Icon</title>*/}
+            {/*            <path*/}
+            {/*                d="M27.929 6.91a6.8 6.8 0 0 0-.843-2.433C25.892 2.388 23.592.987 21.172.811c-2.961-.223-6.099 1.37-7.28 4.094l-.042.1a8.4 8.4 0 0 0-1.227-2.362C11.439 1.06 9.499-.015 7.473 0c-1.23-.002-2.45.35-3.51.959-1.638.923-2.777 2.415-3.369 4.164-.91 2.821-.735 5.874.25 8.641.972 2.692 2.784 5.052 4.991 6.879 1.233 1.033 2.629 1.948 4.235 2.265.294.051.485-.292.294-.508a6 6 0 0 0-.314-.326c-.967-.962-2.07-1.781-3.063-2.7C3.76 16.39 1.928 12.247 2.472 7.877c.174-1.475.606-2.908 1.63-4.003.898-.943 2.194-1.562 3.51-1.568 1.371.01 2.914.586 3.951 1.456.621.522 1.576 1.732 1.992 2.589.134.279.447.22.6 0 .13-.184.337-.49.46-.644C16.172 3.8 18.8 2.772 21.235 3.16c1.319.231 2.544.982 3.31 2.068a4.46 4.46 0 0 1 .808 2.863c-.207 4.735-4.851 8.88-8.046 12.125-2.573 2.62-6.035 5.652-6.539 9.452-.019.345.4.437.56.2 1.054-1.504 2.3-2.805 3.6-4.104 1.962-2.006 4.096-3.848 6.143-5.79 2.502-2.402 4.974-5.005 6.228-8.297.56-1.508.842-3.163.628-4.768"*/}
+            {/*                fill="#372a24"*/}
+            {/*            />*/}
+            {/*        </svg>*/}
+            {/*    </StaggerItem>*/}
+            {/*    <StaggerItem>*/}
+            {/*        <p>{copy.surpriseDescription}</p>*/}
+            {/*    </StaggerItem>*/}
+            {/*    <StaggerItem>*/}
+            {/*        <DividerHistory style={2} />*/}
+            {/*    </StaggerItem>*/}
+            {/*</StaggerContainer>*/}
 
-            <section className="bg-gray-100 p-6 xl:py-8">
+            <section className="p-6 xl:py-8">
                 <div className="flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
                     <div className="flex flex-col gap-2 xl:max-w-4xl xl:mx-auto xl:text-center">
                         <h2>{copy.cultureTitle}</h2>

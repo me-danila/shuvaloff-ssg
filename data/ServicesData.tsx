@@ -22,6 +22,14 @@ export type Service = {
 export const AllServices: Record<Locale, Service[]> = {
     ru: [
         {
+            title: "Водные прогулки",
+            subtitle:
+                "Яхты и катеры для прогулок по рекам и каналам Санкт-Петербурга",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
+            externalLink:
+                "https://academia.spb.ru/boat-tours/",
+        },
+        {
             title: "ACADEMIA Консьерж‑сервис",
             subtitle:
                 "Наша консьерж служба освободит Вас не только от рутинных дел, но и погрузит в эпоху историзма, что позволит Вам почувствовать себя настоящим графом и княгиней!",
@@ -545,16 +553,16 @@ export const AllServices: Record<Locale, Service[]> = {
             ),
             price: "5 500 ₽",
         },
-        {
-            title: "Водная прогулка",
-            subtitle:
-                "Яхты и катеры для прогулок по рекам и каналам Санкт-Петербурга",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/water.avif",
-            externalLink:
-                "https://drive.google.com/file/d/1YSkGKD3VBFHNXyLwXAM3OlvkgjllnfTn",
-        },
     ],
     en: [
+        {
+            title: "Boat tours",
+            subtitle:
+                "Yachts and boats for trips along the rivers and canals of St. Petersburg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
+            externalLink:
+                "https://academia.spb.ru/en/boat-tours/",
+        },
         {
             title: "ACADEMIA Concierge Service",
             subtitle:
@@ -1051,14 +1059,6 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "5 500 ₽",
-        },
-        {
-            title: "Water Walk",
-            subtitle:
-                "Yachts and boats for trips along the rivers and canals of St. Petersburg",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/water.avif",
-            externalLink:
-                "https://drive.google.com/file/d/1YSkGKD3VBFHNXyLwXAM3OlvkgjllnfTn",
         },
     ],
 };
