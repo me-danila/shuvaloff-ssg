@@ -718,6 +718,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 open={Boolean(routeMap)}
                 onClose={() => setRouteMap(null)}
                 maxWidth="3xl"
+                bgColor="bg-transparent"
             >
                 {routeMap && (
                     <div className="relative aspect-[4/3] w-full">
