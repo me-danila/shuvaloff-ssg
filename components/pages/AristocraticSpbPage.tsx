@@ -22,9 +22,10 @@ type PageCopy = {
         title: string;
         content: React.ReactNode;
     }[];
-    day1Title1: string,
-    day2Title1: string,
-    day2Title2: string,
+    day1Title1: string;
+    day2Title1: string;
+    day2Title2: string;
+    day3Title1: string;
     visitTitle: string;
     visitDescription: React.ReactNode;
     historicTitle: string;
@@ -82,12 +83,10 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Расслабление с&nbsp;дороги</strong>
-                        <span className="block h-2 xl:h-4"></span>
-                        • Трансфер с вокзала или аэропорта до особняка
-                        <br />
-                        • Личное приветствие Графом и заселение
-                        <br />
-                        • Велнес-ритуал на ваш выбор в Академиа СПА
+                        <span className="block h-2 xl:h-4"></span>• Трансфер с
+                        вокзала или аэропорта до особняка
+                        <br />• Личное приветствие Графом и заселение
+                        <br />• Велнес-ритуал на ваш выбор в Академиа СПА
                     </>
                 ),
             },
@@ -96,14 +95,13 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Отдых по-графски</strong>
-                        <span className="block h-2 xl:h-4"></span>
-                        • Графские завтраки - лучшие в России по версии
+                        <span className="block h-2 xl:h-4"></span>• Графские
+                        завтраки - лучшие в России по версии
                         <br />
                         Where to eat'26
-                        <br />
-                        • Ретро-кабриолет - эффектная поездка по Петербургу
-                        <br />
-                        • Катер с авторской лекцией от искусствоведа
+                        <br />• Ретро-кабриолет - эффектная поездка по
+                        Петербургу
+                        <br />• Катер с авторской лекцией от искусствоведа
                     </>
                 ),
             },
@@ -112,12 +110,10 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Графский эпилог</strong>
-                        <span className="block h-2 xl:h-4"></span>
-                        • Завтрак от шефа
-                        <br />
-                        • Памятный презент от графской семьи
-                        <br />
-                        • Трансфер от особняка до вокзала/аэропорта
+                        <span className="block h-2 xl:h-4"></span>• Завтрак от
+                        шефа
+                        <br />• Памятный презент от графской семьи
+                        <br />• Трансфер от особняка до вокзала/аэропорта
                     </>
                 ),
             },
@@ -125,6 +121,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
         day1Title1: "1 день, вечернее время",
         day2Title1: "2 день, позднее утро",
         day2Title2: "2 день, дневное время",
+        day3Title1: "3 день, дневное время",
         visitTitle: "В гости к графу",
         visitDescription: (
             <>
@@ -219,11 +216,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Relaxing after a long trip</strong>
-                        <span className="block h-2 xl:h-4"></span>
-                        • Transfer from the train station or airport to the
-                        mansion
-                        <br />
-                        • Personal welcome by the Count and check-in
+                        <span className="block h-2 xl:h-4"></span>• Transfer
+                        from the train station or airport to the mansion
+                        <br />• Personal welcome by the Count and check-in
                         <br />• A wellness ritual of your choice at the Academia
                         SPA
                     </>
@@ -234,9 +229,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>A Count's-Style Getaway</strong>
-                        <span className="block h-2 xl:h-4"></span>
-                        • Count's Breakfasts—Voted the Best in Russia by Where to
-                        Eat '26
+                        <span className="block h-2 xl:h-4"></span>• Count's
+                        Breakfasts—Voted the Best in Russia by Where to Eat '26
                         <br />• A Retro Convertible—A Spectacular Tour of St.
                         Petersburg
                         <br />• A Boat Tour with a Special Lecture by an Art
@@ -249,18 +243,19 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>The Count’s Epilogue</strong>
-                        <span className="block h-2 xl:h-4"></span>
-                        • Breakfast by the chef
+                        <span className="block h-2 xl:h-4"></span>• Breakfast by
+                        the chef
                         <br />• A commemorative gift from the count’s family
-                        <br />
-                        • Transfer from the mansion to the train station/airport
+                        <br />• Transfer from the mansion to the train
+                        station/airport
                     </>
                 ),
             },
         ],
         day1Title1: "Day 1, evening",
-        day2Title1: "2 день, позднее утро",
-        day2Title2: "2 день, дневное время",
+        day2Title1: "Day 2, late morning",
+        day2Title2: "Day 2, daytime",
+        day3Title1: "Day 3, daytime",
         visitTitle: "Visit the Count",
         visitDescription: (
             <>
@@ -501,7 +496,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
 
             <FadeUp duration={1.2} className="bg-gray-100">
                 <div className="mx-6 my-8 xl:text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10">
-                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">{copy.day1Title1}</p>
+                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">
+                        {copy.day1Title1}
+                    </p>
                     <h2>{copy.spaTitle}</h2>
                     <p className="xl:max-w-4xl xl:mx-auto">
                         {copy.spaDescription}
@@ -546,7 +543,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                     />
                 </div>
                 <div className="flex flex-col gap-4 w-full">
-                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">{copy.day2Title1}</p>
+                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">
+                        {copy.day2Title1}
+                    </p>
                     <h2 className="text-center">{copy.breakfastTitle}</h2>
                     <p className="font-alistair text-center text-2xl/7 xl:text-4xl/10">
                         {copy.breakfastQuote}
@@ -561,7 +560,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                     mode="inView"
                     className="m-6 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto"
                 >
-                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto mb-2">{copy.day2Title2}</p>
+                    <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto mb-2">
+                        {copy.day2Title2}
+                    </p>
                     <StaggerItem>
                         <h2>{copy.cruiseTitle}</h2>
                     </StaggerItem>
@@ -628,6 +629,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
             <section className="p-6 xl:py-8">
                 <div className="flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
                     <div className="flex flex-col gap-2 xl:max-w-4xl xl:mx-auto xl:text-center">
+                        <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto mb-2">
+                            {copy.day3Title1}
+                        </p>
                         <h2>{copy.cultureTitle}</h2>
                         <p>{copy.cultureDescription}</p>
                     </div>

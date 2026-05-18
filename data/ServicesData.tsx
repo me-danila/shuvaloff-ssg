@@ -26,8 +26,7 @@ export const AllServices: Record<Locale, Service[]> = {
             subtitle:
                 "Яхты и катеры для прогулок по рекам и каналам Санкт-Петербурга",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
-            externalLink:
-                "https://academia.spb.ru/boat-tours/",
+            slug: "boat-tours",
         },
         {
             title: "ACADEMIA Консьерж‑сервис",
@@ -560,8 +559,7 @@ export const AllServices: Record<Locale, Service[]> = {
             subtitle:
                 "Yachts and boats for trips along the rivers and canals of St. Petersburg",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
-            externalLink:
-                "https://academia.spb.ru/en/boat-tours/",
+            externalLink: "https://academia.spb.ru/en/boat-tours/",
         },
         {
             title: "ACADEMIA Concierge Service",
