@@ -401,7 +401,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     истории и&nbsp;красоты.
                 </>
             ),
-            price: "10 500 ₽",
+            price: "13 000 ₽",
         },
         {
             title: "Приветственный сет в номер",
@@ -916,7 +916,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     by history and beauty.
                 </>
             ),
-            price: "10 500 ₽",
+            price: "13 000 ₽",
         },
         {
             title: "Welcome Set to Room",

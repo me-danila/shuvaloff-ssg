@@ -10,7 +10,13 @@ interface Props {
     bgColor?: string;
 }
 
-export function Modal({ open, onClose, children, maxWidth = "2xl", bgColor = "bg-white" }: Props) {
+export function Modal({
+    open,
+    onClose,
+    children,
+    maxWidth = "2xl",
+    bgColor = "bg-white",
+}: Props) {
     useEffect(() => {
         document.body.style.overflow = open ? "hidden" : "";
         return () => {
