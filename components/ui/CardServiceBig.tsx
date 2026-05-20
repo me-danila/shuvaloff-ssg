@@ -1,14 +1,17 @@
 "use client";
 
 import Image from "@/components/ui/OptimizedImage";
-import { localizeHref } from "@/lib/i18n/routing";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
+
+type CardServiceBigCtaLabel = string | Partial<Record<Locale, string>>;
 
 type CardServiceBigProps = {
     title: string;
     imgUrl: string;
     slug?: string;
     externalLink?: string;
+    ctaLabel?: CardServiceBigCtaLabel;
 };
 
 export default function CardServiceBig({
@@ -16,9 +19,14 @@ export default function CardServiceBig({
     imgUrl,
     slug,
     externalLink,
+    ctaLabel,
 }: CardServiceBigProps) {
     const locale = useLocale();
-    const details = locale === "ru" ? "Подробнее" : "Details";
+    const defaultDetailsLabel = locale === "ru" ? "Подробнее" : "Details";
+    const details =
+        typeof ctaLabel === "string"
+            ? ctaLabel
+            : (ctaLabel?.[locale] ?? defaultDetailsLabel);
 
     const href = slug
         ? localizeHref(`/services/${slug}/`, locale)

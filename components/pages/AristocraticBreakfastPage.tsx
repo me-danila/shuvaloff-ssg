@@ -16,7 +16,7 @@ type BreakfastCopy = {
     subtitle: string;
     bookLabel: string;
     description1: string;
-    description2: string;
+    description2: React.ReactNode;
     breakfastTitle1: string;
     breakfastDescription1: React.ReactNode;
     breakfastButtonLabel1: string;
@@ -40,8 +40,24 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
             "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
         bookLabel: "Забронировать",
         description1: "Воссоздаем атмосферу эпохи XIX века",
-        description2:
-            "Новая глава, вдохновлённая аристократическими традициями, когда по утрам дворянские семьи собирались за большим столом, вели неспешные беседы и наслаждались вкусом жизни. Исключительно для гостей особняка, графские завтраки доступны ежедневно в 13:00 и 15:00.",
+        description2: (
+            <>
+                Новая глава, вдохновлённая аристократическими традициями, когда
+                по&nbsp;утрам дворянские семьи собирались за&nbsp;большим
+                столом, вели неспешные беседы и&nbsp;наслаждались вкусом жизни.
+                <br />
+                <br />
+                Исключительно для гостей особняка, графские завтраки доступны
+                ежедневно
+                <br />
+                (при наличии свободных слотов):
+                <br />
+                вторник / четверг / пятница в 13:00 и 15:00
+                <br />
+                понедельник / среда / суббота / воскресенье в 13:00, 14:00,
+                16:00 и 17:00
+            </>
+        ),
         breakfastTitle1: "Завтрак Графини",
         breakfastDescription1: (
             <>
@@ -125,8 +141,25 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
             "— it’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
         bookLabel: "Book now",
         description1: "Recreating the atmosphere of the 19th century",
-        description2:
-            "A new chapter inspired by aristocratic traditions, when noble families would gather around a large table in the mornings to engage in leisurely conversation and savor the finer things in life. Exclusively for guests of the mansion, the Count’s Breakfast is served daily at 1:00 PM and 3:00 PM.",
+        description2: (
+            <>
+                A new chapter inspired by aristocratic traditions, when noble
+                families would gather around a large table in the mornings to
+                engage in leisurely conversation and savor the finer things in
+                life.
+                <br />
+                <br />
+                Exclusively for guests of the mansion, the Count’s Breakfast is
+                available daily
+                <br />
+                (subject to availability):
+                <br />
+                Tuesday / Thursday / Friday at 1:00 PM and 3:00 PM
+                <br />
+                Monday / Wednesday / Saturday / Sunday at 1:00 PM, 2:00 PM, 4:00
+                PM, and 5:00 PM
+            </>
+        ),
         breakfastTitle1: "The Countess's Breakfast",
         breakfastDescription1: (
             <>

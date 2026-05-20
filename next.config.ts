@@ -11,13 +11,13 @@ const nextConfig: NextConfig = {
             "remoteOptimizedImages.cjs",
         nextImageExportOptimizer_remoteImageCacheTTL: "2592000",
         nextImageExportOptimizer_generateAndUseBlurImages: "false",
-        nextImageExportOptimizer_quality: "75",
+        nextImageExportOptimizer_quality: "85",
         nextImageExportOptimizer_storePicturesInWEBP: "true",
     },
     images: {
         loader: "custom",
-        imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-        deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920],
+        imageSizes: [32, 64, 128, 256],
+        deviceSizes: [640, 828, 1200, 1920],
         remotePatterns: [
             {
                 protocol: "https",
@@ -28,14 +28,6 @@ const nextConfig: NextConfig = {
                 hostname: "static.academia.spb.ru",
             },
         ],
-    },
-    async rewrites() {
-        return [
-            {
-                source: "/myreviews-widget.js",
-                destination: "https://myreviews.dev/widget/dist/index.js",
-            },
-        ];
     },
 };
 

@@ -118,7 +118,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                                     ) : null}
                                 </div>
                                 <Button
-                                    href="https://t.me/+79668342743"
+                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                                     target="_blank"
                                     className="mt-1"
                                     uppercase={false}
@@ -143,7 +143,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
 
             <FadeUp className="mx-6 flex justify-center xl:max-w-6xl xl:mx-auto xl:w-full">
                 <Button
-                    href="https://t.me/+79668342743"
+                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                     target="_blank"
                     variant="primary"
                 >

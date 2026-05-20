@@ -1,8 +1,6 @@
 services:
   shuvaloff-ssg:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/me-danila/shuvaloff-ssg:latest
     container_name: shuvaloff-ssg
     ports:
       - "5171:5171"

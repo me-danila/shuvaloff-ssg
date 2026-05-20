@@ -3,22 +3,13 @@
 import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
-import Image from "@/components/ui/OptimizedImage";
+import ImageGallerySlider from "@/components/ui/slider/ImageGallerySlider";
+import type { Room } from "@/data/RoomsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
-type RoomSlide = {
-    image: { src: string; alt: string };
-    title: string;
-    slug: string;
-    area: string;
-    guests: string;
-    description: string;
-    bookingUrl: string;
-};
-
 type DesktopRoomsGridProps = {
-    rooms: RoomSlide[];
+    rooms: Room[];
 };
 
 export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
@@ -31,19 +22,20 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
             {rooms.map((room) => (
                 <StaggerItem key={room.title} className="flex flex-col gap-2">
                     {/* Фото */}
-                    <a
-                        className="relative w-full h-90 overflow-hidden rounded-md"
-                        href={localizeHref(`/rooms/${room.slug}/`, locale)}
-                    >
-                        <Image
-                            src={room.image.src}
-                            alt={room.image.alt}
-                            fill
+                    <div className="relative w-full h-90 overflow-hidden rounded-md">
+                        <ImageGallerySlider
+                            images={room.gallery}
+                            className="h-full"
                             sizes="50vw"
-                            loading="lazy"
-                            className="object-cover"
                         />
-                    </a>
+                        <a
+                            className="absolute inset-0 z-10 opacity-0"
+                            href={localizeHref(`/rooms/${room.slug}/`, locale)}
+                            aria-label={room.title}
+                        >
+                            a{room.title}
+                        </a>
+                    </div>
 
                     {/* Заголовок */}
                     <h3 className="uppercase text-xl mt-3">{room.title}</h3>

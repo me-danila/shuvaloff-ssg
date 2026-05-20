@@ -83,6 +83,10 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             href: "/aristocratic-spb/",
         },
         {
+            label: "Водные прогулки",
+            href: "/services/boat-tours/",
+        },
+        {
             label: "Бутик-ресторан",
             href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
             target: "_blank",
@@ -111,6 +115,11 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             href: "?cert-open=42761",
             forceReload: true,
         },
+        {
+            label: "Абонемент на проживание",
+            href: "/subscriptions/",
+            forceReload: true,
+        },
     ],
     en: [
         {
@@ -128,6 +137,10 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Aristocratic St. Petersburg",
             href: "/aristocratic-spb/",
+        },
+        {
+            label: "Boat tours",
+            href: "/services/boat-tours/",
         },
         {
             label: "Boutique restaurant",
@@ -156,6 +169,11 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Gift certificates",
             href: "?cert-open=42761",
+            forceReload: true,
+        },
+        {
+            label: "Accommodation subscription",
+            href: "/subscriptions/",
             forceReload: true,
         },
     ],
@@ -448,7 +466,7 @@ export default function Header() {
                             alt={copy.logoAlt}
                             width={150}
                             height={38}
-                            className={`transition-all duration-300 ${
+                            className={`transition-all duration-300 cursor-pointer ${
                                 isLight ? "" : "brightness-0 invert"
                             }`}
                         />
