@@ -40,6 +40,10 @@ export default function RootLayout({
                     src="/scripts/travelline.js"
                     strategy="beforeInteractive"
                 />
+                <Script
+                    src="/scripts/calltracking.js"
+                    strategy="beforeInteractive"
+                />
                 <Script src="/scripts/metrika.js" strategy="afterInteractive" />
                 <SmoothScroll>
                     <Suspense fallback={null}>
