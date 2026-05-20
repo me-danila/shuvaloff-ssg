@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
             "remoteOptimizedImages.cjs",
         nextImageExportOptimizer_remoteImageCacheTTL: "2592000",
         nextImageExportOptimizer_generateAndUseBlurImages: "false",
-        nextImageExportOptimizer_quality: "90",
+        nextImageExportOptimizer_quality: "85",
         nextImageExportOptimizer_storePicturesInWEBP: "true",
     },
     images: {
