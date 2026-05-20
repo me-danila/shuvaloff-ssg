@@ -466,7 +466,7 @@ export default function Header() {
                             alt={copy.logoAlt}
                             width={150}
                             height={38}
-                            className={`transition-all duration-300 ${
+                            className={`transition-all duration-300 cursor-pointer ${
                                 isLight ? "" : "brightness-0 invert"
                             }`}
                         />
