@@ -39,7 +39,13 @@ export default function CardServiceBig({
             target={isExternal ? "_blank" : undefined}
             rel={isExternal ? "noopener noreferrer" : undefined}
             className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/Service"
         >
+            <meta itemProp="name" content={title} />
+            <meta itemProp="url" content={href} />
+            <meta itemProp="image" content={imgUrl} />
             <Image
                 src={imgUrl}
                 alt={title}

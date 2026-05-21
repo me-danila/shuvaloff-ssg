@@ -1,6 +1,9 @@
 import ContactsSection from "@/components/sections/ContactsSection";
 import Divider from "@/components/ui/Divider";
 import SalesGrid from "@/components/ui/grids/SalesGrid";
+import StructuredData from "@/components/seo/StructuredData";
+import { buildSalesPageSchema } from "@/lib/seo/schema";
+import { AllSales } from "@/data/SalesData";
 import { FadeUp } from "@/components/ui/Motion";
 import TransportSlider from "@/components/ui/TransportSlider";
 import type { Locale } from "@/lib/i18n/routing";
@@ -45,6 +48,18 @@ export default function SalesPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
+            <StructuredData
+                data={buildSalesPageSchema({
+                    locale,
+                    path: "/sales/",
+                    name: copy.title,
+                    description: locale === "en" 
+                        ? "Special offers and promotions at ACADEMIA Shuvaloff Mansion hotel"
+                        : "Специальные предложения и акции отеля ACADEMIA Особняк Шувалова",
+                    breadcrumbs: [{ name: copy.title, path: "/sales/" }],
+                    sales: AllSales[locale],
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 mb-4 xl:max-w-6xl xl:mx-auto xl:w-full">
                 <FadeUp className="md:text-center">
                     <h1>{copy.title}</h1>

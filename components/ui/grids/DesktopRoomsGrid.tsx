@@ -16,13 +16,44 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
     const locale = useLocale();
     const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
     const chooseLabel = locale === "ru" ? "Выбрать" : "Choose";
+    const getRoomHref = (slug: string, isHistorical: boolean) =>
+        localizeHref(
+            isHistorical ? `/rooms/historical/${slug}/` : `/rooms/${slug}/`,
+            locale,
+        );
 
     return (
-        <StaggerContainer className="hidden xl:grid xl:grid-cols-2 xl:gap-8 xl:max-w-6xl xl:mx-auto xl:w-full">
-            {rooms.map((room) => (
-                <StaggerItem key={room.title} className="flex flex-col gap-2">
+        <StaggerContainer
+            className="hidden xl:grid xl:grid-cols-2 xl:gap-8 xl:max-w-6xl xl:mx-auto xl:w-full"
+            itemScope
+            itemType="https://schema.org/ItemList"
+        >
+            {rooms.map((room, index) => (
+                <StaggerItem
+                    key={room.title}
+                    className="flex flex-col gap-2"
+                    itemProp="itemListElement"
+                    itemScope
+                    itemType="https://schema.org/ListItem"
+                >
+                    <meta itemProp="position" content={`${index + 1}`} />
                     {/* Фото */}
-                    <div className="relative w-full h-90 overflow-hidden rounded-md">
+                    <div
+                        className="relative w-full h-90 overflow-hidden rounded-md"
+                        itemProp="item"
+                        itemScope
+                        itemType="https://schema.org/HotelRoom"
+                    >
+                        <meta itemProp="name" content={room.title} />
+                        <meta
+                            itemProp="description"
+                            content={room.description}
+                        />
+                        <meta
+                            itemProp="url"
+                            content={getRoomHref(room.slug, room.isHistorical)}
+                        />
+                        <meta itemProp="image" content={room.gallery[0].src} />
                         <ImageGallerySlider
                             images={room.gallery}
                             className="h-full"
@@ -30,7 +61,7 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
                         />
                         <a
                             className="absolute inset-0 z-10 opacity-0"
-                            href={localizeHref(`/rooms/${room.slug}/`, locale)}
+                            href={getRoomHref(room.slug, room.isHistorical)}
                             aria-label={room.title}
                         >
                             a{room.title}
@@ -47,10 +78,7 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
                     <div className="flex items-center gap-8 xl:mt-2">
                         <div className="flex gap-4">
                             <Button
-                                href={localizeHref(
-                                    `/rooms/${room.slug}/`,
-                                    locale,
-                                )}
+                                href={getRoomHref(room.slug, room.isHistorical)}
                                 variant="primary"
                                 size="sm"
                             >

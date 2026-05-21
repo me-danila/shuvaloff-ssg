@@ -32,11 +32,23 @@ export default function CardRoomHistorical({
     const chooseLabel = locale === "ru" ? "ВЫБРАТЬ" : "CHOOSE";
 
     return (
-        <div className="flex flex-col gap-4 flex-1 xl:gap-6">
+        <div
+            className="flex flex-col gap-4 flex-1 xl:gap-6"
+            itemScope
+            itemType="https://schema.org/HotelRoom"
+        >
+            <meta itemProp="name" content={title} />
+            <meta itemProp="description" content={description} />
+            <meta
+                itemProp="url"
+                content={localizeHref(`/rooms/historical/${slug}/`, locale)}
+            />
+            <meta itemProp="image" content={image.src} />
             {/* Фото с текстом поверх */}
             <a
                 href={localizeHref(`/rooms/historical/${slug}/`, locale)}
                 className="relative rounded-md overflow-hidden aspect-4/5 md:aspect-square md:flex-1"
+                itemProp="url"
             >
                 <Image
                     src={image.src}

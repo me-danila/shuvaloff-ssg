@@ -3,11 +3,14 @@ import AntiquesSection from "@/components/sections/AntiquesSection";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
+import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
+import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildRoomSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
     title: "Резиденция Дашковой — ACADEMIA Особняк Шувалова",
@@ -94,8 +97,35 @@ const antiquesItems = [
 ];
 
 export default function HistoricalRooms() {
+    const room = AllRooms.ru.find((item) => item.slug === "dashkova");
+
     return (
-        <main className="flex flex-col gap-6">
+        <main
+            className="flex flex-col gap-6"
+            itemScope
+            itemType="https://schema.org/WebPage"
+        >
+            {room && (
+                <StructuredData
+                    data={buildRoomSchema({
+                        locale: "ru",
+                        path: "/rooms/historical/dashkova/",
+                        room,
+                        breadcrumbs: [
+                            { name: "Главная", path: "/" },
+                            { name: "Номера", path: "/rooms/" },
+                            {
+                                name: "Исторические люксы",
+                                path: "/rooms/historical/",
+                            },
+                            {
+                                name: room.title,
+                                path: "/rooms/historical/dashkova/",
+                            },
+                        ],
+                    })}
+                />
+            )}
             <HeroHistoricalRooms
                 title="РЕЗИДЕНЦИЯ ДАШКОВОЙ"
                 subtitle={

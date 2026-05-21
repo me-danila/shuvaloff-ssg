@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import ContactsSection from "@/components/sections/ContactsSection";
-import RoomsSection from "@/components/sections/RoomsSection";
+import dynamic from "next/dynamic";
+import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
+import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildCollectionPageSchema } from "@/lib/seo/schema";
+
+const ContactsSection = dynamic(() => import("@/components/sections/ContactsSection"), { ssr: true });
+const RoomsSection = dynamic(() => import("@/components/sections/RoomsSection"), { ssr: true });
 
 export const metadata: Metadata = {
     title: "Категории номеров — ACADEMIA Особняк Шувалова",
@@ -14,7 +19,32 @@ export const metadata: Metadata = {
 
 export default function Rooms() {
     return (
-        <main className="flex flex-col gap-4 xl:gap-10">
+        <main
+            className="flex flex-col gap-4 xl:gap-10"
+            itemScope
+            itemType="https://schema.org/CollectionPage"
+        >
+            <StructuredData
+                data={buildCollectionPageSchema({
+                    locale: "ru",
+                    path: "/rooms/",
+                    name: "Категории номеров",
+                    description:
+                        "Номера и люксы отеля ACADEMIA Особняк Шувалова в Санкт-Петербурге.",
+                    breadcrumbs: [
+                        { name: "Главная", path: "/" },
+                        { name: "Номера", path: "/rooms/" },
+                    ],
+                    items: AllRooms.ru.map((room) => ({
+                        name: room.title,
+                        path: room.isHistorical
+                            ? `/rooms/historical/${room.slug}/`
+                            : `/rooms/${room.slug}/`,
+                        image: room.image.src,
+                        description: room.description,
+                    })),
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-6xl xl:mx-auto">
                 <FadeUp>
                     <h1>Категории номеров</h1>

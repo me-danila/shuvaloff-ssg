@@ -1,7 +1,6 @@
 import type { Locale } from "@/lib/i18n/routing";
 import { normalizePath, stripLocalePrefix } from "@/lib/i18n/routing";
-
-const SITE_URL = "https://academia-shuvaloff.ru";
+import { SITE_URL } from "@/lib/seo/site";
 
 export const siteMetadataBase = new URL(SITE_URL);
 

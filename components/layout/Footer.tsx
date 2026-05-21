@@ -6,6 +6,7 @@ import Image from "@/components/ui/OptimizedImage";
 import SocialLinks from "@/components/ui/SocialLinks";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
+import { SITE_URL, SOCIAL_LINKS } from "@/lib/seo/site";
 
 const NAV_LINKS = {
     ru: [
@@ -70,7 +71,23 @@ export default function Footer() {
         locale === "ru" ? "®, г. Санкт-Петербург" : "®, Saint Petersburg";
 
     return (
-        <footer className="mt-12 xl:mt-20 bg-[#1e2b3c] w-full">
+        <footer
+            className="mt-12 xl:mt-20 bg-[#1e2b3c] w-full"
+            itemScope
+            itemType="https://schema.org/Hotel"
+        >
+            <meta
+                itemProp="name"
+                content={
+                    locale === "ru"
+                        ? "ACADEMIA Особняк Шувалова"
+                        : "ACADEMIA Mansion Shuvaloff"
+                }
+            />
+            <meta itemProp="url" content={SITE_URL} />
+            {SOCIAL_LINKS.map((href) => (
+                <meta key={href} itemProp="sameAs" content={href} />
+            ))}
             {/* ── Desktop ── */}
             <div className="hidden md:block max-w-6xl mx-auto py-12">
                 <StaggerContainer

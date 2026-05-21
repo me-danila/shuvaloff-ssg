@@ -11,6 +11,7 @@ type RoomSlide = {
     image: { src: string; alt: string };
     title: string;
     slug: string;
+    isHistorical?: boolean;
     area: string;
     guests: string;
     description: string;
@@ -26,6 +27,11 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
     const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
     const chooseLabel = locale === "ru" ? "Выбрать" : "Choose";
     const { current, sliderRef, scrollTo } = useSlider();
+    const getRoomHref = (slug: string, isHistorical?: boolean) =>
+        localizeHref(
+            isHistorical ? `/rooms/historical/${slug}/` : `/rooms/${slug}/`,
+            locale,
+        );
 
     return (
         <div className="xl:hidden flex flex-col gap-4 px-6">
@@ -34,13 +40,44 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
                 <div
                     ref={sliderRef}
                     className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar rounded-lg"
+                    itemScope
+                    itemType="https://schema.org/ItemList"
                 >
-                    {rooms.map((room) => (
+                    {rooms.map((room, index) => (
                         <a
-                            href={localizeHref(`/rooms/${room.slug}/`, locale)}
+                            href={getRoomHref(room.slug, room.isHistorical)}
                             key={room.title}
                             className="relative snap-start shrink-0 w-full h-90 overflow-hidden"
+                            itemProp="itemListElement"
+                            itemScope
+                            itemType="https://schema.org/ListItem"
                         >
+                            <meta
+                                itemProp="position"
+                                content={`${index + 1}`}
+                            />
+                            <meta
+                                itemProp="url"
+                                content={getRoomHref(
+                                    room.slug,
+                                    room.isHistorical,
+                                )}
+                            />
+                            <div
+                                itemProp="item"
+                                itemScope
+                                itemType="https://schema.org/HotelRoom"
+                            >
+                                <meta itemProp="name" content={room.title} />
+                                <meta
+                                    itemProp="description"
+                                    content={room.description}
+                                />
+                                <meta
+                                    itemProp="image"
+                                    content={room.image.src}
+                                />
+                            </div>
                             <Image
                                 src={room.image.src}
                                 alt={room.image.alt}
@@ -99,9 +136,9 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
             {/* Кнопки */}
             <div className="flex gap-4">
                 <Button
-                    href={localizeHref(
-                        `/rooms/${rooms[current]?.slug}/`,
-                        locale,
+                    href={getRoomHref(
+                        rooms[current]?.slug ?? "",
+                        rooms[current]?.isHistorical,
                     )}
                     variant="primary"
                     size="xs"

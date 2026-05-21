@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import CardRoomHistorical from "@/components/ui/CardRoomHistorical";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
     title: "Исторические люксы — ACADEMIA Особняк Шувалова",
@@ -45,7 +47,34 @@ const historicalRooms = AllRooms.ru
 
 export default function HistoricalRooms() {
     return (
-        <main className="flex flex-col gap-8">
+        <main
+            className="flex flex-col gap-8"
+            itemScope
+            itemType="https://schema.org/CollectionPage"
+        >
+            <StructuredData
+                data={buildCollectionPageSchema({
+                    locale: "ru",
+                    path: "/rooms/historical/",
+                    name: "Исторические люксы",
+                    description:
+                        "Исторические люксы с подлинными антикварными элементами в особняке Шувалова.",
+                    breadcrumbs: [
+                        { name: "Главная", path: "/" },
+                        { name: "Номера", path: "/rooms/" },
+                        {
+                            name: "Исторические люксы",
+                            path: "/rooms/historical/",
+                        },
+                    ],
+                    items: historicalRooms.map((room) => ({
+                        name: room.title,
+                        path: `/rooms/historical/${room.slug}/`,
+                        image: room.image.src,
+                        description: room.description,
+                    })),
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-5xl xl:mx-auto">
                 <FadeUp>
                     <h1>ИСТОРИЧЕСКИЕ ЛЮКСЫ</h1>

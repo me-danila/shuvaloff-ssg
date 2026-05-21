@@ -14,7 +14,11 @@ export default function ServicesGrid() {
     const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
 
     return (
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <StaggerContainer
+            className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
+            itemScope
+            itemType="https://schema.org/ItemList"
+        >
             {services.map((service) => {
                 const href = service.slug
                     ? localizeHref(`/services/${service.slug}/`, locale)
@@ -25,7 +29,14 @@ export default function ServicesGrid() {
                     <StaggerItem
                         key={service.title}
                         className="relative aspect-square rounded-md overflow-hidden group flex"
+                        itemProp="itemListElement"
+                        itemScope
+                        itemType="https://schema.org/ListItem"
                     >
+                        <meta
+                            itemProp="position"
+                            content={`${services.indexOf(service) + 1}`}
+                        />
                         <Image
                             src={service.imgUrl}
                             alt={service.title}
@@ -34,7 +45,19 @@ export default function ServicesGrid() {
                             className="object-cover"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/50" />
-                        <div className="absolute inset-0 flex flex-col justify-between text-white p-6 xl:p-8">
+                        <div
+                            className="absolute inset-0 flex flex-col justify-between text-white p-6 xl:p-8"
+                            itemProp="item"
+                            itemScope
+                            itemType="https://schema.org/Service"
+                        >
+                            <meta itemProp="name" content={service.title} />
+                            <meta
+                                itemProp="description"
+                                content={service.subtitle}
+                            />
+                            <meta itemProp="image" content={service.imgUrl} />
+                            <meta itemProp="url" content={href} />
                             <p className="font-baskerville uppercase leading-tight xl:text-2xl">
                                 {service.title}
                             </p>

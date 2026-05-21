@@ -1,11 +1,16 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import {
     BookingFormDesktop,
     BookingFormMobile,
 } from "@/components/sections/BookingFormResponsive";
-import ContactsSection from "@/components/sections/ContactsSection";
-import DarkHeroSection from "@/components/sections/DarkHeroSection";
-import HistoricalMapSection from "@/components/sections/HistoricalMapSection";
+
+const ContactsSection = dynamic(() => import("@/components/sections/ContactsSection"), { ssr: true });
+const DarkHeroSection = dynamic(() => import("@/components/sections/DarkHeroSection"), { ssr: true });
+const HistoricalMapSection = dynamic(() => import("@/components/sections/HistoricalMapSection"), { ssr: true });
+
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import {
@@ -18,6 +23,7 @@ import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
+import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
 type HomeCopy = {
     heroTitle: React.ReactNode;
@@ -179,7 +185,52 @@ export default function HomePage({ locale }: { locale: Locale }) {
     const descriptionImages = descriptionImagesByLocale[locale];
 
     return (
-        <main className="flex flex-col gap-6">
+        <main
+            className="flex flex-col gap-6"
+            itemScope
+            itemType="https://schema.org/WebPage"
+        >
+            <StructuredData
+                data={buildCollectionPageSchema({
+                    locale,
+                    path: "/",
+                    name:
+                        locale === "ru"
+                            ? "Отель ACADEMIA Особняк Шувалова"
+                            : "ACADEMIA Mansion Shuvaloff Hotel",
+                    description:
+                        locale === "ru"
+                            ? "Бутик-отель в бережно отреставрированном особняке XIX века в центре Санкт-Петербурга."
+                            : "Boutique hotel in a restored 19th-century mansion in central Saint Petersburg.",
+                    breadcrumbs: [
+                        {
+                            name: locale === "ru" ? "Главная" : "Home",
+                            path: "/",
+                        },
+                    ],
+                    items: [
+                        {
+                            name:
+                                locale === "ru"
+                                    ? "Категории номеров"
+                                    : "Room categories",
+                            path: "/rooms/",
+                        },
+                        {
+                            name:
+                                locale === "ru"
+                                    ? "Дополнительные услуги"
+                                    : "Additional services",
+                            path: "/services/",
+                        },
+                        {
+                            name:
+                                locale === "ru" ? "Забронировать" : "Book now",
+                            path: "/booking/",
+                        },
+                    ],
+                })}
+            />
             <section>
                 <div className="relative overflow-hidden aspect-8/9 xl:aspect-[unset] xl:min-h-screen">
                     <FadeIn
@@ -192,8 +243,8 @@ export default function HomePage({ locale }: { locale: Locale }) {
                             muted
                             loop
                             playsInline
-                            preload="metadata"
-                            className="w-full h-full object-cover"
+                            preload="auto"
+                            className="w-full h-full object-cover bg-gray-100"
                         />
                     </FadeIn>
 
@@ -209,13 +260,17 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                     {copy.heroSubtitle}
                                 </p>
                             </StaggerItem>
-                            <BookingFormDesktop />
+                            <Suspense fallback={<div className="h-20 animate-pulse bg-white/10 rounded-lg" />}>
+                                <BookingFormDesktop />
+                            </Suspense>
                         </div>
                     </StaggerContainer>
                 </div>
             </section>
 
-            <BookingFormMobile />
+            <Suspense fallback={null}>
+                <BookingFormMobile />
+            </Suspense>
 
             <section className="relative overflow-hidden">
                 {/* MOBILE: фото снизу 55% */}

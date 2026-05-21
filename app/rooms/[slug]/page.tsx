@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import DesktopHeroGrid from "@/components/ui/grids/DesktopHeroGrid";
@@ -9,6 +10,7 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildRoomSchema } from "@/lib/seo/schema";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -17,12 +19,14 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-    return AllRooms.ru.map((room) => ({ slug: room.slug }));
+    return AllRooms.ru
+        .filter((room) => !room.isHistorical)
+        .map((room) => ({ slug: room.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
-    const room = AllRooms.ru.find((r) => r.slug === slug);
+    const room = AllRooms.ru.find((r) => r.slug === slug && !r.isHistorical);
     if (!room) return {};
     return {
         title: `${room.title} — ACADEMIA Особняк Шувалова`,
@@ -33,11 +37,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function RoomPage({ params }: Props) {
     const { slug } = await params;
-    const room = AllRooms.ru.find((r) => r.slug === slug);
+    const room = AllRooms.ru.find((r) => r.slug === slug && !r.isHistorical);
     if (!room) notFound();
 
     return (
-        <main className="flex flex-col gap-4 xl:gap-6">
+        <main
+            className="flex flex-col gap-4 xl:gap-6"
+            itemScope
+            itemType="https://schema.org/WebPage"
+        >
+            <StructuredData
+                data={buildRoomSchema({
+                    locale: "ru",
+                    path: `/rooms/${slug}/`,
+                    room,
+                    breadcrumbs: [
+                        { name: "Главная", path: "/" },
+                        { name: "Номера", path: "/rooms/" },
+                        { name: room.title, path: `/rooms/${slug}/` },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-2 text-center xl:max-w-6xl xl:mx-auto xl:w-full">
                 <div className="m-4 xl:w-full xl:my-0">
                     <FadeUp>

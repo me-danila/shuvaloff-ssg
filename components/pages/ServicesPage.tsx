@@ -1,10 +1,12 @@
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import CardServiceBig from "@/components/ui/CardServiceBig";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { AllServices } from "@/data/ServicesData";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
+import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
 type ServicesCopy = {
     title: string;
@@ -72,7 +74,43 @@ export default function ServicesPage({ locale }: { locale: Locale }) {
     const services = AllServices[locale];
 
     return (
-        <main className="flex flex-col gap-8">
+        <main
+            className="flex flex-col gap-8"
+            itemScope
+            itemType="https://schema.org/CollectionPage"
+        >
+            <StructuredData
+                data={buildCollectionPageSchema({
+                    locale,
+                    path: "/services/",
+                    name:
+                        locale === "ru"
+                            ? "Дополнительные услуги"
+                            : "Additional services",
+                    description:
+                        locale === "ru"
+                            ? "Дополнительные услуги, консьерж-сервис и персональные предложения для гостей отеля."
+                            : "Additional services, concierge support, and tailor-made offers for hotel guests.",
+                    breadcrumbs: [
+                        {
+                            name: locale === "ru" ? "Главная" : "Home",
+                            path: "/",
+                        },
+                        {
+                            name: locale === "ru" ? "Услуги" : "Services",
+                            path: "/services/",
+                        },
+                    ],
+                    items: services
+                        .filter((service) => service.slug)
+                        .map((service) => ({
+                            name: service.title,
+                            path: `/services/${service.slug}/`,
+                            image: service.imgUrl,
+                            description: service.subtitle,
+                        })),
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 xl:max-w-6xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>

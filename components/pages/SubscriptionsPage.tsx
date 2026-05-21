@@ -5,6 +5,8 @@ import Divider from "@/components/ui/Divider";
 import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
 import ImageGallerySlider from "@/components/ui/slider/ImageGallerySlider";
+import StructuredData from "@/components/seo/StructuredData";
+import { buildSubscriptionPageSchema } from "@/lib/seo/schema";
 import { AllRooms } from "@/data/RoomsData";
 import type { Locale } from "@/lib/i18n/routing";
 
@@ -444,6 +446,22 @@ export default function SubscriptionsPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-10">
+            <StructuredData
+                data={buildSubscriptionPageSchema({
+                    locale,
+                    path: "/subscriptions/",
+                    name: locale === "en" ? "Business accommodation subscription" : "Деловой абонемент на проживание в отеле",
+                    description: locale === "en" 
+                        ? "A single subscription for several stays at a fixed price with flexible arrival dates."
+                        : "Единый абонемент на несколько проживаний по фиксированной цене с гибкими датами заезда.",
+                    breadcrumbs: [
+                        {
+                            name: locale === "en" ? "Business subscription" : "Деловой абонемент",
+                            path: "/subscriptions/",
+                        },
+                    ],
+                })}
+            />
             <section className="mx-6 my-2 flex flex-col gap-4 xl:mx-auto xl:max-w-4xl">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>

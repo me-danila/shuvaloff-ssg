@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
@@ -8,6 +9,7 @@ import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildServiceSchema } from "@/lib/seo/schema";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -40,7 +42,23 @@ export default async function ServicePageEn({ params }: Props) {
     );
 
     return (
-        <main className="flex flex-col gap-8">
+        <main
+            className="flex flex-col gap-8"
+            itemScope
+            itemType="https://schema.org/WebPage"
+        >
+            <StructuredData
+                data={buildServiceSchema({
+                    locale: "en",
+                    path: `/services/${slug}/`,
+                    service,
+                    breadcrumbs: [
+                        { name: "Home", path: "/" },
+                        { name: "Services", path: "/services/" },
+                        { name: service.title, path: `/services/${slug}/` },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-6xl xl:mx-auto">
                 <FadeUp className="md:text-center my-4">
                     <h1>{service.title}</h1>

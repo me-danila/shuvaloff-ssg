@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/slider/WeddingBigSlider";
 import WeddingSlider from "@/components/ui/slider/WeddingSlider";
 import WeddingReviewsWidget from "@/components/ui/WeddingReviewsWidget";
+import StructuredData from "@/components/seo/StructuredData";
+import { buildWeddingPageSchema } from "@/lib/seo/schema";
 import type { Locale } from "@/lib/i18n/routing";
 
 type WeddingCopy = {
@@ -526,6 +528,15 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-8">
+            <StructuredData
+                data={buildWeddingPageSchema({
+                    locale,
+                    path: "/wedding/",
+                    name: copy.heroTitle,
+                    description: copy.heroDescription,
+                    breadcrumbs: [{ name: copy.heroTitle, path: "/wedding/" }],
+                })}
+            />
             <section>
                 <div className="relative overflow-hidden aspect-8/15 xl:aspect-[unset] xl:min-h-screen">
                     <FadeIn

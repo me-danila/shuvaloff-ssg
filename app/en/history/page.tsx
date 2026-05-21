@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import StructuredData from "@/components/seo/StructuredData";
+import { buildHistoryPageSchema } from "@/lib/seo/schema";
 import DividerHistory from "@/components/ui/divider/History";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -14,6 +16,21 @@ export const metadata: Metadata = {
 export default function EnHistory() {
     return (
         <main className="flex flex-col gap-6 xl:gap-6">
+            <StructuredData
+                data={buildHistoryPageSchema({
+                    locale: "en",
+                    path: "/history/",
+                    name: "History of Count Shuvalov Mansion",
+                    description:
+                        "A journey through time: the history of Count Shuvalov Mansion in Saint Petersburg",
+                    breadcrumbs: [
+                        {
+                            name: "History",
+                            path: "/history/",
+                        },
+                    ],
+                })}
+            />
             <FadeUp duration={1.2}>
                 <section className="flex flex-col gap-6 mx-6 text-center xl:mx-auto mt-6 xl:max-w-3xl">
                     <FadeUp>
