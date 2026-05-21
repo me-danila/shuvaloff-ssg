@@ -1,12 +1,12 @@
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import SalesGrid from "@/components/ui/grids/SalesGrid";
-import StructuredData from "@/components/seo/StructuredData";
-import { buildSalesPageSchema } from "@/lib/seo/schema";
-import { AllSales } from "@/data/SalesData";
 import { FadeUp } from "@/components/ui/Motion";
 import TransportSlider from "@/components/ui/TransportSlider";
+import { AllSales } from "@/data/SalesData";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildSalesPageSchema } from "@/lib/seo/schema";
 
 type SalesCopy = {
     title: string;
@@ -53,9 +53,10 @@ export default function SalesPage({ locale }: { locale: Locale }) {
                     locale,
                     path: "/sales/",
                     name: copy.title,
-                    description: locale === "en" 
-                        ? "Special offers and promotions at ACADEMIA Shuvaloff Mansion hotel"
-                        : "Специальные предложения и акции отеля ACADEMIA Особняк Шувалова",
+                    description:
+                        locale === "en"
+                            ? "Special offers and promotions at ACADEMIA Shuvaloff Mansion hotel"
+                            : "Специальные предложения и акции отеля ACADEMIA Особняк Шувалова",
                     breadcrumbs: [{ name: copy.title, path: "/sales/" }],
                     sales: AllSales[locale],
                 })}

@@ -9,7 +9,6 @@ ENV NODE_OPTIONS="--max-old-space-size=3072" \
     SHARP_CONCURRENCY=6
 RUN --mount=type=cache,target=/app/.next \
     --mount=type=cache,target=/app/public/nextImageExportOptimizer \
-    --mount=type=cache,target=/app/public/next-image-export-optimizer-hashes.json \
     --mount=type=cache,target=/app/remoteImagesForOptimization \
     bun run build
 

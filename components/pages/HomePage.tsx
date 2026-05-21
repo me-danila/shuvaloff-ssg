@@ -1,14 +1,23 @@
-import Link from "next/link";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Suspense } from "react";
 import {
     BookingFormDesktop,
     BookingFormMobile,
 } from "@/components/sections/BookingFormResponsive";
 
-const ContactsSection = dynamic(() => import("@/components/sections/ContactsSection"), { ssr: true });
-const DarkHeroSection = dynamic(() => import("@/components/sections/DarkHeroSection"), { ssr: true });
-const HistoricalMapSection = dynamic(() => import("@/components/sections/HistoricalMapSection"), { ssr: true });
+const ContactsSection = dynamic(
+    () => import("@/components/sections/ContactsSection"),
+    { ssr: true },
+);
+const DarkHeroSection = dynamic(
+    () => import("@/components/sections/DarkHeroSection"),
+    { ssr: true },
+);
+const HistoricalMapSection = dynamic(
+    () => import("@/components/sections/HistoricalMapSection"),
+    { ssr: true },
+);
 
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
@@ -260,7 +269,11 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                     {copy.heroSubtitle}
                                 </p>
                             </StaggerItem>
-                            <Suspense fallback={<div className="h-20 animate-pulse bg-white/10 rounded-lg" />}>
+                            <Suspense
+                                fallback={
+                                    <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
+                                }
+                            >
                                 <BookingFormDesktop />
                             </Suspense>
                         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { type HTMLMotionProps, motion } from "framer-motion";
+import { type HTMLMotionProps, m } from "framer-motion";
 import { forwardRef, type ReactNode } from "react";
 
 type BaseDivProps = Omit<HTMLMotionProps<"div">, "children">;
@@ -24,7 +24,7 @@ export function FadeIn({
     ...props
 }: MotionProps) {
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0 }}
             animate={mode === "mount" ? { opacity: 1 } : undefined}
             whileInView={mode === "inView" ? { opacity: 1 } : undefined}
@@ -37,7 +37,7 @@ export function FadeIn({
             {...props}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 }
 
@@ -51,7 +51,7 @@ export function FadeUp({
     ...props
 }: MotionProps) {
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0, y }}
             animate={mode === "mount" ? { opacity: 1, y: 0 } : undefined}
             whileInView={mode === "inView" ? { opacity: 1, y: 0 } : undefined}
@@ -64,7 +64,7 @@ export function FadeUp({
             {...props}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 }
 
@@ -91,7 +91,7 @@ export const StaggerContainer = forwardRef<
         ref,
     ) => {
         return (
-            <motion.div
+            <m.div
                 ref={ref}
                 onScroll={onScroll}
                 initial="hidden"
@@ -112,7 +112,7 @@ export const StaggerContainer = forwardRef<
                 {...props}
             >
                 {children}
-            </motion.div>
+            </m.div>
         );
     },
 );
@@ -128,7 +128,7 @@ export function StaggerItem({
     y?: number;
 }) {
     return (
-        <motion.div
+        <m.div
             variants={{
                 hidden: { opacity: 0, y },
                 show: { opacity: 1, y: 0 },
@@ -140,6 +140,6 @@ export function StaggerItem({
             {...props}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 }

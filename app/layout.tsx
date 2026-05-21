@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { domAnimation, LazyMotion } from "framer-motion";
 import Script from "next/script";
 import { Suspense } from "react";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
@@ -84,6 +85,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ru">
+            <head>
+                <link rel="preconnect" href="https://academia.spb.ru" />
+                <link rel="preconnect" href="https://static.academia.spb.ru" />
+                <link rel="preconnect" href="https://mc.yandex.ru" />
+            </head>
             <body
                 className={`${baskerville.variable} ${alistair.variable} antialiased`}
             >
@@ -97,19 +103,25 @@ export default function RootLayout({
                     src="/scripts/calltracking.js"
                     strategy="afterInteractive"
                 />
-                <Script src="/scripts/metrika.js" strategy="afterInteractive" />
+                <Script src="/scripts/metrika.js" strategy="lazyOnload" />
                 <SmoothScroll>
-                    <Suspense fallback={null}>
-                        <Header />
-                    </Suspense>
-                    <Suspense fallback={null}>{children}</Suspense>
-                    <Footer />
+                    <LazyMotion features={domAnimation}>
+                        <Suspense fallback={null}>
+                            <Header />
+                        </Suspense>
+                        <Suspense fallback={null}>{children}</Suspense>
+                        <Footer />
+                    </LazyMotion>
                 </SmoothScroll>
                 <Script id="hotbot" strategy="lazyOnload">{`
-  var s = document.createElement('script');
-  s.src = 'https://cdn.hotbot.ai/w/hb.js';
-  s.onload = function() { HotBot.init({ appId: '66714551573a85001e63f919' }); };
-  document.body.appendChild(s);
+  window.addEventListener('scroll', function() {
+    if (window.hotbotLoaded) return;
+    window.hotbotLoaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://cdn.hotbot.ai/w/hb.js';
+    s.onload = function() { HotBot.init({ appId: '66714551573a85001e63f919' }); };
+    document.body.appendChild(s);
+  }, { once: true, passive: true });
 `}</Script>
             </body>
         </html>

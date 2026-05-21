@@ -7,8 +7,14 @@ import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
 import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
-const ContactsSection = dynamic(() => import("@/components/sections/ContactsSection"), { ssr: true });
-const RoomsSection = dynamic(() => import("@/components/sections/RoomsSection"), { ssr: true });
+const ContactsSection = dynamic(
+    () => import("@/components/sections/ContactsSection"),
+    { ssr: true },
+);
+const RoomsSection = dynamic(
+    () => import("@/components/sections/RoomsSection"),
+    { ssr: true },
+);
 
 export const metadata: Metadata = {
     title: "Категории номеров — ACADEMIA Особняк Шувалова",

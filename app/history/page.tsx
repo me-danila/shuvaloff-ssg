@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
-import { buildHistoryPageSchema } from "@/lib/seo/schema";
 import DividerHistory from "@/components/ui/divider/History";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildHistoryPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
     title: "История особняка графа Шувалова — ACADEMIA Особняк Шувалова",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContactsSection from "@/components/sections/ContactsSection";
 import WeddingHistoricalMapSection from "@/components/sections/WeddingHistoricalMapSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import {
     FadeIn,
@@ -21,9 +22,8 @@ import {
 } from "@/components/ui/slider/WeddingBigSlider";
 import WeddingSlider from "@/components/ui/slider/WeddingSlider";
 import WeddingReviewsWidget from "@/components/ui/WeddingReviewsWidget";
-import StructuredData from "@/components/seo/StructuredData";
-import { buildWeddingPageSchema } from "@/lib/seo/schema";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWeddingPageSchema } from "@/lib/seo/schema";
 
 type WeddingCopy = {
     heroTitle: string;
