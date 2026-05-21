@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "biome check",
         "format": "biome format --write",
-        "fix": "bun format && bun lint --fix"
+        "fix": "bun format && bun lint --fix",
+        "docker-build": "docker buildx build --push --platform linux/amd64 -t ghcr.io/me-danila/shuvaloff-ssg:latest ."
     },
     "dependencies": {
         "@phosphor-icons/react": "^2.1.10",
