@@ -10,8 +10,10 @@ ENV NODE_OPTIONS="--max-old-space-size=3072" \
 RUN --mount=type=cache,target=/app/.next \
     --mount=type=cache,target=/app/public/nextImageExportOptimizer \
     --mount=type=cache,target=/app/remoteImagesForOptimization \
-    --mount=type=cache,target=/app/public/next-image-export-optimizer-hashes.json \
-    bun run build
+    --mount=type=cache,target=/app/cache/image-hashes \
+    cp -r /app/cache/image-hashes/. public/ 2>/dev/null || true && \
+    bun run build && \
+    cp public/next-image-export-optimizer-hashes.json /app/cache/image-hashes/ 2>/dev/null || true
 
 FROM busybox:1.36.1-musl
 WORKDIR /srv
