@@ -97,7 +97,7 @@ export default function RootLayout({
                 <HtmlLangSync />
                 <Script
                     src="/scripts/travelline.js"
-                    strategy="afterInteractive"
+                    strategy="beforeInteractive"
                 />
                 <Script
                     src="/scripts/calltracking.js"

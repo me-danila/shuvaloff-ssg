@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import TravelLineBookingForm from "@/components/sections/TravelLineBookingForm";
 import GeniusLink from "@/components/ui/GeniusLink";
 import { FadeUp } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
@@ -35,10 +36,7 @@ export default function BookingPage({ locale }: { locale: Locale }) {
                     {copy.line3}
                 </p>
             </FadeUp>
-            <section
-                id="tl-booking-form"
-                className="max-w-xl:px-4 xl:w-full xl:mx-auto xl:max-w-6xl"
-            ></section>
+            <TravelLineBookingForm />
         </main>
     );
 }
