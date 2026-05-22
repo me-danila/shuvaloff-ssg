@@ -837,34 +837,37 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 onClose={() => setCompositionOpen(false)}
             >
                 <div className="flex flex-col xl:flex-row gap-6 m-6 xl:m-8 items-center">
-                <div className="relative min-h-75 xl:min-h-92 w-full xl:max-w-[17rem]">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/05/IMG_6642-1.avif"
-                        className="object-cover rounded-md"
-                        fill
-                        alt={copy.service2.title}
-                    />
-                </div>
-                <div className="flex flex-col gap-2">
-                    <h2 className="font-baskerville text-xl xl:text-2xl uppercase">
-                        {copy.compositionTitle}:
-                    </h2>
-                    <ul className="space-y-2">
-                        {copy.service2.composition.map((item) => (
-                            <li key={item} className="flex gap-3 text-sm md:text-base">
-                                <span aria-hidden="true">—</span>
-                                <span>{item}</span>
-                            </li>
-                        ))}
-                    </ul>
-                    <Button
-                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                        target="_blank"
-                        className="max-w-fit mt-2 xl:mt-4"
-                    >
-                        {copy.orderLabel}
-                    </Button>
-                </div>
+                    <div className="relative min-h-75 xl:min-h-92 w-full xl:max-w-[17rem]">
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/05/IMG_6642-1.avif"
+                            className="object-cover rounded-md"
+                            fill
+                            alt={copy.service2.title}
+                        />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <h2 className="font-baskerville text-xl xl:text-2xl uppercase">
+                            {copy.compositionTitle}:
+                        </h2>
+                        <ul className="space-y-2">
+                            {copy.service2.composition.map((item) => (
+                                <li
+                                    key={item}
+                                    className="flex gap-3 text-sm md:text-base"
+                                >
+                                    <span aria-hidden="true">—</span>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                        <Button
+                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            target="_blank"
+                            className="max-w-fit mt-2 xl:mt-4"
+                        >
+                            {copy.orderLabel}
+                        </Button>
+                    </div>
                 </div>
             </Modal>
         </main>

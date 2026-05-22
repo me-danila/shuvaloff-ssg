@@ -10,7 +10,7 @@ import type { Locale } from "@/lib/i18n/routing";
 type RewardsCopy = {
     title: string;
     subtitle: string;
-    intro: string;
+    intro: React.ReactNode;
     loyaltyTitle: string;
     loyaltyParagraph: string;
     registerTitle: string;
@@ -24,7 +24,17 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
     ru: {
         title: "Программа особых привилегий",
         subtitle: "Academia Rewards",
-        intro: "Путешествие запоминается не только маршрутами и встречами, но и тем, где вы отдыхаете. Проживание в особняке ACADEMIA — это больше, чем просто номер в гостинице. Это атмосфера, в которой рождается настроение всей поездки: комфорт, внимание к деталям и доступ к особым привилегиям делают каждый день путешествия действительно запоминающимся.",
+        intro: (
+            <>
+                Путешествие запоминается не&nbsp;только маршрутами
+                и&nbsp;встречами, но&nbsp;и&nbsp;тем, где вы&nbsp;отдыхаете.
+                Проживание в&nbsp;особняке ACADEMIA&nbsp;&mdash; это больше, чем
+                просто номер в&nbsp;гостинице. Это атмосфера, в&nbsp;которой
+                рождается настроение всей поездки: комфорт, внимание
+                к&nbsp;деталям и&nbsp;доступ к&nbsp;особым привилегиям делают
+                каждый день путешествия действительно запоминающимся.
+            </>
+        ),
         loyaltyTitle: "ПРОГРАММА ЛОЯЛЬНОСТИ ACADEMIA REWARDS",
         loyaltyParagraph:
             "Здесь забота о вас — не формальность, а знак особого статуса. Каждый гость получает индивидуальные условия бронирования, а набор привилегий соответствует ожиданиям самых взыскательных путешественников.",
@@ -39,7 +49,15 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
     en: {
         title: "A program of special privileges",
         subtitle: "Academia Rewards",
-        intro: "A memorable trip is shaped not only by routes and meetings, but also by where you stay. A stay at the ACADEMIA mansion is more than just a hotel room. It is an atmosphere that defines your journey: comfort, attention to detail, and access to special privileges make every travel day truly memorable.",
+        intro: (
+            <>
+                A memorable trip is shaped not only by routes and meetings, but
+                also by where you stay. A stay at the ACADEMIA mansion is more
+                than just a hotel room. It is an atmosphere that defines your
+                journey: comfort, attention to detail, and access to special
+                privileges make every travel day truly memorable.
+            </>
+        ),
         loyaltyTitle: "ACADEMIA REWARDS LOYALTY PROGRAM",
         loyaltyParagraph:
             "Here, caring for you is not a formality but a mark of special status. Every guest receives personalized booking conditions, and the set of privileges meets the expectations of even the most discerning travelers.",

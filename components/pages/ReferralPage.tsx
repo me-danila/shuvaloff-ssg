@@ -1,10 +1,11 @@
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
+import TransportSlider from "@/components/ui/TransportSlider";
 import type { Locale } from "@/lib/i18n/routing";
-import BookingForm from "@/components/sections/BookingForm";
 
 type RewardsCopy = {
     title: string;
@@ -15,6 +16,8 @@ type RewardsCopy = {
     conditionList: string[];
     pathTitle: React.ReactNode;
     joinLabel: string;
+    transportTitle: string;
+    transportDescription: React.ReactNode;
 };
 
 const copyByLocale: Record<Locale, RewardsCopy> = {
@@ -22,17 +25,21 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
         title: "Реферальная программа привилегий",
         intro: (
             <>
-                Каждый участник программы привилегий ACADEMIA REWARDS может
-                приглашать друзей присоединиться к&nbsp;программе
+                Каждый участник{" "}
+                <a href="/rewards/" className="font-semibold border-b">
+                    программы привилегий ACADEMIA REWARDS
+                </a>{" "}
+                может приглашать друзей присоединиться к&nbsp;программе
                 и&nbsp;получать за&nbsp;это приятные бонусы для обоих.
                 <br />
                 <br />
                 Просто поделитесь уникальной ссылкой-приглашением из&nbsp;вашего
-                личного кабинета, и&nbsp;ваш друг после регистрации
-                в&nbsp;программе мгновенно получит карту лояльности
-                и&nbsp;приветственный ваучер на&nbsp;скидку&nbsp;15%.
-                А&nbsp;после проживании друга повысится ваш личный уровень
-                в&nbsp;программе привилегий.
+                личного кабинета,
+                <br />
+                и&nbsp;ваш друг после регистрации в&nbsp;программе мгновенно
+                получит карту лояльности и&nbsp;приветственный ваучер
+                на&nbsp;скидку&nbsp;15%. А&nbsp;после проживании друга повысится
+                ваш личный уровень в&nbsp;программе привилегий.
             </>
         ),
         howItWorksLabel: "Как это работает",
@@ -57,14 +64,27 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
             </>
         ),
         joinLabel: "ПЕРЕЙТИ В ЛИЧНЫЙ КАБИНЕТ",
+        transportTitle: "Путь в Петербург из Москвы — без лишних забот",
+        transportDescription: (
+            <>
+                Мы&nbsp;сделали всё, чтобы поездка началась легко: выберите
+                билеты на&nbsp;самолёт или &laquo;Сапсан&raquo; прямо
+                на&nbsp;сайте&nbsp;&mdash; и&nbsp;сосредоточьтесь
+                на&nbsp;главном&nbsp;&mdash; предвкушении встречи с&nbsp;городом
+                и&nbsp;с&nbsp;ACADEMIA.
+            </>
+        ),
     },
     en: {
         title: "Referral Rewards Program",
         intro: (
             <>
-                Every member of the ACADEMIA REWARDS loyalty program can invite
-                friends to join the program and receive great bonuses for both
-                of you.
+                Every member of the{" "}
+                <a href="/en/rewards/" className="font-semibold border-b">
+                    ACADEMIA REWARDS loyalty program
+                </a>{" "}
+                can invite friends to join the program and receive great bonuses
+                for both of you.
                 <br />
                 <br />
                 Simply share the unique invitation link from your personal
@@ -96,6 +116,16 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
             </>
         ),
         joinLabel: "JOIN THE LOYALTY PROGRAM",
+        transportTitle:
+            "The journey to St. Petersburg from Moscow — without extra worries",
+        transportDescription: (
+            <>
+                We have made everything to ensure your trip starts easily:
+                choose your plane or Sapsan train tickets right on the website —
+                and focus on the main thing — the anticipation of meeting the
+                city and ACADEMIA
+            </>
+        ),
     },
 };
 
@@ -128,7 +158,7 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
                     <h3 className="font-baskerville text-2xl xl:text-3xl uppercase mb-2">
                         {copy.howItWorksLabel}:
                     </h3>
-                    <ol className="list-decimal space-y-1 ml-4">
+                    <ol className="list-disc space-y-1 ml-4">
                         {copy.howItWorksList.map((item) => (
                             <li key={item}>{item}</li>
                         ))}
@@ -158,6 +188,17 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
                     >
                         {copy.joinLabel}
                     </Button>
+                </FadeUp>
+            </section>
+            <section className="mx-6 my-4 xl:max-w-6xl xl:mx-auto xl:w-full flex flex-col gap-6 xl:my-2">
+                <FadeUp className="xl:max-w-4xl">
+                    <h2 className="xl:text-2xl">{copy.transportTitle}</h2>
+                    <p className="mt-2 hidden md:block">
+                        {copy.transportDescription}
+                    </p>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                    <TransportSlider />
                 </FadeUp>
             </section>
             <Divider />
