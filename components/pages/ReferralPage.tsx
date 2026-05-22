@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
+import BookingForm from "@/components/sections/BookingForm";
 
 type RewardsCopy = {
     title: string;
@@ -110,10 +111,11 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
                     alt: copy.title,
                 }}
             />
+            <BookingForm />
 
             <FadeUp
                 delay={0.2}
-                className="mx-6 xl:mx-auto mt-2 xl:text-center xl:max-w-3xl"
+                className="mx-6 xl:mx-auto mt-2 xl:text-center xl:max-w-3xl my-2 xl:my-4"
             >
                 <p>{copy.intro}</p>
             </FadeUp>
