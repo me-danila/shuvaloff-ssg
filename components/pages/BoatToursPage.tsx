@@ -837,7 +837,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 onClose={() => setCompositionOpen(false)}
             >
                 <div className="flex flex-col xl:flex-row gap-6 m-6 xl:m-8 items-center">
-                <div className="relative min-h-75 xl:min-w-[17rem]">
+                <div className="relative min-h-75 xl:min-h-92 xl:min-w-[17rem]">
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/05/IMG_6642-1.avif"
                         className="object-cover rounded-md"
@@ -857,6 +857,13 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                             </li>
                         ))}
                     </ul>
+                    <Button
+                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                        target="_blank"
+                        className="max-w-fit mt-2 xl:mt-4"
+                    >
+                        {copy.orderLabel}
+                    </Button>
                 </div>
                 </div>
             </Modal>
