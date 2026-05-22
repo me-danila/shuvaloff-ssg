@@ -163,9 +163,13 @@ type PageCopy = {
     amenities: { label: string }[];
     title: string;
     bookLabel: string;
+    orderLabel: string;
+    compositionLabel: string;
+    compositionTitle: string;
     intro: React.ReactNode;
     routes: string;
     routeLabel: string;
+    mapLabel: string;
     durationTitle: string;
     priceDayTitle: string;
     priceNightTitle: string;
@@ -217,6 +221,7 @@ type PageCopy = {
         title: string;
         description: string;
         price: string;
+        composition: string[];
     };
 };
 
@@ -232,6 +237,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
         ],
         title: "Водные прогулки и экскурсии",
         bookLabel: "Забронировать",
+        orderLabel: "Заказать",
+        compositionLabel: "Состав",
+        compositionTitle: "Состав бокса",
         intro: (
             <>
                 Есть особенная магия в&nbsp;облике Петербурга, когда смотришь
@@ -253,6 +261,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
         ),
         routes: "Наши маршруты",
         routeLabel: "Маршрут",
+        mapLabel: "Карта",
         durationTitle: "Продолжительность",
         priceDayTitle: "Стоимость",
         priceNightTitle: "Стоимость в вечернее и ночное время",
@@ -308,6 +317,13 @@ const copyByLocale: Record<Locale, PageCopy> = {
             title: "Бокс с закусками и напитками",
             description: "Дополните эстетику города изысканной гастрономией",
             price: "8 000",
+            composition: [
+                "Классические мини-круассаны с соленым маслом и малиновым компоте",
+                "Антипасти: сицилийские оливки и оливки каламата",
+                "Пармская ветчина и пармезан",
+                "Свежие ягоды: клубника, малина и голубика",
+                "Вода без газа",
+            ],
         },
     },
     en: {
@@ -321,6 +337,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
         ],
         title: "Boat Tours and Excursions",
         bookLabel: "Book Now",
+        orderLabel: "Order",
+        compositionLabel: "Composition",
+        compositionTitle: "Box composition",
         intro: (
             <>
                 There is a special kind of magic in St.&nbsp;Petersburg’s
@@ -342,6 +361,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
         ),
         routes: "Our Routes",
         routeLabel: "Route",
+        mapLabel: "Route map",
         durationTitle: "Duration",
         priceDayTitle: "Price",
         priceNightTitle: "Evening and Night Price",
@@ -397,6 +417,13 @@ const copyByLocale: Record<Locale, PageCopy> = {
             title: "Snack and Drinks Box",
             description: "Enhance the city’s beauty with refined gastronomy",
             price: "8,000",
+            composition: [
+                "Classic mini croissants with salted butter and raspberry compote",
+                "Appetizers: Sicilian olives and Kalamata olives",
+                "Parma ham and Parmesan cheese",
+                "Fresh berries: strawberries, raspberries, and blueberries",
+                "Still water",
+            ],
         },
     },
 };
@@ -404,6 +431,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
 export default function BoatToursPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const [routeMap, setRouteMap] = useState<string | null>(null);
+    const [compositionOpen, setCompositionOpen] = useState(false);
     const bookingHref =
         "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y";
 
@@ -702,12 +730,85 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         />
                     </div>
                     <div className="flex">
-                        <CardServiceBig
-                            title={copy.service2.title}
-                            imgUrl={copy.service2.img}
-                            externalLink={bookingHref}
-                            ctaLabel={{ ru: "Забронировать", en: "Book now" }}
-                        />
+                        <article
+                            className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
+                            itemProp="itemListElement"
+                            itemScope
+                            itemType="https://schema.org/Service"
+                        >
+                            <meta itemProp="url" content={bookingHref} />
+                            <meta
+                                itemProp="image"
+                                content={copy.service2.img}
+                            />
+                            <meta
+                                itemProp="description"
+                                content={copy.service2.description}
+                            />
+                            <span
+                                itemProp="offers"
+                                itemScope
+                                itemType="https://schema.org/Offer"
+                            >
+                                <meta
+                                    itemProp="price"
+                                    content={copy.service2.price.replace(
+                                        /\D/g,
+                                        "",
+                                    )}
+                                />
+                                <meta itemProp="priceCurrency" content="RUB" />
+                            </span>
+                            <Image
+                                src={copy.service2.img}
+                                alt={copy.service2.title}
+                                fill
+                                sizes="(max-width: 1200px) 100vw, 50vw"
+                                loading="lazy"
+                                className="object-cover object-center"
+                            />
+
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
+                                }}
+                            />
+
+                            <div className="absolute inset-0 p-6 flex flex-col justify-between text-white z-10 xl:p-8">
+                                <h3
+                                    className="font-baskerville uppercase text-xl xl:text-2xl xl:leading-tight"
+                                    itemProp="name"
+                                >
+                                    {copy.service2.title}
+                                </h3>
+                                <div className="flex gap-4 xl:gap-6 items-center">
+                                    <Button
+                                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                        target="_blank"
+                                        className="max-w-fit"
+                                    >
+                                        {copy.orderLabel}
+                                    </Button>
+                                    <button
+                                        type="button"
+                                        aria-haspopup="dialog"
+                                        aria-expanded={compositionOpen}
+                                        onClick={() => setCompositionOpen(true)}
+                                        className="flex items-center gap-6 uppercase tracking-widest text-sm transition-opacity cursor-pointer hover:opacity-80"
+                                    >
+                                        {copy.compositionLabel}
+                                        <span
+                                            className="text-2xl mb-1"
+                                            aria-hidden="true"
+                                        >
+                                            ›
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -724,12 +825,40 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                     <div className="relative aspect-[4/3] w-full">
                         <Image
                             src={routeMap}
-                            alt="Карта маршрута"
+                            alt={copy.mapLabel}
                             fill
                             className="rounded-md object-contain"
                         />
                     </div>
                 )}
+            </Modal>
+            <Modal
+                open={compositionOpen}
+                onClose={() => setCompositionOpen(false)}
+            >
+                <div className="flex flex-col xl:flex-row gap-6 m-6 xl:m-8 items-center">
+                <div className="relative min-h-75 xl:min-w-[17rem]">
+                    <Image
+                        src="https://academia.spb.ru/wp-content/uploads/2026/05/IMG_6642-1.avif"
+                        className="object-cover rounded-md"
+                        fill
+                        alt={copy.service2.title}
+                    />
+                </div>
+                <div>
+                    <h2 className="mb-3 font-baskerville text-2xl uppercase">
+                        {copy.compositionTitle}:
+                    </h2>
+                    <ul className="space-y-2">
+                        {copy.service2.composition.map((item) => (
+                            <li key={item} className="flex gap-3">
+                                <span aria-hidden="true">—</span>
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                </div>
             </Modal>
         </main>
     );

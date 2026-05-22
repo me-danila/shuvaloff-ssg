@@ -64,7 +64,7 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
                             href={getRoomHref(room.slug, room.isHistorical)}
                             aria-label={room.title}
                         >
-                            a{room.title}
+                            {room.title}
                         </a>
                     </div>
 
