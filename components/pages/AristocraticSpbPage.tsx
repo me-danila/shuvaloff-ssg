@@ -83,10 +83,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Расслабление с&nbsp;дороги</strong>
-                        <span className="block h-2 xl:h-4"></span>• Трансфер с
-                        вокзала или аэропорта до особняка
-                        <br />• Личное приветствие Графом и заселение
-                        <br />• Велнес-ритуал на ваш выбор в Академиа СПА
+                        <span className="block h-2 xl:h-4"></span>• Трансфер с&nbsp;вокзала или аэропорта до&nbsp;особняка
+                        <br />• Личное приветствие Графом и&nbsp;заселение
+                        <br />• Велнес-ритуал на&nbsp;ваш выбор в&nbsp;Академиа СПА
                     </>
                 ),
             },
@@ -95,13 +94,11 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Отдых по-графски</strong>
-                        <span className="block h-2 xl:h-4"></span>• Графские
-                        завтраки - лучшие в России по версии
+                        <span className="block h-2 xl:h-4"></span>• Графские завтраки&nbsp;&mdash; лучшие в&nbsp;России по&nbsp;версии
                         <br />
                         Where to eat'26
-                        <br />• Ретро-кабриолет - эффектная поездка по
-                        Петербургу
-                        <br />• Катер с авторской лекцией от искусствоведа
+                        <br />• Ретро-кабриолет&nbsp;&mdash; эффектная поездка по&nbsp;Петербургу
+                        <br />• Катер с&nbsp;авторской лекцией от&nbsp;искусствоведа
                     </>
                 ),
             },
@@ -110,10 +107,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Графский эпилог</strong>
-                        <span className="block h-2 xl:h-4"></span>• Завтрак от
-                        шефа
-                        <br />• Памятный презент от графской семьи
-                        <br />• Трансфер от особняка до вокзала/аэропорта
+                        <span className="block h-2 xl:h-4"></span>• Завтрак от&nbsp;шефа
+                        <br />• Памятный презент от&nbsp;графской семьи
+                        <br />• Трансфер от&nbsp;особняка до&nbsp;вокзала/аэропорта
                     </>
                 ),
             },
@@ -404,7 +400,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                             key={day.title}
                             className="flex flex-col gap-2 flex-row xl:gap-4"
                         >
-                            <p className="font-alistair text-2xl -mt-2 xl:text-3xl xl:-mt-2 w-[100px]">
+                            <p className="font-alistair text-2xl -mt-2 xl:text-3xl w-full max-w-[75px]">
                                 {day.title}
                             </p>
                             <p>{day.content}</p>
