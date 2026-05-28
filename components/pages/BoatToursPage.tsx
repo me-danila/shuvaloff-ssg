@@ -5,7 +5,6 @@ import { useState } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Button from "@/components/ui/Button";
-import CardServiceBig from "@/components/ui/CardServiceBig";
 import Divider from "@/components/ui/Divider";
 import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
@@ -722,12 +721,55 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
 
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 max-xl:px-6 xl:max-w-6xl xl:mx-auto">
                     <div className="flex">
-                        <CardServiceBig
-                            title={copy.service1.title}
-                            imgUrl={copy.service1.img}
-                            externalLink={bookingHref}
-                            ctaLabel={{ ru: "Забронировать", en: "Book now" }}
-                        />
+                        <div
+                            className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
+                            itemProp="itemListElement"
+                            itemScope
+                            itemType="https://schema.org/Service"
+                        >
+                            <meta
+                                itemProp="name"
+                                content={copy.service1.title}
+                            />
+                            <meta itemProp="url" content={copy.service1.img} />
+                            <meta
+                                itemProp="image"
+                                content={copy.service1.img}
+                            />
+                            <Image
+                                src={copy.service1.img}
+                                alt={copy.service1.title}
+                                fill
+                                sizes="(max-width: 1200px) 100vw, 50vw"
+                                loading="lazy"
+                                className="object-cover object-center"
+                            />
+
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
+                                }}
+                            />
+
+                            <div className="absolute inset-0 p-6 flex flex-col justify-between text-white z-10 xl:p-8">
+                                <p className="font-baskerville uppercase text-xl xl:text-2xl xl:leading-tight">
+                                    {copy.service1.title}
+                                </p>
+                                <Button
+                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    target="_blank"
+                                    className="max-w-fit"
+                                >
+                                    {copy.orderLabel}
+                                </Button>
+                                {/*<p className="flex items-center gap-6 uppercase tracking-widest text-sm">*/}
+                                {/*    {copy.service1.title}*/}
+                                {/*    <span className="text-2xl mb-1">›</span>*/}
+                                {/*</p>*/}
+                            </div>
+                        </div>
                     </div>
                     <div className="flex">
                         <article

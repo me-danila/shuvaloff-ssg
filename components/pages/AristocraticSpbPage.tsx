@@ -83,9 +83,11 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Расслабление с&nbsp;дороги</strong>
-                        <span className="block h-2 xl:h-4"></span>• Трансфер с&nbsp;вокзала или аэропорта до&nbsp;особняка
+                        <span className="block h-2 xl:h-4"></span>• Трансфер
+                        с&nbsp;вокзала или аэропорта до&nbsp;особняка
                         <br />• Личное приветствие Графом и&nbsp;заселение
-                        <br />• Велнес-ритуал на&nbsp;ваш выбор в&nbsp;Академиа СПА
+                        <br />• Велнес-ритуал на&nbsp;ваш выбор в&nbsp;Академиа
+                        СПА
                     </>
                 ),
             },
@@ -94,11 +96,15 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Отдых по-графски</strong>
-                        <span className="block h-2 xl:h-4"></span>• Графские завтраки&nbsp;&mdash; лучшие в&nbsp;России по&nbsp;версии
+                        <span className="block h-2 xl:h-4"></span>• Графские
+                        завтраки&nbsp;&mdash; лучшие в&nbsp;России
+                        по&nbsp;версии
                         <br />
                         Where to eat'26
-                        <br />• Ретро-кабриолет&nbsp;&mdash; эффектная поездка по&nbsp;Петербургу
-                        <br />• Катер с&nbsp;авторской лекцией от&nbsp;искусствоведа
+                        <br />• Ретро-кабриолет&nbsp;&mdash; эффектная поездка
+                        по&nbsp;Петербургу
+                        <br />• Катер с&nbsp;авторской лекцией
+                        от&nbsp;искусствоведа
                     </>
                 ),
             },
@@ -107,9 +113,11 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 content: (
                     <>
                         <strong>Графский эпилог</strong>
-                        <span className="block h-2 xl:h-4"></span>• Завтрак от&nbsp;шефа
+                        <span className="block h-2 xl:h-4"></span>• Завтрак
+                        от&nbsp;шефа
                         <br />• Памятный презент от&nbsp;графской семьи
-                        <br />• Трансфер от&nbsp;особняка до&nbsp;вокзала/аэропорта
+                        <br />• Трансфер от&nbsp;особняка
+                        до&nbsp;вокзала/аэропорта
                     </>
                 ),
             },

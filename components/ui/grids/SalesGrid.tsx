@@ -28,6 +28,11 @@ export default function SalesGrid() {
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                             className="object-cover"
+                            style={
+                                sale.imgObjectPosition
+                                    ? { objectPosition: sale.imgObjectPosition }
+                                    : undefined
+                            }
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/50" />
                         <div className="absolute inset-0 flex flex-col justify-between text-white p-8">

@@ -9,6 +9,7 @@ export type Sale = {
     title: string;
     subtitle: string;
     imgUrl: string;
+    imgObjectPosition?: string;
     bookingUrl: string;
 };
 
@@ -20,6 +21,14 @@ export const AllSales: Record<Locale, Sale[]> = {
                 "Особый отдых в формате пышных аристократических традиций",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
             bookingUrl: "/booking?&be-offer=910895",
+        },
+        {
+            title: "Аэрофлот Бонус",
+            subtitle:
+                "До 1 000 миль за каждую ночь проживания в особняках!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/%D0%B0%D1%8D%D1%80%D0%BE%D1%84%D0%BB%D0%BE%D1%82-%D0%BD%D0%BE%D0%B2%D1%8B%D0%B9-2.avif",
+            imgObjectPosition: "center top",
+            bookingUrl: "https://guest.travelline.ru/guest-account/41018/profile/login",
         },
         {
             title: "Промокод GENIUS",
@@ -44,7 +53,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             title: "ВАШ ВЫХОДНОЙ КАК ИСКУССТВО",
             subtitle:
                 "Особый формат, в котором выходной день становится церемонией",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_0279-2-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9237-1.avif",
             bookingUrl: "/booking/?&be-offer=804866",
         },
         {
@@ -58,7 +67,8 @@ export const AllSales: Record<Locale, Sale[]> = {
             title: "Командировка",
             subtitle:
                 "Специальные привилегии для бизнес-путешественников и скидка 15% от 2 ночей",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/23-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9284-1.avif",
+            imgObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
         },
         {
@@ -85,6 +95,14 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking?&be-offer=910895",
         },
         {
+            title: "Aeroflot bonus",
+            subtitle:
+                "Up to 1,000 miles for every night you stay in a mansion!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/%D0%B0%D1%8D%D1%80%D0%BE%D1%84%D0%BB%D0%BE%D1%82-%D0%BD%D0%BE%D0%B2%D1%8B%D0%B9-2.avif",
+            imgObjectPosition: "center top",
+            bookingUrl: "https://guest.travelline.ru/guest-account/41018/profile/login",
+        },
+        {
             title: "GENIUS Promocode",
             subtitle: "Get a bonus on your first booking on our website",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
@@ -106,7 +124,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         {
             title: "YOUR WEEKEND AS ART",
             subtitle: "A special format where your weekend becomes a ceremony",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_0279-2-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9237-1.avif",
             bookingUrl: "/booking/?&be-offer=804866",
         },
         {
@@ -120,7 +138,8 @@ export const AllSales: Record<Locale, Sale[]> = {
             title: "Business Trip",
             subtitle:
                 "Special privileges for business travelers and 15% discount for stays of 2 nights or more",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/23-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9284-1.avif",
+            imgObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
         },
         {
