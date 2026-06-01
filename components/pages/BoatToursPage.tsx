@@ -222,6 +222,12 @@ type PageCopy = {
         price: string;
         composition: string[];
     };
+    service3: {
+        img: string;
+        title: string;
+        description: string;
+        price: string;
+    };
 };
 
 const copyByLocale: Record<Locale, PageCopy> = {
@@ -324,6 +330,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 "Вода без газа",
             ],
         },
+        service3: {
+            img: "https://academia.spb.ru/wp-content/uploads/2026/05/ddbfb0771f1448c19cc1a34e914deb86_img-1.avif",
+            title: "Цветочное оформление",
+            description: "Воплощаем ваш сценарий в жизнь. Авторский дизайн, уникальная цветовая концепция и живые цветы от профессиональных флористов и декораторов",
+            price: "от 65 000",
+        },
     },
     en: {
         amenities: [
@@ -424,6 +436,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 "Still water",
             ],
         },
+        service3: {
+            img: "https://academia.spb.ru/wp-content/uploads/2026/05/ddbfb0771f1448c19cc1a34e914deb86_img-1.avif",
+            title: "Floral arrangements",
+            description: "We bring your vision to life. Original designs, unique color schemes, and fresh flowers arranged by professional florists and decorators",
+            price: "from 65 000",
+        },
     },
 };
 
@@ -511,12 +529,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                 </span>{" "}
                                 {copy.tour1.priceDay}
                             </p>
-                            {/*<p>*/}
-                            {/*    <span className="font-semibold">*/}
-                            {/*        {copy.priceNightTitle}:*/}
-                            {/*    </span>{" "}*/}
-                            {/*    {copy.tour1.priceNight}*/}
-                            {/*</p>*/}
                             <p>
                                 <span className="font-semibold">
                                     {copy.pierTitle}:
@@ -764,10 +776,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                 >
                                     {copy.orderLabel}
                                 </Button>
-                                {/*<p className="flex items-center gap-6 uppercase tracking-widest text-sm">*/}
-                                {/*    {copy.service1.title}*/}
-                                {/*    <span className="text-2xl mb-1">›</span>*/}
-                                {/*</p>*/}
                             </div>
                         </div>
                     </div>
@@ -851,6 +859,53 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                 </div>
                             </div>
                         </article>
+                    </div>
+                    <div className="flex xl:col-span-2 xl:justify-self-center xl:w-1/2">
+                        <div
+                            className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
+                            itemProp="itemListElement"
+                            itemScope
+                            itemType="https://schema.org/Service"
+                        >
+                            <meta
+                                itemProp="name"
+                                content={copy.service3.title}
+                            />
+                            <meta itemProp="url" content={copy.service3.img} />
+                            <meta
+                                itemProp="image"
+                                content={copy.service3.img}
+                            />
+                            <Image
+                                src={copy.service3.img}
+                                alt={copy.service3.title}
+                                fill
+                                sizes="(max-width: 1200px) 100vw, 50vw"
+                                loading="lazy"
+                                className="object-cover object-[50%_90%]"
+                            />
+
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    background:
+                                        "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
+                                }}
+                            />
+
+                            <div className="absolute inset-0 p-6 flex flex-col justify-between text-white z-10 xl:p-8">
+                                <p className="font-baskerville uppercase text-xl xl:text-2xl xl:leading-tight">
+                                    {copy.service3.title}
+                                </p>
+                                <Button
+                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    target="_blank"
+                                    className="max-w-fit"
+                                >
+                                    {copy.orderLabel}
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
