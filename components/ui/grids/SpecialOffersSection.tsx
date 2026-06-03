@@ -124,6 +124,7 @@ export default function SpecialOffersSection({ offers, locale }: Props) {
             <Modal
                 open={Boolean(selectedOffer)}
                 onClose={() => setSelectedOffer(null)}
+                maxWidth="max-w-lg"
             >
                 {selectedOffer && (
                     <div className="flex flex-col gap-6 m-6 xl:m-8">

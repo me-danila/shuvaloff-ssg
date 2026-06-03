@@ -14,7 +14,7 @@ export function Modal({
     open,
     onClose,
     children,
-    maxWidth = "2xl",
+    maxWidth = "max-w-2xl",
     bgColor = "bg-white",
 }: Props) {
     useEffect(() => {
@@ -39,7 +39,7 @@ export function Modal({
                 type="button"
             />
             <div
-                className={`relative z-10 w-full ${bgColor} max-w-${maxWidth} min-h-fit overflow-y-auto rounded-md text-black`}
+                className={`relative z-10 w-full ${bgColor} ${maxWidth} min-h-fit overflow-y-auto rounded-md text-black`}
             >
                 {children}
             </div>

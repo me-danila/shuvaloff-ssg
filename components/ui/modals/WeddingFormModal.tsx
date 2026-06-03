@@ -153,7 +153,7 @@ export default function WeddingFormModal({
                 {title}
             </button>
 
-            <Modal open={open} onClose={handleClose} maxWidth="2xl">
+            <Modal open={open} onClose={handleClose} maxWidth="max-w-2xl">
                 <div className="px-8 py-12">
                     {status === "success" ? (
                         <div className="flex flex-col items-center gap-4 py-12 text-center">

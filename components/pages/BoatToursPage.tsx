@@ -904,12 +904,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                 </span>{" "}
                                 {copy.tour3.priceDay}
                             </p>
-                            {/*<p>*/}
-                            {/*    <span className="font-semibold">*/}
-                            {/*        {copy.priceNightTitle}:*/}
-                            {/*    </span>{" "}*/}
-                            {/*    {copy.tour3.priceNight}*/}
-                            {/*</p>*/}
                             <p>
                                 <span className="font-semibold">
                                     {copy.pierTitle}:
@@ -1138,11 +1132,11 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
             <Modal
                 open={Boolean(routeMap)}
                 onClose={() => setRouteMap(null)}
-                maxWidth="3xl"
+                maxWidth="max-w-3xl"
                 bgColor="bg-transparent"
             >
                 {routeMap && (
-                    <div className="relative aspect-[4/3] w-full">
+                    <div className="relative aspect-4/3 w-full">
                         <Image
                             src={routeMap}
                             alt={copy.mapLabel}
