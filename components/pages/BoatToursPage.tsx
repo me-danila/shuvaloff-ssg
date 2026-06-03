@@ -6,6 +6,9 @@ import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
+import SpecialOffersSection, {
+    type SpecialOfferItem,
+} from "@/components/ui/grids/SpecialOffersSection";
 import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -228,6 +231,8 @@ type PageCopy = {
         description: string;
         price: string;
     };
+    specialOffersTitle: string;
+    specialOffers: SpecialOfferItem[];
 };
 
 const copyByLocale: Record<Locale, PageCopy> = {
@@ -333,9 +338,120 @@ const copyByLocale: Record<Locale, PageCopy> = {
         service3: {
             img: "https://academia.spb.ru/wp-content/uploads/2026/05/ddbfb0771f1448c19cc1a34e914deb86_img-1.avif",
             title: "Цветочное оформление",
-            description: "Воплощаем ваш сценарий в жизнь. Авторский дизайн, уникальная цветовая концепция и живые цветы от профессиональных флористов и декораторов",
+            description:
+                "Воплощаем ваш сценарий в жизнь. Авторский дизайн, уникальная цветовая концепция и живые цветы от профессиональных флористов и декораторов",
             price: "от 65 000",
         },
+        specialOffersTitle: "Специальные предложения",
+        specialOffers: [
+            {
+                title: "Девичник",
+                subtitle:
+                    "Эффектная прогулка на катере для ярких впечатлений и отличных фотографий",
+                videoUrl: "https://static.academia.spb.ru/video/boat-girl-tour.webm",
+                modal: {
+                    content: (
+                        <>
+                            Ваш яркий девичник на речной прогулке: красивый
+                            катер, любимые подруги, солнце, Нева и блистательный
+                            Петербург. Море впечатлений и эффектные фотографии!
+                            <br />
+                            <br />
+                            <strong>В пакет включено:</strong>
+                            <br /> • Шар с девичьей фамилией
+                            <br />• Бокс с закусками и напитками от Брассери
+                            ACADEMIA
+                            <br />• Торт «Наполеон» (1,5 кг)
+                            <br />• Бокалы для напитков
+                        </>
+                    ),
+                    buttonText: "Заказать",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "от 25 750 ₽",
+                },
+            },
+            {
+                title: "Романтический вечер",
+                subtitle:
+                    "Легкий бриз с залива, закатное небо и лучшие виды на Петербург",
+                imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/ddbfb0771f1448c19cc1a34e914deb86_img-1.avif",
+                modal: {
+                    content: (
+                        <>
+                            Романтика как в кино: катер, заказ и огни города.
+                            Здесь сам Петербург отвечает за атмосферу, а мы
+                            предусмотрели все важные детали.
+                            <br />
+                            <br />
+                            <strong>В пакет включено:</strong>
+                            <br /> • Роскошный букет из 25 роз
+                            <br />• Бокс с изысканными закусками и напитками от
+                            Брассери ACADEMIA
+                        </>
+                    ),
+                    buttonText: "Заказать",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "от 20 000 ₽",
+                },
+            },
+            {
+                title: "День рождения",
+                subtitle:
+                    "Отпразднуйте ваш день рождения в компании самых близких на водной прогулке!",
+                imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/06/IMG_0406.avif",
+                modal: {
+                    content: (
+                        <>
+                            Ваш яркий день рождения в Петербурге: прогулка на
+                            катере в компании самых близких. Нева, реки, каналы
+                            и невероятные виды как декорация к вашему празднику!
+                            <br />
+                            <br />
+                            <strong>В пакет включено:</strong>
+                            <br />• Бокс с закусками и напитками от Брассери
+                            ACADEMIA
+                            <br />• Торт «Наполеон» (1,5 кг)
+                            <br />• Воздушные шары (7 штук — фонтан)
+                            <br />
+                            <br />
+                            Дополните ваш праздник роскошным букетом, цветочным
+                            оформлением катера или шарами-цифрами.
+                        </>
+                    ),
+                    buttonText: "Заказать",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "от 26 450 ₽",
+                },
+            },
+            {
+                title: "Предложение по‑петербургски",
+                subtitle:
+                    "Петербург с воды – лучшая декорация для самых важных слов",
+                imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/06/IMG_0412.avif",
+                modal: {
+                    content: (
+                        <>
+                            Предложение как в кино: катер, закат, огни города и
+                            Нева. Здесь сам Петербург отвечает за романтическую
+                            атмосферу, а мы предусмотрели все важные детали.
+                            <br />
+                            <br />
+                            <strong>В пакет включено:</strong>
+                            <br />• Роскошный букет из 25 роз
+                            <br />• Бокс с изысканными закусками и напитками от
+                            Брассери ACADEMIA
+                        </>
+                    ),
+                    buttonText: "Заказать",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "от 20 000 ₽",
+                },
+            },
+        ],
     },
     en: {
         amenities: [
@@ -439,9 +555,106 @@ const copyByLocale: Record<Locale, PageCopy> = {
         service3: {
             img: "https://academia.spb.ru/wp-content/uploads/2026/05/ddbfb0771f1448c19cc1a34e914deb86_img-1.avif",
             title: "Floral arrangements",
-            description: "We bring your vision to life. Original designs, unique color schemes, and fresh flowers arranged by professional florists and decorators",
+            description:
+                "We bring your vision to life. Original designs, unique color schemes, and fresh flowers arranged by professional florists and decorators",
             price: "from 65 000",
         },
+        specialOffersTitle: "Special Offers",
+        specialOffers: [
+            {
+                title: "Bachelorette Party",
+                subtitle: "A spectacular boat ride for unforgettable memories and great photos",
+                videoUrl: "https://static.academia.spb.ru/video/boat-girl-tour.webm",
+                modal: {
+                    content: (
+                        <>
+                            Your unforgettable bachelorette party on a river cruise: a beautiful boat, your closest friends, sunshine, the Neva River, and the dazzling city of St. Petersburg. A sea of memories and stunning photos!
+                            <br />
+                            <br />
+                            <strong>The package includes:</strong>
+                            <br />• A balloon with the bride-to-be’s maiden name
+                            <br />•  A box of snacks and drinks from Brasserie ACADEMIA
+                            <br />• «Napoleon» cake (1.5 kg)
+                            <br />• Drinking glasses
+                        </>
+                    ),
+                    buttonText: "Order",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "from 25 750 ₽",
+                },
+            },
+            {
+                title: "A Romantic Evening",
+                subtitle:
+                    "A gentle breeze from the bay, the sunset sky, and the best views of St. Petersburg",
+                imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/ddbfb0771f1448c19cc1a34e914deb86_img-1.avif",
+                modal: {
+                    content: (
+                        <>
+                            Romance straight out of a movie: a boat, a special order, and the city lights. Here, St. Petersburg itself sets the mood, and we’ve taken care of all the important details.
+                            <br />
+                            <br />
+                            <strong>The package includes:</strong>
+                            <br />• A luxurious bouquet of 25 roses
+                            <br />• A box of exquisite appetizers and drinks from Brasserie ACADEMIA
+                        </>
+                    ),
+                    buttonText: "Order",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "from 20 000 ₽",
+                },
+            },
+            {
+                title: "Happy birthday",
+                subtitle:
+                    "Celebrate your birthday with your closest friends on a boat ride!",
+                imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/06/IMG_0406.avif",
+                modal: {
+                    content: (
+                        <>
+                            A memorable birthday in St. Petersburg: a boat ride with your closest friends and family. The Neva River, other rivers, canals, and incredible views will serve as the backdrop for your celebration!
+                            <br />
+                            <br />
+                            <strong>The package includes:</strong>
+                            <br />• A box of snacks and drinks from Brasserie ACADEMIA
+                            <br />• “Napoleon” cake (1.5 kg)
+                            <br />• Balloons (7 pieces—a fountain)
+                            <br />
+                            <br />
+                            Enhance your celebration with a luxurious bouquet, floral decorations on the boat, or number balloons.
+                        </>
+                    ),
+                    buttonText: "Order",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "from 26 450 ₽",
+                },
+            },
+            {
+                title: "A St. Petersburg-style proposal",
+                subtitle:
+                    "St. Petersburg from the water — the perfect backdrop for the most important words",
+                imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/06/IMG_0412.avif",
+                modal: {
+                    content: (
+                        <>
+                            A proposal straight out of a movie: a boat, the sunset, the city lights, and the Neva River. Here, St. Petersburg itself sets the romantic mood, and we’ve taken care of all the important details.
+                            <br />
+                            <br />
+                            <strong>The package includes:</strong>
+                            <br />• A luxurious bouquet of 25 roses
+                            <br />• A box of exquisite appetizers and drinks from Brasserie ACADEMIA
+                        </>
+                    ),
+                    buttonText: "Order",
+                    buttonHref:
+                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    price: "from 20 000 ₽",
+                },
+            },
+        ],
     },
 };
 
@@ -907,6 +1120,16 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section className="flex flex-col items-center mt-4 xl:mt-8">
+                <h2 className="max-xl:px-6">{copy.specialOffersTitle}</h2>
+                <div className="w-full max-xl:px-6 xl:max-w-6xl xl:mx-auto mt-4 xl:mt-6">
+                    <SpecialOffersSection
+                        offers={copy.specialOffers}
+                        locale={locale}
+                    />
                 </div>
             </section>
 

@@ -24,11 +24,11 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
         {
             title: "Аэрофлот Бонус",
-            subtitle:
-                "До 1 000 миль за каждую ночь проживания в особняках!",
+            subtitle: "До 1 000 миль за каждую ночь проживания в особняках!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/%D0%B0%D1%8D%D1%80%D0%BE%D1%84%D0%BB%D0%BE%D1%82-%D0%BD%D0%BE%D0%B2%D1%8B%D0%B9-2.avif",
             imgObjectPosition: "center top",
-            bookingUrl: "https://guest.travelline.ru/guest-account/41018/profile/login",
+            bookingUrl:
+                "https://guest.travelline.ru/guest-account/41018/profile/login",
         },
         {
             title: "Промокод GENIUS",
@@ -100,7 +100,8 @@ export const AllSales: Record<Locale, Sale[]> = {
                 "Up to 1,000 miles for every night you stay in a mansion!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/%D0%B0%D1%8D%D1%80%D0%BE%D1%84%D0%BB%D0%BE%D1%82-%D0%BD%D0%BE%D0%B2%D1%8B%D0%B9-2.avif",
             imgObjectPosition: "center top",
-            bookingUrl: "https://guest.travelline.ru/guest-account/41018/profile/login",
+            bookingUrl:
+                "https://guest.travelline.ru/guest-account/41018/profile/login",
         },
         {
             title: "GENIUS Promocode",
