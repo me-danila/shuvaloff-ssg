@@ -348,7 +348,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "Девичник",
                 subtitle:
                     "Эффектная прогулка на катере для ярких впечатлений и отличных фотографий",
-                videoUrl: "https://static.academia.spb.ru/video/boat-girl-tour.webm",
+                videoUrl:
+                    "https://static.academia.spb.ru/video/boat-girl-tour.webm",
                 modal: {
                     content: (
                         <>
@@ -379,7 +380,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 modal: {
                     content: (
                         <>
-                            Романтика как в кино: катер, заказ и огни города.
+                            Романтика как в кино: катер, закат и огни города.
                             Здесь сам Петербург отвечает за атмосферу, а мы
                             предусмотрели все важные детали.
                             <br />
@@ -563,17 +564,24 @@ const copyByLocale: Record<Locale, PageCopy> = {
         specialOffers: [
             {
                 title: "Bachelorette Party",
-                subtitle: "A spectacular boat ride for unforgettable memories and great photos",
-                videoUrl: "https://static.academia.spb.ru/video/boat-girl-tour.webm",
+                subtitle:
+                    "A spectacular boat ride for unforgettable memories and great photos",
+                videoUrl:
+                    "https://static.academia.spb.ru/video/boat-girl-tour.webm",
                 modal: {
                     content: (
                         <>
-                            Your unforgettable bachelorette party on a river cruise: a beautiful boat, your closest friends, sunshine, the Neva River, and the dazzling city of St. Petersburg. A sea of memories and stunning photos!
+                            Your unforgettable bachelorette party on a river
+                            cruise: a beautiful boat, your closest friends,
+                            sunshine, the Neva River, and the dazzling city of
+                            St. Petersburg. A sea of memories and stunning
+                            photos!
                             <br />
                             <br />
                             <strong>The package includes:</strong>
                             <br />• A balloon with the bride-to-be’s maiden name
-                            <br />•  A box of snacks and drinks from Brasserie ACADEMIA
+                            <br />• A box of snacks and drinks from Brasserie
+                            ACADEMIA
                             <br />• «Napoleon» cake (1.5 kg)
                             <br />• Drinking glasses
                         </>
@@ -592,12 +600,16 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 modal: {
                     content: (
                         <>
-                            Romance straight out of a movie: a boat, a special order, and the city lights. Here, St. Petersburg itself sets the mood, and we’ve taken care of all the important details.
+                            Romance straight out of a movie: a boat, a sunset,
+                            and the city lights. Here, St. Petersburg itself
+                            sets the mood, and we’ve taken care of all the
+                            important details.
                             <br />
                             <br />
                             <strong>The package includes:</strong>
                             <br />• A luxurious bouquet of 25 roses
-                            <br />• A box of exquisite appetizers and drinks from Brasserie ACADEMIA
+                            <br />• A box of exquisite appetizers and drinks
+                            from Brasserie ACADEMIA
                         </>
                     ),
                     buttonText: "Order",
@@ -614,16 +626,21 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 modal: {
                     content: (
                         <>
-                            A memorable birthday in St. Petersburg: a boat ride with your closest friends and family. The Neva River, other rivers, canals, and incredible views will serve as the backdrop for your celebration!
+                            A memorable birthday in St. Petersburg: a boat ride
+                            with your closest friends and family. The Neva
+                            River, other rivers, canals, and incredible views
+                            will serve as the backdrop for your celebration!
                             <br />
                             <br />
                             <strong>The package includes:</strong>
-                            <br />• A box of snacks and drinks from Brasserie ACADEMIA
+                            <br />• A box of snacks and drinks from Brasserie
+                            ACADEMIA
                             <br />• “Napoleon” cake (1.5 kg)
                             <br />• Balloons (7 pieces—a fountain)
                             <br />
                             <br />
-                            Enhance your celebration with a luxurious bouquet, floral decorations on the boat, or number balloons.
+                            Enhance your celebration with a luxurious bouquet,
+                            floral decorations on the boat, or number balloons.
                         </>
                     ),
                     buttonText: "Order",
@@ -640,12 +657,16 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 modal: {
                     content: (
                         <>
-                            A proposal straight out of a movie: a boat, the sunset, the city lights, and the Neva River. Here, St. Petersburg itself sets the romantic mood, and we’ve taken care of all the important details.
+                            A proposal straight out of a movie: a boat, the
+                            sunset, the city lights, and the Neva River. Here,
+                            St. Petersburg itself sets the romantic mood, and
+                            we’ve taken care of all the important details.
                             <br />
                             <br />
                             <strong>The package includes:</strong>
                             <br />• A luxurious bouquet of 25 roses
-                            <br />• A box of exquisite appetizers and drinks from Brasserie ACADEMIA
+                            <br />• A box of exquisite appetizers and drinks
+                            from Brasserie ACADEMIA
                         </>
                     ),
                     buttonText: "Order",
