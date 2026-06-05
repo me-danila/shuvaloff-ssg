@@ -16,8 +16,10 @@ type TransferCopy = {
     orderButton: string;
     description1: string;
     description2: string;
+    description3: string;
     otherServicesTitle: string;
     items: string[];
+    items2: string[];
     cards: { label: string; price: string; note?: string }[];
 };
 
@@ -27,25 +29,31 @@ const copyByLocale: Record<Locale, TransferCopy> = {
         subtitle: "на представительском Mercedes-Benz E-класса",
         orderButton: "ЗАКАЗАТЬ",
         description1:
-            "Мы предлагаем вам индивидуальный трансфер без ожиданий и суеты, с заботой и вниманием к деталям. Мы встретим вас в аэропорту или на вокзале, доставим в отель и, при необходимости, обеспечим передвижение по Петербургу во время вашего отдыха.",
+            "Индивидуальный трансфер без ожиданий и суеты. Мы встретим вас в аэропорту или на вокзале, доставим в отель и обеспечим передвижение по Петербургу во время вашего отдыха.",
         description2:
-            "Чтобы заказать трансфер, свяжитесь с нашей консьерж-службой или добавьте его к вашему бронированию на втором шаге оформления на официальном сайте.",
+            "GAC M8 — это сочетание статуса, комфорта и безопасности. Просторный салон с премиальной отделкой и шумоизоляцией и мягкая подвеска гарантируют приятную поездку даже после длительного перелета.",
+        description3: "Закажите трансфер через консьерж-службу или добавьте его к вашему бронированию.",
         otherServicesTitle: "Другие услуги",
         items: [
-            "Подача автомобиля заранее, без ожидания и задержек.",
-            "Встреча с именной табличкой водителя в деловом костюме.",
-            "Просторный, статусный и максимально комфортный Mercedes-Benz E-класса.",
-            "Спокойная поездка с бутилированной водой, салфетками и зарядками в салоне.",
-            "Сопровождение с зонтом в случае дождя.",
-            "Музыка по вашему настроению или по вашему плейлисту.",
+            "Встреча с именной табличкой водителем в деловом костюме",
+            "Просторный, статусный и максимально комфортный GAC M8",
+            "Кресла с функцией массажа",
+            "Бутилированная вода, салфетки, зарядки в салоне",
+            "Сопровождение с зонтом в случае дождя",
+            "Музыка по вашему настроению или из вашего плейлиста",
+        ],
+        items2: [
+            "Аэропорт — отель 4 000 ₽",
+            "Вокзал — отель 2 000 ₽",
+            "Аренда авто с водителем 3 500 ₽/час (мин. аренда 3 часа)",
         ],
         cards: [
-            { label: "Аэропорт — отель", price: "от 3 500 ₽" },
-            { label: "Вокзал — отель", price: "от 1 750 ₽" },
+            { label: "Аэропорт — отель", price: "от 4 000 ₽" },
+            { label: "Вокзал — отель", price: "от 2 000 ₽" },
             {
                 label: "Аренда авто с водителем",
-                price: "от 7 500 ₽",
-                note: "2 500 ₽/час (мин. аренда 3 часа)",
+                price: "от 10 500 ₽",
+                note: "3 500 ₽/час (мин. аренда 3 часа)",
             },
         ],
     },
@@ -54,25 +62,31 @@ const copyByLocale: Record<Locale, TransferCopy> = {
         subtitle: "on executive Mercedes-Benz E-class",
         orderButton: "ORDER",
         description1:
-            "We offer you an individual transfer without waiting or fuss, with care and attention to detail. We will meet you at the airport or train station, deliver you to the hotel and, if necessary, ensure movement around St. Petersburg during your stay.",
+            "A private transfer with no waiting or hassle. We’ll meet you at the airport or train station, take you to your hotel, and handle your transportation around St. Petersburg during your stay.",
         description2:
-            "To order a transfer, contact our concierge service or add it to your booking during the second step of the checkout on the official website.",
+            "The GAC M8 combines prestige, comfort, and safety. A spacious interior with premium finishes and soundproofing, along with a smooth suspension, guarantee a pleasant ride even after a long flight.",
+        description3: "Book a transfer through the concierge service or add it to your reservation.",
         otherServicesTitle: "Other services",
         items: [
-            "Car arrival in advance, without waiting or delays.",
-            "Meeting with a nameplate by a driver in a business suit.",
-            "Spacious, status and most comfortable Mercedes-Benz E-class.",
-            "A calm trip with bottled water, napkins and chargers in the cabin.",
-            "Accompaniment with an umbrella in case of rain.",
-            "Music according to your mood or your playlist.",
+            "Meet-and-greet with a personalized sign by a driver in a business suit",
+            "The spacious, prestigious, and supremely comfortable GAC M8",
+            "Seats with massage function",
+            "Bottled water, napkins, and chargers in the cabin",
+            "An umbrella provided in case of rain",
+            "Music to suit your mood or from your playlist",
+        ],
+        items2: [
+            "Airport to hotel: 4,000 ₽",
+            "Train station to hotel 2,000 ₽",
+            "Car rental with driver 3,500 ₽/hour (minimum rental 3 hours)",
         ],
         cards: [
-            { label: "Airport — Hotel", price: "from 3 500 ₽" },
-            { label: "Train station — Hotel", price: "from 1 750 ₽" },
+            { label: "Airport — Hotel", price: "from 4 000 ₽" },
+            { label: "Train station — Hotel", price: "from 2 000 ₽" },
             {
                 label: "Car rental with driver",
-                price: "from 7 500 ₽",
-                note: "2 500 ₽/hour (min. rental 3 hours)",
+                price: "from 10 500 ₽",
+                note: "3 500 ₽/hour (min. rental 3 hours)",
             },
         ],
     },
@@ -154,7 +168,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
             <section className="mx-6 flex flex-col gap-4 xl:max-w-6xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] xl:gap-8 xl:items-start">
                 <FadeUp className="relative w-full h-60 md:h-80 xl:h-full overflow-hidden rounded-md">
                     <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2025/09/IMG_8480-1.avif"
+                        src="https://academia.spb.ru/wp-content/uploads/2026/06/hf_20260604_144842_063a0fa9-b31d-4114-9e32-e077ede99549-2.avif"
                         alt={copy.title}
                         fill
                         sizes="(max-width: 1200px) 100vw, 55vw"
@@ -164,6 +178,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                 </FadeUp>
                 <FadeUp delay={0.1} className="flex flex-col gap-4">
                     <p>{copy.description1}</p>
+                    <p>{copy.description2}</p>
                     <ul className="space-y-1 my-3">
                         {copy.items.map((item) => (
                             <li key={item} className="flex items-start gap-2">
@@ -172,7 +187,22 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                             </li>
                         ))}
                     </ul>
-                    <p>{copy.description2}</p>
+                    <ul className="space-y-1 my-3">
+                        {copy.items2.map((item) => (
+                            <li key={item} className="flex items-start gap-2">
+                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-blue" />
+                                <span>{item}</span>
+                            </li>
+                        ))}
+                    </ul>
+                    <p>{copy.description3}</p>
+                    <Button
+                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                        target="_blank"
+                        variant="primary"
+                    >
+                        {copy.orderButton}
+                    </Button>
                 </FadeUp>
             </section>
 
