@@ -237,7 +237,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     и&nbsp;всегда рады помочь.
                 </>
             ),
-            price: "9 000 ₽",
+            price: "13 000 ₽",
         },
         {
             title: "Торт от бренд-шефа",
@@ -420,13 +420,13 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br />
                     <i>
                         Приветственный сет с&nbsp;игристым и&nbsp;лепестками
-                        роз&nbsp;&mdash; 2 500 ₽
+                        роз&nbsp;&mdash; 4 000 ₽
                         <br />
                         Приветственный сет с&nbsp;игристым и&nbsp;фруктовой
-                        тарелкой&nbsp;&mdash; 3 500 ₽
+                        тарелкой&nbsp;&mdash; 5 000 ₽
                         <br />
                         Приветственный сет с&nbsp;игристым
-                        и&nbsp;антипасти&nbsp;&mdash; 4 500 ₽
+                        и&nbsp;антипасти&nbsp;&mdash; 6 000 ₽
                     </i>
                 </>
             ),
@@ -456,7 +456,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     и&nbsp;всегда рады помочь.
                 </>
             ),
-            price: "10 000 ₽",
+            price: "10 500 ₽",
         },
         {
             title: "Отдых с детьми",
@@ -550,7 +550,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     и&nbsp;всегда рады помочь.
                 </>
             ),
-            price: "5 500 ₽",
+            price: "8 000 ₽",
         },
     ],
     en: [
@@ -760,7 +760,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     are here and always happy to help.
                 </>
             ),
-            price: "9 000 ₽",
+            price: "13 000 ₽",
         },
         {
             title: "Chef's Cake",
@@ -933,13 +933,13 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br />
                     <br />
                     <i>
-                        Welcome set with sparkling wine and rose petals — 2 500
+                        Welcome set with sparkling wine and rose petals — 4 000
                         ₽
                         <br />
-                        Welcome set with sparkling wine and fruit plate — 3 500
+                        Welcome set with sparkling wine and fruit plate — 5 000
                         ₽
                         <br />
-                        Welcome set with sparkling wine and antipasti — 4 500 ₽
+                        Welcome set with sparkling wine and antipasti — 6 000 ₽
                     </i>
                 </>
             ),
@@ -968,7 +968,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     order — we are here and always happy to help.
                 </>
             ),
-            price: "10 000 ₽",
+            price: "10 500 ₽",
         },
         {
             title: "Traveling with Children",
@@ -1056,7 +1056,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     are here and always happy to help.
                 </>
             ),
-            price: "5 500 ₽",
+            price: "8 000 ₽",
         },
     ],
 };

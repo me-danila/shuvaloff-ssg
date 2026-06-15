@@ -247,7 +247,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                         className="absolute inset-0 h-full w-full"
                     >
                         <video
-                            src="https://academia.spb.ru/wp-content/uploads/2026/04/video.webm"
+                            src="https://static.academia.spb.ru/video/shuvaloff-land-hero.webm"
                             autoPlay
                             muted
                             loop
