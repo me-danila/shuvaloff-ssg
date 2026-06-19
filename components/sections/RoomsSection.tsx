@@ -24,7 +24,7 @@ export default function RoomsSection() {
     return (
         <>
             {/* Свитчер */}
-            <section className="flex mx-6 xl:w-full xl:max-w-2xl xl:mx-auto xl:gap-3 xl:-mt-6">
+            <section className="flex mx-6 xl:w-full xl:max-w-6xl xl:mx-auto xl:gap-3 xl:-mt-6">
                 {/* Классические номера */}
                 <div
                     className={`flex items-center flex-1 whitespace-nowrap xl:rounded-md transition-colors border border-brand-blue-100 ${!showHistorical ? "bg-brand-blue-100" : ""}`}

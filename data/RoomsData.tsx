@@ -83,28 +83,28 @@ const roomsRu: Room[] = [
     {
         title: "Супериор",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/1.jpg",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/06/639123775864187363-a67875c7-669c-4414-b429-95e63a2f9994.avif",
             alt: "Супериор",
         },
         gallery: [
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/639123775864187363-a67875c7-669c-4414-b429-95e63a2f9994.avif",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/2.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/639123775868786994-4fd7b27c-22f1-4996-a91c-4e3c2d116ba7.avif",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/3.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/639123775840590653-fcf10072-348c-4444-bd76-e39cb7385b5a.avif",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/4.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/639123775852494993-0d543b49-3f4e-4e84-8b49-7262ccb5180b.avif",
                 alt: "Супериор",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/5.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/639123775865611480-5653f2e1-d008-4cfc-911c-054a809e0e1b.avif",
                 alt: "Супериор",
             },
         ],
@@ -140,7 +140,79 @@ const roomsRu: Room[] = [
             "Бутилированная вода",
             "Кровать с ортопедическим матрасом и высоким текстильным изголовьем",
             "Удобный столик с креслами для работы или чаепития",
-            "В некоторых номерах мансардные окна, создающие особую атмосферу света и уюта",
+            "Ванная комната с душевой, гигиеническим душем, тёплым полом, халатами, тапочками, гостиничной парфюмерией и косметическими наборами",
+            "Мягкая мебель, обеденный стол, багажная тумба, зеркало в полный рост, шкаф для одежды и пуфик",
+            "Блэкаут-шторы и москитные сетки на окнах",
+            "Smart TV, Wi-Fi, письменные принадлежности и многоуровневое освещение",
+            "Индивидуальная сплит-система",
+            "Чайная станция, капсульная кофемашина, набор для приготовления напитков",
+            "Зона для макияжа",
+            "Утюг, гладильная доска, фен, сейф, мини-холодильник",
+            "Круглосуточное обслуживание номеров, электронный консьерж 24/7 и сопровождение личного менеджера службы заботы",
+        ],
+        isHistorical: false,
+    },
+    {
+        title: "Супериор мансарда",
+        image: {
+            src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2373_maxiimov.avif",
+            alt: "Супериор мансарда",
+        },
+        gallery: [
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2373_maxiimov.avif",
+                alt: "Супериор мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/2.avif",
+                alt: "Супериор мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/3.avif",
+                alt: "Супериор мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/4.avif",
+                alt: "Супериор мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/5.avif",
+                alt: "Супериор мансарда",
+            },
+        ],
+        slug: "superior-mansarda",
+        bookingUrl: "/booking/?be-room=406702",
+        bed: "Одна большая кровать",
+        area: "18-25 м²",
+        guests: "х 1-2",
+        description:
+            "Улучшенный номер на мансарде с двуспальной кроватью, зоной отдыха и просторной ванной комнатой с душевой",
+        fullDescription: (
+            <>
+                Интерьер номера объединяет неоклассический стиль
+                с&nbsp;современным комфортом и&nbsp;держит тонкий баланс между
+                эстетикой и&nbsp;функциональностью. Изящные детали отделки
+                погружают в&nbsp;историю и&nbsp;создают настроение,
+                а&nbsp;современное оснащение номера обеспечивает удобство
+                во&nbsp;всех важных мелочах.
+                <br />
+                <br />
+                Большая двуспальная кровать с&nbsp;ортопедическим матрасом
+                и&nbsp;изысканным текстильным изголовьем, постельное белье
+                премиального качества, светлая ванная комната с&nbsp;ванной или
+                душем, кондиционер и&nbsp;блэкаут шторы, удобный шкаф для
+                одежды, столик с&nbsp;креслами для неспешной беседы
+                за&nbsp;чаепитием и&nbsp;китчинет со&nbsp;стеклянной витриной
+                и&nbsp;зоной для макияжа&nbsp;— все для того, чтобы
+                вы&nbsp;могли расслабиться и&nbsp;погрузиться в&nbsp;атмосферу
+                отдыха.
+            </>
+        ),
+        amenities: [
+            "Бутилированная вода",
+            "Кровать с ортопедическим матрасом и высоким текстильным изголовьем",
+            "Удобный столик с креслами для работы или чаепития",
+            "Мансардные окна, создающие особую атмосферу света и уюта",
             "Ванная комната с душевой, гигиеническим душем, тёплым полом, халатами, тапочками, гостиничной парфюмерией и косметическими наборами",
             "Мягкая мебель, обеденный стол, багажная тумба, зеркало в полный рост, шкаф для одежды и пуфик",
             "Блэкаут-шторы и москитные сетки на окнах",
@@ -209,7 +281,74 @@ const roomsRu: Room[] = [
             "Просторный двухкомнатный номер: изолированная спальня с большой кроватью и гостиная с мягкой мебелью",
             "Удобный столик с креслами для работы или чаепития",
             "Диван-кровать или кресло-кровать для дополнительных гостей",
-            "В некоторых номерах мансардные окна, наполняющие интерьер мягким естественным светом",
+            "Блэкаут-шторы и москитные сетки на окнах",
+            "Ванная комната с ванной или душевой кабиной, гигиеническим душем, тёплым полом, халатами, тапочками, гостиничной парфюмерией и косметическими наборами",
+            "Письменный стол, зеркало в полный рост, эксклюзивная дизайнерская мебель и багажная тумба",
+            "Smart TV, Wi-Fi, многоуровневое освещение и индивидуальная сплит-система",
+            "Гладильные принадлежности, сейф и фен, мини-холодильник",
+            "Круглосуточное обслуживание номеров, электронный консьерж 24/7 и сопровождение личного менеджера службы заботы",
+            "Чайная станция, капсульная кофемашина, набор для приготовления напитков",
+            "Зона для макияжа",
+        ],
+        isHistorical: false,
+    },
+    {
+        title: "Полулюкс мансарда",
+        image: {
+            src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2391_maxiimov.avif",
+            alt: "Полулюкс мансарда",
+        },
+        gallery: [
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2391_maxiimov.avif",
+                alt: "Полулюкс мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2397_maxiimov.avif",
+                alt: "Полулюкс мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2401_maxiimov.avif",
+                alt: "Полулюкс мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2407_maxiimov.avif",
+                alt: "Полулюкс мансарда",
+            },
+            {
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2413_maxiimov.avif",
+                alt: "Полулюкс мансарда",
+            },
+        ],
+        slug: "junior-suite-mansarda",
+        bookingUrl: "/booking/?be-room=406703",
+        bed: "Одна большая кровать и диван-кровать / кресло-кровать",
+        area: "30-40 м²",
+        guests: "х 1-4",
+        description:
+            "Номер повышенной комфортности на мансарде с изолированной спальней, гостиной комнатой для отдыха и просторной ванной комнатой",
+        fullDescription: (
+            <>
+                Номер с&nbsp;отдельной спальней и&nbsp;уютной гостиной
+                с&nbsp;раскладным диваном или креслом-кроватью и&nbsp;столиком
+                с&nbsp;креслами для общения за&nbsp;вечерним чаем. Подойдет для
+                тех, кто особенно ценит личное пространство и&nbsp;для семейного
+                размещения.
+                <br />
+                <br />
+                В&nbsp;интерьере номера сочетаются неоклассический стиль
+                и&nbsp;современное наполнение. Удобная мебель, продуманное
+                оснащение номера и&nbsp;эргономичная планировка обеспечивают ваш
+                комфорт, а&nbsp;изысканные детали отделки помогают погрузиться
+                в&nbsp;историческую атмосферу особняка.
+            </>
+        ),
+        amenities: [
+            "Бутилированная вода",
+            "Просторный двухкомнатный номер: изолированная спальня с большой кроватью и гостиная с мягкой мебелью",
+            "Удобный столик с креслами для работы или чаепития",
+            "Диван-кровать или кресло-кровать для дополнительных гостей",
+            "Мансардные окна, создающие особую атмосферу света и уюта",
             "Блэкаут-шторы и москитные сетки на окнах",
             "Ванная комната с ванной или душевой кабиной, гигиеническим душем, тёплым полом, халатами, тапочками, гостиничной парфюмерией и косметическими наборами",
             "Письменный стол, зеркало в полный рост, эксклюзивная дизайнерская мебель и багажная тумба",
@@ -458,7 +597,7 @@ type RoomTranslation = {
 };
 
 const roomTranslationsEn: Record<string, RoomTranslation> = {
-    standard: {
+    "standard": {
         title: "Standard",
         imageAlt: "Standard room",
         galleryAlt: "Standard room",
@@ -487,7 +626,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "24/7 room service, digital concierge, and dedicated guest care manager",
         ],
     },
-    superior: {
+    "superior": {
         title: "Superior",
         imageAlt: "Superior room",
         galleryAlt: "Superior room",
@@ -512,7 +651,43 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Bottled water",
             "Bed with orthopedic mattress and upholstered headboard",
             "Comfortable table with armchairs",
-            "Some rooms feature mansard windows",
+            "Bathroom with shower, heated floor, bathrobes, slippers, and hotel toiletries",
+            "Soft seating, dining table, luggage stand, full-length mirror, wardrobe, and pouf",
+            "Blackout curtains and mosquito screens",
+            "Smart TV, Wi-Fi, writing essentials, and multi-level lighting",
+            "Individual split-system air conditioning",
+            "Tea station, capsule coffee machine, and drink set",
+            "Vanity zone",
+            "Iron, ironing board, hair dryer, safe, and mini fridge",
+            "24/7 room service, digital concierge, and dedicated guest care manager",
+        ],
+    },
+    "superior-mansarda": {
+        title: "Superior mansarda",
+        imageAlt: "Superior mansarda room",
+        galleryAlt: "Superior mansarda room",
+        bed: "One double bed",
+        guests: "x 1-2",
+        description:
+            "An upgraded attic room with a double bed, a sitting area, and a spacious bathroom with a shower",
+        fullDescription: (
+            <>
+                The interior combines neoclassical aesthetics with modern
+                comfort, balancing visual elegance and functionality. Decorative
+                details create a historical mood, while modern room equipment
+                keeps everyday comfort effortless.
+                <br />
+                <br />A large bed with orthopedic mattress, premium linens, a
+                bright bathroom with bath or shower, air conditioning, blackout
+                curtains, and a cozy tea corner make this room a great choice
+                for a relaxed city stay.
+            </>
+        ),
+        amenities: [
+            "Bottled water",
+            "Bed with orthopedic mattress and upholstered headboard",
+            "Comfortable table with armchairs",
+            "Skylights that create a special atmosphere of light and coziness",
             "Bathroom with shower, heated floor, bathrobes, slippers, and hotel toiletries",
             "Soft seating, dining table, luggage stand, full-length mirror, wardrobe, and pouf",
             "Blackout curtains and mosquito screens",
@@ -549,7 +724,6 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Spacious two-room layout: separate bedroom and living room",
             "Comfortable table with armchairs",
             "Sofa bed or armchair bed for extra guests",
-            "Some rooms feature mansard windows with soft natural light",
             "Blackout curtains and mosquito screens",
             "Bathroom with bath or shower, heated floor, bathrobes, slippers, and hotel toiletries",
             "Writing desk, full-length mirror, designer furniture, and luggage stand",
@@ -560,7 +734,43 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Vanity zone",
         ],
     },
-    suite: {
+    "junior-suite-mansarda": {
+        title: "Junior Suite mansarda",
+        imageAlt: "Junior suite mansarda",
+        galleryAlt: "Junior suite mansarda",
+        bed: "One double bed and sofa bed / armchair bed",
+        guests: "x 1-4",
+        description:
+            "A deluxe attic room with a separate bedroom, a living room for relaxation, and a spacious bathroom",
+        fullDescription: (
+            <>
+                A suite with a separate bedroom and a cozy living area with a
+                sofa bed or armchair bed. It is ideal for guests who value
+                privacy and for families who need more space.
+                <br />
+                <br />
+                The interior blends neoclassical style with modern comfort:
+                ergonomic layout, elegant furniture, and thoughtful amenities
+                for longer and more comfortable stays in the city.
+            </>
+        ),
+        amenities: [
+            "Bottled water",
+            "Spacious two-room layout: separate bedroom and living room",
+            "Comfortable table with armchairs",
+            "Sofa bed or armchair bed for extra guests",
+            "Skylights that create a special atmosphere of light and coziness",
+            "Blackout curtains and mosquito screens",
+            "Bathroom with bath or shower, heated floor, bathrobes, slippers, and hotel toiletries",
+            "Writing desk, full-length mirror, designer furniture, and luggage stand",
+            "Smart TV, Wi-Fi, multi-level lighting, and individual split-system air conditioning",
+            "Ironing amenities, safe, hair dryer, and mini fridge",
+            "24/7 room service, digital concierge, and dedicated guest care manager",
+            "Tea station, capsule coffee machine, and drink set",
+            "Vanity zone",
+        ],
+    },
+    "suite": {
         title: "Suite",
         imageAlt: "Suite",
         galleryAlt: "Suite",
@@ -595,7 +805,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Vanity zone",
         ],
     },
-    dashkova: {
+    "dashkova": {
         title: "Dashkova Residence",
         imageAlt: "Dashkova Residence",
         galleryAlt: "Dashkova Residence",
@@ -629,7 +839,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Antique details: 19th-century French fireplace screen, Art Nouveau floor lamp, collectible porcelain figurines, English Regency side table, mother-of-pearl fan, and rosewood bedside tables",
         ],
     },
-    shuvalov: {
+    "shuvalov": {
         title: "Count Shuvalov Residence",
         imageAlt: "Count Shuvalov Residence",
         galleryAlt: "Count Shuvalov Residence",
