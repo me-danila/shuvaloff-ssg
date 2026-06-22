@@ -284,7 +284,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             description:
                 "Классический маршрут по главной водной артерии города. Парадные дворцовые фасады, все основные достопримечательности, Петропавловская крепость и набережные Петроградской стороны. Вы полюбуетесь панорамой Невы, мостами и историческими зданиями, проплывая по центру столицы.",
             duration: "от 2-х часов",
-            priceDay: "8 000 ₽ / час за всех гостей",
+            priceDay: "9 000 ₽ / час за всех гостей",
             priceNight: "22:01 - 9:59: 11 500 ₽ / час",
             pier: "Яхт-клуб, Академика Павлова, 11A",
             capacity: "до 6 человек",
@@ -296,7 +296,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             description:
                 "Большое путешествие по сердцу города: величественная Нева, знаменитые набережные и уютные каналы. Идеально для основательного знакомства с архитектурой и атмосферой. Вы пройдете более 30 мостов и увидите все знаковые достопримечательности. Кроме того, в отличие от стандартных маршрутов, начинающихся в центре города, вы сможете увидеть Аптекарскую, Петроградскую и Петровскую набережные Петроградской стороны.",
             duration: "от 2-х часов",
-            priceDay: "8 000 ₽ / час за всех гостей",
+            priceDay: "9 000 ₽ / час за всех гостей",
             priceNight: "22:01 - 9:59: 11 500 ₽ / час",
             pier: "Яхт-клуб, Академика Павлова, 11A",
             capacity: "до 6 человек",
@@ -308,7 +308,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             description:
                 "На этой прогулке вас ждет сочетание городских пейзажей и простора залива. Вы увидите дворцовую панораму Невы, Петропавловскую крепость, набережные Петроградской стороны и выйдете на открытую воду, где вас ждут захватывающие виды на современный Петербург и непередаваемое ощущение свободы.",
             duration: "от 2-х часов",
-            priceDay: "8 000 ₽ / час за всех гостей",
+            priceDay: "9 000 ₽ / час за всех гостей",
             priceNight: "22:01 - 9:59: 11 500 ₽ / час",
             pier: "Яхт-клуб, Академика Павлова, 11A",
             capacity: "до 6 человек",
@@ -502,7 +502,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             description:
                 "A classic route along the city’s main waterway. Grand palace facades, all the major landmarks, the Peter and Paul Fortress, and the embankments of the Petrograd Side. You will admire the panorama of the Neva, its bridges, and historic buildings as you cruise through the heart of the city.",
             duration: "from 2 hours",
-            priceDay: "8 000 rub / hour for all guests",
+            priceDay: "9 000 rub / hour for all guests",
             priceNight: "10:01 PM – 9:59 AM: 11,500 ₽ / hour",
             pier: "Yacht Club, Akademika Pavlova, 11A",
             capacity: "up to 6 people",
@@ -514,7 +514,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             description:
                 "A grand tour through the heart of the city: the majestic Neva River, famous embankments, and charming canals. Perfect for getting a thorough sense of the architecture and atmosphere. You’ll cross more than 30 bridges and see all the iconic landmarks. Plus, unlike standard tours that start in the city center, you’ll get to see the Aptekarskaya, Petrogradskaya, and Petrovskaya embankments on the Petrograd Side.",
             duration: "from 2 hours",
-            priceDay: "8 000 rub / hour for all guests",
+            priceDay: "9 000 rub / hour for all guests",
             priceNight: "10:01 PM – 9:59 AM: 11,500 ₽ / hour",
             pier: "Yacht Club, Akademika Pavlova, 11A",
             capacity: "up to 6 people",
@@ -526,7 +526,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             description:
                 "On this walk, you’ll enjoy a blend of cityscapes and the open expanse of the bay. You’ll see the palace panorama of the Neva, the Peter and Paul Fortress, and the embankments of the Petrograd Side, and then head out onto the open water, where breathtaking views of modern St. Petersburg and an indescribable sense of freedom await you.",
             duration: "from 2 hours",
-            priceDay: "8 000 rub / hour for all guests",
+            priceDay: "9 000 rub / hour for all guests",
             priceNight: "10:01 PM – 9:59 AM: 11,500 ₽ / hour",
             pier: "Yacht Club, Akademika Pavlova, 11A",
             capacity: "up to 6 people",
