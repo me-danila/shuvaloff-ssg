@@ -23,6 +23,27 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking?&be-offer=910895",
         },
         {
+            title: "ВАШ ВЫХОДНОЙ КАК ИСКУССТВО",
+            subtitle:
+                "Особый формат, в котором выходной день становится церемонией",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9237-1.avif",
+            bookingUrl: "/booking/?&be-offer=804866",
+        },
+        {
+            title: "День рождения",
+            subtitle:
+                "Специальные привилегии для именинников и скидка 15% от 2 ночей",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
+            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
+        },
+        {
+            title: "Свадебное предложение",
+            subtitle:
+                "Свадебное предложение ACADEMIA — это гармония исторических интерьеров и безупречного сервиса",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
+            bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
+        },
+        {
             title: "Аэрофлот Бонус",
             subtitle: "До 1 000 миль за каждую ночь проживания в особняках!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/%D0%B0%D1%8D%D1%80%D0%BE%D1%84%D0%BB%D0%BE%D1%82-%D0%BD%D0%BE%D0%B2%D1%8B%D0%B9-2.avif",
@@ -43,20 +64,6 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking?be-offer=588673",
         },
         {
-            title: "День рождения",
-            subtitle:
-                "Специальные привилегии для именинников и скидка 15% от 2 ночей",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
-            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
-        },
-        {
-            title: "ВАШ ВЫХОДНОЙ КАК ИСКУССТВО",
-            subtitle:
-                "Особый формат, в котором выходной день становится церемонией",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9237-1.avif",
-            bookingUrl: "/booking/?&be-offer=804866",
-        },
-        {
             title: "РЖД Бонус",
             subtitle:
                 "Скидка 15% на тариф Завтрак включен по программе лояльности РЖД",
@@ -70,13 +77,6 @@ export const AllSales: Record<Locale, Sale[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9284-1.avif",
             imgObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
-        },
-        {
-            title: "Свадебное предложение",
-            subtitle:
-                "Свадебное предложение ACADEMIA — это гармония исторических интерьеров и безупречного сервиса",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
-            bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
         },
         {
             title: "Семейное путешествие",
@@ -93,6 +93,26 @@ export const AllSales: Record<Locale, Sale[]> = {
                 "A unique getaway steeped in opulent aristocratic traditions",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
             bookingUrl: "/booking?&be-offer=910895",
+        },
+        {
+            title: "YOUR WEEKEND AS ART",
+            subtitle: "A special format where your weekend becomes a ceremony",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9237-1.avif",
+            bookingUrl: "/booking/?&be-offer=804866",
+        },
+        {
+            title: "Birthday Offer",
+            subtitle:
+                "Special privileges for birthday guests and 15% discount for stays of 2 nights or more",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
+            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
+        },
+        {
+            title: "Wedding Offer",
+            subtitle:
+                "ACADEMIA wedding offer is a harmony of historical interiors and impeccable service",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
+            bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
         },
         {
             title: "Aeroflot bonus",
@@ -116,19 +136,6 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking?be-offer=588673",
         },
         {
-            title: "Birthday Offer",
-            subtitle:
-                "Special privileges for birthday guests and 15% discount for stays of 2 nights or more",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
-            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
-        },
-        {
-            title: "YOUR WEEKEND AS ART",
-            subtitle: "A special format where your weekend becomes a ceremony",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9237-1.avif",
-            bookingUrl: "/booking/?&be-offer=804866",
-        },
-        {
             title: "RZD Bonus",
             subtitle:
                 "15% discount on Breakfast Included rate via RZD loyalty program",
@@ -142,13 +149,6 @@ export const AllSales: Record<Locale, Sale[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_9284-1.avif",
             imgObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
-        },
-        {
-            title: "Wedding Offer",
-            subtitle:
-                "ACADEMIA wedding offer is a harmony of historical interiors and impeccable service",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
-            bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
         },
         {
             title: "Family Journey",

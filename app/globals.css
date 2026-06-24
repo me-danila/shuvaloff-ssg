@@ -48,6 +48,42 @@ body {
     }
 }
 
+/* Шрифты только на /v2: century gothic для текста, history pro для заголовков (кроме h1) */
+.v2-fonts {
+    font-family: var(--font-century), Arial, Helvetica, sans-serif;
+}
+
+.v2-fonts :is(h2, h3, h4, h5, h6) {
+    font-family: var(--font-history), serif;
+    font-weight: 700;
+}
+
+/* Century Gothic для футера v2 (вне скоупа .v2-fonts) */
+@font-face {
+    font-family: "CenturyGothicV2";
+    src: url("/fonts/CenturyGothic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "CenturyGothicV2";
+    src: url("/fonts/CenturyGothic-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "CenturyGothicV2";
+    src: url("/fonts/CenturyGothic-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+.font-century-v2 {
+    font-family: "CenturyGothicV2", Arial, Helvetica, sans-serif;
+}
+
 @keyframes marquee {
     0% {
         transform: translateX(0);

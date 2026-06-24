@@ -315,11 +315,13 @@ export default function Header() {
     const subNavItems = subNavItemsByLocale[locale];
     const normalizedPath = normalizePath(stripLocalePrefix(pathname));
     const isHome = normalizedPath === "/";
+    const hideSlogan = normalizedPath === "/v2";
     const isHeaderFixed =
         normalizedPath === "/" ||
         normalizedPath === "/wedding" ||
         normalizedPath === "/spasibo_wedding" ||
-        normalizedPath === "/services/aristocratic-breakfast";
+        normalizedPath === "/services/aristocratic-breakfast" ||
+        normalizedPath === "/v2";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -355,7 +357,8 @@ export default function Header() {
         normalizedPath !== "/" &&
         normalizedPath !== "/wedding" &&
         normalizedPath !== "/spasibo_wedding" &&
-        normalizedPath !== "/services/aristocratic-breakfast";
+        normalizedPath !== "/services/aristocratic-breakfast" &&
+        normalizedPath !== "/v2";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,
@@ -522,13 +525,15 @@ export default function Header() {
                 </div>
                 <div>
                     {/* Мобайл: текст над линией */}
-                    <p
-                        className={`xl:hidden text-center font-alistair text-xl pb-2 transition-colors duration-300 ${
-                            isLight ? "text-[#96908D]" : "text-white/70"
-                        }`}
-                    >
-                        {copy.slogan}
-                    </p>
+                    {!hideSlogan && (
+                        <p
+                            className={`xl:hidden text-center font-alistair text-xl pb-2 transition-colors duration-300 ${
+                                isLight ? "text-[#96908D]" : "text-white/70"
+                            }`}
+                        >
+                            {copy.slogan}
+                        </p>
+                    )}
 
                     {/* Общая линия */}
                     <div

@@ -5,7 +5,7 @@ import { domAnimation, LazyMotion } from "framer-motion";
 import Script from "next/script";
 import { Suspense } from "react";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
-import Footer from "@/components/layout/Footer";
+import FooterSwitch from "@/components/layout/FooterSwitch";
 import Header from "@/components/layout/Header";
 import StructuredData from "@/components/seo/StructuredData";
 import { siteMetadataBase } from "@/lib/i18n/metadata";
@@ -110,7 +110,7 @@ export default function RootLayout({
                             <Header />
                         </Suspense>
                         <Suspense fallback={null}>{children}</Suspense>
-                        <Footer />
+                        <FooterSwitch />
                     </LazyMotion>
                 </SmoothScroll>
                 <Script id="hotbot" strategy="lazyOnload">{`
