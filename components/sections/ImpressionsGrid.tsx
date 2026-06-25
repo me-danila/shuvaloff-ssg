@@ -8,13 +8,13 @@ const base = "https://academia.spb.ru/wp-content/uploads/2026/06";
 // Десктопный грид (5 фото) — порядок как в hero отелей: [0] большое слева, далее 2×2
 const gridImages: Img[] = [
     {
-        src: `${base}/1-scaled.jpg`,
+        src: `${base}/fasad.png`,
         alt: "Фасад особняка ACADEMIA",
         w: 2560,
         h: 1843,
     },
     {
-        src: `${base}/2-scaled.jpg`,
+        src: `${base}/IMG_0412.jpeg`,
         alt: "Водная прогулка по каналам",
         w: 1783,
         h: 2560,

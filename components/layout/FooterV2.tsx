@@ -68,6 +68,14 @@ export default function FooterV2() {
             : "© 2026 ACADEMIA Mansion Shuvaloff Hotel, ACADEMILAND";
     const cityText =
         locale === "ru" ? "®, г. Санкт-Петербург" : "®, Saint Petersburg";
+    const copyrightLine1 =
+        locale === "ru"
+            ? "© 2026 Отель «ACADEMIA Особняк SHUVALOFF»,"
+            : "© 2026 ACADEMIA Mansion Shuvaloff Hotel,";
+    const copyrightLine2 =
+        locale === "ru"
+            ? "«ACADEMILAND» ®, г. Санкт-Петербург"
+            : "ACADEMILAND ®, Saint Petersburg";
 
     const newsletterTitle =
         locale === "ru" ? "Ежемесячная рассылка" : "Monthly newsletter";
@@ -152,90 +160,271 @@ export default function FooterV2() {
                 <meta key={href} itemProp="sameAs" content={href} />
             ))}
 
-            {/* ── Desktop ── 3×3 grid: строки выравнены по колонкам */}
-            <div className="hidden md:block max-w-6xl mx-auto py-12">
-                <StaggerContainer
-                    mode="inView"
-                    delay={0.05}
-                    staggerChildren={0.1}
-                    className="grid grid-cols-[1fr_300px_1fr] gap-x-2 gap-y-6 items-start"
-                >
-                    {/* Строка 1: лого / пусто / рейтинг */}
-                    <StaggerItem y={0}>
-                        <Link
-                            href={localizeHref("/", locale)}
-                            aria-label={homeAria}
+            {/* ── Desktop ── рассылка справа, рейтинг+соцсети в центре */}
+            <div className="hidden md:block">
+                <div className="mx-auto max-w-6xl py-12">
+                    <StaggerContainer
+                        mode="inView"
+                        delay={0.05}
+                        staggerChildren={0.08}
+                        className="grid grid-cols-[1fr_1fr_400px] gap-x-16 gap-y-8 items-start text-xs leading-snug text-white/80"
+                    >
+                        <StaggerItem y={0}>
+                            <Link
+                                href={localizeHref("/", locale)}
+                                aria-label={homeAria}
+                            >
+                                <Image
+                                    src="/logo.svg"
+                                    alt={logoAlt}
+                                    width={130}
+                                    height={44}
+                                    className="brightness-0 invert opacity-70 transition duration-200 hover:opacity-90"
+                                />
+                            </Link>
+                        </StaggerItem>
+
+                        <StaggerItem
+                            y={0}
+                            className="col-start-3 row-span-2 flex flex-col gap-3"
+                        >
+                            <p className="mb-[-0.5rem] text-sm font-semibold leading-snug text-white/80">
+                                {newsletterTitle}
+                            </p>
+                            <p className="text-xs leading-snug text-white/80">
+                                {newsletterText}
+                            </p>
+                            <form
+                                onSubmit={(e) => e.preventDefault()}
+                                className="flex w-[228px] items-stretch gap-2"
+                            >
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none"
+                                />
+                                <button
+                                    type="submit"
+                                    aria-label={
+                                        locale === "ru"
+                                            ? "Подписаться"
+                                            : "Subscribe"
+                                    }
+                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#5c1f26] text-white transition-colors duration-300 hover:bg-[#46161c]"
+                                >
+                                    <PlayIcon size={16} weight="fill" />
+                                </button>
+                            </form>
+                            <p className="text-xs leading-snug text-white/50">
+                                {consentPrefix}
+                                <Link
+                                    href="/policy/"
+                                    className="text-white/60 underline transition-colors hover:text-white/80"
+                                >
+                                    {consentLink}
+                                </Link>
+                                {consentSuffix}
+                            </p>
+                        </StaggerItem>
+
+                        <StaggerItem
+                            y={0}
+                            className="col-start-2 row-start-1 flex justify-start"
                         >
                             <Image
-                                src="/logo.svg"
-                                alt={logoAlt}
-                                width={130}
-                                height={44}
-                                className="brightness-0 invert opacity-70 hover:opacity-90 transition duration-200"
+                                src={RATING_IMG}
+                                alt={ratingAlt}
+                                width={169}
+                                height={35}
+                                className="brightness-0 invert"
                             />
-                        </Link>
-                    </StaggerItem>
-                    <div />
-                    <StaggerItem y={0}>
-                        <Image
-                            src={RATING_IMG}
-                            alt={ratingAlt}
-                            width={169}
-                            height={35}
-                            className="brightness-0 invert"
-                        />
-                    </StaggerItem>
+                        </StaggerItem>
 
-                    {/* Строка 2: ссылки / соцсети / рассылка */}
-                    <StaggerItem y={12} className="flex flex-col gap-1">
-                        {navLinks.map(({ label, href }) => (
-                            <Link
-                                key={href}
-                                href={href}
-                                target="_blank"
-                                className="text-white/90 hover:text-white transition-colors text-xs"
-                            >
-                                {label}
-                            </Link>
-                        ))}
-                    </StaggerItem>
-                    <StaggerItem y={12} className="flex flex-col gap-5">
-                        <p className="text-white/90 text-xs leading-snug max-w-xs">
-                            {socialText}
-                        </p>
-                        <SocialLinks invert />
-                    </StaggerItem>
-                    <StaggerItem y={12} className="flex flex-col gap-3">
-                        <p className="text-white text-sm font-semibold">
-                            {newsletterTitle}
-                        </p>
-                        <p className="text-white text-xs leading-snug">
-                            {newsletterText}
-                        </p>
-                        <SubscribeForm />
-                    </StaggerItem>
+                        <StaggerItem
+                            y={12}
+                            className="col-start-1 row-start-2 flex flex-col gap-1.5"
+                        >
+                            {navLinks.map(({ label, href }) => (
+                                <Link
+                                    key={href}
+                                    href={href}
+                                    target="_blank"
+                                    className="text-white/80 transition-colors hover:text-white"
+                                >
+                                    {label}
+                                </Link>
+                            ))}
+                        </StaggerItem>
 
-                    {/* Строка 3: копирайт / легал / согласие */}
-                    <StaggerItem y={0} className="text-white text-xs/5">
-                        {copyrightText}
-                        <br />
-                        {cityText}
-                    </StaggerItem>
-                    <StaggerItem y={0} className="flex flex-col gap-1">
-                        {legalLinks.map(({ label, href }) => (
-                            <Link
-                                key={href}
-                                href={href}
-                                className="text-white/40 hover:text-white/70 transition-colors text-xs"
+                        <StaggerItem
+                            y={12}
+                            className="col-start-2 row-start-2 flex flex-col gap-5"
+                        >
+                            <p className="text-xs leading-snug text-white/80">
+                                {socialText}
+                            </p>
+                            <SocialLinks invert />
+                        </StaggerItem>
+
+                        <div className="col-span-3 flex flex-wrap items-start gap-x-8 gap-y-2 border-t border-white/10 pt-5">
+                            <StaggerItem
+                                y={0}
+                                className="text-xs leading-snug text-white/50"
                             >
-                                {label}
+                                {copyrightText} {cityText}
+                            </StaggerItem>
+
+                            <StaggerItem
+                                y={0}
+                                className="flex flex-wrap gap-x-6 gap-y-1 justify-self-start"
+                            >
+                                {legalLinks.map(({ label, href }) => (
+                                    <Link
+                                        key={href}
+                                        href={href}
+                                        className="text-white/50 transition-colors hover:text-white/75"
+                                    >
+                                        {label}
+                                    </Link>
+                                ))}
+                            </StaggerItem>
+                        </div>
+                    </StaggerContainer>
+                </div>
+            </div>
+
+            {/* ── Desktop v5 ── 3×3: лого/нав/копи · пусто/соцсети/легал · рейтинг/рассылка */}
+            <div className="hidden md:block border-t border-white/10">
+                <div className="mx-auto max-w-6xl py-12">
+                    <StaggerContainer
+                        mode="inView"
+                        delay={0.05}
+                        staggerChildren={0.08}
+                        className="grid grid-cols-[1fr_1fr_400px] gap-x-16 gap-y-8 items-start text-xs leading-snug text-white/80"
+                    >
+                        {/* Колонка 1 */}
+                        <StaggerItem y={0} className="col-start-1 row-start-1">
+                            <Link
+                                href={localizeHref("/", locale)}
+                                aria-label={homeAria}
+                            >
+                                <Image
+                                    src="/logo.svg"
+                                    alt={logoAlt}
+                                    width={130}
+                                    height={44}
+                                    className="brightness-0 invert opacity-70 transition duration-200 hover:opacity-90"
+                                />
                             </Link>
-                        ))}
-                    </StaggerItem>
-                    <StaggerItem y={0}>
-                        <Consent />
-                    </StaggerItem>
-                </StaggerContainer>
+                        </StaggerItem>
+
+                        <StaggerItem
+                            y={12}
+                            className="col-start-1 row-start-2 flex flex-col gap-1.5"
+                        >
+                            {navLinks.map(({ label, href }) => (
+                                <Link
+                                    key={href}
+                                    href={href}
+                                    target="_blank"
+                                    className="text-white/80 transition-colors hover:text-white"
+                                >
+                                    {label}
+                                </Link>
+                            ))}
+                        </StaggerItem>
+
+                        <StaggerItem
+                            y={0}
+                            className="col-start-1 row-start-3 text-xs leading-snug text-white/50"
+                        >
+                            {copyrightText} {cityText}
+                        </StaggerItem>
+
+                        {/* Колонка 2 */}
+                        <StaggerItem
+                            y={12}
+                            className="col-start-2 row-start-2 flex flex-col gap-5"
+                        >
+                            <p className="text-xs leading-snug text-white/80">
+                                {socialText}
+                            </p>
+                            <SocialLinks invert />
+                        </StaggerItem>
+
+                        <StaggerItem
+                            y={0}
+                            className="col-start-2 row-start-3 flex flex-wrap gap-x-6 gap-y-1"
+                        >
+                            {legalLinks.map(({ label, href }) => (
+                                <Link
+                                    key={href}
+                                    href={href}
+                                    className="text-white/50 transition-colors hover:text-white/75"
+                                >
+                                    {label}
+                                </Link>
+                            ))}
+                        </StaggerItem>
+
+                        {/* Колонка 3 */}
+                        <StaggerItem
+                            y={0}
+                            className="col-start-3 row-start-1 flex justify-start"
+                        >
+                            <Image
+                                src={RATING_IMG}
+                                alt={ratingAlt}
+                                width={169}
+                                height={35}
+                                className="brightness-0 invert"
+                            />
+                        </StaggerItem>
+
+                        <StaggerItem
+                            y={0}
+                            className="col-start-3 row-start-2 row-span-2 flex flex-col gap-3"
+                        >
+                            <p className="mb-[-0.5rem] text-sm font-semibold leading-snug text-white/80">
+                                {newsletterTitle}
+                            </p>
+                            <p className="text-xs leading-snug text-white/80">
+                                {newsletterText}
+                            </p>
+                            <form
+                                onSubmit={(e) => e.preventDefault()}
+                                className="flex w-[228px] items-stretch gap-2"
+                            >
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none"
+                                />
+                                <button
+                                    type="submit"
+                                    aria-label={
+                                        locale === "ru"
+                                            ? "Подписаться"
+                                            : "Subscribe"
+                                    }
+                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#5c1f26] text-white transition-colors duration-300 hover:bg-[#46161c]"
+                                >
+                                    <PlayIcon size={16} weight="fill" />
+                                </button>
+                            </form>
+                            <p className="text-xs leading-snug text-white/50">
+                                {consentPrefix}
+                                <Link
+                                    href="/policy/"
+                                    className="text-white/60 underline transition-colors hover:text-white/80"
+                                >
+                                    {consentLink}
+                                </Link>
+                                {consentSuffix}
+                            </p>
+                        </StaggerItem>
+                    </StaggerContainer>
+                </div>
             </div>
 
             {/* ── Mobile ── */}

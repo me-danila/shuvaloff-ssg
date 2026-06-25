@@ -1,5 +1,11 @@
 "use client";
 
+import {
+    CaretDownIcon,
+    MapPinIcon,
+    PhoneIcon,
+    UserIcon,
+} from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -24,13 +30,26 @@ type NavItem = {
     target?: "_blank";
     forceReload?: boolean;
     lineBelow?: boolean;
-    submenu?: { label: string; href: string; target?: "_blank" }[];
+    submenu?: {
+        label: string;
+        href: string;
+        target?: "_blank";
+        forceReload?: boolean;
+    }[];
 };
 
 type SubNavItem = {
     label: string;
     href: string;
     target?: "_blank";
+    forceReload?: boolean;
+    lineBelow?: boolean;
+    submenu?: {
+        label: string;
+        href: string;
+        target?: "_blank";
+        forceReload?: boolean;
+    }[];
 };
 
 type HeaderCopy = {
@@ -41,6 +60,14 @@ type HeaderCopy = {
     loginButton: string;
     slogan: string;
     logoAlt: string;
+};
+
+type HeaderLinkItem = {
+    label: string;
+    href: string;
+    target?: "_blank";
+    forceReload?: boolean;
+    lineBelow?: boolean;
 };
 
 const copyByLocale: Record<Locale, HeaderCopy> = {
@@ -206,6 +233,124 @@ const subNavItemsByLocale: Record<Locale, SubNavItem[]> = {
     ],
 };
 
+const homeV2NavItemsByLocale: Record<Locale, SubNavItem[]> = {
+    ru: [
+        {
+            label: "Категории номеров",
+            href: "/rooms/",
+            submenu: [
+                { label: "Стандарт", href: "/rooms/standard/" },
+                { label: "Супериор", href: "/rooms/superior/" },
+                {
+                    label: "Супериор мансарда",
+                    href: "/rooms/superior-mansarda/",
+                },
+                { label: "Полулюкс", href: "/rooms/junior-suite/" },
+                {
+                    label: "Полулюкс мансарда",
+                    href: "/rooms/junior-suite-mansarda/",
+                },
+                { label: "Двухкомнатный люкс", href: "/rooms/suite/" },
+                { label: "Исторические люксы", href: "/rooms/historical/" },
+            ],
+        },
+        {
+            label: "Специальные предложения",
+            href: "/sales/",
+            submenu: [
+                { label: "Акции", href: "/sales/" },
+                { label: "Реферальная программа", href: "/rewards/referral/" },
+                {
+                    label: "Подарочные сертификаты",
+                    href: "?cert-open=42761",
+                    forceReload: true,
+                },
+                { label: "Абонементы на проживание", href: "/subscriptions/" },
+                { label: "Свадьба в особняке", href: "/wedding/" },
+                { label: "Водные прогулки", href: "/services/boat-tours/" },
+            ],
+        },
+        { label: "Программа привиллегий", href: "/rewards/" },
+        {
+            label: "О нас",
+            href: "/history/",
+            submenu: [
+                { label: "Отзывы", href: "#reviews" },
+                {
+                    label: "СМИ",
+                    href: "https://academia.spb.ru/smi/",
+                    target: "_blank",
+                },
+                {
+                    label: "Блог",
+                    href: "https://academia.spb.ru/blog/",
+                    target: "_blank",
+                },
+                { label: "История особняка", href: "/history/" },
+            ],
+        },
+    ],
+    en: [
+        {
+            label: "Room categories",
+            href: "/rooms/",
+            submenu: [
+                { label: "Standard", href: "/rooms/standard/" },
+                { label: "Superior", href: "/rooms/superior/" },
+                {
+                    label: "Superior mansarda",
+                    href: "/rooms/superior-mansarda/",
+                },
+                { label: "Junior Suite", href: "/rooms/junior-suite/" },
+                {
+                    label: "Junior Suite mansarda",
+                    href: "/rooms/junior-suite-mansarda/",
+                },
+                { label: "Suite", href: "/rooms/suite/" },
+                { label: "Historical suites", href: "/rooms/historical/" },
+            ],
+        },
+        {
+            label: "Special offers",
+            href: "/sales/",
+            submenu: [
+                { label: "Offers", href: "/sales/" },
+                { label: "Referral program", href: "/rewards/referral/" },
+                {
+                    label: "Gift certificates",
+                    href: "?cert-open=42761",
+                    forceReload: true,
+                },
+                {
+                    label: "Accommodation subscriptions",
+                    href: "/subscriptions/",
+                },
+                { label: "Wedding at the mansion", href: "/wedding/" },
+                { label: "Boat tours", href: "/services/boat-tours/" },
+            ],
+        },
+        { label: "Rewards program", href: "/rewards/" },
+        {
+            label: "About us",
+            href: "/history/",
+            submenu: [
+                { label: "Reviews", href: "#reviews" },
+                {
+                    label: "Media",
+                    href: "https://academia.spb.ru/smi/",
+                    target: "_blank",
+                },
+                {
+                    label: "Blog",
+                    href: "https://academia.spb.ru/blog/",
+                    target: "_blank",
+                },
+                { label: "Mansion history", href: "/history/" },
+            ],
+        },
+    ],
+};
+
 const OVERLAY_TRANSITION = {
     duration: 0.32,
     ease: GENTLE_EASE,
@@ -313,9 +458,11 @@ export default function Header() {
     const copy = copyByLocale[locale];
     const navItems = navItemsByLocale[locale];
     const subNavItems = subNavItemsByLocale[locale];
+    const homeV2NavItems = homeV2NavItemsByLocale[locale];
     const normalizedPath = normalizePath(stripLocalePrefix(pathname));
     const isHome = normalizedPath === "/";
     const hideSlogan = normalizedPath === "/v2";
+    const isHomeV2 = normalizedPath === "/v2";
     const isHeaderFixed =
         normalizedPath === "/" ||
         normalizedPath === "/wedding" ||
@@ -365,9 +512,15 @@ export default function Header() {
     );
     const activeSubmenuItems =
         navItems.find((item) => item.label === activeSubmenu)?.submenu ?? [];
+    const visibleSubNavItems = isHomeV2 ? homeV2NavItems : subNavItems;
+    const visibleMobileNavItems = isHomeV2 ? homeV2NavItems : navItems;
     const ruHref = localizeHref(pathname, "ru");
     const enHref = localizeHref(pathname, "en");
-    const buildMenuHref = (item: NavItem) => {
+    const alternateLocale = locale === "ru" ? "en" : "ru";
+    const alternateHref = locale === "ru" ? enHref : ruHref;
+    const currentLanguageLabel = locale.toUpperCase();
+    const alternateLanguageLabel = alternateLocale.toUpperCase();
+    const buildMenuHref = (item: HeaderLinkItem) => {
         if (!item.href.startsWith("?")) {
             return localizeHref(item.href, locale);
         }
@@ -382,9 +535,9 @@ export default function Header() {
         const query = mergedParams.toString();
         return query ? `${pathname}?${query}` : pathname;
     };
-    const getItemRel = (item: NavItem) =>
+    const getItemRel = (item: HeaderLinkItem) =>
         item.target === "_blank" ? "noopener noreferrer" : undefined;
-    const renderNavItemLink = (item: NavItem, className: string) => {
+    const renderNavItemLink = (item: HeaderLinkItem, className: string) => {
         const href = buildMenuHref(item);
 
         if (item.forceReload) {
@@ -426,40 +579,132 @@ export default function Header() {
                 className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 xl:pb-4 ${
                     isLight
                         ? "bg-white"
-                        : "bg-linear-to-b from-black/80 via-black/60 to-transparent"
+                        : isHomeV2
+                          ? "bg-linear-to-b from-black/80 via-black/60 to-transparent"
+                          : "bg-linear-to-b from-black/80 via-black/60 to-transparent"
                 }`}
             >
                 <div className="flex items-center h-14 px-5 xl:px-8 relative xl:h-20">
-                    <div className="flex items-center gap-12">
-                        <button
-                            type="button"
-                            onClick={() => setMenuOpen(true)}
-                            className={`hidden xl:flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
-                                isLight ? "text-stone-700" : "text-white"
-                            }`}
-                            aria-label={copy.openMenuAria}
-                        >
-                            <span className="block w-5 h-px bg-current" />
-                            <span className="block w-5 h-px bg-current" />
-                        </button>
-                        <div
-                            className={`flex items-center gap-2 text-xs tracking-wider transition-colors duration-300 ${
-                                isLight ? "text-[#96908D]" : "text-white/70"
-                            }`}
-                        >
-                            <Link
-                                href={ruHref}
-                                className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
-                            >
-                                RU
-                            </Link>
-                            <Link
-                                href={enHref}
-                                className={`font-medium ${locale === "en" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
-                            >
-                                ENG
-                            </Link>
-                        </div>
+                    <div
+                        className={`flex items-center ${isHomeV2 ? "xl:gap-32" : "gap-12"}`}
+                    >
+                        {isHomeV2 ? (
+                            <>
+                                <div
+                                    className={`flex items-center gap-2 text-xs tracking-wider transition-colors duration-300 xl:hidden ${
+                                        isLight
+                                            ? "text-[#96908D]"
+                                            : "text-white/70"
+                                    }`}
+                                >
+                                    <Link
+                                        href={ruHref}
+                                        className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                    >
+                                        RU
+                                    </Link>
+                                    <Link
+                                        href={enHref}
+                                        className={`font-medium ${locale === "en" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                    >
+                                        ENG
+                                    </Link>
+                                </div>
+                                <div className="group relative hidden xl:block">
+                                    <Link
+                                        href={locale === "ru" ? ruHref : enHref}
+                                        aria-label={
+                                            locale === "ru"
+                                                ? "Русская версия"
+                                                : "English version"
+                                        }
+                                        className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-xs font-medium transition-colors duration-300 ${
+                                            isLight
+                                                ? "border-stone-300 text-stone-700 hover:border-brand-blue hover:text-brand-blue"
+                                                : "border-white/40 text-white hover:border-white hover:bg-white/10"
+                                        }`}
+                                    >
+                                        <span>{currentLanguageLabel}</span>
+                                        <CaretDownIcon
+                                            size={9}
+                                            weight="bold"
+                                            className="ml-0.5"
+                                            aria-hidden="true"
+                                        />
+                                    </Link>
+                                    <span
+                                        className="absolute left-0 top-full z-50 h-1.5 w-11"
+                                        aria-hidden="true"
+                                    />
+                                    <Link
+                                        href={alternateHref}
+                                        aria-label={
+                                            locale === "ru"
+                                                ? "Switch to English"
+                                                : "Переключить на русский"
+                                        }
+                                        className={`absolute left-0 top-[calc(100%+0.375rem)] z-50 inline-flex h-11 w-11 translate-y-1 items-center justify-center rounded-full border text-xs font-medium opacity-0 pointer-events-none transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto ${
+                                            isLight
+                                                ? "border-stone-300 bg-white text-stone-700 shadow-[0_10px_30px_rgba(0,0,0,0.16)] hover:border-brand-blue hover:text-brand-blue"
+                                                : "border-white/70 bg-[#100b08] text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:border-white hover:bg-[#100b08]"
+                                        }`}
+                                    >
+                                        {alternateLanguageLabel}
+                                    </Link>
+                                </div>
+                                <a
+                                    href="tel:+78125659650"
+                                    className={`hidden xl:inline-flex items-center gap-3 text-sm tracking-wide transition-colors duration-300 ${
+                                        isLight
+                                            ? "text-stone-700 hover:text-brand-blue"
+                                            : "text-white hover:text-white/75"
+                                    }`}
+                                >
+                                    <PhoneIcon
+                                        size={16}
+                                        weight="fill"
+                                        aria-hidden="true"
+                                    />
+                                    +7 (812) 565-96-50
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                <button
+                                    type="button"
+                                    onClick={() => setMenuOpen(true)}
+                                    className={`hidden xl:flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
+                                        isLight
+                                            ? "text-stone-700"
+                                            : "text-white"
+                                    }`}
+                                    aria-label={copy.openMenuAria}
+                                >
+                                    <span className="block w-5 h-px bg-current" />
+                                    <span className="block w-5 h-px bg-current" />
+                                </button>
+                                <div
+                                    className={`flex items-center gap-2 text-xs tracking-wider transition-colors duration-300 ${
+                                        isLight
+                                            ? "text-[#96908D]"
+                                            : "text-white/70"
+                                    }`}
+                                >
+                                    <Link
+                                        href={ruHref}
+                                        className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                    >
+                                        RU
+                                    </Link>
+                                    <Link
+                                        href={enHref}
+                                        className={`font-medium ${locale === "en" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                    >
+                                        ENG
+                                    </Link>
+                                </div>
+                            </>
+                        )}
                     </div>
 
                     <Link
@@ -477,37 +722,92 @@ export default function Header() {
                         />
                     </Link>
 
-                    <div className="flex items-center gap-12 ml-auto">
-                        <div className="hidden xl:block">
-                            <Button
-                                href={localizeHref("/booking/", locale)}
-                                variant="primary"
-                                size="xs"
-                            >
-                                {copy.bookButton}
-                            </Button>
+                    <div
+                        className={`flex items-center ml-auto ${isHomeV2 ? "xl:gap-28" : "gap-12"}`}
+                    >
+                        <div className="hidden xl:grid min-w-[10.5rem] place-items-center">
+                            {isHomeV2 ? (
+                                <div className="relative h-11 w-full">
+                                    <span
+                                        className={`absolute inset-0 inline-flex items-center justify-center gap-2 text-sm tracking-wide transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                                            scrolled
+                                                ? "-translate-y-2 opacity-0 pointer-events-none"
+                                                : "translate-y-0 opacity-100"
+                                        } ${
+                                            isLight
+                                                ? "text-stone-700"
+                                                : "text-white"
+                                        }`}
+                                    >
+                                        <MapPinIcon
+                                            size={16}
+                                            weight="fill"
+                                            aria-hidden="true"
+                                        />
+                                        {locale === "en"
+                                            ? "Saint Petersburg"
+                                            : "Санкт-Петербург"}
+                                    </span>
+                                    <Button
+                                        href={localizeHref("/booking/", locale)}
+                                        variant="primary"
+                                        size="xs"
+                                        className={`absolute left-1/2 top-1/2 -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                                            scrolled
+                                                ? "-translate-y-1/2 opacity-100"
+                                                : "translate-y-1 opacity-0 pointer-events-none"
+                                        }`}
+                                    >
+                                        {copy.bookButton}
+                                    </Button>
+                                </div>
+                            ) : (
+                                <Button
+                                    href={localizeHref("/booking/", locale)}
+                                    variant="primary"
+                                    size="xs"
+                                >
+                                    {copy.bookButton}
+                                </Button>
+                            )}
                         </div>
                         <a
                             href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`hidden xl:flex items-center gap-1.5 text-sm transition-colors duration-300 ${
+                            className={`group hidden xl:flex items-center ${isHomeV2 ? "gap-3" : "gap-1.5"} text-sm transition-colors duration-300 ${
                                 isLight ? "text-stone-700" : "text-white"
                             }`}
                         >
-                            <svg
-                                width="15"
-                                height="15"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="1.5"
-                                aria-hidden="true"
-                                focusable="false"
-                            >
-                                <circle cx="12" cy="8" r="4" />
-                                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                            </svg>
+                            {isHomeV2 ? (
+                                <span
+                                    className={`inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-300 ${
+                                        isLight
+                                            ? "border-stone-300 group-hover:border-brand-blue"
+                                            : "border-white/40 group-hover:border-white group-hover:bg-white/10"
+                                    }`}
+                                >
+                                    <UserIcon
+                                        size={13}
+                                        weight="fill"
+                                        aria-hidden="true"
+                                    />
+                                </span>
+                            ) : (
+                                <svg
+                                    width="15"
+                                    height="15"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                >
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                                </svg>
+                            )}
                             {copy.loginButton}
                         </a>
                         <button
@@ -555,43 +855,112 @@ export default function Header() {
                 {/* Десктоп: дополнительное меню — только не на главной */}
                 {!isHome && (
                     <nav className="hidden xl:flex items-center justify-between gap-8 px-8 h-13">
-                        {subNavItems.map(({ label, href, target }, index) => (
-                            <Link
-                                key={href}
-                                href={localizeHref(href, locale)}
-                                target={target}
-                                rel={
-                                    target === "_blank"
-                                        ? "noopener noreferrer"
-                                        : undefined
-                                }
-                                className={`relative flex flex-col items-center tracking-wide whitespace-nowrap transition-colors duration-200 ${
-                                    isLight
-                                        ? "text-stone-500 hover:text-brand-blue"
-                                        : "text-white/70 hover:text-white/90"
-                                }`}
-                            >
-                                {index === 1 && (
-                                    <svg
-                                        width="44"
-                                        height="41"
-                                        viewBox="0 0 44 41"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className={`absolute -top-2.5 -left-1 w-9 h-auto -z-1 ${isLight ? "" : "opacity-50"}`}
-                                        aria-hidden="true"
+                        {visibleSubNavItems.map((item, index) => {
+                            const hasDropdown =
+                                isHomeV2 && item.submenu?.length;
+                            const isLastV2Item =
+                                isHomeV2 &&
+                                index === visibleSubNavItems.length - 1;
+                            const dropdownPositionClass =
+                                index === 0
+                                    ? "left-0"
+                                    : isLastV2Item
+                                      ? "right-0"
+                                      : "left-1/2 -translate-x-1/2";
+
+                            if (hasDropdown) {
+                                return (
+                                    <div
+                                        key={item.href}
+                                        className="group relative flex h-full items-center"
                                     >
-                                        <path
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                            d="M16.22 14.445 22 20.22l5.779-5.775a2.904 2.904 0 0 1 1.272-3.478 5.7 5.7 0 0 1-1.732-1.189 5.7 5.7 0 0 1-1.679-4.05c0-1.466.56-2.932 1.68-4.05A5.72 5.72 0 0 1 31.372 0c1.467 0 2.934.56 4.053 1.678a5.7 5.7 0 0 1 1.19 1.73q.184-.316.454-.588a2.91 2.91 0 0 1 3.121-.648 1.389 1.389 0 0 1 2.347-.711c.27.271.407.627.407.982l-.001.001a1.39 1.39 0 0 1-1.119 1.36c.136.342.203.705.203 1.068a2.89 2.89 0 0 1-1.438 2.506 5.7 5.7 0 0 1 1.73 1.188 5.7 5.7 0 0 1 1.68 4.05 5.7 5.7 0 0 1-1.68 4.051 5.7 5.7 0 0 1-4.053 1.677 5.7 5.7 0 0 1-4.053-1.677 5.7 5.7 0 0 1-1.19-1.73q-.183.317-.453.588a2.9 2.9 0 0 1-2.948.71l-5.806 5.801L38.73 36.938a.43.43 0 0 1 0 .606l-1.212 1.211a.43.43 0 0 1-.606 0l-1.77-1.77-3.895 3.89a.43.43 0 0 1-.606 0l-1.506-1.504a.43.43 0 0 1 0-.606l3.894-3.89-.92-.919-3.893 3.89a.43.43 0 0 1-.606 0l-1.505-1.503a.43.43 0 0 1 0-.606l3.893-3.89L22 23.853l-8 7.993 3.894 3.89a.43.43 0 0 1 0 .606l-1.505 1.504a.43.43 0 0 1-.607 0l-3.894-3.89-.918.918 3.893 3.89a.43.43 0 0 1 0 .607l-1.505 1.504a.43.43 0 0 1-.606 0l-3.894-3.89-1.772 1.77a.43.43 0 0 1-.606 0l-1.211-1.21a.43.43 0 0 1 0-.607l14.913-14.902-5.805-5.8a2.91 2.91 0 0 1-2.948-.71 3 3 0 0 1-.455-.588 5.7 5.7 0 0 1-1.19 1.73 5.7 5.7 0 0 1-4.052 1.677 5.7 5.7 0 0 1-4.054-1.677A5.7 5.7 0 0 1 0 12.617c0-1.466.56-2.932 1.679-4.05A5.7 5.7 0 0 1 3.41 7.378a2.895 2.895 0 0 1-1.237-3.574 1.38 1.38 0 0 1-1.117-1.36h-.001a1.386 1.386 0 0 1 1.39-1.39 1.39 1.39 0 0 1 1.363 1.119 2.91 2.91 0 0 1 3.576 1.235A5.73 5.73 0 0 1 12.627 0c1.467 0 2.934.56 4.053 1.678a5.7 5.7 0 0 1 1.68 4.05 5.7 5.7 0 0 1-1.68 4.05 5.7 5.7 0 0 1-1.73 1.188 2.905 2.905 0 0 1 1.27 3.48m24.8-12.001c0 .134.051.267.153.371l.005.005.004.004a.534.534 0 0 0 .907-.38h-.002a.53.53 0 0 0-.533-.534.53.53 0 0 0-.533.534m-2.36 4.421q.229.053.464.053c.524 0 1.047-.2 1.447-.6a2.04 2.04 0 0 0 0-2.893c-.4-.4-.923-.599-1.447-.599s-1.048.2-1.448.6a2.04 2.04 0 0 0-.547 1.91 4.5 4.5 0 0 1 1.53 1.53m-7.008-.857a4.47 4.47 0 0 1 3.61-1.29 4 4 0 0 0-1.048-1.828 4 4 0 0 0-2.84-1.176 4 4 0 0 0-2.842 1.176 4 4 0 0 0-1.177 2.838 4 4 0 0 0 1.177 2.839 4 4 0 0 0 1.83 1.048 4.46 4.46 0 0 1 1.29-3.607m-.672 5.472a2.04 2.04 0 0 0-1.912.546 2.04 2.04 0 0 0 0 2.894c.4.4.924.6 1.449.6a2.044 2.044 0 0 0 1.994-2.51 4.5 4.5 0 0 1-1.53-1.53m3.398 2.147c.174.67.523 1.304 1.048 1.829a4 4 0 0 0 2.84 1.176 4 4 0 0 0 2.842-1.176 4 4 0 0 0 1.176-2.84 4 4 0 0 0-1.176-2.838 4 4 0 0 0-1.83-1.047q.022.221.022.442a4.46 4.46 0 0 1-1.313 3.165 4.47 4.47 0 0 1-3.609 1.29m-2.751-4.454q0 .28.048.558a4 4 0 0 0 2.54-1.165A4 4 0 0 0 35.38 6.03a3.18 3.18 0 0 0-2.818.886 3.18 3.18 0 0 0-.935 2.258m6.338-.56a4 4 0 0 0-2.539 1.165 4 4 0 0 0-1.166 2.537q.278.05.56.05c.817 0 1.635-.312 2.259-.935a3.18 3.18 0 0 0 .886-2.816M2.98 2.444h-.001a.53.53 0 0 0-.534-.532.53.53 0 0 0-.533.533H1.91a.534.534 0 0 0 .905.38l.005-.004.005-.004a.53.53 0 0 0 .154-.372m2.36 4.422a4.5 4.5 0 0 1 1.53-1.53q.055-.23.054-.463c0-.524-.2-1.047-.6-1.447s-.924-.6-1.448-.6-1.048.2-1.448.6a2.043 2.043 0 0 0 0 2.894 2.04 2.04 0 0 0 1.912.546m7.008-.857a4.46 4.46 0 0 1 1.29 3.607 4 4 0 0 0 1.83-1.048 4 4 0 0 0 1.177-2.838 4 4 0 0 0-1.177-2.839 4 4 0 0 0-2.841-1.176 4 4 0 0 0-2.84 1.174 4 4 0 0 0-1.048 1.83q.22-.022.442-.022a4.47 4.47 0 0 1 3.168 1.31m.672 5.472a4.5 4.5 0 0 1-1.532 1.53 2.04 2.04 0 0 0 .547 1.91 2.045 2.045 0 1 0 2.897-2.894 2.05 2.05 0 0 0-1.912-.546m-3.398 2.147a4.47 4.47 0 0 1-3.61-1.29 4.46 4.46 0 0 1-1.29-3.606A4 4 0 0 0 2.89 9.778a4 4 0 0 0-1.177 2.838 4 4 0 0 0 1.177 2.84 4 4 0 0 0 2.84 1.175 4 4 0 0 0 2.841-1.176 4 4 0 0 0 1.05-1.828m2.752-4.454a3.18 3.18 0 0 0-.936-2.257A3.19 3.19 0 0 0 8.62 6.03a4 4 0 0 0 1.165 2.537 4 4 0 0 0 2.539 1.165q.049-.28.049-.56m-6.339-.56q-.05.278-.05.56c0 .817.313 1.633.936 2.257a3.19 3.19 0 0 0 2.818.885 4 4 0 0 0-1.166-2.537 4 4 0 0 0-2.538-1.164"
-                                            fill="#d7d4d3"
+                                        <Link
+                                            href={buildMenuHref(item)}
+                                            target={item.target}
+                                            rel={
+                                                item.target === "_blank"
+                                                    ? "noopener noreferrer"
+                                                    : undefined
+                                            }
+                                            className={`relative inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
+                                                isLight
+                                                    ? "text-stone-500 hover:text-brand-blue"
+                                                    : "text-white/80 hover:text-white"
+                                            }`}
+                                        >
+                                            {item.label}
+                                            <CaretDownIcon
+                                                size={10}
+                                                weight="bold"
+                                                aria-hidden="true"
+                                                className="transition-transform duration-200 group-hover:rotate-180"
+                                            />
+                                        </Link>
+                                        <div className="pointer-events-none fixed top-36 right-0 bottom-0 left-0 z-40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100" />
+                                        <span
+                                            className={`absolute top-full h-2 w-[19rem] ${dropdownPositionClass}`}
+                                            aria-hidden="true"
                                         />
-                                    </svg>
-                                )}
-                                {label}
-                            </Link>
-                        ))}
+                                        <div
+                                            className={`font-century-v2 pointer-events-none absolute top-[calc(100%+0.5rem)] z-50 w-[19rem] translate-y-2 rounded-sm border border-white/50 bg-white/72 px-8 py-6 opacity-0 shadow-[0_22px_70px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 ${dropdownPositionClass}`}
+                                        >
+                                            <div className="flex flex-col gap-4.5">
+                                                {item.submenu?.map(
+                                                    (subItem) => (
+                                                        <div
+                                                            key={`${item.href}-${subItem.label}`}
+                                                        >
+                                                            {renderNavItemLink(
+                                                                subItem,
+                                                                "block text-base leading-none text-stone-800 transition-colors duration-200 hover:text-brand-blue",
+                                                            )}
+                                                        </div>
+                                                    ),
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            }
+
+                            return (
+                                <Link
+                                    key={item.href}
+                                    href={localizeHref(item.href, locale)}
+                                    target={item.target}
+                                    rel={
+                                        item.target === "_blank"
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                    className={`relative flex flex-col items-center tracking-wide whitespace-nowrap transition-colors duration-200 ${
+                                        isLight
+                                            ? "text-stone-500 hover:text-brand-blue"
+                                            : "text-white/70 hover:text-white/90"
+                                    } ${isHomeV2 ? "text-sm font-semibold uppercase" : ""}`}
+                                >
+                                    {!isHomeV2 && index === 1 && (
+                                        <svg
+                                            width="44"
+                                            height="41"
+                                            viewBox="0 0 44 41"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className={`absolute -top-2.5 -left-1 w-9 h-auto -z-1 ${isLight ? "" : "opacity-50"}`}
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                d="M16.22 14.445 22 20.22l5.779-5.775a2.904 2.904 0 0 1 1.272-3.478 5.7 5.7 0 0 1-1.732-1.189 5.7 5.7 0 0 1-1.679-4.05c0-1.466.56-2.932 1.68-4.05A5.72 5.72 0 0 1 31.372 0c1.467 0 2.934.56 4.053 1.678a5.7 5.7 0 0 1 1.19 1.73q.184-.316.454-.588a2.91 2.91 0 0 1 3.121-.648 1.389 1.389 0 0 1 2.347-.711c.27.271.407.627.407.982l-.001.001a1.39 1.39 0 0 1-1.119 1.36c.136.342.203.705.203 1.068a2.89 2.89 0 0 1-1.438 2.506 5.7 5.7 0 0 1 1.73 1.188 5.7 5.7 0 0 1 1.68 4.05 5.7 5.7 0 0 1-1.68 4.051 5.7 5.7 0 0 1-4.053 1.677 5.7 5.7 0 0 1-4.053-1.677 5.7 5.7 0 0 1-1.19-1.73q-.183.317-.453.588a2.9 2.9 0 0 1-2.948.71l-5.806 5.801L38.73 36.938a.43.43 0 0 1 0 .606l-1.212 1.211a.43.43 0 0 1-.606 0l-1.77-1.77-3.895 3.89a.43.43 0 0 1-.606 0l-1.506-1.504a.43.43 0 0 1 0-.606l3.894-3.89-.92-.919-3.893 3.89a.43.43 0 0 1-.606 0l-1.505-1.503a.43.43 0 0 1 0-.606l3.893-3.89L22 23.853l-8 7.993 3.894 3.89a.43.43 0 0 1 0 .606l-1.505 1.504a.43.43 0 0 1-.607 0l-3.894-3.89-.918.918 3.893 3.89a.43.43 0 0 1 0 .607l-1.505 1.504a.43.43 0 0 1-.606 0l-3.894-3.89-1.772 1.77a.43.43 0 0 1-.606 0l-1.211-1.21a.43.43 0 0 1 0-.607l14.913-14.902-5.805-5.8a2.91 2.91 0 0 1-2.948-.71 3 3 0 0 1-.455-.588 5.7 5.7 0 0 1-1.19 1.73 5.7 5.7 0 0 1-4.052 1.677 5.7 5.7 0 0 1-4.054-1.677A5.7 5.7 0 0 1 0 12.617c0-1.466.56-2.932 1.679-4.05A5.7 5.7 0 0 1 3.41 7.378a2.895 2.895 0 0 1-1.237-3.574 1.38 1.38 0 0 1-1.117-1.36h-.001a1.386 1.386 0 0 1 1.39-1.39 1.39 1.39 0 0 1 1.363 1.119 2.91 2.91 0 0 1 3.576 1.235A5.73 5.73 0 0 1 12.627 0c1.467 0 2.934.56 4.053 1.678a5.7 5.7 0 0 1 1.68 4.05 5.7 5.7 0 0 1-1.68 4.05 5.7 5.7 0 0 1-1.73 1.188 2.905 2.905 0 0 1 1.27 3.48m24.8-12.001c0 .134.051.267.153.371l.005.005.004.004a.534.534 0 0 0 .907-.38h-.002a.53.53 0 0 0-.533-.534.53.53 0 0 0-.533.534m-2.36 4.421q.229.053.464.053c.524 0 1.047-.2 1.447-.6a2.04 2.04 0 0 0 0-2.893c-.4-.4-.923-.599-1.447-.599s-1.048.2-1.448.6a2.04 2.04 0 0 0-.547 1.91 4.5 4.5 0 0 1 1.53 1.53m-7.008-.857a4.47 4.47 0 0 1 3.61-1.29 4 4 0 0 0-1.048-1.828 4 4 0 0 0-2.84-1.176 4 4 0 0 0-2.842 1.176 4 4 0 0 0-1.177 2.838 4 4 0 0 0 1.177 2.839 4 4 0 0 0 1.83 1.048 4.46 4.46 0 0 1 1.29-3.607m-.672 5.472a2.04 2.04 0 0 0-1.912.546 2.04 2.04 0 0 0 0 2.894c.4.4.924.6 1.449.6a2.044 2.044 0 0 0 1.994-2.51 4.5 4.5 0 0 1-1.53-1.53m3.398 2.147c.174.67.523 1.304 1.048 1.829a4 4 0 0 0 2.84 1.176 4 4 0 0 0 2.842-1.176 4 4 0 0 0 1.176-2.84 4 4 0 0 0-1.176-2.838 4 4 0 0 0-1.83-1.047q.022.221.022.442a4.46 4.46 0 0 1-1.313 3.165 4.47 4.47 0 0 1-3.609 1.29m-2.751-4.454q0 .28.048.558a4 4 0 0 0 2.54-1.165A4 4 0 0 0 35.38 6.03a3.18 3.18 0 0 0-2.818.886 3.18 3.18 0 0 0-.935 2.258m6.338-.56a4 4 0 0 0-2.539 1.165 4 4 0 0 0-1.166 2.537q.278.05.56.05c.817 0 1.635-.312 2.259-.935a3.18 3.18 0 0 0 .886-2.816M2.98 2.444h-.001a.53.53 0 0 0-.534-.532.53.53 0 0 0-.533.533H1.91a.534.534 0 0 0 .905.38l.005-.004.005-.004a.53.53 0 0 0 .154-.372m2.36 4.422a4.5 4.5 0 0 1 1.53-1.53q.055-.23.054-.463c0-.524-.2-1.047-.6-1.447s-.924-.6-1.448-.6-1.048.2-1.448.6a2.043 2.043 0 0 0 0 2.894 2.04 2.04 0 0 0 1.912.546m7.008-.857a4.46 4.46 0 0 1 1.29 3.607 4 4 0 0 0 1.83-1.048 4 4 0 0 0 1.177-2.838 4 4 0 0 0-1.177-2.839 4 4 0 0 0-2.841-1.176 4 4 0 0 0-2.84 1.174 4 4 0 0 0-1.048 1.83q.22-.022.442-.022a4.47 4.47 0 0 1 3.168 1.31m.672 5.472a4.5 4.5 0 0 1-1.532 1.53 2.04 2.04 0 0 0 .547 1.91 2.045 2.045 0 1 0 2.897-2.894 2.05 2.05 0 0 0-1.912-.546m-3.398 2.147a4.47 4.47 0 0 1-3.61-1.29 4.46 4.46 0 0 1-1.29-3.606A4 4 0 0 0 2.89 9.778a4 4 0 0 0-1.177 2.838 4 4 0 0 0 1.177 2.84 4 4 0 0 0 2.84 1.175 4 4 0 0 0 2.841-1.176 4 4 0 0 0 1.05-1.828m2.752-4.454a3.18 3.18 0 0 0-.936-2.257A3.19 3.19 0 0 0 8.62 6.03a4 4 0 0 0 1.165 2.537 4 4 0 0 0 2.539 1.165q.049-.28.049-.56m-6.339-.56q-.05.278-.05.56c0 .817.313 1.633.936 2.257a3.19 3.19 0 0 0 2.818.885 4 4 0 0 0-1.166-2.537 4 4 0 0 0-2.538-1.164"
+                                                fill="#d7d4d3"
+                                            />
+                                        </svg>
+                                    )}
+                                    {item.label}
+                                </Link>
+                            );
+                        })}
                     </nav>
                 )}
             </motion.header>
@@ -640,7 +1009,7 @@ export default function Header() {
                                     animate="show"
                                     className="flex flex-1 flex-col overflow-y-auto px-6 py-5"
                                 >
-                                    {navItems.map((item) => {
+                                    {visibleMobileNavItems.map((item) => {
                                         const isSubmenuOpen =
                                             activeSubmenu === item.label;
 
@@ -649,26 +1018,30 @@ export default function Header() {
                                                 key={item.label}
                                                 variants={menuItemVariants}
                                             >
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        setActiveSubmenu(
-                                                            isSubmenuOpen
-                                                                ? null
-                                                                : item.label,
-                                                        )
-                                                    }
-                                                    className="flex w-full items-center justify-between py-3 text-left cursor-pointer"
-                                                >
-                                                    <span className="text-sm">
-                                                        {item.label}
-                                                    </span>
-                                                    <span
-                                                        className={`text-xl text-[#96908D] transition-transform duration-300 leading-none ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                <div className="flex w-full items-center justify-between">
+                                                    {renderNavItemLink(
+                                                        item,
+                                                        "py-3 text-sm transition-colors hover:text-brand-blue",
+                                                    )}
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            setActiveSubmenu(
+                                                                isSubmenuOpen
+                                                                    ? null
+                                                                    : item.label,
+                                                            )
+                                                        }
+                                                        className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-end text-xl leading-none text-[#96908D]"
+                                                        aria-label={item.label}
                                                     >
-                                                        &rsaquo;
-                                                    </span>
-                                                </button>
+                                                        <span
+                                                            className={`transition-transform duration-300 ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                        >
+                                                            &rsaquo;
+                                                        </span>
+                                                    </button>
+                                                </div>
                                                 <motion.div
                                                     variants={
                                                         mobileSubmenuVariants
@@ -684,24 +1057,14 @@ export default function Header() {
                                                     <div className="mb-2 ml-2 flex flex-col border-l border-stone-200/80 pl-4">
                                                         {item.submenu.map(
                                                             (sub) => (
-                                                                <Link
-                                                                    key={
-                                                                        sub.href
-                                                                    }
-                                                                    href={localizeHref(
-                                                                        sub.href,
-                                                                        locale,
-                                                                    )}
-                                                                    target={
-                                                                        sub.target
-                                                                    }
-                                                                    onClick={
-                                                                        closeMenu
-                                                                    }
-                                                                    className="py-2 text-sm text-[#96908D] transition-colors hover:text-brand-blue"
+                                                                <div
+                                                                    key={`${item.href}-${sub.label}`}
                                                                 >
-                                                                    {sub.label}
-                                                                </Link>
+                                                                    {renderNavItemLink(
+                                                                        sub,
+                                                                        "block py-2 text-sm text-[#96908D] transition-colors hover:text-brand-blue",
+                                                                    )}
+                                                                </div>
                                                             ),
                                                         )}
                                                     </div>

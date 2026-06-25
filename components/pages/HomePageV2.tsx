@@ -477,7 +477,7 @@ export default function HomePageV2({ locale }: { locale: Locale }) {
                     </div>
                 </div>
                 <StaggerContainer className="hidden xl:flex xl:h-110 xl:mt-8 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full">
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg hidden xl:block xl:rounded-md">
+                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg hidden xl:block xl:rounded-sm">
                         <Image
                             src={descriptionImages[0].src}
                             alt={descriptionImages[0].alt}
@@ -487,7 +487,7 @@ export default function HomePageV2({ locale }: { locale: Locale }) {
                             className="object-cover"
                         />
                     </StaggerItem>
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-sm">
                         <Image
                             src={descriptionImages[1].src}
                             alt={descriptionImages[1].alt}
@@ -497,7 +497,7 @@ export default function HomePageV2({ locale }: { locale: Locale }) {
                             className="object-cover"
                         />
                     </StaggerItem>
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-sm">
                         <Image
                             src={descriptionImages[2].src}
                             alt={descriptionImages[2].alt}

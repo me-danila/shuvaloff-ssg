@@ -2,7 +2,7 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { AllSales } from "@/data/SalesData";
@@ -18,12 +18,30 @@ const sectionCopy = {
     en: { title: "Special Offers", book: "Book now", more: "Details" },
 } as const;
 
+const renderSaleSubtitle = (subtitle: string) => {
+    if (
+        subtitle ===
+        "Специальные привилегии для именинников и скидка 15% от 2 ночей"
+    ) {
+        return (
+            <>
+                Специальные привилегии для именинников
+                <br />и скидка 15% от 2 ночей
+            </>
+        );
+    }
+
+    return subtitle;
+};
+
 export default function SpecialOffersSection() {
     const locale = useLocale();
     const sales = AllSales[locale];
     const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
-    const [active, setActive] = useState(0);
+    const activeIndexRef = useRef(0);
+    const programmaticScrollRef = useRef(false);
+    const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const step = () => {
         const track = trackRef.current;
@@ -33,19 +51,67 @@ export default function SpecialOffersSection() {
         return first.offsetWidth + 16; // gap-4
     };
 
+    const maxIndex = () => {
+        const track = trackRef.current;
+        const s = step();
+        if (!track || !s) return 0;
+
+        return Math.max(
+            0,
+            Math.round((track.scrollWidth - track.clientWidth) / s),
+        );
+    };
+
+    const scrollLeftForIndex = (index: number) => {
+        const track = trackRef.current;
+        const s = step();
+        if (!track || !s) return 0;
+
+        return Math.min(index * s, track.scrollWidth - track.clientWidth);
+    };
+
     const handleScroll = () => {
         const track = trackRef.current;
-        if (!track) return;
+        if (!track || programmaticScrollRef.current) return;
         const s = step();
-        if (s) setActive(Math.round(track.scrollLeft / s));
+        if (!s) return;
+
+        activeIndexRef.current = Math.min(
+            maxIndex(),
+            Math.max(0, Math.round(track.scrollLeft / s)),
+        );
     };
 
     const go = (dir: -1 | 1) => {
-        trackRef.current?.scrollBy({ left: dir * step(), behavior: "smooth" });
-    };
+        const track = trackRef.current;
+        if (!track) return;
 
-    const atStart = active <= 0;
-    const atEnd = active >= sales.length - 1;
+        const lastIndex = maxIndex();
+        const current = Math.min(
+            lastIndex,
+            Math.max(0, activeIndexRef.current),
+        );
+        const next =
+            dir === 1
+                ? current >= lastIndex
+                    ? 0
+                    : current + 1
+                : current <= 0
+                  ? lastIndex
+                  : current - 1;
+
+        activeIndexRef.current = next;
+        programmaticScrollRef.current = true;
+        track.scrollTo({
+            left: scrollLeftForIndex(next),
+            behavior: "smooth",
+        });
+
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+        scrollTimeoutRef.current = setTimeout(() => {
+            programmaticScrollRef.current = false;
+        }, 450);
+    };
 
     return (
         <section className="-mt-6 bg-[#ededeb] py-10 xl:py-16">
@@ -90,7 +156,7 @@ export default function SpecialOffersSection() {
                                     />
                                 </div>
                                 <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
-                                    {sale.subtitle}
+                                    {renderSaleSubtitle(sale.subtitle)}
                                 </p>
                                 <div className="mt-6 px-5">
                                     <Link
@@ -118,20 +184,15 @@ export default function SpecialOffersSection() {
                         type="button"
                         aria-label="Previous"
                         onClick={() => go(-1)}
-                        disabled={atStart}
-                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors hover:bg-stone-100 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white"
+                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white"
                     >
                         <ArrowLeftIcon size={20} weight="light" />
                     </button>
-                    <span className="text-sm tracking-widest text-stone-500 tabular-nums">
-                        {active + 1} / {sales.length}
-                    </span>
                     <button
                         type="button"
                         aria-label="Next"
                         onClick={() => go(1)}
-                        disabled={atEnd}
-                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors hover:bg-stone-100 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white"
+                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white"
                     >
                         <ArrowRightIcon size={20} weight="light" />
                     </button>

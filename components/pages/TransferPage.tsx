@@ -32,7 +32,8 @@ const copyByLocale: Record<Locale, TransferCopy> = {
             "Индивидуальный трансфер без ожиданий и суеты. Мы встретим вас в аэропорту или на вокзале, доставим в отель и обеспечим передвижение по Петербургу во время вашего отдыха.",
         description2:
             "GAC M8 — это сочетание статуса, комфорта и безопасности. Просторный салон с премиальной отделкой и шумоизоляцией и мягкая подвеска гарантируют приятную поездку даже после длительного перелета.",
-        description3: "Закажите трансфер через консьерж-службу или добавьте его к вашему бронированию.",
+        description3:
+            "Закажите трансфер через консьерж-службу или добавьте его к вашему бронированию.",
         otherServicesTitle: "Другие услуги",
         items: [
             "Встреча с именной табличкой водителем в деловом костюме",
@@ -65,7 +66,8 @@ const copyByLocale: Record<Locale, TransferCopy> = {
             "A private transfer with no waiting or hassle. We’ll meet you at the airport or train station, take you to your hotel, and handle your transportation around St. Petersburg during your stay.",
         description2:
             "The GAC M8 combines prestige, comfort, and safety. A spacious interior with premium finishes and soundproofing, along with a smooth suspension, guarantee a pleasant ride even after a long flight.",
-        description3: "Book a transfer through the concierge service or add it to your reservation.",
+        description3:
+            "Book a transfer through the concierge service or add it to your reservation.",
         otherServicesTitle: "Other services",
         items: [
             "Meet-and-greet with a personalized sign by a driver in a business suit",

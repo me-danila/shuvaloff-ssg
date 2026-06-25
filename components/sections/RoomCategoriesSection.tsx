@@ -2,17 +2,29 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { AllRooms } from "@/data/RoomsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
 const sectionCopy = {
-    ru: { title: "Категории номеров", more: "Подробнее" },
-    en: { title: "Room categories", more: "Details" },
+    ru: {
+        title: "Категории номеров",
+        all: "Все категории",
+        allDesktop: "Все категории номеров",
+        book: "Забронировать",
+        more: "Подробнее",
+    },
+    en: {
+        title: "Room categories",
+        all: "All categories",
+        allDesktop: "All room categories",
+        book: "Book now",
+        more: "Details",
+    },
 } as const;
 
 export default function RoomCategoriesSection() {
@@ -20,7 +32,9 @@ export default function RoomCategoriesSection() {
     const rooms = AllRooms[locale];
     const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
-    const [active, setActive] = useState(0);
+    const activeIndexRef = useRef(0);
+    const programmaticScrollRef = useRef(false);
+    const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const roomHref = (slug: string, isHistorical: boolean) =>
         localizeHref(
@@ -36,19 +50,67 @@ export default function RoomCategoriesSection() {
         return first.offsetWidth + 16; // gap-4
     };
 
+    const maxIndex = () => {
+        const track = trackRef.current;
+        const s = step();
+        if (!track || !s) return 0;
+
+        return Math.max(
+            0,
+            Math.round((track.scrollWidth - track.clientWidth) / s),
+        );
+    };
+
+    const scrollLeftForIndex = (index: number) => {
+        const track = trackRef.current;
+        const s = step();
+        if (!track || !s) return 0;
+
+        return Math.min(index * s, track.scrollWidth - track.clientWidth);
+    };
+
     const handleScroll = () => {
         const track = trackRef.current;
-        if (!track) return;
+        if (!track || programmaticScrollRef.current) return;
         const s = step();
-        if (s) setActive(Math.round(track.scrollLeft / s));
+        if (!s) return;
+
+        activeIndexRef.current = Math.min(
+            maxIndex(),
+            Math.max(0, Math.round(track.scrollLeft / s)),
+        );
     };
 
     const go = (dir: -1 | 1) => {
-        trackRef.current?.scrollBy({ left: dir * step(), behavior: "smooth" });
-    };
+        const track = trackRef.current;
+        if (!track) return;
 
-    const atStart = active <= 0;
-    const atEnd = active >= rooms.length - 1;
+        const lastIndex = maxIndex();
+        const current = Math.min(
+            lastIndex,
+            Math.max(0, activeIndexRef.current),
+        );
+        const next =
+            dir === 1
+                ? current >= lastIndex
+                    ? 0
+                    : current + 1
+                : current <= 0
+                  ? lastIndex
+                  : current - 1;
+
+        activeIndexRef.current = next;
+        programmaticScrollRef.current = true;
+        track.scrollTo({
+            left: scrollLeftForIndex(next),
+            behavior: "smooth",
+        });
+
+        if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+        scrollTimeoutRef.current = setTimeout(() => {
+            programmaticScrollRef.current = false;
+        }, 450);
+    };
 
     return (
         <section className="bg-[#ededeb] py-10 xl:py-16">
@@ -64,6 +126,10 @@ export default function RoomCategoriesSection() {
                 >
                     {rooms.map((room) => {
                         const href = roomHref(room.slug, room.isHistorical);
+                        const bookingHref = localizeHref(
+                            room.bookingUrl,
+                            locale,
+                        );
                         return (
                             <article
                                 key={room.title}
@@ -82,52 +148,63 @@ export default function RoomCategoriesSection() {
 
                                 {/* Контент */}
                                 <div className="flex flex-col items-center px-4 pt-7 pb-8 text-center xl:flex-1 xl:items-start xl:justify-center xl:px-12 xl:py-10 xl:text-left">
-                                    <h3 className="font-baskerville text-xl uppercase leading-tight text-[#372a24] xl:text-3xl">
-                                        {room.title}
-                                    </h3>
+                                    <div className="flex w-full flex-col items-center gap-4 xl:flex-row xl:items-start xl:justify-between xl:gap-8">
+                                        <h3 className="font-baskerville text-xl uppercase leading-tight text-[#372a24] xl:text-3xl">
+                                            {room.title}
+                                        </h3>
+                                        <div className="hidden shrink-0 items-center gap-3 rounded-[4px] border border-[#372a24]/15 px-3.5 py-2 text-xs text-[#372a24]/80 xl:flex">
+                                            <span className="flex items-center gap-1.5 whitespace-nowrap">
+                                                <SquareIcon
+                                                    size={13}
+                                                    color="#372a24"
+                                                />
+                                                {room.area}
+                                            </span>
+                                            <span className="h-4 w-px bg-[#372a24]/15" />
+                                            <span className="flex items-center gap-1.5 whitespace-nowrap">
+                                                <UserIcon
+                                                    size={11}
+                                                    color="#372a24"
+                                                />
+                                                {room.guests}
+                                            </span>
+                                        </div>
+                                    </div>
                                     <p className="mt-4 max-w-md text-sm leading-6 text-[#372a24] xl:mt-6 xl:max-w-lg xl:text-base">
                                         {room.description}
                                     </p>
 
                                     {/* Характеристики (моб.: над кнопкой) */}
                                     <div className="mt-6 flex items-center gap-6 xl:hidden">
-                                        <span className="flex items-center gap-2 text-sm text-[#372a24]">
+                                        <span className="flex items-center gap-2 text-xs text-[#372a24]">
                                             <SquareIcon
                                                 size={16}
                                                 color="#372a24"
                                             />
                                             {room.area}
                                         </span>
-                                        <span className="flex items-center gap-2 text-sm text-[#372a24]">
-                                            <UserIcon size={13} color="#372a24" />
+                                        <span className="flex items-center gap-2 text-xs text-[#372a24]">
+                                            <UserIcon
+                                                size={13}
+                                                color="#372a24"
+                                            />
                                             {room.guests}
                                         </span>
                                     </div>
 
-                                    {/* Кнопка + характеристики (десктоп) */}
-                                    <div className="mt-7 flex w-full flex-col items-center gap-6 xl:mt-9 xl:w-auto xl:flex-row xl:items-center xl:gap-10">
+                                    <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row xl:mt-9 xl:w-auto xl:items-center">
+                                        <Link
+                                            href={bookingHref}
+                                            className="inline-block w-full rounded-md bg-[#5c1f26] px-8 py-4 text-center text-sm uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#46161c] sm:w-auto xl:px-10 xl:py-3 xl:text-base"
+                                        >
+                                            {copy.book}
+                                        </Link>
                                         <Link
                                             href={href}
-                                            className="inline-block w-full rounded-md bg-[#5c1f26] px-10 py-4 text-center text-sm uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#46161c] xl:w-auto xl:px-12 xl:text-base"
+                                            className="inline-block w-full rounded-md border border-[#5c1f26] px-8 py-4 text-center text-sm uppercase tracking-widest text-[#5c1f26] transition-colors duration-300 hover:bg-[#5c1f26] hover:text-white sm:w-auto xl:px-10 xl:py-3 xl:text-base"
                                         >
                                             {copy.more}
                                         </Link>
-                                        <div className="hidden items-center gap-8 xl:flex">
-                                            <span className="flex items-center gap-2 text-base text-[#372a24]">
-                                                <SquareIcon
-                                                    size={18}
-                                                    color="#372a24"
-                                                />
-                                                {room.area}
-                                            </span>
-                                            <span className="flex items-center gap-2 text-base text-[#372a24]">
-                                                <UserIcon
-                                                    size={15}
-                                                    color="#372a24"
-                                                />
-                                                {room.guests}
-                                            </span>
-                                        </div>
                                     </div>
                                 </div>
                             </article>
@@ -140,20 +217,24 @@ export default function RoomCategoriesSection() {
                         type="button"
                         aria-label="Previous"
                         onClick={() => go(-1)}
-                        disabled={atStart}
-                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors hover:bg-stone-100 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white"
+                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white"
                     >
                         <ArrowLeftIcon size={20} weight="light" />
                     </button>
-                    <span className="text-sm tracking-widest text-stone-500 tabular-nums">
-                        {active + 1} / {rooms.length}
-                    </span>
+                    <Link
+                        href={localizeHref("/rooms/", locale)}
+                        className="flex h-12 items-center justify-center rounded-full bg-white px-7 text-xs uppercase tracking-widest text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white"
+                    >
+                        <span className="xl:hidden">{copy.all}</span>
+                        <span className="hidden xl:inline">
+                            {copy.allDesktop}
+                        </span>
+                    </Link>
                     <button
                         type="button"
                         aria-label="Next"
                         onClick={() => go(1)}
-                        disabled={atEnd}
-                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors hover:bg-stone-100 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-white"
+                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white"
                     >
                         <ArrowRightIcon size={20} weight="light" />
                     </button>

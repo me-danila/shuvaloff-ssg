@@ -295,7 +295,7 @@ const roomsRu: Room[] = [
     {
         title: "Полулюкс мансарда",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2391_maxiimov.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2375_@maxiimov.jpg",
             alt: "Полулюкс мансарда",
         },
         gallery: [
@@ -431,7 +431,7 @@ const roomsRu: Room[] = [
     {
         title: "Резиденция Дашковой",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/03/da1.jpg",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/06/16__MMI0825_018_@maxiimov.jpg",
             alt: "Резиденция Дашковой",
         },
         gallery: [
@@ -597,7 +597,7 @@ type RoomTranslation = {
 };
 
 const roomTranslationsEn: Record<string, RoomTranslation> = {
-    "standard": {
+    standard: {
         title: "Standard",
         imageAlt: "Standard room",
         galleryAlt: "Standard room",
@@ -626,7 +626,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "24/7 room service, digital concierge, and dedicated guest care manager",
         ],
     },
-    "superior": {
+    superior: {
         title: "Superior",
         imageAlt: "Superior room",
         galleryAlt: "Superior room",
@@ -770,7 +770,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Vanity zone",
         ],
     },
-    "suite": {
+    suite: {
         title: "Suite",
         imageAlt: "Suite",
         galleryAlt: "Suite",
@@ -805,7 +805,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Vanity zone",
         ],
     },
-    "dashkova": {
+    dashkova: {
         title: "Dashkova Residence",
         imageAlt: "Dashkova Residence",
         galleryAlt: "Dashkova Residence",
@@ -839,7 +839,7 @@ const roomTranslationsEn: Record<string, RoomTranslation> = {
             "Antique details: 19th-century French fireplace screen, Art Nouveau floor lamp, collectible porcelain figurines, English Regency side table, mother-of-pearl fan, and rosewood bedside tables",
         ],
     },
-    "shuvalov": {
+    shuvalov: {
         title: "Count Shuvalov Residence",
         imageAlt: "Count Shuvalov Residence",
         galleryAlt: "Count Shuvalov Residence",
