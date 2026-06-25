@@ -584,7 +584,11 @@ export default function Header() {
                           : "bg-linear-to-b from-black/80 via-black/60 to-transparent"
                 }`}
             >
-                <div className="flex items-center h-14 px-5 xl:px-8 relative xl:h-20">
+                <div
+                    className={`flex items-center h-14 px-5 xl:px-8 relative xl:h-20 ${
+                        isHomeV2 ? "xl:mx-auto xl:w-full xl:max-w-6xl" : ""
+                    }`}
+                >
                     <div
                         className={`flex items-center ${isHomeV2 ? "xl:gap-32" : "gap-12"}`}
                     >
@@ -837,9 +841,11 @@ export default function Header() {
 
                     {/* Общая линия */}
                     <div
-                        className={`relative mx-5 xl:mx-8 border-b transition-colors duration-300 ${
-                            isLight ? "border-stone-200" : "border-white/20"
-                        }`}
+                        className={`relative border-b transition-colors duration-300 ${
+                            isHomeV2
+                                ? "mx-5 xl:mx-auto xl:w-full xl:max-w-6xl"
+                                : "mx-5 xl:mx-8"
+                        } ${isLight ? "border-stone-200" : "border-white/20"}`}
                     >
                         {/* Десктоп: текст на линии */}
                         <p
@@ -854,7 +860,11 @@ export default function Header() {
 
                 {/* Десктоп: дополнительное меню — только не на главной */}
                 {!isHome && (
-                    <nav className="hidden xl:flex items-center justify-between gap-8 px-8 h-13">
+                    <nav
+                        className={`hidden xl:flex items-center justify-between gap-8 px-8 h-13 ${
+                            isHomeV2 ? "mx-auto w-full max-w-6xl" : ""
+                        }`}
+                    >
                         {visibleSubNavItems.map((item, index) => {
                             const hasDropdown =
                                 isHomeV2 && item.submenu?.length;
@@ -912,7 +922,7 @@ export default function Header() {
                                                         >
                                                             {renderNavItemLink(
                                                                 subItem,
-                                                                "block text-base leading-none text-stone-800 transition-colors duration-200 hover:text-brand-blue",
+                                                                "block text-base font-semibold leading-none text-stone-800 opacity-100 transition-opacity duration-200 hover:opacity-90",
                                                             )}
                                                         </div>
                                                     ),

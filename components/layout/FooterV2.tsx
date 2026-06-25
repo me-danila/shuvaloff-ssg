@@ -81,7 +81,7 @@ export default function FooterV2() {
         locale === "ru" ? "Ежемесячная рассылка" : "Monthly newsletter";
     const newsletterText =
         locale === "ru"
-            ? "Подпишитесь на ежемесячную рассылку, чтобы получать актуальную информацию о главных событиях и мероприятиях отеля, рекомендации консьержей и интересный видеоконтент."
+            ? "Подпишитесь, чтобы получать актуальную информацию о главных событиях и мероприятиях отеля."
             : "Subscribe to our monthly newsletter for the latest news on hotel events, concierge recommendations and engaging video content.";
     const consentPrefix =
         locale === "ru"
