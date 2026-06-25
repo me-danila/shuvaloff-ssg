@@ -661,7 +661,7 @@ export default function Header() {
                                     className={`hidden xl:inline-flex items-center gap-3 text-sm tracking-wide transition-colors duration-300 ${
                                         isLight
                                             ? "text-stone-700 hover:text-brand-blue"
-                                            : "text-white hover:text-white/75"
+                                            : "text-white hover:text-white/90"
                                     }`}
                                 >
                                     <PhoneIcon
@@ -895,7 +895,7 @@ export default function Header() {
                                             className={`relative inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
                                                 isLight
                                                     ? "text-stone-500 hover:text-brand-blue"
-                                                    : "text-white/80 hover:text-white"
+                                                    : "text-white hover:text-white"
                                             }`}
                                         >
                                             {item.label}
@@ -946,7 +946,7 @@ export default function Header() {
                                     className={`relative flex flex-col items-center tracking-wide whitespace-nowrap transition-colors duration-200 ${
                                         isLight
                                             ? "text-stone-500 hover:text-brand-blue"
-                                            : "text-white/70 hover:text-white/90"
+                                            : "text-white"
                                     } ${isHomeV2 ? "text-sm font-semibold uppercase" : ""}`}
                                 >
                                     {!isHomeV2 && index === 1 && (
