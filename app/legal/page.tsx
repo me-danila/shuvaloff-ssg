@@ -48,7 +48,7 @@ export default function LegalPage() {
                     {/* Сертификат */}
                     <FadeUp className="w-full xl:flex-1">
                         <Image
-                            src="https://academia.spb.ru/wp-content/uploads/2026/03/cert.png"
+                            src="https://academia.spb.ru/wp-content/uploads/2026/06/Сертификат_Классификации_Шувалов_page-0001.jpg"
                             alt="Свидетельство о присвоении категории звёзд"
                             width={800}
                             height={1100}
@@ -99,7 +99,7 @@ export default function LegalPage() {
                         <div className="flex flex-col gap-1">
                             <p>
                                 Номер записи в Едином реестре объектов
-                                классификации:
+                                классификации:{" "}
                                 <a
                                     href="https://tourism.fsa.gov.ru/ru/resorts/hotels/dff23e3a-c607-11ef-92da-8bd9107bdd5a/about-resort"
                                     target="_blank"
@@ -107,7 +107,7 @@ export default function LegalPage() {
                                     className="underline"
                                 >
                                     С782024020085
-                                </a>
+                                </a>{" "}
                                 действует до: 20.08.2028
                             </p>
                         </div>
