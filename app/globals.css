@@ -3,7 +3,7 @@
 @theme {
     --font-baskerville: "BaskervilleCyr", serif;
     --font-alistair: "Alistair-Signature", cursive;
-    --font-sans: Arial, Helvetica, sans-serif;
+    --font-sans: "Century Gothic", sans-serif;
     --color-brand-blue-100: #e5e9ec;
     --color-brand-blue: #364d6b;
 }
@@ -13,7 +13,14 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Century Gothic", sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -50,7 +57,7 @@ body {
 
 /* Шрифты только на /v2: century gothic для текста, history pro для заголовков (кроме h1) */
 .v2-fonts {
-    font-family: var(--font-century), Arial, Helvetica, sans-serif;
+    font-family: var(--font-century), "Century Gothic", sans-serif;
 }
 
 .v2-fonts :is(h2, h3, h4, h5, h6) {
@@ -58,30 +65,30 @@ body {
     font-weight: 700;
 }
 
-/* Century Gothic для футера v2 (вне скоупа .v2-fonts) */
+/* Century Gothic для основного текста сайта и v2-блоков вне скоупа .v2-fonts */
 @font-face {
-    font-family: "CenturyGothicV2";
+    font-family: "Century Gothic";
     src: url("/fonts/CenturyGothic.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: "CenturyGothicV2";
+    font-family: "Century Gothic";
     src: url("/fonts/CenturyGothic-Bold.woff2") format("woff2");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: "CenturyGothicV2";
+    font-family: "Century Gothic";
     src: url("/fonts/CenturyGothic-Italic.woff2") format("woff2");
     font-weight: 400;
     font-style: italic;
     font-display: swap;
 }
 .font-century-v2 {
-    font-family: "CenturyGothicV2", Arial, Helvetica, sans-serif;
+    font-family: "Century Gothic", sans-serif;
 }
 
 @keyframes marquee {
@@ -99,7 +106,7 @@ body {
 
 /* HotBot */
 html body.hotbot-widget-container {
-    --font-family: CenturyGothic;
+    --font-family: "Century Gothic";
 }
 
 html body {

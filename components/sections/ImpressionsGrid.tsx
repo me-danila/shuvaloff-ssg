@@ -14,7 +14,7 @@ const gridImages: Img[] = [
         h: 1843,
     },
     {
-        src: `${base}/IMG_0412.jpeg`,
+        src: `${base}/new.png`,
         alt: "Водная прогулка по каналам",
         w: 1783,
         h: 2560,
