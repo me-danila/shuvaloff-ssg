@@ -111,7 +111,7 @@ export default function ServicesPage({ locale }: { locale: Locale }) {
                         })),
                 })}
             />
-            <section className="flex flex-col gap-4 m-6 xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 m-6 xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>
                 </FadeUp>
@@ -125,21 +125,23 @@ export default function ServicesPage({ locale }: { locale: Locale }) {
                     <p>{copy.description}</p>
                 </FadeUp>
             </section>
-            <StaggerContainer className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 px-6 xl:max-w-6xl xl:mx-auto">
-                {services.slice(0, 4).map((service) => (
-                    <StaggerItem
-                        key={service.slug || service.externalLink}
-                        className="flex"
-                    >
-                        <CardServiceBig
-                            title={service.title}
-                            imgUrl={service.imgUrl}
-                            slug={service.slug}
-                            externalLink={service.externalLink}
-                        />
-                    </StaggerItem>
-                ))}
-            </StaggerContainer>
+            <section className="bg-brand-light py-8 xl:py-12">
+                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 xl:max-w-7xl xl:mx-auto">
+                    {services.slice(0, 4).map((service) => (
+                        <StaggerItem
+                            key={service.slug || service.externalLink}
+                            className="flex"
+                        >
+                            <CardServiceBig
+                                title={service.title}
+                                imgUrl={service.imgUrl}
+                                slug={service.slug}
+                                externalLink={service.externalLink}
+                            />
+                        </StaggerItem>
+                    ))}
+                </StaggerContainer>
+            </section>
             <FadeUp className="mx-auto">
                 <Button
                     href={localizeHref("/services/all/", locale)}

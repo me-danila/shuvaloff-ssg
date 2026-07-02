@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Policy() {
     return (
         <main className="flex flex-col gap-8">
-            <section className="flex flex-col gap-4 xl:gap-8 max-w-xl:px-6 my-6 w-full xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 xl:gap-8 max-w-xl:px-6 my-6 w-full xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>
                         Политика в&nbsp;отношении обработки персональных данных

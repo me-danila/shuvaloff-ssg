@@ -34,7 +34,7 @@ export function WeddingBigSlider({ slides }: Props) {
             {/* Content wrapper */}
             <div className="flex flex-col justify-center gap-6 p-6 text-center items-center xl:max-w-2xl xl:mx-auto xl:gap-10">
                 {/* Content */}
-                <h3 className="text-2xl font-baskerville uppercase xl:text-4xl -mb-2">
+                <h3 className="text-2xl font-history uppercase xl:text-4xl -mb-2">
                     {slide.title}
                 </h3>
                 <p className="max-w-md">{slide.description}</p>
@@ -56,7 +56,7 @@ export function WeddingBigSlider({ slides }: Props) {
                     >
                         ←
                     </button>
-                    <span className="font-baskerville text-xl xl:text-2xl">
+                    <span className="font-history text-xl xl:text-2xl">
                         {current + 1}/{slides.length}
                     </span>
                     <button

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import type React from "react";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
@@ -101,7 +100,7 @@ export default function DarkHeroSection({
                         className="flex flex-col gap-4"
                     >
                         <FadeUp delay={index * 0.1}>
-                            <h3 className="mt-4 font-baskerville text-2xl xl:text-4xl uppercase leading-tight">
+                            <h3 className="mt-4 font-history text-2xl xl:text-4xl uppercase leading-tight">
                                 {block.title}
                             </h3>
                         </FadeUp>
@@ -121,23 +120,26 @@ export default function DarkHeroSection({
                 ))}
 
                 {buttons && (
-                    <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-2">
                         <Button
                             href={localizeHref(`${buttons.orderHref}`, locale)}
                             variant="primary"
+                            size="sm"
+                            className="shrink-0 xl:px-6"
                         >
                             {orderLabel}
                         </Button>
-                        <Link
+                        <Button
                             href={localizeHref(
                                 `${buttons.detailsHref}`,
                                 locale,
                             )}
-                            className="flex items-center gap-3 uppercase tracking-widest text-sm"
+                            variant="primary-outline"
+                            size="sm"
+                            className="shrink-0 xl:px-6"
                         >
                             {detailsLabel}
-                            <span className="text-2xl mb-1">&rsaquo;</span>
-                        </Link>
+                        </Button>
                     </div>
                 )}
             </div>

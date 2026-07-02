@@ -60,11 +60,11 @@ export default function TransportSlider() {
                     {transport.map(({ Icon, label, route, href }) => (
                         <div
                             key={label}
-                            className="flex flex-col gap-6 bg-brand-blue-100 rounded-xl p-6 min-w-full snap-start"
+                            className="flex flex-col gap-6 bg-brand-light rounded-xl p-6 min-w-full snap-start"
                         >
                             <Icon
                                 size={40}
-                                color="var(--color-brand-blue)"
+                                color="var(--color-brand-brown)"
                                 weight="fill"
                             />
                             <div>
@@ -77,7 +77,7 @@ export default function TransportSlider() {
                             <Button
                                 href={href}
                                 target="_blank"
-                                variant="primary"
+                                variant="primary-outline"
                                 className="mt-auto"
                             >
                                 {cta}
@@ -89,7 +89,7 @@ export default function TransportSlider() {
                     {transport.map((_, i) => (
                         <span
                             key={transport[i].label}
-                            className={`w-2 h-2 rounded-full transition-colors ${i === activeIndex ? "bg-brand-blue" : "bg-stone-300"}`}
+                            className={`w-2 h-2 rounded-full transition-colors ${i === activeIndex ? "bg-brand-brown" : "bg-stone-300"}`}
                         />
                     ))}
                 </div>
@@ -100,11 +100,11 @@ export default function TransportSlider() {
                 {transport.map(({ Icon, label, route, href }) => (
                     <StaggerItem
                         key={label}
-                        className="flex flex-col gap-6 bg-brand-blue-100 rounded-sm p-8"
+                        className="flex flex-col gap-6 bg-brand-light rounded-sm p-8"
                     >
                         <Icon
                             size={40}
-                            color="var(--color-brand-blue)"
+                            color="var(--color-brand-red)"
                             weight="fill"
                         />
                         <div>
@@ -117,7 +117,7 @@ export default function TransportSlider() {
                         <Button
                             href={href}
                             target="_blank"
-                            variant="primary"
+                            variant="primary-outline"
                             className="self-start"
                         >
                             {cta}

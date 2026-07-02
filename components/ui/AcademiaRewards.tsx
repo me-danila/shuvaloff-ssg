@@ -119,67 +119,68 @@ export default function AcademiaRewards() {
             : "* these privileges are subject to availability";
 
     return (
-        <section className="flex flex-col gap-4 xl:gap-8 px-6 xl:w-full xl:max-w-6xl xl:mx-auto">
-            {/* Карточки */}
-            <StaggerContainer className="grid grid-cols-2 xl:grid-cols-4 gap-3">
-                {tiers.map((tier) => (
-                    <StaggerItem
-                        key={tier.label}
-                        className="relative aspect-square bg-brand-blue-100 rounded-xl p-4 flex flex-col justify-end"
-                    >
-                        <div
-                            className="absolute top-3 right-3 w-14 h-14 rounded-full flex items-center justify-center text-xl font-baskerville"
-                            style={{
-                                background: tier.badgeBg,
-                                color: "#FFF",
-                            }}
+        <section className="bg-brand-light px-6 py-8 xl:py-12">
+            <div className="xl:w-full xl:max-w-7xl xl:mx-auto flex flex-col gap-6 xl:gap-8">
+                <StaggerContainer className="grid grid-cols-1 xl:grid-cols-4 gap-4 xl:gap-6 items-stretch">
+                    {tiers.map((tier) => (
+                        <StaggerItem
+                            key={tier.label}
+                            className="bg-white rounded-xl overflow-hidden flex flex-col"
                         >
-                            {tier.discount}
-                        </div>
-                        <p className="font-baskerville text-xl xl:text-2xl">
-                            {tier.label}
-                        </p>
-                        <p className="text-xs text-warm-gray">
-                            ACADEMIA REWARDS
-                        </p>
-                    </StaggerItem>
-                ))}
-            </StaggerContainer>
+                            {/* Шапка */}
+                            <div className="p-5 flex flex-col gap-3">
+                                <p className="uppercase font-history text-xl">
+                                    {discountLabel} {tier.discount}
+                                </p>
+                                <span className="font-alistair self-start text-3xl bg-brand-light rounded px-3 py-1">
+                                    {tier.nights}
+                                </span>
+                            </div>
 
-            {/* Детали */}
-            <StaggerContainer className="grid grid-cols-1 xl:grid-cols-4 gap-6 xl:gap-8">
-                {tiers.map((tier) => (
-                    <StaggerItem
-                        key={tier.label}
-                        className="flex flex-col gap-2"
-                    >
-                        <p className="uppercase font-baskerville text-lg">
-                            {tier.label}: {discountLabel} {tier.discount}
-                        </p>
-                        <span className="font-alistair self-start text-3xl bg-brand-blue-100 rounded px-3 py-1 mb-1">
-                            {tier.nights}
-                        </span>
-                        <ul className="flex flex-col gap-2">
-                            {tier.perks.map((perk) => (
-                                <li
-                                    key={perk}
-                                    className="flex items-start gap-2"
+                            {/* Панель с бейджем */}
+                            <div className="relative bg-[#DDDDDD] px-5 py-6 flex flex-col justify-end min-h-44">
+                                <div
+                                    className="absolute top-4 right-4 w-14 h-14 rounded-full flex items-center justify-center text-xl font-history"
+                                    style={{
+                                        background: tier.badgeBg,
+                                        color: "#FFF",
+                                    }}
                                 >
-                                    <span className="mt-2 w-1 h-1 rounded-full bg-current shrink-0" />
-                                    <span>{perk}</span>
-                                </li>
-                            ))}
-                        </ul>
-                        {tier.note && (
-                            <p className="text-warm-gray">{tier.note}</p>
-                        )}
-                    </StaggerItem>
-                ))}
+                                    {tier.discount}
+                                </div>
+                                <p className="font-history text-xl xl:text-2xl">
+                                    {tier.label}
+                                </p>
+                                <p className="text-xs text-warm-gray">
+                                    ACADEMIA REWARDS
+                                </p>
+                            </div>
 
-                <p className="xl:col-span-4 text-warm-gray border-t border-stone-200 pt-3">
-                    {note}
-                </p>
-            </StaggerContainer>
+                            {/* Привилегии */}
+                            <div className="p-5 flex flex-col gap-3 flex-1">
+                                <ul className="flex flex-col gap-3">
+                                    {tier.perks.map((perk) => (
+                                        <li
+                                            key={perk}
+                                            className="flex items-start gap-2"
+                                        >
+                                            <span className="mt-2 w-1 h-1 rounded-full bg-current shrink-0" />
+                                            <span>{perk}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                {tier.note && (
+                                    <p className="text-warm-gray">
+                                        {tier.note}
+                                    </p>
+                                )}
+                            </div>
+                        </StaggerItem>
+                    ))}
+                </StaggerContainer>
+
+                <p className="text-warm-gray">{note}</p>
+            </div>
         </section>
     );
 }

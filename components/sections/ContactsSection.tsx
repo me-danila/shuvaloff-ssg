@@ -51,7 +51,7 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
         },
         {
             href: "https://yandex.com/maps/org/academia_mansion_shuvaloff/71619247470/",
-            label: "Санкт-Петербург, ул.\u00a0Моховая, д.\u00a010",
+            label: "Санкт-Петербург, ул. Моховая, д. 10",
             Icon: MapPinIcon,
             target: "_blank",
             rel: "noopener referrer",
@@ -83,7 +83,9 @@ export default function ContactsSection() {
     const contacts = CONTACTS[locale];
     const contactsTitle = locale === "ru" ? "КОНТАКТЫ" : "CONTACTS";
     const bookingDepartment =
-        locale === "ru" ? "Отдел бронирования" : "Booking department";
+        locale === "ru"
+            ? "Круглосуточный отдел бронирования"
+            : "24/7 booking department";
     const bookLabel = locale === "ru" ? "Забронировать" : "Book now";
     const mapAlt =
         locale === "ru"
@@ -141,7 +143,7 @@ export default function ContactsSection() {
                             {
                                 iconLayout: "default#image",
                                 iconImageHref:
-                                    "https://academia.spb.ru/wp-content/uploads/2026/03/Vector.svg",
+                                    "https://academia.spb.ru/wp-content/uploads/2026/06/map-logo.svg",
                                 iconImageSize: [64, 64],
                                 iconImageOffset: [-32, -64],
                             },
@@ -172,7 +174,8 @@ export default function ContactsSection() {
 
     return (
         <section
-            className="flex flex-col gap-4 xl:flex-row xl:mx-auto xl:max-w-6xl xl:flex xl:gap-16 xl:items-center"
+            id="contacts"
+            className="flex flex-col gap-4 xl:flex-row xl:mx-auto xl:w-full xl:max-w-7xl xl:flex xl:gap-16 xl:items-center xl:justify-between"
             itemScope
             itemType="https://schema.org/Hotel"
         >
@@ -189,7 +192,7 @@ export default function ContactsSection() {
             {/* Левая колонка — контакты */}
             <div className="flex flex-col gap-2 mx-6 my-4 xl:mx-0 xl:my-8 xl:min-w-84">
                 <h2>{contactsTitle}</h2>
-                <p className="my-2 uppercase">{bookingDepartment}</p>
+                <p className="my-2">{bookingDepartment}</p>
                 {contacts.map(
                     ({ href, label, Icon: ContactIcon, target, rel }) => (
                         <a
@@ -206,7 +209,7 @@ export default function ContactsSection() {
                                       : "hasMap"
                             }
                         >
-                            <span className="border border-zinc-300 rounded-md p-3 transition-colors group-hover:border-zinc-600">
+                            <span className="border border-zinc-300 rounded-full p-3 transition-colors group-hover:border-zinc-600">
                                 <ContactIcon
                                     size={14}
                                     className="text-zinc-500 transition-colors group-hover:text-zinc-900"
@@ -219,7 +222,7 @@ export default function ContactsSection() {
                 <Button
                     href={localizeHref("/booking/", locale)}
                     variant="primary"
-                    className="xl:mt-4"
+                    className="mt-2 xl:mt-4"
                 >
                     {bookLabel}
                 </Button>

@@ -3,6 +3,7 @@ import ContactsSection from "@/components/sections/ContactsSection";
 import RoomsSection from "@/components/sections/RoomsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
+import BookingForm from "@/components/sections/BookingForm";
 import { FadeUp } from "@/components/ui/Motion";
 import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
@@ -43,7 +44,7 @@ export default function RoomsEn() {
                     })),
                 })}
             />
-            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-7xl xl:mx-auto">
                 <FadeUp>
                     <h1>Room Categories</h1>
                 </FadeUp>
@@ -62,6 +63,8 @@ export default function RoomsEn() {
                     </p>
                 </FadeUp>
             </section>
+            <BookingForm />
+            <div />
             <RoomsSection />
             <Divider />
             <ContactsSection />

@@ -1,8 +1,8 @@
 "use client";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
 import { useRef } from "react";
+import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { AllSales } from "@/data/SalesData";
@@ -135,7 +135,7 @@ export default function SpecialOffersSection() {
                                 key={sale.title}
                                 className="flex min-w-full snap-start flex-col overflow-hidden rounded-[4px] bg-white pb-7 text-center xl:min-w-[calc((100%-3rem)/4)]"
                             >
-                                <h3 className="flex h-[6.5rem] items-start justify-center px-5 pt-6 pb-5 font-baskerville text-xl uppercase leading-tight text-[#372a24] xl:text-2xl">
+                                <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[22px]">
                                     {sale.title}
                                 </h3>
                                 <div className="relative aspect-[16/11] w-full overflow-hidden">
@@ -159,20 +159,21 @@ export default function SpecialOffersSection() {
                                     {renderSaleSubtitle(sale.subtitle)}
                                 </p>
                                 <div className="mt-6 px-5">
-                                    <Link
+                                    <Button
                                         href={href}
                                         target={
                                             isExternal ? "_blank" : undefined
                                         }
-                                        rel={
+                                        variant={
                                             isExternal
-                                                ? "noopener noreferrer"
-                                                : undefined
+                                                ? "primary-outline"
+                                                : "primary"
                                         }
-                                        className="inline-block rounded-md bg-[#5c1f26] px-10 py-4 text-sm uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#46161c] xl:px-8 xl:py-3 xl:text-base"
+                                        size="xl"
+                                        className="xl:px-8 xl:py-3 xl:text-base"
                                     >
                                         {isExternal ? copy.more : copy.book}
-                                    </Link>
+                                    </Button>
                                 </div>
                             </article>
                         );

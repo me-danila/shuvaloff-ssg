@@ -24,7 +24,7 @@ export default function BookingPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-8 xl:gap-12 my-10 xl:my-12">
-            <FadeUp className="xl:w-full xl:max-w-6xl xl:mx-auto text-center px-4">
+            <FadeUp className="xl:w-full xl:max-w-7xl xl:mx-auto text-center px-4">
                 <h1>{copy.title}</h1>
                 <p className="leading-5 mt-2">
                     {copy.line1}

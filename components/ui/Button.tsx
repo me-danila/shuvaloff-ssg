@@ -17,9 +17,9 @@ type ButtonProps = {
 };
 
 const variants: Record<ButtonVariant, string> = {
-    primary: "bg-brand-blue text-white",
+    primary: "bg-brand-red text-white",
     "primary-outline":
-        "border border-brand-blue text-brand-blue hover:text-white",
+        "border border-brand-red text-brand-red hover:text-white",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -31,11 +31,11 @@ const sizes: Record<ButtonSize, string> = {
 };
 
 const base =
-    "group relative inline-flex items-center justify-center overflow-hidden rounded-md tracking-widest transition-[color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] disabled:opacity-50 disabled:pointer-events-none";
+    "group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md transition-[color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] disabled:opacity-50 disabled:pointer-events-none";
 
 const fillVariants: Record<ButtonVariant, string> = {
-    primary: "bg-slate-800",
-    "primary-outline": "bg-brand-blue",
+    primary: "bg-brand-red-dark",
+    "primary-outline": "bg-brand-red",
 };
 
 export default function Button({

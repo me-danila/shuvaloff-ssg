@@ -1,58 +1,89 @@
 "use client";
 
-import Link from "next/link";
+import Button from "@/components/ui/Button";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { AllSales } from "@/data/SalesData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
+const copyByLocale = {
+    ru: { book: "Забронировать", more: "Подробнее" },
+    en: { book: "Book now", more: "Details" },
+} as const;
+
+const renderSaleSubtitle = (subtitle: string) => {
+    if (
+        subtitle ===
+        "Специальные привилегии для именинников и скидка 15% от 2 ночей"
+    ) {
+        return (
+            <>
+                Специальные привилегии для именинников
+                <br />и скидка 15% от 2 ночей
+            </>
+        );
+    }
+
+    return subtitle;
+};
+
 export default function SalesGrid() {
     const locale = useLocale();
     const sales = AllSales[locale];
+    const copy = copyByLocale[locale];
 
     return (
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {sales.map((sale) => (
-                <StaggerItem
-                    key={sale.title}
-                    className="relative aspect-square rounded-md overflow-hidden group flex"
-                >
-                    <Link
-                        href={localizeHref(sale.bookingUrl, locale)}
-                        className="w-full h-full"
+            {sales.map((sale) => {
+                const isExternal = !sale.bookingUrl.startsWith("/");
+                const href = isExternal
+                    ? sale.bookingUrl
+                    : localizeHref(sale.bookingUrl, locale);
+                return (
+                    <StaggerItem
+                        key={sale.title}
+                        className="flex flex-col overflow-hidden rounded-[4px] bg-white pb-7 text-center"
                     >
-                        <Image
-                            src={sale.imgUrl}
-                            alt={sale.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                            className="object-cover"
-                            style={
-                                sale.imgObjectPosition
-                                    ? { objectPosition: sale.imgObjectPosition }
-                                    : undefined
-                            }
-                        />
-                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/50" />
-                        <div className="absolute inset-0 flex flex-col justify-between text-white p-8">
-                            <div className="flex justify-between gap-4">
-                                <h2 className="font-baskerville uppercase leading-tight xl:text-2xl">
-                                    {sale.title}
-                                </h2>
-                                <span className="hidden xl:block text-2xl">
-                                    ›
-                                </span>
-                            </div>
-                            {sale.subtitle && (
-                                <p className="text-sm text-white/90">
-                                    {sale.subtitle}
-                                </p>
-                            )}
+                        <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[22px]">
+                            {sale.title}
+                        </h3>
+                        <div className="relative aspect-[16/11] w-full overflow-hidden">
+                            <Image
+                                src={sale.imgUrl}
+                                alt={sale.title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                                className="object-cover"
+                                style={
+                                    sale.imgObjectPosition
+                                        ? {
+                                              objectPosition:
+                                                  sale.imgObjectPosition,
+                                          }
+                                        : undefined
+                                }
+                            />
                         </div>
-                    </Link>
-                </StaggerItem>
-            ))}
+                        <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
+                            {renderSaleSubtitle(sale.subtitle)}
+                        </p>
+                        <div className="mt-6 px-5">
+                            <Button
+                                href={href}
+                                target={isExternal ? "_blank" : undefined}
+                                variant={
+                                    isExternal ? "primary-outline" : "primary"
+                                }
+                                size="xl"
+                                className="xl:px-8 xl:py-3 xl:text-base"
+                            >
+                                {isExternal ? copy.more : copy.book}
+                            </Button>
+                        </div>
+                    </StaggerItem>
+                );
+            })}
         </StaggerContainer>
     );
 }

@@ -49,7 +49,7 @@ export default function WeddingSliderMobile({
                         onClick={() => scrollTo(i)}
                         className={`h-2 rounded-full transition-all duration-300 ${
                             i === current
-                                ? "bg-slate-100 w-3"
+                                ? "bg-brand-light w-3"
                                 : "bg-slate-300 w-2"
                         }`}
                     />

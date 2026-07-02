@@ -148,7 +148,7 @@ export default function WeddingFormModal({
             <button
                 type="button"
                 onClick={() => setOpen(true)}
-                className={`border p-4 rounded-md font-baskerville uppercase duration-200 cursor-pointer ${triggerClassName} ${fillVariants[variant]}`}
+                className={`border p-4 rounded-md font-history uppercase duration-200 cursor-pointer ${triggerClassName} ${fillVariants[variant]}`}
             >
                 {title}
             </button>
@@ -157,7 +157,7 @@ export default function WeddingFormModal({
                 <div className="px-8 py-12">
                     {status === "success" ? (
                         <div className="flex flex-col items-center gap-4 py-12 text-center">
-                            <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
+                            <h3 className="font-history uppercase text-xl xl:text-2xl">
                                 {copy.successTitle}
                             </h3>
                             <p>{copy.successText}</p>
@@ -231,7 +231,7 @@ export default function WeddingFormModal({
                                 <button
                                     type="submit"
                                     disabled={status === "loading"}
-                                    className="mt-2 w-full bg-neutral-900 px-8 py-4 font-baskerville uppercase text-white hover:bg-neutral-800 disabled:opacity-50 transition-colors duration-200 rounded-md cursor-pointer"
+                                    className="mt-2 w-full bg-neutral-900 px-8 py-4 font-history uppercase text-white hover:bg-neutral-800 disabled:opacity-50 transition-colors duration-200 rounded-md cursor-pointer"
                                 >
                                     {status === "loading"
                                         ? copy.loadingLabel

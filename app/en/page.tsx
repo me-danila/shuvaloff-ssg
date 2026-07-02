@@ -10,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function EnPage() {
-    return <HomePage locale="en" />;
+    return (
+        <div className="v2-fonts">
+            <HomePage locale="en" />
+        </div>
+    );
 }

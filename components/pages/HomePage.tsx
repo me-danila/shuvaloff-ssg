@@ -1,3 +1,8 @@
+import {
+    CoffeeIcon,
+    FlowerLotusIcon,
+    ForkKnifeIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -10,15 +15,11 @@ const ContactsSection = dynamic(
     () => import("@/components/sections/ContactsSection"),
     { ssr: true },
 );
-const DarkHeroSection = dynamic(
-    () => import("@/components/sections/DarkHeroSection"),
-    { ssr: true },
-);
-const HistoricalMapSection = dynamic(
-    () => import("@/components/sections/HistoricalMapSection"),
-    { ssr: true },
-);
 
+import HomeServicesSection from "@/components/sections/HomeServicesSection";
+import ImpressionsGrid from "@/components/sections/ImpressionsGrid";
+import RoomCategoriesSection from "@/components/sections/RoomCategoriesSection";
+import SpecialOffersSection from "@/components/sections/SpecialOffersSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
@@ -45,14 +46,19 @@ type HomeCopy = {
     mansionDescription: string;
     mansionLeftText: string;
     mansionRightText: string;
+    mansionRightTextLast: string;
     centerTitle: string;
     centerTextTop: string;
     centerTextBottom: string;
     centerCaption: string;
     soulTitleBottom: string;
     soulParagraphs: [string, string];
+    servicesTitle: string;
+    servicesSubtitle: string;
+    servicesDescription: React.ReactNode;
     impressionsTitle: string;
     impressionsTextTop: string;
+    impressionsTextTop2: string;
     impressionsTextBottom: string;
     impressionsCaption: string;
     ecosystemTitle: string;
@@ -109,11 +115,13 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         detailsLabel: "Подробнее",
         mansionTitle: "ОСОБНЯК С ИСТОРИЕЙ",
         mansionDescription:
-            "Отель ACADEMIA Шувалова — это бережно отреставрированный объект культурного наследия, ранее принадлежавший семье графа Шувалова. С уважением к истории мы восстановили исторические детали, чтобы вы могли погрузиться в неспешный ритм жизни аристократического Петербурга.",
+            "Отель ACADEMIA Шувалова — это бережно отреставрированный объект культурного наследия, ранее принадлежавший семье графа Шувалова. С уважением к истории мы восстановили исторические детали, чтобы вы могли погрузиться в неспешный ритм жизни аристократического Петербурга.",
         mansionLeftText:
-            "Историческая лепнина, мрамор, парадная лестница, кессонный потолок в ресторане и антикварные предметы в исторических резиденциях — все для того, чтобы вы могли почувствовать шепот истории в этих стенах, не отказывая себе в привычном комфорте.",
+            "Историческая лепнина, мрамор, парадная лестница, кессонный потолок в ресторане и антикварные предметы в исторических резиденциях — все для того, чтобы вы могли почувствовать шепот истории в этих стенах, не отказывая себе в привычном комфорте.",
         mansionRightText:
-            "В отеле вас ждет встреча с графом Шуваловым и его семьей, как связующая нить между прошлым и настоящим места, в котором вы остановитесь. Вы сможете стать частью новой жизни старинного особняка и вписать свою страницу в его историю.",
+            "В отеле вас ждет встреча с графом Шуваловым и его семьей, как связующая нить между прошлым и настоящим места, в котором вы остановитесь.",
+        mansionRightTextLast:
+            "Вы сможете стать частью новой жизни старинного особняка и вписать свою страницу в его историю.",
         centerTitle: "Исторический центр",
         centerTextTop:
             "Особняк ACADEMIA Шувалова находится в одном из самых красивых мест исторического Петербурга — на тихой Моховой улице, рядом с набережными Невы и Фонтанки, Летним и Михайловским садами, Михайловским замком и Марсовым полем. Дворец бракосочетания № 2 находится в пешей доступности на улице Фурштатской.",
@@ -126,11 +134,25 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             "В особняке гостеприимство становится частью искусства, а сервис — проявлением внимательного и индивидуального подхода.",
             "Мы создаем пространство, где каждый гость чувствует себя желанным и особенным. Где сервис становится невидимым, а забота естественной. Наша миссия — не просто соответствовать ожиданиям, а превосходить их и делать каждый визит не просто комфортным, а вдохновляющим.",
         ],
+        servicesTitle: "Мир ACADEMIA",
+        servicesSubtitle: "Дополнительные услуги",
+        servicesDescription: (
+            <>
+В&nbsp;особняке Шувалова мы&nbsp;превращаем классический сервис в
+индивидуальный опыт. Служба заботы с&nbsp;вниманием отнесется к&nbsp;любым
+нюансам вашего комфорта: будь то&nbsp;особенный букет или кофе,
+приготовленный именно тогда, когда вы&nbsp;это нго захотите.
+Здесь ваши желания становятся неотъемлемой частью продуманного
+                сценария пребывания.
+            </>
+        ),
         impressionsTitle: "АТМОСФЕРА ВПЕЧАТЛЕНИЙ",
         impressionsTextTop:
-            "Мы превращаем пребывание гостей в нашем особняке в необычное погружение, в котором пространство, люди и детали становятся частью единого художественного и исторического замысла. Мы воссоздаем жизнь эпохи с помощью театрализованных форматов, сценических зарисовок и живых персонажей, которые могут встречать и сопровождать вас в течение дня.",
+            "Мы превращаем пребывание гостей в нашем особняке в необычное погружение, в котором пространство, люди и детали становятся частью единого художественного и исторического замысла.",
+        impressionsTextTop2:
+            "Мы воссоздаем жизнь эпохи с помощью театрализованных форматов, сценических зарисовок и живых персонажей, которые могут встречать и сопровождать вас в течение дня.",
         impressionsTextBottom:
-            "Граф Шувалов и его семья возвращаются в свою резиденцию с пятницы по воскресенье, чтобы наполнить ее подлинной жизнью и атмосферой своей эпохи. Их общение с гостями столь же естественно и непредсказуемо, как и в XIX веке: мимолетная встреча в холле особняка, изящный комплимент во время прогулки по залам или случайная беседа у бара.",
+            "Граф Шувалов и его семья возвращаются в свою резиденцию с пятницы по воскресенье, чтобы наполнить ее подлинной жизнью и атмосферой своей эпохи. Их общение с гостями столь же естественно и непредсказуемо, как и в XIX веке: мимолетная встреча в холле особняка, изящный комплимент во время прогулки по залам или случайная беседа у бара.",
         impressionsCaption:
             "Это не спектакль, а связь времен, которую вы сможете почувствовать, становясь частью этой истории.",
         ecosystemTitle: "ЭКОСИСТЕМА ВАШЕГО ОТДЫХА",
@@ -161,7 +183,9 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         mansionLeftText:
             "Historic stucco, marble, the grand staircase, a coffered restaurant ceiling, and antique objects in the historical residences are all here so you can feel the whisper of history without giving up modern comfort.",
         mansionRightText:
-            "At the hotel, you are welcomed by Count Shuvalov and his family as a living connection between the past and the present of the place where you stay. You can become part of a new chapter in the life of this old mansion and add your own page to its story.",
+            "At the hotel, you are welcomed by Count Shuvalov and his family as a living connection between the past and the present of the place where you stay.",
+        mansionRightTextLast:
+            "You can become part of a new chapter in the life of this old mansion and add your own page to its story.",
         centerTitle: "Historic center",
         centerTextTop:
             "ACADEMIA Mansion Shuvaloff is located in one of the most beautiful parts of historic Saint Petersburg on quiet Mokhovaya Street, close to the embankments of the Neva and Fontanka, the Summer Garden, Mikhailovsky Garden, Mikhailovsky Castle, and Marsovo Pole. Wedding Palace No. 2 on Furshtatskaya Street is within walking distance.",
@@ -174,9 +198,15 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             "In the mansion, hospitality becomes part of the art, and service becomes an attentive, personalized approach.",
             "We create a space where every guest feels welcome and truly special. Where service is seamless and care feels natural. Our mission is not only to meet expectations, but to exceed them and make every stay not just comfortable, but inspiring.",
         ],
+        servicesTitle: "THE ACADEMIA WORLD",
+        servicesSubtitle: "Additional services",
+        servicesDescription:
+            "At Shuvaloff Mansion, we turn classic service into a personal experience. Our guest care team will attend to every nuance of your comfort, whether it is a special bouquet or coffee prepared exactly when you want it. Here, your wishes become an essential part of a carefully planned stay.",
         impressionsTitle: "AN ATMOSPHERE OF IMPRESSIONS",
         impressionsTextTop:
-            "We turn our guests' stay in the mansion into an immersive journey where space, people, and details become part of one artistic and historical vision. We recreate the spirit of the era through theatrical formats, staged sketches, and vivid characters who can greet and accompany you throughout the day.",
+            "We turn our guests' stay in the mansion into an immersive journey where space, people, and details become part of one artistic and historical vision.",
+        impressionsTextTop2:
+            "We recreate the spirit of the era through theatrical formats, staged sketches, and vivid characters who can greet and accompany you throughout the day.",
         impressionsTextBottom:
             "Count Shuvalov and his family return to their residence from Friday to Sunday to fill it with authentic life and the atmosphere of their era. Their interactions with guests are as natural and unpredictable as in the 19th century: a brief encounter in the mansion hall, an elegant compliment while walking through the rooms, or an accidental conversation at the bar.",
         impressionsCaption:
@@ -188,6 +218,36 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             "Relax in a cozy room after a walk, enjoy classic cuisine and signature cocktails at ACADEMIA Shuvaloff Bar-Restaurant, unwind in the hands of massage and wellness experts at ACADEMIA SPA, and order a transfer or a surprise for someone special. Our concierge team is ready to help with any request.",
     },
 };
+
+const heroButtons = [
+    {
+        label: {
+            ru: "Графские завтраки",
+            en: "Aristocratic breakfasts",
+        },
+        href: "/services/aristocratic-breakfast/",
+        external: false,
+        Icon: CoffeeIcon,
+    },
+    {
+        label: {
+            ru: "Ресторан",
+            en: "Restaurant",
+        },
+        href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
+        external: true,
+        Icon: ForkKnifeIcon,
+    },
+    {
+        label: {
+            ru: "Спа",
+            en: "Spa",
+        },
+        href: "https://academia-spa.ru/?utm_source=hotels",
+        external: true,
+        Icon: FlowerLotusIcon,
+    },
+];
 
 export default function HomePage({ locale }: { locale: Locale }) {
     const copy = homeCopyByLocale[locale];
@@ -241,43 +301,66 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 })}
             />
             <section>
-                <div className="relative overflow-hidden aspect-8/9 xl:aspect-[unset] xl:min-h-screen">
+                <div className="relative overflow-hidden aspect-8/10 xl:aspect-[unset] xl:min-h-screen">
                     <FadeIn
                         duration={0.9}
                         className="absolute inset-0 h-full w-full"
                     >
-                        <video
-                            src="https://static.academia.spb.ru/video/shuvaloff-land-hero.webm"
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            preload="auto"
-                            className="w-full h-full object-cover bg-gray-100"
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/06/ChatGPT-Image-28-%D0%BC%D0%B0%D1%8F-2026-%D0%B3.-15_43_59-1-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg"
+                            alt="ACADEMIA Особняк Шувалова"
+                            fill
+                            priority
+                            sizes="100vw"
+                            className="object-cover bg-gray-100"
                         />
                     </FadeIn>
 
-                    <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
-                        <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-6xl xl:mx-auto xl:gap-6">
-                            <StaggerItem>
-                                <h1 className="text-3xl xl:text-5xl xl:max-w-2xl xl:mx-auto">
-                                    {copy.heroTitle}
-                                </h1>
+                    <StaggerContainer className="absolute inset-x-0 top-20 z-10 flex flex-col items-start gap-3 px-8 xl:px-0 xl:top-40 xl:max-w-7xl xl:mx-auto">
+                        {heroButtons.map((b) => (
+                            <StaggerItem key={b.href}>
+                                <Link
+                                    href={
+                                        b.external
+                                            ? b.href
+                                            : localizeHref(b.href, locale)
+                                    }
+                                    target={b.external ? "_blank" : undefined}
+                                    rel={
+                                        b.external
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                    className="flex w-fit items-center gap-3 rounded-lg bg-black/40 px-5 py-3 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:px-6 xl:py-4"
+                                >
+                                    <b.Icon
+                                        size={26}
+                                        weight="thin"
+                                        className="shrink-0"
+                                    />
+                                    <span className="text-sm font-semibold">
+                                        {b.label[locale]}
+                                    </span>
+                                </Link>
                             </StaggerItem>
-                            <StaggerItem>
-                                <p className="leading-5 mb-4">
-                                    {copy.heroSubtitle}
-                                </p>
-                            </StaggerItem>
-                            <Suspense
-                                fallback={
-                                    <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
-                                }
-                            >
-                                <BookingFormDesktop />
-                            </Suspense>
-                        </div>
+                        ))}
                     </StaggerContainer>
+
+                    <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">
+                        <FadeIn duration={1}>
+                            <h1 className="font-alistair text-4xl normal-case leading-tight xl:text-5xl xl:mb-4 font-normal">
+                                Отдых
+                                <br className="xl:hidden" /> с графским размахом
+                            </h1>
+                        </FadeIn>
+                        <Suspense
+                            fallback={
+                                <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
+                            }
+                        >
+                            <BookingFormDesktop />
+                        </Suspense>
+                    </div>
                 </div>
             </section>
 
@@ -285,7 +368,9 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 <BookingFormMobile />
             </Suspense>
 
-            <section className="relative overflow-hidden">
+            <SpecialOffersSection />
+
+            <section className="relative overflow-hidden hidden">
                 {/* MOBILE: фото снизу 55% */}
                 <div className="mx-6 flex flex-col gap-4 mb-4 xl:hidden">
                     <div className="relative h-60 overflow-hidden rounded-lg mb-1">
@@ -305,23 +390,26 @@ export default function HomePage({ locale }: { locale: Locale }) {
                             </FadeUp>
                         ))}
                     </div>
-                    <div className="flex items-center gap-4 mt-2">
+                    <div className="flex items-center gap-2 mt-2">
                         <Button
                             href={localizeHref(
                                 `/booking?&be-offer=910895`,
                                 locale,
                             )}
                             variant="primary"
+                            size="sm"
+                            className="shrink-0 xl:px-6"
                         >
                             {copy.orderLabel}
                         </Button>
-                        <Link
+                        <Button
                             href={localizeHref(`/aristocratic-spb/`, locale)}
-                            className="relative flex items-center gap-3 uppercase tracking-widest text-sm"
+                            variant="primary-outline"
+                            size="sm"
+                            className="shrink-0 xl:px-6"
                         >
                             {copy.detailsLabel}
-                            <span className="text-2xl mb-1">&rsaquo;</span>
-                        </Link>
+                        </Button>
                     </div>
                 </div>
 
@@ -363,7 +451,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                         />
                         <FadeUp
                             duration={1.2}
-                            className="flex items-center gap-8 mt-2"
+                            className="flex items-center gap-2 mt-2"
                         >
                             <Button
                                 href={localizeHref(
@@ -371,34 +459,28 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                     locale,
                                 )}
                                 variant="primary"
+                                size="sm"
+                                className="shrink-0 xl:px-6"
                             >
                                 {copy.orderLabel}
                             </Button>
-                            <Link
+                            <Button
                                 href={localizeHref(
                                     `/aristocratic-spb/`,
                                     locale,
                                 )}
-                                className="relative flex items-center gap-3 uppercase tracking-widest text-sm"
+                                variant="primary-outline"
+                                size="sm"
+                                className="shrink-0 xl:px-6"
                             >
                                 {copy.detailsLabel}
-                                <span className="text-2xl mb-1">&rsaquo;</span>
-                            </Link>
+                            </Button>
                         </FadeUp>
                     </div>
                 </div>
             </section>
 
             <section className="flex flex-col gap-2 mx-6 relative xl:text-center xl:mx-0">
-                <div className="relative h-90 overflow-hidden rounded-lg xl:hidden">
-                    <Image
-                        src={descriptionImages[0].src}
-                        alt={descriptionImages[0].alt}
-                        fill
-                        loading="lazy"
-                        className="h-100 w-full rounded-lg object-cover"
-                    />
-                </div>
                 <FadeUp>
                     <h2 className="mt-4">{copy.mansionTitle}</h2>
                 </FadeUp>
@@ -407,8 +489,30 @@ export default function HomePage({ locale }: { locale: Locale }) {
                         {copy.mansionDescription}
                     </p>
                 </FadeUp>
-                <StaggerContainer className="flex gap-2 h-65 mt-2 xl:h-110 xl:mt-8 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full">
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg hidden xl:block xl:rounded-md">
+                <div className="flex gap-2 h-65 mt-2 xl:hidden">
+                    <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg">
+                        <Image
+                            src={descriptionImages[1].src}
+                            alt={descriptionImages[1].alt}
+                            fill
+                            sizes="50vw"
+                            loading="lazy"
+                            className="object-cover"
+                        />
+                    </div>
+                    <div className="relative flex-1 min-w-0 overflow-hidden rounded-lg">
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/06/1f6c276d95bae86165d082af9bb508ae687c7068.jpg"
+                            alt={copy.mansionTitle}
+                            fill
+                            sizes="50vw"
+                            loading="lazy"
+                            className="object-cover"
+                        />
+                    </div>
+                </div>
+                <StaggerContainer className="hidden xl:flex xl:h-110 xl:mt-8 xl:gap-4 xl:max-w-7xl xl:mx-auto xl:w-full">
+                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg hidden xl:block xl:rounded-sm">
                         <Image
                             src={descriptionImages[0].src}
                             alt={descriptionImages[0].alt}
@@ -418,7 +522,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                             className="object-cover"
                         />
                     </StaggerItem>
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-sm">
                         <Image
                             src={descriptionImages[1].src}
                             alt={descriptionImages[1].alt}
@@ -428,7 +532,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                             className="object-cover"
                         />
                     </StaggerItem>
-                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                    <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-sm">
                         <Image
                             src={descriptionImages[2].src}
                             alt={descriptionImages[2].alt}
@@ -440,144 +544,96 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     </StaggerItem>
                 </StaggerContainer>
             </section>
-            <section className="flex flex-col mx-6 gap-3 xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-8 xl:text-justify">
-                <FadeUp className="xl:flex-1">
-                    <p>{copy.mansionLeftText}</p>
-                </FadeUp>
-                <FadeUp delay={0.2} className="hidden xl:block xl:flex-none">
+            <section className="flex flex-col mx-6 gap-3 xl:max-w-5xl xl:mx-auto xl:flex-row xl:items-center xl:gap-16">
+                <FadeUp className="relative hidden xl:block xl:h-[286px] xl:w-[260px] xl:flex-none">
                     <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/Group-126.png"
-                        alt="Shuvalov coat of arms"
-                        width={263}
-                        height={234}
+                        src="https://academia.spb.ru/wp-content/uploads/2026/06/%D0%90%D0%9A%D0%90%D0%94%D0%95%D0%9C%D0%98%D0%90-%D1%82%D1%91%D0%BC%D0%BD%D1%8B%D0%B9_%D0%B3%D0%B5%D1%80%D0%B1-%D0%9E%D1%81%D0%BE%D0%B1%D0%BD%D1%8F%D0%BA-%D0%A8%D1%83%D0%B2%D0%B0%D0%BB%D0%BE%D0%B2%D0%B0-1.png"
+                        alt="Герб Академиа Особняк Шувалова"
+                        fill
+                        sizes="(max-width: 1200px) 0px, 260px"
                         loading="lazy"
+                        className="object-contain"
                     />
                 </FadeUp>
-                <FadeUp delay={0.3} className="xl:flex-1">
-                    <p>{copy.mansionRightText}</p>
-                </FadeUp>
-                <div className="relative mt-2 overflow-hidden rounded-lg xl:hidden">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/%D1%84%D0%B0%D1%81%D0%B0%D0%B4-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F2-2.png"
-                        alt="Shuvaloff historic facade"
-                        width={340}
-                        height={405}
-                        loading="lazy"
-                        className="w-full h-auto"
-                    />
+                <div className="flex flex-col gap-3 xl:flex-1 xl:gap-5">
+                    <FadeUp>
+                        <p>{copy.mansionLeftText}</p>
+                    </FadeUp>
+                    <FadeUp delay={0.1}>
+                        <p>{copy.mansionRightText}</p>
+                    </FadeUp>
+                    <FadeUp delay={0.2}>
+                        <p>{copy.mansionRightTextLast}</p>
+                    </FadeUp>
                 </div>
             </section>
-            <section className="flex flex-col gap-3 xl:text-center xl:mt-4">
-                <FadeUp>
-                    <h2 className="mx-6">{copy.centerTitle}</h2>
+
+            <RoomCategoriesSection />
+
+            <section className="flex flex-col gap-4 m-6 xl:my-4 xl:max-w-4xl xl:mx-auto">
+                <FadeUp className="xl:text-center">
+                    <h2>{copy.servicesTitle}</h2>
                 </FadeUp>
-                <FadeUp delay={0.1}>
-                    <p className="mx-6 xl:max-w-4xl xl:mx-auto xl:mt-2">
-                        {copy.centerTextTop}
-                    </p>
+                <FadeUp
+                    delay={0.1}
+                    className="-mt-2 font-alistair text-2xl xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:text-center xl:-mt-4"
+                >
+                    {copy.servicesSubtitle}
                 </FadeUp>
-                <FadeUp delay={0.2}>
-                    <p className="mx-6 xl:max-w-4xl xl:mx-auto xl:mt-2">
-                        {copy.centerTextBottom}
-                    </p>
-                </FadeUp>
-                <HistoricalMapSection />
-                <FadeUp delay={0.3}>
-                    <p className="mx-6 text-center font-alistair text-2xl text-stone-400 xl:text-[40px] xl:max-w-3xl xl:mx-auto xl:mt-4 xl:-mb-2">
-                        {copy.centerCaption}
-                    </p>
+                <FadeUp
+                    delay={0.2}
+                    className="xl:text-center"
+                >
+                    <p>{copy.servicesDescription}</p>
                 </FadeUp>
             </section>
-            <Divider />
-            <DarkHeroSection
-                imageMobile={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/hands.png",
-                    alt: "ACADEMIA Mansion Shuvaloff",
-                    position: "center",
-                }}
-                image={{
-                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/Rectangle-122.png",
-                    alt: "ACADEMIA Mansion Shuvaloff",
-                }}
-                blocks={[
-                    {
-                        title: (
-                            <>
-                                SOLE&SOUL
-                                <br />
-                                {copy.soulTitleBottom}
-                            </>
-                        ),
-                        paragraphs: copy.soulParagraphs,
-                    },
-                ]}
-            />
-            <section className="flex flex-col gap-3 mx-6 xl:max-w-6xl xl:mx-auto xl:text-center">
+
+            <HomeServicesSection locale={locale} />
+
+            <section className="flex flex-col gap-3 w-full px-6 xl:max-w-7xl xl:mx-auto xl:px-0 xl:py-12 xl:text-center">
                 <FadeUp>
                     <h2>{copy.impressionsTitle}</h2>
                 </FadeUp>
                 <FadeUp delay={0.1}>
-                    <p className="xl:max-w-3xl xl:mx-auto">
+                    <p className="xl:max-w-4xl xl:mx-auto">
                         {copy.impressionsTextTop}
                     </p>
                 </FadeUp>
-                <FadeUp delay={0.2}>
-                    <video
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/horiz.mov"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        className="w-full h-90 my-2 rounded-xl object-cover xl:mt-8 xl:h-150 xl:rounded-md"
-                    />
+                <FadeUp delay={0.15}>
+                    <p className="xl:max-w-4xl xl:mx-auto">
+                        {copy.impressionsTextTop2}
+                    </p>
+                </FadeUp>
+                <FadeUp delay={0.2} className="my-2 xl:my-4">
+                    <ImpressionsGrid />
                 </FadeUp>
                 <FadeUp delay={0.3}>
-                    <p className="xl:max-w-3xl xl:mx-auto">
+                    <p className="xl:max-w-4xl xl:mx-auto">
                         {copy.impressionsTextBottom}
                     </p>
                 </FadeUp>
-                <FadeUp delay={0.4}>
-                    <p className="text-center font-alistair text-2xl text-stone-400 xl:text-[40px] xl:max-w-4xl xl:mx-auto xl:mt-4">
+            </section>
+            <section className="bg-[#ededeb] py-8 xl:py-16">
+                <FadeUp>
+                    {/* Десктоп: единой строкой alistair */}
+                    <p className="hidden xl:block mx-auto max-w-4xl px-6 text-center font-alistair text-2xl xl:text-[40px]">
                         {copy.impressionsCaption}
                     </p>
-                </FadeUp>
-            </section>
-            <section className="flex flex-col gap-4 mx-6 xl:flex-row xl:max-w-6xl xl:mx-auto xl:gap-8">
-                <FadeUp className="hidden xl:block xl:flex-1">
-                    <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded-lg">
-                        <Image
-                            src="https://academia.spb.ru/wp-content/uploads/2026/02/5235.jpg"
-                            alt="Your stay ecosystem"
-                            fill
-                            loading="lazy"
-                            sizes="(max-width: 1280px) 100vw, 50vw"
-                            className="object-cover xl:object-[50%_70%]"
-                        />
+                    {/* Мобайл: первая фраза alistair, дальше обычным шрифтом */}
+                    <div className="flex flex-col gap-3 px-6 text-center xl:hidden">
+                        <p className="font-alistair text-4xl">
+                            Это не спектакль.
+                        </p>
+                        <p>
+                            Это связь времен, которую вы сможете почувствовать,
+                            становясь частью этой истории.
+                        </p>
                     </div>
                 </FadeUp>
-                <div className="flex flex-col gap-4 xl:my-4 xl:flex-1">
-                    <FadeUp>
-                        <h2>{copy.ecosystemTitle}</h2>
-                    </FadeUp>
-                    <FadeUp delay={0.1}>
-                        <p className="xl:mt-2">{copy.ecosystemTextTop}</p>
-                    </FadeUp>
-                    <FadeUp delay={0.2}>
-                        <p>{copy.ecosystemTextBottom}</p>
-                    </FadeUp>
-                </div>
-                <div className="relative mt-2 overflow-hidden rounded-lg xl:hidden">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/1e86635f1b9830245e5c69efe98d9745c21d4e4b.jpg"
-                        alt="Your stay ecosystem"
-                        width={340}
-                        height={405}
-                        loading="lazy"
-                        className="w-full h-auto"
-                    />
-                </div>
             </section>
+            <div className="hidden xl:block">
+                <Divider />
+            </div>
             <ContactsSection />
         </main>
     );

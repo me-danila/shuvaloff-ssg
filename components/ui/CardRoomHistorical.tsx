@@ -29,26 +29,38 @@ export default function CardRoomHistorical({
 }: CardRoomHistoricalProps) {
     const locale = useLocale();
     const detailsLabel = locale === "ru" ? "ПОДРОБНЕЕ" : "DETAILS";
-    const chooseLabel = locale === "ru" ? "ВЫБРАТЬ" : "CHOOSE";
+    const bookLabel = locale === "ru" ? "ЗАБРОНИРОВАТЬ" : "BOOK NOW";
+    const detailsHref = localizeHref(`/rooms/historical/${slug}/`, locale);
 
     return (
         <div
-            className="flex flex-col gap-4 flex-1 xl:gap-6"
+            className="flex flex-1 flex-col rounded-[4px] bg-white p-5 xl:p-8"
             itemScope
             itemType="https://schema.org/HotelRoom"
         >
             <meta itemProp="name" content={title} />
             <meta itemProp="description" content={description} />
-            <meta
-                itemProp="url"
-                content={localizeHref(`/rooms/historical/${slug}/`, locale)}
-            />
+            <meta itemProp="url" content={detailsHref} />
             <meta itemProp="image" content={image.src} />
-            {/* Фото с текстом поверх */}
+
+            {/* Заголовок и описание */}
             <a
-                href={localizeHref(`/rooms/historical/${slug}/`, locale)}
-                className="relative rounded-md overflow-hidden aspect-4/5 md:aspect-square md:flex-1"
+                href={detailsHref}
+                className="flex flex-col text-center md:min-h-[160px]"
                 itemProp="url"
+            >
+                <h3 className="font-history text-2xl uppercase leading-tight text-[#372a24] xl:text-3xl">
+                    {title}
+                </h3>
+                <p className="mt-4 text-sm leading-6 text-[#372a24]/85 xl:text-base">
+                    {description}
+                </p>
+            </a>
+
+            {/* Фото */}
+            <a
+                href={detailsHref}
+                className="relative mt-6 block aspect-4/5 overflow-hidden rounded-md md:aspect-square"
             >
                 <Image
                     src={image.src}
@@ -58,60 +70,43 @@ export default function CardRoomHistorical({
                     loading="lazy"
                     className="object-cover object-bottom transition-transform duration-700 hover:scale-105"
                 />
-
-                {/* Градиент */}
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background:
-                            "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
-                    }}
-                />
-
-                {/* Текст */}
-                <div className="absolute inset-0 p-6 flex flex-col text-white z-10 xl:justify-between xl:p-8">
-                    <div className="flex flex-col gap-2">
-                        <h3 className="text-white font-baskerville uppercase text-2xl xl:text-[40px]/10">
-                            {title}
-                        </h3>
-                        <p className="text-white/80">{description}</p>
-                    </div>
-                </div>
             </a>
 
             {/* Характеристики */}
-            <p className="flex text-sm text-brand-blue gap-8 xl:items-center">
-                <span className="hidden xl:flex items-center gap-3">
-                    <BedIcon size={18} />
+            <div className="mt-6 flex flex-col gap-4 text-sm text-[#372a24]">
+                <span className="flex items-center gap-3">
+                    <BedIcon size={18} color="#372a24" />
                     {bed}
                 </span>
-                <span className="flex items-center gap-3">
-                    <SquareIcon size={14} />
-                    {area}
+                <span className="flex items-center gap-8">
+                    <span className="flex items-center gap-3">
+                        <SquareIcon size={14} color="#372a24" />
+                        {area}
+                    </span>
+                    <span className="flex items-center gap-3">
+                        <UserIcon size={14} color="#372a24" />
+                        {guests}
+                    </span>
                 </span>
-                <span className="flex items-center gap-3">
-                    <UserIcon size={14} />
-                    {guests}
-                </span>
-            </p>
+            </div>
 
             {/* Кнопки */}
-            <div className="flex items-center gap-3">
-                <Button
-                    href={localizeHref(`/rooms/historical/${slug}/`, locale)}
-                    variant="primary"
-                    size="sm"
-                    className="self-start"
-                >
-                    {detailsLabel}
-                </Button>
+            <div className="mt-7 flex gap-2">
                 <Button
                     href={bookingUrl}
+                    variant="primary"
+                    size="sm"
+                    className="shrink-0 xl:px-6"
+                >
+                    {bookLabel}
+                </Button>
+                <Button
+                    href={detailsHref}
                     variant="primary-outline"
                     size="sm"
-                    className="self-start"
+                    className="shrink-0 xl:px-6"
                 >
-                    {chooseLabel}
+                    {detailsLabel}
                 </Button>
             </div>
         </div>

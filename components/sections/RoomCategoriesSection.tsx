@@ -3,6 +3,7 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { useRef } from "react";
+import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -149,7 +150,7 @@ export default function RoomCategoriesSection() {
                                 {/* Контент */}
                                 <div className="flex flex-col items-center px-4 pt-7 pb-8 text-center xl:flex-1 xl:items-start xl:justify-center xl:px-12 xl:py-10 xl:text-left">
                                     <div className="flex w-full flex-col items-center gap-4 xl:flex-row xl:items-start xl:justify-between xl:gap-8">
-                                        <h3 className="font-baskerville text-xl uppercase leading-tight text-[#372a24] xl:text-3xl">
+                                        <h3 className="font-history text-xl uppercase leading-tight text-[#372a24] xl:text-3xl">
                                             {room.title}
                                         </h3>
                                         <div className="hidden shrink-0 items-center gap-3 rounded-[4px] border border-[#372a24]/15 px-3.5 py-2 text-xs text-[#372a24]/80 xl:flex">
@@ -192,19 +193,22 @@ export default function RoomCategoriesSection() {
                                         </span>
                                     </div>
 
-                                    <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row xl:mt-9 xl:w-auto xl:items-center">
-                                        <Link
+                                    <div className="mt-7 flex w-full flex-col items-center gap-2 sm:flex-row xl:mt-9 xl:w-auto xl:items-center">
+                                        <Button
                                             href={bookingHref}
-                                            className="inline-block w-full rounded-md bg-[#5c1f26] px-8 py-4 text-center text-sm uppercase tracking-widest text-white transition-colors duration-300 hover:bg-[#46161c] sm:w-auto xl:px-10 xl:py-3 xl:text-base"
+                                            size="lg"
+                                            className="w-full sm:w-auto xl:px-10 xl:py-3 xl:text-base"
                                         >
                                             {copy.book}
-                                        </Link>
-                                        <Link
+                                        </Button>
+                                        <Button
                                             href={href}
-                                            className="inline-block w-full rounded-md border border-[#5c1f26] px-8 py-4 text-center text-sm uppercase tracking-widest text-[#5c1f26] transition-colors duration-300 hover:bg-[#5c1f26] hover:text-white sm:w-auto xl:px-10 xl:py-3 xl:text-base"
+                                            variant="primary-outline"
+                                            size="lg"
+                                            className="w-full sm:w-auto xl:px-10 xl:py-3 xl:text-base"
                                         >
                                             {copy.more}
-                                        </Link>
+                                        </Button>
                                     </div>
                                 </div>
                             </article>

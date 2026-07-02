@@ -1,59 +1,180 @@
-// biome-ignore-all lint: third-party script
+// biome-ignore-all lint: third-party integration bootstrap
 (function (w) {
-    var locale = w.location.pathname.startsWith("/en") ? "en" : "ru";
-    var q = [
-        ["setContext", "TL-INT-academia-shuvaloff_2024-03-18.new", locale],
-        [
-            "embed",
-            "booking-form",
-            {
-                container: "tl-booking-form",
-            },
-        ],
-        [
-            "embed",
-            "search-form",
-            {
-                container: "tl-search-form",
-            },
-        ],
-        // [
-        //     "embed",
-        //     "reputation-widget",
-        //     {
-        //         container: "tl-reputation-widget",
-        //     },
-        // ],
-    ];
-    var h = [
+    var CONTEXT = "TL-INT-academia-shuvaloff_2024-03-18";
+    var HOSTS = [
         "ru-ibe.tlintegration.ru",
         "ibe.tlintegration.ru",
         "ibe.tlintegration.com",
     ];
-    var t = (w.travelline = w.travelline || {}),
-        ti = (t.integration = t.integration || {});
-    ti.__cq = ti.__cq ? ti.__cq.concat(q) : q;
-    if (!ti.__loader) {
+    var WIDGETS = [
+        ["booking-form", "tl-booking-form"],
+        ["search-form", "tl-search-form"],
+        ["reputation-widget", "tl-reputation-widget"],
+        ["reviews-widget", "tl-reviews-widget"],
+    ];
+    var RETRY_DELAY = 2500;
+    var MAX_RETRIES = 3;
+    var elementState =
+        typeof WeakMap === "function"
+            ? new WeakMap()
+            : {
+                  get: function (element) {
+                      return element.__tlAcademiaState;
+                  },
+                  set: function (element, value) {
+                      element.__tlAcademiaState = value;
+                  },
+                  delete: function (element) {
+                      delete element.__tlAcademiaState;
+                  },
+              };
+    var elementRetries =
+        typeof WeakMap === "function"
+            ? new WeakMap()
+            : {
+                  get: function (element) {
+                      return element.__tlAcademiaRetries;
+                  },
+                  set: function (element, value) {
+                      element.__tlAcademiaRetries = value;
+                  },
+              };
+
+    function getLocale(locale) {
+        if (locale === "en" || locale === "ru") return locale;
+        var path = w.location && w.location.pathname;
+        return path === "/en" || path.indexOf("/en/") === 0 ? "en" : "ru";
+    }
+
+    function getIntegration() {
+        var t = (w.travelline = w.travelline || {});
+        return (t.integration = t.integration || {});
+    }
+
+    function getCommands(locale, includeMissing) {
+        var commands = [["setContext", CONTEXT, locale]];
+
+        WIDGETS.forEach(function (widget) {
+            var kind = widget[0];
+            var container = widget[1];
+            var element = w.document.getElementById(container);
+
+            if (!includeMissing && !element) return;
+            if (element) {
+                var stateKey = locale + ":" + kind;
+                if (elementState.get(element) === stateKey) return;
+                elementState.set(element, stateKey);
+            }
+
+            commands.push([
+                "embed",
+                kind,
+                {
+                    container: container,
+                },
+            ]);
+        });
+
+        return commands;
+    }
+
+    function appendQueue(commands) {
+        var ti = getIntegration();
+        ti.__cq = Array.isArray(ti.__cq) ? ti.__cq.concat(commands) : commands;
+    }
+
+    function loadFromHosts(hosts) {
+        if (!hosts.length) return;
+
+        var ti = getIntegration();
+        if (ti.__academiaLoaderLoading) return;
+
+        ti.__academiaLoaderLoading = true;
         ti.__loader = true;
-        var d = w.document,
-            c =
-                d.getElementsByTagName("head")[0] ||
-                d.getElementsByTagName("body")[0];
-        function e(s, f) {
+
+        var d = w.document;
+        var c =
+            d.getElementsByTagName("head")[0] ||
+            d.getElementsByTagName("body")[0];
+
+        function next(script, remaining) {
             return function () {
-                w.TL || (c.removeChild(s), f());
+                ti.__academiaLoaderLoading = false;
+                if (!w.TL && script.parentNode) {
+                    script.parentNode.removeChild(script);
+                    loadFromHosts(remaining);
+                }
             };
         }
-        (function l(h) {
-            if (0 === h.length) return;
-            var s = d.createElement("script");
-            s.type = "text/javascript";
-            s.async = !0;
-            s.src = "https://" + h[0] + "/integration/loader.js";
-            s.onerror = s.onload = e(s, function () {
-                l(h.slice(1, h.length));
-            });
-            c.appendChild(s);
-        })(h);
+
+        var script = d.createElement("script");
+        script.type = "text/javascript";
+        script.async = true;
+        script.dataset.academiaTlLoader = "true";
+        script.src = "https://" + hosts[0] + "/integration/loader.js";
+        script.onerror = script.onload = next(script, hosts.slice(1));
+        c.appendChild(script);
     }
+
+    function ensureLoader() {
+        var ti = getIntegration();
+
+        if (ti.__academiaLoaderLoading) return;
+
+        if (ti.loaded) {
+            ti.loaded = false;
+            ti.__loader = false;
+        }
+
+        if (!ti.__loader) {
+            loadFromHosts(HOSTS);
+        }
+    }
+
+    function isContainerFilled(element) {
+        if (!element) return true;
+        var text = (element.textContent || "").replace(/\s+/g, "");
+        return element.children.length > 0 && text !== "TravelLine";
+    }
+
+    function verify(locale) {
+        WIDGETS.forEach(function (widget) {
+            var container = widget[1];
+            var element = w.document.getElementById(container);
+            if (!element || isContainerFilled(element)) return;
+
+            var retries = Number(elementRetries.get(element) || 0);
+            if (retries >= MAX_RETRIES) return;
+
+            elementRetries.set(element, retries + 1);
+            elementState.delete(element);
+            refresh(locale, true);
+        });
+    }
+
+    function refresh(locale, includeMissing) {
+        var resolvedLocale = getLocale(locale);
+        var commands = getCommands(resolvedLocale, includeMissing);
+
+        if (commands.length === 1 && !includeMissing) return;
+
+        appendQueue(commands);
+        ensureLoader();
+        w.setTimeout(function () {
+            verify(resolvedLocale);
+        }, RETRY_DELAY);
+    }
+
+    var refreshTimer = 0;
+    w.__academiaTravelLine = {
+        refresh: function (locale) {
+            w.clearTimeout(refreshTimer);
+            refreshTimer = w.setTimeout(function () {
+                refresh(locale, false);
+            }, 50);
+        },
+        init: function (locale) {
+            refresh(locale, true);
+        },
+    };
 })(window);
