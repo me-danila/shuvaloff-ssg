@@ -126,6 +126,8 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://ru-ibe.tlintegration.ru" />
                 <link rel="preconnect" href="https://ibe.tlintegration.ru" />
                 <link rel="preconnect" href="https://ibe.tlintegration.com" />
+                {/* Обычный <script>, не next/script: beforeInteractive не эмитится в HTML при output: "export" */}
+                <script src="/scripts/travelline.js" defer />
             </head>
             <body
                 className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
@@ -133,10 +135,6 @@ export default function RootLayout({
                 <StructuredData data={buildSiteSchema("ru")} />
                 <HtmlLangSync />
                 <TravelLineManager />
-                <Script
-                    src="/scripts/travelline.js"
-                    strategy="beforeInteractive"
-                />
                 <Script
                     src="/scripts/calltracking.js"
                     strategy="afterInteractive"

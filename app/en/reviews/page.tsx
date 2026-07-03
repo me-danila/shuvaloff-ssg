@@ -35,8 +35,8 @@ const reviewPlatforms = [
 
 export default function EnReviews() {
     return (
-        <main className="mt-10 -mb-10 xl:mt-12 xl:-mb-20">
-            <FadeUp className="mx-auto w-full max-w-7xl px-4">
+        <main className="my-10 xl:my-12">
+            <FadeUp className="mx-auto w-full max-w-7xl px-4 xl:px-0">
                 <h1>Thank you for choosing ACADEMIA Mansion Shuvaloff hotel</h1>
                 <p className="mt-6">
                     We would be grateful if you leave us a review on one of the
@@ -44,10 +44,10 @@ export default function EnReviews() {
                 </p>
             </FadeUp>
 
-            <section className="mx-auto mt-12 w-full max-w-7xl px-4">
+            <section className="mx-auto w-full max-w-7xl px-4 xl:px-0 mt-4 xl:mt-8">
                 <FadeUp>
                     <p className="font-bold">Rate the hotel on:</p>
-                    <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+                    <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
                         {reviewPlatforms.map((platform) => (
                             <a
                                 key={platform.name}
@@ -55,7 +55,7 @@ export default function EnReviews() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={`Leave a review on ${platform.name}`}
-                                className="flex items-center justify-center rounded-md bg-brand-light p-8 transition-opacity hover:opacity-80"
+                                className="flex aspect-video items-center justify-center rounded-md bg-brand-light p-8 transition-opacity hover:opacity-80"
                             >
                                 <Image
                                     src={platform.image}

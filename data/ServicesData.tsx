@@ -143,7 +143,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Ужин от шефа",
             subtitle:
                 "С радостью приглашаем вас провести время в Бар-ресторан ACADEMIA Шувалова — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/cb49c80b30436e5033eadfc5e2b8d6b3eef8205c.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png",
             slug: "dinner",
             fullDescription: (
                 <>
@@ -187,7 +187,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Аристократический вечер Ruinart",
             subtitle:
                 "Изысканная услуга для особого события — вдохновлённая эпохой, когда дом Ruinart впервые заворожил аристократию.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/mobile_file_2025-09-19_07-33-26-3.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/mobile_file_2025-09-19_07-33-26.jpg",
             slug: "ruinart",
             fullDescription: (
                 <>
@@ -674,7 +674,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Chef's Dinner",
             subtitle:
                 "We are happy to invite you to spend time at ACADEMIA Shuvaloff Bar-Restaurant — a boutique restaurant located in the former office of Count Shuvalov.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/cb49c80b30436e5033eadfc5e2b8d6b3eef8205c.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png",
             slug: "dinner",
             fullDescription: (
                 <>
@@ -716,7 +716,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Aristocratic Evening Ruinart",
             subtitle:
                 "An exquisite service for a special event — inspired by the era when the House of Ruinart first enchanted the aristocracy.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/mobile_file_2025-09-19_07-33-26-3.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/mobile_file_2025-09-19_07-33-26.jpg",
             slug: "ruinart",
             fullDescription: (
                 <>

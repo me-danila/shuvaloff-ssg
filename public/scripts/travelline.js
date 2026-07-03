@@ -137,7 +137,20 @@
         return element.children.length > 0 && text !== "TravelLine";
     }
 
+    var verifyWaits = 0;
+
     function verify(locale) {
+        if (!w.TL) {
+            // loader ещё грузится: повторный embed сейчас даст дубль iframe
+            if (verifyWaits < MAX_RETRIES) {
+                verifyWaits += 1;
+                w.setTimeout(function () {
+                    verify(locale);
+                }, RETRY_DELAY);
+            }
+            return;
+        }
+
         WIDGETS.forEach(function (widget) {
             var container = widget[1];
             var element = w.document.getElementById(container);
@@ -148,6 +161,9 @@
 
             elementRetries.set(element, retries + 1);
             elementState.delete(element);
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
             refresh(locale, true);
         });
     }
@@ -177,4 +193,12 @@
             refresh(locale, true);
         },
     };
+
+    try {
+        w.dispatchEvent(new Event("academia:tl-ready"));
+    } catch (e) {
+        var readyEvent = w.document.createEvent("Event");
+        readyEvent.initEvent("academia:tl-ready", false, false);
+        w.dispatchEvent(readyEvent);
+    }
 })(window);

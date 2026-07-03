@@ -25,7 +25,18 @@ export default function TravelLineManager() {
 
     useEffect(() => {
         const locale = detectLocaleFromPath(pathname);
-        window.__academiaTravelLine?.refresh(locale);
+        const onReady = () => {
+            window.__academiaTravelLine?.refresh(locale);
+        };
+
+        if (window.__academiaTravelLine) {
+            onReady();
+        } else {
+            // travelline.js (defer) может выполниться позже гидрации
+            window.addEventListener("academia:tl-ready", onReady, {
+                once: true,
+            });
+        }
 
         const observer = new MutationObserver((mutations) => {
             const hasTravelLineContainer = mutations.some((mutation) => {
@@ -52,6 +63,7 @@ export default function TravelLineManager() {
         });
 
         return () => {
+            window.removeEventListener("academia:tl-ready", onReady);
             observer.disconnect();
         };
     }, [pathname]);

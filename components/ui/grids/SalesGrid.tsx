@@ -72,9 +72,7 @@ export default function SalesGrid() {
                             <Button
                                 href={href}
                                 target={isExternal ? "_blank" : undefined}
-                                variant={
-                                    isExternal ? "primary-outline" : "primary"
-                                }
+                                variant={"primary"}
                                 size="xl"
                                 className="xl:px-8 xl:py-3 xl:text-base"
                             >
