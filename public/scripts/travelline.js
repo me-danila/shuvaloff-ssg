@@ -51,6 +51,30 @@
         return (t.integration = t.integration || {});
     }
 
+    function shouldResetBeforeEmbed(kind) {
+        return kind === "reputation-widget";
+    }
+
+    function resetElement(element) {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+    }
+
+    function isEmbedCommand(command, kind) {
+        return (
+            Array.isArray(command) &&
+            command[0] === "embed" &&
+            command[1] === kind
+        );
+    }
+
+    function hasResettableEmbed(commands) {
+        return commands.some(function (command) {
+            return isEmbedCommand(command, "reputation-widget");
+        });
+    }
+
     function getCommands(locale, includeMissing) {
         var commands = [["setContext", CONTEXT, locale]];
 
@@ -63,6 +87,9 @@
             if (element) {
                 var stateKey = locale + ":" + kind;
                 if (elementState.get(element) === stateKey) return;
+                if (shouldResetBeforeEmbed(kind)) {
+                    resetElement(element);
+                }
                 elementState.set(element, stateKey);
             }
 
@@ -80,7 +107,15 @@
 
     function appendQueue(commands) {
         var ti = getIntegration();
-        ti.__cq = Array.isArray(ti.__cq) ? ti.__cq.concat(commands) : commands;
+        var queue = Array.isArray(ti.__cq) ? ti.__cq : [];
+
+        if (hasResettableEmbed(commands)) {
+            queue = queue.filter(function (command) {
+                return !isEmbedCommand(command, "reputation-widget");
+            });
+        }
+
+        ti.__cq = queue.concat(commands);
     }
 
     function loadFromHosts(hosts) {
@@ -161,9 +196,7 @@
 
             elementRetries.set(element, retries + 1);
             elementState.delete(element);
-            while (element.firstChild) {
-                element.removeChild(element.firstChild);
-            }
+            resetElement(element);
             refresh(locale, true);
         });
     }

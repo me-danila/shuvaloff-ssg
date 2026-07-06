@@ -222,16 +222,10 @@ export default function Footer() {
                             y={0}
                             className="col-start-2 row-start-1 flex justify-start"
                         >
-                            <div id="tl-reputation-widget" className="max-w-[170px]"></div>
-                            {/*<Link href="/reviews/">*/}
-                            {/*    <Image*/}
-                            {/*        src={RATING_IMG}*/}
-                            {/*        alt={ratingAlt}*/}
-                            {/*        width={169}*/}
-                            {/*        height={35}*/}
-                            {/*        className="brightness-0 invert"*/}
-                            {/*    />*/}
-                            {/*</Link>*/}
+                            <div
+                                id="tl-reputation-widget"
+                                className="max-w-[170px]"
+                            ></div>
                         </StaggerItem>
 
                         <StaggerItem
@@ -283,142 +277,6 @@ export default function Footer() {
                                 ))}
                             </StaggerItem>
                         </div>
-                    </StaggerContainer>
-                </div>
-            </div>
-
-            {/* ── Desktop v5 ── 3×3: лого/нав/копи · пусто/соцсети/легал · рейтинг/рассылка */}
-            <div className="hidden md:block border-t border-white/10">
-                <div className="mx-auto max-w-7xl py-12">
-                    <StaggerContainer
-                        mode="inView"
-                        delay={0.05}
-                        staggerChildren={0.08}
-                        className="grid grid-cols-[1fr_1fr_400px] gap-x-16 gap-y-8 items-start text-xs leading-snug text-white/80"
-                    >
-                        {/* Колонка 1 */}
-                        <StaggerItem y={0} className="col-start-1 row-start-1">
-                            <Link
-                                href={localizeHref("/", locale)}
-                                aria-label={homeAria}
-                            >
-                                <Image
-                                    src="/logo.svg"
-                                    alt={logoAlt}
-                                    width={130}
-                                    height={44}
-                                    className="brightness-0 invert opacity-70 transition duration-200 hover:opacity-90"
-                                />
-                            </Link>
-                        </StaggerItem>
-
-                        <StaggerItem
-                            y={12}
-                            className="col-start-1 row-start-2 flex flex-col gap-1.5"
-                        >
-                            {navLinks.map(({ label, href }) => (
-                                <Link
-                                    key={href}
-                                    href={href}
-                                    target="_blank"
-                                    className="text-white/80 transition-colors hover:text-white"
-                                >
-                                    {label}
-                                </Link>
-                            ))}
-                        </StaggerItem>
-
-                        <StaggerItem
-                            y={0}
-                            className="col-start-1 row-start-3 text-xs leading-snug text-white/50"
-                        >
-                            {copyrightText} {cityText}
-                        </StaggerItem>
-
-                        {/* Колонка 2 */}
-                        <StaggerItem
-                            y={12}
-                            className="col-start-2 row-start-2 flex flex-col gap-5"
-                        >
-                            <p className="text-xs leading-snug text-white/80">
-                                {socialText}
-                            </p>
-                            <SocialLinks invert />
-                        </StaggerItem>
-
-                        <StaggerItem
-                            y={0}
-                            className="col-start-2 row-start-3 flex flex-wrap gap-x-6 gap-y-1"
-                        >
-                            {legalLinks.map(({ label, href }) => (
-                                <Link
-                                    key={href}
-                                    href={href}
-                                    className="text-white/50 transition-colors hover:text-white/75"
-                                >
-                                    {label}
-                                </Link>
-                            ))}
-                        </StaggerItem>
-
-                        {/* Колонка 3 */}
-                        <StaggerItem
-                            y={0}
-                            className="col-start-3 row-start-1 flex justify-start"
-                        >
-                            <Link href="/reviews/">
-                                <Image
-                                    src={RATING_IMG}
-                                    alt={ratingAlt}
-                                    width={169}
-                                    height={35}
-                                    className="brightness-0 invert"
-                                />
-                            </Link>
-                        </StaggerItem>
-
-                        <StaggerItem
-                            y={0}
-                            className="col-start-3 row-start-2 row-span-2 flex flex-col gap-3"
-                        >
-                            <p className="mb-[-0.5rem] text-sm font-semibold leading-snug text-white/80">
-                                {newsletterTitle}
-                            </p>
-                            <p className="text-xs leading-snug text-white/80">
-                                {newsletterText}
-                            </p>
-                            <form
-                                onSubmit={(e) => e.preventDefault()}
-                                className="flex w-[228px] items-stretch gap-2"
-                            >
-                                <input
-                                    type="email"
-                                    placeholder="Email"
-                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none"
-                                />
-                                <button
-                                    type="submit"
-                                    aria-label={
-                                        locale === "ru"
-                                            ? "Подписаться"
-                                            : "Subscribe"
-                                    }
-                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-[#5c1f26] text-white transition-colors duration-300 hover:bg-[#46161c]"
-                                >
-                                    <PlayIcon size={16} weight="fill" />
-                                </button>
-                            </form>
-                            <p className="text-xs leading-snug text-white/50">
-                                {consentPrefix}
-                                <Link
-                                    href="/policy/"
-                                    className="text-white/60 underline transition-colors hover:text-white/80"
-                                >
-                                    {consentLink}
-                                </Link>
-                                {consentSuffix}
-                            </p>
-                        </StaggerItem>
                     </StaggerContainer>
                 </div>
             </div>

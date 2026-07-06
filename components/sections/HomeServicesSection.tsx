@@ -1,13 +1,25 @@
 "use client";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
 import { useRef } from "react";
 import CardServiceBig from "@/components/ui/CardServiceBig";
 import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
+import { localizeHref } from "@/lib/i18n/routing";
+
+const sectionCopy = {
+    ru: {
+        all: "Все услуги",
+    },
+    en: {
+        all: "All services",
+    },
+} as const;
 
 export default function HomeServicesSection({ locale }: { locale: Locale }) {
     const services = AllServices[locale];
+    const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
     const activeIndexRef = useRef(0);
     const programmaticScrollRef = useRef(false);
@@ -116,6 +128,12 @@ export default function HomeServicesSection({ locale }: { locale: Locale }) {
                     >
                         <ArrowLeftIcon size={20} weight="light" />
                     </button>
+                    <Link
+                        href={localizeHref("/services/all/", locale)}
+                        className="flex h-12 items-center justify-center rounded-full bg-stone-100 px-7 text-xs uppercase tracking-widest text-stone-600 transition-colors duration-300 hover:bg-stone-200 active:bg-[#5c1f26] active:text-white"
+                    >
+                        {copy.all}
+                    </Link>
                     <button
                         type="button"
                         aria-label="Next"

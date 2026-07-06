@@ -43,6 +43,7 @@ type Props = {
     locale: Locale;
     title: string;
     description?: string;
+    showSubtitles?: boolean;
 };
 
 const sectionCopy = {
@@ -95,6 +96,7 @@ export default function SpecialOffersSection({
     locale,
     title,
     description,
+    showSubtitles = true,
 }: Props) {
     const copy = sectionCopy[locale];
     const [selectedOffer, setSelectedOffer] = useState<SpecialOfferItem | null>(
@@ -192,7 +194,7 @@ export default function SpecialOffersSection({
 
     return (
         <section className="mt-4 bg-[#ededeb] py-10 xl:mt-8 xl:py-16">
-            <div className="mx-auto max-w-7xl px-6">
+            <div className="mx-auto max-w-7xl px-6 xl:px-0">
                 <FadeUp>
                     <h2 className="text-center text-[#3d2b22]">{title}</h2>
                 </FadeUp>
@@ -221,7 +223,13 @@ export default function SpecialOffersSection({
                             <div className="relative aspect-[16/11] w-full overflow-hidden">
                                 <SpecialOfferMedia offer={offer} />
                             </div>
-                            <div className="mt-6 flex min-h-[3.25rem] items-center gap-2 px-5">
+                            {showSubtitles && (
+                                <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
+                                    {offer.subtitle}
+                                </p>
+                            )}
+
+                            <div className="mt-6 flex min-h-[3.25rem] flex-wrap items-center justify-center gap-2 px-5">
                                 <Button
                                     href={localizeHref(
                                         offer.modal.buttonHref,

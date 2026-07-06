@@ -996,6 +996,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 locale={locale}
                 title={copy.servicesLabel}
                 description={copy.servicesDescription}
+                showSubtitles={false}
             />
 
             <SpecialOffersSection

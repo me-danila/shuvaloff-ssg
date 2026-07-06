@@ -37,6 +37,7 @@ export default function SalesGrid() {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {sales.map((sale) => {
                 const isExternal = !sale.bookingUrl.startsWith("/");
+                const isDetails = sale.actionType === "details" || isExternal;
                 const href = isExternal
                     ? sale.bookingUrl
                     : localizeHref(sale.bookingUrl, locale);
@@ -76,7 +77,7 @@ export default function SalesGrid() {
                                 size="xl"
                                 className="xl:px-8 xl:py-3 xl:text-base"
                             >
-                                {isExternal ? copy.more : copy.book}
+                                {isDetails ? copy.more : copy.book}
                             </Button>
                         </div>
                     </StaggerItem>

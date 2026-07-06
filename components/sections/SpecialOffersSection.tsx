@@ -115,7 +115,7 @@ export default function SpecialOffersSection() {
 
     return (
         <section className="-mt-6 bg-[#ededeb] py-10 xl:py-16">
-            <div className="mx-auto max-w-7xl px-6">
+            <div className="mx-auto max-w-7xl px-6 xl:px-0">
                 <FadeUp>
                     <h2 className="text-center text-[#3d2b22]">{copy.title}</h2>
                 </FadeUp>
@@ -127,6 +127,8 @@ export default function SpecialOffersSection() {
                 >
                     {sales.map((sale) => {
                         const isExternal = !sale.bookingUrl.startsWith("/");
+                        const isDetails =
+                            sale.actionType === "details" || isExternal;
                         const href = isExternal
                             ? sale.bookingUrl
                             : localizeHref(sale.bookingUrl, locale);
@@ -168,7 +170,7 @@ export default function SpecialOffersSection() {
                                         size="xl"
                                         className="xl:px-8 xl:py-3 xl:text-base"
                                     >
-                                        {isExternal ? copy.more : copy.book}
+                                        {isDetails ? copy.more : copy.book}
                                     </Button>
                                 </div>
                             </article>

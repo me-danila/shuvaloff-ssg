@@ -115,7 +115,7 @@ export default function RoomCategoriesSection() {
 
     return (
         <section className="bg-[#ededeb] py-10 xl:py-16">
-            <div className="mx-auto max-w-7xl px-6">
+            <div className="mx-auto max-w-7xl px-6 xl:px-0">
                 <FadeUp>
                     <h2 className="text-center text-[#3d2b22]">{copy.title}</h2>
                 </FadeUp>
