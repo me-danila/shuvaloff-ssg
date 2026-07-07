@@ -76,6 +76,7 @@ export const StaggerContainer = forwardRef<
         mode?: "mount" | "inView";
         staggerChildren?: number;
         once?: boolean;
+        amount?: "some" | "all" | number;
     }
 >(
     (
@@ -85,6 +86,7 @@ export const StaggerContainer = forwardRef<
             mode = "inView",
             staggerChildren = 0.1,
             once = true,
+            amount = 0.08,
             onScroll,
             ...props
         },
@@ -97,9 +99,7 @@ export const StaggerContainer = forwardRef<
                 initial="hidden"
                 animate={mode === "mount" ? "show" : undefined}
                 whileInView={mode === "inView" ? "show" : undefined}
-                viewport={
-                    mode === "inView" ? { once, amount: 0.08 } : undefined
-                }
+                viewport={mode === "inView" ? { once, amount } : undefined}
                 variants={{
                     hidden: {},
                     show: {

@@ -36,7 +36,7 @@ const gridImages: Img[] = [
 
 // 6-е фото (только мобильная мозаика)
 const bedroom: Img = {
-    src: `${base}/35025f793764a0ba861c56044240451000234756-scaled.jpg`,
+    src: `https://academia.spb.ru/wp-content/uploads/2026/07/MMI2261_@maxiimov-2.jpg`,
     alt: "Номер отеля",
     w: 1706,
     h: 2560,

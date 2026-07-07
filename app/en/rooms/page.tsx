@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import RoomsSection from "@/components/sections/RoomsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
-import BookingForm from "@/components/sections/BookingForm";
 import { FadeUp } from "@/components/ui/Motion";
 import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";

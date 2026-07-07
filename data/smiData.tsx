@@ -9,8 +9,7 @@ export const smiArticles: SmiArticle[] = [
     {
         backgroundImageUrl:
             "https://academia.spb.ru/wp-content/uploads/2025/12/shuvaloff.avif",
-        logoUrl:
-            "https://academia.spb.ru/wp-content/uploads/2025/12/logo.avif",
+        logoUrl: "https://academia.spb.ru/wp-content/uploads/2025/12/logo.avif",
         externalUrl:
             "https://wheretotravel.club/publications/interview/anna-kachanyuk-my-sozdali-nastoyashchuyu-mashinu-vremeni-chtoby-udivlyat/",
         text: "Анна Качанюк: «Мы создали настоящую машину времени, чтобы удивлять»",
@@ -38,8 +37,7 @@ export const smiArticles: SmiArticle[] = [
             "https://academia.spb.ru/wp-content/uploads/2025/09/shuvaloff-dashkov-4.avif",
         logoUrl:
             "https://academia.spb.ru/wp-content/uploads/2026/07/svgviewer-output-6.svg",
-        externalUrl:
-            "https://sobaka.ru/lifestyle/travel/195807",
+        externalUrl: "https://sobaka.ru/lifestyle/travel/195807",
         text: "Искусство гостеприимства: в отелях Петербурга появились новые иммерсивные форматы приема гостей",
     },
     {

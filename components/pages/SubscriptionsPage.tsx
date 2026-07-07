@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
-import BookingForm from "@/components/sections/BookingForm";
 import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
 import ImageGallerySlider from "@/components/ui/slider/ImageGallerySlider";

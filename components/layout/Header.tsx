@@ -273,7 +273,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
                 { label: "Рады вашему питомцу", href: "/services/pets/" },
             ],
         },
-        { label: "Программа привиллегий", href: "/rewards/" },
+        { label: "Программа привилегий", href: "/rewards/" },
         { label: "Услуги", href: "/services/all/" },
         {
             label: "О нас",
@@ -286,7 +286,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
                 },
                 {
                     label: "Блог",
-                    href: "#",
+                    href: "/blog/",
                 },
                 { label: "История особняка", href: "/history/" },
             ],
@@ -345,8 +345,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
                 },
                 {
                     label: "Blog",
-                    href: "https://academia.spb.ru/blog/",
-                    target: "_blank",
+                    href: "https://academia-shuvaloff.ru/blog/",
                 },
                 { label: "Mansion history", href: "/history/" },
             ],
@@ -476,7 +475,7 @@ export default function Header() {
     const isUnifiedNav = true;
     const isHeaderFixed =
         normalizedPath === "/" ||
-//        normalizedPath === "/wedding" ||
+        //        normalizedPath === "/wedding" ||
         normalizedPath === "/spasibo_wedding" ||
         normalizedPath === "/services/aristocratic-breakfast";
     const [scrolled, setScrolled] = useState(false);
@@ -512,7 +511,7 @@ export default function Header() {
     const isLight =
         !scrolled &&
         normalizedPath !== "/" &&
-//        normalizedPath !== "/wedding" &&
+        //        normalizedPath !== "/wedding" &&
         normalizedPath !== "/spasibo_wedding" &&
         normalizedPath !== "/services/aristocratic-breakfast";
     const isDesktop = useMediaQuery("(min-width: 1024px)");

@@ -151,7 +151,7 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
 
             <FadeUp
                 delay={0.3}
-                className="mx-6 flex flex-col gap-8 xl:gap-12 md:flex-row mx-auto my-4 xl:my-8 xl:max-w-7xl"
+                className="mx-6 flex flex-col gap-8 xl:gap-12 md:flex-row mx-auto my-4 xl:my-8 xl:max-w-7xl px-6 xl:px-0"
             >
                 <div className="flex flex-col md:gap-2">
                     <h3 className="font-history text-2xl xl:text-3xl uppercase mb-2">

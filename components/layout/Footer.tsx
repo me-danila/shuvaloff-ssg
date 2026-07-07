@@ -45,8 +45,6 @@ const LEGAL_LINKS = {
     ],
 } as const;
 
-const RATING_IMG = "https://academia.spb.ru/wp-content/uploads/2026/06/10.png";
-
 export default function Footer() {
     const locale = useLocale();
     const navLinks = NAV_LINKS[locale];
@@ -56,7 +54,6 @@ export default function Footer() {
         locale === "ru"
             ? "ACADEMIA Особняк Шувалова"
             : "ACADEMIA Mansion Shuvaloff";
-    const ratingAlt = "Отзывы об ACADEMIA";
     const socialText =
         locale === "ru"
             ? "Присоединяйтесь к нам в соцсетях, чтобы первыми узнавать все анонсы, новости и спецпредложения!"
@@ -330,15 +327,10 @@ export default function Footer() {
                     y={10}
                     className="flex justify-center"
                 >
-                    <Link href="/reviews/">
-                        <Image
-                            src={RATING_IMG}
-                            alt={ratingAlt}
-                            width={169}
-                            height={35}
-                            className="brightness-0 invert"
-                        />
-                    </Link>
+                    <div
+                        id="tl-reputation-widget-mobile"
+                        className="max-w-[170px]"
+                    ></div>
                 </FadeUp>
 
                 {/* Подписка — враппер */}

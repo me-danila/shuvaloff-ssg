@@ -67,9 +67,7 @@ const copyByLocale: Record<Locale, PetsCopy> = {
             },
         ],
         guideLabel: "ВСЕ ДЛЯ ОТДЫХА С ПИТОМЦЕМ",
-        conciergeTitle: (
-            <>Наша консьерж-служба всегда готова помочь:</>
-        ),
+        conciergeTitle: <>Наша консьерж-служба всегда готова помочь:</>,
         conciergeItems: [
             { id: "walk", text: <>погулять с&nbsp;вашим питомцем,</> },
             { id: "feed", text: <>покормить в&nbsp;нужное время,</> },
@@ -129,8 +127,7 @@ const copyByLocale: Record<Locale, PetsCopy> = {
         ],
         pricing: (
             <>
-                <strong>Стоимость размещения:</strong> 2&nbsp;000&nbsp;₽ /
-                ночь
+                <strong>Стоимость размещения:</strong> 2&nbsp;000&nbsp;₽ / ночь
                 <br />
                 Залог: 5&nbsp;000&nbsp;₽ (возвращается после проверки номера)
             </>
@@ -192,8 +189,8 @@ const copyByLocale: Record<Locale, PetsCopy> = {
                 id: "partners",
                 text: (
                     <>
-                        In&nbsp;addition, we&nbsp;offer our guests special
-                        terms for professional grooming and veterinary support
+                        In&nbsp;addition, we&nbsp;offer our guests special terms
+                        for professional grooming and veterinary support
                         services from our partners.
                     </>
                 ),
@@ -216,8 +213,8 @@ const copyByLocale: Record<Locale, PetsCopy> = {
         ],
         kitTitle: (
             <>
-                Together with the Four Paws pet store chain,
-                we&nbsp;have prepared kits with all the essentials,
+                Together with the Four Paws pet store chain, we&nbsp;have
+                prepared kits with all the essentials,
             </>
         ),
         kitIntro: (
@@ -391,10 +388,7 @@ export default function PetsPage({ locale }: { locale: Locale }) {
                         />
                     </div>
                 </FadeUp>
-                <FadeUp
-                    delay={0.3}
-                    className="relative aspect-[7/10]"
-                >
+                <FadeUp delay={0.3} className="relative aspect-[7/10]">
                     <div className="absolute inset-0 overflow-hidden rounded-md xl:bottom-6">
                         <Image
                             src={galleryImages[1]}
@@ -405,7 +399,10 @@ export default function PetsPage({ locale }: { locale: Locale }) {
                         />
                     </div>
                 </FadeUp>
-                <FadeUp delay={0.4} className="flex flex-col xl:flex-col-reverse gap-6 xl:gap-10">
+                <FadeUp
+                    delay={0.4}
+                    className="flex flex-col xl:flex-col-reverse gap-6 xl:gap-10"
+                >
                     <div className="relative aspect-[7/10] overflow-hidden rounded-md xl:aspect-auto xl:flex-1">
                         <Image
                             src={galleryImages[2]}

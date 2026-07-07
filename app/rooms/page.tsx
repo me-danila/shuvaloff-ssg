@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import BookingForm from "@/components/sections/BookingForm";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
-import BookingForm from "@/components/sections/BookingForm";
 import { FadeUp } from "@/components/ui/Motion";
 import { AllRooms } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";

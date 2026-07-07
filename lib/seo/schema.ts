@@ -526,3 +526,142 @@ export const buildSalesPageSchema = ({
         },
     ],
 });
+
+const getBlogId = () => `${SITE_URL}/blog/#blog`;
+
+const buildPostAuthor = (author?: string) =>
+    author
+        ? {
+              "@type": "Person",
+              name: author,
+              url: `${SITE_URL}/blog/author/`,
+              worksFor: { "@id": getOrganizationId() },
+          }
+        : { "@id": getOrganizationId() };
+
+export const buildBlogEditorialSchema = () => ({
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ProfilePage",
+            "@id": `${SITE_URL}/blog/author/#webpage`,
+            url: `${SITE_URL}/blog/author/`,
+            name: "О редакции блога — " + SITE_NAME,
+            inLanguage: "ru",
+            isPartOf: { "@id": getWebsiteId() },
+            mainEntity: { "@id": getOrganizationId() },
+        },
+        {
+            ...buildBreadcrumbSchema("ru", [
+                { name: "Главная", path: "/" },
+                { name: "Блог", path: "/blog/" },
+                { name: "Редакция", path: "/blog/author/" },
+            ]),
+            "@id": `${SITE_URL}/blog/author/#breadcrumb`,
+        },
+    ],
+});
+
+export const buildBlogIndexSchema = ({
+    posts,
+}: {
+    posts: Array<{
+        slug: string;
+        title: string;
+        description: string;
+        image: string;
+        datePublished: string;
+        author?: string;
+    }>;
+}) => ({
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Blog",
+            "@id": getBlogId(),
+            url: getAbsoluteUrl("/blog/"),
+            name: `Блог — ${SITE_NAME}`,
+            description:
+                "Блог бутик-отеля ACADEMIA Особняк Шувалова: аристократический Петербург, история особняка, гиды по городу.",
+            inLanguage: "ru",
+            isPartOf: { "@id": getWebsiteId() },
+            publisher: { "@id": getOrganizationId() },
+            blogPost: posts.map((post) => ({
+                "@type": "BlogPosting",
+                "@id": `${getAbsoluteUrl(`/blog/${post.slug}/`)}#article`,
+                headline: post.title,
+                description: post.description,
+                image: getAbsoluteUrl(post.image),
+                datePublished: post.datePublished,
+                url: getAbsoluteUrl(`/blog/${post.slug}/`),
+                author: buildPostAuthor(post.author),
+            })),
+        },
+        {
+            ...buildBreadcrumbSchema("ru", [
+                { name: "Главная", path: "/" },
+                { name: "Блог", path: "/blog/" },
+            ]),
+            "@id": `${getAbsoluteUrl("/blog/")}#breadcrumb`,
+        },
+    ],
+});
+
+export const buildBlogPostingSchema = ({
+    slug,
+    title,
+    description,
+    image,
+    imageAlt,
+    datePublished,
+    dateModified,
+    author,
+    tags,
+}: {
+    slug: string;
+    title: string;
+    description: string;
+    image: string;
+    imageAlt?: string;
+    datePublished: string;
+    dateModified?: string;
+    author?: string;
+    tags?: string[];
+}) => {
+    const url = getAbsoluteUrl(`/blog/${slug}/`);
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "BlogPosting",
+                "@id": `${url}#article`,
+                mainEntityOfPage: url,
+                url,
+                headline: title,
+                description,
+                image: {
+                    "@type": "ImageObject",
+                    url: getAbsoluteUrl(image),
+                    ...(imageAlt ? { caption: imageAlt } : {}),
+                },
+                datePublished,
+                dateModified: dateModified ?? datePublished,
+                inLanguage: "ru",
+                author: buildPostAuthor(author),
+                publisher: { "@id": getOrganizationId() },
+                isPartOf: { "@id": getBlogId() },
+                about: { "@id": getHotelId() },
+                ...(tags?.length ? { keywords: tags.join(", ") } : {}),
+            },
+            {
+                ...buildBreadcrumbSchema("ru", [
+                    { name: "Главная", path: "/" },
+                    { name: "Блог", path: "/blog/" },
+                    { name: title, path: `/blog/${slug}/` },
+                ]),
+                "@id": `${url}#breadcrumb`,
+            },
+        ],
+    };
+};

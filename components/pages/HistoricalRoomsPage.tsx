@@ -28,24 +28,22 @@ const copyByLocale: Record<Locale, HistoricalCopy> = {
             <>
                 Исторические люксы — объекты культурного наследия, в которых
                 сохранены детали отделки, восстановлен изначальный цвет стен и
-                добавлены подлинные антикварные предметы эпохи конца XIX — начала
-                ХХ века.
+                добавлены подлинные антикварные предметы эпохи конца XIX —
+                начала ХХ века.
             </>,
             <>
                 Это резиденции, отражающие характер владельцев особняка: графа
                 Андрея Шувалова и его дочери Елизаветы Воронцовой-Дашковой.
                 Изысканные линии, глубокие цвета и изящные детали дают
-                возможность почувствовать себя дорогим гостем одного из известных
-                аристократических домов Российской Империи. Стены особняка хранят
-                память о людях, которые здесь жили — не выдуманных персонажах, а
-                реальных аристократах. Помнят их уклад жизни, вечерние разговоры
-                при свечах, неспешные шаги по мраморной лестнице, звуки рояля,
-                шелест парадного платья, мягкий свет люстры — всё это не
-                декорации.
+                возможность почувствовать себя дорогим гостем одного из
+                известных аристократических домов Российской Империи. Стены
+                особняка хранят память о людях, которые здесь жили — не
+                выдуманных персонажах, а реальных аристократах. Помнят их уклад
+                жизни, вечерние разговоры при свечах, неспешные шаги по
+                мраморной лестнице, звуки рояля, шелест парадного платья, мягкий
+                свет люстры — всё это не декорации.
             </>,
-            <>
-                Это отблески жизни, которой когда-то был наполнен особняк.
-            </>,
+            <>Это отблески жизни, которой когда-то был наполнен особняк.</>,
         ],
         galleryHeading: "Пространство, в котором дышит история Петербурга",
         schemaName: "Исторические люксы",
@@ -75,8 +73,8 @@ const copyByLocale: Record<Locale, HistoricalCopy> = {
                 centuries.
             </>,
             <>
-                These residences reflect the personalities of the mansion owners:
-                Count Andrey Shuvalov and his daughter Elizaveta
+                These residences reflect the personalities of the mansion
+                owners: Count Andrey Shuvalov and his daughter Elizaveta
                 Vorontsova-Dashkova. Elegant lines, deep colors, and curated
                 details let you feel like an honored guest of one of Imperial
                 Russia's aristocratic houses. The mansion preserves memories of
@@ -86,7 +84,8 @@ const copyByLocale: Record<Locale, HistoricalCopy> = {
             </>,
             <>This is not decoration. It is continuity.</>,
         ],
-        galleryHeading: "A space where the history of Saint Petersburg still breathes",
+        galleryHeading:
+            "A space where the history of Saint Petersburg still breathes",
         schemaName: "Historical suites",
         schemaDescription:
             "Historical suites with authentic antiques inside the Shuvaloff Mansion.",

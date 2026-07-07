@@ -1,8 +1,8 @@
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import SalesGrid from "@/components/ui/grids/SalesGrid";
-import BookingForm from "@/components/sections/BookingForm";
 import { FadeUp } from "@/components/ui/Motion";
 import TransportSlider from "@/components/ui/TransportSlider";
 import { AllSales } from "@/data/SalesData";

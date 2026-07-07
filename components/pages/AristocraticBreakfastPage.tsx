@@ -411,7 +411,7 @@ export default function AristocraticBreakfastPage({
 
             <section className="relative aspect-4/3 min-h-[350px] w-full overflow-hidden rounded xl:aspect-5/2 xl:w-[98%] xl:mx-auto xl:rounded-xl">
                 <Image
-                    src="https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif"
+                    src="https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif"
                     alt={copy.title}
                     fill
                     loading="lazy"

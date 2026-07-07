@@ -10,6 +10,7 @@
         ["booking-form", "tl-booking-form"],
         ["search-form", "tl-search-form"],
         ["reputation-widget", "tl-reputation-widget"],
+        ["reputation-widget", "tl-reputation-widget-mobile"],
         ["reviews-widget", "tl-reviews-widget"],
     ];
     var RETRY_DELAY = 2500;

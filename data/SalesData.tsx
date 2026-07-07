@@ -27,7 +27,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             title: "ВАШ ВЫХОДНОЙ КАК ИСКУССТВО",
             subtitle:
                 "Особый формат, в котором выходной день становится церемонией",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Untitled.png",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9164-2.jpg",
             bookingUrl: "/booking/?&be-offer=804866",
         },
         {
@@ -41,7 +41,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             title: "Свадебное предложение",
             subtitle:
                 "Свадебное предложение ACADEMIA — это гармония исторических интерьеров и безупречного сервиса",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/AP_162.jpg",
             bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
         },
         {
@@ -109,7 +109,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         {
             title: "YOUR WEEKEND AS ART",
             subtitle: "A special format where your weekend becomes a ceremony",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Untitled.png",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9164-2.jpg",
             bookingUrl: "/booking/?&be-offer=804866",
         },
         {
@@ -123,7 +123,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             title: "Wedding Offer",
             subtitle:
                 "ACADEMIA wedding offer is a harmony of historical interiors and impeccable service",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/de060397c259e575a407debaece3e14e28a085ef.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/AP_162.jpg",
             bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
         },
         {

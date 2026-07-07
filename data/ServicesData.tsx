@@ -104,7 +104,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Графский завтрак",
             subtitle:
                 "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif",
             slug: "aristocratic-breakfast",
         },
         {
@@ -114,13 +114,13 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
             externalLink: "https://academia-spa.ru/",
         },
-//        {
-//            title: "Девайсы для красоты и здоровья",
-//            subtitle:
-//                "Сделайте ваш отдых еще более приятным — закажите в номер девайсы для красоты и здоровья от бренда GESS.",
-//            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
-//            slug: "beauty-bar",
-//        },
+        //        {
+        //            title: "Девайсы для красоты и здоровья",
+        //            subtitle:
+        //                "Сделайте ваш отдых еще более приятным — закажите в номер девайсы для красоты и здоровья от бренда GESS.",
+        //            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
+        //            slug: "beauty-bar",
+        //        },
         {
             title: "Букет в номер",
             subtitle: "Жест внимания без повода или в особый момент.",
@@ -466,7 +466,8 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "wine-set",
             fullDescription: (
                 <>
-                    *Игристое вино, представленное на&nbsp;фотографии, не&nbsp;включено в&nbsp;стоимость сета.
+                    *Игристое вино, представленное на&nbsp;фотографии,
+                    не&nbsp;включено в&nbsp;стоимость сета.
                 </>
             ),
             price: "5 500 ₽",
@@ -648,7 +649,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Aristocratic breakfast",
             subtitle:
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif",
             slug: "aristocratic-breakfast",
         },
         {
@@ -658,13 +659,13 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
             externalLink: "https://academia-spa.ru/",
         },
-//        {
-//            title: "Beauty & Health Devices",
-//            subtitle:
-//                "Make your stay even more pleasant — order beauty and health devices from the GESS brand to your room.",
-//            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
-//            slug: "beauty-bar",
-//        },
+        //        {
+        //            title: "Beauty & Health Devices",
+        //            subtitle:
+        //                "Make your stay even more pleasant — order beauty and health devices from the GESS brand to your room.",
+        //            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
+        //            slug: "beauty-bar",
+        //        },
         {
             title: "Flower Bouquet to Room",
             subtitle:
@@ -991,7 +992,8 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "wine-set",
             fullDescription: (
                 <>
-                    *The sparkling wine shown in the photo is not included in the price of the set.
+                    *The sparkling wine shown in the photo is not included in
+                    the price of the set.
                 </>
             ),
             price: "5 500 ₽",

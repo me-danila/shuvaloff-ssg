@@ -17,6 +17,7 @@ const TRAVELLINE_CONTAINER_SELECTOR = [
     "#tl-booking-form",
     "#tl-search-form",
     "#tl-reputation-widget",
+    "#tl-reputation-widget-mobile",
     "#tl-reviews-widget",
 ].join(",");
 

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
-import BookingForm from "@/components/sections/BookingForm";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import DesktopHeroGrid from "@/components/ui/grids/DesktopHeroGrid";
