@@ -5,23 +5,57 @@ import { domAnimation, LazyMotion } from "framer-motion";
 import Script from "next/script";
 import { Suspense } from "react";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
-import FooterSwitch from "@/components/layout/FooterSwitch";
+import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import TravelLineManager from "@/components/sections/TravelLineManager";
 import StructuredData from "@/components/seo/StructuredData";
 import { siteMetadataBase } from "@/lib/i18n/metadata";
 import { buildSiteSchema } from "@/lib/seo/schema";
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo/site";
 import { SmoothScroll } from "../components/ui/SmoothScroll";
 
-const baskerville = localFont({
-    src: "../public/fonts/BaskervilleCyr.woff2",
-    variable: "--font-baskerville",
-    display: "swap",
-});
-
 const alistair = localFont({
     src: "../public/fonts/Alistair-Signature.woff2",
     variable: "--font-alistair",
+    display: "swap",
+});
+
+const historyPro = localFont({
+    src: [
+        {
+            path: "../public/fonts/History-Pro.woff2",
+            weight: "400",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/History-Pro-Bold.woff2",
+            weight: "700",
+            style: "normal",
+        },
+    ],
+    variable: "--font-history",
+    display: "swap",
+});
+
+const centuryGothic = localFont({
+    src: [
+        {
+            path: "../public/fonts/CenturyGothic.woff2",
+            weight: "400",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/CenturyGothic-Bold.woff2",
+            weight: "700",
+            style: "normal",
+        },
+        {
+            path: "../public/fonts/CenturyGothic-Italic.woff2",
+            weight: "400",
+            style: "italic",
+        },
+    ],
+    variable: "--font-century",
     display: "swap",
 });
 
@@ -89,16 +123,18 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://academia.spb.ru" />
                 <link rel="preconnect" href="https://static.academia.spb.ru" />
                 <link rel="preconnect" href="https://mc.yandex.ru" />
+                <link rel="preconnect" href="https://ru-ibe.tlintegration.ru" />
+                <link rel="preconnect" href="https://ibe.tlintegration.ru" />
+                <link rel="preconnect" href="https://ibe.tlintegration.com" />
+                {/* Обычный <script>, не next/script: beforeInteractive не эмитится в HTML при output: "export" */}
+                <script src="/scripts/travelline.js" defer />
             </head>
             <body
-                className={`${baskerville.variable} ${alistair.variable} antialiased`}
+                className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
             >
                 <StructuredData data={buildSiteSchema("ru")} />
                 <HtmlLangSync />
-                <Script
-                    src="/scripts/travelline.js"
-                    strategy="beforeInteractive"
-                />
+                <TravelLineManager />
                 <Script
                     src="/scripts/calltracking.js"
                     strategy="afterInteractive"
@@ -110,7 +146,7 @@ export default function RootLayout({
                             <Header />
                         </Suspense>
                         <Suspense fallback={null}>{children}</Suspense>
-                        <FooterSwitch />
+                        <Footer />
                     </LazyMotion>
                 </SmoothScroll>
                 <Script id="hotbot" strategy="lazyOnload">{`

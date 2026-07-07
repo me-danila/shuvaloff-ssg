@@ -26,7 +26,7 @@ type TransferCopy = {
 const copyByLocale: Record<Locale, TransferCopy> = {
     ru: {
         title: "ТРАНСФЕР",
-        subtitle: "на представительском Mercedes-Benz E-класса",
+        subtitle: "GAC M8",
         orderButton: "ЗАКАЗАТЬ",
         description1:
             "Индивидуальный трансфер без ожиданий и суеты. Мы встретим вас в аэропорту или на вокзале, доставим в отель и обеспечим передвижение по Петербургу во время вашего отдыха.",
@@ -60,7 +60,7 @@ const copyByLocale: Record<Locale, TransferCopy> = {
     },
     en: {
         title: "TRANSFER",
-        subtitle: "on executive Mercedes-Benz E-class",
+        subtitle: "GAC M8",
         orderButton: "ORDER",
         description1:
             "A private transfer with no waiting or hassle. We’ll meet you at the airport or train station, take you to your hotel, and handle your transportation around St. Petersburg during your stay.",
@@ -104,25 +104,25 @@ export default function TransferPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-8 xl:gap-8">
-            <section className="flex flex-col gap-3 mx-6 mt-6 xl:mt-8 xl:max-w-6xl xl:mx-auto xl:w-full">
+            <section className="flex flex-col gap-3 mx-6 mt-6 xl:mt-8 xl:max-w-7xl xl:mx-auto xl:w-full">
                 <FadeUp className="text-center flex flex-col">
                     <h1>{copy.title}</h1>
                     <p>{copy.subtitle}</p>
                 </FadeUp>
             </section>
 
-            <section className="mx-6 flex flex-col gap-4 xl:max-w-6xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1fr_1.2fr] xl:items-stretch xl:gap-6">
+            <section className="mx-6 flex flex-col gap-4 xl:max-w-7xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1fr_1.2fr] xl:items-stretch xl:gap-6">
                 <StaggerContainer className="flex flex-col gap-4">
                     {copy.cards.map(({ label, price, note }, idx) => {
                         const Icon = icons[idx];
                         return (
                             <StaggerItem
                                 key={label}
-                                className="bg-brand-blue-100 rounded-md p-4 flex flex-col items-center text-center gap-3 xl:p-5 flex-1"
+                                className="bg-brand-light rounded-md p-4 flex flex-col items-center text-center gap-3 xl:p-5 flex-1"
                             >
                                 <Icon
                                     size={32}
-                                    color="var(--color-brand-blue)"
+                                    color="var(--color-brand-brown)"
                                     weight="fill"
                                 />
                                 <div className="flex flex-col items-center">
@@ -157,7 +157,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                 </FadeUp>
             </section>
 
-            <FadeUp className="mx-6 flex justify-center xl:max-w-6xl xl:mx-auto xl:w-full">
+            <FadeUp className="mx-6 flex justify-center xl:max-w-7xl xl:mx-auto xl:w-full">
                 <Button
                     href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
                     target="_blank"
@@ -167,7 +167,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                 </Button>
             </FadeUp>
 
-            <section className="mx-6 flex flex-col gap-4 xl:max-w-6xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] xl:gap-8 xl:items-start">
+            <section className="mx-6 flex flex-col gap-4 xl:max-w-7xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] xl:gap-8 xl:items-start">
                 <FadeUp className="relative w-full h-60 md:h-80 xl:h-full overflow-hidden rounded-md">
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/06/hf_20260604_144842_063a0fa9-b31d-4114-9e32-e077ede99549-2.avif"
@@ -184,7 +184,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                     <ul className="space-y-1 my-3">
                         {copy.items.map((item) => (
                             <li key={item} className="flex items-start gap-2">
-                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-blue" />
+                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
                                 <span>{item}</span>
                             </li>
                         ))}
@@ -192,7 +192,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                     <ul className="space-y-1 my-3">
                         {copy.items2.map((item) => (
                             <li key={item} className="flex items-start gap-2">
-                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-blue" />
+                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
                                 <span>{item}</span>
                             </li>
                         ))}
@@ -209,13 +209,15 @@ export default function TransferPage({ locale }: { locale: Locale }) {
             </section>
 
             {otherServices.length > 0 && (
-                <section className="flex flex-col gap-4 xl:gap-6 mt-2 xl:mt-8 mx-6 xl:w-full xl:max-w-6xl xl:mx-auto">
-                    <FadeUp>
-                        <h2 className="text-center xl:text-4xl">
-                            {copy.otherServicesTitle}
-                        </h2>
-                    </FadeUp>
-                    <ServicesSlider services={otherServices} />
+                <section className="bg-brand-light py-8 xl:py-12 mt-2 xl:mt-8">
+                    <div className="flex flex-col gap-4 xl:gap-6 mx-6 xl:w-full xl:max-w-7xl xl:mx-auto">
+                        <FadeUp>
+                            <h2 className="text-center xl:text-4xl">
+                                {copy.otherServicesTitle}
+                            </h2>
+                        </FadeUp>
+                        <ServicesSlider services={otherServices} />
+                    </div>
                 </section>
             )}
 

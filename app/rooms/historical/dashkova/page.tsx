@@ -155,7 +155,7 @@ export default function HistoricalRooms() {
             <SliderMobile images={descriptionImages} />
             <StaggerContainer
                 mode="inView"
-                className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full"
+                className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-7xl xl:mx-auto xl:w-full"
             >
                 <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
                     <Image
@@ -188,7 +188,7 @@ export default function HistoricalRooms() {
                     />
                 </StaggerItem>
             </StaggerContainer>
-            <section className="flex flex-col gap-3 m-6 xl:max-w-6xl xl:mx-auto xl:text-center xl:my-8">
+            <section className="flex flex-col gap-3 m-6 xl:max-w-7xl xl:mx-auto xl:text-center xl:my-8">
                 <FadeUp>
                     <h2>
                         Строгие линии, исторические детали и&nbsp;безупречный

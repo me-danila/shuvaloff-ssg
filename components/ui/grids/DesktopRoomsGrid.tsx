@@ -24,7 +24,7 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
 
     return (
         <StaggerContainer
-            className="hidden xl:grid xl:grid-cols-2 xl:gap-8 xl:max-w-6xl xl:mx-auto xl:w-full"
+            className="hidden xl:grid xl:grid-cols-2 xl:gap-8 xl:max-w-7xl xl:mx-auto xl:w-full"
             itemScope
             itemType="https://schema.org/ItemList"
         >
@@ -76,28 +76,28 @@ export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {
 
                     {/* Кнопка + характеристики */}
                     <div className="flex items-center gap-8 xl:mt-2">
-                        <div className="flex gap-4">
-                            <Button
-                                href={getRoomHref(room.slug, room.isHistorical)}
-                                variant="primary"
-                                size="sm"
-                            >
-                                {detailsLabel}
-                            </Button>
+                        <div className="flex gap-2">
                             <Button
                                 href={room.bookingUrl}
-                                variant="primary-outline"
+                                variant="primary"
                                 size="sm"
                             >
                                 {chooseLabel}
                             </Button>
+                            <Button
+                                href={getRoomHref(room.slug, room.isHistorical)}
+                                variant="primary-outline"
+                                size="sm"
+                            >
+                                {detailsLabel}
+                            </Button>
                         </div>
                         <span className="flex items-center gap-2 text-sm text-zinc-600">
-                            <SquareIcon size={16} color="#364D6B" />
+                            <SquareIcon size={16} color="#372A24" />
                             {room.area}
                         </span>
                         <span className="flex items-center gap-2 text-sm text-zinc-600">
-                            <UserIcon size={12} color="#364D6B" />
+                            <UserIcon size={12} color="#372A24" />
                             {room.guests}
                         </span>
                     </div>

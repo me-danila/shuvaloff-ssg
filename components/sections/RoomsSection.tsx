@@ -24,16 +24,16 @@ export default function RoomsSection() {
     return (
         <>
             {/* Свитчер */}
-            <section className="flex mx-6 xl:w-full xl:max-w-6xl xl:mx-auto xl:gap-3 xl:-mt-6">
+            <section className="flex mx-6 xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-3 xl:-mt-6">
                 {/* Классические номера */}
                 <div
-                    className={`flex items-center flex-1 whitespace-nowrap xl:rounded-md transition-colors border border-brand-blue-100 ${!showHistorical ? "bg-brand-blue-100" : ""}`}
+                    className={`flex items-center flex-1 whitespace-nowrap xl:rounded-md transition-colors border border-brand-light ${!showHistorical ? "bg-brand-light" : ""}`}
                 >
                     {/* Мобайл */}
                     <button
                         type="button"
                         onClick={() => setShowHistorical(false)}
-                        className={`flex-1 xl:hidden text-brand-blue text-xs py-4 px-2 cursor-pointer ${!showHistorical ? "font-semibold" : ""}`}
+                        className={`flex-1 xl:hidden text-brand-brown text-xs py-4 px-2 cursor-pointer ${!showHistorical ? "font-semibold" : ""}`}
                     >
                         {classicalLabel}
                     </button>
@@ -43,7 +43,7 @@ export default function RoomsSection() {
                         <Link
                             href={localizeHref(`/rooms/${room.slug}/`, locale)}
                             key={room.title}
-                            className={`hidden xl:flex-1 xl:items-center xl:justify-center xl:text-center xl:block px-4 py-4 text-brand-blue text-sm hover:bg-slate-300 transition-colors duration-200 rounded-md xl:uppercase ${showHistorical ? "" : "font-semibold"}`}
+                            className={`hidden xl:flex-1 xl:items-center xl:justify-center xl:text-center xl:block px-4 py-4 text-brand-brown text-sm hover:bg-[#E8E3DF] transition-colors duration-200 rounded-md xl:uppercase ${showHistorical ? "" : "font-semibold"}`}
                         >
                             {room.title}
                         </Link>
@@ -54,7 +54,7 @@ export default function RoomsSection() {
                 <button
                     type="button"
                     onClick={() => setShowHistorical(true)}
-                    className={`flex flex-1 items-center justify-center border px-2 py-4 text-xs text-brand-blue transition-colors xl:px-6 whitespace-nowrap xl:text-sm xl:flex-none xl:rounded-md cursor-pointer xl:uppercase ${showHistorical ? "bg-brand-blue-100 border-brand-blue-100 font-semibold" : "border-brand-blue-100 hover:bg-slate-300"}`}
+                    className={`flex flex-1 items-center justify-center border px-2 py-4 text-xs text-brand-brown transition-colors xl:px-6 whitespace-nowrap xl:text-sm xl:flex-none xl:rounded-md cursor-pointer xl:uppercase ${showHistorical ? "bg-brand-light border-brand-light font-semibold" : "border-brand-light hover:bg-[#E8E3DF]"}`}
                 >
                     {historicalLabel}
                 </button>

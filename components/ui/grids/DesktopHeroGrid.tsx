@@ -21,7 +21,7 @@ export default function DesktopHeroGrid({
             delay={isInner ? 0.22 : 0.15}
             mode="mount"
             staggerChildren={isInner ? 0.12 : 0.08}
-            className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-21/9 w-full"
+            className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-20/8 w-full"
         >
             <StaggerItem
                 y={isInner ? 8 : 0}

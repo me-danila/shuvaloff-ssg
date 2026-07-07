@@ -76,7 +76,7 @@ export default function RewardsPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-6">
-            <section className="flex flex-col gap-4 mx-6 my-2 xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 mx-6 my-2 xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>
                 </FadeUp>

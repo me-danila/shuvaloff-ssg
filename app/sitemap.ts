@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { AllRooms } from "@/data/RoomsData";
 import { AllServices } from "@/data/ServicesData";
+import { getAllPosts } from "@/lib/blog";
 import { getAbsoluteUrl } from "@/lib/seo/site";
 
 export const dynamic = "force-static";
@@ -17,7 +18,9 @@ const staticRuRoutes = [
     "/rooms/",
     "/rooms/historical/",
     "/run/",
+    "/reviews/",
     "/sales/",
+    "/sales/aeroflot/",
     "/services/",
     "/services/all/",
     "/subscriptions/",
@@ -32,10 +35,12 @@ const staticEnRoutes = [
     "/history/",
     "/rewards/",
     "/rewards/referral/",
+    "/reviews/",
     "/rooms/",
     "/rooms/historical/",
     "/run/",
     "/sales/",
+    "/sales/aeroflot/",
     "/services/",
     "/services/all/",
     "/subscriptions/",
@@ -43,10 +48,29 @@ const staticEnRoutes = [
     "/wedding/",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const now = new Date();
+    const posts = await getAllPosts();
 
     const routes = [
+        {
+            url: getAbsoluteUrl("/blog/", "ru"),
+            lastModified: now,
+            changeFrequency: "weekly" as const,
+            priority: 0.8,
+        },
+        {
+            url: getAbsoluteUrl("/blog/author/", "ru"),
+            lastModified: now,
+            changeFrequency: "yearly" as const,
+            priority: 0.3,
+        },
+        ...posts.map((post) => ({
+            url: getAbsoluteUrl(`/blog/${post.slug}/`, "ru"),
+            lastModified: new Date(post.dateModified ?? post.datePublished),
+            changeFrequency: "monthly" as const,
+            priority: 0.7,
+        })),
         ...staticRuRoutes.map((path) => ({
             url: getAbsoluteUrl(path, "ru"),
             lastModified: now,

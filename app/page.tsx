@@ -10,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-    return <HomePage locale="ru" />;
+    return (
+        <div className="v2-fonts">
+            <HomePage locale="ru" />
+        </div>
+    );
 }

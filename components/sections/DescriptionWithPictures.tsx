@@ -34,7 +34,7 @@ export default function DescriptionWithPictures({
             {/* DESKTOP: flex 3 колонки */}
             <StaggerContainer
                 mode="inView"
-                className="hidden xl:flex gap-3 max-w-6xl mx-auto mt-6"
+                className="hidden xl:flex gap-3 max-w-7xl mx-auto mt-6"
             >
                 {images.slice(0, 3).map((img) => (
                     <StaggerItem

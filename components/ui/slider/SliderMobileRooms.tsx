@@ -96,7 +96,7 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
 
                             {/* Заголовок и ссылка поверх фото */}
                             <div className="absolute top-0 inset-x-0 p-6 flex flex-col gap-2 z-10">
-                                <h3 className="text-white font-baskerville uppercase text-2xl leading-tight">
+                                <h3 className="text-white font-history uppercase text-2xl leading-tight">
                                     {room.title}
                                 </h3>
                             </div>
@@ -124,33 +124,33 @@ export default function SliderMobileRooms({ rooms }: SliderMobileRoomsProps) {
             {/* Характеристики и описание текущего номера */}
             <div className="flex items-center gap-4 text-sm text-zinc-700">
                 <span className="flex items-center gap-2">
-                    <SquareIcon size={16} color="#364D6B" />
+                    <SquareIcon size={16} color="#372A24" />
                     {rooms[current]?.area}
                 </span>
                 <span className="flex items-center gap-2">
-                    <UserIcon size={12} color="#364D6B" />
+                    <UserIcon size={12} color="#372A24" />
                     {rooms[current]?.guests}
                 </span>
             </div>
 
             {/* Кнопки */}
-            <div className="flex gap-4">
+            <div className="flex gap-2">
+                <Button
+                    href={`${rooms[current]?.bookingUrl}`}
+                    variant="primary"
+                    size="xs"
+                >
+                    {chooseLabel}
+                </Button>
                 <Button
                     href={getRoomHref(
                         rooms[current]?.slug ?? "",
                         rooms[current]?.isHistorical,
                     )}
-                    variant="primary"
-                    size="xs"
-                >
-                    {detailsLabel}
-                </Button>
-                <Button
-                    href={`${rooms[current]?.bookingUrl}`}
                     variant="primary-outline"
                     size="xs"
                 >
-                    {chooseLabel}
+                    {detailsLabel}
                 </Button>
             </div>
 

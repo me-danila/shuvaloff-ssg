@@ -369,12 +369,12 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
 
             <StaggerContainer
                 staggerChildren={0.05}
-                className="grid mx-6 gap-4 xl:grid-cols-3 xl:w-full xl:max-w-6xl xl:mx-auto"
+                className="grid mx-6 gap-4 xl:grid-cols-3 xl:w-full xl:max-w-7xl xl:mx-auto"
             >
                 {copy.bullets.map((item) => (
                     <StaggerItem
                         key={item}
-                        className="text-center text-lg font-baskerville uppercase bg-gray-100 p-6 rounded"
+                        className="text-center text-lg font-history uppercase bg-gray-100 p-6 rounded"
                     >
                         <DividerHistory style={3} />
                         {item}
@@ -382,9 +382,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                 ))}
             </StaggerContainer>
 
-            <section className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-8 my-4 xl:my-6">
+            <section className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-7xl xl:mx-auto xl:flex-row xl:gap-8 my-4 xl:my-6">
                 <div className="flex flex-col gap-4 xl:w-full">
-                    <p className="font-baskerville uppercase text-3xl/2 xl:text-4xl/4">
+                    <p className="font-history uppercase text-3xl/2 xl:text-4xl/4">
                         {copy.cityTitle}
                     </p>
                     <p>{copy.cityDescription}</p>
@@ -417,7 +417,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                 </StaggerContainer>
             </section>
 
-            <section className="mx-6 mt-6 flex flex-col gap-8 xl:flex-row-reverse xl:w-full xl:max-w-6xl xl:mx-auto">
+            <section className="mx-6 mt-6 flex flex-col gap-8 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="relative overflow-hidden rounded max-xl:h-60 w-full">
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/04/герб-кириллица-наполовину-копия-1.png"
@@ -441,7 +441,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
             />
             <StaggerContainer
                 mode="inView"
-                className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full"
+                className="hidden xl:flex xl:h-110 xl:mt-4 xl:gap-4 xl:max-w-7xl xl:mx-auto xl:w-full"
             >
                 {descriptionImages.map((src, i) => (
                     <StaggerItem
@@ -467,7 +467,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
             <div className="flex flex-col gap-4 bg-gray-100 px-6 py-8 xl:-mt-20 xl:pt-24 xl:pb-4">
                 <FadeUp
                     duration={1.2}
-                    className="flex flex-col gap-4 xl:text-center xl:max-w-6xl xl:mx-auto"
+                    className="flex flex-col gap-4 xl:text-center xl:max-w-7xl xl:mx-auto"
                 >
                     <h2 className="uppercase">{copy.historicTitle}</h2>
                     <p>{copy.historicDescription}</p>
@@ -475,7 +475,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                 <DividerHistory style={2} />
             </div>
 
-            <FadeUp className="mx-6 my-2 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
+            <FadeUp className="mx-6 my-2 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-7xl xl:mx-auto">
                 <h2>{copy.specialMeetingTitle}</h2>
                 <p className="xl:max-w-4xl xl:mx-auto">
                     {copy.specialMeetingDescription}
@@ -499,7 +499,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
             </FadeUp>
 
             <FadeUp duration={1.2} className="bg-gray-100">
-                <div className="mx-6 my-8 xl:text-center flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:my-10">
+                <div className="mx-6 my-8 xl:text-center flex flex-col gap-4 xl:w-full xl:max-w-7xl xl:mx-auto xl:my-10">
                     <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">
                         {copy.day1Title1}
                     </p>
@@ -525,7 +525,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
 
             <FadeUp
                 duration={1.2}
-                className="mx-6 my-8 flex flex-col gap-6 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row xl:gap-10 xl:my-10"
+                className="mx-6 my-8 flex flex-col gap-6 xl:w-full xl:max-w-7xl xl:mx-auto xl:flex-row xl:gap-10 xl:my-10"
             >
                 <div className="relative w-full">
                     <div className="relative overflow-hidden aspect-21/15 rounded xl:mt-12">
@@ -562,7 +562,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
             <section className="bg-gray-100">
                 <StaggerContainer
                     mode="inView"
-                    className="m-6 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto"
+                    className="m-6 xl:text-center flex flex-col gap-2 xl:w-full xl:max-w-7xl xl:mx-auto"
                 >
                     <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto mb-2">
                         {copy.day2Title2}
@@ -631,7 +631,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
             {/*</StaggerContainer>*/}
 
             <section className="p-6 xl:py-8">
-                <div className="flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
+                <div className="flex flex-col gap-2 xl:w-full xl:max-w-7xl xl:mx-auto">
                     <div className="flex flex-col gap-2 xl:max-w-4xl xl:mx-auto xl:text-center">
                         <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto mb-2">
                             {copy.day3Title1}

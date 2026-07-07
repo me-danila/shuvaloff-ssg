@@ -2,8 +2,15 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT = __dirname;
-const SEARCH_DIRS = ["app", "components", "data"];
-const FILE_EXTENSIONS = new Set([".ts", ".tsx", ".js", ".jsx", ".json"]);
+const SEARCH_DIRS = ["app", "components", "content", "data"];
+const FILE_EXTENSIONS = new Set([
+    ".ts",
+    ".tsx",
+    ".js",
+    ".jsx",
+    ".json",
+    ".mdx",
+]);
 const IMAGE_URL_PATTERN =
     /https?:\/\/[^\s"'`]+?\.(?:gif|jpe?g|png|webp)(?:\?[^\s"'`]*)?/gi;
 

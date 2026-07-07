@@ -237,7 +237,7 @@ export default function BeautyBarPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-8 xl:gap-10">
-            <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-6xl xl:mx-auto xl:text-center">
+            <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-7xl xl:mx-auto xl:text-center">
                 <FadeUp>
                     <h1>{copy.title}</h1>
                 </FadeUp>
@@ -267,7 +267,7 @@ export default function BeautyBarPage({ locale }: { locale: Locale }) {
                 </FadeUp>
             </section>
 
-            <StaggerContainer className="flex flex-col mx-6 gap-8 xl:grid xl:grid-cols-2 xl:max-w-6xl xl:mx-auto xl:w-full">
+            <StaggerContainer className="flex flex-col mx-6 gap-8 xl:grid xl:grid-cols-2 xl:max-w-7xl xl:mx-auto xl:w-full">
                 {copy.devices.map((device) => (
                     <StaggerItem
                         key={device.title}
@@ -291,9 +291,9 @@ export default function BeautyBarPage({ locale }: { locale: Locale }) {
                 ))}
             </StaggerContainer>
 
-            <section className="flex flex-col gap-6 xl:gap-10 mx-6 py-4 xl:py-10 border-t border-brand-blue-100 xl:max-w-6xl xl:mx-auto xl:w-full">
+            <section className="flex flex-col gap-6 xl:gap-10 mx-6 py-4 xl:py-10 border-t border-brand-light xl:max-w-7xl xl:mx-auto xl:w-full">
                 <FadeUp>
-                    <h3 className="font-baskerville text-xl xl:text-3xl uppercase">
+                    <h3 className="font-history text-xl xl:text-3xl uppercase">
                         {copy.hintTitle}
                     </h3>
                 </FadeUp>
@@ -303,7 +303,7 @@ export default function BeautyBarPage({ locale }: { locale: Locale }) {
                             key={number}
                             className="flex gap-5 xl:flex-1"
                         >
-                            <span className="text-4xl text-brand-blue-100 shrink-0 font-baskerville">
+                            <span className="text-4xl text-brand-light shrink-0 font-history">
                                 {number}
                             </span>
                             <div className="flex flex-col gap-1 -mt-1">
@@ -317,7 +317,7 @@ export default function BeautyBarPage({ locale }: { locale: Locale }) {
                 </StaggerContainer>
             </section>
 
-            <section className="mx-6 flex flex-col xl:max-w-6xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] gap-8 xl:items-start">
+            <section className="mx-6 flex flex-col xl:max-w-7xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] gap-8 xl:items-start">
                 <FadeUp className="relative w-full h-60 md:h-80 xl:h-full overflow-hidden rounded-md">
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2025/10/item.avif"
@@ -336,7 +336,7 @@ export default function BeautyBarPage({ locale }: { locale: Locale }) {
                     <ul className="space-y-1 my-3">
                         {copy.giftItems.map((item) => (
                             <li key={item} className="flex items-start gap-2">
-                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-blue" />
+                                <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
                                 <span>{item}</span>
                             </li>
                         ))}

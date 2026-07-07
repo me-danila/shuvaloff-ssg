@@ -176,7 +176,7 @@ const roomsRu: Room[] = [
                 alt: "Супериор мансарда",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/06/5.avif",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2383_maxiimov.avif",
                 alt: "Супериор мансарда",
             },
         ],
@@ -245,11 +245,11 @@ const roomsRu: Room[] = [
                 alt: "Полулюкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/4-1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2483_maxiimov.avif",
                 alt: "Полулюкс",
             },
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/04/5-1.jpg",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2343_maxiimov.avif",
                 alt: "Полулюкс",
             },
         ],
@@ -295,12 +295,12 @@ const roomsRu: Room[] = [
     {
         title: "Полулюкс мансарда",
         image: {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2375_@maxiimov.jpg",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2375_maxiimov.avif",
             alt: "Полулюкс мансарда",
         },
         gallery: [
             {
-                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2391_maxiimov.avif",
+                src: "https://academia.spb.ru/wp-content/uploads/2026/06/MMI2375_maxiimov.avif",
                 alt: "Полулюкс мансарда",
             },
             {

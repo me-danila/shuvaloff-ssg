@@ -24,6 +24,7 @@ import WeddingSlider from "@/components/ui/slider/WeddingSlider";
 import WeddingReviewsWidget from "@/components/ui/WeddingReviewsWidget";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildWeddingPageSchema } from "@/lib/seo/schema";
+import BookingForm from "../sections/BookingForm";
 
 type WeddingCopy = {
     heroTitle: string;
@@ -584,7 +585,9 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <section className="flex flex-col gap-8 m-6 text-center xl:max-w-6xl xl:mx-auto xl:my-10">
+            <BookingForm />
+
+            <section className="flex flex-col gap-8 m-6 text-center xl:max-w-7xl xl:mx-auto xl:my-10">
                 <FadeUp>
                     <h2 className="text-3xl xl:text-5xl">{copy.whyTitle}</h2>
                 </FadeUp>
@@ -610,7 +613,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     </p>
                 </FadeUp>
                 <FadeUp className="relative" mode="inView">
-                    <h3 className="font-baskerville text-2xl xl:text-4xl xl:max-w-3xl xl:mx-auto uppercase">
+                    <h3 className="font-history text-2xl xl:text-4xl xl:max-w-3xl xl:mx-auto uppercase">
                         {copy.whySubTitle}
                     </h3>
                 </FadeUp>
@@ -666,7 +669,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 />
                 <Link
                     href="/booking/"
-                    className="border border-black p-4 rounded-md font-baskerville uppercase hover:bg-black hover:border-black hover:text-white duration-200"
+                    className="border border-black p-4 rounded-md font-history uppercase hover:bg-black hover:border-black hover:text-white duration-200"
                 >
                     {copy.bookNowButton}
                 </Link>
@@ -709,7 +712,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                         <h2 className="xl:text-4.5xl xl:mt-6 uppercase">
                             {copy.intimateTitle}
                         </h2>
-                        <p className="font-baskerville uppercase text-xl xl:text-2xl">
+                        <p className="font-history uppercase text-xl xl:text-2xl">
                             {copy.intimateSubTitle}
                         </p>
                     </div>
@@ -966,7 +969,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
 
             <section className="flex flex-col gap-6 xl:flex-row xl:items-center xl:min-h-screen xl:-my-8">
                 <div className="flex flex-col gap-4 items-center text-center p-6 xl:max-w-lg xl:mx-auto xl:w-full">
-                    <h3 className="font-baskerville text-3xl uppercase xl:text-5xl">
+                    <h3 className="font-history text-3xl uppercase xl:text-5xl">
                         {copy.chefTitle}
                     </h3>
                     <p className="text-stone-500">{copy.chefDescription}</p>
@@ -1110,7 +1113,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
             </section>
 
             <section className="bg-neutral-100 px-6 py-10 xl:py-16">
-                <div className="flex flex-col gap-4 xl:max-w-6xl xl:mx-auto">
+                <div className="flex flex-col gap-4 xl:max-w-7xl xl:mx-auto">
                     <h2 className="text-3xl xl:text-4xl uppercase">
                         {copy.reviewsTitle}
                     </h2>
@@ -1118,7 +1121,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <section className="flex flex-col gap-6 xl:max-w-6xl xl:w-full xl:mx-auto px-6 py-10 xl:gap-8">
+            <section className="flex flex-col gap-6 xl:max-w-7xl xl:w-full xl:mx-auto px-6 py-10 xl:gap-8">
                 <h2 className="text-3xl xl:text-4xl uppercase">
                     {copy.mediaTitle}
                 </h2>

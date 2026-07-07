@@ -88,7 +88,7 @@ export default function AllServicesPage({ locale }: { locale: Locale }) {
                     })),
                 })}
             />
-            <section className="flex flex-col gap-4 m-6 xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 m-6 xl:max-w-4xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>
                 </FadeUp>
@@ -104,7 +104,11 @@ export default function AllServicesPage({ locale }: { locale: Locale }) {
                 >
                     <p>{copy.description}</p>
                 </FadeUp>
-                <ServicesGrid />
+            </section>
+            <section className="bg-brand-light py-8 xl:py-12">
+                <div className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
+                    <ServicesGrid />
+                </div>
             </section>
             <Divider />
             <ContactsSection />

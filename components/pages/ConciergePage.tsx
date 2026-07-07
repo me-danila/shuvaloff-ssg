@@ -149,7 +149,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
-            <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto xl:px-0">
+            <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0">
                 <FadeUp>
                     <h1>{copy.title}</h1>
                 </FadeUp>
@@ -166,19 +166,19 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                 <DesktopHeroGrid images={heroImages} tone="inner" />
             </section>
             <BookingForm />
-            <FadeUp className="px-6 w-full xl:max-w-6xl xl:mx-auto whitespace-pre-line">
+            <FadeUp className="px-6 w-full xl:max-w-7xl xl:mx-auto whitespace-pre-line">
                 <p>{copy.description2}</p>
             </FadeUp>
-            <section className="mx-6 xl:max-w-6xl xl:mx-auto xl:w-full">
+            <section className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                    <FadeUp className="bg-brand-blue-100 rounded-md p-6 flex flex-col gap-6">
+                    <FadeUp className="bg-brand-light rounded-md p-6 flex flex-col gap-6">
                         <div className="flex flex-col gap-4 xl:flex-row grow">
                             <div className="flex flex-col">
                                 <div className="flex items-center gap-3 xl:flex-row xl:items-start">
                                     <BellIcon
                                         size={28}
                                         weight="fill"
-                                        color="var(--color-brand-blue)"
+                                        color="var(--color-brand-brown)"
                                         className="shrink-0 xl:mt-1"
                                     />
                                     <p className="xl:max-w-50">
@@ -200,7 +200,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                         key={item}
                                         className="flex items-start gap-2"
                                     >
-                                        <span className="mt-2 w-1 h-1 rounded-full bg-brand-blue" />
+                                        <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
                                         <span>{item}</span>
                                     </li>
                                 ))}
@@ -218,7 +218,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
 
                     <FadeUp
                         delay={0.1}
-                        className="bg-brand-blue-100 rounded-md p-6 flex flex-col gap-6"
+                        className="bg-brand-light rounded-md p-6 flex flex-col gap-6"
                     >
                         <div className="flex flex-col gap-4 xl:flex-row grow">
                             <div className="flex flex-col">
@@ -226,7 +226,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     <ListHeartIcon
                                         size={28}
                                         weight="fill"
-                                        color="var(--color-brand-blue)"
+                                        color="var(--color-brand-brown)"
                                         className="shrink-0 xl:mt-1"
                                     />
                                     <p className="xl:max-w-50">
@@ -248,7 +248,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                         key={item}
                                         className="flex items-start gap-2"
                                     >
-                                        <span className="mt-2 w-1 h-1 rounded-full bg-brand-blue" />
+                                        <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
                                         <span>{item}</span>
                                     </li>
                                 ))}
@@ -265,25 +265,27 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                     </FadeUp>
                 </div>
             </section>
-            <FadeUp className="max-xl:px-6 my-4 w-full xl:text-center xl:max-w-4xl xl:mx-auto">
-                <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
-                    {copy.guidesTitle}
-                </h3>
-                <p>{copy.guidesSubtitle}</p>
-                <div className="flex flex-col gap-3 mt-5 xl:flex-row">
-                    {copy.guideButtons.map((btn) => (
-                        <Button
-                            key={btn.label}
-                            href={btn.href}
-                            target={btn.external ? "_blank" : undefined}
-                            variant="primary-outline"
-                            className="grow"
-                            size="xl"
-                            uppercase={false}
-                        >
-                            {btn.label}
-                        </Button>
-                    ))}
+            <FadeUp className="bg-brand-light py-2 xl:py-6">
+                <div className="max-xl:px-6 my-4 w-full xl:text-center xl:max-w-4xl xl:mx-auto flex flex-col gap-2">
+                    <h3 className="font-history uppercase text-xl xl:text-4xl">
+                        {copy.guidesTitle}
+                    </h3>
+                    <p>{copy.guidesSubtitle}</p>
+                    <div className="flex flex-col gap-3 mt-3 xl:flex-row">
+                        {copy.guideButtons.map((btn) => (
+                            <Button
+                                key={btn.label}
+                                href={btn.href}
+                                target={btn.external ? "_blank" : undefined}
+                                variant="primary-outline"
+                                className="grow font-semibold"
+                                size="xl"
+                                uppercase={false}
+                            >
+                                {btn.label}
+                            </Button>
+                        ))}
+                    </div>
                 </div>
             </FadeUp>
             <Divider />

@@ -1,4 +1,3 @@
-import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Button from "@/components/ui/Button";
@@ -140,8 +139,8 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
                     src: "https://academia.spb.ru/wp-content/uploads/2026/05/чел-с-телефоном.avif",
                     alt: copy.title,
                 }}
+                withBookingForm
             />
-            <BookingForm />
 
             <FadeUp
                 delay={0.2}
@@ -152,10 +151,10 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
 
             <FadeUp
                 delay={0.3}
-                className="mx-6 flex flex-col gap-8 xl:gap-12 md:flex-row mx-auto my-4 xl:my-8 xl:max-w-6xl"
+                className="mx-6 flex flex-col gap-8 xl:gap-12 md:flex-row mx-auto my-4 xl:my-8 xl:max-w-7xl px-6 xl:px-0"
             >
                 <div className="flex flex-col md:gap-2">
-                    <h3 className="font-baskerville text-2xl xl:text-3xl uppercase mb-2">
+                    <h3 className="font-history text-2xl xl:text-3xl uppercase mb-2">
                         {copy.howItWorksLabel}:
                     </h3>
                     <ol className="list-disc space-y-1 ml-4">
@@ -165,7 +164,7 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
                     </ol>
                 </div>
                 <div className="flex flex-col md:gap-2">
-                    <h3 className="font-baskerville text-2xl xl:text-3xl uppercase mb-2">
+                    <h3 className="font-history text-2xl xl:text-3xl uppercase mb-2">
                         {copy.conditionsLabel}:
                     </h3>
                     <ol className="list-disc space-y-1 ml-4">
@@ -190,7 +189,7 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
                     </Button>
                 </FadeUp>
             </section>
-            <section className="mx-6 my-4 xl:max-w-6xl xl:mx-auto xl:w-full flex flex-col gap-6 xl:my-2">
+            <section className="mx-6 my-4 xl:max-w-7xl xl:mx-auto xl:w-full flex flex-col gap-6 xl:my-2">
                 <FadeUp className="xl:max-w-4xl">
                     <h2 className="xl:text-2xl">{copy.transportTitle}</h2>
                     <p className="mt-2 hidden md:block">

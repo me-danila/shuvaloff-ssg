@@ -24,7 +24,7 @@ export default function NotFoundPage({ locale }: { locale?: Locale }) {
 
     return (
         <main className="flex flex-col items-center justify-center min-h-[60vh] gap-6 px-6 text-center">
-            <p className="text-8xl xl:text-[160px] font-baskerville text-stone-200 leading-none select-none">
+            <p className="text-8xl xl:text-[160px] font-history text-stone-200 leading-none select-none">
                 404
             </p>
             <div className="flex flex-col gap-2 -mt-4">

@@ -1,4 +1,8 @@
 import type React from "react";
+import {
+    BookingFormDesktop,
+    BookingFormMobile,
+} from "@/components/sections/BookingFormResponsive";
 import Button from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -10,6 +14,7 @@ type HeroHistoricalRoomsProps = {
     subtitle?: React.ReactNode;
     image: { src: string; alt: string };
     button?: { label: string; href: string };
+    withBookingForm?: boolean;
 };
 
 export default function HeroHistoricalRooms({
@@ -18,6 +23,7 @@ export default function HeroHistoricalRooms({
     subtitle,
     image,
     button,
+    withBookingForm = false,
 }: HeroHistoricalRoomsProps) {
     return (
         <section>
@@ -71,7 +77,19 @@ export default function HeroHistoricalRooms({
                         {button.label}
                     </Button>
                 )}
+
+                {withBookingForm && (
+                    <div className="absolute inset-x-6 bottom-8 z-10 hidden xl:block">
+                        <BookingFormDesktop />
+                    </div>
+                )}
             </div>
+
+            {withBookingForm && (
+                <div className="xl:hidden">
+                    <BookingFormMobile />
+                </div>
+            )}
         </section>
     );
 }

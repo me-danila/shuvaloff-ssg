@@ -39,7 +39,7 @@ const docLinks = [
 export default function LegalPage() {
     return (
         <main className="flex flex-col gap-8">
-            <section className="flex flex-col gap-6 m-6 xl:w-full xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-6 m-6 xl:w-full xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="md:text-center my-4">
                     <h1>Правовая информация</h1>
                 </FadeUp>

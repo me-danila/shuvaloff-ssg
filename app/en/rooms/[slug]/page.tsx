@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
@@ -59,7 +60,7 @@ export default async function RoomPageEn({ params }: Props) {
                     ],
                 })}
             />
-            <section className="flex flex-col gap-2 text-center xl:max-w-6xl xl:mx-auto xl:w-full">
+            <section className="flex flex-col gap-2 text-center xl:max-w-7xl xl:mx-auto xl:w-full">
                 <div className="m-4 xl:w-full xl:my-0">
                     <FadeUp>
                         <h1>{room.title}</h1>
@@ -75,8 +76,9 @@ export default async function RoomPageEn({ params }: Props) {
                 <SliderMobile images={room.gallery} />
                 <DesktopHeroGrid images={room.gallery} tone="inner" />
             </section>
-            <section className="flex flex-col gap-4 mx-6 mt-4 md:flex-row xl:max-w-6xl xl:mx-auto xl:w-full xl:gap-8">
-                <FadeUp className="flex flex-col gap-6 bg-slate-100 rounded-md p-4 text-sm text-brand-blue md:flex-row md:items-center md:gap-8 md:min-w-xl md:px-6">
+            <BookingForm />
+            <section className="flex flex-col gap-4 mx-6 mt-4 md:flex-row xl:max-w-7xl xl:mx-auto xl:w-full xl:gap-8">
+                <FadeUp className="flex flex-col gap-6 bg-brand-light rounded-md p-4 text-sm text-brand-brown md:flex-row md:items-center md:gap-8 md:min-w-xl md:px-6">
                     <p className="flex items-center gap-3 md:gap-4 xl:leading-6">
                         <BedIcon size={18} />
                         {room.bed}
@@ -91,7 +93,7 @@ export default async function RoomPageEn({ params }: Props) {
                     </p>
                 </FadeUp>
                 <Button href={room.bookingUrl} variant="primary">
-                    Book now
+                    CHOOSE A ROOM
                 </Button>
                 <Button
                     href="/en/rooms/"
@@ -101,18 +103,13 @@ export default async function RoomPageEn({ params }: Props) {
                     ALL CATEGORIES
                 </Button>
             </section>
-            <section className="flex flex-col mx-6 my-4 gap-4 xl:max-w-6xl xl:mx-auto xl:my-2">
+            <section className="flex flex-col mx-6 my-4 gap-4 xl:max-w-7xl xl:mx-auto xl:my-2">
                 <FadeUp>
                     <p>{room.fullDescription}</p>
                 </FadeUp>
-                <FadeUp delay={0.1}>
-                    <p className="font-alistair text-stone-400 text-3xl mt-2 xl:mt-4 xl:mb-3 xl:text-4xl">
-                        Amenities:
-                    </p>
-                </FadeUp>
                 <StaggerContainer
                     staggerChildren={0.05}
-                    className="columns-1 md:columns-2 xl:columns-3 gap-x-24 xl:max-w-6xl xl:mx-auto xl:w-full text-left space-y-4 xl:space-y-8"
+                    className="columns-1 md:columns-2 xl:columns-3 gap-x-24 xl:max-w-7xl xl:mx-auto xl:w-full text-left space-y-4 xl:space-y-8 mt-4 xl:mt-6 text-sm md:text-base"
                 >
                     {room.amenities.map((item) => (
                         <StaggerItem

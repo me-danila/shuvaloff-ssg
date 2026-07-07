@@ -1,3 +1,4 @@
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
@@ -61,13 +62,18 @@ export default function SalesPage({ locale }: { locale: Locale }) {
                     sales: AllSales[locale],
                 })}
             />
-            <section className="flex flex-col gap-4 m-6 mb-4 xl:max-w-6xl xl:mx-auto xl:w-full">
+            <section className="mx-6 mt-6 xl:max-w-7xl xl:mx-auto xl:w-full">
                 <FadeUp className="md:text-center">
                     <h1>{copy.title}</h1>
                 </FadeUp>
-                <SalesGrid />
             </section>
-            <section className="mx-6 my-4 xl:max-w-6xl xl:mx-auto xl:w-full flex flex-col gap-6 xl:my-2">
+            <BookingForm />
+            <section className="bg-brand-light py-8 xl:py-12">
+                <div className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
+                    <SalesGrid />
+                </div>
+            </section>
+            <section className="mx-6 my-4 xl:max-w-7xl xl:mx-auto xl:w-full flex flex-col gap-6 xl:my-2">
                 <FadeUp className="xl:max-w-4xl">
                     <h2 className="xl:text-2xl">{copy.transportTitle}</h2>
                     <p className="mt-2 hidden md:block">

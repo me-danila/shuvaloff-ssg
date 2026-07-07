@@ -13,7 +13,6 @@ import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
-import { localizeHref } from "@/lib/i18n/routing";
 
 const AMENITY_ICONS = [
     {
@@ -682,9 +681,54 @@ const copyByLocale: Record<Locale, PageCopy> = {
 export default function BoatToursPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const [routeMap, setRouteMap] = useState<string | null>(null);
-    const [compositionOpen, setCompositionOpen] = useState(false);
     const bookingHref =
         "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y";
+
+    const serviceOffers: SpecialOfferItem[] = [
+        {
+            title: copy.service1.title,
+            subtitle: copy.service1.description,
+            imgUrl: copy.service1.img,
+            modal: {
+                content: copy.service1.description,
+                buttonText: copy.orderLabel,
+                buttonHref: bookingHref,
+                price: `${copy.service1.price} ₽`,
+            },
+        },
+        {
+            title: copy.service2.title,
+            subtitle: copy.service2.description,
+            imgUrl: copy.service2.img,
+            modal: {
+                content: (
+                    <>
+                        <strong>{copy.compositionTitle}:</strong>
+                        {copy.service2.composition.map((item) => (
+                            <span key={item} className="mt-1 block">
+                                • {item}
+                            </span>
+                        ))}
+                    </>
+                ),
+                buttonText: copy.orderLabel,
+                buttonHref: bookingHref,
+                price: `${copy.service2.price} ₽`,
+            },
+        },
+        {
+            title: copy.service3.title,
+            subtitle: copy.service3.description,
+            imgUrl: copy.service3.img,
+            mediaObjectPosition: "50% 90%",
+            modal: {
+                content: copy.service3.description,
+                buttonText: copy.orderLabel,
+                buttonHref: bookingHref,
+                price: `${copy.service3.price} ₽`,
+            },
+        },
+    ];
 
     return (
         <main className="flex flex-col gap-4 xl:-mt-4">
@@ -694,22 +738,19 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                     src: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7062-%D1%80%D0%B5%D0%B4-1.avif",
                     alt: copy.title,
                 }}
-                button={{
-                    label: copy.bookLabel,
-                    href: localizeHref(bookingHref, locale),
-                }}
+                withBookingForm
             />
 
             <FadeUp
                 delay={0.2}
-                className="mt-2 xl:mt-4 xl:text-center xl:max-w-4xl mx-auto"
+                className="mt-2 xl:mt-4 xl:text-center xl:max-w-5xl mx-auto"
             >
                 <p className="max-xl:px-6">{copy.intro}</p>
             </FadeUp>
 
             <section className="flex flex-col items-center mt-4 xl:mt-8">
                 <h2>{copy.routes}</h2>
-                <div className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row my-4 xl:my-6">
+                <div className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-7xl xl:mx-auto xl:flex-row my-4 xl:my-6">
                     <div className="flex flex-col gap-4 xl:w-full xl:max-w-lg">
                         <div className="relative h-80 overflow-hidden rounded xl:h-full">
                             <Image
@@ -722,8 +763,8 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         </div>
                     </div>
 
-                    <div className="p-4 xl:p-6 bg-gray-100 flex flex-col gap-2 xl:w-full">
-                        <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
+                    <div className="p-4 xl:p-6 bg-brand-light flex flex-col gap-2 xl:w-full">
+                        <h3 className="font-history uppercase text-xl xl:text-2xl">
                             {copy.tour1.title}
                         </h3>
                         <p>{copy.tour1.description}</p>
@@ -731,7 +772,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         <button
                             type="button"
                             onClick={() => setRouteMap(copy.tour1.map)}
-                            className="flex items-center gap-3 text-brand-blue border-b max-w-fit my-2 xl:mt-4 cursor-pointer"
+                            className="flex items-center gap-3 text-brand-brown border-b max-w-fit my-2 xl:mt-4 cursor-pointer"
                         >
                             {copy.routeLabel} <span className="text-xl">›</span>
                         </button>
@@ -742,7 +783,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                     key={label}
                                     className="flex items-center gap-2 text-sm text-gray-700"
                                 >
-                                    <span className="shrink-0 text-gray-600 p-1 bg-slate-200">
+                                    <span className="shrink-0 text-brand-red p-1 bg-[#DDD]">
                                         {AMENITY_ICONS[i].icon}
                                     </span>
                                     {label}
@@ -787,7 +828,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                     </div>
                 </div>
 
-                <div className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row my-4 xl:my-6">
+                <div className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-7xl xl:mx-auto xl:flex-row my-4 xl:my-6">
                     <div className="flex flex-col gap-4 xl:w-full xl:max-w-lg">
                         <div className="relative h-80 overflow-hidden rounded xl:h-full">
                             <Image
@@ -800,8 +841,8 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         </div>
                     </div>
 
-                    <div className="p-4 xl:p-6 bg-gray-100 flex flex-col gap-2 xl:w-full">
-                        <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
+                    <div className="p-4 xl:p-6 bg-brand-light flex flex-col gap-2 xl:w-full">
+                        <h3 className="font-history uppercase text-xl xl:text-2xl">
                             {copy.tour2.title}
                         </h3>
                         <p>{copy.tour2.description}</p>
@@ -809,7 +850,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         <button
                             type="button"
                             onClick={() => setRouteMap(copy.tour2.map)}
-                            className="flex items-center gap-3 text-brand-blue border-b max-w-fit my-2 xl:mt-4 cursor-pointer"
+                            className="flex items-center gap-3 text-brand-brown border-b max-w-fit my-2 xl:mt-4 cursor-pointer"
                         >
                             {copy.routeLabel} <span className="text-xl">›</span>
                         </button>
@@ -820,7 +861,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                     key={label}
                                     className="flex items-center gap-2 text-sm text-gray-700"
                                 >
-                                    <span className="shrink-0 text-gray-600 p-1 bg-slate-200">
+                                    <span className="shrink-0 text-brand-red p-1 bg-[#DDD]">
                                         {AMENITY_ICONS[i].icon}
                                     </span>
                                     {label}
@@ -871,7 +912,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                     </div>
                 </div>
 
-                <div className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-6xl xl:mx-auto xl:flex-row my-4 xl:my-6">
+                <div className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-7xl xl:mx-auto xl:flex-row my-4 xl:my-6">
                     <div className="flex flex-col gap-4 xl:w-full xl:max-w-lg">
                         <div className="relative h-80 overflow-hidden rounded xl:h-full">
                             <Image
@@ -884,8 +925,8 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         </div>
                     </div>
 
-                    <div className="p-4 xl:p-6 bg-gray-100 flex flex-col gap-2 xl:w-full">
-                        <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
+                    <div className="p-4 xl:p-6 bg-brand-light flex flex-col gap-2 xl:w-full">
+                        <h3 className="font-history uppercase text-xl xl:text-2xl">
                             {copy.tour3.title}
                         </h3>
                         <p>{copy.tour3.description}</p>
@@ -893,7 +934,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         <button
                             type="button"
                             onClick={() => setRouteMap(copy.tour3.map)}
-                            className="flex items-center gap-3 text-brand-blue border-b max-w-fit my-2 xl:mt-4 cursor-pointer"
+                            className="flex items-center gap-3 text-brand-brown border-b max-w-fit my-2 xl:mt-4 cursor-pointer"
                         >
                             {copy.routeLabel} <span className="text-xl">›</span>
                         </button>
@@ -904,7 +945,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                                     key={label}
                                     className="flex items-center gap-2 text-sm text-gray-700"
                                 >
-                                    <span className="shrink-0 text-gray-600 p-1 bg-slate-200">
+                                    <span className="shrink-0 text-brand-red p-1 bg-[#DDD]">
                                         {AMENITY_ICONS[i].icon}
                                     </span>
                                     {label}
@@ -950,203 +991,19 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <section className="flex flex-col items-center mt-4 xl:mt-8 gap-2">
-                <h2 className="max-xl:px-6">{copy.servicesLabel}</h2>
-                <FadeUp
-                    delay={0.2}
-                    className="mb-4 xl:text-center xl:max-w-3xl mx-auto"
-                >
-                    <p className="max-xl:px-6">{copy.servicesDescription}</p>
-                </FadeUp>
+            <SpecialOffersSection
+                offers={serviceOffers}
+                locale={locale}
+                title={copy.servicesLabel}
+                description={copy.servicesDescription}
+                showSubtitles={false}
+            />
 
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 max-xl:px-6 xl:max-w-6xl xl:mx-auto">
-                    <div className="flex">
-                        <div
-                            className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
-                            itemProp="itemListElement"
-                            itemScope
-                            itemType="https://schema.org/Service"
-                        >
-                            <meta
-                                itemProp="name"
-                                content={copy.service1.title}
-                            />
-                            <meta itemProp="url" content={copy.service1.img} />
-                            <meta
-                                itemProp="image"
-                                content={copy.service1.img}
-                            />
-                            <Image
-                                src={copy.service1.img}
-                                alt={copy.service1.title}
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 50vw"
-                                loading="lazy"
-                                className="object-cover object-center"
-                            />
-
-                            <div
-                                className="absolute inset-0"
-                                style={{
-                                    background:
-                                        "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
-                                }}
-                            />
-
-                            <div className="absolute inset-0 p-6 flex flex-col justify-between text-white z-10 xl:p-8">
-                                <p className="font-baskerville uppercase text-xl xl:text-2xl xl:leading-tight">
-                                    {copy.service1.title}
-                                </p>
-                                <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                                    target="_blank"
-                                    className="max-w-fit"
-                                >
-                                    {copy.orderLabel}
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex">
-                        <article
-                            className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
-                            itemProp="itemListElement"
-                            itemScope
-                            itemType="https://schema.org/Service"
-                        >
-                            <meta itemProp="url" content={bookingHref} />
-                            <meta
-                                itemProp="image"
-                                content={copy.service2.img}
-                            />
-                            <meta
-                                itemProp="description"
-                                content={copy.service2.description}
-                            />
-                            <span
-                                itemProp="offers"
-                                itemScope
-                                itemType="https://schema.org/Offer"
-                            >
-                                <meta
-                                    itemProp="price"
-                                    content={copy.service2.price.replace(
-                                        /\D/g,
-                                        "",
-                                    )}
-                                />
-                                <meta itemProp="priceCurrency" content="RUB" />
-                            </span>
-                            <Image
-                                src={copy.service2.img}
-                                alt={copy.service2.title}
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 50vw"
-                                loading="lazy"
-                                className="object-cover object-center"
-                            />
-
-                            <div
-                                className="absolute inset-0"
-                                style={{
-                                    background:
-                                        "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
-                                }}
-                            />
-
-                            <div className="absolute inset-0 p-6 flex flex-col justify-between text-white z-10 xl:p-8">
-                                <h3
-                                    className="font-baskerville uppercase text-xl xl:text-2xl xl:leading-tight"
-                                    itemProp="name"
-                                >
-                                    {copy.service2.title}
-                                </h3>
-                                <div className="flex gap-4 xl:gap-6 items-center">
-                                    <Button
-                                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                                        target="_blank"
-                                        className="max-w-fit"
-                                    >
-                                        {copy.orderLabel}
-                                    </Button>
-                                    <button
-                                        type="button"
-                                        aria-haspopup="dialog"
-                                        aria-expanded={compositionOpen}
-                                        onClick={() => setCompositionOpen(true)}
-                                        className="flex items-center gap-6 uppercase tracking-widest text-sm transition-opacity cursor-pointer hover:opacity-80"
-                                    >
-                                        {copy.compositionLabel}
-                                        <span
-                                            className="text-2xl mb-1"
-                                            aria-hidden="true"
-                                        >
-                                            ›
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div className="flex xl:col-span-2 xl:justify-self-center xl:w-1/2">
-                        <div
-                            className="relative rounded-md overflow-hidden aspect-3/2 flex-1"
-                            itemProp="itemListElement"
-                            itemScope
-                            itemType="https://schema.org/Service"
-                        >
-                            <meta
-                                itemProp="name"
-                                content={copy.service3.title}
-                            />
-                            <meta itemProp="url" content={copy.service3.img} />
-                            <meta
-                                itemProp="image"
-                                content={copy.service3.img}
-                            />
-                            <Image
-                                src={copy.service3.img}
-                                alt={copy.service3.title}
-                                fill
-                                sizes="(max-width: 1200px) 100vw, 50vw"
-                                loading="lazy"
-                                className="object-cover object-[50%_90%]"
-                            />
-
-                            <div
-                                className="absolute inset-0"
-                                style={{
-                                    background:
-                                        "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%)",
-                                }}
-                            />
-
-                            <div className="absolute inset-0 p-6 flex flex-col justify-between text-white z-10 xl:p-8">
-                                <p className="font-baskerville uppercase text-xl xl:text-2xl xl:leading-tight">
-                                    {copy.service3.title}
-                                </p>
-                                <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                                    target="_blank"
-                                    className="max-w-fit"
-                                >
-                                    {copy.orderLabel}
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="flex flex-col items-center mt-4 xl:mt-8">
-                <h2 className="max-xl:px-6">{copy.specialOffersTitle}</h2>
-                <div className="w-full max-xl:px-6 xl:max-w-6xl xl:mx-auto mt-4 xl:mt-6">
-                    <SpecialOffersSection
-                        offers={copy.specialOffers}
-                        locale={locale}
-                    />
-                </div>
-            </section>
+            <SpecialOffersSection
+                offers={copy.specialOffers}
+                locale={locale}
+                title={copy.specialOffersTitle}
+            />
 
             <Divider dark />
             <ContactsSection />
@@ -1166,44 +1023,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         />
                     </div>
                 )}
-            </Modal>
-            <Modal
-                open={compositionOpen}
-                onClose={() => setCompositionOpen(false)}
-            >
-                <div className="flex flex-col xl:flex-row gap-6 m-6 xl:m-8 items-center">
-                    <div className="relative min-h-75 xl:min-h-92 w-full xl:max-w-[17rem]">
-                        <Image
-                            src="https://academia.spb.ru/wp-content/uploads/2026/05/IMG_6642-1.avif"
-                            className="object-cover rounded-md"
-                            fill
-                            alt={copy.service2.title}
-                        />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <h2 className="font-baskerville text-xl xl:text-2xl uppercase">
-                            {copy.compositionTitle}:
-                        </h2>
-                        <ul className="space-y-2">
-                            {copy.service2.composition.map((item) => (
-                                <li
-                                    key={item}
-                                    className="flex gap-3 text-sm md:text-base"
-                                >
-                                    <span aria-hidden="true">—</span>
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
-                        <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                            target="_blank"
-                            className="max-w-fit mt-2 xl:mt-4"
-                        >
-                            {copy.orderLabel}
-                        </Button>
-                    </div>
-                </div>
             </Modal>
         </main>
     );

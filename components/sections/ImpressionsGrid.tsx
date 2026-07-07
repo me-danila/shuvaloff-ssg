@@ -36,7 +36,7 @@ const gridImages: Img[] = [
 
 // 6-е фото (только мобильная мозаика)
 const bedroom: Img = {
-    src: `${base}/35025f793764a0ba861c56044240451000234756-scaled.jpg`,
+    src: `https://academia.spb.ru/wp-content/uploads/2026/07/MMI2261_@maxiimov-2.jpg`,
     alt: "Номер отеля",
     w: 1706,
     h: 2560,
@@ -97,7 +97,7 @@ export default function ImpressionsGrid() {
                 delay={0.15}
                 mode="mount"
                 staggerChildren={0.08}
-                className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-21/9 w-full"
+                className="hidden xl:grid xl:mt-2 gap-3 grid-rows-2 grid-cols-[2fr_1fr_1fr] aspect-20/8 w-full"
             >
                 <StaggerItem className="relative row-span-2 rounded-md overflow-hidden">
                     <Image

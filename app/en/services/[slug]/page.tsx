@@ -18,7 +18,9 @@ type Props = {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-    return AllServices.en.filter((s) => s.slug).map((s) => ({ slug: s.slug }));
+    return AllServices.en
+        .filter((s) => s.slug && s.slug !== "pets")
+        .map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -59,7 +61,7 @@ export default async function ServicePageEn({ params }: Props) {
                     ],
                 })}
             />
-            <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="md:text-center my-4">
                     <h1>{service.title}</h1>
                 </FadeUp>
@@ -96,7 +98,7 @@ export default async function ServicePageEn({ params }: Props) {
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center gap-3 text-brand-blue"
+                                            className="flex items-center gap-3 text-brand-brown"
                                         >
                                             {link.label}
                                             <span className="text-xl">
@@ -135,13 +137,15 @@ export default async function ServicePageEn({ params }: Props) {
             </section>
 
             {otherServices.length > 0 && (
-                <section className="flex flex-col gap-6 mx-6 xl:w-full xl:max-w-6xl xl:mx-auto">
-                    <FadeUp>
-                        <h2 className="text-center xl:text-4xl">
-                            Other services
-                        </h2>
-                    </FadeUp>
-                    <ServicesSlider services={otherServices} />
+                <section className="bg-brand-light py-8 xl:py-12">
+                    <div className="flex flex-col gap-6 mx-6 xl:w-full xl:max-w-7xl xl:mx-auto">
+                        <FadeUp>
+                            <h2 className="text-center xl:text-4xl">
+                                Other services
+                            </h2>
+                        </FadeUp>
+                        <ServicesSlider services={otherServices} />
+                    </div>
                 </section>
             )}
 

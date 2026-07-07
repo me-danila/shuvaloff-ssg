@@ -673,7 +673,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Французский каминный экран
                     </h3>
 
@@ -702,7 +702,7 @@ export default function History() {
                         className="object-contain mx-auto my-2"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Перламутровый веер
                     </h3>
 
@@ -728,7 +728,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Коллекционный фарфор
                     </h3>
 
@@ -754,7 +754,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Настольная лампа
                     </h3>
                     <p>
@@ -818,7 +818,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Парные тумбочки с&nbsp;мраморными столешницами
                     </h3>
                     <p>
@@ -848,7 +848,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Диванный столик эпохи регентства
                     </h3>
                     <p>
@@ -873,7 +873,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Торшер в стиле ар-нуво
                     </h3>
                     <p>
@@ -950,7 +950,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Бронзовый торшер конца XIX века с&nbsp;львиными
                         маскаронами
                     </h3>
@@ -979,7 +979,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Картина Эмиля Табари
                     </h3>
                     <p>
@@ -1011,7 +1011,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Боковой столик эпохи регентства
                     </h3>
                     <p>
@@ -1036,7 +1036,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Фарфоровые статуэтки
                     </h3>
                     <p>
@@ -1066,7 +1066,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Складной веер в оригинальной раме
                     </h3>
                     <p>
@@ -1095,7 +1095,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Бронзовые подсвечники
                     </h3>
                     <p>
@@ -1120,7 +1120,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Потолок с кессонами
                     </h3>
                     <p>
@@ -1162,7 +1162,7 @@ export default function History() {
                         className="object-contain mx-auto"
                     />
                     <DividerHistory style={3} />
-                    <h3 className="text-xl font-baskerville uppercase">
+                    <h3 className="text-xl font-history uppercase">
                         Антикварный гарнитур
                     </h3>
                     <p>

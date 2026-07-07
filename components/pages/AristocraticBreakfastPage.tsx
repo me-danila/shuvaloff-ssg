@@ -294,7 +294,7 @@ export default function AristocraticBreakfastPage({
                     </FadeIn>
 
                     <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
-                        <div className="absolute bottom-10 md:bottom-20 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-6xl xl:mx-auto xl:gap-6">
+                        <div className="absolute bottom-10 md:bottom-20 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-7xl xl:mx-auto xl:gap-6">
                             <StaggerItem>
                                 <h1 className="text-3xl xl:text-5xl xl:max-w-2xl xl:mx-auto">
                                     {copy.title}
@@ -319,7 +319,7 @@ export default function AristocraticBreakfastPage({
                 </div>
             </section>
 
-            <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto xl:px-0">
+            <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0">
                 <FadeUp>
                     <h2>{copy.description1}</h2>
                 </FadeUp>
@@ -328,7 +328,7 @@ export default function AristocraticBreakfastPage({
                 </FadeUp>
             </section>
 
-            <section className="flex flex-col gap-2 xl:flex-row xl:w-full xl:max-w-6xl xl:mx-auto xl:gap-10">
+            <section className="flex flex-col gap-2 xl:flex-row xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
                 <FadeUp className="flex-1">
                     <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded">
                         <Image
@@ -363,7 +363,7 @@ export default function AristocraticBreakfastPage({
                 </div>
             </section>
 
-            <section className="flex flex-col gap-2 xl:flex-row-reverse xl:w-full xl:max-w-6xl xl:mx-auto xl:gap-10">
+            <section className="flex flex-col gap-2 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
                 <FadeUp className="flex-1">
                     <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded">
                         <Image
@@ -398,7 +398,7 @@ export default function AristocraticBreakfastPage({
                 </div>
             </section>
 
-            <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-6xl xl:mx-auto xl:px-0 xl:gap-6">
+            <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0 xl:gap-6">
                 <FadeUp>
                     <h3 className="font-alistair text-blue-800 text-4xl xl:text-5xl">
                         {copy.quoteTitle1}
@@ -411,7 +411,7 @@ export default function AristocraticBreakfastPage({
 
             <section className="relative aspect-4/3 min-h-[350px] w-full overflow-hidden rounded xl:aspect-5/2 xl:w-[98%] xl:mx-auto xl:rounded-xl">
                 <Image
-                    src="https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif"
+                    src="https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif"
                     alt={copy.title}
                     fill
                     loading="lazy"
@@ -421,7 +421,7 @@ export default function AristocraticBreakfastPage({
 
             <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-4xl xl:mx-auto xl:px-0 xl:gap-6">
                 <FadeUp>
-                    <h3 className="font-baskerville uppercase text-lg/6 xl:text-2xl">
+                    <h3 className="font-history uppercase text-lg/6 xl:text-2xl">
                         {copy.quoteTitle2}
                     </h3>
                 </FadeUp>

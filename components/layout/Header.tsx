@@ -104,6 +104,7 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Реферальная программа", href: "/rewards/referral/" },
                 { label: "Консьерж-сервис", href: "/services/concierge/" },
                 { label: "Дополнительные услуги", href: "/services/" },
+                { label: "Рады вашему питомцу", href: "/services/pets/" },
             ],
         },
         {
@@ -161,6 +162,7 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Referral programm", href: "/rewards/referral/" },
                 { label: "Concierge service", href: "/services/concierge/" },
                 { label: "Additional services", href: "/services/" },
+                { label: "Accomodation with pets", href: "/services/pets/" },
             ],
         },
         {
@@ -233,7 +235,7 @@ const subNavItemsByLocale: Record<Locale, SubNavItem[]> = {
     ],
 };
 
-const homeV2NavItemsByLocale: Record<Locale, SubNavItem[]> = {
+const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
     ru: [
         {
             label: "Категории номеров",
@@ -268,23 +270,23 @@ const homeV2NavItemsByLocale: Record<Locale, SubNavItem[]> = {
                 { label: "Абонементы на проживание", href: "/subscriptions/" },
                 { label: "Свадьба в особняке", href: "/wedding/" },
                 { label: "Водные прогулки", href: "/services/boat-tours/" },
+                { label: "Рады вашему питомцу", href: "/services/pets/" },
             ],
         },
-        { label: "Программа привиллегий", href: "/rewards/" },
+        { label: "Программа привилегий", href: "/rewards/" },
+        { label: "Услуги", href: "/services/all/" },
         {
             label: "О нас",
             href: "/history/",
             submenu: [
-                { label: "Отзывы", href: "#reviews" },
+                { label: "Отзывы", href: "/reviews" },
                 {
                     label: "СМИ",
-                    href: "https://academia.spb.ru/smi/",
-                    target: "_blank",
+                    href: "/smi/",
                 },
                 {
                     label: "Блог",
-                    href: "https://academia.spb.ru/blog/",
-                    target: "_blank",
+                    href: "/blog/",
                 },
                 { label: "История особняка", href: "/history/" },
             ],
@@ -327,23 +329,23 @@ const homeV2NavItemsByLocale: Record<Locale, SubNavItem[]> = {
                 },
                 { label: "Wedding at the mansion", href: "/wedding/" },
                 { label: "Boat tours", href: "/services/boat-tours/" },
+                { label: "Accomodation with pets", href: "/services/pets/" },
             ],
         },
         { label: "Rewards program", href: "/rewards/" },
+        { label: "Services", href: "/services/all/" },
         {
             label: "About us",
             href: "/history/",
             submenu: [
-                { label: "Reviews", href: "#reviews" },
+                { label: "Reviews", href: "/reviews" },
                 {
                     label: "Media",
-                    href: "https://academia.spb.ru/smi/",
-                    target: "_blank",
+                    href: "/smi/",
                 },
                 {
                     label: "Blog",
-                    href: "https://academia.spb.ru/blog/",
-                    target: "_blank",
+                    href: "https://academia-shuvaloff.ru/blog/",
                 },
                 { label: "Mansion history", href: "/history/" },
             ],
@@ -458,17 +460,24 @@ export default function Header() {
     const copy = copyByLocale[locale];
     const navItems = navItemsByLocale[locale];
     const subNavItems = subNavItemsByLocale[locale];
-    const homeV2NavItems = homeV2NavItemsByLocale[locale];
+    const homeNavItems = homeNavItemsByLocale[locale];
     const normalizedPath = normalizePath(stripLocalePrefix(pathname));
-    const isHome = normalizedPath === "/";
-    const hideSlogan = normalizedPath === "/v2";
-    const isHomeV2 = normalizedPath === "/v2";
+
+    const scrollToContacts = () => {
+        const el = document.getElementById("contacts");
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+            window.location.href = `${localizeHref("/", locale)}#contacts`;
+        }
+    };
+    // v2-дизайн теперь на всех страницах: единый хедер + навбар, без слогана
+    const isUnifiedNav = true;
     const isHeaderFixed =
         normalizedPath === "/" ||
-        normalizedPath === "/wedding" ||
+        //        normalizedPath === "/wedding" ||
         normalizedPath === "/spasibo_wedding" ||
-        normalizedPath === "/services/aristocratic-breakfast" ||
-        normalizedPath === "/v2";
+        normalizedPath === "/services/aristocratic-breakfast";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -502,18 +511,17 @@ export default function Header() {
     const isLight =
         !scrolled &&
         normalizedPath !== "/" &&
-        normalizedPath !== "/wedding" &&
+        //        normalizedPath !== "/wedding" &&
         normalizedPath !== "/spasibo_wedding" &&
-        normalizedPath !== "/services/aristocratic-breakfast" &&
-        normalizedPath !== "/v2";
+        normalizedPath !== "/services/aristocratic-breakfast";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,
     );
     const activeSubmenuItems =
         navItems.find((item) => item.label === activeSubmenu)?.submenu ?? [];
-    const visibleSubNavItems = isHomeV2 ? homeV2NavItems : subNavItems;
-    const visibleMobileNavItems = isHomeV2 ? homeV2NavItems : navItems;
+    const visibleSubNavItems = isUnifiedNav ? homeNavItems : subNavItems;
+    const visibleMobileNavItems = isUnifiedNav ? homeNavItems : navItems;
     const ruHref = localizeHref(pathname, "ru");
     const enHref = localizeHref(pathname, "en");
     const alternateLocale = locale === "ru" ? "en" : "ru";
@@ -568,9 +576,7 @@ export default function Header() {
 
     return (
         <>
-            <div
-                className={`h-24 ${isHome ? "xl:h-28" : "xl:h-36"} ${isHeaderFixed ? "hidden" : ""}`}
-            />
+            <div className={`h-14 xl:h-36 ${isHeaderFixed ? "hidden" : ""}`} />
 
             <motion.header
                 initial={isDesktop ? { y: -20, opacity: 0 } : false}
@@ -579,20 +585,20 @@ export default function Header() {
                 className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 xl:pb-4 ${
                     isLight
                         ? "bg-white"
-                        : isHomeV2
+                        : isUnifiedNav
                           ? "bg-linear-to-b from-black/80 via-black/60 to-transparent"
                           : "bg-linear-to-b from-black/80 via-black/60 to-transparent"
                 }`}
             >
                 <div
-                    className={`flex items-center h-14 px-5 xl:px-8 relative xl:h-20 ${
-                        isHomeV2 ? "xl:mx-auto xl:w-full xl:max-w-6xl" : ""
+                    className={`flex items-center h-14 px-5 px-8 xl:px-0 relative xl:h-20 ${
+                        isUnifiedNav ? "xl:mx-auto xl:w-full xl:max-w-7xl" : ""
                     }`}
                 >
                     <div
-                        className={`flex items-center ${isHomeV2 ? "xl:gap-32" : "gap-12"}`}
+                        className={`flex items-center ${isUnifiedNav ? "xl:gap-32" : "gap-12"}`}
                     >
-                        {isHomeV2 ? (
+                        {isUnifiedNav ? (
                             <>
                                 <div
                                     className={`flex items-center gap-2 text-xs tracking-wider transition-colors duration-300 xl:hidden ${
@@ -603,13 +609,13 @@ export default function Header() {
                                 >
                                     <Link
                                         href={ruHref}
-                                        className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                        className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-brown" : "text-white") : "opacity-80 hover:opacity-100"}`}
                                     >
                                         RU
                                     </Link>
                                     <Link
                                         href={enHref}
-                                        className={`font-medium ${locale === "en" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                        className={`font-medium ${locale === "en" ? (isLight ? "text-brand-brown" : "text-white") : "opacity-80 hover:opacity-100"}`}
                                     >
                                         ENG
                                     </Link>
@@ -624,7 +630,7 @@ export default function Header() {
                                         }
                                         className={`inline-flex h-11 w-11 items-center justify-center rounded-full border text-xs font-medium transition-colors duration-300 ${
                                             isLight
-                                                ? "border-stone-300 text-stone-700 hover:border-brand-blue hover:text-brand-blue"
+                                                ? "border-stone-300 text-brand-brown hover:border-brand-brown hover:text-brand-brown"
                                                 : "border-white/40 text-white hover:border-white hover:bg-white/10"
                                         }`}
                                     >
@@ -649,7 +655,7 @@ export default function Header() {
                                         }
                                         className={`absolute left-0 top-[calc(100%+0.375rem)] z-50 inline-flex h-11 w-11 translate-y-1 items-center justify-center rounded-full border text-xs font-medium opacity-0 pointer-events-none transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto ${
                                             isLight
-                                                ? "border-stone-300 bg-white text-stone-700 shadow-[0_10px_30px_rgba(0,0,0,0.16)] hover:border-brand-blue hover:text-brand-blue"
+                                                ? "border-stone-300 bg-white text-brand-brown shadow-[0_10px_30px_rgba(0,0,0,0.16)] hover:border-brand-brown hover:text-brand-brown"
                                                 : "border-white/70 bg-[#100b08] text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:border-white hover:bg-[#100b08]"
                                         }`}
                                     >
@@ -660,7 +666,7 @@ export default function Header() {
                                     href="tel:+78125659650"
                                     className={`hidden xl:inline-flex items-center gap-3 text-sm tracking-wide transition-colors duration-300 ${
                                         isLight
-                                            ? "text-stone-700 hover:text-brand-blue"
+                                            ? "text-brand-brown hover:text-brand-brown"
                                             : "text-white hover:text-white/90"
                                     }`}
                                 >
@@ -679,7 +685,7 @@ export default function Header() {
                                     onClick={() => setMenuOpen(true)}
                                     className={`hidden xl:flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
                                         isLight
-                                            ? "text-stone-700"
+                                            ? "text-brand-brown"
                                             : "text-white"
                                     }`}
                                     aria-label={copy.openMenuAria}
@@ -696,13 +702,13 @@ export default function Header() {
                                 >
                                     <Link
                                         href={ruHref}
-                                        className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                        className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-brown" : "text-white") : "opacity-80 hover:opacity-100"}`}
                                     >
                                         RU
                                     </Link>
                                     <Link
                                         href={enHref}
-                                        className={`font-medium ${locale === "en" ? (isLight ? "text-brand-blue" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                                        className={`font-medium ${locale === "en" ? (isLight ? "text-brand-brown" : "text-white") : "opacity-80 hover:opacity-100"}`}
                                     >
                                         ENG
                                     </Link>
@@ -727,19 +733,21 @@ export default function Header() {
                     </Link>
 
                     <div
-                        className={`flex items-center ml-auto ${isHomeV2 ? "xl:gap-28" : "gap-12"}`}
+                        className={`flex items-center ml-auto ${isUnifiedNav ? "xl:gap-28" : "gap-12"}`}
                     >
                         <div className="hidden xl:grid min-w-[10.5rem] place-items-center">
-                            {isHomeV2 ? (
+                            {isUnifiedNav ? (
                                 <div className="relative h-11 w-full">
-                                    <span
-                                        className={`absolute inset-0 inline-flex items-center justify-center gap-2 text-sm tracking-wide transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                                    <button
+                                        type="button"
+                                        onClick={scrollToContacts}
+                                        className={`absolute inset-0 inline-flex items-center justify-center gap-2 text-sm tracking-wide transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer ${
                                             scrolled
                                                 ? "-translate-y-2 opacity-0 pointer-events-none"
                                                 : "translate-y-0 opacity-100"
                                         } ${
                                             isLight
-                                                ? "text-stone-700"
+                                                ? "text-brand-brown"
                                                 : "text-white"
                                         }`}
                                     >
@@ -751,7 +759,7 @@ export default function Header() {
                                         {locale === "en"
                                             ? "Saint Petersburg"
                                             : "Санкт-Петербург"}
-                                    </span>
+                                    </button>
                                     <Button
                                         href={localizeHref("/booking/", locale)}
                                         variant="primary"
@@ -779,15 +787,15 @@ export default function Header() {
                             href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`group hidden xl:flex items-center ${isHomeV2 ? "gap-3" : "gap-1.5"} text-sm transition-colors duration-300 ${
-                                isLight ? "text-stone-700" : "text-white"
+                            className={`group hidden xl:flex items-center ${isUnifiedNav ? "gap-3" : "gap-1.5"} text-sm transition-colors duration-300 ${
+                                isLight ? "text-brand-brown" : "text-white"
                             }`}
                         >
-                            {isHomeV2 ? (
+                            {isUnifiedNav ? (
                                 <span
                                     className={`inline-flex h-11 w-11 items-center justify-center rounded-full border transition-colors duration-300 ${
                                         isLight
-                                            ? "border-stone-300 group-hover:border-brand-blue"
+                                            ? "border-stone-300 group-hover:border-brand-brown"
                                             : "border-white/40 group-hover:border-white group-hover:bg-white/10"
                                     }`}
                                 >
@@ -818,7 +826,7 @@ export default function Header() {
                             type="button"
                             onClick={() => setMenuOpen(true)}
                             className={`xl:hidden flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
-                                isLight ? "text-stone-700" : "text-white"
+                                isLight ? "text-brand-brown" : "text-white"
                             }`}
                             aria-label={copy.openMenuAria}
                         >
@@ -828,53 +836,33 @@ export default function Header() {
                     </div>
                 </div>
                 <div>
-                    {/* Мобайл: текст над линией */}
-                    {!hideSlogan && (
-                        <p
-                            className={`xl:hidden text-center font-alistair text-xl pb-2 transition-colors duration-300 ${
-                                isLight ? "text-[#96908D]" : "text-white/70"
-                            }`}
-                        >
-                            {copy.slogan}
-                        </p>
-                    )}
-
                     {/* Общая линия */}
                     <div
                         className={`relative border-b transition-colors duration-300 ${
-                            isHomeV2
-                                ? "mx-5 xl:mx-auto xl:w-full xl:max-w-6xl"
+                            isUnifiedNav
+                                ? "mx-5 xl:mx-auto xl:w-full xl:max-w-7xl"
                                 : "mx-5 xl:mx-8"
                         } ${isLight ? "border-stone-200" : "border-white/20"}`}
-                    >
-                        {/* Десктоп: текст на линии */}
-                        <p
-                            className={`hidden ${isHome ? "xl:block" : "hidden"} absolute left-1/2 -translate-x-1/2 -translate-y-1/3 font-alistair text-3xl whitespace-nowrap transition-colors duration-300 ${
-                                isLight ? "text-[#96908D]" : "text-white/70"
-                            }`}
-                        >
-                            {copy.slogan}
-                        </p>
-                    </div>
+                    />
                 </div>
 
-                {/* Десктоп: дополнительное меню — только не на главной */}
-                {!isHome && (
+                {/* Десктоп: дополнительное меню — на всех страницах */}
+                {
                     <nav
-                        className={`hidden xl:flex items-center justify-between gap-8 px-8 h-13 ${
-                            isHomeV2 ? "mx-auto w-full max-w-6xl" : ""
+                        className={`hidden xl:flex items-center justify-between gap-8 px-8 xl:px-0 h-13 ${
+                            isUnifiedNav ? "mx-auto w-full max-w-7xl" : ""
                         }`}
                     >
                         {visibleSubNavItems.map((item, index) => {
                             const hasDropdown =
-                                isHomeV2 && item.submenu?.length;
-                            const isLastV2Item =
-                                isHomeV2 &&
+                                isUnifiedNav && item.submenu?.length;
+                            const isLastNavItem =
+                                isUnifiedNav &&
                                 index === visibleSubNavItems.length - 1;
                             const dropdownPositionClass =
                                 index === 0
                                     ? "left-0"
-                                    : isLastV2Item
+                                    : isLastNavItem
                                       ? "right-0"
                                       : "left-1/2 -translate-x-1/2";
 
@@ -892,10 +880,10 @@ export default function Header() {
                                                     ? "noopener noreferrer"
                                                     : undefined
                                             }
-                                            className={`relative inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
+                                            className={`relative inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold uppercase tracking-wide transition-opacity duration-200 hover:opacity-70 ${
                                                 isLight
-                                                    ? "text-stone-500 hover:text-brand-blue"
-                                                    : "text-white hover:text-white"
+                                                    ? "text-brand-brown"
+                                                    : "text-white"
                                             }`}
                                         >
                                             {item.label}
@@ -943,13 +931,13 @@ export default function Header() {
                                             ? "noopener noreferrer"
                                             : undefined
                                     }
-                                    className={`relative flex flex-col items-center tracking-wide whitespace-nowrap transition-colors duration-200 ${
+                                    className={`relative flex flex-col items-center whitespace-nowrap transition-opacity duration-200 hover:opacity-70 ${
                                         isLight
-                                            ? "text-stone-500 hover:text-brand-blue"
+                                            ? "text-brand-brown"
                                             : "text-white"
-                                    } ${isHomeV2 ? "text-sm font-semibold uppercase" : ""}`}
+                                    } ${isUnifiedNav ? "text-sm font-semibold uppercase" : ""}`}
                                 >
-                                    {!isHomeV2 && index === 1 && (
+                                    {!isUnifiedNav && index === 1 && (
                                         <svg
                                             width="44"
                                             height="41"
@@ -972,7 +960,7 @@ export default function Header() {
                             );
                         })}
                     </nav>
-                )}
+                }
             </motion.header>
 
             <AnimatePresence>
@@ -1007,7 +995,7 @@ export default function Header() {
                                     <button
                                         type="button"
                                         onClick={closeMenu}
-                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-stone-700"
+                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-brand-brown"
                                         aria-label={copy.closeMenuAria}
                                     >
                                         &times;
@@ -1031,7 +1019,7 @@ export default function Header() {
                                                 <div className="flex w-full items-center justify-between">
                                                     {renderNavItemLink(
                                                         item,
-                                                        "py-3 text-sm transition-colors hover:text-brand-blue",
+                                                        "py-3 text-sm transition-colors hover:text-brand-brown",
                                                     )}
                                                     <button
                                                         type="button"
@@ -1072,7 +1060,7 @@ export default function Header() {
                                                                 >
                                                                     {renderNavItemLink(
                                                                         sub,
-                                                                        "block py-2 text-sm text-[#96908D] transition-colors hover:text-brand-blue",
+                                                                        "block py-2 text-sm text-[#96908D] transition-colors hover:text-brand-brown",
                                                                     )}
                                                                 </div>
                                                             ),
@@ -1087,7 +1075,7 @@ export default function Header() {
                                             >
                                                 {renderNavItemLink(
                                                     item,
-                                                    "block py-3 text-sm transition-colors hover:text-brand-blue",
+                                                    "block py-3 text-sm transition-colors hover:text-brand-brown",
                                                 )}
                                                 {item.lineBelow && (
                                                     <div className="my-1 border-b border-stone-200" />
@@ -1179,7 +1167,7 @@ export default function Header() {
                                     <button
                                         type="button"
                                         onClick={closeMenu}
-                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-stone-700"
+                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-brand-brown"
                                         aria-label={copy.closeMenuAria}
                                     >
                                         &times;
@@ -1210,7 +1198,7 @@ export default function Header() {
                                                                 : item.label,
                                                         )
                                                     }
-                                                    className="flex w-full items-center justify-between py-3 text-left cursor-pointer text-sm transition-colors hover:text-brand-blue"
+                                                    className="flex w-full items-center justify-between py-3 text-left cursor-pointer text-sm transition-colors hover:text-brand-brown"
                                                 >
                                                     <span>{item.label}</span>
                                                     <span
@@ -1227,7 +1215,7 @@ export default function Header() {
                                             >
                                                 {renderNavItemLink(
                                                     item,
-                                                    "block py-3 text-sm transition-colors hover:text-brand-blue",
+                                                    "block py-3 text-sm transition-colors hover:text-brand-brown",
                                                 )}
                                                 {item.lineBelow && (
                                                     <div className="border-b border-stone-200" />
@@ -1345,7 +1333,7 @@ export default function Header() {
                                                         )}
                                                         target={sub.target}
                                                         onClick={closeMenu}
-                                                        className="block py-2 text-sm transition-colors hover:text-brand-blue"
+                                                        className="block py-2 text-sm transition-colors hover:text-brand-brown"
                                                     >
                                                         {sub.label}
                                                     </Link>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import BookingForm from "@/components/sections/BookingForm";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
@@ -51,7 +52,7 @@ export default function Rooms() {
                     })),
                 })}
             />
-            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-6xl xl:mx-auto">
+            <section className="flex flex-col gap-4 m-6 xl:text-center xl:max-w-3xl xl:mx-auto">
                 <FadeUp>
                     <h1>Категории номеров</h1>
                 </FadeUp>
@@ -65,13 +66,16 @@ export default function Rooms() {
                 <FadeUp delay={0.2}>
                     <p>
                         В&nbsp;отеле-особняке представлены категории:
-                        классический Стандарт, изысканный Супериор,
-                        двухкомнатный Полулюкс, Двухкомнатный люкс и&nbsp;два
+                        классический Стандарт, изысканный Делюкс, двухкомнатный
+                        Джуниор Сьют с&nbsp;отдельной спальней, трехкомнатный
+                        Сьют с&nbsp;двумя спальнями и&nbsp;гостиной и&nbsp;два
                         уникальных исторических люкса, названные в&nbsp;честь
                         владельцев особняка.
                     </p>
                 </FadeUp>
             </section>
+            <BookingForm />
+            <div />
             <RoomsSection />
             <Divider />
             <ContactsSection />

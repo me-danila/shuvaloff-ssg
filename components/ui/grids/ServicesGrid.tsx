@@ -1,96 +1,43 @@
 "use client";
 
-import Button from "@/components/ui/Button";
+import CardServiceBig from "@/components/ui/CardServiceBig";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
-import Image from "@/components/ui/OptimizedImage";
 import { AllServices } from "@/data/ServicesData";
-import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
-export default function ServicesGrid() {
+type ServicesGridItem = {
+    title: string;
+    imgUrl: string;
+    slug?: string;
+    externalLink?: string;
+};
+
+type ServicesGridProps = {
+    services?: ServicesGridItem[];
+};
+
+export default function ServicesGrid({
+    services: servicesProp,
+}: ServicesGridProps) {
     const locale = useLocale();
-    const services = AllServices[locale];
-    const orderLabel = locale === "ru" ? "Заказать" : "Order";
-    const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
+    const services = servicesProp ?? AllServices[locale];
 
     return (
         <StaggerContainer
+            amount="some"
             className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
-            itemScope
-            itemType="https://schema.org/ItemList"
         >
-            {services.map((service) => {
-                const href = service.slug
-                    ? localizeHref(`/services/${service.slug}/`, locale)
-                    : (service.externalLink ?? "#");
-                const isExternal = Boolean(service.externalLink);
-
-                return (
-                    <StaggerItem
-                        key={service.title}
-                        className="relative aspect-square rounded-md overflow-hidden group flex"
-                        itemProp="itemListElement"
-                        itemScope
-                        itemType="https://schema.org/ListItem"
-                    >
-                        <meta
-                            itemProp="position"
-                            content={`${services.indexOf(service) + 1}`}
-                        />
-                        <Image
-                            src={service.imgUrl}
-                            alt={service.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                            className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/50" />
-                        <div
-                            className="absolute inset-0 flex flex-col justify-between text-white p-6 xl:p-8"
-                            itemProp="item"
-                            itemScope
-                            itemType="https://schema.org/Service"
-                        >
-                            <meta itemProp="name" content={service.title} />
-                            <meta
-                                itemProp="description"
-                                content={service.subtitle}
-                            />
-                            <meta itemProp="image" content={service.imgUrl} />
-                            <meta itemProp="url" content={href} />
-                            <p className="font-baskerville uppercase leading-tight xl:text-2xl">
-                                {service.title}
-                            </p>
-                            <div className="flex items-center gap-4 justify-between">
-                                {service.slug && (
-                                    <Button
-                                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                                        target="_blank"
-                                        variant="primary"
-                                    >
-                                        {orderLabel}
-                                    </Button>
-                                )}
-                                <a
-                                    href={href}
-                                    target={isExternal ? "_blank" : undefined}
-                                    rel={
-                                        isExternal
-                                            ? "noopener noreferrer"
-                                            : undefined
-                                    }
-                                    className="flex items-center gap-3 uppercase tracking-widest text-sm"
-                                >
-                                    {detailsLabel}
-                                    <span className="text-2xl mb-1">
-                                        &rsaquo;
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </StaggerItem>
-                );
-            })}
+            {services.map((service) => (
+                <StaggerItem key={service.title} className="flex">
+                    <CardServiceBig
+                        title={service.title}
+                        imgUrl={service.imgUrl}
+                        slug={service.slug}
+                        externalLink={service.externalLink}
+                        showOrder
+                    />
+                </StaggerItem>
+            ))}
         </StaggerContainer>
     );
 }

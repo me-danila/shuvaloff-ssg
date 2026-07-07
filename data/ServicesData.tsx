@@ -104,7 +104,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Графский завтрак",
             subtitle:
                 "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif",
             slug: "aristocratic-breakfast",
         },
         {
@@ -114,17 +114,17 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
             externalLink: "https://academia-spa.ru/",
         },
-        {
-            title: "Девайсы для красоты и здоровья",
-            subtitle:
-                "Сделайте ваш отдых еще более приятным — закажите в номер девайсы для красоты и здоровья от бренда GESS.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
-            slug: "beauty-bar",
-        },
+        //        {
+        //            title: "Девайсы для красоты и здоровья",
+        //            subtitle:
+        //                "Сделайте ваш отдых еще более приятным — закажите в номер девайсы для красоты и здоровья от бренда GESS.",
+        //            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
+        //            slug: "beauty-bar",
+        //        },
         {
             title: "Букет в номер",
             subtitle: "Жест внимания без повода или в особый момент.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/efc06e02ff905dba3b08435aa4be3aeab0fbe8ce.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_5179-1-2.jpg",
             slug: "bouquet",
             fullDescription: (
                 <>
@@ -143,7 +143,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Ужин от шефа",
             subtitle:
                 "С радостью приглашаем вас провести время в Бар-ресторан ACADEMIA Шувалова — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/cb49c80b30436e5033eadfc5e2b8d6b3eef8205c.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png",
             slug: "dinner",
             fullDescription: (
                 <>
@@ -187,7 +187,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Аристократический вечер Ruinart",
             subtitle:
                 "Изысканная услуга для особого события — вдохновлённая эпохой, когда дом Ruinart впервые заворожил аристократию.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/mobile_file_2025-09-19_07-33-26-3.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/mobile_file_2025-09-19_07-33-26.jpg",
             slug: "ruinart",
             fullDescription: (
                 <>
@@ -406,7 +406,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Приветственный сет в номер",
             subtitle: "Позвольте начать ваше пребывание с особого акцента.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/638720452918249784-db5c3134-880f-41e0-8487-575e96be39ef-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_5118-1-2-2-2.jpg",
             slug: "welcome-set",
             fullDescription: (
                 <>
@@ -457,6 +457,20 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "10 500 ₽",
+        },
+        {
+            title: "Сет к вину",
+            subtitle:
+                "Идеальный аккомпанемент для вашего отдыха, задающий правильный ритм вечеру. Специально подобранные закуски станут изысканным сопровождением к выбранному вину.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_5216-1-2.jpg",
+            slug: "wine-set",
+            fullDescription: (
+                <>
+                    *Игристое вино, представленное на&nbsp;фотографии,
+                    не&nbsp;включено в&nbsp;стоимость сета.
+                </>
+            ),
+            price: "5 500 ₽",
         },
         {
             title: "Отдых с детьми",
@@ -635,7 +649,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Aristocratic breakfast",
             subtitle:
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9187.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif",
             slug: "aristocratic-breakfast",
         },
         {
@@ -645,18 +659,18 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
             externalLink: "https://academia-spa.ru/",
         },
-        {
-            title: "Beauty & Health Devices",
-            subtitle:
-                "Make your stay even more pleasant — order beauty and health devices from the GESS brand to your room.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
-            slug: "beauty-bar",
-        },
+        //        {
+        //            title: "Beauty & Health Devices",
+        //            subtitle:
+        //                "Make your stay even more pleasant — order beauty and health devices from the GESS brand to your room.",
+        //            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/beauty-bar-menu.avif",
+        //            slug: "beauty-bar",
+        //        },
         {
             title: "Flower Bouquet to Room",
             subtitle:
                 "A gesture of attention for no reason or for a special moment.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/efc06e02ff905dba3b08435aa4be3aeab0fbe8ce.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_5179-1-2.jpg",
             slug: "bouquet",
             fullDescription: (
                 <>
@@ -674,7 +688,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Chef's Dinner",
             subtitle:
                 "We are happy to invite you to spend time at ACADEMIA Shuvaloff Bar-Restaurant — a boutique restaurant located in the former office of Count Shuvalov.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/cb49c80b30436e5033eadfc5e2b8d6b3eef8205c.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png",
             slug: "dinner",
             fullDescription: (
                 <>
@@ -716,7 +730,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Aristocratic Evening Ruinart",
             subtitle:
                 "An exquisite service for a special event — inspired by the era when the House of Ruinart first enchanted the aristocracy.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/mobile_file_2025-09-19_07-33-26-3.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/mobile_file_2025-09-19_07-33-26.jpg",
             slug: "ruinart",
             fullDescription: (
                 <>
@@ -921,7 +935,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Welcome Set to Room",
             subtitle: "Allow your stay to begin with a special touch.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/638720452918249784-db5c3134-880f-41e0-8487-575e96be39ef-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_5118-1-2-2-2.jpg",
             slug: "welcome-set",
             fullDescription: (
                 <>
@@ -969,6 +983,20 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "10 500 ₽",
+        },
+        {
+            title: "Wine Set",
+            subtitle:
+                "The perfect accompaniment to your evening, setting just the right tone. Our specially selected appetizers will serve as an exquisite pairing for your chosen wine.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_5216-1-2.jpg",
+            slug: "wine-set",
+            fullDescription: (
+                <>
+                    *The sparkling wine shown in the photo is not included in
+                    the price of the set.
+                </>
+            ),
+            price: "5 500 ₽",
         },
         {
             title: "Traveling with Children",

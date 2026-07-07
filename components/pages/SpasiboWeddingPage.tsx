@@ -68,7 +68,7 @@ export default function SpasiboWeddingPage({ locale }: { locale: Locale }) {
                                 <div className="flex flex-col gap-4 mt-2 md:flex-row md:justify-center">
                                     <Link
                                         href={localizeHref("/wedding/", locale)}
-                                        className="border border-white bg-white p-4 rounded-md text-black font-baskerville uppercase hover:bg-black hover:border-black hover:text-white duration-200"
+                                        className="border border-white bg-white p-4 rounded-md text-black font-history uppercase hover:bg-black hover:border-black hover:text-white duration-200"
                                     >
                                         {copy.backButton}
                                     </Link>

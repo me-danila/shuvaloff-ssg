@@ -44,7 +44,7 @@ function MobileCard({ item }: { item: AntiqueItem }) {
                     </div>
                 )}
                 <div className="flex items-center justify-between">
-                    <h3 className="text-2xl/7 font-baskerville uppercase">
+                    <h3 className="text-2xl/7 font-history uppercase">
                         {item.title}
                     </h3>
                     <span
@@ -78,7 +78,7 @@ export default function AntiquesSection({
     return (
         <section className="flex flex-col py-8 gap-6 bg-stone-200 xl:py-12">
             {intro && (
-                <FadeUp className="mx-8 text-neutral-900 xl:text-center xl:max-w-6xl xl:mx-auto">
+                <FadeUp className="mx-8 text-neutral-900 xl:text-center xl:max-w-7xl xl:mx-auto">
                     {intro}
                 </FadeUp>
             )}
@@ -93,7 +93,7 @@ export default function AntiquesSection({
             </div>
 
             {/* Десктоп */}
-            <StaggerContainer className="hidden xl:grid xl:grid-cols-2 xl:gap-4 xl:max-w-6xl xl:mx-auto xl:w-full xl:mt-2">
+            <StaggerContainer className="hidden xl:grid xl:grid-cols-2 xl:gap-4 xl:max-w-7xl xl:mx-auto xl:w-full xl:mt-2">
                 {items.map((item, i) => {
                     const isLastAndOdd = isLastOdd && i === items.length - 1;
                     return (
@@ -113,7 +113,7 @@ export default function AntiquesSection({
                                     />
                                 </div>
                             )}
-                            <h3 className="font-baskerville uppercase text-2xl/7 xl:mt-4">
+                            <h3 className="font-history uppercase text-2xl/7 xl:mt-4">
                                 {item.title}
                             </h3>
                             <p className="text-zinc-600 leading-relaxed">

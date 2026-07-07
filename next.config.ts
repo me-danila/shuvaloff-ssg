@@ -1,7 +1,9 @@
+import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     output: "export",
+    pageExtensions: ["ts", "tsx", "mdx"],
     trailingSlash: true,
     transpilePackages: ["next-image-export-optimizer"],
     env: {
@@ -31,4 +33,11 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default nextConfig;
+const withMDX = createMDX({
+    options: {
+        // Строки, не импорты: Turbopack не принимает JS-функции плагинов
+        remarkPlugins: ["remark-gfm"],
+    },
+});
+
+export default withMDX(nextConfig);

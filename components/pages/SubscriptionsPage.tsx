@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
@@ -481,7 +482,9 @@ export default function SubscriptionsPage({ locale }: { locale: Locale }) {
                 </FadeUp>
             </section>
 
-            <section className="mx-6 xl:mx-auto xl:max-w-6xl">
+            <BookingForm />
+
+            <section className="mx-6 xl:mx-auto xl:max-w-7xl">
                 <div className="grid gap-4 xl:gap-8">
                     {rooms.map((room, index) => {
                         const roomExtra = extras.find(
@@ -505,13 +508,13 @@ export default function SubscriptionsPage({ locale }: { locale: Locale }) {
                                         />
                                     </div>
 
-                                    <div className="grid gap-4 xl:grid-rows-[auto_1fr] border border-brand-blue/15 rounded-md p-4 w-full">
+                                    <div className="grid gap-4 xl:grid-rows-[auto_1fr] border border-brand-brown/15 rounded-md p-4 w-full">
                                         <div className="flex flex-col gap-3 rounded-lg p-3 xl:justify-between">
-                                            <h3 className="font-baskerville text-2xl uppercase xl:text-3xl">
+                                            <h3 className="font-history text-2xl uppercase xl:text-3xl">
                                                 {room.title}
                                             </h3>
                                             <p>{room.description}</p>
-                                            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-brand-blue mt-2 xl:flex-row-reverse xl:justify-end">
+                                            <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm text-brand-brown mt-2 xl:flex-row-reverse xl:justify-end">
                                                 <span
                                                     className={`flex items-center gap-2 ${room.slug === "junior-suite" ? "xl:w-full" : ""}`}
                                                 >
@@ -533,23 +536,23 @@ export default function SubscriptionsPage({ locale }: { locale: Locale }) {
                                             {roomExtras.map((item) => (
                                                 <div
                                                     key={`${room.slug}-${item.title}`}
-                                                    className="flex h-full flex-col gap-4 rounded-lg bg-brand-blue-100/40 p-5 xl:p-6"
+                                                    className="flex h-full flex-col gap-4 rounded-lg bg-brand-light/40 p-5 xl:p-6"
                                                 >
-                                                    <div className="border-b border-brand-blue/10 pb-2 flex flex-col gap-2">
-                                                        <p className="text-xs uppercase text-brand-blue/60">
+                                                    <div className="border-b border-brand-brown/10 pb-2 flex flex-col gap-2">
+                                                        <p className="text-xs uppercase text-brand-brown/60">
                                                             {copy.tariffLabel}
                                                         </p>
-                                                        <h3 className="font-baskerville uppercase text-xl xl:text-2xl">
+                                                        <h3 className="font-history uppercase text-xl xl:text-2xl">
                                                             {item.title}
                                                         </h3>
                                                     </div>
 
-                                                    <p className="flex-1 text-sm leading-6 text-brand-blue/80">
+                                                    <p className="flex-1 text-sm leading-6 text-brand-brown/80">
                                                         {item.description}
                                                     </p>
 
-                                                    <div className="flex justify-between text-brand-blue">
-                                                        <p className="font-bold text-lg xl:text-xl font-baskerville">
+                                                    <div className="flex justify-between text-brand-brown">
+                                                        <p className="font-bold text-lg xl:text-xl font-history">
                                                             {item.priceTotal}
                                                         </p>
                                                         <p>
@@ -580,8 +583,8 @@ export default function SubscriptionsPage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <section className="mx-6 flex flex-col gap-2 xl:w-full xl:max-w-6xl xl:mx-auto">
-                <h3 className="text-lg xl:text-xl font-baskerville uppercase">
+            <section className="mx-6 flex flex-col gap-2 xl:w-full xl:max-w-7xl xl:mx-auto">
+                <h3 className="text-lg xl:text-xl font-history uppercase">
                     {copy.rulesTitle}
                 </h3>
                 <ul className="mt-1 list-disc space-y-1 pl-5 pb-4 xl:max-w-5xl">
