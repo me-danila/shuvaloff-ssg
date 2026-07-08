@@ -12,8 +12,9 @@ import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 
 type BreakfastCopy = {
-    title: string;
+    title: React.ReactNode;
     subtitle: string;
+    bestBreakfastLabel: string;
     bookLabel: string;
     description1: string;
     description2: React.ReactNode;
@@ -25,6 +26,11 @@ type BreakfastCopy = {
     breakfastDescription2: React.ReactNode;
     breakfastButtonLabel2: string;
     breakfastLink2: string;
+    graphTitle: string;
+    graphImage: string;
+    graphSections: { heading: string; items: string[] }[];
+    graphButtonLabel: string;
+    graphPrice: React.ReactNode;
     quoteTitle1: string;
     quoteDescription1: React.ReactNode;
     quoteTitle2: string;
@@ -35,9 +41,10 @@ type BreakfastCopy = {
 
 const copyByLocale: Record<Locale, BreakfastCopy> = {
     ru: {
-        title: "ГРАФСКИЕ ЗАВТРАКИ В АКАДЕМИА ОСОБНЯК ШУВАЛОВА",
+        title: (<>ГРАФСКИЕ ЗАВТРАКИ В&nbsp;АКАДЕМИА ОСОБНЯК ШУВАЛОВА</>),
         subtitle:
             "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
+        bestBreakfastLabel: "Ресторан с лучшим завтраком 2026",
         bookLabel: "Забронировать",
         description1: "Воссоздаем атмосферу эпохи XIX века",
         description2: (
@@ -47,15 +54,13 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 столом, вели неспешные беседы и&nbsp;наслаждались вкусом жизни.
                 <br />
                 <br />
-                Исключительно для гостей особняка, графские завтраки доступны
-                ежедневно
+                Исключительно для гостей особняка, графские завтраки подаются ежедневно по предварительному бронированию (при наличии свободных слотов):
                 <br />
-                (при наличии свободных слотов):
+                в 13:00, 13:15, 13:30,
                 <br />
-                вторник / четверг / пятница в 13:00 и 15:00
+                14:00, 14:15, 14:30,
                 <br />
-                понедельник / среда / суббота / воскресенье в 13:00, 14:00,
-                16:00 и 17:00
+                15:00, 15:15, 15:30.
             </>
         ),
         breakfastTitle1: "Завтрак Графини",
@@ -113,6 +118,50 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
         breakfastButtonLabel2: "Открыть меню",
         breakfastLink2:
             "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA_%D0%B3%D1%80%D0%B0%D1%84%D0%B0.pdf",
+        graphTitle: "Состав графского завтрака",
+        graphImage:
+            "https://academia.spb.ru/wp-content/uploads/2026/04/%D0%93%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA.avif",
+        graphSections: [
+            {
+                heading: "ОСНОВА",
+                items: [
+                    "Пшенная каша со сливочным маслом",
+                    "Яйца всмятку с черной икрой",
+                    "Паштет из лососины",
+                    "Редис и свежие огурцы",
+                    "Хлебная корзина с солодовыми булочками и мини-круассанами",
+                    "Сливочное соленое масло",
+                    "Малиновое и вишневое варенье",
+                    "Кофейный крем с ягодами",
+                ],
+            },
+            {
+                heading: "ЭТАЖЕРКА",
+                items: [
+                    "Ассорти десертов: наполеон и медовик",
+                    "Фруктовое желе с малиной",
+                    "Ананас",
+                    "Блины с лососиной / Сырники со сметаной и ягодами на выбор",
+                    "Пирог с уткой и сметаной",
+                ],
+            },
+            {
+                heading: "НАПИТКИ",
+                items: [
+                    "Ягодный морс",
+                    "Вишневая наливка / Бокал шампанского на выбор",
+                    "Чай / Кофе по-венски на выбор",
+                ],
+            },
+        ],
+        graphButtonLabel: "Открыть меню",
+        graphPrice: (
+            <>
+                Стоимость:
+                <br />5 500 ₽ — на одну персону
+                <br />8 500 ₽ — на две персоны
+            </>
+        ),
         quoteTitle1: "Это не подача — это настоящий ритуал.",
         quoteDescription1: (
             <>
@@ -136,9 +185,10 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
         bookHotelLabel: "Забронировать отель",
     },
     en: {
-        title: "ARISTOCRATIC BREAKFASTS AT THE SHUVALOV MANSION ACADEMY",
+        title: (<>ARISTOCRATIC BREAKFASTS AT THE ACADEMIA MANSION SHUVALOV</>),
         subtitle:
             "— it’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
+        bestBreakfastLabel: "The Best Breakfast Restaurant of 2026",
         bookLabel: "Book now",
         description1: "Recreating the atmosphere of the 19th century",
         description2: (
@@ -149,15 +199,13 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 life.
                 <br />
                 <br />
-                Exclusively for guests of the mansion, the Count’s Breakfast is
-                available daily
+                Exclusively for guests of the mansion, the Count's breakfasts are served daily by prior reservation (subject to availability):
                 <br />
-                (subject to availability):
+                at 13:00, 13:15, 13:30,
                 <br />
-                Tuesday / Thursday / Friday at 1:00 PM and 3:00 PM
+                14:00, 14:15, 14:30,
                 <br />
-                Monday / Wednesday / Saturday / Sunday at 1:00 PM, 2:00 PM, 4:00
-                PM, and 5:00 PM
+                15:00, 15:15, 15:30.
             </>
         ),
         breakfastTitle1: "The Countess's Breakfast",
@@ -203,6 +251,50 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
         breakfastButtonLabel2: "Open a menu",
         breakfastLink2:
             "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA_%D0%B3%D1%80%D0%B0%D1%84%D0%B0.pdf",
+        graphTitle: "The Count's Breakfast Menu",
+        graphImage:
+            "https://academia.spb.ru/wp-content/uploads/2026/04/%D0%93%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA.avif",
+        graphSections: [
+            {
+                heading: "MAIN COURSE",
+                items: [
+                    "Millet porridge with butter",
+                    "Soft-boiled eggs with black caviar",
+                    "Salmon pâté",
+                    "Radishes and fresh cucumbers",
+                    "Bread basket with malt buns and mini croissants",
+                    "Salted butter",
+                    "Raspberry and cherry jam",
+                    "Coffee cream with berries",
+                ],
+            },
+            {
+                heading: "TIERED STAND",
+                items: [
+                    "Assorted desserts: Napoleon and medovik",
+                    "Fruit jelly with raspberries",
+                    "Pineapple",
+                    "Blini with salmon / Syrniki with sour cream and berries (your choice)",
+                    "Duck and sour cream pie",
+                ],
+            },
+            {
+                heading: "DRINKS",
+                items: [
+                    "Berry mors",
+                    "Cherry liqueur / A glass of champagne (your choice)",
+                    "Tea / Viennese coffee (your choice)",
+                ],
+            },
+        ],
+        graphButtonLabel: "Open a menu",
+        graphPrice: (
+            <>
+                Price:
+                <br />5,500 ₽ — for one person
+                <br />8,500 ₽ — for two persons
+            </>
+        ),
         quoteTitle1: "It’s not just a serve — it’s a real ritual.",
         quoteDescription1: (
             <>
@@ -277,7 +369,7 @@ export default function AristocraticBreakfastPage({
     return (
         <main className="flex flex-col gap-4 xl:gap-16">
             <section>
-                <div className="relative overflow-hidden aspect-8/9 xl:aspect-[unset] xl:min-h-screen">
+                <div className="relative overflow-hidden min-h-[40rem] xl:min-h-screen">
                     <FadeIn
                         duration={0.9}
                         className="absolute inset-0 h-full w-full"
@@ -294,7 +386,19 @@ export default function AristocraticBreakfastPage({
                     </FadeIn>
 
                     <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
-                        <div className="absolute bottom-10 md:bottom-20 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-7xl xl:mx-auto xl:gap-6">
+                        <div className="absolute bottom-10 md:bottom-20 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-6xl xl:mx-auto xl:gap-6">
+                            <StaggerItem className="flex flex-col gap-0 mb-8 xl:mb-20">
+                                <div className="relative w-full h-[50px]">
+                                    <Image
+                                        src="https://static.tildacdn.com/tild6134-6132-4566-b630-356264393238/svgexport-1_5.svg"
+                                        alt={copy.breakfastTitle1}
+                                        fill
+                                        loading="lazy"
+                                        sizes="(max-width: 1280px) 100vw, 50vw"
+                                    />
+                                </div>
+                                <p>{copy.bestBreakfastLabel}</p>
+                            </StaggerItem>
                             <StaggerItem>
                                 <h1 className="text-3xl xl:text-5xl xl:max-w-2xl xl:mx-auto">
                                     {copy.title}
@@ -328,7 +432,7 @@ export default function AristocraticBreakfastPage({
                 </FadeUp>
             </section>
 
-            <section className="flex flex-col gap-2 xl:flex-row xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
+            <section className="hidden flex-col gap-2 xl:flex-row xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
                 <FadeUp className="flex-1">
                     <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded">
                         <Image
@@ -363,7 +467,7 @@ export default function AristocraticBreakfastPage({
                 </div>
             </section>
 
-            <section className="flex flex-col gap-2 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
+            <section className="hidden flex-col gap-2 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
                 <FadeUp className="flex-1">
                     <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded">
                         <Image
@@ -398,6 +502,55 @@ export default function AristocraticBreakfastPage({
                 </div>
             </section>
 
+            <section className="flex flex-col gap-2 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
+                <FadeUp className="flex-1">
+                    <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded">
+                        <Image
+                            src={copy.graphImage}
+                            alt={copy.graphTitle}
+                            fill
+                            loading="lazy"
+                            sizes="(max-width: 1280px) 100vw, 50vw"
+                            className="object-cover xl:object-[50%_70%]"
+                        />
+                    </div>
+                </FadeUp>
+                <div className="px-6 py-2 flex flex-col gap-4 xl:my-2 xl:flex-1 xl:gap-4">
+                    <FadeUp>
+                        <h3 className="font-alistair text-blue-800 text-4xl xl:text-5xl">
+                            {copy.graphTitle}:
+                        </h3>
+                    </FadeUp>
+                    <FadeUp delay={0.1}>
+                        <div className="flex flex-col gap-3">
+                            {copy.graphSections.map((group) => (
+                                <div
+                                    key={group.heading}
+                                    className="flex flex-col gap-[0.1875rem]"
+                                >
+                                    <p className="font-semibold text-blue-800">
+                                        {group.heading}:
+                                    </p>
+                                    {group.items.map((item) => (
+                                        <p key={item}>• {item}</p>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </FadeUp>
+                    <FadeUp delay={0.2} className="flex flex-col items-start gap-2">
+                        <Button
+                            href={copy.breakfastLink2}
+                            target="_blank"
+                            variant="primary"
+                        >
+                            {copy.graphButtonLabel}
+                        </Button>
+                        <p className="italic">{copy.graphPrice}</p>
+                    </FadeUp>
+                </div>
+            </section>
+
             <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0 xl:gap-6">
                 <FadeUp>
                     <h3 className="font-alistair text-blue-800 text-4xl xl:text-5xl">
@@ -411,7 +564,7 @@ export default function AristocraticBreakfastPage({
 
             <section className="relative aspect-4/3 min-h-[350px] w-full overflow-hidden rounded xl:aspect-5/2 xl:w-[98%] xl:mx-auto xl:rounded-xl">
                 <Image
-                    src="https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif"
+                    src="https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D1%84%D0%BE%D0%BD.avif"
                     alt={copy.title}
                     fill
                     loading="lazy"

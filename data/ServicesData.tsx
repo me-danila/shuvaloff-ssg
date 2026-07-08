@@ -104,7 +104,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Графский завтрак",
             subtitle:
                 "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D1%84%D0%BE%D0%BD.avif",
             slug: "aristocratic-breakfast",
         },
         {
@@ -260,11 +260,11 @@ export const AllServices: Record<Locale, Service[]> = {
                     рады помочь.
                 </>
             ),
-            price: "от 3 500 ₽",
+            price: "от 5 800 ₽",
             links: [
                 {
                     label: "Коллекция тортов",
-                    href: "https://static.academia.spb.ru/files/chef-cake.pdf",
+                    href: "https://shuvaloff.academia-rest.ru/torty/",
                 },
             ],
         },
@@ -649,7 +649,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Aristocratic breakfast",
             subtitle:
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Графский-завтрак.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D1%84%D0%BE%D0%BD.avif",
             slug: "aristocratic-breakfast",
         },
         {
@@ -795,11 +795,11 @@ export const AllServices: Record<Locale, Service[]> = {
                     are here and always happy to help.
                 </>
             ),
-            price: "from 3 500 ₽",
+            price: "from 5 800 ₽",
             links: [
                 {
                     label: "Cake Collection",
-                    href: "https://static.academia.spb.ru/files/chef-cake.pdf",
+                    href: "https://shuvaloff.academia-rest.ru/torty/",
                 },
             ],
         },
