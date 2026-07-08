@@ -13,6 +13,7 @@ import { localizeHref } from "@/lib/i18n/routing";
 
 type BreakfastCopy = {
     title: React.ReactNode;
+    titleAlt: string;
     subtitle: string;
     bestBreakfastLabel: string;
     bookLabel: string;
@@ -42,6 +43,7 @@ type BreakfastCopy = {
 const copyByLocale: Record<Locale, BreakfastCopy> = {
     ru: {
         title: (<>ГРАФСКИЕ ЗАВТРАКИ В&nbsp;АКАДЕМИА ОСОБНЯК ШУВАЛОВА</>),
+        titleAlt: "Графские завтраки в Академиа Особняк Шувалова",
         subtitle:
             "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
         bestBreakfastLabel: "Ресторан с лучшим завтраком 2026",
@@ -186,6 +188,7 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
     },
     en: {
         title: (<>ARISTOCRATIC BREAKFASTS AT THE ACADEMIA MANSION SHUVALOV</>),
+        titleAlt: "Aristocratic breakfasts at the Academia Mansion Shuvalov",
         subtitle:
             "— it’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
         bestBreakfastLabel: "The Best Breakfast Restaurant of 2026",
@@ -565,7 +568,7 @@ export default function AristocraticBreakfastPage({
             <section className="relative aspect-4/3 min-h-[350px] w-full overflow-hidden rounded xl:aspect-5/2 xl:w-[98%] xl:mx-auto xl:rounded-xl">
                 <Image
                     src="https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D1%84%D0%BE%D0%BD.avif"
-                    alt={copy.title}
+                    alt={copy.titleAlt}
                     fill
                     loading="lazy"
                     className="object-cover"
