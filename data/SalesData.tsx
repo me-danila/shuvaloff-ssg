@@ -24,6 +24,13 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking?&be-offer=910895",
         },
         {
+            title: "Петербург: Погружение в историю",
+            subtitle:
+                "Отдых в особняке Шувалова с комплиментарным посещением лекции",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84-2.avif",
+            bookingUrl: "/booking/?&be-offer=946722",
+        },
+        {
             title: "ВАШ ВЫХОДНОЙ КАК ИСКУССТВО",
             subtitle:
                 "Особый формат, в котором выходной день становится церемонией",
@@ -105,6 +112,13 @@ export const AllSales: Record<Locale, Sale[]> = {
                 "A unique getaway steeped in opulent aristocratic traditions",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
             bookingUrl: "/booking?&be-offer=910895",
+        },
+        {
+            title: "St. Petersburg: A Journey into History",
+            subtitle:
+                "A visit to the Shuvalov Mansion, including a complimentary lecture",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84-2.avif",
+            bookingUrl: "/booking/?&be-offer=946722",
         },
         {
             title: "YOUR WEEKEND AS ART",

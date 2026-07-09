@@ -46,7 +46,7 @@ export default function SalesGrid() {
                         key={sale.title}
                         className="flex flex-col overflow-hidden rounded-[4px] bg-white pb-7 text-center"
                     >
-                        <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[22px]">
+                        <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]">
                             {sale.title}
                         </h3>
                         <div className="relative aspect-[16/11] w-full overflow-hidden">
