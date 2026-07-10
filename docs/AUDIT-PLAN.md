@@ -34,9 +34,9 @@
 | **DX-7** tsconfig `ES2022` + `typecheck`-скрипт | ✅ | (`allowJs` Next авто-возвращает) |
 | чистка `HistoricalRoomsPage` `biome-ignore` (noArrayIndexKey) | ✅ | 0 biome-ignore в first-party коде |
 
-**Отложено (по решению владельца — выгода уже взята SEO-2):**
-- **DX-5 / Вопрос 2** — реструктуризация layout (route-group `app/(ru)/` + `app/en/layout`). Главная цель (нативный EN OpenGraph) достигнута через SEO-2 (`fix-en-lang og:locale`=0). Остаток (удалить `HtmlLangSync`, ужать `fix-en-lang.mjs` до html-lang/inLanguage, серверизовать `SkipLink`) — высокий риск переноса ~40 файлов ради умеренной пользы. Способ задокументирован в [Вопрос 2](#q-layout), готов к выполнению.
-- **DX-4** — locale-проп вместо `useLocale`. Завязан на DX-5: без реструктуризации целевые компоненты всё равно остаются клиентскими (динамическая локаль 404 / клиентские родители с framer). Отложен вместе с DX-5.
+**DX-5 / Вопрос 2 — ✅ выполнено (по решению владельца).** Реструктуризация layout: route-group `app/(ru)/` (URL без изменений) + `app/en/layout.tsx`, оба рендерят серверный `SiteShell(locale)` (SkipLink + site-JSON-LD + Header + Footer). Один root сохранён → глобальный 404 цел. `Header`/`Footer`/`SkipLink` берут `locale` пропом (SkipLink стал серверным); `og:locale`/`inLanguage` для EN — нативно; `fix-en-lang.mjs` ужат с 3 регэкспов до одного (`<html lang>` — единственный сигнал, который один root не задаёт per-locale). Верифицировано: 117 стр., ровно один site-nav/стр., 404 с RU-shell, EN `lang/og:locale/inLanguage`=en (0 ru-утечек), RU без изменений.
+
+**DX-4 — частично (в составе DX-5).** Shell-компоненты (`Header`/`Footer`/`SkipLink`) получают `locale` пропом; `SkipLink` серверизован. Глубокие клиентские потребители `useLocale` (гриды/слайдеры/модалки/`ContactsSection`/`BookingForm`) оставлены — они клиентские из-за интерактива (framer/state), проп локали их не серверизует.
 
 **Пропущено осознанно (обоснованно):**
 - **P-8** webvisor Метрики — продуктовое решение отеля (запись сессий), не автономный перф.
