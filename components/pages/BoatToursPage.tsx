@@ -1012,6 +1012,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 onClose={() => setRouteMap(null)}
                 maxWidth="max-w-3xl"
                 bgColor="bg-transparent"
+                ariaLabel={copy.mapLabel}
             >
                 {routeMap && (
                     <div className="relative aspect-4/3 w-full">

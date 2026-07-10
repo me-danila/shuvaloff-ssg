@@ -132,6 +132,17 @@ select {
     animation: marquee 120s linear infinite;
 }
 
+/* Пользователи с prefers-reduced-motion не видят бесконечную прокрутку —
+   маркиза останавливается и показывает статичный ряд. Дефолтные
+   пользователи (без предпочтения) не попадают под этот media-запрос,
+   поэтому анимация для них не меняется. Unlayered-правило перебивает
+   utility из @layer, отдельный !important не нужен. */
+@media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+        animation: none;
+    }
+}
+
 /* HotBot */
 html body.hotbot-widget-container {
     --font-family: "Century Gothic";

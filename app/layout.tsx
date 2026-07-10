@@ -4,6 +4,7 @@ import "./globals.css";
 import { domAnimation, LazyMotion } from "framer-motion";
 import Script from "next/script";
 import { Suspense } from "react";
+import SkipLink from "@/components/a11y/SkipLink";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
@@ -133,6 +134,7 @@ export default function RootLayout({
             <body
                 className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
             >
+                <SkipLink />
                 <StructuredData data={buildSiteSchema("ru")} />
                 <HtmlLangSync />
                 <TravelLineManager />
@@ -146,7 +148,13 @@ export default function RootLayout({
                         <Suspense fallback={null}>
                             <Header />
                         </Suspense>
-                        <Suspense fallback={null}>{children}</Suspense>
+                        <div
+                            id="main-content"
+                            tabIndex={-1}
+                            className="scroll-mt-24 focus:outline-none"
+                        >
+                            <Suspense fallback={null}>{children}</Suspense>
+                        </div>
                         <Footer />
                     </LazyMotion>
                 </SmoothScroll>

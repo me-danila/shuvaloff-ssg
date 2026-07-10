@@ -43,6 +43,12 @@ const TITLE_PREFIX: Record<Locale, string> = {
     en: "Events calendar",
 };
 
+// aria-label для кнопок переключения месяца.
+const NAV_ARIA: Record<Locale, { prev: string; next: string }> = {
+    ru: { prev: "Предыдущий месяц", next: "Следующий месяц" },
+    en: { prev: "Previous month", next: "Next month" },
+};
+
 // Неделя начинается с понедельника.
 const WEEKDAYS: Record<Locale, string[]> = {
     ru: ["пн", "вт", "ср", "чт", "пт", "сб", "вс"],
@@ -124,7 +130,7 @@ export default function EventsCalendar() {
             <div className="mb-6 flex items-center justify-between">
                 <button
                     type="button"
-                    aria-label="Previous month"
+                    aria-label={NAV_ARIA[locale].prev}
                     onClick={() => shift(-1)}
                     className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-brand-brown/60 transition-colors hover:bg-stone-100 hover:text-brand-brown"
                 >
@@ -136,7 +142,7 @@ export default function EventsCalendar() {
                 </span>
                 <button
                     type="button"
-                    aria-label="Next month"
+                    aria-label={NAV_ARIA[locale].next}
                     onClick={() => shift(1)}
                     className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-brand-brown/60 transition-colors hover:bg-stone-100 hover:text-brand-brown"
                 >

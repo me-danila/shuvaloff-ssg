@@ -7,6 +7,9 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
     const isDesktop = useMediaQuery("(min-width: 1024px)");
+    const prefersReducedMotion = useMediaQuery(
+        "(prefers-reduced-motion: reduce)",
+    );
     const [hasCert, setHasCert] = useState(false);
 
     useEffect(() => {
@@ -42,7 +45,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         };
     }, []);
 
-    if (!isDesktop || hasCert) return <>{children}</>;
+    if (!isDesktop || hasCert || prefersReducedMotion) return <>{children}</>;
 
     return (
         <ReactLenis

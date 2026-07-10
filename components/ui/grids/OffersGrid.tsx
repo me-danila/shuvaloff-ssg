@@ -287,10 +287,14 @@ export default function OffersGrid({
                 open={Boolean(selectedOffer)}
                 onClose={() => setSelectedOffer(null)}
                 maxWidth="max-w-lg"
+                ariaLabelledby="offer-modal-title"
             >
                 {selectedOffer && (
                     <div className="flex flex-col gap-6 m-6 xl:m-8">
-                        <h2 className="font-history text-xl xl:text-2xl uppercase">
+                        <h2
+                            id="offer-modal-title"
+                            className="font-history text-xl xl:text-2xl uppercase"
+                        >
                             {selectedOffer.title}:
                         </h2>
                         <div className="space-y-2">

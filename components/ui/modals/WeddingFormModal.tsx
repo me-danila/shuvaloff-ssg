@@ -62,6 +62,7 @@ export default function WeddingFormModal({
                 ? "Заполните контактные данные для связи"
                 : "Fill in your contact details",
         namePlaceholder: locale === "ru" ? "Ваше имя" : "Your name",
+        phoneLabel: locale === "ru" ? "Ваш телефон" : "Your phone",
         emailPlaceholder: locale === "ru" ? "Ваш e-mail" : "Your e-mail",
         tgPlaceholder:
             locale === "ru" ? "Ваш ник в Telegram" : "Your Telegram username",
@@ -146,18 +147,36 @@ export default function WeddingFormModal({
                 {title}
             </button>
 
-            <Modal open={open} onClose={handleClose} maxWidth="max-w-2xl">
+            <Modal
+                open={open}
+                onClose={handleClose}
+                maxWidth="max-w-2xl"
+                ariaLabelledby="wedding-form-modal-title"
+            >
                 <div className="px-8 py-12">
                     {status === "success" ? (
-                        <div className="flex flex-col items-center gap-4 py-12 text-center">
-                            <h3 className="font-history uppercase text-xl xl:text-2xl">
+                        // biome-ignore lint/a11y/useSemanticElements: this live region wraps an <h3> heading, which <output> (phrasing content only) cannot legally contain — role="status" on a div is the correct choice
+                        <div
+                            role="status"
+                            aria-live="polite"
+                            className="flex flex-col items-center gap-4 py-12 text-center"
+                        >
+                            <h3
+                                id="wedding-form-modal-title"
+                                className="font-history uppercase text-xl xl:text-2xl"
+                            >
                                 {copy.successTitle}
                             </h3>
                             <p>{copy.successText}</p>
                         </div>
                     ) : (
                         <>
-                            <h2 className="text-center">{title}</h2>
+                            <h2
+                                id="wedding-form-modal-title"
+                                className="text-center"
+                            >
+                                {title}
+                            </h2>
                             <p className="text-sm text-neutral-400 text-center mt-1 mb-6 xl:mb-10">
                                 {copy.subtitle}
                             </p>
@@ -169,6 +188,7 @@ export default function WeddingFormModal({
                                 <input
                                     type="text"
                                     placeholder={copy.namePlaceholder}
+                                    aria-label={copy.namePlaceholder}
                                     required
                                     value={form.name}
                                     onChange={set("name")}
@@ -177,6 +197,7 @@ export default function WeddingFormModal({
                                 <input
                                     type="tel"
                                     placeholder="+7 (000) 000-00-00"
+                                    aria-label={copy.phoneLabel}
                                     required
                                     value={form.phone}
                                     onChange={set("phone")}
@@ -185,6 +206,7 @@ export default function WeddingFormModal({
                                 <input
                                     type="email"
                                     placeholder={copy.emailPlaceholder}
+                                    aria-label={copy.emailPlaceholder}
                                     value={form.email}
                                     onChange={set("email")}
                                     className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
@@ -192,6 +214,7 @@ export default function WeddingFormModal({
                                 <input
                                     type="text"
                                     placeholder={copy.tgPlaceholder}
+                                    aria-label={copy.tgPlaceholder}
                                     value={form.telegram}
                                     onChange={set("telegram")}
                                     className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
@@ -233,7 +256,10 @@ export default function WeddingFormModal({
                                 </button>
 
                                 {status === "error" && (
-                                    <p className="text-center text-xs text-red-500">
+                                    <p
+                                        role="alert"
+                                        className="text-center text-xs text-red-500"
+                                    >
                                         {copy.errorLabel}
                                     </p>
                                 )}

@@ -33,7 +33,11 @@ export function SmiSobakaRuModal() {
                 </svg>
             </button>
 
-            <Modal open={open} onClose={() => setOpen(false)}>
+            <Modal
+                open={open}
+                onClose={() => setOpen(false)}
+                ariaLabel={imageAlt}
+            >
                 <div className="p-8 min-h-[90vh]">
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/04/by-graf.jpeg"

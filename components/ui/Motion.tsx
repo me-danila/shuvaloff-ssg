@@ -1,6 +1,6 @@
 "use client";
 
-import { type HTMLMotionProps, m } from "framer-motion";
+import { type HTMLMotionProps, m, useReducedMotion } from "framer-motion";
 import { forwardRef, type ReactNode } from "react";
 
 type BaseDivProps = Omit<HTMLMotionProps<"div">, "children">;
@@ -23,9 +23,10 @@ export function FadeIn({
     once = true,
     ...props
 }: MotionProps) {
+    const shouldReduce = useReducedMotion();
     return (
         <m.div
-            initial={{ opacity: 0 }}
+            initial={shouldReduce ? { opacity: 1 } : { opacity: 0 }}
             animate={mode === "mount" ? { opacity: 1 } : undefined}
             whileInView={mode === "inView" ? { opacity: 1 } : undefined}
             viewport={mode === "inView" ? { once, amount: 0.12 } : undefined}
@@ -50,9 +51,10 @@ export function FadeUp({
     once = true,
     ...props
 }: MotionProps) {
+    const shouldReduce = useReducedMotion();
     return (
         <m.div
-            initial={{ opacity: 0, y }}
+            initial={shouldReduce ? { opacity: 1, y: 0 } : { opacity: 0, y }}
             animate={mode === "mount" ? { opacity: 1, y: 0 } : undefined}
             whileInView={mode === "inView" ? { opacity: 1, y: 0 } : undefined}
             viewport={mode === "inView" ? { once, amount: 0.12 } : undefined}
@@ -92,11 +94,12 @@ export const StaggerContainer = forwardRef<
         },
         ref,
     ) => {
+        const shouldReduce = useReducedMotion();
         return (
             <m.div
                 ref={ref}
                 onScroll={onScroll}
-                initial="hidden"
+                initial={shouldReduce ? "show" : "hidden"}
                 animate={mode === "mount" ? "show" : undefined}
                 whileInView={mode === "inView" ? "show" : undefined}
                 viewport={mode === "inView" ? { once, amount } : undefined}

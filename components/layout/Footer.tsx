@@ -81,6 +81,7 @@ export default function Footer() {
         locale === "ru"
             ? " Академиа Особняк Шувалова"
             : " of ACADEMIA Shuvaloff";
+    const emailLabel = locale === "ru" ? "Электронная почта" : "Email address";
 
     // Десктоп: кнопка отдельным блоком. Мобайл: кнопка внутри поля.
     const SubscribeForm = ({ inset = false }: { inset?: boolean }) =>
@@ -89,7 +90,8 @@ export default function Footer() {
                 <input
                     type="email"
                     placeholder="Email"
-                    className="w-full rounded-md bg-white py-3.5 pl-4 pr-14 text-sm text-stone-800 placeholder:text-stone-400 outline-none"
+                    aria-label={emailLabel}
+                    className="w-full rounded-md bg-white py-3.5 pl-4 pr-14 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                 />
                 <button
                     type="submit"
@@ -107,7 +109,8 @@ export default function Footer() {
                 <input
                     type="email"
                     placeholder="Email"
-                    className="min-w-0 flex-1 rounded-md bg-white px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 outline-none"
+                    aria-label={emailLabel}
+                    className="min-w-0 flex-1 rounded-md bg-white px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                 />
                 <button
                     type="submit"
@@ -189,7 +192,8 @@ export default function Footer() {
                                 <input
                                     type="email"
                                     placeholder="Email"
-                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none"
+                                    aria-label={emailLabel}
+                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                                 />
                                 <button
                                     type="submit"

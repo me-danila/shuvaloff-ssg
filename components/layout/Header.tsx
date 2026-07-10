@@ -480,6 +480,10 @@ export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+    // Keyboard-only: tracks which desktop dropdown currently holds keyboard
+    // focus, purely to drive aria-expanded. The visual open/close is handled by
+    // CSS (:hover for mouse, :focus-visible for keyboard) and is unaffected.
+    const [focusedDropdown, setFocusedDropdown] = useState<string | null>(null);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
@@ -868,12 +872,38 @@ export default function Header() {
                                     : isLastNavItem
                                       ? "right-0"
                                       : "left-1/2 -translate-x-1/2";
+                            const dropdownId = `nav-dropdown-${index}`;
+                            const isDropdownFocused =
+                                focusedDropdown === item.label;
 
                             if (hasDropdown) {
                                 return (
+                                    // biome-ignore lint/a11y/noStaticElementInteractions: focus wrapper only observes focus-within to mirror aria-expanded for keyboard users; the interactive control is the child <Link>, not this div
                                     <div
                                         key={item.href}
                                         className="group relative flex h-full items-center"
+                                        onFocus={(e) => {
+                                            // Only reflect aria-expanded for
+                                            // keyboard focus (matches the
+                                            // :focus-visible CSS that opens the
+                                            // panel); mouse clicks do not.
+                                            if (
+                                                (
+                                                    e.target as HTMLElement
+                                                ).matches?.(":focus-visible")
+                                            ) {
+                                                setFocusedDropdown(item.label);
+                                            }
+                                        }}
+                                        onBlur={(e) => {
+                                            if (
+                                                !e.currentTarget.contains(
+                                                    e.relatedTarget as Node | null,
+                                                )
+                                            ) {
+                                                setFocusedDropdown(null);
+                                            }
+                                        }}
                                     >
                                         <Link
                                             href={buildMenuHref(item)}
@@ -883,6 +913,9 @@ export default function Header() {
                                                     ? "noopener noreferrer"
                                                     : undefined
                                             }
+                                            aria-haspopup="true"
+                                            aria-expanded={isDropdownFocused}
+                                            aria-controls={dropdownId}
                                             className={`relative inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-semibold uppercase tracking-wide transition-opacity duration-200 hover:opacity-70 ${
                                                 isLight
                                                     ? "text-brand-brown"
@@ -897,13 +930,14 @@ export default function Header() {
                                                 className="transition-transform duration-200 group-hover:rotate-180"
                                             />
                                         </Link>
-                                        <div className="pointer-events-none fixed top-36 right-0 bottom-0 left-0 z-40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100" />
+                                        <div className="pointer-events-none fixed top-36 right-0 bottom-0 left-0 z-40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100 group-has-[:focus-visible]:opacity-100" />
                                         <span
                                             className={`absolute top-full h-2 w-[19rem] ${dropdownPositionClass}`}
                                             aria-hidden="true"
                                         />
                                         <div
-                                            className={`font-century-v2 pointer-events-none absolute top-[calc(100%+0.5rem)] z-50 w-[19rem] translate-y-2 rounded-sm border border-white/50 bg-white/72 px-8 py-6 opacity-0 shadow-[0_22px_70px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 ${dropdownPositionClass}`}
+                                            id={dropdownId}
+                                            className={`font-century-v2 pointer-events-none absolute top-[calc(100%+0.5rem)] z-50 w-[19rem] translate-y-2 rounded-sm border border-white/50 bg-white/72 px-8 py-6 opacity-0 shadow-[0_22px_70px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-has-[:focus-visible]:pointer-events-auto group-has-[:focus-visible]:translate-y-0 group-has-[:focus-visible]:opacity-100 ${dropdownPositionClass}`}
                                         >
                                             <div className="flex flex-col gap-4.5">
                                                 {item.submenu?.map(
