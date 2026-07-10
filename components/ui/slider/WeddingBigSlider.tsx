@@ -78,6 +78,7 @@ export function WeddingBigSlider({ slides }: Props) {
                     src={slide.image.src}
                     alt={slide.image.alt}
                     fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover"
                     loading="lazy"
                 />

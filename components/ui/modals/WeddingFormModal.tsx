@@ -220,6 +220,7 @@ export default function WeddingFormModal({
                                                 locale,
                                             )}
                                             target="_blank"
+                                            rel="noopener noreferrer"
                                             className="text-neutral-900 underline underline-offset-2"
                                         >
                                             {copy.consentLink}

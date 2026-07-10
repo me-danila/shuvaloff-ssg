@@ -6,7 +6,7 @@ import {
     PhoneIcon,
     UserIcon,
 } from "@phosphor-icons/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -568,6 +568,9 @@ export default function Header() {
             <Link
                 href={href}
                 target={item.target}
+                rel={
+                    item.target === "_blank" ? "noopener noreferrer" : undefined
+                }
                 onClick={closeMenu}
                 className={className}
             >
@@ -580,7 +583,7 @@ export default function Header() {
         <>
             <div className={`h-14 xl:h-36 ${isHeaderFixed ? "hidden" : ""}`} />
 
-            <motion.header
+            <m.header
                 initial={isDesktop ? { y: -20, opacity: 0 } : false}
                 animate={isDesktop ? { y: 0, opacity: 1 } : false}
                 transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
@@ -963,12 +966,12 @@ export default function Header() {
                         })}
                     </nav>
                 }
-            </motion.header>
+            </m.header>
 
             <AnimatePresence>
                 {menuOpen && (
                     <>
-                        <motion.button
+                        <m.button
                             type="button"
                             initial="hidden"
                             animate="show"
@@ -980,7 +983,7 @@ export default function Header() {
                             aria-label={copy.closeMenuAria}
                         />
 
-                        <motion.div
+                        <m.div
                             initial="hidden"
                             animate="show"
                             exit="exit"
@@ -1003,7 +1006,7 @@ export default function Header() {
                                         &times;
                                     </button>
                                 </div>
-                                <motion.nav
+                                <m.nav
                                     variants={menuListVariants}
                                     initial="hidden"
                                     animate="show"
@@ -1014,7 +1017,7 @@ export default function Header() {
                                             activeSubmenu === item.label;
 
                                         return item.submenu ? (
-                                            <motion.div
+                                            <m.div
                                                 key={item.label}
                                                 variants={menuItemVariants}
                                             >
@@ -1042,7 +1045,7 @@ export default function Header() {
                                                         </span>
                                                     </button>
                                                 </div>
-                                                <motion.div
+                                                <m.div
                                                     variants={
                                                         mobileSubmenuVariants
                                                     }
@@ -1068,10 +1071,10 @@ export default function Header() {
                                                             ),
                                                         )}
                                                     </div>
-                                                </motion.div>
-                                            </motion.div>
+                                                </m.div>
+                                            </m.div>
                                         ) : (
-                                            <motion.div
+                                            <m.div
                                                 key={item.href}
                                                 variants={menuItemVariants}
                                             >
@@ -1082,11 +1085,11 @@ export default function Header() {
                                                 {item.lineBelow && (
                                                     <div className="my-1 border-b border-stone-200" />
                                                 )}
-                                            </motion.div>
+                                            </m.div>
                                         );
                                     })}
-                                </motion.nav>
-                                <motion.div
+                                </m.nav>
+                                <m.div
                                     initial={{ opacity: 0, y: 14 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 10 }}
@@ -1148,12 +1151,12 @@ export default function Header() {
                                         +7 (812) 565-96-50
                                     </a>
                                     <SocialLinks className="justify-center" />
-                                </motion.div>
+                                </m.div>
                             </div>
-                        </motion.div>
+                        </m.div>
 
                         <div className="pointer-events-none fixed inset-y-0 left-0 z-[60] hidden xl:flex items-start gap-2 p-2">
-                            <motion.div
+                            <m.div
                                 initial="hidden"
                                 animate="show"
                                 exit="exit"
@@ -1176,7 +1179,7 @@ export default function Header() {
                                     </button>
                                 </div>
 
-                                <motion.nav
+                                <m.nav
                                     variants={menuListVariants}
                                     initial="hidden"
                                     animate="show"
@@ -1187,7 +1190,7 @@ export default function Header() {
                                             activeSubmenu === item.label;
 
                                         return item.submenu ? (
-                                            <motion.div
+                                            <m.div
                                                 key={item.label}
                                                 variants={menuItemVariants}
                                             >
@@ -1209,9 +1212,9 @@ export default function Header() {
                                                         &rsaquo;
                                                     </span>
                                                 </button>
-                                            </motion.div>
+                                            </m.div>
                                         ) : (
-                                            <motion.div
+                                            <m.div
                                                 key={item.href}
                                                 variants={menuItemVariants}
                                             >
@@ -1222,12 +1225,12 @@ export default function Header() {
                                                 {item.lineBelow && (
                                                     <div className="border-b border-stone-200" />
                                                 )}
-                                            </motion.div>
+                                            </m.div>
                                         );
                                     })}
-                                </motion.nav>
+                                </m.nav>
 
-                                <motion.div
+                                <m.div
                                     initial={{ opacity: 0, y: 14 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 10 }}
@@ -1288,12 +1291,12 @@ export default function Header() {
                                         +7 (812) 565-96-50
                                     </a>
                                     <SocialLinks className="justify-center" />
-                                </motion.div>
-                            </motion.div>
+                                </m.div>
+                            </m.div>
 
                             <AnimatePresence>
                                 {activeSubmenuItems.length > 0 && (
-                                    <motion.div
+                                    <m.div
                                         initial="hidden"
                                         animate="show"
                                         exit="exit"
@@ -1315,14 +1318,14 @@ export default function Header() {
                                         }}
                                     >
                                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.05)_0%,rgba(255,255,255,0)_100%)]" />
-                                        <motion.div
+                                        <m.div
                                             variants={submenuListVariants}
                                             initial="hidden"
                                             animate="show"
                                             className="relative flex flex-col gap-1"
                                         >
                                             {activeSubmenuItems.map((sub) => (
-                                                <motion.div
+                                                <m.div
                                                     key={sub.href}
                                                     variants={
                                                         submenuItemVariants
@@ -1334,15 +1337,21 @@ export default function Header() {
                                                             locale,
                                                         )}
                                                         target={sub.target}
+                                                        rel={
+                                                            sub.target ===
+                                                            "_blank"
+                                                                ? "noopener noreferrer"
+                                                                : undefined
+                                                        }
                                                         onClick={closeMenu}
                                                         className="block py-2 text-sm transition-colors hover:text-brand-brown"
                                                     >
                                                         {sub.label}
                                                     </Link>
-                                                </motion.div>
+                                                </m.div>
                                             ))}
-                                        </motion.div>
-                                    </motion.div>
+                                        </m.div>
+                                    </m.div>
                                 )}
                             </AnimatePresence>
                         </div>

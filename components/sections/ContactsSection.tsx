@@ -54,7 +54,7 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
             label: "Санкт-Петербург, ул. Моховая, д. 10",
             Icon: MapPinIcon,
             target: "_blank",
-            rel: "noopener referrer",
+            rel: "noopener noreferrer",
         },
     ],
     en: [
@@ -73,7 +73,7 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
             label: "10 Mokhovaya St, Saint Petersburg",
             Icon: MapPinIcon,
             target: "_blank",
-            rel: "noopener referrer",
+            rel: "noopener noreferrer",
         },
     ],
 };

@@ -234,6 +234,7 @@ export default function Footer() {
                                     key={href}
                                     href={href}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-white/80 transition-colors hover:text-white"
                                 >
                                     {label}
@@ -302,6 +303,7 @@ export default function Footer() {
                                 <Link
                                     href={href}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-white/90 hover:text-white transition-colors"
                                 >
                                     {label}
