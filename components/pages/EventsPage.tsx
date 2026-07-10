@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import {
     BookingFormDesktop,
@@ -5,11 +6,18 @@ import {
 } from "@/components/sections/BookingFormResponsive";
 import ContactsSection from "@/components/sections/ContactsSection";
 import Divider from "@/components/ui/Divider";
-import EventsCalendar from "@/components/ui/EventsCalendar";
 import EventsGrid from "@/components/ui/grids/EventsGrid";
 import { FadeIn, FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
+
+// EventsCalendar рендерится ниже сгиба (боковая колонка), не за интеракцией.
+// ssr:true оставляет HTML в SSG-выдаче (без CLS и без потерь для SEO), а его
+// клиентский JS (+ иконки phosphor) грузится отдельным ленивым чанком вне
+// критического пути. ssr:false здесь запрещён — EventsPage это Server Component.
+const EventsCalendar = dynamic(() => import("@/components/ui/EventsCalendar"), {
+    ssr: true,
+});
 
 const eventsCopyByLocale: Record<
     Locale,

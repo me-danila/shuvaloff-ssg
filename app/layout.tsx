@@ -18,6 +18,7 @@ const alistair = localFont({
     src: "../public/fonts/Alistair-Signature.woff2",
     variable: "--font-alistair",
     display: "swap",
+    preload: false,
 });
 
 const historyPro = localFont({

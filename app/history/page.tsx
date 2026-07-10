@@ -76,7 +76,7 @@ export default function History() {
             </FadeUp>
             <FadeUp duration={1.2}>
                 <FadeUp duration={1.2}>
-                    <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                    <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                         <DividerHistory style={2} />
                         <p>
                             Особняк, в&nbsp;котором сейчас расположен отель,
@@ -126,7 +126,7 @@ export default function History() {
             </FadeUp>
             <FadeUp duration={1.2}>
                 <FadeUp duration={1.2}>
-                    <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                    <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                         <h2 className="text-center uppercase">ОСОБНЯК</h2>
                         <p>
                             История дома начинается с&nbsp;1735 года, когда
@@ -155,7 +155,7 @@ export default function History() {
                 </FadeUp>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         В&nbsp;1854 году участок приобрел генерал-майор
                         и&nbsp;действительный статский советник граф Андрей
@@ -194,7 +194,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         В&nbsp;1913 году от&nbsp;неисправного дымохода
                         мраморного камина загорелись балки в&nbsp;комнате
@@ -228,7 +228,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         Воронцовы-Дашковы покинули Россию в&nbsp;1919 году,
                         а&nbsp;дом No 10 долгое время пустовал. В&nbsp;годы
@@ -259,7 +259,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img27.jpg"
                         alt="Герб рода Шуваловых"
@@ -285,7 +285,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         В&nbsp;центре герба расположен серебряный единорог
                         с&nbsp;золотыми глазами, рогом и&nbsp;копытами
@@ -329,7 +329,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <h2 className="text-center uppercase">Род Шуваловых</h2>
                     <p>
                         Улицу, на&nbsp;которой находится особняк, в&nbsp;1834
@@ -362,7 +362,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 xl:max-w-3xl xl:mx-auto">
                     <div className="relative my-8 mx-auto aspect-square w-90 xl:w-200 xl:my-10">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/03/img250-1.png"
@@ -376,7 +376,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <div className="relative mx-auto aspect-6/5 w-90 xl:w-200">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0013-2.png"
@@ -423,7 +423,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         Служил Андрей Шувалов достаточно долго. Участвуя
                         в&nbsp;военных экспедициях, он&nbsp;получил ранение
@@ -459,7 +459,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <div className="relative mx-auto aspect-6/5 w-90 xl:w-200">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0016-1.png"
@@ -510,7 +510,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         Поступки Елизаветы Андреевны целиком отражали девиз
                         графского рода Шуваловых. Во&nbsp;время паники
@@ -549,7 +549,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         Величественный особняк Шувалова, расположившийся среди
                         тихих улиц центра Петербурга, хранит в&nbsp;себе больше,
@@ -594,7 +594,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <p>
                         Наши дизайнеры с&nbsp;особым вниманием подошли
                         к&nbsp;воссозда- нию исторической атмосферы особняка.
@@ -629,7 +629,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto mt-4">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto mt-4">
                     <h2 className="uppercase mt-4 text-xl text-center xl:text-2xl">
                         Люкс Дашковой
                     </h2>
@@ -648,7 +648,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 xl:max-w-3xl xl:mx-auto my-6">
+                <section className="cv-history flex flex-col gap-4 xl:max-w-3xl xl:mx-auto my-6">
                     <div className="relative mx-auto aspect-6/5 w-90 xl:w-200">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0022.jpg"
@@ -662,7 +662,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img75.jpg"
@@ -691,7 +691,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img83.jpg"
@@ -717,7 +717,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img91.jpg"
@@ -743,7 +743,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0029-1.png"
@@ -766,7 +766,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img109.jpg"
@@ -807,7 +807,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img117.jpg"
@@ -837,7 +837,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0045-1.png"
@@ -862,7 +862,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0037-1.png"
@@ -904,7 +904,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto mt-4">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto mt-4">
                     <DividerHistory style={3} />
                     <h2 className="uppercase mt-4 text-xl text-center xl:text-2xl">
                         Люкс Шувалова
@@ -925,7 +925,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 xl:max-w-3xl xl:mx-auto my-6">
+                <section className="cv-history flex flex-col gap-4 xl:max-w-3xl xl:mx-auto my-6">
                     <div className="relative mx-auto aspect-6/5 w-90 xl:w-200">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0040.jpg"
@@ -939,7 +939,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0041-1.png"
@@ -968,7 +968,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img161.jpg"
@@ -1000,7 +1000,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0045-1-1.png"
@@ -1025,7 +1025,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0047-1.png"
@@ -1055,7 +1055,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img189.jpg"
@@ -1084,7 +1084,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0051-1.png"
@@ -1109,7 +1109,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img207.jpg"
@@ -1151,7 +1151,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto">
                     <DividerHistory style={2} />
                     <Image
                         src="https://academia.spb.ru/wp-content/uploads/2026/03/img266-1.png"
@@ -1183,7 +1183,7 @@ export default function History() {
                 </section>
             </FadeUp>
             <FadeUp duration={1.2}>
-                <section className="flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto mt-4">
+                <section className="cv-history flex flex-col gap-4 mx-6 xl:max-w-3xl xl:mx-auto mt-4">
                     <DividerHistory style={1} />
                     <p>
                         И&nbsp;все&nbsp;же, в&nbsp;интерьере доминируют строгие

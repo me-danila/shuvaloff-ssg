@@ -34,6 +34,21 @@ select {
     scrollbar-width: none;
 }
 
+/* Ленивый рендер длинных секций истории вне вьюпорта.
+   content-visibility: auto пропускает рендер контента, пока секция за
+   пределами экрана, и рисует её без изменений, как только она подъезжает.
+   contain-intrinsic-size задаёт запасную высоту-плейсхолдер, чтобы полоса
+   прокрутки и позиция скролла не прыгали. Ключевое слово auto подставляет
+   реальную (запомненную) высоту после первого показа секции, поэтому
+   повторные проходы вверх/вниз остаются стабильными. Первая строка —
+   фолбэк для браузеров без поддержки last-remembered-size. */
+.cv-history {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: intentional progressive-enhancement fallback — the 1000px line above serves browsers with content-visibility but no last-remembered-size (auto keyword) support */
+    contain-intrinsic-size: auto 1000px;
+}
+
 @layer base {
     h1 {
         @apply font-history font-semibold text-2xl uppercase;
