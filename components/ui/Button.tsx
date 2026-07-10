@@ -1,4 +1,6 @@
+import Link from "next/link";
 import type React from "react";
+import { isExternalHref } from "@/lib/i18n/routing";
 
 type ButtonVariant = "primary" | "primary-outline";
 type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
@@ -64,15 +66,28 @@ export default function Button({
     );
 
     if (href) {
+        const rel = target === "_blank" ? "noopener noreferrer" : undefined;
+        // Keep a full page load (raw <a>) for links the TravelLine loader or the
+        // browser must own on navigation; use client-nav <Link> for the rest.
+        const requiresFullNavigation =
+            isExternalHref(href) || // http(s):, //, mailto:, tel:
+            href.startsWith("#") || // in-page anchor
+            href.includes("cert-open") || // TL certificate modal (Phase 1)
+            href.includes("tl-booking-open") || // TL booking modal (Phase 1)
+            target === "_blank"; // new-tab link
+
+        if (requiresFullNavigation) {
+            return (
+                <a href={href} target={target} rel={rel} className={classes}>
+                    {content}
+                </a>
+            );
+        }
+
         return (
-            <a
-                href={href}
-                target={target}
-                rel={target === "_blank" ? "noopener noreferrer" : undefined}
-                className={classes}
-            >
+            <Link href={href} target={target} rel={rel} className={classes}>
                 {content}
-            </a>
+            </Link>
         );
     }
 

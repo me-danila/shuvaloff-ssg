@@ -91,7 +91,7 @@ export default function Footer() {
                     type="email"
                     placeholder="Email"
                     aria-label={emailLabel}
-                    className="w-full rounded-md bg-white py-3.5 pl-4 pr-14 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
+                    className="ym-disable-keys w-full rounded-md bg-white py-3.5 pl-4 pr-14 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                 />
                 <button
                     type="submit"
@@ -110,7 +110,7 @@ export default function Footer() {
                     type="email"
                     placeholder="Email"
                     aria-label={emailLabel}
-                    className="min-w-0 flex-1 rounded-md bg-white px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
+                    className="ym-disable-keys min-w-0 flex-1 rounded-md bg-white px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                 />
                 <button
                     type="submit"
@@ -193,7 +193,7 @@ export default function Footer() {
                                     type="email"
                                     placeholder="Email"
                                     aria-label={emailLabel}
-                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
+                                    className="ym-disable-keys h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                                 />
                                 <button
                                     type="submit"

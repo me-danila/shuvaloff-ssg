@@ -278,7 +278,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
             label: "О нас",
             href: "/history/",
             submenu: [
-                { label: "Отзывы", href: "/reviews" },
+                { label: "Отзывы", href: "/reviews/" },
                 {
                     label: "СМИ",
                     href: "/smi/",
@@ -337,7 +337,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
             label: "About us",
             href: "/history/",
             submenu: [
-                { label: "Reviews", href: "/reviews" },
+                { label: "Reviews", href: "/reviews/" },
                 {
                     label: "Media",
                     href: "/smi/",

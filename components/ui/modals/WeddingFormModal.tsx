@@ -24,6 +24,23 @@ const INITIAL: FormState = {
     formName: "",
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// RU-friendly phone check: 10 local digits, or 11 digits starting with 7/8.
+const isPhoneValid = (raw: string) => {
+    const digits = raw.replace(/\D/g, "");
+    return (
+        digits.length === 10 || (digits.length === 11 && /^[78]/.test(digits))
+    );
+};
+
+const MAX = {
+    name: 100,
+    phone: 24,
+    email: 254,
+    telegram: 64,
+} as const;
+
 type ButtonVariant = "light" | "light-outline" | "dark" | "dark-outline";
 
 interface Props {
@@ -79,6 +96,22 @@ export default function WeddingFormModal({
             locale === "ru"
                 ? "Что-то пошло не так. Попробуйте ещё раз."
                 : "Something went wrong. Please try again.",
+        errName:
+            locale === "ru"
+                ? "Пожалуйста, укажите имя"
+                : "Please enter your name",
+        errPhone:
+            locale === "ru"
+                ? "Укажите корректный номер телефона"
+                : "Please enter a valid phone number",
+        errEmail:
+            locale === "ru"
+                ? "Укажите корректный e-mail"
+                : "Please enter a valid e-mail",
+        errConsent:
+            locale === "ru"
+                ? "Подтвердите согласие на обработку персональных данных"
+                : "Please accept the personal data policy",
     } as const;
 
     const [open, setOpen] = useState(false);
@@ -86,9 +119,12 @@ export default function WeddingFormModal({
     const [status, setStatus] = useState<
         "idle" | "loading" | "success" | "error"
     >("idle");
+    const [validationError, setValidationError] = useState<string | null>(null);
 
     const set =
-        (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) =>
+        (field: keyof FormState) =>
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setValidationError(null);
             setForm((prev) => ({
                 ...prev,
                 [field]:
@@ -96,15 +132,36 @@ export default function WeddingFormModal({
                         ? e.target.checked
                         : e.target.value,
             }));
+        };
 
     const handleClose = () => {
         setOpen(false);
         setStatus("idle");
         setForm(INITIAL);
+        setValidationError(null);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const name = form.name.trim();
+        const phone = form.phone.trim();
+        const email = form.email.trim();
+        const telegram = form.telegram.trim();
+
+        let error: string | null = null;
+        if (!name) error = copy.errName;
+        else if (!isPhoneValid(phone)) error = copy.errPhone;
+        else if (email && !EMAIL_RE.test(email)) error = copy.errEmail;
+        else if (!form.consent) error = copy.errConsent;
+
+        if (error) {
+            setStatus("idle");
+            setValidationError(error);
+            return;
+        }
+
+        setValidationError(null);
         setStatus("loading");
 
         try {
@@ -118,10 +175,10 @@ export default function WeddingFormModal({
                     },
                     body: JSON.stringify({
                         service: title,
-                        name: form.name,
-                        phone: form.phone,
-                        email: form.email,
-                        telegram: form.telegram,
+                        name,
+                        phone,
+                        email,
+                        telegram,
                     }),
                 },
             );
@@ -183,6 +240,7 @@ export default function WeddingFormModal({
 
                             <form
                                 onSubmit={handleSubmit}
+                                noValidate
                                 className="flex flex-col gap-4"
                             >
                                 <input
@@ -190,34 +248,38 @@ export default function WeddingFormModal({
                                     placeholder={copy.namePlaceholder}
                                     aria-label={copy.namePlaceholder}
                                     required
+                                    maxLength={MAX.name}
                                     value={form.name}
                                     onChange={set("name")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="tel"
                                     placeholder="+7 (000) 000-00-00"
                                     aria-label={copy.phoneLabel}
                                     required
+                                    maxLength={MAX.phone}
                                     value={form.phone}
                                     onChange={set("phone")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="email"
                                     placeholder={copy.emailPlaceholder}
                                     aria-label={copy.emailPlaceholder}
+                                    maxLength={MAX.email}
                                     value={form.email}
                                     onChange={set("email")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="text"
                                     placeholder={copy.tgPlaceholder}
                                     aria-label={copy.tgPlaceholder}
+                                    maxLength={MAX.telegram}
                                     value={form.telegram}
                                     onChange={set("telegram")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
 
                                 <label className="flex items-start gap-3 cursor-pointer mt-1">
@@ -254,6 +316,15 @@ export default function WeddingFormModal({
                                         ? copy.loadingLabel
                                         : title}
                                 </button>
+
+                                {validationError && (
+                                    <p
+                                        role="alert"
+                                        className="text-center text-xs text-red-500"
+                                    >
+                                        {validationError}
+                                    </p>
+                                )}
 
                                 {status === "error" && (
                                     <p
