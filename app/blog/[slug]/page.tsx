@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: Props) {
     if (meta.draft) {
         notFound();
     }
-    
+
     const relatedPosts = await getRelatedPosts(slug, meta.tags);
 
     return (

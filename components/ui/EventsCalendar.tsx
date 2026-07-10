@@ -52,7 +52,11 @@ const WEEKDAYS: Record<Locale, string[]> = {
 type Cell = { day: number; inMonth: boolean; hasEvent: boolean };
 
 /** Строит сетку 6×7 для месяца, неделя с понедельника. */
-function buildGrid(year: number, month: number, eventDays: Set<number>): Cell[] {
+function buildGrid(
+    year: number,
+    month: number,
+    eventDays: Set<number>,
+): Cell[] {
     // getDay(): 0=вс..6=сб → приводим к пн=0..вс=6
     const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -127,9 +131,7 @@ export default function EventsCalendar() {
                     <CaretLeftIcon size={18} weight="bold" />
                 </button>
                 <span className="px-2 text-center font-history text-lg font-semibold uppercase tracking-wide text-brand-brown">
-                    <span className="xl:hidden">
-                        {TITLE_PREFIX[locale]}{" "}
-                    </span>
+                    <span className="xl:hidden">{TITLE_PREFIX[locale]} </span>
                     {MONTHS_NOMINATIVE[locale][view.month]}
                 </span>
                 <button
@@ -152,9 +154,9 @@ export default function EventsCalendar() {
                     </div>
                 ))}
 
-                {cells.map((cell, i) => (
+                {cells.map((cell) => (
                     <div
-                        key={i}
+                        key={`${cell.inMonth ? "in" : "out"}-${cell.day}`}
                         className="flex items-center justify-center py-1"
                     >
                         <span

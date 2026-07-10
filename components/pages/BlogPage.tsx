@@ -19,7 +19,6 @@ export default async function BlogPage({ page }: { page: number }) {
         <main className="v2-fonts flex flex-col gap-4 xl:gap-10">
             <StructuredData data={buildBlogIndexSchema({ posts: pagePosts })} />
             <section className="mx-6 mt-6 xl:mx-auto xl:w-full xl:max-w-7xl">
-                
                 <div className="md:text-center">
                     <h1>Блог</h1>
                     <p className="mt-3 max-w-xl md:mx-auto">

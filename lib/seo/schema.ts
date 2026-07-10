@@ -632,7 +632,7 @@ export const buildBlogEditorialSchema = () => ({
             "@type": "ProfilePage",
             "@id": `${SITE_URL}/blog/author/#webpage`,
             url: `${SITE_URL}/blog/author/`,
-            name: "О редакции блога — " + SITE_NAME,
+            name: `О редакции блога — ${SITE_NAME}`,
             inLanguage: "ru",
             isPartOf: { "@id": getWebsiteId() },
             mainEntity: { "@id": getOrganizationId() },

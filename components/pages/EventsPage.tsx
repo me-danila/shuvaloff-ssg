@@ -19,7 +19,8 @@ const eventsCopyByLocale: Record<
         heroTitle: (
             <>
                 Приглашаем вас на&nbsp;мероприятия
-                <br />в&nbsp;особняке Шувалова
+                <br />
+                в&nbsp;особняке Шувалова
             </>
         ),
         heroAlt: "Мероприятия в особняке Шувалова",
