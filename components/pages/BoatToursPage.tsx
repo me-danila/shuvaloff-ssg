@@ -6,9 +6,9 @@ import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
-import SpecialOffersSection, {
+import OffersGrid, {
     type SpecialOfferItem,
-} from "@/components/ui/grids/SpecialOffersSection";
+} from "@/components/ui/grids/OffersGrid";
 import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -991,7 +991,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <SpecialOffersSection
+            <OffersGrid
                 offers={serviceOffers}
                 locale={locale}
                 title={copy.servicesLabel}
@@ -999,7 +999,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 showSubtitles={false}
             />
 
-            <SpecialOffersSection
+            <OffersGrid
                 offers={copy.specialOffers}
                 locale={locale}
                 title={copy.specialOffersTitle}

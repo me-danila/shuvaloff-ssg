@@ -71,10 +71,10 @@ export default async function EventPage({ params }: Props) {
                             sizes="(max-width: 1280px) 100vw, 50vw"
                             className="object-cover"
                             style={
-                                event.imgObjectPosition
+                                event.mediaObjectPosition
                                     ? {
                                           objectPosition:
-                                              event.imgObjectPosition,
+                                              event.mediaObjectPosition,
                                       }
                                     : undefined
                             }

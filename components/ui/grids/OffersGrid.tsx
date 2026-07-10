@@ -13,11 +13,6 @@ type SpecialOfferBaseItem = {
     title: string;
     subtitle: string;
     mediaObjectPosition?: string;
-    /**
-     * Deprecated alias kept for existing image cards.
-     * Use mediaObjectPosition for both image and video backgrounds.
-     */
-    imgObjectPosition?: string;
     modal: {
         content: React.ReactNode;
         buttonText: string;
@@ -52,8 +47,7 @@ const sectionCopy = {
 } as const;
 
 function SpecialOfferMedia({ offer }: { offer: SpecialOfferItem }) {
-    const objectPosition =
-        offer.mediaObjectPosition ?? offer.imgObjectPosition ?? undefined;
+    const objectPosition = offer.mediaObjectPosition ?? undefined;
     const style = objectPosition ? { objectPosition } : undefined;
 
     if ("videoUrl" in offer && offer.videoUrl) {
@@ -91,7 +85,7 @@ function SpecialOfferMedia({ offer }: { offer: SpecialOfferItem }) {
     );
 }
 
-export default function SpecialOffersSection({
+export default function OffersGrid({
     offers,
     locale,
     title,

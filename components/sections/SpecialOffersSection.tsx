@@ -171,10 +171,10 @@ export default function SpecialOffersSection() {
                                         sizes="(max-width: 1200px) 90vw, 25vw"
                                         className="object-cover"
                                         style={
-                                            sale.imgObjectPosition
+                                            sale.mediaObjectPosition
                                                 ? {
                                                       objectPosition:
-                                                          sale.imgObjectPosition,
+                                                          sale.mediaObjectPosition,
                                                   }
                                                 : undefined
                                         }

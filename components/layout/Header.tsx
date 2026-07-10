@@ -147,7 +147,6 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Абонемент на проживание",
             href: "/subscriptions/",
-            forceReload: true,
         },
     ],
     en: [
@@ -205,7 +204,6 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Accommodation subscription",
             href: "/subscriptions/",
-            forceReload: true,
         },
     ],
 };

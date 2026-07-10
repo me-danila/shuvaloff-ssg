@@ -9,7 +9,7 @@ export type Sale = {
     title: string;
     subtitle: string;
     imgUrl: string;
-    imgObjectPosition?: string;
+    mediaObjectPosition?: string;
     bookingUrl: string;
     actionType?: "booking" | "details";
 };
@@ -56,7 +56,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             subtitle:
                 "Отдыхайте в особняке Шувалова и копите мили «Аэрофлот Бонус»! До 1 000 миль за каждую ночь проживания",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9448-ГОРИЗОНТАЛЬ.jpg",
-            imgObjectPosition: "center top",
+            mediaObjectPosition: "center top",
             bookingUrl: "/sales/aeroflot/",
             actionType: "details",
         },
@@ -93,7 +93,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             subtitle:
                 "Рабочая поездка, где о вас уже позаботились. Ранний заезд, питание полупансион в ресторане отеля",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9300-ГОРИЗОНТАЛЬ.jpg",
-            imgObjectPosition: "center top",
+            mediaObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
         },
         {
@@ -145,7 +145,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             subtitle:
                 "Relax at the Shuvalov Mansion and earn Aeroflot Bonus miles! Up to 1,000 miles for every night's stay.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9448-ГОРИЗОНТАЛЬ.jpg",
-            imgObjectPosition: "center top",
+            mediaObjectPosition: "center top",
             bookingUrl: "/sales/aeroflot/",
             actionType: "details",
         },
@@ -182,7 +182,7 @@ export const AllSales: Record<Locale, Sale[]> = {
             subtitle:
                 "A business trip where you're already taken care of. Early check-in, half-board meals in the hotel restaurant",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9300-ГОРИЗОНТАЛЬ.jpg",
-            imgObjectPosition: "center top",
+            mediaObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
         },
         {

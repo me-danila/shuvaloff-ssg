@@ -102,13 +102,6 @@ export default function WeddingFormModal({
         setForm(INITIAL);
     };
 
-    //    const handleSubmit = async (e: React.FormEvent) => {
-    //        e.preventDefault();
-    //        setStatus("loading");
-    //        await new Promise((r) => setTimeout(r, 800));
-    //        setStatus("success");
-    //    };
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("loading");

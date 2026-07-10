@@ -16,7 +16,7 @@ export type EventDefinition = {
     title: string;
     subtitle: string;
     imgUrl: string;
-    imgObjectPosition?: string;
+    mediaObjectPosition?: string;
     bookingUrl: string;
     fullDescription?: ReactNode;
     price?: string;

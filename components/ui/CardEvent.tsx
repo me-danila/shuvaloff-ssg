@@ -26,8 +26,8 @@ export default function CardEvent({ event }: { event: EventCard }) {
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     className="object-cover"
                     style={
-                        event.imgObjectPosition
-                            ? { objectPosition: event.imgObjectPosition }
+                        event.mediaObjectPosition
+                            ? { objectPosition: event.mediaObjectPosition }
                             : undefined
                     }
                 />
