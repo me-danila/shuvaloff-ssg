@@ -54,7 +54,8 @@ function gitLastModified(relPath: string): Date {
 
 /** Map a sitemap route path to the page.tsx source file that renders it. */
 function routeSourceFile(path: string, locale: "ru" | "en"): string {
-    const base = locale === "en" ? "app/en" : "app";
+    // RU routes live in the app/(ru) route group (URLs unaffected).
+    const base = locale === "en" ? "app/en" : "app/(ru)";
     return path === "/" ? `${base}/page.tsx` : `${base}${path}page.tsx`;
 }
 
@@ -116,7 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const blogIndexDate =
         posts.length > 0
             ? latestPostDate
-            : gitLastModified("app/blog/page.tsx");
+            : gitLastModified("app/(ru)/blog/page.tsx");
 
     const routes = [
         {
@@ -127,7 +128,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: getAbsoluteUrl("/blog/author/", "ru"),
-            lastModified: gitLastModified("app/blog/author/page.tsx"),
+            lastModified: gitLastModified("app/(ru)/blog/author/page.tsx"),
             changeFrequency: "yearly" as const,
             priority: 0.3,
         },

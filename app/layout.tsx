@@ -3,15 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { domAnimation, LazyMotion } from "framer-motion";
 import Script from "next/script";
-import { Suspense } from "react";
-import SkipLink from "@/components/a11y/SkipLink";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
 import TravelLineManager from "@/components/sections/TravelLineManager";
-import StructuredData from "@/components/seo/StructuredData";
 import { siteMetadataBase } from "@/lib/i18n/metadata";
-import { buildSiteSchema } from "@/lib/seo/schema";
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo/site";
 import { SmoothScroll } from "../components/ui/SmoothScroll";
 
@@ -137,8 +131,6 @@ export default function RootLayout({
             <body
                 className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
             >
-                <SkipLink />
-                <StructuredData data={buildSiteSchema("ru")} />
                 <HtmlLangSync />
                 <TravelLineManager />
                 <Script
@@ -147,19 +139,7 @@ export default function RootLayout({
                 />
                 <Script src="/scripts/metrika.js" strategy="lazyOnload" />
                 <SmoothScroll>
-                    <LazyMotion features={domAnimation}>
-                        <Suspense fallback={null}>
-                            <Header />
-                        </Suspense>
-                        <div
-                            id="main-content"
-                            tabIndex={-1}
-                            className="scroll-mt-24 focus:outline-none"
-                        >
-                            <Suspense fallback={null}>{children}</Suspense>
-                        </div>
-                        <Footer />
-                    </LazyMotion>
+                    <LazyMotion features={domAnimation}>{children}</LazyMotion>
                 </SmoothScroll>
                 <Script id="hotbot" strategy="lazyOnload">{`
   window.addEventListener('scroll', function() {

@@ -1,7 +1,4 @@
-"use client";
-
 import type { Locale } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
 
 const SKIP_LINK_LABEL: Record<Locale, string> = {
     ru: "Перейти к основному содержанию",
@@ -13,9 +10,7 @@ const SKIP_LINK_LABEL: Record<Locale, string> = {
  * Визуально скрыт (сдвинут за верхнюю кромку вьюпорта) и появляется только
  * при получении фокуса с клавиатуры — для пользователя мыши ничего не меняется.
  */
-export default function SkipLink() {
-    const locale = useLocale();
-
+export default function SkipLink({ locale }: { locale: Locale }) {
     return (
         <a
             href="#main-content"

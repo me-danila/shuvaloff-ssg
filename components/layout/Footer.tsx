@@ -5,8 +5,8 @@ import Link from "next/link";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SocialLinks from "@/components/ui/SocialLinks";
+import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
 import { SITE_URL, SOCIAL_LINKS } from "@/lib/seo/site";
 
 const NAV_LINKS = {
@@ -45,8 +45,7 @@ const LEGAL_LINKS = {
     ],
 } as const;
 
-export default function Footer() {
-    const locale = useLocale();
+export default function Footer({ locale }: { locale: Locale }) {
     const navLinks = NAV_LINKS[locale];
     const legalLinks = LEGAL_LINKS[locale];
     const homeAria = locale === "ru" ? "На главную" : "Back to homepage";

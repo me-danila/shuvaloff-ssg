@@ -17,7 +17,6 @@ import Image from "@/components/ui/OptimizedImage";
 import SocialLinks from "@/components/ui/SocialLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
-    detectLocaleFromPath,
     hasEnglishVersion,
     type Locale,
     localizeHref,
@@ -453,9 +452,8 @@ const mobileSubmenuVariants = {
     },
 };
 
-export default function Header() {
+export default function Header({ locale }: { locale: Locale }) {
     const pathname = usePathname() || "/";
-    const locale = detectLocaleFromPath(pathname);
     const copy = copyByLocale[locale];
     const navItems = navItemsByLocale[locale];
     const subNavItems = subNavItemsByLocale[locale];

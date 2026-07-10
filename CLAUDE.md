@@ -41,18 +41,20 @@ bun test                # built-in runner
   styles, `rm -rf .next` and rebuild — a warm `.next` cache serves the old
   theme. There is no `tailwind.config.js`.
 
-- **`fix-en-lang.mjs` only runs in `build`, on `out/en/*.html`.** The single
-  shared root layout hardcodes RU locale signals (`<html lang="ru">`,
-  `og:locale=ru_RU`, `WebSite` JSON-LD `inLanguage:"ru"`) that EN pages inherit
-  and the Metadata API can't override per page. The script rewrites them for EN
-  output only. Consequences:
-  - In `bun dev` the EN pages *will* show `lang="ru"` / `og:locale=ru_RU`.
-    That's expected; the fix is a post-export step, not a dev-time one.
-  - A child page's `openGraph` **replaces** (does not deep-merge) the layout's,
-    so setting `openGraph.locale` on a page drops `og:image`/`og:type`. Use
+- **`fix-en-lang.mjs` only rewrites `<html lang>` for EN, in `build`.** There is
+  ONE root layout (`app/layout.tsx`, kept single so the global not-found stays
+  intact) which hardcodes `<html lang="ru">`; the Metadata API can't set
+  `<html lang>` per route, so EN pages inherit `lang="ru"` in the raw static
+  HTML and the script flips it to `en` for `out/en/*.html` only. Consequences:
+  - In `bun dev` EN pages *will* show `lang="ru"` (client `HtmlLangSync` patches
+    it at runtime; the static-HTML fix is a post-export step).
+  - `og:locale` and `WebSite` JSON-LD `inLanguage` are now emitted **natively**
+    in English — `app/en/layout.tsx` provides a full `en_US` OpenGraph default
+    and renders `SiteShell(locale="en")`, so `buildSiteSchema("en")` emits
+    `inLanguage:"en"`. The script no longer touches them.
+  - A child page's `openGraph` **replaces** (does not deep-merge) a parent's, so
+    setting `openGraph.locale` alone drops `og:image`/`og:type`. Use
     `buildPageMetadata` (`lib/i18n/metadata.ts`) which re-emits the full block.
-  - If you touch the layout's `<html>` tag, `og:locale`, or the site JSON-LD,
-    re-verify the anchored regexes in `scripts/fix-en-lang.mjs` still match.
 
 - **Remote images don't load in the preview sandbox.** Images come from
   `academia.spb.ru` / `static.academia.spb.ru` and are optimized at build by
@@ -70,10 +72,18 @@ bun test                # built-in runner
   `components/sections/TravelLineManager.tsx` refreshes TL widgets per locale
   via pathname + `MutationObserver`; keep that intact when moving widgets.
 
-- **Locale is client-only.** `useLocale()` reads `usePathname()`
-  (`lib/i18n/useLocale.ts`) — there is no server locale in a static export.
-  Don't try to detect locale from headers/request in a server component.
-  `page.tsx` files pass an explicit `locale` prop down instead.
+- **Locale flows from per-locale layouts as a prop.** RU routes live in the
+  `app/(ru)/` route group (URLs unchanged) under `app/(ru)/layout.tsx`; EN under
+  `app/en/layout.tsx`. Each renders `components/layout/SiteShell` with an
+  explicit `locale`, so `Header`/`Footer`/`SkipLink` and the site JSON-LD get
+  locale server-side (no client detection). `page.tsx` files likewise pass
+  `locale` down to their `components/pages/*` component. `useLocale()`
+  (`lib/i18n/useLocale.ts`, reads `usePathname()`) remains only for deep client
+  components that already need `pathname` — there is still no server locale in a
+  static export, so don't detect locale from headers/request. The single root
+  (`app/layout.tsx`) holds only `<html>`/`<body>`, fonts, third-party scripts
+  and the providers (`SmoothScroll`/`LazyMotion`); the global `app/not-found.tsx`
+  wraps itself in `SiteShell(locale="ru")` since it renders in the bare root.
 
 - **remark/rehype plugins are strings, not imports** in `next.config.ts`
   (`["remark-gfm"]`) — Turbopack rejects JS-function plugins.
