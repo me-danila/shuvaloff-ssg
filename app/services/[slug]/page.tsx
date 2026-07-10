@@ -10,6 +10,7 @@ import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildServiceSchema } from "@/lib/seo/schema";
+import { ORDER_URL } from "@/lib/seo/site";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -125,7 +126,7 @@ export default async function ServicePage({ params }: Props) {
                             )}
 
                             <Button
-                                href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                href={ORDER_URL}
                                 target="_blank"
                                 variant="primary"
                                 size="xl"

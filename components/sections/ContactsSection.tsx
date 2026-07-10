@@ -40,8 +40,8 @@ type ContactLink = {
 const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
     ru: [
         {
-            href: "tel:+78125659650",
-            label: "+7 (812) 565-96-50",
+            href: HOTEL_CONTACTS.telephoneHref,
+            label: HOTEL_CONTACTS.telephoneDisplay,
             Icon: PhoneIcon,
         },
         {
@@ -59,8 +59,8 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
     ],
     en: [
         {
-            href: "tel:+78125659650",
-            label: "+7 (812) 565-96-50",
+            href: HOTEL_CONTACTS.telephoneHref,
+            label: HOTEL_CONTACTS.telephoneDisplay,
             Icon: PhoneIcon,
         },
         {
@@ -133,7 +133,7 @@ export default function ContactsSection() {
                                     (locale === "ru"
                                         ? "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>"
                                         : "10 Mokhovaya St, Saint Petersburg<br>Open 24/7<br><br>") +
-                                    "+7 (812) 565-96-50<br>" +
+                                    `${HOTEL_CONTACTS.telephoneDisplay}<br>` +
                                     "reservation@academia.spb.ru",
                                 hintContent:
                                     locale === "ru"

@@ -18,6 +18,9 @@ export const HOTEL_ADDRESS = {
 export const HOTEL_CONTACTS = {
     telephone: "+7-812-565-96-50",
     telephoneDisplay: "+7 (812) 565-96-50",
+    // `tel:` href form (E.164, no separators). Same number as `telephone`,
+    // different formatting — kept verbatim so rendered hrefs don't change.
+    telephoneHref: "tel:+78125659650",
     email: "reservation@academia.spb.ru",
     legalEmail: "legal@academia-suites.ru",
 };
@@ -63,6 +66,11 @@ export const HOTEL_LEGAL = {
 };
 
 export const BOOKING_URL = `${SITE_URL}/booking/`;
+
+// External order/booking messenger link (MAX). Single source of truth for the
+// "Заказать" / "Order" CTA across services, boat tours, transfer & concierge.
+export const ORDER_URL =
+    "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y";
 
 export const getSiteName = (locale: Locale) =>
     locale === "en" ? SITE_NAME_EN : SITE_NAME;

@@ -10,6 +10,7 @@ import DesktopHeroGrid from "@/components/ui/grids/DesktopHeroGrid";
 import { FadeUp } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import type { Locale } from "@/lib/i18n/routing";
+import { ORDER_URL } from "@/lib/seo/site";
 
 type ConciergeCopy = {
     title: string;
@@ -186,7 +187,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     </p>
                                 </div>
                                 <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    href={ORDER_URL}
                                     target="_blank"
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
@@ -207,7 +208,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                             </ul>
                         </div>
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             variant="primary"
                             className="xl:hidden"
@@ -234,7 +235,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     </p>
                                 </div>
                                 <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    href={ORDER_URL}
                                     target="_blank"
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
@@ -255,7 +256,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                             </ul>
                         </div>
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             variant="primary"
                             className="xl:hidden"

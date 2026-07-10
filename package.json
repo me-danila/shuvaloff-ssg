@@ -6,9 +6,11 @@
         "dev": "next dev",
         "build": "next build && next-image-export-optimizer && node scripts/fix-en-lang.mjs",
         "start": "next start",
+        "test": "bun test",
         "lint": "biome check",
         "format": "biome format --write",
         "fix": "bun format && bun lint --fix",
+        "prepare": "git config core.hooksPath .githooks 2>/dev/null || exit 0",
         "indexnow": "node scripts/indexnow.mjs",
         "docker-build": "docker buildx build --push --platform linux/amd64 -t ghcr.io/me-danila/shuvaloff-ssg:latest ."
     },
@@ -28,6 +30,7 @@
     "devDependencies": {
         "@biomejs/biome": "2.2.0",
         "@tailwindcss/postcss": "^4",
+        "@types/bun": "^1.3.14",
         "@types/mdx": "^2.0.14",
         "@types/node": "^20",
         "@types/react": "^19",

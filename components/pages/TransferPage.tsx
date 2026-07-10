@@ -11,6 +11,7 @@ import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
+import { ORDER_URL } from "@/lib/seo/site";
 
 type TransferCopy = {
     title: string;
@@ -136,7 +137,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                                     ) : null}
                                 </div>
                                 <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    href={ORDER_URL}
                                     target="_blank"
                                     className="mt-1"
                                     uppercase={false}
@@ -160,11 +161,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
             </section>
 
             <FadeUp className="mx-6 flex justify-center xl:max-w-7xl xl:mx-auto xl:w-full">
-                <Button
-                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                    target="_blank"
-                    variant="primary"
-                >
+                <Button href={ORDER_URL} target="_blank" variant="primary">
                     {copy.orderButton}
                 </Button>
             </FadeUp>
@@ -200,11 +197,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                         ))}
                     </ul>
                     <p>{copy.description3}</p>
-                    <Button
-                        href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
-                        target="_blank"
-                        variant="primary"
-                    >
+                    <Button href={ORDER_URL} target="_blank" variant="primary">
                         {copy.orderButton}
                     </Button>
                 </FadeUp>

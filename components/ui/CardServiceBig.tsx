@@ -4,11 +4,9 @@ import Button from "@/components/ui/Button";
 import Image from "@/components/ui/OptimizedImage";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
+import { ORDER_URL } from "@/lib/seo/site";
 
 type CardServiceBigCtaLabel = string | Partial<Record<Locale, string>>;
-
-const ORDER_URL =
-    "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y";
 
 type CardServiceBigProps = {
     title: string;
