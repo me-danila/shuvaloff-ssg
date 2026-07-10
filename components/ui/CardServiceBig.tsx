@@ -52,9 +52,22 @@ export default function CardServiceBig({
             className={`flex w-full flex-col overflow-hidden rounded-[4px] ${backgroundClassName} pb-7 text-center`}
         >
             <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]">
-                {title}
+                <a
+                    href={href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    className="transition-colors hover:text-brand-red"
+                >
+                    {title}
+                </a>
             </h3>
-            <div className="relative aspect-[16/11] w-full overflow-hidden">
+            <a
+                href={href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                aria-label={title}
+                className="relative block aspect-[16/11] w-full overflow-hidden"
+            >
                 <Image
                     src={imgUrl}
                     alt={title}
@@ -63,7 +76,7 @@ export default function CardServiceBig({
                     loading="lazy"
                     className="object-cover object-center"
                 />
-            </div>
+            </a>
             {subtitle && (
                 <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
                     {subtitle}

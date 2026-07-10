@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { AllEvents } from "@/data/EventsData";
 import { AllRooms } from "@/data/RoomsData";
 import { AllServices } from "@/data/ServicesData";
 import { getAllPosts } from "@/lib/blog";
@@ -10,6 +11,7 @@ const staticRuRoutes = [
     "/",
     "/aristocratic-spb/",
     "/booking/",
+    "/events/",
     "/history/",
     "/legal/",
     "/policy/",
@@ -32,6 +34,7 @@ const staticEnRoutes = [
     "/",
     "/aristocratic-spb/",
     "/booking/",
+    "/events/",
     "/history/",
     "/rewards/",
     "/rewards/referral/",
@@ -121,6 +124,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 changeFrequency: "weekly" as const,
                 priority: 0.6,
             })),
+        ...AllEvents.ru.map((event) => ({
+            url: getAbsoluteUrl(`/events/${event.slug}/`, "ru"),
+            lastModified: now,
+            changeFrequency: "weekly" as const,
+            priority: 0.7,
+        })),
+        ...AllEvents.en.map((event) => ({
+            url: getAbsoluteUrl(`/events/${event.slug}/`, "en"),
+            lastModified: now,
+            changeFrequency: "weekly" as const,
+            priority: 0.6,
+        })),
     ];
 
     return routes;

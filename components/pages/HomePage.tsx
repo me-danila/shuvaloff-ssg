@@ -1,8 +1,3 @@
-import {
-    CoffeeIcon,
-    FlowerLotusIcon,
-    ForkKnifeIcon,
-} from "@phosphor-icons/react/dist/ssr";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -221,6 +216,96 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
     },
 };
 
+// Единый оптический размер иконок кнопок hero.
+// Каждая иконка вписана в бокс HERO_ICON_BOX по длинной стороне (сохраняя
+// aspect ratio) — широкие иконки не растягиваются шире остальных.
+// Толщина обводки нормализована через vectorEffect независимо от масштаба.
+const HERO_ICON_BOX = 20;
+
+type HeroIconProps = { className?: string };
+
+function heroIconSize(vbWidth: number, vbHeight: number) {
+    const scale = HERO_ICON_BOX / Math.max(vbWidth, vbHeight);
+    return {
+        width: Math.round(vbWidth * scale),
+        height: Math.round(vbHeight * scale),
+    };
+}
+
+const strokeIconProps = {
+    fill: "none" as const,
+    stroke: "currentColor",
+    strokeWidth: 1.1,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    vectorEffect: "non-scaling-stroke" as const,
+    xmlns: "http://www.w3.org/2000/svg",
+    "aria-hidden": true,
+};
+
+function BreakfastIcon({ className }: HeroIconProps) {
+    return (
+        <svg
+            {...heroIconSize(29, 17)}
+            viewBox="0 0 29 17"
+            {...strokeIconProps}
+            className={className}
+        >
+            <path d="M14.8181 2.40909C15.3453 2.40909 15.7726 1.98173 15.7726 1.45455C15.7726 0.927365 15.3453 0.5 14.8181 0.5C14.2909 0.5 13.8635 0.927365 13.8635 1.45455C13.8635 1.98173 14.2909 2.40909 14.8181 2.40909Z" />
+            <path d="M3.30005 13.9275C3.30005 7.76754 8.34005 2.72754 14.5 2.72754C20.66 2.72754 25.7 7.76754 25.7 13.9275H3.30005Z" />
+            <path d="M0.5 15.7729H28.5" />
+        </svg>
+    );
+}
+
+function RestaurantIcon({ className }: HeroIconProps) {
+    return (
+        <svg
+            {...heroIconSize(14, 17)}
+            viewBox="0 0 14 17"
+            {...strokeIconProps}
+            className={className}
+        >
+            <path d="M3.5 0.5L3.5 4.5" />
+            <path d="M3.5 6.5L3.5 16.5" />
+            <path d="M13.5 8.5C13.5 8.5 10.5 7.5 10.5 4.5C10.5 1.5 13.5 0.5 13.5 0.5L13.5 16.5" />
+            <path d="M0.5 0.5V6.5H6.5V0.5" />
+            <path d="M0.5 4.5H6.5" />
+        </svg>
+    );
+}
+
+function SpaIcon({ className }: HeroIconProps) {
+    return (
+        <svg
+            {...heroIconSize(18, 18)}
+            viewBox="0 0 18 18"
+            {...strokeIconProps}
+            className={className}
+        >
+            <path d="M17.4854 7.71387C17.2781 12.0569 14.4614 15.6948 10.6016 17.0654L10.5986 17.0664C10.083 17.2532 9.54978 17.3919 9 17.4902C8.44902 17.3879 7.91511 17.2485 7.39844 17.0654C3.5386 15.6947 0.720883 12.0569 0.513672 7.71387C2.39545 7.80802 4.14453 8.41627 5.62891 9.4043L5.62109 9.41797C5.78638 9.52626 5.85977 9.56421 5.96582 9.6377C6.99328 10.3821 7.88174 11.3138 8.58203 12.3838L9 13.0225L9.41797 12.3838C10.1199 11.3113 11.0105 10.3771 12.041 9.63184C12.0703 9.61256 12.104 9.59113 12.1465 9.56543C12.1911 9.5384 12.2461 9.50259 12.3037 9.46484C12.3177 9.45587 12.3327 9.44778 12.3467 9.43848L12.3457 9.4375C12.3481 9.43587 12.3511 9.43524 12.3535 9.43359L12.3447 9.4209C13.8344 8.42285 15.593 7.80873 17.4854 7.71387ZM9.05273 0.725586C10.5685 2.40187 11.4148 4.46428 11.6191 6.5918C10.6758 7.12193 9.79233 7.76783 9 8.52734C8.2087 7.76949 7.3277 7.1271 6.39062 6.5957C6.63078 4.48052 7.51414 2.4183 9.05273 0.725586Z" />
+        </svg>
+    );
+}
+
+function EventsIcon({ className }: HeroIconProps) {
+    // Fill-иконка (кольцо-контур + язычок билета). Тонкое кольцо визуально
+    // читается как контур и совпадает по весу с остальными stroke-иконками.
+    return (
+        <svg
+            {...heroIconSize(14, 14)}
+            viewBox="0 0 14 14"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            className={className}
+        >
+            <path d="M8.59375 13.4375H4.84375C1.45 13.4375 0 11.9875 0 8.59375V4.84375C0 1.45 1.45 0 4.84375 0H8.59375C11.9875 0 13.4375 1.45 13.4375 4.84375V8.59375C13.4375 11.9875 11.9875 13.4375 8.59375 13.4375ZM4.84375 0.9375C1.9625 0.9375 0.9375 1.9625 0.9375 4.84375V8.59375C0.9375 11.475 1.9625 12.5 4.84375 12.5H8.59375C11.475 12.5 12.5 11.475 12.5 8.59375V4.84375C12.5 1.9625 11.475 0.9375 8.59375 0.9375H4.84375Z" />
+            <path d="M4.64375 8.7999C4.38125 8.7999 4.1375 8.7374 3.925 8.61865C3.40625 8.3249 3.125 7.74365 3.125 6.98115V0.743652C3.125 0.487402 3.3375 0.274902 3.59375 0.274902C3.85 0.274902 4.0625 0.487402 4.0625 0.743652V6.98115C4.0625 7.3874 4.18125 7.6874 4.3875 7.7999C4.60625 7.9249 4.94375 7.8624 5.3125 7.64365L6.1375 7.1499C6.475 6.9499 6.95625 6.9499 7.29375 7.1499L8.11875 7.64365C8.49375 7.86865 8.83125 7.9249 9.04375 7.7999C9.25 7.68115 9.36875 7.38115 9.36875 6.98115V0.743652C9.36875 0.487402 9.58125 0.274902 9.8375 0.274902C10.0938 0.274902 10.3062 0.487402 10.3062 0.743652V6.98115C10.3062 7.74365 10.025 8.3249 9.50625 8.61865C8.9875 8.9124 8.30625 8.8499 7.6375 8.4499L6.8125 7.95615C6.775 7.93115 6.65625 7.93115 6.61875 7.95615L5.79375 8.4499C5.40625 8.68115 5.00625 8.7999 4.64375 8.7999Z" />
+        </svg>
+    );
+}
+
 const heroButtons = [
     {
         label: {
@@ -229,7 +314,7 @@ const heroButtons = [
         },
         href: "/services/aristocratic-breakfast/",
         external: false,
-        Icon: CoffeeIcon,
+        Icon: BreakfastIcon,
     },
     {
         label: {
@@ -238,7 +323,7 @@ const heroButtons = [
         },
         href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
         external: true,
-        Icon: ForkKnifeIcon,
+        Icon: RestaurantIcon,
     },
     {
         label: {
@@ -247,7 +332,16 @@ const heroButtons = [
         },
         href: "https://academia-spa.ru/?utm_source=hotels",
         external: true,
-        Icon: FlowerLotusIcon,
+        Icon: SpaIcon,
+    },
+    {
+        label: {
+            ru: "Афиша",
+            en: "Events",
+        },
+        href: "/events/",
+        external: false,
+        Icon: EventsIcon,
     },
 ];
 
@@ -303,7 +397,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 })}
             />
             <section>
-                <div className="relative overflow-hidden aspect-8/10 xl:aspect-[unset] xl:min-h-screen">
+                <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
                     <FadeIn
                         duration={0.9}
                         className="absolute inset-0 h-full w-full"
@@ -335,11 +429,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                                     }
                                     className="flex w-fit items-center gap-3 rounded-lg bg-black/40 px-5 py-3 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:px-6 xl:py-4"
                                 >
-                                    <b.Icon
-                                        size={26}
-                                        weight="thin"
-                                        className="shrink-0"
-                                    />
+                                    <b.Icon className="shrink-0" />
                                     <span className="text-sm font-semibold">
                                         {b.label[locale]}
                                     </span>

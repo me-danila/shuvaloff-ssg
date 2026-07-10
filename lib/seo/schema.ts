@@ -312,6 +312,92 @@ export const buildServiceSchema = ({
     ],
 });
 
+export const buildEventSchema = ({
+    locale,
+    path,
+    event,
+    breadcrumbs,
+}: {
+    locale: Locale;
+    path: string;
+    event: {
+        title: string;
+        subtitle: string;
+        imgUrl: string;
+        bookingUrl: string;
+        price?: string;
+        dates: string[];
+    };
+    breadcrumbs: BreadcrumbItem[];
+}) => {
+    const url = getAbsoluteUrl(path, locale);
+    const offerUrl = event.bookingUrl.startsWith("http")
+        ? event.bookingUrl
+        : getAbsoluteUrl(event.bookingUrl, locale);
+
+    const place = {
+        "@type": "Place",
+        name: getSiteName(locale),
+        address: getAddress(locale),
+        geo: {
+            "@type": "GeoCoordinates",
+            latitude: HOTEL_GEO.latitude,
+            longitude: HOTEL_GEO.longitude,
+        },
+    };
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": `${url}#webpage`,
+                url,
+                name: event.title,
+                description: event.subtitle,
+                inLanguage: locale,
+                isPartOf: {
+                    "@id": getWebsiteId(),
+                },
+                breadcrumb: {
+                    "@id": `${url}#breadcrumb`,
+                },
+                primaryImageOfPage: event.imgUrl,
+            },
+            ...event.dates.map((start, index) => ({
+                "@type": "Event",
+                "@id": `${url}#event-${index}`,
+                name: event.title,
+                description: event.subtitle,
+                image: event.imgUrl,
+                // SPb (МСК, UTC+3); время в данных — локальное.
+                startDate: `${start}:00+03:00`,
+                eventAttendanceMode:
+                    "https://schema.org/OfflineEventAttendanceMode",
+                eventStatus: "https://schema.org/EventScheduled",
+                inLanguage: locale,
+                url,
+                location: place,
+                organizer: {
+                    "@id": getHotelId(),
+                },
+                offers: {
+                    "@type": "Offer",
+                    url: offerUrl,
+                    availability: "https://schema.org/InStock",
+                    priceCurrency: "RUB",
+                    ...(event.price ? { price: event.price } : {}),
+                    validFrom: `${start}:00+03:00`,
+                },
+            })),
+            {
+                ...buildBreadcrumbSchema(locale, breadcrumbs),
+                "@id": `${url}#breadcrumb`,
+            },
+        ],
+    };
+};
+
 export const buildWeddingPageSchema = ({
     locale,
     path,

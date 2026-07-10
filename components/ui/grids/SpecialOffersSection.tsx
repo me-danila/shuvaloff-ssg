@@ -218,11 +218,22 @@ export default function SpecialOffersSection({
                             className="flex min-w-full snap-start flex-col overflow-hidden rounded-[4px] bg-white pb-7 text-center xl:min-w-[calc((100%-2rem)/3)]"
                         >
                             <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]">
-                                {offer.title}
+                                <button
+                                    type="button"
+                                    onClick={() => setSelectedOffer(offer)}
+                                    className="cursor-pointer uppercase transition-colors hover:text-brand-red"
+                                >
+                                    {offer.title}
+                                </button>
                             </h3>
-                            <div className="relative aspect-[16/11] w-full overflow-hidden">
+                            <button
+                                type="button"
+                                onClick={() => setSelectedOffer(offer)}
+                                aria-label={`${offer.title} — ${copy.more}`}
+                                className="relative block aspect-[16/11] w-full cursor-pointer overflow-hidden"
+                            >
                                 <SpecialOfferMedia offer={offer} />
-                            </div>
+                            </button>
                             {showSubtitles && (
                                 <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
                                     {offer.subtitle}
