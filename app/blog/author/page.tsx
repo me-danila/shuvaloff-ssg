@@ -3,6 +3,7 @@ import Link from "next/link";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 import { buildBlogEditorialSchema } from "@/lib/seo/schema";
 
 const TITLE = "О редакции блога — ACADEMIA Особняк Шувалова";
@@ -12,9 +13,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
-    alternates: {
-        canonical: "/blog/author/",
-    },
+    alternates: getLocaleAlternates("/blog/author/", "ru"),
 };
 
 export default function EditorialPage() {

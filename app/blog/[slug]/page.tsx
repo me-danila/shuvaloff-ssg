@@ -9,6 +9,7 @@ import {
     getPostSlugs,
     getRelatedPosts,
 } from "@/lib/blog";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 import { buildBlogPostingSchema } from "@/lib/seo/schema";
 import { SITE_NAME } from "@/lib/seo/site";
 
@@ -42,9 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${meta.title} — ${SITE_NAME}`,
         description: meta.description,
-        alternates: {
-            canonical: `/blog/${slug}/`,
-        },
+        alternates: getLocaleAlternates(`/blog/${slug}/`, "ru"),
         ...(meta.draft ? { robots: { index: false, follow: false } } : {}),
         openGraph: {
             type: "article",

@@ -18,6 +18,7 @@ import SocialLinks from "@/components/ui/SocialLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
     detectLocaleFromPath,
+    hasEnglishVersion,
     type Locale,
     localizeHref,
     normalizePath,
@@ -527,7 +528,9 @@ export default function Header() {
     const visibleSubNavItems = isUnifiedNav ? homeNavItems : subNavItems;
     const visibleMobileNavItems = isUnifiedNav ? homeNavItems : navItems;
     const ruHref = localizeHref(pathname, "ru");
-    const enHref = localizeHref(pathname, "en");
+    const enHref = hasEnglishVersion(pathname)
+        ? localizeHref(pathname, "en")
+        : "/en/";
     const alternateLocale = locale === "ru" ? "en" : "ru";
     const alternateHref = locale === "ru" ? enHref : ruHref;
     const currentLanguageLabel = locale.toUpperCase();

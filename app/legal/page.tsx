@@ -4,10 +4,12 @@ import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = {
     title: "Правовая информация — ACADEMIA Особняк Шувалова",
     description: "Реквизиты и правовая информация ACADEMIA Особняк Шувалова",
+    alternates: getLocaleAlternates("/legal/", "ru"),
 };
 
 const links = [

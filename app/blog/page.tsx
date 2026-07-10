@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BlogPage from "@/components/pages/BlogPage";
+import { getLocaleAlternates } from "@/lib/i18n/metadata";
 
 const TITLE = "Блог — ACADEMIA Особняк Шувалова";
 const DESCRIPTION =
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     alternates: {
-        canonical: "/blog/",
+        ...getLocaleAlternates("/blog/", "ru"),
         types: {
             "application/rss+xml": "/blog/feed.xml",
         },

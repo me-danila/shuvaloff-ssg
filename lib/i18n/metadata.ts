@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/routing";
-import { normalizePath, stripLocalePrefix } from "@/lib/i18n/routing";
+import {
+    hasEnglishVersion,
+    normalizePath,
+    stripLocalePrefix,
+} from "@/lib/i18n/routing";
 import {
     DEFAULT_OG_IMAGE,
     getAbsoluteUrl,
@@ -22,6 +26,19 @@ const withTrailingSlash = (value: string): string => {
 export const getLocaleAlternates = (path: string, locale: Locale) => {
     const stripped = stripLocalePrefix(normalizePath(path));
     const ruPath = withTrailingSlash(stripped);
+
+    // RU-only sections (/blog, /policy, /legal) have no /en/ twin: never emit an
+    // `en` hreflang, and point x-default at the Russian page.
+    if (!hasEnglishVersion(stripped)) {
+        return {
+            canonical: ruPath,
+            languages: {
+                ru: ruPath,
+                "x-default": ruPath,
+            },
+        };
+    }
+
     const enPath = ruPath === "/" ? "/en/" : `/en${ruPath}`;
 
     return {
@@ -29,6 +46,7 @@ export const getLocaleAlternates = (path: string, locale: Locale) => {
         languages: {
             ru: ruPath,
             en: enPath,
+            "x-default": ruPath,
         },
     };
 };
