@@ -365,6 +365,10 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 data={buildCollectionPageSchema({
                     locale,
                     path: "/",
+                    // Single <h1> ("Отдых с графским размахом") is the only
+                    // stable selector; the hero heading is followed by the
+                    // booking widget, not a lead paragraph.
+                    speakable: ["h1"],
                     name:
                         locale === "ru"
                             ? "Отель ACADEMIA Особняк Шувалова"

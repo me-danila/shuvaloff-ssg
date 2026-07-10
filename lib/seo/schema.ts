@@ -6,9 +6,14 @@ import {
     DEFAULT_OG_IMAGE,
     getAbsoluteUrl,
     getSiteName,
+    HISTORY_DATE_PUBLISHED,
+    HISTORY_HERO_IMAGE,
     HOTEL_ADDRESS,
     HOTEL_CONTACTS,
     HOTEL_GEO,
+    HOTEL_IMAGES,
+    HOTEL_MAP_URL,
+    SITE_BUILD_DATE,
     SITE_NAME,
     SITE_NAME_EN,
     SITE_URL,
@@ -68,17 +73,19 @@ export const buildSiteSchema = (locale: Locale) => ({
             name: SITE_NAME,
             alternateName: SITE_NAME_EN,
             url: SITE_URL,
-            image: DEFAULT_OG_IMAGE,
+            image: HOTEL_IMAGES,
             description:
                 locale === "en"
-                    ? "Boutique hotel in a restored 19th-century mansion in central Saint Petersburg."
-                    : "Бутик-отель в бережно отреставрированном особняке XIX века в центре Санкт-Петербурга.",
+                    ? "Boutique hotel in a carefully restored 19th-century mansion of Count Shuvalov on Mokhovaya Street in the historic centre of Saint Petersburg. Several halls, including the historical Count's and Countess's suites, are recognised cultural-heritage interiors protected by KGIOP."
+                    : "Бутик-отель в бережно отреставрированном особняке графа Шувалова XIX века на Моховой улице в историческом центре Санкт-Петербурга. Часть залов, включая исторические люксы графа и графини, — интерьеры-объекты культурного наследия под охраной КГИОП.",
             address: getAddress(locale),
             geo: {
                 "@type": "GeoCoordinates",
                 latitude: HOTEL_GEO.latitude,
                 longitude: HOTEL_GEO.longitude,
             },
+            hasMap: HOTEL_MAP_URL,
+            currenciesAccepted: "RUB",
             telephone: HOTEL_CONTACTS.telephone,
             email: HOTEL_CONTACTS.email,
             sameAs: SOCIAL_LINKS,
@@ -109,6 +116,30 @@ export const buildSiteSchema = (locale: Locale) => ({
                 },
             ],
         },
+        {
+            "@type": ["LandmarksOrHistoricalBuildings", "TouristAttraction"],
+            "@id": `${SITE_URL}#landmark`,
+            name:
+                locale === "en"
+                    ? "Count Shuvalov Mansion"
+                    : "Особняк графа Шувалова",
+            description:
+                locale === "en"
+                    ? "A 19th-century mansion on Mokhovaya Street, commissioned in 1854 by Count Andrei Shuvalov and later fitted with neoclassical interiors by the architect Ivan Fomin. Several halls, including the historical Count's and Countess's suites, are protected cultural heritage (KGIOP)."
+                    : "Особняк XIX века на Моховой улице, построенный по заказу графа Андрея Павловича Шувалова в 1854 году; неоклассические интерьеры созданы архитектором Иваном Фоминым. Ряд залов, включая исторические люксы графа и графини, — объекты культурного наследия под охраной КГИОП.",
+            url: getAbsoluteUrl("/history/", locale),
+            address: getAddress(locale),
+            geo: {
+                "@type": "GeoCoordinates",
+                latitude: HOTEL_GEO.latitude,
+                longitude: HOTEL_GEO.longitude,
+            },
+            hasMap: HOTEL_MAP_URL,
+            image: HOTEL_IMAGES,
+            containsPlace: {
+                "@id": getHotelId(),
+            },
+        },
     ],
 });
 
@@ -133,6 +164,7 @@ export const buildCollectionPageSchema = ({
     description,
     breadcrumbs,
     items,
+    speakable,
 }: {
     locale: Locale;
     path: string;
@@ -145,6 +177,10 @@ export const buildCollectionPageSchema = ({
         image?: string;
         description?: string;
     }>;
+    // CSS selectors for the page's main heading / lead content, exposed to
+    // voice assistants via schema.org SpeakableSpecification. Optional so the
+    // shared builder stays unchanged for pages that don't opt in.
+    speakable?: string[];
 }) => ({
     "@context": "https://schema.org",
     "@graph": [
@@ -165,6 +201,15 @@ export const buildCollectionPageSchema = ({
                 "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
             },
             primaryImageOfPage: DEFAULT_OG_IMAGE,
+            dateModified: SITE_BUILD_DATE,
+            ...(speakable?.length
+                ? {
+                      speakable: {
+                          "@type": "SpeakableSpecification",
+                          cssSelector: speakable,
+                      },
+                  }
+                : {}),
         },
         {
             "@type": "ItemList",
@@ -531,6 +576,18 @@ export const buildHistoryPageSchema = ({
             breadcrumb: {
                 "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
             },
+            datePublished: HISTORY_DATE_PUBLISHED,
+            dateModified: SITE_BUILD_DATE,
+            lastReviewed: SITE_BUILD_DATE,
+            primaryImageOfPage: HISTORY_HERO_IMAGE,
+            // Points voice assistants at the page's main heading. Only the
+            // single <h1> is a stable, locale-portable selector: the RU/EN
+            // history pages share this builder and their lead paragraphs have
+            // no shared id/class hook (RU uses .cv-history, EN has none).
+            speakable: {
+                "@type": "SpeakableSpecification",
+                cssSelector: ["h1"],
+            },
         },
         {
             "@type": "Article",
@@ -538,6 +595,12 @@ export const buildHistoryPageSchema = ({
             headline: name,
             description,
             inLanguage: locale,
+            image: HISTORY_HERO_IMAGE,
+            datePublished: HISTORY_DATE_PUBLISHED,
+            dateModified: SITE_BUILD_DATE,
+            mainEntityOfPage: {
+                "@id": `${getAbsoluteUrl(path, locale)}#webpage`,
+            },
             author: {
                 "@id": getOrganizationId(),
             },

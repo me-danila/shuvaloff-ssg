@@ -27,6 +27,29 @@ export const HOTEL_GEO = {
     longitude: 30.345467,
 };
 
+// --- SEO/AEO media & heritage constants (existing published assets only) ---
+
+// Image URLs already published on the site, reused as the Hotel/landmark
+// `image` array: home hero frames + the two historical suites' hero photos.
+export const HOTEL_IMAGES = [
+    DEFAULT_OG_IMAGE,
+    "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-1.png",
+    "https://academia.spb.ru/wp-content/uploads/2026/06/16__MMI0825_018_@maxiimov.jpg",
+    "https://academia.spb.ru/wp-content/uploads/2026/03/sh1.jpg",
+];
+
+// History-page hero (same asset used as that page's OG image and hero <Image>).
+export const HISTORY_HERO_IMAGE =
+    "https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0003.jpg";
+
+// Yandex Maps deep link built from HOTEL_GEO (pt=lng,lat).
+export const HOTEL_MAP_URL = `https://yandex.ru/maps/?pt=${HOTEL_GEO.longitude},${HOTEL_GEO.latitude}&z=16&l=map`;
+
+// Content dates derived from git history: latest commit (build / last review)
+// and the first commit of app/history/page.tsx (history article published).
+export const SITE_BUILD_DATE = "2026-07-10";
+export const HISTORY_DATE_PUBLISHED = "2026-03-26";
+
 export const SOCIAL_LINKS = [
     "https://t.me/academia_land_hotels",
     "https://vk.com/academia.hotels",
