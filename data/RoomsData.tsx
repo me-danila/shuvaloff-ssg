@@ -902,6 +902,14 @@ const translateRoomToEn = (room: Room): Room => {
     };
 };
 
+export type RoomListItem = Omit<Room, "fullDescription" | "amenities">;
+
+export const toRoomListItem = ({
+    fullDescription,
+    amenities,
+    ...rest
+}: Room): RoomListItem => rest;
+
 export const AllRooms: Record<Locale, Room[]> = {
     ru: roomsRu,
     en: roomsRu.map(translateRoomToEn),

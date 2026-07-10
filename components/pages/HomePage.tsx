@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
+import { AllRooms, toRoomListItem } from "@/data/RoomsData";
 import { AllSales } from "@/data/SalesData";
 import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
@@ -670,7 +671,9 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <RoomCategoriesSection />
+            <RoomCategoriesSection
+                rooms={AllRooms[locale].map(toRoomListItem)}
+            />
 
             <section className="flex flex-col gap-4 m-6 xl:my-4 xl:max-w-4xl xl:mx-auto">
                 <FadeUp className="xl:text-center">

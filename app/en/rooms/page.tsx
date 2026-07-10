@@ -5,7 +5,7 @@ import RoomsSection from "@/components/sections/RoomsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
-import { AllRooms } from "@/data/RoomsData";
+import { AllRooms, toRoomListItem } from "@/data/RoomsData";
 import { getLocaleAlternates } from "@/lib/i18n/metadata";
 import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
@@ -65,7 +65,7 @@ export default function RoomsEn() {
             </section>
             <BookingForm />
             <div />
-            <RoomsSection />
+            <RoomsSection rooms={AllRooms.en.map(toRoomListItem)} />
             <Divider />
             <ContactsSection />
         </main>
