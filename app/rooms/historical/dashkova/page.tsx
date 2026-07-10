@@ -9,15 +9,17 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildRoomSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "ru",
+    path: "/rooms/historical/dashkova/",
     title: "Резиденция Дашковой — ACADEMIA Особняк Шувалова",
     description:
         "Исторический люкс «Резиденция Дашковой» в атмосфере классического Петербурга с подлинными антикварными элементами",
-    alternates: getLocaleAlternates("/rooms/historical/dashkova/", "ru"),
-};
+    ogImage: AllRooms.ru.find((r) => r.slug === "dashkova")?.image.src,
+});
 
 const descriptionImages = [
     {

@@ -8,7 +8,7 @@ import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import EventsSlider from "@/components/ui/slider/EventsSlider";
 import { AllEvents, getEventBySlug, getEventCards } from "@/data/EventsData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildEventSchema } from "@/lib/seo/schema";
 
 type Props = {
@@ -25,11 +25,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const event = getEventBySlug("ru", slug);
     if (!event) return {};
-    return {
+    return buildPageMetadata({
+        locale: "ru",
+        path: `/events/${slug}/`,
         title: `${event.title} — ACADEMIA Особняк Шувалова`,
         description: event.subtitle,
-        alternates: getLocaleAlternates(`/events/${slug}/`, "ru"),
-    };
+        ogImage: event.imgUrl,
+    });
 }
 
 export default async function EventPage({ params }: Props) {

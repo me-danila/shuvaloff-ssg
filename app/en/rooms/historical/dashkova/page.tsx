@@ -9,15 +9,17 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildRoomSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "en",
+    path: "/rooms/historical/dashkova/",
     title: "Dashkova Residence — ACADEMIA Shuvaloff Mansion",
     description:
         "Historical suite 'Dashkova Residence' with authentic antiques and the atmosphere of classic Saint Petersburg",
-    alternates: getLocaleAlternates("/rooms/historical/dashkova/", "en"),
-};
+    ogImage: AllRooms.en.find((r) => r.slug === "dashkova")?.image.src,
+});
 
 const descriptionImages = [
     {

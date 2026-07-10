@@ -10,7 +10,7 @@ import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildRoomSchema } from "@/lib/seo/schema";
 
 type Props = {
@@ -30,11 +30,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const room = AllRooms.en.find((r) => r.slug === slug && !r.isHistorical);
     if (!room) return {};
 
-    return {
+    return buildPageMetadata({
+        locale: "en",
+        path: `/rooms/${slug}/`,
         title: `${room.title} — ACADEMIA Shuvaloff Mansion`,
         description: room.description,
-        alternates: getLocaleAlternates(`/rooms/${slug}/`, "en"),
-    };
+        ogImage: room.gallery[0].src,
+    });
 }
 
 export default async function RoomPageEn({ params }: Props) {

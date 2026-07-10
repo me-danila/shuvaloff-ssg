@@ -8,7 +8,7 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildServiceSchema } from "@/lib/seo/schema";
 
 type Props = {
@@ -27,11 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const service = AllServices.en.find((s) => s.slug === slug);
     if (!service) return {};
-    return {
+    return buildPageMetadata({
+        locale: "en",
+        path: `/services/${slug}/`,
         title: `${service.title} — ACADEMIA Shuvaloff Mansion`,
         description: service.subtitle,
-        alternates: getLocaleAlternates(`/services/${slug}/`, "en"),
-    };
+        ogImage: service.imgUrl,
+    });
 }
 
 export default async function ServicePageEn({ params }: Props) {

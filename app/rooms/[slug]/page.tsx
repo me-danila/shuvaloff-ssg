@@ -10,7 +10,7 @@ import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildRoomSchema } from "@/lib/seo/schema";
 
 type Props = {
@@ -29,11 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const room = AllRooms.ru.find((r) => r.slug === slug && !r.isHistorical);
     if (!room) return {};
-    return {
+    return buildPageMetadata({
+        locale: "ru",
+        path: `/rooms/${slug}/`,
         title: `${room.title} — ACADEMIA Особняк Шувалова`,
         description: room.description,
-        alternates: getLocaleAlternates(`/rooms/${slug}/`, "ru"),
-    };
+        ogImage: room.gallery[0].src,
+    });
 }
 
 export default async function RoomPage({ params }: Props) {

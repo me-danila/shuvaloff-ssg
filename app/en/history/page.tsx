@@ -3,15 +3,19 @@ import StructuredData from "@/components/seo/StructuredData";
 import DividerHistory from "@/components/ui/divider/History";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildHistoryPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "en",
+    path: "/history/",
     title: "History of Count Shuvalov Mansion — ACADEMIA Shuvaloff Mansion",
     description:
         "A journey through time: the history of Count Shuvalov Mansion in Saint Petersburg",
-    alternates: getLocaleAlternates("/history/", "en"),
-};
+    ogImage:
+        "https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0003.jpg",
+    ogType: "article",
+});
 
 export default function EnHistory() {
     return (

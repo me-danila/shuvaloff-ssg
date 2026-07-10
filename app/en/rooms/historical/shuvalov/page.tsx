@@ -9,15 +9,17 @@ import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import { AllRooms } from "@/data/RoomsData";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildRoomSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "en",
+    path: "/rooms/historical/shuvalov/",
     title: "Count Shuvalov Residence — ACADEMIA Shuvaloff Mansion",
     description:
         "Historical suite 'Count Shuvalov Residence' with authentic antiques and aristocratic Saint Petersburg atmosphere",
-    alternates: getLocaleAlternates("/rooms/historical/shuvalov/", "en"),
-};
+    ogImage: AllRooms.en.find((r) => r.slug === "shuvalov")?.image.src,
+});
 
 const descriptionImages = [
     {

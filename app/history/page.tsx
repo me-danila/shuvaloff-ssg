@@ -3,15 +3,19 @@ import StructuredData from "@/components/seo/StructuredData";
 import DividerHistory from "@/components/ui/divider/History";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildHistoryPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "ru",
+    path: "/history/",
     title: "История особняка графа Шувалова — ACADEMIA Особняк Шувалова",
     description:
         "Путешствие во времени — История особняка графа Шувалова в Санкт-Петербурге",
-    alternates: getLocaleAlternates("/history/", "ru"),
-};
+    ogImage:
+        "https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0003.jpg",
+    ogType: "article",
+});
 
 export default function History() {
     return (
