@@ -2,6 +2,27 @@
 
 > Дата: 2026-07-10. Стек: Next.js 16.1.6 (`output: "export"`, SSG), React 19.2.3, Tailwind v4, framer-motion 12, lenis, next-image-export-optimizer, MDX-блог, Bun, Biome. i18n: ru (root) + en (`/en/*`). Дизайн v2 — в проде.
 
+## ✅ Статус реализации (ветка `feat/audit-autonomous`, 2026-07-10)
+
+Все автономные фазы реализованы и верифицированы (per-фаза: `bun lint` + `bun run build` 125/125 + `tsc --noEmit` + DOM/HTML-паритет; `bun test` 96/0). Итог vs `main`: **104 файла, +4559 / −1324**.
+
+| Фаза | Статус | Пропущено (обоснованно) |
+|---|---|---|
+| **0** Быстрые победы | ✅ | Яндекс `package.map` — карта без `controls:[]` → package.map убрал бы видимые контролы (дизайн-регресс); нужен явный `controls`-список (дизайн-решение). |
+| **1** Чистка v2 | ✅ | forceReload снят с `/subscriptions/`; **оставлен** на 4 `?cert-open` (виджет TravelLine читает param только при полной перезагрузке → машинерия остаётся). |
+| **2** Производительность | ✅ | Дедуп шрифта Century Gothic (питает разные элементы, безопасно не убрать); Footer/Header→server (общий layout не знает локаль — нужна реструктуризация роутинга). Выгружены из клиента: AllServices ~60КБ, AllRooms ~54КБ, AllSales ~10КБ, smiData ~5КБ + fullDescription/amenities. |
+| **3** a11y | ✅ | — (все пункты; `<html lang=en>` через post-build `scripts/fix-en-lang.mjs`). |
+| **4** SEO | ✅ | og:title/description для статических EN-страниц (home) наследуются от layout — нужен per-page metadata (detail-маршруты + history + историч. люксы уже исправлены). Кастомные сервис-лендинги/list — дефолтный OG (не регресс). |
+| **5** i18n RU-only | ✅ | — (RU_ONLY hreflang + x-default + переключатель; slug-паритет полный). |
+| **9** GEO/AEO | ✅ | Всё из существующего контента; НЕ добавлены priceRange/starRating/aggregateRating/numberOfRooms/sameAs-URL (данные отеля → «Требуется от отеля»). |
+| **6** Формы/безопасность | ✅ | — (валидация + Metrika-маскировка; утёкший скрипт удалён в Фазе 0). |
+| **8** Юзабилити | ✅ | Button `<a>→Link` исключает external/#/TravelLine (cert-open/tl-booking-open — full-nav). |
+| **7** DX | ✅ (частично) | Дедуп: 4 механические пары объединены (services/rooms/events `[slug]` + reviews, byte-identical). **Не тронуты** (не 1:1): `rooms/page` (dynamic-import + max-w drift), `history` (RU 38 vs EN 8 секций — контент), историч. люксы dashkova/shuvalov (инлайн не-1:1 копия + JSX-shape diff). |
+
+Пре-существующие info-хинты `noUselessFragments` в `components/pages/HistoricalRoomsPage.tsx` (6 шт) оставлены: info-уровень (lint exit 0), фикс = схлопывание multi-line JSX→строка → риск исказить контент.
+
+Разделы [«Требуется от отеля»](#требуется-от-отеля--вне-автономного-плана) и [«Вне scope — инфраструктура»](#вне-scope--инфраструктура-сервер) — НЕ трогались (по ограничениям).
+
 ## Принципы
 
 1. **Только улучшать** — без компромиссов, деградации UI/UX, потери качества фото, риска сломать сторонние виджеты.
