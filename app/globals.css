@@ -3,7 +3,7 @@
 @theme {
     --font-history: "History Pro", serif;
     --font-alistair: "Alistair-Signature", cursive;
-    --font-sans: "Century Gothic", sans-serif;
+    --font-sans: var(--font-century), sans-serif;
     --color-brand-light: #efefef;
     --color-brand-brown: #372a24;
     --color-brand-red: #5c1f26;
@@ -15,7 +15,7 @@
 }
 
 body {
-    font-family: "Century Gothic", sans-serif;
+    font-family: var(--font-century), sans-serif;
 }
 
 button,
@@ -78,7 +78,7 @@ select {
 
 /* Шрифты дизайна v2: century gothic для текста, history pro для заголовков (кроме h1) */
 .v2-fonts {
-    font-family: var(--font-century), "Century Gothic", sans-serif;
+    font-family: var(--font-century), sans-serif;
 }
 
 .v2-fonts :is(h2, h3, h4, h5, h6) {
@@ -93,30 +93,11 @@ select {
     font-weight: 700;
 }
 
-/* Century Gothic для основного текста сайта и v2-блоков вне скоупа .v2-fonts */
-@font-face {
-    font-family: "Century Gothic";
-    src: url("/fonts/CenturyGothic.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Century Gothic";
-    src: url("/fonts/CenturyGothic-Bold.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Century Gothic";
-    src: url("/fonts/CenturyGothic-Italic.woff2") format("woff2");
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-}
+/* Century Gothic грузится единственным источником — next/font/local
+   (app/layout.tsx, → var(--font-century)): self-host + auto-preload +
+   size-adjust fallback. Ручной @font-face удалён (дублировал те же woff2). */
 .font-century-v2 {
-    font-family: "Century Gothic", sans-serif;
+    font-family: var(--font-century), sans-serif;
 }
 
 @keyframes marquee {
@@ -145,7 +126,7 @@ select {
 
 /* HotBot */
 html body.hotbot-widget-container {
-    --font-family: "Century Gothic";
+    --font-family: var(--font-century), sans-serif;
 }
 
 html body {

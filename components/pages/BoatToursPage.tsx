@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import OffersGrid, {
@@ -13,6 +14,7 @@ import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 import { ORDER_URL } from "@/lib/seo/site";
 
 const AMENITY_ICONS = [
@@ -671,6 +673,23 @@ const copyByLocale: Record<Locale, PageCopy> = {
     },
 };
 
+const seo = {
+    ru: {
+        name: "Водные прогулки и экскурсии",
+        description:
+            "Есть особенная магия в облике Петербурга, когда смотришь на него с воды.",
+        crumbs: ["Главная", "Услуги"],
+    },
+    en: {
+        name: "Boat tours and excursions",
+        description:
+            "There is a special magic to the sight of St. Petersburg when viewed from the water.",
+        crumbs: ["Home", "Services"],
+    },
+} as const;
+
+const SEO_PARENT_PATHS = ["/", "/services/"] as const;
+
 export default function BoatToursPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const [routeMap, setRouteMap] = useState<string | null>(null);
@@ -724,6 +743,25 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-4 xl:-mt-4">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/boat-tours/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: SEO_PARENT_PATHS[i],
+                        })),
+                        {
+                            name: seo[locale].name,
+                            path: "/services/boat-tours/",
+                        },
+                    ],
+                })}
+            />
+
             <HeroHistoricalRooms
                 title={copy.title}
                 image={{

@@ -355,10 +355,3 @@ export function getEventBySlug(
 ): EventDefinition | undefined {
     return AllEvents[locale].find((event) => event.slug === slug);
 }
-
-/** Даты мероприятия с готовыми подписями, отсортированные по возрастанию. */
-export function getEventOccurrences(event: EventDefinition, locale: Locale) {
-    return [...event.dates]
-        .sort((a, b) => a.localeCompare(b))
-        .map((start) => ({ start, ...formatOccurrence(start, locale) }));
-}

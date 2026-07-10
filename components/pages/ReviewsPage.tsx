@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import StructuredData from "@/components/seo/StructuredData";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import ReviewsWidgetToggle from "@/components/ui/ReviewsWidgetToggle";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type Props = {
     locale: Locale;
@@ -82,18 +84,44 @@ const contentByLocale: Record<Locale, ReviewsContent> = {
 
 export function reviewsMetadata(locale: Locale): Metadata {
     const content = contentByLocale[locale];
-    return {
+    return buildPageMetadata({
+        locale,
+        path: "/reviews/",
         title: content.metaTitle,
         description: content.metaDescription,
-        alternates: getLocaleAlternates("/reviews/", locale),
-    };
+    });
 }
+
+const seo = {
+    ru: {
+        name: "Отзывы",
+        crumbs: ["Главная", "Отзывы"],
+    },
+    en: {
+        name: "Reviews",
+        crumbs: ["Home", "Reviews"],
+    },
+} as const;
+
+const seoPaths = ["/", "/reviews/"] as const;
 
 export default function ReviewsPage({ locale }: Props) {
     const content = contentByLocale[locale];
 
     return (
         <main className="my-10 xl:my-12">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/reviews/",
+                    name: seo[locale].name,
+                    description: content.metaDescription,
+                    breadcrumbs: seo[locale].crumbs.map((name, i) => ({
+                        name,
+                        path: seoPaths[i],
+                    })),
+                })}
+            />
             <FadeUp className="mx-auto w-full max-w-7xl px-4 xl:px-0">
                 <h1>{content.heading}</h1>
                 <p className="mt-6">{content.intro}</p>

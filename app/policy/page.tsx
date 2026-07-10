@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import ContactsSection from "@/components/sections/ContactsSection";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "ru",
+    path: "/policy/",
     title: "Политика обработки персональных данных — ACADEMIA Особняк Шувалова",
     description:
         "Политика обработки персональных данных и условия конфиденциальности ACADEMIA Особняк Шувалова",
-    alternates: getLocaleAlternates("/policy/", "ru"),
-};
+});
 
 export default function Policy() {
     return (

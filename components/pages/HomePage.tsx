@@ -35,6 +35,7 @@ import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
 type HomeCopy = {
     heroTitle: React.ReactNode;
+    heroHeading: React.ReactNode;
     heroSubtitle: string;
     mansionTitle: string;
     countsSpbTitle: string;
@@ -103,6 +104,12 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
                 <span className="xl:whitespace-nowrap">Особняк Шувалова</span>
             </>
         ),
+        heroHeading: (
+            <>
+                Отдых
+                <br className="xl:hidden" /> с графским размахом
+            </>
+        ),
         heroSubtitle: "СПА | Отель | Ресторан в центре Петербурга",
         countsSpbTitle: "Графский Петербург",
         countsSpbParagraphs: [
@@ -166,6 +173,12 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
             <>
                 Academia{" "}
                 <span className="xl:whitespace-nowrap">Mansion Shuvaloff</span>
+            </>
+        ),
+        heroHeading: (
+            <>
+                Relaxation
+                <br className="xl:hidden" /> on a grand scale
             </>
         ),
         heroSubtitle:
@@ -408,19 +421,20 @@ export default function HomePage({ locale }: { locale: Locale }) {
             />
             <section>
                 <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
-                    <FadeIn
-                        duration={0.9}
-                        className="absolute inset-0 h-full w-full"
-                    >
+                    {/* LCP-герой рендерится сразу видимым (без opacity:0-гейта
+                        от framer): preload + priority больше не обесцениваются
+                        ожиданием гидратации. Fade сохранён для не-LCP элементов. */}
+                    <div className="absolute inset-0 h-full w-full">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/06/ChatGPT-Image-28-%D0%BC%D0%B0%D1%8F-2026-%D0%B3.-15_43_59-1-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg"
                             alt="ACADEMIA Особняк Шувалова"
                             fill
                             priority
+                            fetchPriority="high"
                             sizes="100vw"
                             className="object-cover bg-gray-100"
                         />
-                    </FadeIn>
+                    </div>
 
                     <StaggerContainer className="absolute inset-x-0 top-20 z-10 flex flex-col items-start gap-3 px-8 xl:px-0 xl:top-40 xl:max-w-7xl xl:mx-auto">
                         {/* Кнопка «Афиша» (→ /events/) временно скрыта до согласования дизайна страницы: страница задеплоена и доступна по прямому URL, но не связана из hero. Восстановить: убрать .filter ниже. */}
@@ -456,8 +470,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">
                         <FadeIn duration={1}>
                             <h1 className="font-alistair text-4xl normal-case leading-tight xl:text-5xl xl:mb-4 font-normal">
-                                Отдых
-                                <br className="xl:hidden" /> с графским размахом
+                                {copy.heroHeading}
                             </h1>
                         </FadeIn>
                         <Suspense

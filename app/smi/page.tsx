@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import SmiPage from "@/components/pages/SmiPage";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "ru",
+    path: "/smi/",
     title: "СМИ о нас — ACADEMIA Особняк Шувалова",
     description: "Публикации СМИ об отеле ACADEMIA Особняк Шувалова",
-    alternates: getLocaleAlternates("/smi/", "ru"),
-};
+});
 
 export default function Smi() {
     return <SmiPage locale="ru" />;

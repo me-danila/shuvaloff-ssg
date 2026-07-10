@@ -5,11 +5,13 @@ import {
     BookingFormMobile,
 } from "@/components/sections/BookingFormResponsive";
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import EventsGrid from "@/components/ui/grids/EventsGrid";
 import { FadeIn, FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 // EventsCalendar рендерится ниже сгиба (боковая колонка), не за интеракцией.
 // ssr:true оставляет HTML в SSG-выдаче (без CLS и без потерь для SEO), а его
@@ -47,6 +49,23 @@ const eventsCopyByLocale: Record<
     },
 };
 
+const seo = {
+    ru: {
+        name: "Афиша мероприятий",
+        description:
+            "Приглашаем вас на мероприятия в особняке Шувалова в центре Санкт-Петербурга.",
+        crumbs: ["Главная"],
+    },
+    en: {
+        name: "Events",
+        description:
+            "We invite you to events at the Shuvaloff Mansion in central Saint Petersburg.",
+        crumbs: ["Home"],
+    },
+} as const;
+
+const CRUMB_PATHS = ["/"];
+
 export default function EventsPage({ locale }: { locale: Locale }) {
     const copy = eventsCopyByLocale[locale];
 
@@ -56,6 +75,22 @@ export default function EventsPage({ locale }: { locale: Locale }) {
             itemScope
             itemType="https://schema.org/WebPage"
         >
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/events/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: CRUMB_PATHS[i],
+                        })),
+                        { name: seo[locale].name, path: "/events/" },
+                    ],
+                })}
+            />
+
             <section>
                 <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
                     <FadeIn

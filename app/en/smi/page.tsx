@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import SmiPage from "@/components/pages/SmiPage";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "en",
+    path: "/smi/",
     title: "Media About Us — ACADEMIA Shuvaloff Mansion",
     description: "Media publications about ACADEMIA Shuvaloff Mansion hotel",
-    alternates: getLocaleAlternates("/smi/", "en"),
-};
+});
 
 export default function EnSmi() {
     return <SmiPage locale="en" />;

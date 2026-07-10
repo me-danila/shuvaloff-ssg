@@ -3,18 +3,19 @@ import Link from "next/link";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildBlogEditorialSchema } from "@/lib/seo/schema";
 
 const TITLE = "О редакции блога — ACADEMIA Особняк Шувалова";
 const DESCRIPTION =
     "Кто пишет блог бутик-отеля ACADEMIA Особняк Шувалова: команда отеля — консьержи, историки и рестораторы, которые знают аристократический Петербург изнутри.";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "ru",
+    path: "/blog/author/",
     title: TITLE,
     description: DESCRIPTION,
-    alternates: getLocaleAlternates("/blog/author/", "ru"),
-};
+});
 
 export default function EditorialPage() {
     return (

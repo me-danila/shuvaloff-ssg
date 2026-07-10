@@ -1,6 +1,7 @@
 import type React from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import DividerHistory from "@/components/ui/divider/History";
@@ -10,6 +11,7 @@ import Image from "@/components/ui/OptimizedImage";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type PageCopy = {
     title: string;
@@ -348,12 +350,44 @@ const cultureImages = [
     "https://academia.spb.ru/wp-content/uploads/2026/04/culture2.jpg",
 ];
 
+const seo = {
+    ru: {
+        name: "Графский Петербург",
+        description: "Особый отдых в формате пышных аристократических традиций",
+        crumbs: ["Главная"],
+    },
+    en: {
+        name: "Aristocratic St. Petersburg",
+        description:
+            "A special getaway in the style of grand aristocratic traditions",
+        crumbs: ["Home"],
+    },
+} as const;
+
+const PARENT_PATHS = ["/"] as const;
+
 export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const bookingHref = "/booking/?&be-offer=910895";
 
     return (
         <main className="flex flex-col gap-4 xl:-mt-4">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/aristocratic-spb/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: PARENT_PATHS[i],
+                        })),
+                        { name: seo[locale].name, path: "/aristocratic-spb/" },
+                    ],
+                })}
+            />
+
             <HeroHistoricalRooms
                 title={copy.title}
                 additionalTitle={copy.additionalTitle}

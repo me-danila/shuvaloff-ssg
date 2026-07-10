@@ -157,7 +157,7 @@ export default function ContactsSection() {
                     initMap();
                 } else {
                     const script = document.createElement("script");
-                    script.src = `https://api-maps.yandex.ru/2.1/?apikey=8d5dabf6-ffc8-46c7-89e6-ad8f95f78257&load=package.full&lang=${locale === "ru" ? "ru-RU" : "en-US"}`;
+                    script.src = `https://api-maps.yandex.ru/2.1/?apikey=8d5dabf6-ffc8-46c7-89e6-ad8f95f78257&load=package.map&lang=${locale === "ru" ? "ru-RU" : "en-US"}`;
                     script.onload = initMap;
                     document.head.appendChild(script);
                 }

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import HomePage from "@/components/pages/HomePage";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import { buildPageMetadata } from "@/lib/i18n/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
+    locale: "ru",
+    path: "/",
     title: "Отель ACADEMIA Особняк Шувалова — Санкт-Петербург",
     description:
         "Отель в историческом особняке XIX века в центре Санкт-Петербурга",
-    alternates: getLocaleAlternates("/", "ru"),
-};
+});
 
 export default function Page() {
     return (

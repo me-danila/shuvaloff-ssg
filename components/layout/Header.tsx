@@ -5,10 +5,10 @@ import {
     MapPinIcon,
     PhoneIcon,
     UserIcon,
-} from "@phosphor-icons/react";
+} from "@phosphor-icons/react/dist/ssr";
 import { AnimatePresence, m } from "framer-motion";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import Button from "@/components/ui/Button";
@@ -455,7 +455,6 @@ const mobileSubmenuVariants = {
 
 export default function Header() {
     const pathname = usePathname() || "/";
-    const searchParams = useSearchParams();
     const locale = detectLocaleFromPath(pathname);
     const copy = copyByLocale[locale];
     const navItems = navItemsByLocale[locale];
@@ -540,16 +539,12 @@ export default function Header() {
         if (!item.href.startsWith("?")) {
             return localizeHref(item.href, locale);
         }
-
-        const mergedParams = new URLSearchParams(searchParams.toString());
-        const nextParams = new URLSearchParams(item.href.slice(1));
-
-        nextParams.forEach((value, key) => {
-            mergedParams.set(key, value);
-        });
-
-        const query = mergedParams.toString();
-        return query ? `${pathname}?${query}` : pathname;
+        // Param-ссылки (?cert-open=…) добавляем к текущему пути. Раньше здесь
+        // мерджился useSearchParams(), но он уводил весь Header в CSR-bailout
+        // (BAILOUT_TO_CLIENT_SIDE_RENDERING) при output:export → хедер выпадал
+        // из статического HTML. Существующие query-параметры для cert-open
+        // несущественны.
+        return `${pathname}${item.href}`;
     };
     const getItemRel = (item: HeaderLinkItem) =>
         item.target === "_blank" ? "noopener noreferrer" : undefined;

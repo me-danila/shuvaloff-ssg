@@ -12,6 +12,7 @@ import {
     HOTEL_CONTACTS,
     HOTEL_GEO,
     HOTEL_IMAGES,
+    HOTEL_LEGAL,
     HOTEL_MAP_URL,
     SITE_BUILD_DATE,
     SITE_NAME,
@@ -51,11 +52,22 @@ export const buildSiteSchema = (locale: Locale) => ({
             "@id": getOrganizationId(),
             name: SITE_NAME,
             alternateName: SITE_NAME_EN,
+            legalName: HOTEL_LEGAL.legalName,
+            taxID: HOTEL_LEGAL.taxID,
+            vatID: HOTEL_LEGAL.vatID,
             url: SITE_URL,
             logo: `${SITE_URL}/logo.svg`,
             sameAs: SOCIAL_LINKS,
             email: HOTEL_CONTACTS.email,
             telephone: HOTEL_CONTACTS.telephone,
+            address: getAddress(locale),
+            contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "reservations",
+                telephone: HOTEL_CONTACTS.telephone,
+                email: HOTEL_CONTACTS.email,
+                availableLanguage: ["Russian", "English"],
+            },
         },
         {
             "@type": "WebSite",
@@ -115,6 +127,17 @@ export const buildSiteSchema = (locale: Locale) => ({
                     value: true,
                 },
             ],
+            contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "reservations",
+                telephone: HOTEL_CONTACTS.telephone,
+                email: HOTEL_CONTACTS.email,
+                availableLanguage: ["Russian", "English"],
+            },
+            potentialAction: {
+                "@type": "ReserveAction",
+                target: BOOKING_URL,
+            },
         },
         {
             "@type": ["LandmarksOrHistoricalBuildings", "TouristAttraction"],
@@ -155,6 +178,65 @@ export const buildBreadcrumbSchema = (
         name: item.name,
         item: getAbsoluteUrl(item.path, locale),
     })),
+});
+
+/**
+ * Generic WebPage + BreadcrumbList graph for content pages that aren't a
+ * collection/detail type with a dedicated builder. Links into the site graph
+ * via isPartOf(WebSite) / about(Hotel), mirroring buildCollectionPageSchema
+ * minus the ItemList. Breadcrumb labels come from existing page titles/nav.
+ */
+export const buildWebPageSchema = ({
+    locale,
+    path,
+    name,
+    description,
+    breadcrumbs,
+    image,
+    speakable,
+}: {
+    locale: Locale;
+    path: string;
+    name: string;
+    description: string;
+    breadcrumbs: BreadcrumbItem[];
+    image?: string;
+    speakable?: string[];
+}) => ({
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": `${getAbsoluteUrl(path, locale)}#webpage`,
+            url: getAbsoluteUrl(path, locale),
+            name,
+            description,
+            inLanguage: locale,
+            isPartOf: {
+                "@id": getWebsiteId(),
+            },
+            about: {
+                "@id": getHotelId(),
+            },
+            breadcrumb: {
+                "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
+            },
+            primaryImageOfPage: image ?? DEFAULT_OG_IMAGE,
+            dateModified: SITE_BUILD_DATE,
+            ...(speakable?.length
+                ? {
+                      speakable: {
+                          "@type": "SpeakableSpecification",
+                          cssSelector: speakable,
+                      },
+                  }
+                : {}),
+        },
+        {
+            ...buildBreadcrumbSchema(locale, breadcrumbs),
+            "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
+        },
+    ],
 });
 
 export const buildCollectionPageSchema = ({

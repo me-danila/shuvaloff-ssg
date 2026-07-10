@@ -2,10 +2,12 @@
 
 import type { ReactNode } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type Device = {
     src: string;
@@ -232,11 +234,46 @@ const copyByLocale: Record<Locale, BeautyBarCopy> = {
     },
 };
 
+const seo = {
+    ru: {
+        name: "Девайсы для красоты и здоровья",
+        description:
+            "Сделайте ваш отдых еще более приятным — закажите в номер девайсы для красоты и здоровья от бренда GESS",
+        crumbs: ["Главная", "Услуги"],
+    },
+    en: {
+        name: "Beauty & Health Devices",
+        description:
+            "Make your stay even more pleasant — order beauty and health devices from the GESS brand to your room",
+        crumbs: ["Home", "Services"],
+    },
+} as const;
+
+const CRUMB_PATHS = ["/", "/services/"] as const;
+
 export default function BeautyBarPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
 
     return (
         <main className="flex flex-col gap-8 xl:gap-10">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/beauty-bar/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: CRUMB_PATHS[i],
+                        })),
+                        {
+                            name: seo[locale].name,
+                            path: "/services/beauty-bar/",
+                        },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-7xl xl:mx-auto xl:text-center">
                 <FadeUp>
                     <h1>{copy.title}</h1>

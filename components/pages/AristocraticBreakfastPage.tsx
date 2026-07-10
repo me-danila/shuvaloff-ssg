@@ -1,5 +1,6 @@
 "use client";
 
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import {
     FadeIn,
@@ -10,6 +11,7 @@ import {
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type BreakfastCopy = {
     title: React.ReactNode;
@@ -374,8 +376,43 @@ export default function AristocraticBreakfastPage({
     const copy = copyByLocale[locale];
     const descImages = descriptionImages[locale];
 
+    const seo = {
+        ru: {
+            name: "Графский завтрак",
+            description:
+                "Гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
+            crumbs: ["Главная", "Услуги"],
+        },
+        en: {
+            name: "Aristocratic breakfast",
+            description:
+                "Gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
+            crumbs: ["Home", "Services"],
+        },
+    } as const;
+
+    const crumbPaths = ["/", "/services/"] as const;
+
     return (
         <main className="flex flex-col gap-4 xl:gap-16">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/aristocratic-breakfast/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: crumbPaths[i],
+                        })),
+                        {
+                            name: seo[locale].name,
+                            path: "/services/aristocratic-breakfast/",
+                        },
+                    ],
+                })}
+            />
             <section>
                 <div className="relative overflow-hidden min-h-[40rem] xl:min-h-screen">
                     <FadeIn

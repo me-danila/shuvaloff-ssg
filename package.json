@@ -8,6 +8,7 @@
         "start": "next start",
         "test": "bun test",
         "lint": "biome check",
+        "typecheck": "tsc --noEmit",
         "format": "biome format --write",
         "fix": "bun format && bun lint --fix",
         "prepare": "git config core.hooksPath .githooks 2>/dev/null || exit 0",

@@ -4,6 +4,7 @@ import {
     TrainIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
@@ -11,6 +12,7 @@ import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 import { ORDER_URL } from "@/lib/seo/site";
 
 type TransferCopy = {
@@ -99,6 +101,23 @@ const copyByLocale: Record<Locale, TransferCopy> = {
 
 const icons = [AirplaneIcon, TrainIcon, CarProfileIcon];
 
+const seo = {
+    ru: {
+        name: "Трансфер",
+        description:
+            "Индивидуальный представительский трансфер в ACADEMIA Особняк Шувалова",
+        crumbs: ["Главная", "Услуги"],
+    },
+    en: {
+        name: "Transfer",
+        description:
+            "Individual executive transfer to ACADEMIA Shuvaloff Mansion",
+        crumbs: ["Home", "Services"],
+    },
+} as const;
+
+const SEO_PATHS = ["/", "/services/"] as const;
+
 export default function TransferPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const otherServices = AllServices[locale].filter(
@@ -107,6 +126,24 @@ export default function TransferPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-8 xl:gap-8">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/transfer/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: SEO_PATHS[i],
+                        })),
+                        {
+                            name: seo[locale].name,
+                            path: "/services/transfer/",
+                        },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-3 mx-6 mt-6 xl:mt-8 xl:max-w-7xl xl:mx-auto xl:w-full">
                 <FadeUp className="text-center flex flex-col">
                     <h1>{copy.title}</h1>

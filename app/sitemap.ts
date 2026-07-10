@@ -159,6 +159,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: gitLastModified(ROOMS_SOURCE),
             changeFrequency: "weekly" as const,
             priority: 0.8,
+            images: [room.image.src, ...room.gallery.map((img) => img.src)],
         })),
         ...AllRooms.en.map((room) => ({
             url: getAbsoluteUrl(
@@ -170,6 +171,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: gitLastModified(ROOMS_SOURCE),
             changeFrequency: "weekly" as const,
             priority: 0.7,
+            images: [room.image.src, ...room.gallery.map((img) => img.src)],
         })),
         ...AllServices.ru
             .filter((service) => "slug" in service && service.slug)
@@ -178,6 +180,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 lastModified: gitLastModified(SERVICES_SOURCE),
                 changeFrequency: "weekly" as const,
                 priority: 0.7,
+                images: [service.imgUrl],
             })),
         ...AllServices.en
             .filter((service) => "slug" in service && service.slug)
@@ -186,18 +189,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 lastModified: gitLastModified(SERVICES_SOURCE),
                 changeFrequency: "weekly" as const,
                 priority: 0.6,
+                images: [service.imgUrl],
             })),
         ...AllEvents.ru.map((event) => ({
             url: getAbsoluteUrl(`/events/${event.slug}/`, "ru"),
             lastModified: gitLastModified(EVENTS_SOURCE),
             changeFrequency: "weekly" as const,
             priority: 0.7,
+            images: [event.imgUrl],
         })),
         ...AllEvents.en.map((event) => ({
             url: getAbsoluteUrl(`/events/${event.slug}/`, "en"),
             lastModified: gitLastModified(EVENTS_SOURCE),
             changeFrequency: "weekly" as const,
             priority: 0.6,
+            images: [event.imgUrl],
         })),
     ];
 
