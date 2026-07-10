@@ -1,6 +1,8 @@
-"use client";
-
-import { AirplaneIcon, CarProfileIcon, TrainIcon } from "@phosphor-icons/react";
+import {
+    AirplaneIcon,
+    CarProfileIcon,
+    TrainIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import ContactsSection from "@/components/sections/ContactsSection";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";

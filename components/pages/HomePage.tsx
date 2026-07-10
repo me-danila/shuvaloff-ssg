@@ -26,6 +26,8 @@ import {
 } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
+import { AllSales } from "@/data/SalesData";
+import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 import { buildCollectionPageSchema } from "@/lib/seo/schema";
@@ -463,7 +465,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 <BookingFormMobile />
             </Suspense>
 
-            <SpecialOffersSection />
+            <SpecialOffersSection sales={AllSales[locale]} locale={locale} />
 
             <section className="relative overflow-hidden hidden">
                 {/* MOBILE: фото снизу 55% */}
@@ -680,7 +682,15 @@ export default function HomePage({ locale }: { locale: Locale }) {
                 </FadeUp>
             </section>
 
-            <HomeServicesSection locale={locale} />
+            <HomeServicesSection
+                locale={locale}
+                services={AllServices[locale].map((s) => ({
+                    title: s.title,
+                    imgUrl: s.imgUrl,
+                    slug: s.slug,
+                    externalLink: s.externalLink,
+                }))}
+            />
 
             <section className="flex flex-col gap-3 w-full px-6 xl:max-w-7xl xl:mx-auto xl:px-0 xl:py-12 xl:text-center">
                 <FadeUp>

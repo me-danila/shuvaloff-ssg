@@ -5,9 +5,8 @@ import { useRef } from "react";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { AllSales } from "@/data/SalesData";
-import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
+import type { Sale } from "@/data/SalesData";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 
 const sectionCopy = {
     ru: {
@@ -34,9 +33,13 @@ const renderSaleSubtitle = (subtitle: string) => {
     return subtitle;
 };
 
-export default function SpecialOffersSection() {
-    const locale = useLocale();
-    const sales = AllSales[locale];
+export default function SpecialOffersSection({
+    sales,
+    locale,
+}: {
+    sales: Sale[];
+    locale: Locale;
+}) {
     const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
     const activeIndexRef = useRef(0);

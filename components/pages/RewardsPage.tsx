@@ -95,6 +95,7 @@ export default function RewardsPage({ locale }: { locale: Locale }) {
             </section>
             <BookingForm />
             <DarkHeroSection
+                locale={locale}
                 imageMobile={{
                     src: "https://academia.spb.ru/wp-content/uploads/2026/03/4-1.png",
                     alt: "ACADEMIA REWARDS",
@@ -132,7 +133,7 @@ export default function RewardsPage({ locale }: { locale: Locale }) {
                     </Button>
                 </FadeUp>
             </section>
-            <AcademiaRewards />
+            <AcademiaRewards locale={locale} />
             <Divider />
             <ContactsSection />
         </main>

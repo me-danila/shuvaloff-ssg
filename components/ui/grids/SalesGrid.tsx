@@ -1,11 +1,8 @@
-"use client";
-
 import Button from "@/components/ui/Button";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { AllSales } from "@/data/SalesData";
-import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 
 const copyByLocale = {
     ru: { book: "Забронировать", more: "Подробнее" },
@@ -28,8 +25,7 @@ const renderSaleSubtitle = (subtitle: string) => {
     return subtitle;
 };
 
-export default function SalesGrid() {
-    const locale = useLocale();
+export default function SalesGrid({ locale }: { locale: Locale }) {
     const sales = AllSales[locale];
     const copy = copyByLocale[locale];
 

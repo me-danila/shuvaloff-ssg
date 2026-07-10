@@ -660,7 +660,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 </FadeUp>
             </section>
 
-            <WeddingHistoricalMapSection />
+            <WeddingHistoricalMapSection locale={locale} />
 
             <section className="flex flex-col gap-4 mx-6 xl:flex-row xl:mx-auto xl:my-6">
                 <WeddingFormModal

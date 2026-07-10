@@ -107,7 +107,7 @@ export default function AllServicesPage({ locale }: { locale: Locale }) {
             </section>
             <section className="bg-brand-light py-8 xl:py-12">
                 <div className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
-                    <ServicesGrid />
+                    <ServicesGrid locale={locale} />
                 </div>
             </section>
             <Divider />

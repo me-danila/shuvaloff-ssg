@@ -1,12 +1,10 @@
-"use client";
-
 import Button from "@/components/ui/Button";
 import { BedIcon, SquareIcon, UserIcon } from "@/components/ui/icons";
 import Image from "@/components/ui/OptimizedImage";
-import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 
 type CardRoomHistoricalProps = {
+    locale: Locale;
     title: string;
     description: string;
     image: { src: string; alt: string };
@@ -18,6 +16,7 @@ type CardRoomHistoricalProps = {
 };
 
 export default function CardRoomHistorical({
+    locale,
     title,
     description,
     image,
@@ -27,7 +26,6 @@ export default function CardRoomHistorical({
     guests,
     bookingUrl,
 }: CardRoomHistoricalProps) {
-    const locale = useLocale();
     const detailsLabel = locale === "ru" ? "ПОДРОБНЕЕ" : "DETAILS";
     const bookLabel = locale === "ru" ? "ЗАБРОНИРОВАТЬ" : "BOOK NOW";
     const detailsHref = localizeHref(`/rooms/historical/${slug}/`, locale);

@@ -183,6 +183,7 @@ export default function HistoricalRoomsPage({ locale }: { locale: Locale }) {
                                 className="flex flex-1 basis-0 min-w-0"
                             >
                                 <CardRoomHistorical
+                                    locale={locale}
                                     title={room.title}
                                     description={room.description}
                                     image={room.image}

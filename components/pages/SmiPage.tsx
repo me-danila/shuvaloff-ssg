@@ -19,7 +19,7 @@ export default function SmiPage({ locale }: { locale: Locale }) {
             </section>
             <section className="bg-brand-light py-8 xl:py-12">
                 <div className="mx-6 xl:mx-auto xl:w-full xl:max-w-7xl">
-                    <SmiGrid />
+                    <SmiGrid locale={locale} />
                 </div>
             </section>
             <Divider />
