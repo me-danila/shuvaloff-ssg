@@ -4,13 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import DesktopRoomsGrid from "@/components/ui/grids/DesktopRoomsGrid";
 import SliderMobileRooms from "@/components/ui/slider/SliderMobileRooms";
-import { AllRooms } from "@/data/RoomsData";
+import type { RoomListItem } from "@/data/RoomsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
-export default function RoomsSection() {
+export default function RoomsSection({ rooms }: { rooms: RoomListItem[] }) {
     const locale = useLocale();
-    const rooms = AllRooms[locale];
     const classicalRooms = rooms.filter((r) => !r.isHistorical);
     const historicalRooms = rooms.filter((r) => r.isHistorical);
     const classicalLabel =

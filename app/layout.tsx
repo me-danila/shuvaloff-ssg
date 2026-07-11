@@ -3,14 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { domAnimation, LazyMotion } from "framer-motion";
 import Script from "next/script";
-import { Suspense } from "react";
 import HtmlLangSync from "@/components/i18n/HtmlLangSync";
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
 import TravelLineManager from "@/components/sections/TravelLineManager";
-import StructuredData from "@/components/seo/StructuredData";
 import { siteMetadataBase } from "@/lib/i18n/metadata";
-import { buildSiteSchema } from "@/lib/seo/schema";
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo/site";
 import { SmoothScroll } from "../components/ui/SmoothScroll";
 
@@ -18,6 +13,7 @@ const alistair = localFont({
     src: "../public/fonts/Alistair-Signature.woff2",
     variable: "--font-alistair",
     display: "swap",
+    preload: false,
 });
 
 const historyPro = localFont({
@@ -78,6 +74,9 @@ export const metadata: Metadata = {
     robots: {
         index: true,
         follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
         googleBot: {
             index: true,
             follow: true,
@@ -132,7 +131,6 @@ export default function RootLayout({
             <body
                 className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
             >
-                <StructuredData data={buildSiteSchema("ru")} />
                 <HtmlLangSync />
                 <TravelLineManager />
                 <Script
@@ -141,13 +139,7 @@ export default function RootLayout({
                 />
                 <Script src="/scripts/metrika.js" strategy="lazyOnload" />
                 <SmoothScroll>
-                    <LazyMotion features={domAnimation}>
-                        <Suspense fallback={null}>
-                            <Header />
-                        </Suspense>
-                        <Suspense fallback={null}>{children}</Suspense>
-                        <Footer />
-                    </LazyMotion>
+                    <LazyMotion features={domAnimation}>{children}</LazyMotion>
                 </SmoothScroll>
                 <Script id="hotbot" strategy="lazyOnload">{`
   window.addEventListener('scroll', function() {

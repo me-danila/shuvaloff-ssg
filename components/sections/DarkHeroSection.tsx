@@ -1,12 +1,9 @@
-"use client";
-
 import type React from "react";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
-import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 
 type ContentBlock = {
     title: React.ReactNode;
@@ -14,6 +11,7 @@ type ContentBlock = {
 };
 
 type DarkHeroSectionProps = {
+    locale: Locale;
     blocks: ContentBlock[];
     image: { src: string; alt: string };
     imageMobile?: { src: string; alt: string; position?: string };
@@ -30,6 +28,7 @@ const sizeClass: Record<NonNullable<DarkHeroSectionProps["size"]>, string> = {
 };
 
 export default function DarkHeroSection({
+    locale,
     blocks,
     image,
     imageMobile,
@@ -38,7 +37,6 @@ export default function DarkHeroSection({
     imageGradient = false,
     buttons,
 }: DarkHeroSectionProps) {
-    const locale = useLocale();
     const orderLabel = locale === "ru" ? "Заказать" : "Order";
     const detailsLabel = locale === "ru" ? "Подробнее" : "Details";
     const mobileImage = imageMobile ?? image;

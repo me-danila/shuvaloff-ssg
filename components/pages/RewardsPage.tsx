@@ -1,11 +1,13 @@
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import DarkHeroSection from "@/components/sections/DarkHeroSection";
+import StructuredData from "@/components/seo/StructuredData";
 import AcademiaRewards from "@/components/ui/AcademiaRewards";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type RewardsCopy = {
     title: string;
@@ -71,11 +73,43 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
     },
 };
 
+const seo = {
+    ru: {
+        name: "Программа лояльности",
+        description:
+            "Программа лояльности ACADEMIA REWARDS с привилегиями для гостей отелей сети ACADEMIA",
+        crumbs: ["Главная"],
+    },
+    en: {
+        name: "Loyalty Program",
+        description:
+            "The ACADEMIA REWARDS loyalty program with special privileges for guests of ACADEMIA hotels.",
+        crumbs: ["Home"],
+    },
+} as const;
+
+const CRUMB_PATHS = ["/"];
+
 export default function RewardsPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
 
     return (
         <main className="flex flex-col gap-6">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/rewards/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: CRUMB_PATHS[i],
+                        })),
+                        { name: seo[locale].name, path: "/rewards/" },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-4 mx-6 my-2 xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>
@@ -95,6 +129,7 @@ export default function RewardsPage({ locale }: { locale: Locale }) {
             </section>
             <BookingForm />
             <DarkHeroSection
+                locale={locale}
                 imageMobile={{
                     src: "https://academia.spb.ru/wp-content/uploads/2026/03/4-1.png",
                     alt: "ACADEMIA REWARDS",
@@ -132,7 +167,7 @@ export default function RewardsPage({ locale }: { locale: Locale }) {
                     </Button>
                 </FadeUp>
             </section>
-            <AcademiaRewards />
+            <AcademiaRewards locale={locale} />
             <Divider />
             <ContactsSection />
         </main>

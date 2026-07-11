@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { AllRooms } from "@/data/RoomsData";
+import type { RoomListItem } from "@/data/RoomsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
@@ -28,9 +28,12 @@ const sectionCopy = {
     },
 } as const;
 
-export default function RoomCategoriesSection() {
+export default function RoomCategoriesSection({
+    rooms,
+}: {
+    rooms: RoomListItem[];
+}) {
     const locale = useLocale();
-    const rooms = AllRooms[locale];
     const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
     const activeIndexRef = useRef(0);

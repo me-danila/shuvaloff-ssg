@@ -1,8 +1,6 @@
-"use client";
-
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { useLocale } from "@/lib/i18n/useLocale";
+import type { Locale } from "@/lib/i18n/routing";
 
 const LANDMARKS = [
     {
@@ -56,8 +54,11 @@ const LANDMARKS = [
     },
 ];
 
-export default function WeddingHistoricalMapSection() {
-    const locale = useLocale();
+export default function WeddingHistoricalMapSection({
+    locale,
+}: {
+    locale: Locale;
+}) {
     const mobileAlt =
         locale === "ru"
             ? "Исторический центр Санкт-Петербурга"

@@ -1,5 +1,6 @@
 "use client";
 
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import {
     FadeIn,
@@ -10,6 +11,7 @@ import {
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type BreakfastCopy = {
     title: React.ReactNode;
@@ -42,7 +44,7 @@ type BreakfastCopy = {
 
 const copyByLocale: Record<Locale, BreakfastCopy> = {
     ru: {
-        title: (<>ГРАФСКИЕ ЗАВТРАКИ В&nbsp;АКАДЕМИА ОСОБНЯК ШУВАЛОВА</>),
+        title: <>ГРАФСКИЕ ЗАВТРАКИ В&nbsp;АКАДЕМИА ОСОБНЯК ШУВАЛОВА</>,
         titleAlt: "Графские завтраки в Академиа Особняк Шувалова",
         subtitle:
             "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
@@ -56,7 +58,9 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 столом, вели неспешные беседы и&nbsp;наслаждались вкусом жизни.
                 <br />
                 <br />
-                Исключительно для гостей особняка, графские завтраки подаются ежедневно по предварительному бронированию (при наличии свободных слотов):
+                Исключительно для гостей особняка, графские завтраки подаются
+                ежедневно по предварительному бронированию (при наличии
+                свободных слотов):
                 <br />
                 в 13:00, 13:15, 13:30,
                 <br />
@@ -187,7 +191,7 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
         bookHotelLabel: "Забронировать отель",
     },
     en: {
-        title: (<>ARISTOCRATIC BREAKFASTS AT THE ACADEMIA MANSION SHUVALOV</>),
+        title: <>ARISTOCRATIC BREAKFASTS AT THE ACADEMIA MANSION SHUVALOV</>,
         titleAlt: "Aristocratic breakfasts at the Academia Mansion Shuvalov",
         subtitle:
             "— it’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
@@ -202,7 +206,8 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 life.
                 <br />
                 <br />
-                Exclusively for guests of the mansion, the Count's breakfasts are served daily by prior reservation (subject to availability):
+                Exclusively for guests of the mansion, the Count's breakfasts
+                are served daily by prior reservation (subject to availability):
                 <br />
                 at 13:00, 13:15, 13:30,
                 <br />
@@ -294,8 +299,10 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
         graphPrice: (
             <>
                 Price:
-                <br />5,500 ₽ — for one person
-                <br />8,500 ₽ — for two persons
+                <br />
+                5,500 ₽ — for one person
+                <br />
+                8,500 ₽ — for two persons
             </>
         ),
         quoteTitle1: "It’s not just a serve — it’s a real ritual.",
@@ -369,8 +376,43 @@ export default function AristocraticBreakfastPage({
     const copy = copyByLocale[locale];
     const descImages = descriptionImages[locale];
 
+    const seo = {
+        ru: {
+            name: "Графский завтрак",
+            description:
+                "Гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
+            crumbs: ["Главная", "Услуги"],
+        },
+        en: {
+            name: "Aristocratic breakfast",
+            description:
+                "Gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
+            crumbs: ["Home", "Services"],
+        },
+    } as const;
+
+    const crumbPaths = ["/", "/services/"] as const;
+
     return (
         <main className="flex flex-col gap-4 xl:gap-16">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/aristocratic-breakfast/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: crumbPaths[i],
+                        })),
+                        {
+                            name: seo[locale].name,
+                            path: "/services/aristocratic-breakfast/",
+                        },
+                    ],
+                })}
+            />
             <section>
                 <div className="relative overflow-hidden min-h-[40rem] xl:min-h-screen">
                     <FadeIn
@@ -541,7 +583,10 @@ export default function AristocraticBreakfastPage({
                             ))}
                         </div>
                     </FadeUp>
-                    <FadeUp delay={0.2} className="flex flex-col items-start gap-2">
+                    <FadeUp
+                        delay={0.2}
+                        className="flex flex-col items-start gap-2"
+                    >
                         <Button
                             href={copy.breakfastLink2}
                             target="_blank"

@@ -24,6 +24,7 @@ export default function InfiniteImageSlider({ images }: Props) {
                             src={image.src}
                             alt={image.alt}
                             fill
+                            sizes="(min-width: 1024px) 360px, 240px"
                             className="object-cover"
                         />
                     </div>

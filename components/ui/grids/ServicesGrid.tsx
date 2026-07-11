@@ -1,9 +1,7 @@
-"use client";
-
 import CardServiceBig from "@/components/ui/CardServiceBig";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import { AllServices } from "@/data/ServicesData";
-import { useLocale } from "@/lib/i18n/useLocale";
+import type { Locale } from "@/lib/i18n/routing";
 
 type ServicesGridItem = {
     title: string;
@@ -13,13 +11,14 @@ type ServicesGridItem = {
 };
 
 type ServicesGridProps = {
+    locale: Locale;
     services?: ServicesGridItem[];
 };
 
 export default function ServicesGrid({
+    locale,
     services: servicesProp,
 }: ServicesGridProps) {
-    const locale = useLocale();
     const services = servicesProp ?? AllServices[locale];
 
     return (

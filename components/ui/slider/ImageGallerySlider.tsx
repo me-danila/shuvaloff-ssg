@@ -1,5 +1,6 @@
 "use client";
 
+import { useReducedMotion } from "framer-motion";
 import { useEffect } from "react";
 
 import Image from "@/components/ui/OptimizedImage";
@@ -34,16 +35,17 @@ export default function ImageGallerySlider({
     autoplay = false,
 }: ImageGallerySliderProps) {
     const { current, sliderRef, scrollTo } = useSlider();
+    const prefersReducedMotion = useReducedMotion();
 
     useEffect(() => {
-        if (!autoplay || images.length <= 1) return;
+        if (!autoplay || prefersReducedMotion || images.length <= 1) return;
 
         const intervalId = window.setInterval(() => {
             scrollTo((current + 1) % images.length);
         }, 5000);
 
         return () => window.clearInterval(intervalId);
-    }, [autoplay, current, images.length, scrollTo]);
+    }, [autoplay, prefersReducedMotion, current, images.length, scrollTo]);
 
     return (
         <div className={`relative w-full ${className ?? ""}`}>

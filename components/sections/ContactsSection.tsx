@@ -40,8 +40,8 @@ type ContactLink = {
 const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
     ru: [
         {
-            href: "tel:+78125659650",
-            label: "+7 (812) 565-96-50",
+            href: HOTEL_CONTACTS.telephoneHref,
+            label: HOTEL_CONTACTS.telephoneDisplay,
             Icon: PhoneIcon,
         },
         {
@@ -54,13 +54,13 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
             label: "Санкт-Петербург, ул. Моховая, д. 10",
             Icon: MapPinIcon,
             target: "_blank",
-            rel: "noopener referrer",
+            rel: "noopener noreferrer",
         },
     ],
     en: [
         {
-            href: "tel:+78125659650",
-            label: "+7 (812) 565-96-50",
+            href: HOTEL_CONTACTS.telephoneHref,
+            label: HOTEL_CONTACTS.telephoneDisplay,
             Icon: PhoneIcon,
         },
         {
@@ -73,7 +73,7 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
             label: "10 Mokhovaya St, Saint Petersburg",
             Icon: MapPinIcon,
             target: "_blank",
-            rel: "noopener referrer",
+            rel: "noopener noreferrer",
         },
     ],
 };
@@ -133,7 +133,7 @@ export default function ContactsSection() {
                                     (locale === "ru"
                                         ? "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>"
                                         : "10 Mokhovaya St, Saint Petersburg<br>Open 24/7<br><br>") +
-                                    "+7 (812) 565-96-50<br>" +
+                                    `${HOTEL_CONTACTS.telephoneDisplay}<br>` +
                                     "reservation@academia.spb.ru",
                                 hintContent:
                                     locale === "ru"
@@ -157,7 +157,7 @@ export default function ContactsSection() {
                     initMap();
                 } else {
                     const script = document.createElement("script");
-                    script.src = `https://api-maps.yandex.ru/2.1/?apikey=8d5dabf6-ffc8-46c7-89e6-ad8f95f78257&load=package.full&lang=${locale === "ru" ? "ru-RU" : "en-US"}`;
+                    script.src = `https://api-maps.yandex.ru/2.1/?apikey=8d5dabf6-ffc8-46c7-89e6-ad8f95f78257&load=package.map&lang=${locale === "ru" ? "ru-RU" : "en-US"}`;
                     script.onload = initMap;
                     document.head.appendChild(script);
                 }

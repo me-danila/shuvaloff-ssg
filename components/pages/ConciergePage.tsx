@@ -1,15 +1,18 @@
 "use client";
 
-import { BellIcon, ListHeartIcon } from "@phosphor-icons/react";
+import { BellIcon, ListHeartIcon } from "@phosphor-icons/react/dist/ssr";
 import BookingForm from "@/components/sections/BookingForm";
 import ContactsSection from "@/components/sections/ContactsSection";
 import type { HeroImage } from "@/components/sections/HeroWithPictures";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import DesktopHeroGrid from "@/components/ui/grids/DesktopHeroGrid";
 import { FadeUp } from "@/components/ui/Motion";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
+import { ORDER_URL } from "@/lib/seo/site";
 
 type ConciergeCopy = {
     title: string;
@@ -144,11 +147,47 @@ const heroImages: [HeroImage, HeroImage, HeroImage, HeroImage] = [
     },
 ];
 
+const seo = {
+    ru: {
+        name: "Консьерж-сервис",
+        description:
+            "Персональный консьерж-сервис ACADEMIA Особняк Шувалова: организация отдыха, событий, трансфера и индивидуальных запросов",
+        crumbs: ["Главная", "Услуги"],
+    },
+    en: {
+        name: "Concierge Service",
+        description:
+            "Personal concierge service ACADEMIA Shuvaloff Mansion: organization of recreation, events, transfer and individual requests",
+        crumbs: ["Home", "Services"],
+    },
+} as const;
+
+const SEO_CRUMB_PATHS = ["/", "/services/"] as const;
+
 export default function ConciergePage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
+    const pageSeo = seo[locale];
 
     return (
         <main className="flex flex-col gap-4 xl:gap-10">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/concierge/",
+                    name: pageSeo.name,
+                    description: pageSeo.description,
+                    breadcrumbs: [
+                        ...pageSeo.crumbs.map((name, i) => ({
+                            name,
+                            path: SEO_CRUMB_PATHS[i],
+                        })),
+                        {
+                            name: pageSeo.name,
+                            path: "/services/concierge/",
+                        },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-4 xl:gap-8 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0">
                 <FadeUp>
                     <h1>{copy.title}</h1>
@@ -186,7 +225,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     </p>
                                 </div>
                                 <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    href={ORDER_URL}
                                     target="_blank"
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
@@ -207,7 +246,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                             </ul>
                         </div>
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             variant="primary"
                             className="xl:hidden"
@@ -234,7 +273,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                     </p>
                                 </div>
                                 <Button
-                                    href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                                    href={ORDER_URL}
                                     target="_blank"
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
@@ -255,7 +294,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                             </ul>
                         </div>
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             variant="primary"
                             className="xl:hidden"

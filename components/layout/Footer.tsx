@@ -5,8 +5,8 @@ import Link from "next/link";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import SocialLinks from "@/components/ui/SocialLinks";
+import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
 import { SITE_URL, SOCIAL_LINKS } from "@/lib/seo/site";
 
 const NAV_LINKS = {
@@ -45,8 +45,7 @@ const LEGAL_LINKS = {
     ],
 } as const;
 
-export default function Footer() {
-    const locale = useLocale();
+export default function Footer({ locale }: { locale: Locale }) {
     const navLinks = NAV_LINKS[locale];
     const legalLinks = LEGAL_LINKS[locale];
     const homeAria = locale === "ru" ? "На главную" : "Back to homepage";
@@ -81,6 +80,7 @@ export default function Footer() {
         locale === "ru"
             ? " Академиа Особняк Шувалова"
             : " of ACADEMIA Shuvaloff";
+    const emailLabel = locale === "ru" ? "Электронная почта" : "Email address";
 
     // Десктоп: кнопка отдельным блоком. Мобайл: кнопка внутри поля.
     const SubscribeForm = ({ inset = false }: { inset?: boolean }) =>
@@ -89,7 +89,8 @@ export default function Footer() {
                 <input
                     type="email"
                     placeholder="Email"
-                    className="w-full rounded-md bg-white py-3.5 pl-4 pr-14 text-sm text-stone-800 placeholder:text-stone-400 outline-none"
+                    aria-label={emailLabel}
+                    className="ym-disable-keys w-full rounded-md bg-white py-3.5 pl-4 pr-14 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                 />
                 <button
                     type="submit"
@@ -107,7 +108,8 @@ export default function Footer() {
                 <input
                     type="email"
                     placeholder="Email"
-                    className="min-w-0 flex-1 rounded-md bg-white px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 outline-none"
+                    aria-label={emailLabel}
+                    className="ym-disable-keys min-w-0 flex-1 rounded-md bg-white px-4 py-3 text-sm text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                 />
                 <button
                     type="submit"
@@ -189,7 +191,8 @@ export default function Footer() {
                                 <input
                                     type="email"
                                     placeholder="Email"
-                                    className="h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none"
+                                    aria-label={emailLabel}
+                                    className="ym-disable-keys h-10 min-w-0 flex-1 rounded-md bg-white px-3 text-xs text-stone-800 placeholder:text-stone-400 outline-none focus-visible:ring-2 focus-visible:ring-[#5c1f26]"
                                 />
                                 <button
                                     type="submit"
@@ -234,6 +237,7 @@ export default function Footer() {
                                     key={href}
                                     href={href}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-white/80 transition-colors hover:text-white"
                                 >
                                     {label}
@@ -302,6 +306,7 @@ export default function Footer() {
                                 <Link
                                     href={href}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-white/90 hover:text-white transition-colors"
                                 >
                                     {label}

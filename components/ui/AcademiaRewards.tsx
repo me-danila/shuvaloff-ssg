@@ -1,8 +1,5 @@
-"use client";
-
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
 
 type Tier = {
     label: string;
@@ -109,8 +106,7 @@ const tiersByLocale: Record<Locale, Tier[]> = {
     ],
 } as const;
 
-export default function AcademiaRewards() {
-    const locale = useLocale();
+export default function AcademiaRewards({ locale }: { locale: Locale }) {
     const tiers = tiersByLocale[locale];
     const discountLabel = locale === "ru" ? "Скидка" : "Discount";
     const note =

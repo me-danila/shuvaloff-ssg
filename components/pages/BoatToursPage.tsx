@@ -4,15 +4,18 @@ import type React from "react";
 import { useState } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
-import SpecialOffersSection, {
+import OffersGrid, {
     type SpecialOfferItem,
-} from "@/components/ui/grids/SpecialOffersSection";
+} from "@/components/ui/grids/OffersGrid";
 import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
+import { ORDER_URL } from "@/lib/seo/site";
 
 const AMENITY_ICONS = [
     {
@@ -366,8 +369,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "от 25 750 ₽",
                 },
             },
@@ -391,8 +393,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "от 20 000 ₽",
                 },
             },
@@ -421,8 +422,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "от 26 450 ₽",
                 },
             },
@@ -446,8 +446,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "от 20 000 ₽",
                 },
             },
@@ -586,8 +585,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "from 25 750 ₽",
                 },
             },
@@ -612,8 +610,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "from 20 000 ₽",
                 },
             },
@@ -643,8 +640,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "from 26 450 ₽",
                 },
             },
@@ -669,8 +665,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref:
-                        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y",
+                    buttonHref: ORDER_URL,
                     price: "from 20 000 ₽",
                 },
             },
@@ -678,11 +673,27 @@ const copyByLocale: Record<Locale, PageCopy> = {
     },
 };
 
+const seo = {
+    ru: {
+        name: "Водные прогулки и экскурсии",
+        description:
+            "Есть особенная магия в облике Петербурга, когда смотришь на него с воды.",
+        crumbs: ["Главная", "Услуги"],
+    },
+    en: {
+        name: "Boat tours and excursions",
+        description:
+            "There is a special magic to the sight of St. Petersburg when viewed from the water.",
+        crumbs: ["Home", "Services"],
+    },
+} as const;
+
+const SEO_PARENT_PATHS = ["/", "/services/"] as const;
+
 export default function BoatToursPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const [routeMap, setRouteMap] = useState<string | null>(null);
-    const bookingHref =
-        "https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y";
+    const bookingHref = ORDER_URL;
 
     const serviceOffers: SpecialOfferItem[] = [
         {
@@ -732,6 +743,25 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-4 xl:-mt-4">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/services/boat-tours/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: SEO_PARENT_PATHS[i],
+                        })),
+                        {
+                            name: seo[locale].name,
+                            path: "/services/boat-tours/",
+                        },
+                    ],
+                })}
+            />
+
             <HeroHistoricalRooms
                 title={copy.title}
                 image={{
@@ -819,7 +849,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         </div>
 
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             className="max-w-fit mt-2 xl:mt-4"
                         >
@@ -903,7 +933,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         </div>
 
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             className="max-w-fit mt-2 xl:mt-4"
                         >
@@ -981,7 +1011,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                         </div>
 
                         <Button
-                            href="https://max.ru/u/f9LHodD0cOLWQFq44DQuZv4QvZQiGksp6PbIj9GE8aT7AofzZpUCM8hNy-Y"
+                            href={ORDER_URL}
                             target="_blank"
                             className="max-w-fit mt-2 xl:mt-4"
                         >
@@ -991,7 +1021,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 </div>
             </section>
 
-            <SpecialOffersSection
+            <OffersGrid
                 offers={serviceOffers}
                 locale={locale}
                 title={copy.servicesLabel}
@@ -999,7 +1029,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 showSubtitles={false}
             />
 
-            <SpecialOffersSection
+            <OffersGrid
                 offers={copy.specialOffers}
                 locale={locale}
                 title={copy.specialOffersTitle}
@@ -1012,6 +1042,7 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                 onClose={() => setRouteMap(null)}
                 maxWidth="max-w-3xl"
                 bgColor="bg-transparent"
+                ariaLabel={copy.mapLabel}
             >
                 {routeMap && (
                     <div className="relative aspect-4/3 w-full">

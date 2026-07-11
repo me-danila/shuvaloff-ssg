@@ -70,7 +70,7 @@ export default function SalesPage({ locale }: { locale: Locale }) {
             <BookingForm />
             <section className="bg-brand-light py-8 xl:py-12">
                 <div className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
-                    <SalesGrid />
+                    <SalesGrid locale={locale} />
                 </div>
             </section>
             <section className="mx-6 my-4 xl:max-w-7xl xl:mx-auto xl:w-full flex flex-col gap-6 xl:my-2">

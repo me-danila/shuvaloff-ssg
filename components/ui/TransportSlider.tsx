@@ -1,6 +1,6 @@
 "use client";
 
-import { AirplaneIcon, TrainIcon } from "@phosphor-icons/react";
+import { AirplaneIcon, TrainIcon } from "@phosphor-icons/react/dist/ssr";
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";

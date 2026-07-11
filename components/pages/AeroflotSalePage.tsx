@@ -1,9 +1,11 @@
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 const registerHref =
     "https://guest.travelline.ru/guest-account/41018/profile/login";
@@ -68,11 +70,44 @@ const copyByLocale: Record<Locale, AeroflotCopy> = {
     },
 };
 
+const seo = {
+    ru: {
+        name: "Аэрофлот Бонус",
+        description:
+            "Отдыхайте в Коллекции особняков ACADEMIA и копите мили «Аэрофлот Бонус» за каждую ночь проживания.",
+        crumbs: ["Главная", "Специальные предложения"],
+    },
+    en: {
+        name: "Aeroflot Bonus",
+        description:
+            "Stay at the ACADEMIA Collection of Mansions and earn Aeroflot Bonus miles for every night of your stay.",
+        crumbs: ["Home", "Special offers"],
+    },
+} as const;
+
+const CRUMB_PATHS = ["/", "/sales/"] as const;
+
 export default function AeroflotSalePage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
 
     return (
         <main className="flex flex-col gap-6">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/sales/aeroflot/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: CRUMB_PATHS[i],
+                        })),
+                        { name: seo[locale].name, path: "/sales/aeroflot/" },
+                    ],
+                })}
+            />
+
             <HeroHistoricalRooms
                 title={copy.title}
                 image={{

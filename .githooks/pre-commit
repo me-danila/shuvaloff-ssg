@@ -1,0 +1,19 @@
+#!/bin/sh
+# Pre-commit hook: run Biome (`bun lint` = `biome check`) and block the commit on error.
+#
+# Version-controlled in .githooks/. Activated per-clone by the package.json
+# "prepare" script, which runs on `bun install`:
+#     git config core.hooksPath .githooks
+#
+# Emergency bypass: git commit --no-verify
+if ! command -v bun >/dev/null 2>&1; then
+    echo "pre-commit: 'bun' not found on PATH; skipping Biome check." >&2
+    exit 0
+fi
+
+if ! bun run lint; then
+    echo "" >&2
+    echo "pre-commit blocked: Biome reported problems." >&2
+    echo "Fix them with 'bun fix', or bypass with 'git commit --no-verify'." >&2
+    exit 1
+fi

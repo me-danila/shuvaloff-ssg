@@ -4,9 +4,15 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { useRef } from "react";
 import CardServiceBig from "@/components/ui/CardServiceBig";
-import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
+
+type HomeServiceItem = {
+    title: string;
+    imgUrl: string;
+    slug?: string;
+    externalLink?: string;
+};
 
 const sectionCopy = {
     ru: {
@@ -17,8 +23,13 @@ const sectionCopy = {
     },
 } as const;
 
-export default function HomeServicesSection({ locale }: { locale: Locale }) {
-    const services = AllServices[locale];
+export default function HomeServicesSection({
+    locale,
+    services,
+}: {
+    locale: Locale;
+    services: HomeServiceItem[];
+}) {
     const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
     const activeIndexRef = useRef(0);

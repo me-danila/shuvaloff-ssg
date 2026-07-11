@@ -37,9 +37,18 @@ export async function GET() {
 
 ${articles}
 
+## English
+
+- [Hotel overview (EN)](${SITE_URL}/en/): ACADEMIA Mansion Shuvaloff — boutique hotel in a restored 19th-century mansion in central Saint Petersburg
+- [Rooms (EN)](${SITE_URL}/en/rooms/): all room categories with descriptions
+- [Historical suites (EN)](${SITE_URL}/en/rooms/historical/): cultural-heritage suites with authentic interiors
+- [Services (EN)](${SITE_URL}/en/services/all/): transfer, boat tours, breakfasts, SPA and more
+- [History (EN)](${SITE_URL}/en/history/): history of the Shuvalov mansion
+
 ## Служебное
 
 - [Sitemap](${SITE_URL}/sitemap.xml)
+- [Полная текстовая версия / full-text index](${SITE_URL}/llms-full.txt): все страницы (ru + en) одним файлом
 `;
 
     return new Response(body, {

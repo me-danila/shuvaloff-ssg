@@ -4,12 +4,12 @@ import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import ImageGallerySlider from "@/components/ui/slider/ImageGallerySlider";
-import type { Room } from "@/data/RoomsData";
+import type { RoomListItem } from "@/data/RoomsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
 type DesktopRoomsGridProps = {
-    rooms: Room[];
+    rooms: RoomListItem[];
 };
 
 export default function DesktopRoomsGrid({ rooms }: DesktopRoomsGridProps) {

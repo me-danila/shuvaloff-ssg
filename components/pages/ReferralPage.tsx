@@ -1,10 +1,29 @@
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
 import TransportSlider from "@/components/ui/TransportSlider";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
+
+const BREADCRUMB_PATHS = ["/", "/rewards/"] as const;
+
+const seo = {
+    ru: {
+        name: "Реферальная программа привилегий",
+        description:
+            "Каждый участник программы привилегий ACADEMIA REWARDS может приглашать друзей присоединиться к программе и получать за это приятные бонусы для обоих.",
+        crumbs: ["Главная", "ACADEMIA Rewards"],
+    },
+    en: {
+        name: "Referral Rewards Program",
+        description:
+            "Every member of the ACADEMIA REWARDS loyalty program can invite friends to join the program and receive great rewards for both of you.",
+        crumbs: ["Home", "ACADEMIA Rewards"],
+    },
+} as const;
 
 type RewardsCopy = {
     title: string;
@@ -133,6 +152,22 @@ export default function ReferralPage({ locale }: { locale: Locale }) {
 
     return (
         <main className="flex flex-col gap-6">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/rewards/referral/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: BREADCRUMB_PATHS[i],
+                        })),
+                        { name: seo[locale].name, path: "/rewards/referral/" },
+                    ],
+                })}
+            />
+
             <HeroHistoricalRooms
                 title={copy.title}
                 image={{

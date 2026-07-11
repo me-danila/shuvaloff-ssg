@@ -1,8 +1,10 @@
 import ContactsSection from "@/components/sections/ContactsSection";
+import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 type RunCopy = {
     title: string;
@@ -31,11 +33,43 @@ const copyByLocale: Record<Locale, RunCopy> = {
     },
 };
 
+const seo = {
+    ru: {
+        name: "Ваш утренний маршрут с философией ACADEMIA",
+        description:
+            "Город ещё спит, а вы уже в движении. Тихие улицы, шелест листвы, отражения рассвета в витринах. Маршрут проходит там, где Петербург особенно красив в это время",
+        crumbs: ["Главная"],
+    },
+    en: {
+        name: "Your morning route with ACADEMIA philosophy",
+        description:
+            "The city is still asleep, and you are already in motion. Quiet streets, rustling leaves, dawn reflections in the windows. The route passes through places where St. Petersburg is especially beautiful at this time",
+        crumbs: ["Home"],
+    },
+} as const;
+
+const PARENT_PATHS = ["/"];
+
 export default function RunPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
 
     return (
         <main className="flex flex-col gap-8">
+            <StructuredData
+                data={buildWebPageSchema({
+                    locale,
+                    path: "/run/",
+                    name: seo[locale].name,
+                    description: seo[locale].description,
+                    breadcrumbs: [
+                        ...seo[locale].crumbs.map((name, i) => ({
+                            name,
+                            path: PARENT_PATHS[i],
+                        })),
+                        { name: seo[locale].name, path: "/run/" },
+                    ],
+                })}
+            />
             <section className="flex flex-col gap-4 m-6 xl:max-w-3xl xl:mx-auto">
                 <FadeUp className="xl:text-center">
                     <h1>{copy.title}</h1>

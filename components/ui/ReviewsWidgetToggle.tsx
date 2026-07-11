@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatCenteredTextIcon } from "@phosphor-icons/react";
+import { ChatCenteredTextIcon } from "@phosphor-icons/react/dist/ssr";
 import { useState } from "react";
 
 type ReviewsWidgetToggleProps = {

@@ -10,7 +10,7 @@ import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
 type HistoricalCopy = {
     title: string;
-    intro: React.ReactNode[];
+    intro: { id: string; body: React.ReactNode }[];
     galleryHeading: string;
     schemaName: string;
     schemaDescription: string;
@@ -25,25 +25,18 @@ const copyByLocale: Record<Locale, HistoricalCopy> = {
     ru: {
         title: "ИСТОРИЧЕСКИЕ ЛЮКСЫ",
         intro: [
-            <>
-                Исторические люксы — объекты культурного наследия, в которых
-                сохранены детали отделки, восстановлен изначальный цвет стен и
-                добавлены подлинные антикварные предметы эпохи конца XIX —
-                начала ХХ века.
-            </>,
-            <>
-                Это резиденции, отражающие характер владельцев особняка: графа
-                Андрея Шувалова и его дочери Елизаветы Воронцовой-Дашковой.
-                Изысканные линии, глубокие цвета и изящные детали дают
-                возможность почувствовать себя дорогим гостем одного из
-                известных аристократических домов Российской Империи. Стены
-                особняка хранят память о людях, которые здесь жили — не
-                выдуманных персонажах, а реальных аристократах. Помнят их уклад
-                жизни, вечерние разговоры при свечах, неспешные шаги по
-                мраморной лестнице, звуки рояля, шелест парадного платья, мягкий
-                свет люстры — всё это не декорации.
-            </>,
-            <>Это отблески жизни, которой когда-то был наполнен особняк.</>,
+            {
+                id: "heritage",
+                body: "Исторические люксы — объекты культурного наследия, в которых сохранены детали отделки, восстановлен изначальный цвет стен и добавлены подлинные антикварные предметы эпохи конца XIX — начала ХХ века.",
+            },
+            {
+                id: "residences",
+                body: "Это резиденции, отражающие характер владельцев особняка: графа Андрея Шувалова и его дочери Елизаветы Воронцовой-Дашковой. Изысканные линии, глубокие цвета и изящные детали дают возможность почувствовать себя дорогим гостем одного из известных аристократических домов Российской Империи. Стены особняка хранят память о людях, которые здесь жили — не выдуманных персонажах, а реальных аристократах. Помнят их уклад жизни, вечерние разговоры при свечах, неспешные шаги по мраморной лестнице, звуки рояля, шелест парадного платья, мягкий свет люстры — всё это не декорации.",
+            },
+            {
+                id: "continuity",
+                body: "Это отблески жизни, которой когда-то был наполнен особняк.",
+            },
         ],
         galleryHeading: "Пространство, в котором дышит история Петербурга",
         schemaName: "Исторические люксы",
@@ -66,23 +59,18 @@ const copyByLocale: Record<Locale, HistoricalCopy> = {
     en: {
         title: "HISTORICAL SUITES",
         intro: [
-            <>
-                These historical suites are protected heritage spaces with
-                restored original colors, preserved decorative details, and
-                authentic antique objects from the late 19th and early 20th
-                centuries.
-            </>,
-            <>
-                These residences reflect the personalities of the mansion
-                owners: Count Andrey Shuvalov and his daughter Elizaveta
-                Vorontsova-Dashkova. Elegant lines, deep colors, and curated
-                details let you feel like an honored guest of one of Imperial
-                Russia's aristocratic houses. The mansion preserves memories of
-                real people who once lived here: their evenings by candlelight,
-                their slow steps on marble stairs, the sound of the piano, and
-                the soft glow of chandeliers.
-            </>,
-            <>This is not decoration. It is continuity.</>,
+            {
+                id: "heritage",
+                body: "These historical suites are protected heritage spaces with restored original colors, preserved decorative details, and authentic antique objects from the late 19th and early 20th centuries.",
+            },
+            {
+                id: "residences",
+                body: "These residences reflect the personalities of the mansion owners: Count Andrey Shuvalov and his daughter Elizaveta Vorontsova-Dashkova. Elegant lines, deep colors, and curated details let you feel like an honored guest of one of Imperial Russia's aristocratic houses. The mansion preserves memories of real people who once lived here: their evenings by candlelight, their slow steps on marble stairs, the sound of the piano, and the soft glow of chandeliers.",
+            },
+            {
+                id: "continuity",
+                body: "This is not decoration. It is continuity.",
+            },
         ],
         galleryHeading:
             "A space where the history of Saint Petersburg still breathes",
@@ -158,12 +146,11 @@ export default function HistoricalRoomsPage({ locale }: { locale: Locale }) {
                 </FadeUp>
                 {copy.intro.map((paragraph, i) => (
                     <FadeUp
-                        // biome-ignore lint/suspicious/noArrayIndexKey: static copy
-                        key={i}
+                        key={paragraph.id}
                         delay={0.1 * (i + 1)}
                         className="xl:mt-2"
                     >
-                        <p>{paragraph}</p>
+                        <p>{paragraph.body}</p>
                     </FadeUp>
                 ))}
             </section>
@@ -183,6 +170,7 @@ export default function HistoricalRoomsPage({ locale }: { locale: Locale }) {
                                 className="flex flex-1 basis-0 min-w-0"
                             >
                                 <CardRoomHistorical
+                                    locale={locale}
                                     title={room.title}
                                     description={room.description}
                                     image={room.image}

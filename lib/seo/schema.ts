@@ -6,9 +6,15 @@ import {
     DEFAULT_OG_IMAGE,
     getAbsoluteUrl,
     getSiteName,
+    HISTORY_DATE_PUBLISHED,
+    HISTORY_HERO_IMAGE,
     HOTEL_ADDRESS,
     HOTEL_CONTACTS,
     HOTEL_GEO,
+    HOTEL_IMAGES,
+    HOTEL_LEGAL,
+    HOTEL_MAP_URL,
+    SITE_BUILD_DATE,
     SITE_NAME,
     SITE_NAME_EN,
     SITE_URL,
@@ -46,11 +52,22 @@ export const buildSiteSchema = (locale: Locale) => ({
             "@id": getOrganizationId(),
             name: SITE_NAME,
             alternateName: SITE_NAME_EN,
+            legalName: HOTEL_LEGAL.legalName,
+            taxID: HOTEL_LEGAL.taxID,
+            vatID: HOTEL_LEGAL.vatID,
             url: SITE_URL,
             logo: `${SITE_URL}/logo.svg`,
             sameAs: SOCIAL_LINKS,
             email: HOTEL_CONTACTS.email,
             telephone: HOTEL_CONTACTS.telephone,
+            address: getAddress(locale),
+            contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "reservations",
+                telephone: HOTEL_CONTACTS.telephone,
+                email: HOTEL_CONTACTS.email,
+                availableLanguage: ["Russian", "English"],
+            },
         },
         {
             "@type": "WebSite",
@@ -68,17 +85,19 @@ export const buildSiteSchema = (locale: Locale) => ({
             name: SITE_NAME,
             alternateName: SITE_NAME_EN,
             url: SITE_URL,
-            image: DEFAULT_OG_IMAGE,
+            image: HOTEL_IMAGES,
             description:
                 locale === "en"
-                    ? "Boutique hotel in a restored 19th-century mansion in central Saint Petersburg."
-                    : "Бутик-отель в бережно отреставрированном особняке XIX века в центре Санкт-Петербурга.",
+                    ? "Boutique hotel in a carefully restored 19th-century mansion of Count Shuvalov on Mokhovaya Street in the historic centre of Saint Petersburg. Several halls, including the historical Count's and Countess's suites, are recognised cultural-heritage interiors protected by KGIOP."
+                    : "Бутик-отель в бережно отреставрированном особняке графа Шувалова XIX века на Моховой улице в историческом центре Санкт-Петербурга. Часть залов, включая исторические люксы графа и графини, — интерьеры-объекты культурного наследия под охраной КГИОП.",
             address: getAddress(locale),
             geo: {
                 "@type": "GeoCoordinates",
                 latitude: HOTEL_GEO.latitude,
                 longitude: HOTEL_GEO.longitude,
             },
+            hasMap: HOTEL_MAP_URL,
+            currenciesAccepted: "RUB",
             telephone: HOTEL_CONTACTS.telephone,
             email: HOTEL_CONTACTS.email,
             sameAs: SOCIAL_LINKS,
@@ -108,6 +127,41 @@ export const buildSiteSchema = (locale: Locale) => ({
                     value: true,
                 },
             ],
+            contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "reservations",
+                telephone: HOTEL_CONTACTS.telephone,
+                email: HOTEL_CONTACTS.email,
+                availableLanguage: ["Russian", "English"],
+            },
+            potentialAction: {
+                "@type": "ReserveAction",
+                target: BOOKING_URL,
+            },
+        },
+        {
+            "@type": ["LandmarksOrHistoricalBuildings", "TouristAttraction"],
+            "@id": `${SITE_URL}#landmark`,
+            name:
+                locale === "en"
+                    ? "Count Shuvalov Mansion"
+                    : "Особняк графа Шувалова",
+            description:
+                locale === "en"
+                    ? "A 19th-century mansion on Mokhovaya Street, commissioned in 1854 by Count Andrei Shuvalov and later fitted with neoclassical interiors by the architect Ivan Fomin. Several halls, including the historical Count's and Countess's suites, are protected cultural heritage (KGIOP)."
+                    : "Особняк XIX века на Моховой улице, построенный по заказу графа Андрея Павловича Шувалова в 1854 году; неоклассические интерьеры созданы архитектором Иваном Фоминым. Ряд залов, включая исторические люксы графа и графини, — объекты культурного наследия под охраной КГИОП.",
+            url: getAbsoluteUrl("/history/", locale),
+            address: getAddress(locale),
+            geo: {
+                "@type": "GeoCoordinates",
+                latitude: HOTEL_GEO.latitude,
+                longitude: HOTEL_GEO.longitude,
+            },
+            hasMap: HOTEL_MAP_URL,
+            image: HOTEL_IMAGES,
+            containsPlace: {
+                "@id": getHotelId(),
+            },
         },
     ],
 });
@@ -126,6 +180,65 @@ export const buildBreadcrumbSchema = (
     })),
 });
 
+/**
+ * Generic WebPage + BreadcrumbList graph for content pages that aren't a
+ * collection/detail type with a dedicated builder. Links into the site graph
+ * via isPartOf(WebSite) / about(Hotel), mirroring buildCollectionPageSchema
+ * minus the ItemList. Breadcrumb labels come from existing page titles/nav.
+ */
+export const buildWebPageSchema = ({
+    locale,
+    path,
+    name,
+    description,
+    breadcrumbs,
+    image,
+    speakable,
+}: {
+    locale: Locale;
+    path: string;
+    name: string;
+    description: string;
+    breadcrumbs: BreadcrumbItem[];
+    image?: string;
+    speakable?: string[];
+}) => ({
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": `${getAbsoluteUrl(path, locale)}#webpage`,
+            url: getAbsoluteUrl(path, locale),
+            name,
+            description,
+            inLanguage: locale,
+            isPartOf: {
+                "@id": getWebsiteId(),
+            },
+            about: {
+                "@id": getHotelId(),
+            },
+            breadcrumb: {
+                "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
+            },
+            primaryImageOfPage: image ?? DEFAULT_OG_IMAGE,
+            dateModified: SITE_BUILD_DATE,
+            ...(speakable?.length
+                ? {
+                      speakable: {
+                          "@type": "SpeakableSpecification",
+                          cssSelector: speakable,
+                      },
+                  }
+                : {}),
+        },
+        {
+            ...buildBreadcrumbSchema(locale, breadcrumbs),
+            "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
+        },
+    ],
+});
+
 export const buildCollectionPageSchema = ({
     locale,
     path,
@@ -133,6 +246,7 @@ export const buildCollectionPageSchema = ({
     description,
     breadcrumbs,
     items,
+    speakable,
 }: {
     locale: Locale;
     path: string;
@@ -145,6 +259,10 @@ export const buildCollectionPageSchema = ({
         image?: string;
         description?: string;
     }>;
+    // CSS selectors for the page's main heading / lead content, exposed to
+    // voice assistants via schema.org SpeakableSpecification. Optional so the
+    // shared builder stays unchanged for pages that don't opt in.
+    speakable?: string[];
 }) => ({
     "@context": "https://schema.org",
     "@graph": [
@@ -165,6 +283,15 @@ export const buildCollectionPageSchema = ({
                 "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
             },
             primaryImageOfPage: DEFAULT_OG_IMAGE,
+            dateModified: SITE_BUILD_DATE,
+            ...(speakable?.length
+                ? {
+                      speakable: {
+                          "@type": "SpeakableSpecification",
+                          cssSelector: speakable,
+                      },
+                  }
+                : {}),
         },
         {
             "@type": "ItemList",
@@ -312,6 +439,92 @@ export const buildServiceSchema = ({
     ],
 });
 
+export const buildEventSchema = ({
+    locale,
+    path,
+    event,
+    breadcrumbs,
+}: {
+    locale: Locale;
+    path: string;
+    event: {
+        title: string;
+        subtitle: string;
+        imgUrl: string;
+        bookingUrl: string;
+        price?: string;
+        dates: string[];
+    };
+    breadcrumbs: BreadcrumbItem[];
+}) => {
+    const url = getAbsoluteUrl(path, locale);
+    const offerUrl = event.bookingUrl.startsWith("http")
+        ? event.bookingUrl
+        : getAbsoluteUrl(event.bookingUrl, locale);
+
+    const place = {
+        "@type": "Place",
+        name: getSiteName(locale),
+        address: getAddress(locale),
+        geo: {
+            "@type": "GeoCoordinates",
+            latitude: HOTEL_GEO.latitude,
+            longitude: HOTEL_GEO.longitude,
+        },
+    };
+
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": `${url}#webpage`,
+                url,
+                name: event.title,
+                description: event.subtitle,
+                inLanguage: locale,
+                isPartOf: {
+                    "@id": getWebsiteId(),
+                },
+                breadcrumb: {
+                    "@id": `${url}#breadcrumb`,
+                },
+                primaryImageOfPage: event.imgUrl,
+            },
+            ...event.dates.map((start, index) => ({
+                "@type": "Event",
+                "@id": `${url}#event-${index}`,
+                name: event.title,
+                description: event.subtitle,
+                image: event.imgUrl,
+                // SPb (МСК, UTC+3); время в данных — локальное.
+                startDate: `${start}:00+03:00`,
+                eventAttendanceMode:
+                    "https://schema.org/OfflineEventAttendanceMode",
+                eventStatus: "https://schema.org/EventScheduled",
+                inLanguage: locale,
+                url,
+                location: place,
+                organizer: {
+                    "@id": getHotelId(),
+                },
+                offers: {
+                    "@type": "Offer",
+                    url: offerUrl,
+                    availability: "https://schema.org/InStock",
+                    priceCurrency: "RUB",
+                    ...(event.price ? { price: event.price } : {}),
+                    validFrom: `${start}:00+03:00`,
+                },
+            })),
+            {
+                ...buildBreadcrumbSchema(locale, breadcrumbs),
+                "@id": `${url}#breadcrumb`,
+            },
+        ],
+    };
+};
+
 export const buildWeddingPageSchema = ({
     locale,
     path,
@@ -445,6 +658,18 @@ export const buildHistoryPageSchema = ({
             breadcrumb: {
                 "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
             },
+            datePublished: HISTORY_DATE_PUBLISHED,
+            dateModified: SITE_BUILD_DATE,
+            lastReviewed: SITE_BUILD_DATE,
+            primaryImageOfPage: HISTORY_HERO_IMAGE,
+            // Points voice assistants at the page's main heading. Only the
+            // single <h1> is a stable, locale-portable selector: the RU/EN
+            // history pages share this builder and their lead paragraphs have
+            // no shared id/class hook (RU uses .cv-history, EN has none).
+            speakable: {
+                "@type": "SpeakableSpecification",
+                cssSelector: ["h1"],
+            },
         },
         {
             "@type": "Article",
@@ -452,6 +677,12 @@ export const buildHistoryPageSchema = ({
             headline: name,
             description,
             inLanguage: locale,
+            image: HISTORY_HERO_IMAGE,
+            datePublished: HISTORY_DATE_PUBLISHED,
+            dateModified: SITE_BUILD_DATE,
+            mainEntityOfPage: {
+                "@id": `${getAbsoluteUrl(path, locale)}#webpage`,
+            },
             author: {
                 "@id": getOrganizationId(),
             },
@@ -546,7 +777,7 @@ export const buildBlogEditorialSchema = () => ({
             "@type": "ProfilePage",
             "@id": `${SITE_URL}/blog/author/#webpage`,
             url: `${SITE_URL}/blog/author/`,
-            name: "О редакции блога — " + SITE_NAME,
+            name: `О редакции блога — ${SITE_NAME}`,
             inLanguage: "ru",
             isPartOf: { "@id": getWebsiteId() },
             mainEntity: { "@id": getOrganizationId() },

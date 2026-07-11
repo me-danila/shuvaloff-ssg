@@ -24,6 +24,23 @@ const INITIAL: FormState = {
     formName: "",
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// RU-friendly phone check: 10 local digits, or 11 digits starting with 7/8.
+const isPhoneValid = (raw: string) => {
+    const digits = raw.replace(/\D/g, "");
+    return (
+        digits.length === 10 || (digits.length === 11 && /^[78]/.test(digits))
+    );
+};
+
+const MAX = {
+    name: 100,
+    phone: 24,
+    email: 254,
+    telegram: 64,
+} as const;
+
 type ButtonVariant = "light" | "light-outline" | "dark" | "dark-outline";
 
 interface Props {
@@ -62,6 +79,7 @@ export default function WeddingFormModal({
                 ? "Заполните контактные данные для связи"
                 : "Fill in your contact details",
         namePlaceholder: locale === "ru" ? "Ваше имя" : "Your name",
+        phoneLabel: locale === "ru" ? "Ваш телефон" : "Your phone",
         emailPlaceholder: locale === "ru" ? "Ваш e-mail" : "Your e-mail",
         tgPlaceholder:
             locale === "ru" ? "Ваш ник в Telegram" : "Your Telegram username",
@@ -78,6 +96,22 @@ export default function WeddingFormModal({
             locale === "ru"
                 ? "Что-то пошло не так. Попробуйте ещё раз."
                 : "Something went wrong. Please try again.",
+        errName:
+            locale === "ru"
+                ? "Пожалуйста, укажите имя"
+                : "Please enter your name",
+        errPhone:
+            locale === "ru"
+                ? "Укажите корректный номер телефона"
+                : "Please enter a valid phone number",
+        errEmail:
+            locale === "ru"
+                ? "Укажите корректный e-mail"
+                : "Please enter a valid e-mail",
+        errConsent:
+            locale === "ru"
+                ? "Подтвердите согласие на обработку персональных данных"
+                : "Please accept the personal data policy",
     } as const;
 
     const [open, setOpen] = useState(false);
@@ -85,9 +119,12 @@ export default function WeddingFormModal({
     const [status, setStatus] = useState<
         "idle" | "loading" | "success" | "error"
     >("idle");
+    const [validationError, setValidationError] = useState<string | null>(null);
 
     const set =
-        (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement>) =>
+        (field: keyof FormState) =>
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setValidationError(null);
             setForm((prev) => ({
                 ...prev,
                 [field]:
@@ -95,22 +132,36 @@ export default function WeddingFormModal({
                         ? e.target.checked
                         : e.target.value,
             }));
+        };
 
     const handleClose = () => {
         setOpen(false);
         setStatus("idle");
         setForm(INITIAL);
+        setValidationError(null);
     };
-
-    //    const handleSubmit = async (e: React.FormEvent) => {
-    //        e.preventDefault();
-    //        setStatus("loading");
-    //        await new Promise((r) => setTimeout(r, 800));
-    //        setStatus("success");
-    //    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const name = form.name.trim();
+        const phone = form.phone.trim();
+        const email = form.email.trim();
+        const telegram = form.telegram.trim();
+
+        let error: string | null = null;
+        if (!name) error = copy.errName;
+        else if (!isPhoneValid(phone)) error = copy.errPhone;
+        else if (email && !EMAIL_RE.test(email)) error = copy.errEmail;
+        else if (!form.consent) error = copy.errConsent;
+
+        if (error) {
+            setStatus("idle");
+            setValidationError(error);
+            return;
+        }
+
+        setValidationError(null);
         setStatus("loading");
 
         try {
@@ -124,10 +175,10 @@ export default function WeddingFormModal({
                     },
                     body: JSON.stringify({
                         service: title,
-                        name: form.name,
-                        phone: form.phone,
-                        email: form.email,
-                        telegram: form.telegram,
+                        name,
+                        phone,
+                        email,
+                        telegram,
                     }),
                 },
             );
@@ -153,55 +204,82 @@ export default function WeddingFormModal({
                 {title}
             </button>
 
-            <Modal open={open} onClose={handleClose} maxWidth="max-w-2xl">
+            <Modal
+                open={open}
+                onClose={handleClose}
+                maxWidth="max-w-2xl"
+                ariaLabelledby="wedding-form-modal-title"
+            >
                 <div className="px-8 py-12">
                     {status === "success" ? (
-                        <div className="flex flex-col items-center gap-4 py-12 text-center">
-                            <h3 className="font-history uppercase text-xl xl:text-2xl">
+                        // biome-ignore lint/a11y/useSemanticElements: this live region wraps an <h3> heading, which <output> (phrasing content only) cannot legally contain — role="status" on a div is the correct choice
+                        <div
+                            role="status"
+                            aria-live="polite"
+                            className="flex flex-col items-center gap-4 py-12 text-center"
+                        >
+                            <h3
+                                id="wedding-form-modal-title"
+                                className="font-history uppercase text-xl xl:text-2xl"
+                            >
                                 {copy.successTitle}
                             </h3>
                             <p>{copy.successText}</p>
                         </div>
                     ) : (
                         <>
-                            <h2 className="text-center">{title}</h2>
+                            <h2
+                                id="wedding-form-modal-title"
+                                className="text-center"
+                            >
+                                {title}
+                            </h2>
                             <p className="text-sm text-neutral-400 text-center mt-1 mb-6 xl:mb-10">
                                 {copy.subtitle}
                             </p>
 
                             <form
                                 onSubmit={handleSubmit}
+                                noValidate
                                 className="flex flex-col gap-4"
                             >
                                 <input
                                     type="text"
                                     placeholder={copy.namePlaceholder}
+                                    aria-label={copy.namePlaceholder}
                                     required
+                                    maxLength={MAX.name}
                                     value={form.name}
                                     onChange={set("name")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="tel"
                                     placeholder="+7 (000) 000-00-00"
+                                    aria-label={copy.phoneLabel}
                                     required
+                                    maxLength={MAX.phone}
                                     value={form.phone}
                                     onChange={set("phone")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="email"
                                     placeholder={copy.emailPlaceholder}
+                                    aria-label={copy.emailPlaceholder}
+                                    maxLength={MAX.email}
                                     value={form.email}
                                     onChange={set("email")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="text"
                                     placeholder={copy.tgPlaceholder}
+                                    aria-label={copy.tgPlaceholder}
+                                    maxLength={MAX.telegram}
                                     value={form.telegram}
                                     onChange={set("telegram")}
-                                    className="w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
 
                                 <label className="flex items-start gap-3 cursor-pointer mt-1">
@@ -220,6 +298,7 @@ export default function WeddingFormModal({
                                                 locale,
                                             )}
                                             target="_blank"
+                                            rel="noopener noreferrer"
                                             className="text-neutral-900 underline underline-offset-2"
                                         >
                                             {copy.consentLink}
@@ -238,8 +317,20 @@ export default function WeddingFormModal({
                                         : title}
                                 </button>
 
+                                {validationError && (
+                                    <p
+                                        role="alert"
+                                        className="text-center text-xs text-red-500"
+                                    >
+                                        {validationError}
+                                    </p>
+                                )}
+
                                 {status === "error" && (
-                                    <p className="text-center text-xs text-red-500">
+                                    <p
+                                        role="alert"
+                                        className="text-center text-xs text-red-500"
+                                    >
                                         {copy.errorLabel}
                                     </p>
                                 )}

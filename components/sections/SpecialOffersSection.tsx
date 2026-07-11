@@ -5,9 +5,8 @@ import { useRef } from "react";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { AllSales } from "@/data/SalesData";
-import { localizeHref } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
+import type { Sale } from "@/data/SalesData";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 
 const sectionCopy = {
     ru: {
@@ -34,9 +33,13 @@ const renderSaleSubtitle = (subtitle: string) => {
     return subtitle;
 };
 
-export default function SpecialOffersSection() {
-    const locale = useLocale();
-    const sales = AllSales[locale];
+export default function SpecialOffersSection({
+    sales,
+    locale,
+}: {
+    sales: Sale[];
+    locale: Locale;
+}) {
     const copy = sectionCopy[locale];
     const trackRef = useRef<HTMLDivElement>(null);
     const activeIndexRef = useRef(0);
@@ -138,9 +141,32 @@ export default function SpecialOffersSection() {
                                 className="flex min-w-full snap-start flex-col overflow-hidden rounded-[4px] bg-white pb-7 text-center xl:min-w-[calc((100%-3rem)/4)]"
                             >
                                 <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]">
-                                    {sale.title}
+                                    <a
+                                        href={href}
+                                        target={
+                                            isExternal ? "_blank" : undefined
+                                        }
+                                        rel={
+                                            isExternal
+                                                ? "noopener noreferrer"
+                                                : undefined
+                                        }
+                                        className="transition-colors hover:text-brand-red"
+                                    >
+                                        {sale.title}
+                                    </a>
                                 </h3>
-                                <div className="relative aspect-[16/11] w-full overflow-hidden">
+                                <a
+                                    href={href}
+                                    target={isExternal ? "_blank" : undefined}
+                                    rel={
+                                        isExternal
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                    aria-label={sale.title}
+                                    className="relative block aspect-[16/11] w-full overflow-hidden"
+                                >
                                     <Image
                                         src={sale.imgUrl}
                                         alt={sale.title}
@@ -148,15 +174,15 @@ export default function SpecialOffersSection() {
                                         sizes="(max-width: 1200px) 90vw, 25vw"
                                         className="object-cover"
                                         style={
-                                            sale.imgObjectPosition
+                                            sale.mediaObjectPosition
                                                 ? {
                                                       objectPosition:
-                                                          sale.imgObjectPosition,
+                                                          sale.mediaObjectPosition,
                                                   }
                                                 : undefined
                                         }
                                     />
-                                </div>
+                                </a>
                                 <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
                                     {renderSaleSubtitle(sale.subtitle)}
                                 </p>

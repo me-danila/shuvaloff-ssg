@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -57,9 +57,9 @@ function ParallaxDesktop({
 
     return (
         <div ref={ref} className={`overflow-hidden ${className}`}>
-            <motion.div className="relative h-full w-full" style={{ y }}>
+            <m.div className="relative h-full w-full" style={{ y }}>
                 {children}
-            </motion.div>
+            </m.div>
         </div>
     );
 }

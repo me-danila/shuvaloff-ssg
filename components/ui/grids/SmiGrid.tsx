@@ -1,19 +1,19 @@
-"use client";
-
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { smiArticles } from "@/data/smiData";
 import type { Locale } from "@/lib/i18n/routing";
-import { useLocale } from "@/lib/i18n/useLocale";
 
 const buttonTextByLocale: Record<Locale, string> = {
     ru: "Читать",
     en: "Read",
 };
 
-export default function SmiGrid() {
-    const locale = useLocale();
+const logoAltByLocale: Record<Locale, (outlet: string) => string> = {
+    ru: (outlet) => `Логотип издания ${outlet}`,
+    en: (outlet) => `${outlet} logo`,
+};
 
+export default function SmiGrid({ locale }: { locale: Locale }) {
     return (
         <StaggerContainer className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 xl:grid-cols-3">
             {smiArticles.map((article) => (
@@ -36,7 +36,9 @@ export default function SmiGrid() {
                             <div className="absolute inset-0 flex items-center justify-center px-8">
                                 <Image
                                     src={article.logoUrl}
-                                    alt=""
+                                    alt={logoAltByLocale[locale](
+                                        article.outlet,
+                                    )}
                                     width={260}
                                     height={80}
                                     className="h-12 max-h-12 w-auto max-w-full object-contain md:h-14 md:max-h-14"
