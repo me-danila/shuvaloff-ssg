@@ -55,30 +55,43 @@ export default function BookingForm() {
 
         setStatus("loading");
 
-        const timeoutId = window.setTimeout(() => {
-            // Виджет всё ещё пуст — показываем запасное сообщение.
-            // Наблюдатель остаётся активным: если TL догрузится позже,
-            // ошибка сменится на готовый виджет без действий пользователя.
-            setStatus((prev) => (prev === "ready" ? prev : "error"));
-        }, LOAD_TIMEOUT_MS);
+        let settled = false;
+        let pollId = 0;
+        let timeoutId = 0;
 
-        // Пассивное наблюдение за контейнером TL: только читаем DOM,
-        // ничего не добавляем внутрь #tl-search-form, чтобы не сломать
-        // логику встраивания/повторов во внешнем загрузчике.
-        const observer = new MutationObserver(() => {
-            if (isWidgetFilled(container)) {
-                window.clearTimeout(timeoutId);
-                observer.disconnect();
-                setStatus("ready");
-            }
-        });
+        // Снимаем скелетон, как только TL встроил виджет. Детект делаем ДВУМЯ
+        // способами: MutationObserver (мгновенно) И короткий polling. Polling —
+        // страховка от гонок: на мобиле главной слот бронирования пересоздаётся
+        // при гидратации (desktop→mobile), а при SPA-навигации observer может
+        // не поймать вставку iframe — тогда скелетон залипал поверх рабочего
+        // модуля (модуль через который идут продажи). Только читаем DOM, внутрь
+        // #tl-search-form не вмешиваемся.
+        const markReady = () => {
+            if (settled || !isWidgetFilled(container)) return;
+            settled = true;
+            window.clearInterval(pollId);
+            window.clearTimeout(timeoutId);
+            observer.disconnect();
+            setStatus("ready");
+        };
+
+        const observer = new MutationObserver(markReady);
         observer.observe(container, {
             childList: true,
             subtree: true,
             characterData: true,
         });
+        pollId = window.setInterval(markReady, 300);
+
+        timeoutId = window.setTimeout(() => {
+            // Виджет так и не встроился — запасное сообщение. Observer остаётся
+            // активным: если TL догрузится позже, ошибка сменится на виджет.
+            window.clearInterval(pollId);
+            if (!settled) setStatus("error");
+        }, LOAD_TIMEOUT_MS);
 
         return () => {
+            window.clearInterval(pollId);
             window.clearTimeout(timeoutId);
             observer.disconnect();
         };
@@ -93,9 +106,7 @@ export default function BookingForm() {
     return (
         <section
             id="block-search"
-            className={`relative w-full max-w-7xl mx-auto xl:bg-brand-light rounded${
-                status === "ready" ? "" : " min-h-[200px] xl:min-h-[92px]"
-            }`}
+            className="relative w-full max-w-7xl mx-auto xl:bg-brand-light rounded min-h-[200px] xl:min-h-[92px]"
             aria-busy={status === "loading"}
             suppressHydrationWarning
         >
