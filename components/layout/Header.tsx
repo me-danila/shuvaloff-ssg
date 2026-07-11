@@ -39,27 +39,12 @@ type NavItem = {
     }[];
 };
 
-type SubNavItem = {
-    label: string;
-    href: string;
-    target?: "_blank";
-    forceReload?: boolean;
-    lineBelow?: boolean;
-    submenu?: {
-        label: string;
-        href: string;
-        target?: "_blank";
-        forceReload?: boolean;
-    }[];
-};
-
 type HeaderCopy = {
     openMenuAria: string;
     closeMenuAria: string;
     menuLabel: string;
     bookButton: string;
     loginButton: string;
-    slogan: string;
     logoAlt: string;
 };
 
@@ -78,7 +63,6 @@ const copyByLocale: Record<Locale, HeaderCopy> = {
         menuLabel: "Меню",
         bookButton: "Забронировать",
         loginButton: "Войти",
-        slogan: "Отдых с графским размахом!",
         logoAlt: "ACADEMIA Особняк Шувалова",
     },
     en: {
@@ -87,7 +71,6 @@ const copyByLocale: Record<Locale, HeaderCopy> = {
         menuLabel: "Menu",
         bookButton: "Book now",
         loginButton: "Sign in",
-        slogan: "Relaxation on a grand scale!",
         logoAlt: "ACADEMIA Mansion Shuvaloff",
     },
 };
@@ -209,7 +192,7 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
     ],
 };
 
-const subNavItemsByLocale: Record<Locale, SubNavItem[]> = {
+const subNavItemsByLocale: Record<Locale, NavItem[]> = {
     ru: [
         { label: "Категории номеров", href: "/rooms/" },
         { label: "Исторические люксы", href: "/rooms/historical/" },
@@ -234,7 +217,7 @@ const subNavItemsByLocale: Record<Locale, SubNavItem[]> = {
     ],
 };
 
-const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
+const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
     ru: [
         {
             label: "Категории номеров",

@@ -1,7 +1,5 @@
 export type Locale = "ru" | "en";
 
-export const DEFAULT_LOCALE: Locale = "ru";
-
 export const normalizePath = (value: string): string => {
     const normalized = value.replace(/\/+$/, "");
     return normalized || "/";
