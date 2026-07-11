@@ -11,11 +11,6 @@ import type { Locale } from "@/lib/i18n/routing";
  * с типографскими сущностями (&nbsp;, &mdash;, &laquo;/&raquo;, &minus;) или
  * <br/> хранится как ReactNode (JSX-фрагмент), чтобы сохранить исходный вывод;
  * простые строки без сущностей — обычные строки.
- *
- * NB: некоторые исходные RU-строки содержат опечатки/артефакты вёрстки
- * («tБудучи…», «Особнняка», «отреставри- рованными», «воссозда- нию»,
- * дублирующийся абзац в mansionSpirit). Они сохранены намеренно — это часть
- * эталонного RU-вывода, «исправлять» их нельзя.
  */
 
 const BASE = "https://academia.spb.ru/wp-content/uploads/2026/03/";
@@ -331,7 +326,7 @@ export const HistoryContent: Record<Locale, HistoryContentShape> = {
                 body: (
                     <>
                         Сейчас в&nbsp;бережно восстановленном здании
-                        с&nbsp;отреставри- рованными элементами культурного
+                        с&nbsp;отреставрированными элементами культурного
                         наследия находится отель ACADEMIA Особняк Шувалова.
                         Особняк живет новой жизнью и&nbsp;вновь радушно
                         принимает гостей.
@@ -461,7 +456,7 @@ export const HistoryContent: Record<Locale, HistoryContentShape> = {
             },
         ],
 
-        facadeImageAlt: "Исторический фасад Особнняка Шувалова",
+        facadeImageAlt: "Исторический фасад Особняка Шувалова",
 
         countImageAlt: "Граф Андрей Павлович Шувалов",
         countHeading: (
@@ -503,7 +498,7 @@ export const HistoryContent: Record<Locale, HistoryContentShape> = {
                 id: "p3",
                 body: (
                     <>
-                        tБудучи против третьего замужества матери с&nbsp;князем
+                        Будучи против третьего замужества матери с&nbsp;князем
                         Бутера ди Радали, в&nbsp;1835 году граф поступил
                         в&nbsp;армию и&nbsp;уехал на&nbsp;Кавказ, где служил
                         в&nbsp;одном полку с&nbsp;Лермонтовым. Между юношами
@@ -712,25 +707,6 @@ export const HistoryContent: Record<Locale, HistoryContentShape> = {
                     </>
                 ),
             },
-            {
-                id: "p3",
-                body: (
-                    <>
-                        Этот дом пережил не&nbsp;одно столетие, и&nbsp;сегодня
-                        его залы, в&nbsp;том числе люксы графа и&nbsp;графини,
-                        признаны объектами культурного наследия, охраняемыми
-                        КГИОП (Комитет по государственному контролю,
-                        использованию и&nbsp;охране памятников истории
-                        и&nbsp;культуры). Эти помещения&nbsp;&mdash; подлинные
-                        жемчужины особняка, его сердце, его душа. Именно они
-                        дают нам возможность прикоснуться к&nbsp;реальной живой
-                        истории не&nbsp;в&nbsp;музеях,
-                        а&nbsp;в&nbsp;пространстве, где время словно
-                        замедляется, позволяя почувствовать дыхание ушедшей
-                        эпохи.
-                    </>
-                ),
-            },
         ],
 
         designers: [
@@ -739,7 +715,7 @@ export const HistoryContent: Record<Locale, HistoryContentShape> = {
                 body: (
                     <>
                         Наши дизайнеры с&nbsp;особым вниманием подошли
-                        к&nbsp;воссозда- нию исторической атмосферы особняка.
+                        к&nbsp;воссозданию исторической атмосферы особняка.
                         Часть предметов была найдена прямо здесь, в&nbsp;доме.
                         Остальное&nbsp;&mdash; с&nbsp;такой же тщательностью
                         подбиралось на&nbsp;антикварных аукционах
@@ -1662,10 +1638,6 @@ export const HistoryContent: Record<Locale, HistoryContentShape> = {
             },
             {
                 id: "p2",
-                body: "This house has survived more than one century, and today its halls — including the Count's and Countess's suites — are recognized as objects of cultural heritage, protected by KGIOP (the Committee for the State Control, Use, and Protection of Monuments of History and Culture). These rooms are the true gems of the mansion, its heart, its soul. It is they that give us the chance to touch real, living history — not in museums, but in a space where time seems to slow down, allowing us to feel the breath of a bygone era.",
-            },
-            {
-                id: "p3",
                 body: "This house has survived more than one century, and today its halls — including the Count's and Countess's suites — are recognized as objects of cultural heritage, protected by KGIOP (the Committee for the State Control, Use, and Protection of Monuments of History and Culture). These rooms are the true gems of the mansion, its heart, its soul. It is they that give us the chance to touch real, living history — not in museums, but in a space where time seems to slow down, allowing us to feel the breath of a bygone era.",
             },
         ],

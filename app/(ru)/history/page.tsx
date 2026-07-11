@@ -7,7 +7,7 @@ export const metadata: Metadata = buildPageMetadata({
     path: "/history/",
     title: "История особняка графа Шувалова — ACADEMIA Особняк Шувалова",
     description:
-        "Путешствие во времени — История особняка графа Шувалова в Санкт-Петербурге",
+        "Путешествие во времени — История особняка графа Шувалова в Санкт-Петербурге",
     ogImage:
         "https://academia.spb.ru/wp-content/uploads/2026/03/Антиквариат-в-резиденциях-Дашковой-и-Шувалова_page-0003.jpg",
     ogType: "article",
