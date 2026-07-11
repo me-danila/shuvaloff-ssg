@@ -355,7 +355,7 @@ const heroButtons = [
     },
     {
         label: {
-            ru: "Афиша",
+            ru: "Мероприятия",
             en: "Events",
         },
         href: "/events/",
@@ -437,34 +437,29 @@ export default function HomePage({ locale }: { locale: Locale }) {
                     </div>
 
                     <StaggerContainer className="absolute inset-x-0 top-20 z-10 flex flex-col items-start gap-3 px-8 xl:px-0 xl:top-40 xl:max-w-7xl xl:mx-auto">
-                        {/* Кнопка «Афиша» (→ /events/) временно скрыта до согласования дизайна страницы: страница задеплоена и доступна по прямому URL, но не связана из hero. Восстановить: убрать .filter ниже. */}
-                        {heroButtons
-                            .filter((b) => b.href !== "/events/")
-                            .map((b) => (
-                                <StaggerItem key={b.href}>
-                                    <Link
-                                        href={
-                                            b.external
-                                                ? b.href
-                                                : localizeHref(b.href, locale)
-                                        }
-                                        target={
-                                            b.external ? "_blank" : undefined
-                                        }
-                                        rel={
-                                            b.external
-                                                ? "noopener noreferrer"
-                                                : undefined
-                                        }
-                                        className="flex w-fit items-center gap-3 rounded-lg bg-black/40 px-5 py-3 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:px-6 xl:py-4"
-                                    >
-                                        <b.Icon className="shrink-0" />
-                                        <span className="text-sm font-semibold">
-                                            {b.label[locale]}
-                                        </span>
-                                    </Link>
-                                </StaggerItem>
-                            ))}
+                        {heroButtons.map((b) => (
+                            <StaggerItem key={b.href}>
+                                <Link
+                                    href={
+                                        b.external
+                                            ? b.href
+                                            : localizeHref(b.href, locale)
+                                    }
+                                    target={b.external ? "_blank" : undefined}
+                                    rel={
+                                        b.external
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                    className="flex w-fit items-center gap-3 rounded-lg bg-black/40 px-5 py-3 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:px-6 xl:py-4"
+                                >
+                                    <b.Icon className="shrink-0" />
+                                    <span className="text-sm font-semibold">
+                                        {b.label[locale]}
+                                    </span>
+                                </Link>
+                            </StaggerItem>
+                        ))}
                     </StaggerContainer>
 
                     <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">

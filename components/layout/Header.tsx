@@ -260,6 +260,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Акции", href: "/sales/" },
+                { label: "Мероприятия", href: "/events/" },
                 { label: "Реферальная программа", href: "/rewards/referral/" },
                 {
                     label: "Подарочные сертификаты",
@@ -316,6 +317,7 @@ const homeNavItemsByLocale: Record<Locale, SubNavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Offers", href: "/sales/" },
+                { label: "Events", href: "/events/" },
                 { label: "Referral program", href: "/rewards/referral/" },
                 {
                     label: "Gift certificates",
