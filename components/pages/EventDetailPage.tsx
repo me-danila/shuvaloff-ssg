@@ -4,6 +4,7 @@ import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
+import EventDates from "@/components/ui/EventDates";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import EventsSlider from "@/components/ui/slider/EventsSlider";
@@ -23,6 +24,7 @@ type EventDetailLabels = {
     breadcrumbEvents: string;
     book: string;
     otherEvents: string;
+    dates: string;
 };
 
 const labelsByLocale: Record<Locale, EventDetailLabels> = {
@@ -32,6 +34,7 @@ const labelsByLocale: Record<Locale, EventDetailLabels> = {
         breadcrumbEvents: "Афиша мероприятий",
         book: "Забронировать",
         otherEvents: "Другие события",
+        dates: "Ближайшие даты:",
     },
     en: {
         brandSuffix: "— ACADEMIA Shuvaloff Mansion",
@@ -39,6 +42,7 @@ const labelsByLocale: Record<Locale, EventDetailLabels> = {
         breadcrumbEvents: "Events",
         book: "Book now",
         otherEvents: "Other events",
+        dates: "Upcoming dates:",
     },
 };
 
@@ -126,6 +130,14 @@ export default async function EventDetailPage({ params, locale }: Props) {
                         )}
 
                         <FadeUp delay={0.3}>
+                            <EventDates
+                                dates={event.dates}
+                                locale={locale}
+                                title={labels.dates}
+                            />
+                        </FadeUp>
+
+                        <FadeUp delay={0.4}>
                             <Button
                                 href={event.bookingUrl}
                                 target={

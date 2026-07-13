@@ -153,11 +153,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                                     {service.price}
                                 </p>
                             )}
-                            {service.comment && (
-                                <p className="-mt-2 xl:-mt-3">
-                                    {service.comment}
-                                </p>
-                            )}
+                            {service.comment && <p>{service.comment}</p>}
 
                             <Button
                                 href={ORDER_URL}
