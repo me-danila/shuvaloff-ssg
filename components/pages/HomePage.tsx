@@ -364,7 +364,15 @@ const heroButtons = [
     },
 ];
 
-export default function HomePage({ locale }: { locale: Locale }) {
+export default function HomePage({
+    locale,
+    afterOffers,
+}: {
+    locale: Locale;
+    // Опциональный блок между «Спец. предложениями» и «Особняком с историей».
+    // На главной не задаётся — рендер идентичен прод-странице.
+    afterOffers?: React.ReactNode;
+}) {
     const copy = homeCopyByLocale[locale];
     const descriptionImages = descriptionImagesByLocale[locale];
 
@@ -484,6 +492,8 @@ export default function HomePage({ locale }: { locale: Locale }) {
             </Suspense>
 
             <SpecialOffersSection sales={AllSales[locale]} locale={locale} />
+
+            {afterOffers}
 
             <section className="relative overflow-hidden hidden">
                 {/* MOBILE: фото снизу 55% */}
