@@ -414,8 +414,7 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "history-trip",
             fullDescription: (
                 <>
-                    Погрузитесь в&nbsp;историю Петербурга: на&nbsp;элегантном
-                    Mercedes вас доставят к&nbsp;одному из&nbsp;самых красивых
+                    Погрузитесь в&nbsp;историю Петербурга: на&nbsp;комфортабельном GAC M8 вас доставят к&nbsp;одному из&nbsp;самых красивых
                     особняков на&nbsp;набережной Фонтанки. Вас ждёт прогулка
                     по&nbsp;парадным залам Шуваловского дворца, в&nbsp;котором
                     расположен Музей Фаберже, знакомство с&nbsp;его легендами
@@ -970,7 +969,7 @@ export const AllServices: Record<Locale, Service[]> = {
             fullDescription: (
                 <>
                     Immerse yourself in the history of St. Petersburg: an
-                    elegant Mercedes will take you to one of the most beautiful
+                    comfortable GAC M8 will take you to one of the most beautiful
                     mansions on the Fontanka Embankment. A walk through the
                     ceremonial halls of the Shuvalov Palace, which houses the
                     Faberge Museum, awaits you, where you'll get to know its

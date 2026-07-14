@@ -8,7 +8,11 @@ import EventDates from "@/components/ui/EventDates";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import EventsSlider from "@/components/ui/slider/EventsSlider";
-import { AllEvents, getEventBySlug, getEventCards } from "@/data/EventsData";
+import {
+    getEventBySlug,
+    getEventCards,
+    getPublishedEvents,
+} from "@/data/EventsData";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildEventSchema } from "@/lib/seo/schema";
@@ -47,7 +51,7 @@ const labelsByLocale: Record<Locale, EventDetailLabels> = {
 };
 
 export function eventDetailParams(locale: Locale) {
-    return AllEvents[locale].map((event) => ({ slug: event.slug }));
+    return getPublishedEvents(locale).map((event) => ({ slug: event.slug }));
 }
 
 export async function eventDetailMetadata(

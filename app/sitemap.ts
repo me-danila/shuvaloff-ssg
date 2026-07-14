@@ -1,6 +1,6 @@
 import { execSync } from "node:child_process";
 import type { MetadataRoute } from "next";
-import { AllEvents } from "@/data/EventsData";
+import { getPublishedEvents } from "@/data/EventsData";
 import { AllRooms } from "@/data/RoomsData";
 import { AllServices } from "@/data/ServicesData";
 import { getAllPosts } from "@/lib/blog";
@@ -192,14 +192,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 priority: 0.6,
                 images: [service.imgUrl],
             })),
-        ...AllEvents.ru.map((event) => ({
+        ...getPublishedEvents("ru").map((event) => ({
             url: getAbsoluteUrl(`/events/${event.slug}/`, "ru"),
             lastModified: gitLastModified(EVENTS_SOURCE),
             changeFrequency: "weekly" as const,
             priority: 0.7,
             images: [event.imgUrl],
         })),
-        ...AllEvents.en.map((event) => ({
+        ...getPublishedEvents("en").map((event) => ({
             url: getAbsoluteUrl(`/events/${event.slug}/`, "en"),
             lastModified: gitLastModified(EVENTS_SOURCE),
             changeFrequency: "weekly" as const,

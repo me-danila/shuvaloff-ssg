@@ -10,6 +10,11 @@ import type { Locale } from "@/lib/i18n/routing";
  *
  * `slug` — адрес индивидуальной страницы (`/events/<slug>/`).
  * `bookingUrl` — собственная ссылка бронирования кнопки на этой странице.
+ *
+ * `published` — флаг видимости. `false` полностью скрывает мероприятие:
+ * нет карточки в афише, нет своей страницы (404), нет в sitemap и календаре.
+ * Отсутствие поля = опубликовано (по умолчанию `true`), чтобы не помечать
+ * каждое активное мероприятие вручную.
  */
 export type EventDefinition = {
     slug: string;
@@ -21,6 +26,7 @@ export type EventDefinition = {
     fullDescription?: ReactNode;
     price?: string;
     dates: string[];
+    published?: boolean;
 };
 
 /** Одна карточка = одно мероприятие в конкретную дату. */
@@ -76,7 +82,7 @@ const LectureOutroEn = (
     </>
 );
 
-export const AllEvents: Record<Locale, EventDefinition[]> = {
+const BaseEvents: Record<Locale, EventDefinition[]> = {
     ru: [
         {
             slug: "one-night-in-petersburg-1899",
@@ -98,7 +104,7 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
                     {LectureOutroRu}
                 </>
             ),
-            dates: ["2026-07-09T19:00", "2026-07-30T19:00", "2026-08-20T19:00"],
+            dates: ["2026-07-09T19:00", "2026-07-30T19:00"],
         },
         {
             slug: "masonic-petersburg",
@@ -119,7 +125,7 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
                     {LectureOutroRu}
                 </>
             ),
-            dates: ["2026-07-16T19:00", "2026-08-06T19:00", "2026-08-27T19:00"],
+            dates: ["2026-07-16T19:00"],
         },
         {
             slug: "income-house",
@@ -140,7 +146,7 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
                     {LectureOutroRu}
                 </>
             ),
-            dates: ["2026-07-23T19:00", "2026-08-13T19:00"],
+            dates: ["2026-07-23T19:00"],
         },
         {
             slug: "comb-painting",
@@ -261,7 +267,7 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
                     {LectureOutroEn}
                 </>
             ),
-            dates: ["2026-07-09T19:00", "2026-07-30T19:00", "2026-08-20T19:00"],
+            dates: ["2026-07-09T19:00", "2026-07-30T19:00"],
         },
         {
             slug: "masonic-petersburg",
@@ -283,7 +289,7 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
                     {LectureOutroEn}
                 </>
             ),
-            dates: ["2026-07-16T19:00", "2026-08-06T19:00", "2026-08-27T19:00"],
+            dates: ["2026-07-16T19:00"],
         },
         {
             slug: "income-house",
@@ -305,7 +311,7 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
                     {LectureOutroEn}
                 </>
             ),
-            dates: ["2026-07-23T19:00", "2026-08-13T19:00"],
+            dates: ["2026-07-23T19:00"],
         },
         {
             slug: "comb-painting",
@@ -416,6 +422,66 @@ export const AllEvents: Record<Locale, EventDefinition[]> = {
     ],
 };
 
+/**
+ * Дубли мероприятий: полная копия исходной карточки (фото, текст, название),
+ * но со своей ссылкой бронирования и своими датами. Даты этих дублей вынесены
+ * из оригиналов выше, чтобы не задваиваться в афише.
+ *
+ * `baseSlug` — какое мероприятие клонировать; `slug` — адрес страницы копии;
+ * `bookingUrl` — ссылка кнопки «Забронировать»; `dates` — даты копии.
+ * Клонирование программное, чтобы контент оставался идентичным оригиналу.
+ */
+const EVENT_DUPLICATES: {
+    baseSlug: string;
+    slug: string;
+    bookingUrl: string;
+    dates: string[];
+}[] = [
+    {
+        baseSlug: "masonic-petersburg",
+        slug: "masonic-petersburg-august",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-august",
+        dates: ["2026-08-06T19:00", "2026-08-27T19:00"],
+    },
+    {
+        baseSlug: "income-house",
+        slug: "income-house-august",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-august",
+        dates: ["2026-08-13T19:00"],
+    },
+    {
+        baseSlug: "one-night-in-petersburg-1899",
+        slug: "one-night-in-petersburg-1899-august",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/one-night-august",
+        dates: ["2026-08-20T19:00"],
+    },
+];
+
+/** Достраивает список локали дублями из EVENT_DUPLICATES. */
+function withDuplicates(locale: Locale): EventDefinition[] {
+    const base = BaseEvents[locale];
+    const dups = EVENT_DUPLICATES.map(
+        ({ baseSlug, slug, bookingUrl, dates }) => {
+            const original = base.find((event) => event.slug === baseSlug);
+            if (!original) {
+                throw new Error(
+                    `EVENT_DUPLICATES: базовое мероприятие "${baseSlug}" не найдено`,
+                );
+            }
+            return { ...original, slug, bookingUrl, dates };
+        },
+    );
+    return [...base, ...dups];
+}
+
+export const AllEvents: Record<Locale, EventDefinition[]> = {
+    ru: withDuplicates("ru"),
+    en: withDuplicates("en"),
+};
+
 const MONTHS: Record<Locale, string[]> = {
     ru: [
         "января",
@@ -456,11 +522,20 @@ function formatOccurrence(start: string, locale: Locale) {
 }
 
 /**
+ * Опубликованные мероприятия локали — единая точка фильтрации по `published`.
+ * Все публичные списки (афиша, календарь, sitemap, generateStaticParams)
+ * должны идти через неё, а не читать `AllEvents` напрямую.
+ */
+export function getPublishedEvents(locale: Locale): EventDefinition[] {
+    return AllEvents[locale].filter((event) => event.published !== false);
+}
+
+/**
  * Разворачивает мероприятия в карточки (по одной на дату) и сортирует
  * по возрастанию даты — от ближних к дальним.
  */
 export function getEventCards(locale: Locale): EventCard[] {
-    const cards = AllEvents[locale].flatMap(({ dates, ...event }) =>
+    const cards = getPublishedEvents(locale).flatMap(({ dates, ...event }) =>
         dates.map((start) => ({
             ...event,
             start,
@@ -492,10 +567,10 @@ export function getEventOccurrences(
         .sort((a, b) => a.start.localeCompare(b.start));
 }
 
-/** Мероприятие по slug (или undefined). */
+/** Опубликованное мероприятие по slug (или undefined). */
 export function getEventBySlug(
     locale: Locale,
     slug: string,
 ): EventDefinition | undefined {
-    return AllEvents[locale].find((event) => event.slug === slug);
+    return getPublishedEvents(locale).find((event) => event.slug === slug);
 }
