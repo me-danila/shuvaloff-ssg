@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 
-const BOOKING_URL = "https://academia-shuvaloff.ru/booking/?date=2026-07-26";
+const BOOKING_URL = "/booking/?date=2026-07-26";
 
 // Десктоп — фон-баннер (1920×768). Мобилка — постер-изображение (1280×1920).
 const DESKTOP_BG =
@@ -10,7 +10,58 @@ const DESKTOP_BG =
 const MOBILE_IMG =
     "https://academia.spb.ru/wp-content/uploads/2026/07/ДР-2026-1-2.avif";
 
-export default function BirthdayBannerSection() {
+// Общий текстовый блок (заголовок + абзацы + кнопка). headingClass задаёт цвет
+// заголовка: белый поверх фото на десктопе, тёмный — на сером фоне.
+function BannerText({
+    headingClass,
+    bodyClass = "max-w-lg",
+}: {
+    headingClass: string;
+    bodyClass?: string;
+}) {
+    return (
+        <>
+            <FadeUp>
+                <h2 className={`max-w-2xl text-3xl ${headingClass}`}>
+                    ГРАФ ШУВАЛОВ ПРИГЛАШАЕТ
+                    <br />
+                    НА ДЕНЬ РОЖДЕНИЯ ОСОБНЯКА!
+                </h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+                <p className={bodyClass}>
+                    В этот праздничный день дарим особенные подарки для гостей
+                    особняка: винное казино в Игорном доме графа Шувалова,
+                    мастер-класс по живописи с графиней, приветственную наливку,
+                    розыгрыш приятных сюрпризов, десерт в подарок в ресторане и
+                    встречу с графской семьей.
+                    <br />
+                    <br />
+                    Все мероприятия в этот день бесплатны для гостей особняка,
+                    количество мест ограничено.
+                </p>
+            </FadeUp>
+            <FadeUp delay={0.15}>
+                <p className={bodyClass}>
+                    Забронируйте номер на 26 июля и разделите праздник с нами!
+                </p>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+                <Button
+                    href={BOOKING_URL}
+                    target="_blank"
+                    variant="primary"
+                    size="xl"
+                >
+                    Забронировать
+                </Button>
+            </FadeUp>
+        </>
+    );
+}
+
+// Вариант 1 — текст поверх фон-баннера (десктоп) / поверх постера (мобилка).
+function BannerOverImage() {
     return (
         <section className="relative overflow-hidden">
             {/* ДЕСКТОП: фон-баннер, сдвинут вправо + едва заметный скрим слева */}
@@ -21,7 +72,7 @@ export default function BirthdayBannerSection() {
                     fill
                     sizes="110vw"
                     loading="lazy"
-                    className="object-cover object-left"
+                    className="object-cover object-[0%_35%]"
                 />
             </div>
             {/* Едва заметный короткий скрим слева под текстом (десктоп) */}
@@ -39,39 +90,44 @@ export default function BirthdayBannerSection() {
                 />
             </div>
 
-            <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 py-8 text-left text-brand-brown xl:px-0 xl:py-20 xl:text-white">
-                <FadeUp>
-                    <h2 className="max-w-lg text-brand-brown xl:text-white">
-                        Граф Шувалов приглашает 26 июля на день рождения
-                        особняка!
-                    </h2>
-                </FadeUp>
-                <FadeUp delay={0.1}>
-                    <p className="max-w-lg">
-                        В этот праздничный день дарим особенные подарки для
-                        гостей: винное казино в Игорном доме графа Шувалова,
-                        мастер-класс по живописи с графиней, розыгрыш приятных
-                        сюрпризов, приветственную наливку по фамильному рецепту,
-                        десерт и живую музыку в ресторане.
-                    </p>
-                </FadeUp>
-                <FadeUp delay={0.15}>
-                    <p className="max-w-lg">
-                        Забронируйте ваш номер на 26 июля и разделите праздник с
-                        нами!
-                    </p>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                    <Button
-                        href={BOOKING_URL}
-                        target="_blank"
-                        variant="primary"
-                        size="xl"
-                    >
-                        Забронировать
-                    </Button>
-                </FadeUp>
+            <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 py-8 text-left text-brand-brown xl:px-0 xl:py-12 xl:text-white">
+                <BannerText headingClass="text-brand-brown xl:text-white" />
             </div>
         </section>
+    );
+}
+
+// Вариант 2 — текст на сером фоне + картинка рядом (люди).
+function BannerSplit() {
+    return (
+        <section className="bg-[#ededeb]">
+            <div className="grid grid-cols-1 items-stretch gap-4 xl:grid-cols-[1fr_1.15fr] xl:gap-6">
+                <div className="flex flex-col items-start gap-6 px-6 py-10 text-left text-brand-brown xl:py-12 xl:pr-4 xl:pl-[max(1.5rem,calc((100vw-80rem)/2))]">
+                    <BannerText
+                        headingClass="text-brand-brown"
+                        bodyClass="max-w-2xl"
+                    />
+                </div>
+                <div className="relative order-first min-h-[300px] w-full self-stretch overflow-hidden xl:order-last xl:min-h-[520px]">
+                    <Image
+                        src={DESKTOP_BG}
+                        alt="Граф Шувалов с семьёй"
+                        fill
+                        sizes="(max-width: 1200px) 100vw, 55vw"
+                        loading="lazy"
+                        className="object-cover object-[78%_50%]"
+                    />
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export default function BirthdayBannerSection() {
+    return (
+        <>
+            <BannerOverImage />
+            <BannerSplit />
+        </>
     );
 }

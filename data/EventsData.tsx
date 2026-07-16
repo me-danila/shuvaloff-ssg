@@ -245,6 +245,76 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-07-24T19:00"],
         },
+        {
+            slug: "count-dinner-august",
+            title: "Графский ужин",
+            subtitle:
+                "Камерный гастрономический вечер в ACADEMIA особняке Шувалова",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
+            price: "8 500 ₽",
+            fullDescription: (
+                <>
+                    Бар-ресторан ACADEMIA Шувалова приглашает гостей
+                    на&nbsp;особенный Графский ужин&nbsp;&mdash; камерный вечер
+                    в&nbsp;историческом особняке.
+                    <br />
+                    <br />
+                    Граф станет главным проводником вечера и&nbsp;встретит
+                    гостей в&nbsp;формате частного приема. Формат предполагает
+                    ограниченное количество гостей, создавая атмосферу закрытого
+                    салона и&nbsp;личного общения. Гастрономическим
+                    сопровождением станет курсовой ужин от&nbsp;бренд-шефа Ильи
+                    Харченко и&nbsp;бренд-шеф бармена Даниила Лемана.
+                    <br />
+                    <br />
+                    <b>Стоимость: 8 500 ₽</b>
+                    <br />
+                    <br />
+                    В&nbsp;стоимость входит курсовой ужин и&nbsp;участие
+                    в&nbsp;программе.
+                </>
+            ),
+            dates: ["2026-08-14T19:00"],
+        },
+        {
+            slug: "wine-casino-august",
+            title: "Винное казино «Игорный дом графа Шувалова»",
+            subtitle: "Азарт и эстетика в особняке XIX века",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_2064-1.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/vinnoe-kazino-august?utm_campaign=hotel&utm_term=vino",
+            price: "5 900 ₽",
+            fullDescription: (
+                <>
+                    На&nbsp;один вечер исторический зал «Кабинет» превратится
+                    в&nbsp;настоящий игорный дом, ломая стереотипы
+                    о&nbsp;классических винных вечерах.
+                    <br />
+                    <br />
+                    Под руководством сомелье гости будут дегустировать вина
+                    и&nbsp;делать ставки, угадывая сорт винограда, страну
+                    происхождения и&nbsp;год урожая. Глубокие знания
+                    не&nbsp;требуются: сомелье даст подсказки, расскажет историю
+                    напитков и&nbsp;поможет уловить тонкие ноты в&nbsp;бокале.
+                    <br />
+                    <br />
+                    Победитель получит в&nbsp;подарок бутылку вина
+                    от&nbsp;ресторана. Идеальным дополнением к&nbsp;азартному
+                    вечеру станут фуршетные закуски от&nbsp;бренд-шефа Ильи
+                    Харченко.
+                    <br />
+                    <br />
+                    <b>Стоимость: 5 900 ₽</b>
+                    <br />
+                    <br />
+                    В&nbsp;стоимость билета входит сопровождение сомелье, вина
+                    и&nbsp;закуски в&nbsp;стол.
+                </>
+            ),
+            dates: ["2026-08-07T19:00", "2026-08-21T19:00"],
+        },
     ],
     en: [
         {
@@ -419,6 +489,79 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-07-24T19:00"],
         },
+        {
+            slug: "count-dinner-august",
+            title: "Count's Dinner",
+            subtitle:
+                "An intimate gastronomic evening at ACADEMIA Shuvaloff Mansion",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
+            price: "8 500 ₽",
+            fullDescription: (
+                <>
+                    ACADEMIA Shuvaloff Bar-Restaurant invites guests
+                    to&nbsp;a&nbsp;special Count's Dinner&nbsp;&mdash;
+                    an&nbsp;intimate evening in&nbsp;the historic mansion.
+                    <br />
+                    <br />
+                    The&nbsp;Count will be&nbsp;the main guide of&nbsp;the
+                    evening and&nbsp;will greet guests in&nbsp;the format
+                    of&nbsp;a&nbsp;private reception. The&nbsp;format assumes
+                    a&nbsp;limited number of&nbsp;guests, creating the
+                    atmosphere of&nbsp;a&nbsp;closed salon and&nbsp;personal
+                    conversation. The&nbsp;gastronomic accompaniment will
+                    be&nbsp;a&nbsp;course dinner by&nbsp;brand-chef Ilya
+                    Kharchenko and&nbsp;brand-bar-chef Daniil Leman.
+                    <br />
+                    <br />
+                    <b>Price: 8 500 ₽</b>
+                    <br />
+                    <br />
+                    The&nbsp;price includes a&nbsp;course dinner
+                    and&nbsp;participation in&nbsp;the program.
+                </>
+            ),
+            dates: ["2026-08-14T19:00"],
+        },
+        {
+            slug: "wine-casino-august",
+            title: 'Wine Casino "Count Shuvalov\'s Gambling House"',
+            subtitle: "Thrill and aesthetics in a 19th-century mansion",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_2064-1.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/vinnoe-kazino-august?utm_campaign=hotel&utm_term=vino",
+            price: "5 900 ₽",
+            fullDescription: (
+                <>
+                    For one evening, the historic &laquo;Cabinet&raquo; hall
+                    turns into a&nbsp;real gambling house, breaking the
+                    stereotypes of&nbsp;classic wine evenings.
+                    <br />
+                    <br />
+                    Guided by&nbsp;a&nbsp;sommelier, guests will taste wines
+                    and&nbsp;place bets, guessing the grape variety, country
+                    of&nbsp;origin, and&nbsp;vintage year. Deep knowledge
+                    is&nbsp;not required: the sommelier gives hints, tells the
+                    story of&nbsp;the drinks, and&nbsp;helps catch the subtle
+                    notes in&nbsp;the glass.
+                    <br />
+                    <br />
+                    The&nbsp;winner receives a&nbsp;bottle of&nbsp;wine from the
+                    restaurant as&nbsp;a&nbsp;gift. The&nbsp;perfect complement
+                    to&nbsp;the thrilling evening will be&nbsp;buffet snacks
+                    by&nbsp;brand-chef Ilya Kharchenko.
+                    <br />
+                    <br />
+                    <b>Price: 5 900 ₽</b>
+                    <br />
+                    <br />
+                    The&nbsp;ticket price includes the sommelier's guidance,
+                    wines, and&nbsp;shared snacks.
+                </>
+            ),
+            dates: ["2026-08-07T19:00", "2026-08-21T19:00"],
+        },
     ],
 };
 
@@ -429,6 +572,8 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
  *
  * `baseSlug` — какое мероприятие клонировать; `slug` — адрес страницы копии;
  * `bookingUrl` — ссылка кнопки «Забронировать»; `dates` — даты копии.
+ * `imgUrl` — необязательная замена афиши, если у копии свой постер;
+ * без него используется фото оригинала.
  * Клонирование программное, чтобы контент оставался идентичным оригиналу.
  */
 const EVENT_DUPLICATES: {
@@ -436,6 +581,7 @@ const EVENT_DUPLICATES: {
     slug: string;
     bookingUrl: string;
     dates: string[];
+    imgUrl?: string;
 }[] = [
     {
         baseSlug: "masonic-petersburg",
@@ -458,20 +604,34 @@ const EVENT_DUPLICATES: {
             "https://shuvaloff.academia-rest.ru/afisha/one-night-august",
         dates: ["2026-08-20T19:00"],
     },
+    {
+        baseSlug: "comb-painting",
+        slug: "comb-painting-august",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/rospis-grebney-august?utm_campaign=hotel&utm_term=lecture",
+        dates: ["2026-08-01T15:00", "2026-08-21T15:00"],
+        imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/роспись.png",
+    },
 ];
 
 /** Достраивает список локали дублями из EVENT_DUPLICATES. */
 function withDuplicates(locale: Locale): EventDefinition[] {
     const base = BaseEvents[locale];
     const dups = EVENT_DUPLICATES.map(
-        ({ baseSlug, slug, bookingUrl, dates }) => {
+        ({ baseSlug, slug, bookingUrl, dates, imgUrl }) => {
             const original = base.find((event) => event.slug === baseSlug);
             if (!original) {
                 throw new Error(
                     `EVENT_DUPLICATES: базовое мероприятие "${baseSlug}" не найдено`,
                 );
             }
-            return { ...original, slug, bookingUrl, dates };
+            return {
+                ...original,
+                slug,
+                bookingUrl,
+                dates,
+                ...(imgUrl ? { imgUrl } : {}),
+            };
         },
     );
     return [...base, ...dups];
