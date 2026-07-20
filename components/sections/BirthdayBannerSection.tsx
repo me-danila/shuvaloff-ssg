@@ -98,11 +98,11 @@ function BannerOverImage() {
 }
 
 // Вариант 2 — текст на сером фоне + картинка рядом (люди).
-function BannerSplit() {
+export function BirthdayBannerSplit() {
     return (
         <section className="bg-[#ededeb]">
             <div className="grid grid-cols-1 items-stretch gap-4 xl:grid-cols-[1fr_1.15fr] xl:gap-6">
-                <div className="flex flex-col items-start gap-6 px-6 py-10 text-left text-brand-brown xl:py-12 xl:pr-4 xl:pl-[max(1.5rem,calc((100vw-80rem)/2))]">
+                <div className="flex flex-col items-start gap-6 px-6 py-10 text-left text-brand-brown xl:py-12 xl:pr-4 xl:pl-[max(1.5rem,calc((100vw-84rem)/2))]">
                     <BannerText
                         headingClass="text-brand-brown"
                         bodyClass="max-w-2xl"
@@ -127,7 +127,7 @@ export default function BirthdayBannerSection() {
     return (
         <>
             <BannerOverImage />
-            <BannerSplit />
+            <BirthdayBannerSplit />
         </>
     );
 }

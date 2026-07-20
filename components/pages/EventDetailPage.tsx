@@ -124,11 +124,8 @@ export default async function EventDetailPage({ params, locale }: Props) {
                     </FadeUp>
 
                     <div className="flex flex-col gap-4 xl:flex-1 xl:gap-3">
-                        <FadeUp delay={0.1}>
-                            <p>{event.subtitle}</p>
-                        </FadeUp>
                         {event.fullDescription && (
-                            <FadeUp delay={0.2} className="mb-2 xl:mb-4">
+                            <FadeUp delay={0.1} className="mb-2 xl:mb-4">
                                 <p>{event.fullDescription}</p>
                             </FadeUp>
                         )}

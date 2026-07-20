@@ -85,6 +85,53 @@ const LectureOutroEn = (
 const BaseEvents: Record<Locale, EventDefinition[]> = {
     ru: [
         {
+            slug: "mansion-birthday",
+            title: "Граф Шувалов приглашает на день рождения особняка!",
+            subtitle:
+                "Забронируйте проживание в ACADEMIA Особняк Шувалова на 26 июля и разделите с нами праздник!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/без-улыбок-с-шуваловым-копия-1.png",
+            bookingUrl:
+                "https://academia-shuvaloff.ru/booking/?date=2026-07-26",
+            fullDescription: (
+                <>
+                    Вас ждёт приветственная наливка, розыгрыш приятных
+                    сюрпризов, десерт в&nbsp;подарок в&nbsp;ресторане
+                    и&nbsp;встреча с&nbsp;графской семьёй. Кроме того,
+                    в&nbsp;честь дня рождения особняка дарим вам участие
+                    в&nbsp;мастер-классе по&nbsp;живописи с&nbsp;графиней
+                    и&nbsp;винном казино, а&nbsp;вечером в&nbsp;ресторане для
+                    вас будет звучать живая музыка!
+                    <br />
+                    <br />
+                    <b>Программа:</b>
+                    <br />
+                    <br />
+                    <b>13:00&nbsp;&ndash;&nbsp;23:00</b> &mdash; угощаем
+                    десертом всех гостей
+                    <br />
+                    <b>15:00&nbsp;&ndash;&nbsp;18:00</b> &mdash; создаём свою
+                    картину на&nbsp;мастер-классе по&nbsp;живописи
+                    с&nbsp;графиней
+                    <br />
+                    <b>19:30</b> &mdash; дегустируем вино в&nbsp;Игорном доме
+                    графа Шувалова
+                    <br />
+                    <b>19:30&nbsp;&ndash;&nbsp;21:30</b> &mdash; слушаем живую
+                    музыку в&nbsp;ресторане и&nbsp;красиво завершаем день!
+                    <br />
+                    <br />
+                    Обратите внимание, количество мест на&nbsp;мастер-класс
+                    и&nbsp;винное казино ограничено. Пожалуйста, сообщите нам
+                    о&nbsp;вашем желании посетить мероприятие при бронировании
+                    проживания.
+                    <br />
+                    <br />
+                    Ждём вас на&nbsp;праздник!
+                </>
+            ),
+            dates: ["2026-07-26T13:00"],
+        },
+        {
             slug: "one-night-in-petersburg-1899",
             title: "Лекция от историка: «Одна ночь в Петербурге 1899 года»",
             subtitle:
@@ -317,6 +364,56 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
         },
     ],
     en: [
+        {
+            slug: "mansion-birthday",
+            title: "Count Shuvalov invites you to the mansion's birthday!",
+            subtitle:
+                "Book a stay at ACADEMIA Shuvaloff Mansion on July 26 and share the celebration with us!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/без-улыбок-с-шуваловым-копия-1.png",
+            bookingUrl:
+                "https://academia-shuvaloff.ru/booking/?date=2026-07-26",
+            fullDescription: (
+                <>
+                    A&nbsp;welcome liqueur awaits you, a&nbsp;raffle of&nbsp;
+                    delightful surprises, a&nbsp;complimentary dessert
+                    at&nbsp;the restaurant, and&nbsp;a&nbsp;meeting with the
+                    count's family. Moreover, in&nbsp;honour of&nbsp;the
+                    mansion's birthday we&nbsp;gift you a&nbsp;place
+                    in&nbsp;a&nbsp;painting masterclass with the countess
+                    and&nbsp;a&nbsp;wine casino, and&nbsp;in&nbsp;the evening
+                    live music will play for you at&nbsp;the restaurant!
+                    <br />
+                    <br />
+                    <b>Programme:</b>
+                    <br />
+                    <br />
+                    <b>13:00&nbsp;&ndash;&nbsp;23:00</b> &mdash; we&nbsp;treat
+                    all guests to&nbsp;dessert
+                    <br />
+                    <b>15:00&nbsp;&ndash;&nbsp;18:00</b> &mdash; we&nbsp;create
+                    our own painting at&nbsp;a&nbsp;masterclass with the
+                    countess
+                    <br />
+                    <b>19:30</b> &mdash; we&nbsp;taste wine
+                    at&nbsp;Count&nbsp;Shuvalov's Gambling House
+                    <br />
+                    <b>19:30&nbsp;&ndash;&nbsp;21:30</b> &mdash; we&nbsp;listen
+                    to&nbsp;live music at&nbsp;the restaurant and&nbsp;bring the
+                    day to&nbsp;a&nbsp;beautiful close!
+                    <br />
+                    <br />
+                    Please note that the number of&nbsp;places for&nbsp;the
+                    masterclass and&nbsp;the wine casino is&nbsp;limited. Please
+                    let&nbsp;us&nbsp;know of&nbsp;your wish to&nbsp;attend the
+                    event when booking your stay.
+                    <br />
+                    <br />
+                    We&nbsp;look forward to&nbsp;seeing you at&nbsp;the
+                    celebration!
+                </>
+            ),
+            dates: ["2026-07-26T13:00"],
+        },
         {
             slug: "one-night-in-petersburg-1899",
             title: 'Historian\'s lecture: "One night in Saint Petersburg, 1899"',
@@ -587,14 +684,14 @@ const EVENT_DUPLICATES: {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-august",
         bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-august",
+            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-august?utm_campaign=hotel&utm_term=lecture",
         dates: ["2026-08-06T19:00", "2026-08-27T19:00"],
     },
     {
         baseSlug: "income-house",
         slug: "income-house-august",
         bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-august",
+            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-august?utm_campaign=hotel&utm_term=lecture",
         dates: ["2026-08-13T19:00"],
     },
     {
@@ -609,7 +706,7 @@ const EVENT_DUPLICATES: {
         slug: "comb-painting-august",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/rospis-grebney-august?utm_campaign=hotel&utm_term=lecture",
-        dates: ["2026-08-01T15:00", "2026-08-21T15:00"],
+        dates: ["2026-08-01T15:00", "2026-08-22T15:00"],
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/роспись.png",
     },
 ];
