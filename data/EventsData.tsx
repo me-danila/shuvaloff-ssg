@@ -366,7 +366,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             slug: "comb-painting-august",
             title: "«В гостях у Графини»",
             subtitle: "Мастер-класс по живописи",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_1328_1_2.jpg.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/comb.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/grafinya?utm_campaign=hotel&utm_term=grafinya",
             price: "8 000 ₽",
@@ -706,7 +706,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             slug: "comb-painting-august",
             title: '"Visiting the Countess"',
             subtitle: "A painting masterclass",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_1328_1_2.jpg.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/comb.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/grafinya?utm_campaign=hotel&utm_term=grafinya",
             price: "8 000 ₽",
