@@ -362,6 +362,49 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-08-07T19:00", "2026-08-21T19:00"],
         },
+        {
+            slug: "comb-painting-august",
+            title: "«В гостях у Графини»",
+            subtitle: "Мастер-класс по живописи",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_1328_1_2.jpg.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/grafinya?utm_campaign=hotel&utm_term=grafinya",
+            price: "8 000 ₽",
+            fullDescription: (
+                <>
+                    Мастер-класс по&nbsp;живописи «В&nbsp;гостях у&nbsp;Графини»
+                    &nbsp;&mdash; это настоящий светский прием с&nbsp;хозяйкой
+                    дома.
+                    <br />
+                    <br />
+                    Профессиональный художник проведет гостей через процесс
+                    создания картины в&nbsp;технике текстурной
+                    пасты&nbsp;&mdash; от&nbsp;чистого холста до&nbsp;готового
+                    полотна. Параллельно графиня будет делиться историями
+                    фамильного особняка и&nbsp;секретами творческого
+                    вдохновения.
+                    <br />
+                    <br />
+                    Опыт не&nbsp;нужен: перед началом каждый гость выбирает
+                    художественный референс, который затем воплощает
+                    на&nbsp;холсте под чутким руководством мастера.
+                    Результат&nbsp;&mdash; авторская работа, которую
+                    вы&nbsp;унесете с&nbsp;собой как память о&nbsp;событии.
+                    <br />
+                    <br />
+                    <b>Стоимость: 8 000 ₽</b>
+                    <br />
+                    <br />
+                    <b>В&nbsp;стоимость входит:</b>
+                    <br />• сопровождение профессионального художника
+                    <br />• материалы для мастер-класса: холст и&nbsp;краски
+                    <br />• welcome бокал игристого
+                    <br />• сет на&nbsp;выбор с&nbsp;закуской, горячим
+                    и&nbsp;напитком
+                </>
+            ),
+            dates: ["2026-08-01T15:00", "2026-08-22T15:00"],
+        },
     ],
     en: [
         {
@@ -659,6 +702,50 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-08-07T19:00", "2026-08-21T19:00"],
         },
+        {
+            slug: "comb-painting-august",
+            title: '"Visiting the Countess"',
+            subtitle: "A painting masterclass",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_1328_1_2.jpg.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/grafinya?utm_campaign=hotel&utm_term=grafinya",
+            price: "8 000 ₽",
+            fullDescription: (
+                <>
+                    The&nbsp;painting masterclass "Visiting the Countess"
+                    &nbsp;&mdash; is&nbsp;a&nbsp;true high-society reception
+                    with the lady of&nbsp;the house.
+                    <br />
+                    <br />
+                    A&nbsp;professional artist will guide guests through the
+                    process of&nbsp;creating a&nbsp;painting using the textured
+                    paste technique&nbsp;&mdash; from a&nbsp;blank canvas
+                    to&nbsp;a&nbsp;finished piece. Meanwhile, the countess will
+                    share stories of&nbsp;the family mansion and&nbsp;the
+                    secrets of&nbsp;creative inspiration.
+                    <br />
+                    <br />
+                    No&nbsp;experience is&nbsp;needed: before starting, each
+                    guest chooses an&nbsp;artistic reference, which they then
+                    bring to&nbsp;life on&nbsp;the canvas under the attentive
+                    guidance of&nbsp;the master. The&nbsp;result&nbsp;&mdash;
+                    a&nbsp;signature work that you&nbsp;take home with you
+                    as&nbsp;a&nbsp;memory of&nbsp;the event.
+                    <br />
+                    <br />
+                    <b>Price: 8 000 ₽</b>
+                    <br />
+                    <br />
+                    <b>The price includes:</b>
+                    <br />• the guidance of&nbsp;a&nbsp;professional artist
+                    <br />• masterclass materials: a&nbsp;canvas and&nbsp;paints
+                    <br />• a&nbsp;welcome glass of&nbsp;sparkling wine
+                    <br />• a&nbsp;set of&nbsp;your choice with a&nbsp;starter,
+                    main course, and&nbsp;drink
+                </>
+            ),
+            dates: ["2026-08-01T15:00", "2026-08-22T15:00"],
+        },
     ],
 };
 
@@ -700,14 +787,6 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/one-night-august",
         dates: ["2026-08-20T19:00"],
-    },
-    {
-        baseSlug: "comb-painting",
-        slug: "comb-painting-august",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/rospis-grebney-august?utm_campaign=hotel&utm_term=lecture",
-        dates: ["2026-08-01T15:00", "2026-08-22T15:00"],
-        imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/роспись.png",
     },
 ];
 
