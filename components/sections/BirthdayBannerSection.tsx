@@ -2,8 +2,6 @@ import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 
-const BOOKING_URL = "/booking/?date=2026-07-26";
-
 // Десктоп — фон-баннер (1920×768). Мобилка — постер-изображение (1280×1920).
 const DESKTOP_BG =
     "https://academia.spb.ru/wp-content/uploads/2026/07/400х160-др.png";
@@ -37,8 +35,7 @@ function BannerText({
                     встречу с графской семьей.
                     <br />
                     <br />
-                    Все мероприятия в этот день бесплатны для гостей особняка,
-                    количество мест ограничено.
+                    Регистрация на мероприятия завершена, свободных мест нет.
                 </p>
             </FadeUp>
             <FadeUp delay={0.15}>
@@ -47,13 +44,8 @@ function BannerText({
                 </p>
             </FadeUp>
             <FadeUp delay={0.2}>
-                <Button
-                    href={BOOKING_URL}
-                    target="_blank"
-                    variant="primary"
-                    size="xl"
-                >
-                    Забронировать
+                <Button disabled variant="primary" size="xl">
+                    SOLD OUT
                 </Button>
             </FadeUp>
         </>
