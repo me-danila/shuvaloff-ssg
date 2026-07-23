@@ -1,6 +1,6 @@
 "use client";
 
-// Секция «Заявка на фотосъёмку» для страницы /photo-shoot/.
+// Секция «Заявка на фотосъемку» для страницы /photo-shoot/.
 // Пока форма — плейсхолдер: данные никуда не отправляются (submit только
 // preventDefault). Фото справа — заполнитель. Когда появятся бэкенд-обработчик
 // и реальное фото, заменить handleSubmit и блок с заполнителем.
@@ -16,7 +16,7 @@ import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
 
 const PHOTO_SRC =
-    "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_7033-1.png";
+    "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_7033-2.jpg";
 
 type RequestCopy = {
     title: ReactNode;
@@ -38,7 +38,7 @@ type RequestCopy = {
 const copyByLocale: Record<Locale, RequestCopy> = {
     ru: {
         // Заголовок оттипографирован: неразрывный пробел после предлога «на».
-        title: "Заявка на фотосъёмку",
+        title: "Заявка на фотосъемку",
         formIntro: "Заполните форму, чтобы оставить заявку",
         datePlaceholder: "Укажите желаемую дату",
         residencePlaceholder: "Выбрать резиденцию",
@@ -49,7 +49,7 @@ const copyByLocale: Record<Locale, RequestCopy> = {
         contactOptions: ["Telegram", "WhatsApp", "MAX", "Звонок"],
         requiredNote: "*поле обязательное для заполнения",
         submit: "Оставить заявку",
-        photoAlt: "Фотосъёмка в интерьерах особняка Шувалова",
+        photoAlt: "Фотосъемка в интерьерах особняка Шувалова",
         successTitle: "Спасибо!",
         successText: (
             <>

@@ -15,7 +15,12 @@ const SHUVALOV_PHOTO_TOP =
 const SHUVALOV_PHOTO_BOTTOM =
     "https://academia.spb.ru/wp-content/uploads/2026/07/AP_29-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg";
 
-type Tariff = { duration: string; costLabel: string; price: string };
+type Tariff = {
+    timeLabel: string;
+    time: string;
+    costLabel: string;
+    price: string;
+};
 
 type Residence = {
     title: string;
@@ -39,16 +44,18 @@ const sectionCopy: Record<
             {
                 title: "Резиденция Дашковой",
                 description:
-                    "Светлое, нежное и яркое пространство в теплых тонах в неоклассическом стиле с антикварными деталями, высокими потолками, большими окнами и эффектной ванной комнатой с элегантной ванной в стеклянном кубе для особенных кадров.",
+                    "Светлое, нежное и яркое пространство в теплых тонах в неоклассическом стиле с антикварными деталями, высокими потолками, большими окнами и эффектной ванной комнатой с элегантной ванной в стеклянном кубе.",
                 hourTariff: {
-                    duration: "1 час",
-                    costLabel: "Стоимость",
-                    price: "5 000 ₽",
+                    timeLabel: "Время проведения:",
+                    time: "08:00 - 10:00",
+                    costLabel: "Стоимость:",
+                    price: "7 500 ₽",
                 },
                 twoHourTariff: {
-                    duration: "2 часа",
-                    costLabel: "Стоимость",
-                    price: "10 000 ₽",
+                    timeLabel: "Время проведения:",
+                    time: "16:00 - 18:00",
+                    costLabel: "Стоимость:",
+                    price: "15 500 ₽",
                 },
                 photoTop: {
                     src: DASHKOVA_PHOTO_TOP,
@@ -64,14 +71,16 @@ const sectionCopy: Record<
                 description:
                     "Просторное, элегантное и строгое пространство с антикварными предметами интерьера, высокими потолками с лепниной, большими окнами и ванной комнатой в стеклянном кубе в винтажном стиле.",
                 hourTariff: {
-                    duration: "1 час",
-                    costLabel: "Стоимость",
-                    price: "5 000 ₽",
+                    timeLabel: "Время проведения:",
+                    time: "12:00 - 14:00",
+                    costLabel: "Стоимость:",
+                    price: "10 500 ₽",
                 },
                 twoHourTariff: {
-                    duration: "2 часа",
-                    costLabel: "Стоимость",
-                    price: "10 000 ₽",
+                    timeLabel: "Время проведения:",
+                    time: "18:00 - 20:00",
+                    costLabel: "Стоимость:",
+                    price: "15 500 ₽",
                 },
                 photoTop: {
                     src: SHUVALOV_PHOTO_TOP,
@@ -94,14 +103,16 @@ const sectionCopy: Record<
                 description:
                     "A bright, tender and vivid space in warm tones, in a neoclassical style with antique details, high ceilings, large windows and a striking bathroom with an elegant bath in a glass cube for special shots.",
                 hourTariff: {
-                    duration: "1 hour",
-                    costLabel: "Cost",
-                    price: "5 000 ₽",
+                    timeLabel: "Time slot:",
+                    time: "08:00 - 10:00",
+                    costLabel: "Cost:",
+                    price: "7 500 ₽",
                 },
                 twoHourTariff: {
-                    duration: "2 hours",
-                    costLabel: "Cost",
-                    price: "10 000 ₽",
+                    timeLabel: "Time slot:",
+                    time: "16:00 - 18:00",
+                    costLabel: "Cost:",
+                    price: "15 500 ₽",
                 },
                 photoTop: {
                     src: DASHKOVA_PHOTO_TOP,
@@ -117,14 +128,16 @@ const sectionCopy: Record<
                 description:
                     "A spacious, elegant and stately space with antique interior pieces, high ceilings with moldings, large windows and a bathroom in a glass cube in a vintage style.",
                 hourTariff: {
-                    duration: "1 hour",
-                    costLabel: "Cost",
-                    price: "5 000 ₽",
+                    timeLabel: "Time slot:",
+                    time: "12:00 - 14:00",
+                    costLabel: "Cost:",
+                    price: "10 500 ₽",
                 },
                 twoHourTariff: {
-                    duration: "2 hours",
-                    costLabel: "Cost",
-                    price: "10 000 ₽",
+                    timeLabel: "Time slot:",
+                    time: "18:00 - 20:00",
+                    costLabel: "Cost:",
+                    price: "15 500 ₽",
                 },
                 photoTop: {
                     src: SHUVALOV_PHOTO_TOP,
@@ -143,9 +156,10 @@ const sectionCopy: Record<
 function PriceTile({ tariff }: { tariff: Tariff }) {
     return (
         <div className="flex aspect-square flex-col items-center justify-center gap-4 bg-[#ededeb] p-4 text-center text-[#372a24]">
-            <p className="font-history text-lg font-semibold uppercase xl:text-xl">
-                {tariff.duration}
-            </p>
+            <div className="flex flex-col gap-0.5 text-sm xl:text-base">
+                <span>{tariff.timeLabel}</span>
+                <span>{tariff.time}</span>
+            </div>
             <div className="flex flex-col gap-0.5 text-sm xl:text-base">
                 <span>{tariff.costLabel}</span>
                 <span>{tariff.price}</span>

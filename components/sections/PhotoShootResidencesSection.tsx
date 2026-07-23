@@ -11,7 +11,7 @@ type FiveImages = [RoomImage, RoomImage, RoomImage, RoomImage, RoomImage];
 
 const DASHKOVA_URLS = [
     "https://academia.spb.ru/wp-content/uploads/2026/07/11.jpg",
-    "https://academia.spb.ru/wp-content/uploads/2026/07/12.jpg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/1.png",
     "https://academia.spb.ru/wp-content/uploads/2026/07/13.png",
     "https://academia.spb.ru/wp-content/uploads/2026/07/14.jpg",
     "https://academia.spb.ru/wp-content/uploads/2026/07/15.jpg",
@@ -20,7 +20,7 @@ const DASHKOVA_URLS = [
 const SHUVALOV_URLS = [
     "https://academia.spb.ru/wp-content/uploads/2026/07/21.jpg",
     "https://academia.spb.ru/wp-content/uploads/2026/07/22.jpeg",
-    "https://academia.spb.ru/wp-content/uploads/2026/07/23.png",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/Gemini_Generated_Image_8cciq78cciq78cci-1.png",
     "https://academia.spb.ru/wp-content/uploads/2026/07/24.png",
     "https://academia.spb.ru/wp-content/uploads/2026/07/25.jpg",
 ];

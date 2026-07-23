@@ -630,7 +630,10 @@ export default function Header({ locale }: { locale: Locale }) {
                         </a>
                     </div>
 
-                    <Link
+                    {/* Плейн <a>, а не next/link: клик по лого — всегда полный
+                        переход на "/". Работает даже до гидрации и сбрасывает
+                        скролл; Link на том же маршруте давал no-op (клик мимо). */}
+                    <a
                         href={localizeHref("/", locale)}
                         className="absolute left-1/2 -translate-x-1/2"
                     >
@@ -643,7 +646,7 @@ export default function Header({ locale }: { locale: Locale }) {
                                 isLight ? "" : "brightness-0 invert"
                             }`}
                         />
-                    </Link>
+                    </a>
 
                     <div className="flex items-center ml-auto xl:gap-28">
                         <div className="hidden xl:grid min-w-[10.5rem] place-items-center">
