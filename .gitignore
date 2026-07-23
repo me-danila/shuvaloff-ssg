@@ -45,3 +45,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# module-price-load: локальный fallback-снимок цен (на проде owner — cron)
+public/module-price-load/cache/price.json
