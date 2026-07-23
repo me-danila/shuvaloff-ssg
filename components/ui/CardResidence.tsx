@@ -56,7 +56,7 @@ export default function CardResidence({
             </div>
 
             {/* Фото (во всю ширину карточки) */}
-            <div className="relative mt-6 aspect-[3/2] w-full md:aspect-[8/3] xl:mt-8">
+            <div className="relative mt-6 aspect-[4/3] w-full md:aspect-[5/2] xl:mt-8">
                 {active ? (
                     <Image
                         key={active.src}
@@ -80,10 +80,10 @@ export default function CardResidence({
             </div>
 
             {/* Описание + навигация */}
-            <div className="flex flex-col items-center px-6 pt-6 pb-8 text-center xl:px-10 xl:pt-8 xl:pb-10">
+            <div className="flex flex-1 flex-col items-center px-6 pt-6 pb-8 text-center xl:px-10 xl:pt-8 xl:pb-10">
                 <p className="text-[#372a24]">{description}</p>
 
-                <div className="mt-6 flex items-center gap-8 xl:mt-8 xl:gap-10">
+                <div className="mt-auto flex items-center gap-8 pt-6 xl:gap-10 xl:pt-8">
                     <button
                         type="button"
                         aria-label={prevLabel}

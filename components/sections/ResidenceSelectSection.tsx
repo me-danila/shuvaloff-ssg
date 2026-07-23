@@ -14,8 +14,14 @@ type Residence = {
 
 const SHUVALOV_PHOTO =
     "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%BC%D1%83%D0%B6%D0%B8%D0%BA-%D0%B2-%D0%B7%D0%B5%D0%BB%D1%91%D0%BD%D0%BE%D0%BC.png";
+const SHUVALOV_PHOTO_2 =
+    "https://academia.spb.ru/wp-content/uploads/2026/07/19__MMI0761_000_@maxiimov.jpg";
+const SHUVALOV_PHOTO_3 =
+    "https://academia.spb.ru/wp-content/uploads/2026/07/Gemini_Generated_Image_77e8ub77e8ub77e8.png";
 const DASHKOVA_PHOTO =
     "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B4%D0%B5%D0%B2%D1%83%D1%88%D0%BA%D0%B0-%D0%B2-%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%BC.png";
+const DASHKOVA_PHOTO_2 =
+    "https://academia.spb.ru/wp-content/uploads/2026/07/16__MMI0825_018_@maxiimov.jpg";
 
 const sectionCopy: Record<
     Locale,
@@ -36,7 +42,10 @@ const sectionCopy: Record<
                 ),
                 description:
                     "Изящная, яркая и светлая резиденция с мягким светом, антикварными предметами интерьера и подлинной лепниной, вдохновленное образом графини Елизаветы Воронцовой-Дашковой",
-                images: [{ src: DASHKOVA_PHOTO, alt: "Резиденция Дашковой" }],
+                images: [
+                    { src: DASHKOVA_PHOTO, alt: "Резиденция Дашковой" },
+                    { src: DASHKOVA_PHOTO_2, alt: "Резиденция Дашковой" },
+                ],
             },
             {
                 title: "Резиденция графа Шувалова",
@@ -50,6 +59,12 @@ const sectionCopy: Record<
                     "Просторная парадная резиденция в строгом неоклассическом стиле и историческими деталями, отражающая силу духа и благородство истинного аристократа — графа Андрея Шувалова",
                 images: [
                     { src: SHUVALOV_PHOTO, alt: "Резиденция графа Шувалова" },
+                    { src: SHUVALOV_PHOTO_2, alt: "Резиденция графа Шувалова" },
+                    {
+                        src: SHUVALOV_PHOTO_3,
+                        alt: "Резиденция графа Шувалова",
+                        imagePosition: "center 25%",
+                    },
                 ],
             },
         ],
@@ -70,7 +85,10 @@ const sectionCopy: Record<
                 ),
                 description:
                     "An elegant, bright and light residence with soft light, antique interior pieces and authentic moldings, inspired by the image of Countess Elizaveta Vorontsova-Dashkova",
-                images: [{ src: DASHKOVA_PHOTO, alt: "Dashkova Residence" }],
+                images: [
+                    { src: DASHKOVA_PHOTO, alt: "Dashkova Residence" },
+                    { src: DASHKOVA_PHOTO_2, alt: "Dashkova Residence" },
+                ],
             },
             {
                 title: "Count Shuvalov Residence",
@@ -85,6 +103,12 @@ const sectionCopy: Record<
                     "A spacious formal residence in a strict neoclassical style with historical details, reflecting the strength of spirit and the nobility of a true aristocrat — Count Andrei Shuvalov",
                 images: [
                     { src: SHUVALOV_PHOTO, alt: "Count Shuvalov Residence" },
+                    { src: SHUVALOV_PHOTO_2, alt: "Count Shuvalov Residence" },
+                    {
+                        src: SHUVALOV_PHOTO_3,
+                        alt: "Count Shuvalov Residence",
+                        imagePosition: "center 25%",
+                    },
                 ],
             },
         ],
