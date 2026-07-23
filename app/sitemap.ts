@@ -66,6 +66,7 @@ const staticRuRoutes = [
     "/events/",
     "/history/",
     "/legal/",
+    "/photo-shoot/",
     "/policy/",
     "/rewards/",
     "/rewards/referral/",

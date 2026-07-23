@@ -4,6 +4,9 @@ import type { Locale } from "@/lib/i18n/routing";
 export type RoomImage = {
     src: string;
     alt: string;
+    // CSS object-position. Не задан → дефолт браузера (center). Применяется
+    // только в DesktopHeroGrid; мобильный слайдер игнорирует.
+    imagePosition?: string;
 };
 
 export type Room = {

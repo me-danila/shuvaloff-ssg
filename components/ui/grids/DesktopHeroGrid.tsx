@@ -34,6 +34,7 @@ export default function DesktopHeroGrid({
                     priority
                     sizes="52vw"
                     className="object-cover"
+                    style={{ objectPosition: images[0].imagePosition }}
                 />
             </StaggerItem>
             {images.slice(1).map((image, i) => (
@@ -49,6 +50,7 @@ export default function DesktopHeroGrid({
                         loading={isInner ? "eager" : undefined}
                         sizes="25vw"
                         className="object-cover"
+                        style={{ objectPosition: image.imagePosition }}
                     />
                 </StaggerItem>
             ))}

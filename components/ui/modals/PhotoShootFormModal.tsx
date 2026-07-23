@@ -1,5 +1,9 @@
 "use client";
 
+// Отдельная копия WeddingFormModal под страницу /photo-shoot/. Сейчас логика и
+// поля идентичны, но вынесено в самостоятельный компонент, чтобы позже добавить
+// сюда специфичные для фотосъёмки поля, не затрагивая свадебную форму.
+
 import Link from "next/link";
 import { useState } from "react";
 import { Modal } from "@/components/ui/Modal";
@@ -64,7 +68,7 @@ const fillVariants: Record<ButtonVariant, string> = {
     "dark-outline": "border-black hover:bg-black hover:text-white",
 };
 
-export default function WeddingFormModal({
+export default function PhotoShootFormModal({
     triggerLabel,
     variant = "light",
     triggerClassName,
@@ -220,7 +224,7 @@ export default function WeddingFormModal({
                 open={open}
                 onClose={handleClose}
                 maxWidth="max-w-2xl"
-                ariaLabelledby="wedding-form-modal-title"
+                ariaLabelledby="photo-shoot-form-modal-title"
             >
                 <div className="px-8 py-12">
                     {status === "success" ? (
@@ -231,7 +235,7 @@ export default function WeddingFormModal({
                             className="flex flex-col items-center gap-4 py-12 text-center"
                         >
                             <h3
-                                id="wedding-form-modal-title"
+                                id="photo-shoot-form-modal-title"
                                 className="font-history uppercase text-xl xl:text-2xl"
                             >
                                 {copy.successTitle}
@@ -241,7 +245,7 @@ export default function WeddingFormModal({
                     ) : (
                         <>
                             <h2
-                                id="wedding-form-modal-title"
+                                id="photo-shoot-form-modal-title"
                                 className="text-center"
                             >
                                 {title}
@@ -322,7 +326,7 @@ export default function WeddingFormModal({
                                 <button
                                     type="submit"
                                     disabled={status === "loading"}
-                                    className="mt-2 w-full bg-neutral-900 px-8 py-4 font-history uppercase text-white hover:bg-neutral-800 disabled:opacity-50 transition-colors duration-200 rounded-md cursor-pointer"
+                                    className="mt-2 w-full bg-brand-red px-8 py-4 font-history uppercase text-white hover:bg-brand-red-dark disabled:opacity-50 transition-colors duration-200 rounded-md cursor-pointer"
                                 >
                                     {status === "loading"
                                         ? copy.loadingLabel

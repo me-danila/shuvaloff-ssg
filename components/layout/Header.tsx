@@ -432,6 +432,7 @@ export default function Header({ locale }: { locale: Locale }) {
         //        normalizedPath === "/wedding" ||
         normalizedPath === "/spasibo_wedding" ||
         normalizedPath === "/events" ||
+        normalizedPath === "/photo-shoot" ||
         normalizedPath === "/services/aristocratic-breakfast";
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -473,6 +474,7 @@ export default function Header({ locale }: { locale: Locale }) {
         //        normalizedPath !== "/wedding" &&
         normalizedPath !== "/spasibo_wedding" &&
         normalizedPath !== "/events" &&
+        normalizedPath !== "/photo-shoot" &&
         normalizedPath !== "/services/aristocratic-breakfast";
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
