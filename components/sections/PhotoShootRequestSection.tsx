@@ -1,9 +1,9 @@
 "use client";
 
 // Секция «Заявка на фотосессию» для страницы /photo-shoot/.
-// Пока форма — плейсхолдер: данные никуда не отправляются (submit только
-// preventDefault). Фото справа — заполнитель. Когда появятся бэкенд-обработчик
-// и реальное фото, заменить handleSubmit и блок с заполнителем.
+// Данные уходят напрямую в Web3Forms (email без своего бэкенда): POST на их
+// endpoint с публичным access_key → письмо на почту менеджера. Правая колонка —
+// фото. Клиентская валидация → fetch → экран «Спасибо» / ошибка.
 
 import {
     CalendarBlankIcon,
@@ -18,6 +18,40 @@ import type { Locale } from "@/lib/i18n/routing";
 const PHOTO_SRC =
     "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_7033-2.jpg";
 
+// Web3Forms: приём заявки без своего бэкенда. access_key — публичный ключ из
+// личного кабинета web3forms.com (привязан к почте-получателю). В бандле он не
+// секрет: спам отсекает honeypot-поле `botcheck` + лимиты на стороне сервиса.
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "441c373c-1f8a-4fa5-8b06-92740270235d";
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
+
+type FormState = {
+    date: string;
+    residence: string;
+    name: string;
+    phone: string;
+    contact: string;
+};
+
+const INITIAL: FormState = {
+    date: "",
+    residence: "",
+    name: "",
+    phone: "",
+    contact: "",
+};
+
+// RU-friendly phone check: 10 local digits, or 11 digits starting with 7/8.
+const isPhoneValid = (raw: string) => {
+    const digits = raw.replace(/\D/g, "");
+    return (
+        digits.length === 10 || (digits.length === 11 && /^[78]/.test(digits))
+    );
+};
+
+const MAX = { name: 100, phone: 24 } as const;
+
 type RequestCopy = {
     title: ReactNode;
     formIntro: string;
@@ -30,6 +64,10 @@ type RequestCopy = {
     contactOptions: string[];
     requiredNote: string;
     submit: string;
+    loadingLabel: string;
+    errName: string;
+    errPhone: string;
+    errorLabel: string;
     photoAlt: string;
     successTitle: string;
     successText: ReactNode;
@@ -38,7 +76,7 @@ type RequestCopy = {
 const copyByLocale: Record<Locale, RequestCopy> = {
     ru: {
         // Заголовок оттипографирован: неразрывный пробел после предлога «на».
-        title: "Заявка на фотосессию",
+        title: "Заявка на фотосессию",
         formIntro: "Заполните форму, чтобы оставить заявку",
         datePlaceholder: "Укажите желаемую дату",
         residencePlaceholder: "Выбрать резиденцию",
@@ -49,6 +87,10 @@ const copyByLocale: Record<Locale, RequestCopy> = {
         contactOptions: ["Telegram", "WhatsApp", "MAX", "Звонок"],
         requiredNote: "*поле обязательное для заполнения",
         submit: "Оставить заявку",
+        loadingLabel: "Отправка...",
+        errName: "Пожалуйста, укажите имя",
+        errPhone: "Укажите корректный номер телефона",
+        errorLabel: "Что-то пошло не так. Попробуйте ещё раз.",
         photoAlt: "Фотосъемка в интерьерах особняка Шувалова",
         successTitle: "Спасибо!",
         successText: (
@@ -72,6 +114,10 @@ const copyByLocale: Record<Locale, RequestCopy> = {
         contactOptions: ["Telegram", "WhatsApp", "MAX", "Phone call"],
         requiredNote: "*required field",
         submit: "Leave a request",
+        loadingLabel: "Sending...",
+        errName: "Please enter your name",
+        errPhone: "Please enter a valid phone number",
+        errorLabel: "Something went wrong. Please try again.",
         photoAlt: "Photoshoot in the interiors of the Shuvaloff Mansion",
         successTitle: "Thank you!",
         successText: (
@@ -93,13 +139,68 @@ export default function PhotoShootRequestSection({
     locale: Locale;
 }) {
     const copy = copyByLocale[locale];
-    const [submitted, setSubmitted] = useState(false);
+    const [form, setForm] = useState<FormState>(INITIAL);
+    const [status, setStatus] = useState<SubmitStatus>("idle");
+    const [validationError, setValidationError] = useState<string | null>(null);
+    // Honeypot: скрытое поле, невидимое людям. Если заполнено — это бот,
+    // Web3Forms молча отклонит заявку как спам.
+    const [botcheck, setBotcheck] = useState(false);
 
-    // Плейсхолдер: данные никуда не шлём, просто показываем экран «Спасибо».
-    const handleSubmit = (e: React.FormEvent) => {
+    const set =
+        (field: keyof FormState) =>
+        (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+            setValidationError(null);
+            setForm((prev) => ({ ...prev, [field]: e.target.value }));
+        };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+
+        const name = form.name.trim();
+        const phone = form.phone.trim();
+
+        let error: string | null = null;
+        if (!name) error = copy.errName;
+        else if (!isPhoneValid(phone)) error = copy.errPhone;
+
+        if (error) {
+            setStatus("idle");
+            setValidationError(error);
+            return;
+        }
+
+        setValidationError(null);
+        setStatus("loading");
+
+        try {
+            const res = await fetch(WEB3FORMS_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_ACCESS_KEY,
+                    subject: "Новая заявка на фотосессию",
+                    from_name: "Сайт ACADEMIA — Фотосессия",
+                    botcheck,
+                    Имя: name,
+                    Телефон: phone,
+                    Дата: form.date || "—",
+                    Резиденция: form.residence || "—",
+                    "Способ связи": form.contact || "—",
+                }),
+            });
+
+            const json = await res.json();
+            setStatus(json.success ? "success" : "error");
+        } catch {
+            setStatus("error");
+        }
     };
+
+    const submitted = status === "success";
+    const loading = status === "loading";
 
     return (
         <section className="px-6 xl:px-0 xl:py-4">
@@ -111,10 +212,10 @@ export default function PhotoShootRequestSection({
                 </FadeUp>
 
                 <FadeUp className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:items-stretch xl:mt-10 xl:gap-10">
-                    {/* Левая колонка — форма (плейсхолдер) / экран «Спасибо».
-                        Форма всегда в потоке и держит высоту карточки; после
-                        сабмита прячется (invisible), а поверх абсолютом ложится
-                        экран «Спасибо» — размеры секции и фото не прыгают. */}
+                    {/* Левая колонка — форма / экран «Спасибо». Форма всегда в
+                        потоке и держит высоту карточки; после успеха прячется
+                        (invisible), а поверх абсолютом ложится экран «Спасибо» —
+                        размеры секции и фото не прыгают. */}
                     <div className="relative rounded-lg bg-[#ededeb] p-6 xl:p-10">
                         <div
                             className={submitted ? "invisible" : ""}
@@ -129,9 +230,25 @@ export default function PhotoShootRequestSection({
                                 noValidate
                                 className="mt-6 flex flex-col gap-3"
                             >
+                                {/* Honeypot — скрыт от людей, ловит ботов. */}
+                                <input
+                                    type="checkbox"
+                                    name="botcheck"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                    checked={botcheck}
+                                    onChange={(e) =>
+                                        setBotcheck(e.target.checked)
+                                    }
+                                    className="hidden"
+                                />
+
                                 <div className="relative">
                                     <input
                                         type="text"
+                                        value={form.date}
+                                        onChange={set("date")}
                                         placeholder={copy.datePlaceholder}
                                         aria-label={copy.datePlaceholder}
                                         onFocus={(e) => {
@@ -148,7 +265,8 @@ export default function PhotoShootRequestSection({
                                 <div className="relative">
                                     <select
                                         aria-label={copy.residencePlaceholder}
-                                        defaultValue=""
+                                        value={form.residence}
+                                        onChange={set("residence")}
                                         className={`${fieldClass} cursor-pointer appearance-none pr-12`}
                                     >
                                         <option value="" disabled>
@@ -168,6 +286,9 @@ export default function PhotoShootRequestSection({
 
                                 <input
                                     type="text"
+                                    value={form.name}
+                                    onChange={set("name")}
+                                    maxLength={MAX.name}
                                     placeholder={copy.namePlaceholder}
                                     aria-label={copy.namePlaceholder}
                                     className={fieldClass}
@@ -175,6 +296,9 @@ export default function PhotoShootRequestSection({
 
                                 <input
                                     type="tel"
+                                    value={form.phone}
+                                    onChange={set("phone")}
+                                    maxLength={MAX.phone}
                                     placeholder={copy.phonePlaceholder}
                                     aria-label={copy.phonePlaceholder}
                                     className={fieldClass}
@@ -183,7 +307,8 @@ export default function PhotoShootRequestSection({
                                 <div className="relative">
                                     <select
                                         aria-label={copy.contactPlaceholder}
-                                        defaultValue=""
+                                        value={form.contact}
+                                        onChange={set("contact")}
                                         className={`${fieldClass} cursor-pointer appearance-none pr-12`}
                                     >
                                         <option value="" disabled>
@@ -201,17 +326,27 @@ export default function PhotoShootRequestSection({
                                     />
                                 </div>
 
-                                <p className="text-center text-xs text-neutral-500">
-                                    {copy.requiredNote}
-                                </p>
+                                {validationError || status === "error" ? (
+                                    <p
+                                        role="alert"
+                                        className="text-center text-xs text-brand-red"
+                                    >
+                                        {validationError ?? copy.errorLabel}
+                                    </p>
+                                ) : (
+                                    <p className="text-center text-xs text-neutral-500">
+                                        {copy.requiredNote}
+                                    </p>
+                                )}
 
                                 <Button
                                     type="submit"
                                     variant="primary"
                                     size="lg"
+                                    disabled={loading}
                                     className="mx-auto mt-1 w-full max-w-xs"
                                 >
-                                    {copy.submit}
+                                    {loading ? copy.loadingLabel : copy.submit}
                                 </Button>
                             </form>
                         </div>
