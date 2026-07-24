@@ -30,10 +30,10 @@ type PhotoShootCopy = {
 
 const copyByLocale: Record<Locale, PhotoShootCopy> = {
     ru: {
-        heroTitle: "Фотосъемка в исторических интерьерах особняка Шувалова",
+        heroTitle: "Фотосессия в исторических интерьерах особняка Шувалова",
         heroDescription:
             "Изысканный исторический антураж для ваших эффектных кадров в атмосфере графского особняка XIX века",
-        heroAlt: "Фотосъемка в исторических интерьерах особняка Шувалова",
+        heroAlt: "Фотосессия в исторических интерьерах особняка Шувалова",
         requestButton: "Оставить заявку",
         costButton: "Узнать стоимость",
         interiorsTitle: "Исторические интерьеры",
@@ -71,7 +71,7 @@ const seoByLocale: Record<
     ru: {
         name: "Фотосъемка в особняке Шувалова",
         description:
-            "Фотосъемка в исторических интерьерах особняка Шувалова XIX века в центре Санкт-Петербурга.",
+            "Фотосессия в исторических интерьерах особняка Шувалова XIX века в центре Санкт-Петербурга.",
         homeCrumb: "Главная",
     },
     en: {
@@ -123,7 +123,7 @@ export default function PhotoShootPage({ locale }: { locale: Locale }) {
                     <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
                         <div className="absolute bottom-10 md:bottom-20 xl:bottom-20 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-5xl xl:mx-auto xl:gap-6">
                             <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md xl:max-w-5xl xl:mx-auto xl:mb-6">
-                                <h1 className="text-2xl xl:text-5xl uppercase">
+                                <h1 className="text-2xl xl:text-5xl uppercase xl:mt-10">
                                     {copy.heroTitle}
                                 </h1>
                             </StaggerItem>

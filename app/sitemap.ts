@@ -90,6 +90,7 @@ const staticEnRoutes = [
     "/booking/",
     "/events/",
     "/history/",
+    "/photo-shoot/",
     "/rewards/",
     "/rewards/referral/",
     "/reviews/",

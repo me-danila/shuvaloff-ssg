@@ -25,16 +25,7 @@ export const stripLocalePrefix = (value: string): string => {
  * Path segments that exist only in Russian (no /en/ twin). Pages under these
  * roots must not emit an `en` hreflang or offer a language switch to /en.
  */
-export const RU_ONLY_SEGMENTS = [
-    "/blog",
-    "/policy",
-    "/legal",
-    // Временно: EN-локаль /photo-shoot пока не опубликована. Компонент
-    // PhotoShootPage уже содержит en-копию — чтобы включить английскую версию,
-    // создайте app/en/photo-shoot/page.tsx, добавьте путь в sitemap и удалите
-    // эту строку (тогда появятся hreflang и переключатель языка).
-    "/photo-shoot",
-] as const;
+export const RU_ONLY_SEGMENTS = ["/blog", "/policy", "/legal"] as const;
 
 /**
  * True when the given path has an English counterpart. Accepts either a raw

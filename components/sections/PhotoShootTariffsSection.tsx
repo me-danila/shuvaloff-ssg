@@ -39,7 +39,7 @@ const sectionCopy: Record<
 > = {
     ru: {
         title: "Тарифы",
-        subtitle: "Пространство для съёмки, где важна каждая деталь",
+        subtitle: "Пространство для фотосессии, где важна каждая деталь",
         residences: [
             {
                 title: "Резиденция Дашковой",
@@ -235,28 +235,17 @@ function ResidenceTariff({
     );
 }
 
-// Два варианта оформления подзаголовков в плитках — для сравнения дизайна.
-// Каждый рендерит одинаковую сетку резиденций, отличается только класс
-// подписей «Время проведения:» / «Стоимость:».
-const LABEL_VARIANTS = [
-    { key: "alistair", labelClassName: "font-alistair text-2xl xl:text-3xl" },
-    { key: "history", labelClassName: "font-history font-semibold" },
-] as const;
+// Рукописный стиль подписей «Время проведения:» / «Стоимость:» в плитках.
+const LABEL_CLASS_NAME = "font-alistair text-2xl xl:text-3xl";
 
-function TariffsGrid({
-    residences,
-    labelClassName,
-}: {
-    residences: Residence[];
-    labelClassName: string;
-}) {
+function TariffsGrid({ residences }: { residences: Residence[] }) {
     return (
         <FadeUp className="mt-8 grid grid-cols-1 gap-y-12 md:grid-cols-2 md:grid-rows-[auto_auto_auto] md:gap-x-8 md:gap-y-8 xl:mt-10 xl:gap-x-10">
             {residences.map((residence) => (
                 <ResidenceTariff
                     key={residence.title}
                     residence={residence}
-                    labelClassName={labelClassName}
+                    labelClassName={LABEL_CLASS_NAME}
                 />
             ))}
         </FadeUp>
@@ -281,13 +270,7 @@ export default function PhotoShootTariffsSection({
                     <p className="mt-1 text-[#372a24]">{copy.subtitle}</p>
                 </FadeUp>
 
-                {LABEL_VARIANTS.map((variant) => (
-                    <TariffsGrid
-                        key={variant.key}
-                        residences={copy.residences}
-                        labelClassName={variant.labelClassName}
-                    />
-                ))}
+                <TariffsGrid residences={copy.residences} />
             </div>
         </section>
     );
