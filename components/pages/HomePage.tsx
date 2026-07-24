@@ -367,16 +367,11 @@ const heroButtons = [
 export default function HomePage({
     locale,
     afterOffers,
-    roomCategories,
 }: {
     locale: Locale;
     // Опциональный блок между «Спец. предложениями» и «Особняком с историей».
     // На главной не задаётся — рендер идентичен прод-странице.
     afterOffers?: React.ReactNode;
-    // Опциональная замена секции «Категории номеров». На главной не задаётся —
-    // используется штатная RoomCategoriesSection. Тестовые роуты (напр.
-    // /test/prices/) подменяют её вариантом с ценами.
-    roomCategories?: React.ReactNode;
 }) {
     const copy = homeCopyByLocale[locale];
     const descriptionImages = descriptionImagesByLocale[locale];
@@ -698,11 +693,9 @@ export default function HomePage({
                 </div>
             </section>
 
-            {roomCategories ?? (
-                <RoomCategoriesSection
-                    rooms={AllRooms[locale].map(toRoomListItem)}
-                />
-            )}
+            <RoomCategoriesSection
+                rooms={AllRooms[locale].map(toRoomListItem)}
+            />
 
             <section className="flex flex-col gap-4 m-6 xl:my-4 xl:max-w-4xl xl:mx-auto">
                 <FadeUp className="xl:text-center">

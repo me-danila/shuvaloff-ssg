@@ -7,9 +7,9 @@ import PhotoShootFormModal from "@/components/ui/modals/PhotoShootFormModal";
  * Пара CTA-кнопок для hero страницы /photo-shoot/. Вынесено в клиентский
  * компонент, потому что `renderTrigger` — функция, а её нельзя передать из
  * серверного PhotoShootPage напрямую в клиентский PhotoShootFormModal. Кнопки
- * используют брендовый `Button`: «Оставить заявку» — обычный primary, «Узнать
- * стоимость» — light-glass (полупрозрачный белый фон + красный текст, при
- * наведении заливается в primary).
+ * используют брендовый `Button`: «Оставить заявку» — обычный primary
+ * (открывает модалку заявки), «Узнать стоимость» — light-glass-якорь на
+ * секцию «Тарифы» (#tariffs) той же страницы.
  */
 export default function PhotoShootHeroCta({
     requestButton,
@@ -33,19 +33,14 @@ export default function PhotoShootHeroCta({
                     </Button>
                 )}
             />
-            <PhotoShootFormModal
-                triggerLabel={costButton}
-                renderTrigger={(open) => (
-                    <Button
-                        variant="light-glass"
-                        size="lg"
-                        onClick={open}
-                        className="w-full md:w-auto"
-                    >
-                        {costButton}
-                    </Button>
-                )}
-            />
+            <Button
+                variant="light-glass"
+                size="lg"
+                href="#tariffs"
+                className="w-full md:w-auto"
+            >
+                {costButton}
+            </Button>
         </div>
     );
 }

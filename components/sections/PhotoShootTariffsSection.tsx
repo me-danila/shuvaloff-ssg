@@ -153,15 +153,23 @@ const sectionCopy: Record<
     },
 };
 
-function PriceTile({ tariff }: { tariff: Tariff }) {
+function PriceTile({
+    tariff,
+    labelClassName,
+}: {
+    tariff: Tariff;
+    // Класс подзаголовков «Время проведения:» / «Стоимость:». Задаётся
+    // блоком-вариантом (рукописный font-alistair или полужирный капс).
+    labelClassName: string;
+}) {
     return (
         <div className="flex aspect-square flex-col items-center justify-center gap-4 bg-[#ededeb] p-4 text-center text-[#372a24]">
             <div className="flex flex-col gap-0.5 text-sm xl:text-base">
-                <span>{tariff.timeLabel}</span>
+                <span className={labelClassName}>{tariff.timeLabel}</span>
                 <span>{tariff.time}</span>
             </div>
             <div className="flex flex-col gap-0.5 text-sm xl:text-base">
-                <span>{tariff.costLabel}</span>
+                <span className={labelClassName}>{tariff.costLabel}</span>
                 <span>{tariff.price}</span>
             </div>
         </div>
@@ -195,7 +203,13 @@ function PhotoTile({ image, index }: { image?: TariffImage; index: number }) {
     );
 }
 
-function ResidenceTariff({ residence }: { residence: Residence }) {
+function ResidenceTariff({
+    residence,
+    labelClassName,
+}: {
+    residence: Residence;
+    labelClassName: string;
+}) {
     return (
         <div className="grid grid-rows-[auto_auto_auto] gap-y-4 md:row-span-3 md:grid-rows-subgrid md:gap-y-4">
             <h3 className="text-center font-history text-lg font-semibold uppercase text-[#372a24] xl:text-2xl">
@@ -206,12 +220,46 @@ function ResidenceTariff({ residence }: { residence: Residence }) {
             </p>
 
             <div className="grid grid-cols-2 gap-3">
-                <PriceTile tariff={residence.hourTariff} />
+                <PriceTile
+                    tariff={residence.hourTariff}
+                    labelClassName={labelClassName}
+                />
                 <PhotoTile image={residence.photoTop} index={1} />
                 <PhotoTile image={residence.photoBottom} index={2} />
-                <PriceTile tariff={residence.twoHourTariff} />
+                <PriceTile
+                    tariff={residence.twoHourTariff}
+                    labelClassName={labelClassName}
+                />
             </div>
         </div>
+    );
+}
+
+// Два варианта оформления подзаголовков в плитках — для сравнения дизайна.
+// Каждый рендерит одинаковую сетку резиденций, отличается только класс
+// подписей «Время проведения:» / «Стоимость:».
+const LABEL_VARIANTS = [
+    { key: "alistair", labelClassName: "font-alistair text-2xl xl:text-3xl" },
+    { key: "history", labelClassName: "font-history font-semibold" },
+] as const;
+
+function TariffsGrid({
+    residences,
+    labelClassName,
+}: {
+    residences: Residence[];
+    labelClassName: string;
+}) {
+    return (
+        <FadeUp className="mt-8 grid grid-cols-1 gap-y-12 md:grid-cols-2 md:grid-rows-[auto_auto_auto] md:gap-x-8 md:gap-y-8 xl:mt-10 xl:gap-x-10">
+            {residences.map((residence) => (
+                <ResidenceTariff
+                    key={residence.title}
+                    residence={residence}
+                    labelClassName={labelClassName}
+                />
+            ))}
+        </FadeUp>
     );
 }
 
@@ -223,21 +271,23 @@ export default function PhotoShootTariffsSection({
     const copy = sectionCopy[locale];
 
     return (
-        <section className="px-6 xl:px-0 xl:py-10">
+        <section
+            id="tariffs"
+            className="scroll-mt-28 px-6 xl:scroll-mt-36 xl:px-0 xl:py-10"
+        >
             <div className="mx-auto max-w-7xl">
                 <FadeUp className="text-center">
                     <h2 className="text-[#372a24]">{copy.title}</h2>
                     <p className="mt-1 text-[#372a24]">{copy.subtitle}</p>
                 </FadeUp>
 
-                <FadeUp className="mt-8 grid grid-cols-1 gap-y-12 md:grid-cols-2 md:grid-rows-[auto_auto_auto] md:gap-x-8 md:gap-y-8 xl:mt-10 xl:gap-x-10">
-                    {copy.residences.map((residence) => (
-                        <ResidenceTariff
-                            key={residence.title}
-                            residence={residence}
-                        />
-                    ))}
-                </FadeUp>
+                {LABEL_VARIANTS.map((variant) => (
+                    <TariffsGrid
+                        key={variant.key}
+                        residences={copy.residences}
+                        labelClassName={variant.labelClassName}
+                    />
+                ))}
             </div>
         </section>
     );

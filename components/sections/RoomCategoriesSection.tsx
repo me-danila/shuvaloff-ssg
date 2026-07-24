@@ -2,7 +2,7 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Button from "@/components/ui/Button";
 import { SquareIcon, UserIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
@@ -11,6 +11,25 @@ import type { RoomListItem } from "@/data/RoomsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
+// Метод модуля module-price-load, который расставляет цены по data-атрибутам.
+// Определяется скриптом /module-price-load/assets/public/price-autoload.js.
+declare global {
+    interface Window {
+        setLoadedPrices?: (selector?: string) => void;
+    }
+}
+
+// id отеля в системе бронирования (TravelLine). Все категории номеров
+// относятся к одному отелю; room-type берётся из bookingUrl (?be-room=<id>).
+const HOTEL_ID = "41018";
+
+// Путь к скрипту вывода цен. На проде отдаётся отдельно деплоящейся папкой
+// module-price-load/ в корне сайта; локально — из public/ этого репозитория.
+const PRICE_SCRIPT_SRC = "/module-price-load/assets/public/price-autoload.js";
+
+const roomTypeId = (bookingUrl: string): string | null =>
+    new URLSearchParams(bookingUrl.split("?")[1] ?? "").get("be-room");
+
 const sectionCopy = {
     ru: {
         title: "Категории номеров",
@@ -18,6 +37,8 @@ const sectionCopy = {
         allDesktop: "Все категории номеров",
         book: "Забронировать",
         more: "Подробнее",
+        from: "от",
+        perNight: "₽ / ночь",
     },
     en: {
         title: "Room categories",
@@ -25,6 +46,8 @@ const sectionCopy = {
         allDesktop: "All room categories",
         book: "Book now",
         more: "Details",
+        from: "from",
+        perNight: "₽ / night",
     },
 } as const;
 
@@ -39,6 +62,34 @@ export default function RoomCategoriesSection({
     const activeIndexRef = useRef(0);
     const programmaticScrollRef = useRef(false);
     const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    // Подключаем скрипт module-price-load и расставляем цены. Инъекция вручную
+    // (а не next/script) — потому что скрипт вешает автозапуск на уже прошедший
+    // к моменту гидратации DOMContentLoaded, а next/script в static-export
+    // ненадёжно исполняет внешний бандл. Метод setLoadedPrices идемпотентен.
+    useEffect(() => {
+        const runPlacement = () => window.setLoadedPrices?.();
+
+        if (typeof window.setLoadedPrices === "function") {
+            runPlacement();
+            return;
+        }
+
+        const existing = document.querySelector<HTMLScriptElement>(
+            `script[data-module-price-load]`,
+        );
+        if (existing) {
+            existing.addEventListener("load", runPlacement, { once: true });
+            return;
+        }
+
+        const script = document.createElement("script");
+        script.src = PRICE_SCRIPT_SRC;
+        script.async = true;
+        script.dataset.modulePriceLoad = "";
+        script.addEventListener("load", runPlacement, { once: true });
+        document.body.appendChild(script);
+    }, []);
 
     const roomHref = (slug: string, isHistorical: boolean) =>
         localizeHref(
@@ -134,6 +185,7 @@ export default function RoomCategoriesSection({
                             room.bookingUrl,
                             locale,
                         );
+                        const roomId = roomTypeId(room.bookingUrl);
                         return (
                             <article
                                 key={room.title}
@@ -212,6 +264,31 @@ export default function RoomCategoriesSection({
                                         >
                                             {copy.more}
                                         </Button>
+                                        {/* Третий элемент: динамическая цена из
+                                            module-price-load. Значение цены
+                                            вписывает скрипт внутрь span по
+                                            data-атрибутам; «от» и «₽ / ночь» —
+                                            соседние узлы, их скрипт не трогает. */}
+                                        {roomId && (
+                                            <span className="flex items-center gap-1 whitespace-nowrap text-sm text-[#372a24] xl:text-base">
+                                                <span className="opacity-70">
+                                                    {copy.from}
+                                                </span>
+                                                <span
+                                                    className="font-semibold"
+                                                    data-module-price-load-hotel-id={
+                                                        HOTEL_ID
+                                                    }
+                                                    data-module-price-load-room-type={
+                                                        roomId
+                                                    }
+                                                    data-module-price-load-currency="RUB"
+                                                />
+                                                <span className="opacity-70">
+                                                    {copy.perNight}
+                                                </span>
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                             </article>

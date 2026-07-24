@@ -156,7 +156,7 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 items: [
                     "Ягодный морс",
                     "Вишневая наливка / Бокал шампанского на выбор",
-                    "Чай / Кофе по-венски на выбор",
+                    "Чай / Черный кофе",
                 ],
             },
         ],
@@ -291,7 +291,7 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 items: [
                     "Berry mors",
                     "Cherry liqueur / A glass of champagne (your choice)",
-                    "Tea / Viennese coffee (your choice)",
+                    "Tea / Black coffee",
                 ],
             },
         ],
