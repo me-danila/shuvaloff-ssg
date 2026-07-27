@@ -89,11 +89,11 @@ const copyByLocale: Record<Locale, RequestCopy> = {
         errName: "Пожалуйста, укажите имя",
         errPhone: "Укажите корректный номер телефона",
         errorLabel: "Что-то пошло не так. Попробуйте ещё раз.",
-        photoAlt: "Фотосъемка в интерьерах особняка Шувалова",
+        photoAlt: "Фотосессия в интерьерах особняка Шувалова",
         successTitle: "Спасибо!",
         successText: (
             <>
-                Мы позвоним вам,
+                Мы свяжемся с вами,
                 <br />
                 чтобы подтвердить дату и время
                 <br />в течение 10 минут!
@@ -120,7 +120,7 @@ const copyByLocale: Record<Locale, RequestCopy> = {
         successTitle: "Thank you!",
         successText: (
             <>
-                We will call you to confirm
+                We will contact you to confirm
                 <br />
                 the date and time within 10 minutes!
             </>
@@ -352,7 +352,7 @@ export default function PhotoShootRequestSection({
                                 aria-live="polite"
                                 className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 text-center text-[#372a24]"
                             >
-                                <h3 className="text-2xl">
+                                <h3 className="font-history text-2xl">
                                     {copy.successTitle}
                                 </h3>
                                 <p className="leading-relaxed">

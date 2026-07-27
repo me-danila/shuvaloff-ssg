@@ -69,7 +69,7 @@ const seoByLocale: Record<
     { name: string; description: string; homeCrumb: string }
 > = {
     ru: {
-        name: "Фотосъемка в особняке Шувалова",
+        name: "Фотосессия в особняке Шувалова",
         description:
             "Фотосессия в исторических интерьерах особняка Шувалова XIX века в центре Санкт-Петербурга.",
         homeCrumb: "Главная",
