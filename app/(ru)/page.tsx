@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import HomePage from "@/components/pages/HomePage";
-import { BirthdayBannerSplit } from "@/components/sections/BirthdayBannerSection";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -14,7 +13,7 @@ export const metadata: Metadata = buildPageMetadata({
 export default function Page() {
     return (
         <div className="v2-fonts">
-            <HomePage locale="ru" afterOffers={<BirthdayBannerSplit />} />
+            <HomePage locale="ru" />
         </div>
     );
 }
