@@ -5,12 +5,10 @@
 // endpoint с публичным access_key → письмо на почту менеджера. Правая колонка —
 // фото. Клиентская валидация → fetch → экран «Спасибо» / ошибка.
 
-import {
-    CalendarBlankIcon,
-    CaretDownIcon,
-} from "@phosphor-icons/react/dist/ssr";
+import { CaretDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { type ReactNode, useState } from "react";
 import Button from "@/components/ui/Button";
+import DateField, { formatDateDMY } from "@/components/ui/DateField";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
@@ -186,7 +184,7 @@ export default function PhotoShootRequestSection({
                     botcheck,
                     Имя: name,
                     Телефон: phone,
-                    Дата: form.date || "—",
+                    Дата: form.date ? formatDateDMY(form.date) : "—",
                     Резиденция: form.residence || "—",
                     "Способ связи": form.contact || "—",
                 }),
@@ -244,23 +242,19 @@ export default function PhotoShootRequestSection({
                                     className="hidden"
                                 />
 
-                                <div className="relative">
-                                    <input
-                                        type="text"
-                                        value={form.date}
-                                        onChange={set("date")}
-                                        placeholder={copy.datePlaceholder}
-                                        aria-label={copy.datePlaceholder}
-                                        onFocus={(e) => {
-                                            e.currentTarget.type = "date";
-                                        }}
-                                        className={`${fieldClass} pr-12`}
-                                    />
-                                    <CalendarBlankIcon
-                                        size={18}
-                                        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400"
-                                    />
-                                </div>
+                                <DateField
+                                    value={form.date}
+                                    onChange={(iso) => {
+                                        setValidationError(null);
+                                        setForm((prev) => ({
+                                            ...prev,
+                                            date: iso,
+                                        }));
+                                    }}
+                                    locale={locale}
+                                    placeholder={copy.datePlaceholder}
+                                    className={`${fieldClass} cursor-pointer`}
+                                />
 
                                 <div className="relative">
                                     <select
