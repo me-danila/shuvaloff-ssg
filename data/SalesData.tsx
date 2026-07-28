@@ -17,6 +17,43 @@ export type Sale = {
 export const AllSales: Record<Locale, Sale[]> = {
     ru: [
         {
+            title: "Промокод GENIUS",
+            subtitle:
+                "Получите бонус при первом бронировании на сайте. Гарантия лучшей цены",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
+            bookingUrl: "/booking/?promo-code-plain=genius",
+        },
+        {
+            title: "Раннее бронирование",
+            subtitle:
+                "Планируйте поездку заранее от 3 ночей с сентября по декабрь скидка от 15%",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
+            bookingUrl: "/booking?be-offer=588665",
+        },
+        {
+            title: "Длительное проживание",
+            subtitle:
+                "Скидка 20% при бронировании от 5 ночей. Скидка 15% на проживание в сентябре",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
+            bookingUrl: "/booking?be-offer=588673",
+        },
+        {
+            title: "День рождения",
+            subtitle:
+                "Специальные привилегии для именинников и скидка 15% от 2 ночей",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
+            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
+        },
+        {
+            title: "Аэрофлот Бонус",
+            subtitle:
+                "Отдыхайте в особняке Шувалова и копите мили «Аэрофлот Бонус»! До 1 000 миль за каждую ночь проживания",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9448-ГОРИЗОНТАЛЬ.jpg",
+            mediaObjectPosition: "center top",
+            bookingUrl: "/sales/aeroflot/",
+            actionType: "details",
+        },
+        {
             title: "Графский Петербург",
             subtitle:
                 "Особый отдых в формате пышных аристократических традиций",
@@ -38,55 +75,11 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking/?&be-offer=804866",
         },
         {
-            title: "День рождения",
-            subtitle:
-                "Специальные привилегии для именинников и скидка 15% от 2 ночей",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
-            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
-        },
-        {
             title: "Свадебное предложение",
             subtitle:
                 "Свадебное предложение ACADEMIA — это гармония исторических интерьеров и безупречного сервиса",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/AP_162.jpg",
             bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
-        },
-        {
-            title: "Аэрофлот Бонус",
-            subtitle:
-                "Отдыхайте в особняке Шувалова и копите мили «Аэрофлот Бонус»! До 1 000 миль за каждую ночь проживания",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9448-ГОРИЗОНТАЛЬ.jpg",
-            mediaObjectPosition: "center top",
-            bookingUrl: "/sales/aeroflot/",
-            actionType: "details",
-        },
-        {
-            title: "Промокод GENIUS",
-            subtitle:
-                "Получите бонус при первом бронировании на сайте. Гарантия лучшей цены",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
-            bookingUrl: "/booking/?promo-code-plain=genius",
-        },
-        {
-            title: "Длительное проживание",
-            subtitle:
-                "Скидка 20% при бронировании от 5 ночей. Скидка 15% на проживание в сентябре",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
-            bookingUrl: "/booking?be-offer=588673",
-        },
-        {
-            title: "Раннее бронирование",
-            subtitle:
-                "Планируйте поездку заранее от 3 ночей с сентября по декабрь скидка от 15%",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
-            bookingUrl: "/booking?be-offer=588665",
-        },
-        {
-            title: "РЖД Бонус",
-            subtitle:
-                "Скидка 15% на тариф Завтрак включен по программе лояльности РЖД",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
-            bookingUrl: "/booking?promo-code-plain=rzd",
         },
         {
             title: "Командировка",
@@ -95,6 +88,13 @@ export const AllSales: Record<Locale, Sale[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9300-ГОРИЗОНТАЛЬ.jpg",
             mediaObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
+        },
+        {
+            title: "РЖД Бонус",
+            subtitle:
+                "Скидка 15% на тариф Завтрак включен по программе лояльности РЖД",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
+            bookingUrl: "/booking?promo-code-plain=rzd",
         },
         {
             title: "Семейное путешествие",
@@ -106,6 +106,43 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
     ],
     en: [
+        {
+            title: "GENIUS Promocode",
+            subtitle:
+                "Get a bonus on your first booking on the site. Best price guarantee",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
+            bookingUrl: "/booking/?promo-code-plain=genius",
+        },
+        {
+            title: "Early Booking",
+            subtitle:
+                "Plan your trip in advance for a stay of 3 nights or more from September through December to receive a discount of 15% or more",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
+            bookingUrl: "/booking?be-offer=588665",
+        },
+        {
+            title: "Long Stay Offer",
+            subtitle:
+                "20% off when booking 5 nights or more. 15% off September stays",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
+            bookingUrl: "/booking?be-offer=588673",
+        },
+        {
+            title: "Birthday Offer",
+            subtitle:
+                "Special privileges for birthday guests and 15% discount for stays of 2 nights or more",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
+            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
+        },
+        {
+            title: "Aeroflot bonus",
+            subtitle:
+                "Relax at the Shuvalov Mansion and earn Aeroflot Bonus miles! Up to 1,000 miles for every night's stay.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9448-ГОРИЗОНТАЛЬ.jpg",
+            mediaObjectPosition: "center top",
+            bookingUrl: "/sales/aeroflot/",
+            actionType: "details",
+        },
         {
             title: "Aristocratic St. Petersburg",
             subtitle:
@@ -127,55 +164,11 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking/?&be-offer=804866",
         },
         {
-            title: "Birthday Offer",
-            subtitle:
-                "Special privileges for birthday guests and 15% discount for stays of 2 nights or more",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
-            bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
-        },
-        {
             title: "Wedding Offer",
             subtitle:
                 "ACADEMIA wedding offer is a harmony of historical interiors and impeccable service",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/AP_162.jpg",
             bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
-        },
-        {
-            title: "Aeroflot bonus",
-            subtitle:
-                "Relax at the Shuvalov Mansion and earn Aeroflot Bonus miles! Up to 1,000 miles for every night's stay.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9448-ГОРИЗОНТАЛЬ.jpg",
-            mediaObjectPosition: "center top",
-            bookingUrl: "/sales/aeroflot/",
-            actionType: "details",
-        },
-        {
-            title: "GENIUS Promocode",
-            subtitle:
-                "Get a bonus on your first booking on the site. Best price guarantee",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/a05a9ff67a6d51f6afd4cb1ef1e2cbdff77fdc6f-1.avif",
-            bookingUrl: "/booking/?promo-code-plain=genius",
-        },
-        {
-            title: "Long Stay Offer",
-            subtitle:
-                "20% off when booking 5 nights or more. 15% off September stays",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
-            bookingUrl: "/booking?be-offer=588673",
-        },
-        {
-            title: "Early Booking",
-            subtitle:
-                "Plan your trip in advance for a stay of 3 nights or more from September through December to receive a discount of 15% or more",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
-            bookingUrl: "/booking?be-offer=588665",
-        },
-        {
-            title: "RZD Bonus",
-            subtitle:
-                "15% discount on Breakfast Included rate via RZD loyalty program",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
-            bookingUrl: "/booking?promo-code-plain=rzd",
         },
         {
             title: "Business Trip",
@@ -184,6 +177,13 @@ export const AllSales: Record<Locale, Sale[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9300-ГОРИЗОНТАЛЬ.jpg",
             mediaObjectPosition: "center top",
             bookingUrl: "/booking?be-offer=588976&promo-code-plain=work",
+        },
+        {
+            title: "RZD Bonus",
+            subtitle:
+                "15% discount on Breakfast Included rate via RZD loyalty program",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
+            bookingUrl: "/booking?promo-code-plain=rzd",
         },
         {
             title: "Family Journey",
