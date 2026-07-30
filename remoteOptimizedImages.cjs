@@ -11,8 +11,12 @@ const FILE_EXTENSIONS = new Set([
     ".json",
     ".mdx",
 ]);
+// `${}` исключены намеренно: URL внутри шаблонной строки с подстановкой
+// попал бы в список сырым (`.../%D0%B4${n}.jpeg`) и уронил бы оптимизатор
+// на 404. Такие картинки лучше не оптимизировать, чем ломать билд —
+// пишите их полными литералами.
 const IMAGE_URL_PATTERN =
-    /https?:\/\/[^\s"'`]+?\.(?:gif|jpe?g|png|webp)(?:\?[^\s"'`]*)?/gi;
+    /https?:\/\/[^\s"'`${}]+?\.(?:gif|jpe?g|png|webp)(?:\?[^\s"'`${}]*)?/gi;
 
 function walk(dir, collector) {
     if (!fs.existsSync(dir)) {

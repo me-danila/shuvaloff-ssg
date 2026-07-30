@@ -19,12 +19,25 @@ const DASHKOVA_PHOTO =
     "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B4%D0%B5%D0%B2%D1%83%D1%88%D0%BA%D0%B0-%D0%B2-%D1%80%D0%BE%D0%B7%D0%BE%D0%B2%D0%BE%D0%BC.png";
 
 // Остальные слайды (кириллица в имени → percent-encoded: д=%D0%B4, ш=%D1%88).
-const DASHKOVA_SLIDES = [1, 2, 3, 4, 5, 6].map(
-    (n) => `https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B4${n}.jpeg`,
-);
-const SHUVALOV_SLIDES = [1, 2, 3, 4, 5, 6].map(
-    (n) => `https://academia.spb.ru/wp-content/uploads/2026/07/%D1%88${n}.jpeg`,
-);
+// URL пишем целиком, без шаблонных подстановок: remoteOptimizedImages.cjs
+// собирает список удалённых картинок регуляркой по исходникам, и интерполяцию
+// он не раскрывает — из `...%D0%B4${n}.jpeg` в список попал бы literal `${n}`.
+const DASHKOVA_SLIDES = [
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B41.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B42.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B43.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B44.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B45.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B46.jpeg",
+];
+const SHUVALOV_SLIDES = [
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D1%881.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D1%882.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D1%883.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D1%884.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D1%885.jpeg",
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D1%886.jpeg",
+];
 
 // object-position для слайдов на десктопе. Ключ — индекс в массиве слайдов
 // (0 = первое НЕзаглавное фото; заглавное — отдельный первый слайд).
