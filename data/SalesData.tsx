@@ -77,9 +77,9 @@ export const AllSales: Record<Locale, Sale[]> = {
         {
             title: "Свадебное предложение",
             subtitle:
-                "Свадебное предложение ACADEMIA — это гармония исторических интерьеров и безупречного сервиса",
+                "Особый сценарий для дня вашей свадьбы в графском особняке",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/AP_162.jpg",
-            bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
+            bookingUrl: "/booking/?&be-offer=588988&promo-code-plain=wedding",
         },
         {
             title: "Командировка",
@@ -166,9 +166,9 @@ export const AllSales: Record<Locale, Sale[]> = {
         {
             title: "Wedding Offer",
             subtitle:
-                "ACADEMIA wedding offer is a harmony of historical interiors and impeccable service",
+                "A Special Itinerary for Your Wedding Day at a County Mansion",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/AP_162.jpg",
-            bookingUrl: "/booking?be-offer=588988&promo-code-plain=wedding",
+            bookingUrl: "/booking/?&be-offer=588988&promo-code-plain=wedding",
         },
         {
             title: "Business Trip",
