@@ -108,6 +108,40 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "aristocratic-breakfast",
         },
         {
+            title: "Детский завтрак от шефа",
+            subtitle:
+                "Специально для маленьких гостей особняка концепт-шеф Илья Харченко подготовил детское сет-меню вкусных и полезных завтраков, которые одобрят и дети, и родители.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/ChatGPT-Image-6-%D0%B0%D0%B2%D0%B3.-2026-%D0%B3.-10_56_42.avif",
+            slug: "kids-breakfast",
+            fullDescription: (
+                <>
+                    В&nbsp;меню собраны традиционные и&nbsp;любимые блюда:
+                    глазунья, скрембл или омлет с&nbsp;овощным салатом, лососем
+                    или куриными колбасками, сытные каши со&nbsp;свежими
+                    ягодами, нежнейшие сырники, творог, блины и&nbsp;круассаны,
+                    свежевыжатый сок или клюквенный морс. Каждый ребенок найдет
+                    то, что ему понравится&nbsp;&mdash; можно выбрать две
+                    позиции из&nbsp;меню и&nbsp;напиток.
+                </>
+            ),
+            links: [
+                {
+                    label: "Меню детских завтраков",
+                    href: "https://static.academia.spb.ru/files/kids-breakfast-shuvaloff.pdf",
+                },
+            ],
+            price: "1 100 ₽",
+            comment: (
+                <>
+                    Время подачи завтраков в&nbsp;ресторане: с&nbsp;8:00
+                    до&nbsp;12:00
+                    <br />
+                    Вы&nbsp;можете заказать детский завтрак от&nbsp;шефа для
+                    детей от&nbsp;0 до&nbsp;13 лет включительно
+                </>
+            ),
+        },
+        {
             title: "Графский завтрак в номер",
             subtitle:
                 "Закажите подачу легендарного Графского завтрака в ваш исторический номер и почувствуйте себя жителем дворянского особняка XIX века!",
@@ -678,6 +712,40 @@ export const AllServices: Record<Locale, Service[]> = {
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D1%84%D0%BE%D0%BD.avif",
             slug: "aristocratic-breakfast",
+        },
+        {
+            title: "Chef's Kids Breakfast",
+            subtitle:
+                "Especially for the mansion's little guests, concept chef Ilya Kharchenko has created a children's set menu of tasty and wholesome breakfasts that both kids and parents will approve of.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/ChatGPT-Image-6-%D0%B0%D0%B2%D0%B3.-2026-%D0%B3.-10_56_42.avif",
+            slug: "kids-breakfast",
+            fullDescription: (
+                <>
+                    The menu brings together traditional favourites: fried eggs,
+                    scramble or omelette with vegetable salad, salmon or chicken
+                    sausages, hearty porridges with fresh berries, delicate
+                    syrniki, cottage cheese, pancakes and croissants, freshly
+                    squeezed juice or cranberry mors. Every child will find
+                    something to enjoy — you can choose two items from the menu
+                    and a drink.
+                </>
+            ),
+            links: [
+                {
+                    label: "Kids Breakfast Menu",
+                    href: "https://static.academia.spb.ru/files/kids-breakfast-shuvaloff.pdf",
+                },
+            ],
+            price: "1 100 ₽",
+            comment: (
+                <>
+                    Breakfast serving hours in the restaurant: 8:00 AM to 12:00
+                    PM
+                    <br />
+                    You can order the chef's kids breakfast for children aged 0
+                    to 13 inclusive
+                </>
+            ),
         },
         {
             title: "Aristocratic Breakfast to Room",
