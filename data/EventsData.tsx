@@ -786,7 +786,7 @@ const EVENT_DUPLICATES: {
         slug: "one-night-in-petersburg-1899-august",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/one-night-august",
-        dates: ["2026-08-20T19:00"],
+        dates: ["2026-08-22T19:00"],
     },
 ];
 
