@@ -46,5 +46,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# module-price-load: локальный fallback-снимок цен (на проде owner — cron)
-public/module-price-load/cache/price.json
+# module-price-load: ключ TravelLine (образец — api.json.example), снимок цен
+# и лог — их владелец прод, а не репозиторий
+server/module-price-load/core/settings/common/api.json
+server/module-price-load/cache/price.json
+server/module-price-load/core/logs/log.txt
+server/module-price-load/cron.log

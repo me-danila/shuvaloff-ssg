@@ -187,17 +187,56 @@ Loaded from `app/layout.tsx`, sourced from `public/scripts/`:
 
 ## Deploy
 
-**Production (current, authoritative):** build locally, then `rsync` the
-contents of `out/` to the BeGet host over SSH:
+**Production (current, authoritative):** one command, always this one:
 
 ```bash
-bun run build
-rsync -az --delete out/ al.bgt:~/academia-shuvaloff.ru/public_html/
-bun run indexnow        # optional: ping IndexNow with blog URLs
+bun run deploy
 ```
 
+It builds, rsyncs `out/` to the BeGet host, ships `server/module-price-load/`
+to its master copy outside `public_html`, and refreshes live prices. Then
+optionally `bun run indexnow` to ping IndexNow with blog URLs.
+
+**Never deploy with a bare `rsync -az --delete out/ …`.** `public_html` also
+holds `module-price-load/`, a PHP module that is not built from `out/`; a bare
+`--delete` wipes it and live prices freeze (this happened on 2026-08-07 and
+went unnoticed for a month). `scripts/deploy.sh` carries the required
+`--exclude 'module-price-load/'`.
+
 `out/` is plain static HTML/JS/assets — any static host will serve it. There is
-no application server in production.
+no application server in production, apart from the price module's cron job.
+
+### Live prices (module-price-load)
+
+Room prices on the home page are fetched from TravelLine at runtime — the site
+is SSG, so nothing is baked at build time:
+
+- **Server:** `core/execute.php` is run by cron every 4 h, calls the TravelLine
+  API for hotel `41018` and writes `module-price-load/cache/price.json`.
+- **Client:** `assets/public/price-autoload.js` is injected by
+  `components/sections/RoomCategoriesSection.tsx`, fetches that JSON and fills
+  the `data-module-price-load-*` spans.
+
+Layout:
+
+| Where | What |
+| --- | --- |
+| `server/module-price-load/` (repo) | source of truth, vendor code v3.2.1, in git |
+| `~/module-price-load-src/` (prod) | master copy outside `public_html`, safe from `--delete` |
+| `public_html/module-price-load/` (prod) | working copy, served to browsers |
+
+`cron.sh` in the master copy heals the working copy from the master before every
+run, so a bad deploy self-repairs within 4 h. The BeGet cron entry must point at
+the master copy, never inside `public_html`:
+
+```
+0 */4 * * * /bin/sh /home/d/dorofegk/module-price-load-src/cron.sh
+```
+
+`api.json` (the TravelLine key) is deliberately not in git — see
+`api.json.example`; the real file lives on the server and `deploy.sh` never
+deletes it. Check the module from anywhere with `bun run check:prices`; the
+cron log is `~/module-price-load-src/cron.log`.
 
 **Docker (exists, NOT the current prod path):** the `Dockerfile` builds with
 Bun and serves `out/` from a `busybox` `httpd` on port 5171;

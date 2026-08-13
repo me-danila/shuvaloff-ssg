@@ -13,6 +13,8 @@
         "fix": "bun format && bun lint --fix",
         "prepare": "git config core.hooksPath .githooks 2>/dev/null || exit 0",
         "indexnow": "node scripts/indexnow.mjs",
+        "deploy": "bash scripts/deploy.sh",
+        "check:prices": "node scripts/check-prices.mjs",
         "docker-build": "docker buildx build --push --platform linux/amd64 -t ghcr.io/me-danila/shuvaloff-ssg:latest ."
     },
     "dependencies": {
