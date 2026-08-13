@@ -300,7 +300,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
-            price: "8 500 ₽",
+            price: "7 500 ₽",
             fullDescription: (
                 <>
                     Бар-ресторан ACADEMIA Шувалова приглашает гостей
@@ -316,7 +316,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     Харченко и&nbsp;бренд-шеф бармена Даниила Лемана.
                     <br />
                     <br />
-                    <b>Стоимость: 8 500 ₽</b>
+                    <b>Стоимость: 7 500 ₽</b>
                     <br />
                     <br />
                     В&nbsp;стоимость входит курсовой ужин и&nbsp;участие
@@ -637,7 +637,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
-            price: "8 500 ₽",
+            price: "7 500 ₽",
             fullDescription: (
                 <>
                     ACADEMIA Shuvaloff Bar-Restaurant invites guests
@@ -655,7 +655,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     Kharchenko and&nbsp;brand-bar-chef Daniil Leman.
                     <br />
                     <br />
-                    <b>Price: 8 500 ₽</b>
+                    <b>Price: 7 500 ₽</b>
                     <br />
                     <br />
                     The&nbsp;price includes a&nbsp;course dinner
