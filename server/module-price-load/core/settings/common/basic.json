@@ -1,0 +1,7 @@
+{
+  "days": 14,
+  "currencies": ["RUB"],
+  "minLosLimit": 1,
+  "startTomorrow": false,
+  "enableCache": true
+}

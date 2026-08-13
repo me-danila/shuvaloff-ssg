@@ -1,0 +1,8 @@
+{
+  "domains": [
+    "ru-ibe.tlintegration.ru",
+    "ibe.tlintegration.ru",
+    "ibe.tlintegration.com"
+  ],
+  "api_key_header": "X-TravelLine-ApiKey: <ключ TravelLine>"
+}
