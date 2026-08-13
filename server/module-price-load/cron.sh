@@ -75,6 +75,9 @@ if [ ! -f "$SITE/core/execute.php" ]; then
     exit 0
 fi
 
+prices="$SITE/cache/price.json"
+before=$([ -f "$prices" ] && stat -c %Y "$prices" 2>/dev/null || echo 0)
+
 out=$("$PHP" "$SITE/core/execute.php" 2>&1)
 code=$?
 if [ $code -ne 0 ]; then
@@ -82,6 +85,14 @@ if [ $code -ne 0 ]; then
     exit 0
 fi
 
+after=$([ -f "$prices" ] && stat -c %Y "$prices" 2>/dev/null || echo 0)
+if [ "$after" = "$before" ]; then
+    # Модуль не ходит в API, пока price.json моложе 50 минут
+    # (MIN_CACHE_TIME_MINUTES) — при часовом запуске это норма, не сбой.
+    log "update: пропуск, цены моложе 50 мин"
+    exit 0
+fi
+
 backup_prices
-log "update: ok, price.json $(wc -c <"$SITE/cache/price.json" | tr -d ' ') байт"
+log "update: ok, price.json $(wc -c <"$prices" | tr -d ' ') байт"
 exit 0
