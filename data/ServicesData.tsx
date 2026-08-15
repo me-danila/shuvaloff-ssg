@@ -491,6 +491,8 @@ export const AllServices: Record<Locale, Service[]> = {
                     </i>
                 </>
             ),
+            comment:
+                "При необходимости можем заменить игристое на безалкогольный напиток.",
         },
         {
             title: "Романтический вечер на двоих",
@@ -518,6 +520,8 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "10 500 ₽",
+            comment:
+                "При необходимости можем заменить игристое на безалкогольный напиток.",
         },
         {
             title: "Сет к вину",
@@ -626,6 +630,8 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "8 000 ₽",
+            comment:
+                "При необходимости можем заменить игристое на безалкогольный напиток.",
         },
     ],
     en: [
@@ -1077,6 +1083,8 @@ export const AllServices: Record<Locale, Service[]> = {
                     </i>
                 </>
             ),
+            comment:
+                "If preferred, we can replace the sparkling wine with a non-alcoholic beverage.",
         },
         {
             title: "Romantic Evening for Two",
@@ -1103,6 +1111,8 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "10 500 ₽",
+            comment:
+                "If preferred, we can replace the sparkling wine with a non-alcoholic beverage.",
         },
         {
             title: "Wine Set",
@@ -1205,6 +1215,8 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "8 000 ₽",
+            comment:
+                "If preferred, we can replace the sparkling wine with a non-alcoholic beverage.",
         },
     ],
 };
