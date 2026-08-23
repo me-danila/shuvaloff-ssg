@@ -82,6 +82,64 @@ const LectureOutroEn = (
     </>
 );
 
+/**
+ * Описание Графского ужина с подставляемой ценой. Копии на другие даты идут
+ * по своей цене, а текст остаётся единым источником — иначе цена в `price`
+ * и цена внутри описания расходятся.
+ */
+const CountDinnerDescription: Record<Locale, (price: string) => ReactNode> = {
+    ru: (price) => (
+        <>
+            Бар-ресторан ACADEMIA Шувалова приглашает гостей на&nbsp;особенный
+            Графский ужин&nbsp;&mdash; камерный вечер в&nbsp;историческом
+            особняке.
+            <br />
+            <br />
+            Граф станет главным проводником вечера и&nbsp;встретит гостей
+            в&nbsp;формате частного приема. Формат предполагает ограниченное
+            количество гостей, создавая атмосферу закрытого салона
+            и&nbsp;личного общения. Гастрономическим сопровождением станет
+            курсовой ужин от&nbsp;бренд-шефа Ильи Харченко и&nbsp;бренд-шеф
+            бармена Даниила Лемана.
+            <br />
+            <br />
+            <b>Стоимость: {price}</b>
+            <br />
+            <br />
+            В&nbsp;стоимость входит курсовой ужин и&nbsp;участие
+            в&nbsp;программе.
+        </>
+    ),
+    en: (price) => (
+        <>
+            ACADEMIA Shuvaloff Bar-Restaurant invites guests
+            to&nbsp;a&nbsp;special Count's Dinner&nbsp;&mdash; an&nbsp;intimate
+            evening in&nbsp;the historic mansion.
+            <br />
+            <br />
+            The&nbsp;Count will be&nbsp;the main guide of&nbsp;the evening
+            and&nbsp;will greet guests in&nbsp;the format of&nbsp;a&nbsp;private
+            reception. The&nbsp;format assumes a&nbsp;limited number
+            of&nbsp;guests, creating the atmosphere of&nbsp;a&nbsp;closed salon
+            and&nbsp;personal conversation. The&nbsp;gastronomic accompaniment
+            will be&nbsp;a&nbsp;course dinner by&nbsp;brand-chef Ilya Kharchenko
+            and&nbsp;brand-bar-chef Daniil Leman.
+            <br />
+            <br />
+            <b>Price: {price}</b>
+            <br />
+            <br />
+            The&nbsp;price includes a&nbsp;course dinner and&nbsp;participation
+            in&nbsp;the program.
+        </>
+    ),
+};
+
+/** Пара «цена + описание с этой же ценой» для Графского ужина. */
+function countDinner(locale: Locale, price: string) {
+    return { price, fullDescription: CountDinnerDescription[locale](price) };
+}
+
 const BaseEvents: Record<Locale, EventDefinition[]> = {
     ru: [
         {
@@ -300,29 +358,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
-            price: "7 500 ₽",
-            fullDescription: (
-                <>
-                    Бар-ресторан ACADEMIA Шувалова приглашает гостей
-                    на&nbsp;особенный Графский ужин&nbsp;&mdash; камерный вечер
-                    в&nbsp;историческом особняке.
-                    <br />
-                    <br />
-                    Граф станет главным проводником вечера и&nbsp;встретит
-                    гостей в&nbsp;формате частного приема. Формат предполагает
-                    ограниченное количество гостей, создавая атмосферу закрытого
-                    салона и&nbsp;личного общения. Гастрономическим
-                    сопровождением станет курсовой ужин от&nbsp;бренд-шефа Ильи
-                    Харченко и&nbsp;бренд-шеф бармена Даниила Лемана.
-                    <br />
-                    <br />
-                    <b>Стоимость: 7 500 ₽</b>
-                    <br />
-                    <br />
-                    В&nbsp;стоимость входит курсовой ужин и&nbsp;участие
-                    в&nbsp;программе.
-                </>
-            ),
+            ...countDinner("ru", "7 500 ₽"),
             dates: ["2026-08-14T19:00"],
         },
         {
@@ -404,6 +440,41 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                 </>
             ),
             dates: ["2026-08-01T15:00", "2026-08-22T15:00"],
+        },
+        {
+            slug: "noble-investments",
+            title: "Лекция от историка: «Куда инвестировали дворяне во второй половине XIX века»",
+            subtitle:
+                "В основе лекции живые истории из писем, дневников и архивов",
+            imgUrl: "https://static.tildacdn.com/tild6361-6564-4661-b163-666239633738/_2.png",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
+            fullDescription: (
+                <>
+                    Как дворяне распоряжались своим состоянием, если торговать
+                    им&nbsp;не&nbsp;позволял статус? Можно&nbsp;ли было прожить
+                    на&nbsp;одно жалованье? Почему карточный долг платили
+                    раньше, чем долг портному?
+                    <br />
+                    <br />
+                    На&nbsp;лекции мы&nbsp;заглянем в&nbsp;повседневную
+                    хозяйственную жизнь русского дворянства, поговорим
+                    о&nbsp;заложенных имениях и&nbsp;петербургских доходных
+                    домах, об&nbsp;акциях железных дорог и&nbsp;сахарных
+                    заводов, о&nbsp;службе ради чина и&nbsp;пенсии, и&nbsp;даже
+                    о&nbsp;том, как азартная игра становилась частью финансовых
+                    привычек.
+                    <br />
+                    <br />
+                    В&nbsp;основе лекции живые истории из&nbsp;писем, дневников
+                    и&nbsp;архивов.
+                    <br />
+                    <br />
+                    Для гостей, проживающих в&nbsp;отелях коллекции ACADEMIA,
+                    посещение мероприятия бесплатно.
+                </>
+            ),
+            dates: ["2026-09-03T19:00"],
         },
     ],
     en: [
@@ -531,38 +602,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Роспись-Афиша.png",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/rospis-grebney?utm_campaign=hotel&utm_term=lecture",
-            price: "7 500 ₽",
-            fullDescription: (
-                <>
-                    Under the guidance of&nbsp;an artist, guests will paint
-                    a&nbsp;comb, turning it&nbsp;into a&nbsp;signature
-                    accessory. The&nbsp;format suits everyone&nbsp;&mdash; both
-                    those trying painting for the first time and&nbsp;those
-                    already familiar with decorative techniques. During the
-                    work, the countess will share stories of&nbsp;her lineage
-                    and&nbsp;create the atmosphere of&nbsp;a&nbsp;true
-                    high-society reception.
-                    <br />
-                    <br />
-                    The&nbsp;creative part is&nbsp;complemented by&nbsp;a&nbsp;
-                    gastronomic accompaniment: guests are served a&nbsp;set
-                    of&nbsp;their choice&nbsp;&mdash; meat or&nbsp;fish. Each
-                    includes a&nbsp;starter, a&nbsp;main course, and&nbsp;
-                    a&nbsp;drink, and&nbsp;the masterclass itself begins with
-                    a&nbsp;welcome glass of&nbsp;wine.
-                    <br />
-                    <br />
-                    <b>Price: 7 500 ₽</b>
-                    <br />
-                    <br />
-                    <b>The price includes:</b>
-                    <br />• the guidance of&nbsp;a&nbsp;professional artist
-                    <br />• masterclass materials: a&nbsp;comb and&nbsp;paints
-                    <br />• a&nbsp;welcome glass of&nbsp;wine
-                    <br />• a&nbsp;set of&nbsp;your choice with a&nbsp;starter,
-                    main course, and&nbsp;drink
-                </>
-            ),
+            ...countDinner("en", "7 500 ₽"),
             dates: ["2026-07-18T14:00"],
         },
         {
@@ -746,6 +786,41 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-08-01T15:00", "2026-08-22T15:00"],
         },
+        {
+            slug: "noble-investments",
+            title: 'Historian\'s lecture: "Where the nobility invested in the second half of the 19th century"',
+            subtitle:
+                "The lecture is built on living stories from letters, diaries, and archives",
+            imgUrl: "https://static.tildacdn.com/tild6361-6564-4661-b163-666239633738/_2.png",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
+            fullDescription: (
+                <>
+                    How did the&nbsp;nobility manage their fortunes when their
+                    status forbade them to&nbsp;trade? Was&nbsp;it possible
+                    to&nbsp;live on&nbsp;a&nbsp;salary alone? Why was
+                    a&nbsp;gambling debt paid before the&nbsp;tailor's bill?
+                    <br />
+                    <br />
+                    In&nbsp;this lecture we&nbsp;look into the&nbsp;everyday
+                    household economy of&nbsp;the Russian nobility: mortgaged
+                    estates and&nbsp;Petersburg tenement houses, shares
+                    in&nbsp;railways and&nbsp;sugar factories, service
+                    for&nbsp;the sake of&nbsp;rank and&nbsp;pension,
+                    and&nbsp;even how gambling became part of&nbsp;their
+                    financial habits.
+                    <br />
+                    <br />
+                    The&nbsp;lecture is&nbsp;built on&nbsp;living stories from
+                    letters, diaries, and&nbsp;archives.
+                    <br />
+                    <br />
+                    For guests staying at&nbsp;ACADEMIA collection hotels,
+                    attendance is&nbsp;free of&nbsp;charge.
+                </>
+            ),
+            dates: ["2026-09-03T19:00"],
+        },
     ],
 };
 
@@ -758,6 +833,8 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
  * `bookingUrl` — ссылка кнопки «Забронировать»; `dates` — даты копии.
  * `imgUrl` — необязательная замена афиши, если у копии свой постер;
  * без него используется фото оригинала.
+ * `overrides` — точечная замена полей копии по локали (напр. своя цена
+ * вместе с согласованным описанием).
  * Клонирование программное, чтобы контент оставался идентичным оригиналу.
  */
 const EVENT_DUPLICATES: {
@@ -766,6 +843,7 @@ const EVENT_DUPLICATES: {
     bookingUrl: string;
     dates: string[];
     imgUrl?: string;
+    overrides?: Partial<Record<Locale, Partial<EventDefinition>>>;
 }[] = [
     {
         baseSlug: "masonic-petersburg",
@@ -788,13 +866,59 @@ const EVENT_DUPLICATES: {
             "https://shuvaloff.academia-rest.ru/afisha/one-night-august",
         dates: ["2026-08-22T19:00"],
     },
+    {
+        baseSlug: "one-night-in-petersburg-1899",
+        slug: "one-night-in-petersburg-1899-september",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
+        dates: ["2026-09-17T19:00"],
+    },
+    {
+        baseSlug: "masonic-petersburg",
+        slug: "masonic-petersburg-september",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg/?utm_source=hotel",
+        dates: ["2026-09-24T19:00"],
+    },
+    {
+        baseSlug: "income-house",
+        slug: "income-house-september",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
+        dates: ["2026-09-10T19:00"],
+    },
+    {
+        baseSlug: "comb-painting-august",
+        slug: "comb-painting-september",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/v-gostyah-grafini/?utm_source=hotel",
+        dates: ["2026-09-12T15:00"],
+    },
+    {
+        baseSlug: "wine-casino-august",
+        slug: "wine-casino-september",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
+        dates: ["2026-09-25T19:00"],
+    },
+    {
+        baseSlug: "count-dinner-august",
+        slug: "count-dinner-september",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
+        dates: ["2026-09-26T19:00"],
+        overrides: {
+            ru: countDinner("ru", "8 500 ₽"),
+            en: countDinner("en", "8 500 ₽"),
+        },
+    },
 ];
 
 /** Достраивает список локали дублями из EVENT_DUPLICATES. */
 function withDuplicates(locale: Locale): EventDefinition[] {
     const base = BaseEvents[locale];
     const dups = EVENT_DUPLICATES.map(
-        ({ baseSlug, slug, bookingUrl, dates, imgUrl }) => {
+        ({ baseSlug, slug, bookingUrl, dates, imgUrl, overrides }) => {
             const original = base.find((event) => event.slug === baseSlug);
             if (!original) {
                 throw new Error(
@@ -807,6 +931,7 @@ function withDuplicates(locale: Locale): EventDefinition[] {
                 bookingUrl,
                 dates,
                 ...(imgUrl ? { imgUrl } : {}),
+                ...overrides?.[locale],
             };
         },
     );
