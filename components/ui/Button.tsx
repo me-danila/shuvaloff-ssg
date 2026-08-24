@@ -18,14 +18,16 @@ type ButtonProps = {
     type?: "button" | "submit" | "reset";
 };
 
+// Рамка есть у всех вариантов (у заливных — прозрачная): иначе outline-кнопка
+// оказывается на 2px выше соседней primary того же размера.
 const variants: Record<ButtonVariant, string> = {
-    primary: "bg-brand-red text-white",
+    primary: "border border-transparent bg-brand-red text-white",
     "primary-outline":
         "border border-brand-red text-brand-red hover:text-white",
     // Полупрозрачный белый фон + брендовый красный текст, без обводки; при
     // наведении заливка делает кнопку неотличимой от `primary`.
     "light-glass":
-        "bg-white/45 text-brand-red backdrop-blur-sm hover:text-white",
+        "border border-transparent bg-white/45 text-brand-red backdrop-blur-sm hover:text-white",
 };
 
 const sizes: Record<ButtonSize, string> = {

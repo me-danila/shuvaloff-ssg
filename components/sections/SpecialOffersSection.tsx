@@ -186,7 +186,20 @@ export default function SpecialOffersSection({
                                 <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
                                     {renderSaleSubtitle(sale.subtitle)}
                                 </p>
-                                <div className="mt-6 px-5">
+                                <div className="mt-6 flex flex-col items-center gap-2 px-5">
+                                    {sale.detailsUrl ? (
+                                        <Button
+                                            href={localizeHref(
+                                                sale.detailsUrl,
+                                                locale,
+                                            )}
+                                            variant="primary-outline"
+                                            size="xl"
+                                            className="xl:px-8 xl:py-3 xl:text-base"
+                                        >
+                                            {copy.more}
+                                        </Button>
+                                    ) : null}
                                     <Button
                                         href={href}
                                         target={

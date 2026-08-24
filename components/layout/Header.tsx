@@ -218,6 +218,7 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Акции", href: "/sales/" },
+                { label: "Графский Петербург", href: "/aristocratic-spb/" },
                 { label: "Мероприятия", href: "/events/" },
                 { label: "Реферальная программа", href: "/rewards/referral/" },
                 {
@@ -276,6 +277,10 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Offers", href: "/sales/" },
+                {
+                    label: "Aristocratic St. Petersburg",
+                    href: "/aristocratic-spb/",
+                },
                 { label: "Events", href: "/events/" },
                 { label: "Referral program", href: "/rewards/referral/" },
                 {

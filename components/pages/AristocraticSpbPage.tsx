@@ -429,7 +429,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                             key={day.title}
                             className="flex flex-col gap-2 flex-row xl:gap-4"
                         >
-                            <p className="font-alistair text-2xl -mt-2 xl:text-3xl w-full max-w-[75px]">
+                            <p className="font-alistair text-2xl -mt-2 xl:text-3xl w-full max-w-[85px]">
                                 {day.title}
                             </p>
                             <p>{day.content}</p>

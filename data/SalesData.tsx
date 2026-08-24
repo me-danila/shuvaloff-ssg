@@ -12,6 +12,11 @@ export type Sale = {
     mediaObjectPosition?: string;
     bookingUrl: string;
     actionType?: "booking" | "details";
+    /**
+     * Второй, outline-CTA под кнопкой брони: ведёт на страницу предложения.
+     * Путь пишем без локали — карточка локализует его сама.
+     */
+    detailsUrl?: string;
 };
 
 export const AllSales: Record<Locale, Sale[]> = {
@@ -59,6 +64,7 @@ export const AllSales: Record<Locale, Sale[]> = {
                 "Особый отдых в формате пышных аристократических традиций",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
             bookingUrl: "/booking?&be-offer=910895",
+            detailsUrl: "/aristocratic-spb/",
         },
         {
             title: "Петербург: Погружение в историю",
@@ -149,6 +155,7 @@ export const AllSales: Record<Locale, Sale[]> = {
                 "A unique getaway steeped in opulent aristocratic traditions",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/Frame-3.png",
             bookingUrl: "/booking?&be-offer=910895",
+            detailsUrl: "/aristocratic-spb/",
         },
         {
             title: "St. Petersburg: A Journey into History",
