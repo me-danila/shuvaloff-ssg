@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import BlogPage from "@/components/pages/BlogPage";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import {
+    getLocaleAlternates,
+    withOfficialSiteSuffix,
+} from "@/lib/i18n/metadata";
 
 const TITLE = "Блог — ACADEMIA Особняк Шувалова";
+const DOC_TITLE = withOfficialSiteSuffix(TITLE, "ru");
 const DESCRIPTION =
     "Блог бутик-отеля ACADEMIA Особняк Шувалова: аристократический Петербург, история особняка, гиды по городу и советы путешественникам.";
 
 export const metadata: Metadata = {
-    title: TITLE,
+    title: DOC_TITLE,
     description: DESCRIPTION,
     alternates: {
         ...getLocaleAlternates("/blog/", "ru"),
@@ -16,7 +20,7 @@ export const metadata: Metadata = {
         },
     },
     openGraph: {
-        title: TITLE,
+        title: DOC_TITLE,
         description: DESCRIPTION,
         url: "/blog/",
         type: "website",

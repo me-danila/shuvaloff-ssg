@@ -23,6 +23,33 @@ const withTrailingSlash = (value: string): string => {
     return value.endsWith("/") ? value : `${value}/`;
 };
 
+/**
+ * Хвост документного <title>: имя отеля + пометка «официальный сайт».
+ * Тайтлы без бренда (свадьба, фотосессия) сначала получают имя отеля, чтобы
+ * концовка везде читалась одинаково: «… — <отель> – официальный сайт».
+ */
+const OFFICIAL_SITE_SUFFIX: Record<Locale, string> = {
+    ru: " – официальный сайт",
+    en: " – official website",
+};
+
+export const withOfficialSiteSuffix = (
+    title: string,
+    locale: Locale,
+): string => {
+    const suffix = OFFICIAL_SITE_SUFFIX[locale];
+
+    if (title.endsWith(suffix)) {
+        return title;
+    }
+
+    const withBrand = /academia/i.test(title)
+        ? title
+        : `${title} — ${getSiteName(locale)}`;
+
+    return `${withBrand}${suffix}`;
+};
+
 export const getLocaleAlternates = (path: string, locale: Locale) => {
     const stripped = stripLocalePrefix(normalizePath(path));
     const ruPath = withTrailingSlash(stripped);
@@ -74,12 +101,13 @@ export const buildPageMetadata = ({
     ogType?: "website" | "article";
 }): Metadata => {
     const imageUrl = toAbsoluteImage(ogImage ?? DEFAULT_OG_IMAGE);
+    const docTitle = withOfficialSiteSuffix(title, locale);
     const ogImageEntry = ogImage
         ? { url: imageUrl, alt: title }
         : { url: imageUrl, ...OG_DEFAULT_IMAGE_DIMENSIONS, alt: title };
 
     return {
-        title,
+        title: docTitle,
         description,
         alternates: getLocaleAlternates(path, locale),
         openGraph: {
@@ -88,13 +116,13 @@ export const buildPageMetadata = ({
             siteName: getSiteName(locale),
             locale: locale === "en" ? "en_US" : "ru_RU",
             alternateLocale: locale === "en" ? ["ru_RU"] : ["en_US"],
-            title,
+            title: docTitle,
             description,
             images: [ogImageEntry],
         },
         twitter: {
             card: "summary_large_image",
-            title,
+            title: docTitle,
             description,
             images: [imageUrl],
         },

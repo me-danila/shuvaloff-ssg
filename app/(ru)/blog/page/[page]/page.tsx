@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import BlogPage from "@/components/pages/BlogPage";
 import { getAllPosts, POSTS_PER_PAGE } from "@/lib/blog";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import {
+    getLocaleAlternates,
+    withOfficialSiteSuffix,
+} from "@/lib/i18n/metadata";
 
 type Props = {
     params: Promise<{ page: string }>;
@@ -28,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const title = `Блог — страница ${page} — ACADEMIA Особняк Шувалова`;
 
     return {
-        title,
+        title: withOfficialSiteSuffix(title, "ru"),
         description: `Статьи блога бутик-отеля ACADEMIA Особняк Шувалова, страница ${page}.`,
         alternates: getLocaleAlternates(`/blog/page/${page}/`, "ru"),
         ...(isEmptyPage ? { robots: { index: false, follow: true } } : {}),

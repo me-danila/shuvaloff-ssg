@@ -9,7 +9,10 @@ import {
     getPostSlugs,
     getRelatedPosts,
 } from "@/lib/blog";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import {
+    getLocaleAlternates,
+    withOfficialSiteSuffix,
+} from "@/lib/i18n/metadata";
 import { buildBlogPostingSchema } from "@/lib/seo/schema";
 import { SITE_NAME } from "@/lib/seo/site";
 
@@ -40,15 +43,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const meta = await getPostMeta(slug);
 
+    const docTitle = withOfficialSiteSuffix(
+        `${meta.title} — ${SITE_NAME}`,
+        "ru",
+    );
+
     return {
-        title: `${meta.title} — ${SITE_NAME}`,
+        title: docTitle,
         description: meta.description,
         alternates: getLocaleAlternates(`/blog/${slug}/`, "ru"),
         ...(meta.draft ? { robots: { index: false, follow: false } } : {}),
         openGraph: {
             type: "article",
             url: `/blog/${slug}/`,
-            title: meta.title,
+            title: docTitle,
             description: meta.description,
             publishedTime: meta.datePublished,
             modifiedTime: meta.dateModified ?? meta.datePublished,
@@ -65,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
         twitter: {
             card: "summary_large_image",
-            title: meta.title,
+            title: docTitle,
             description: meta.description,
             images: [meta.image],
         },

@@ -55,10 +55,12 @@ const centuryGothic = localFont({
     display: "swap",
 });
 
+const SITE_TITLE = `${SITE_NAME} – официальный сайт`;
+
 export const metadata: Metadata = {
     metadataBase: siteMetadataBase,
     title: {
-        default: SITE_NAME,
+        default: SITE_TITLE,
         template: "%s",
     },
     description:
@@ -90,7 +92,7 @@ export const metadata: Metadata = {
         locale: "ru_RU",
         alternateLocale: ["en_US"],
         siteName: SITE_NAME,
-        title: SITE_NAME,
+        title: SITE_TITLE,
         description:
             "Бутик-отель в бережно отреставрированном особняке XIX века в центре Санкт-Петербурга.",
         images: [
@@ -104,7 +106,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: SITE_NAME,
+        title: SITE_TITLE,
         description:
             "Бутик-отель в бережно отреставрированном особняке XIX века в центре Санкт-Петербурга.",
         images: [DEFAULT_OG_IMAGE],
