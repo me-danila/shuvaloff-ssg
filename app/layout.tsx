@@ -55,7 +55,7 @@ const centuryGothic = localFont({
     display: "swap",
 });
 
-const SITE_TITLE = `${SITE_NAME} – официальный сайт`;
+const SITE_TITLE = `${SITE_NAME} — Официальный сайт`;
 
 export const metadata: Metadata = {
     metadataBase: siteMetadataBase,

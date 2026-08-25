@@ -3,7 +3,7 @@ import SiteShell from "@/components/layout/SiteShell";
 import NotFoundPage from "@/components/pages/NotFoundPage";
 
 export const metadata: Metadata = {
-    title: "Page not found / Страница не найдена — ACADEMIA Mansion Shuvaloff – официальный сайт",
+    title: "Page not found / Страница не найдена — ACADEMIA Mansion Shuvaloff — Официальный сайт",
     description:
         "The requested page could not be found / Запрашиваемая страница не найдена",
 };
