@@ -833,6 +833,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
  * `bookingUrl` — ссылка кнопки «Забронировать»; `dates` — даты копии.
  * `imgUrl` — необязательная замена афиши, если у копии свой постер;
  * без него используется фото оригинала.
+ * `published` — как у оригинала: `false` полностью скрывает копию.
  * `overrides` — точечная замена полей копии по локали (напр. своя цена
  * вместе с согласованным описанием).
  * Клонирование программное, чтобы контент оставался идентичным оригиналу.
@@ -843,6 +844,7 @@ const EVENT_DUPLICATES: {
     bookingUrl: string;
     dates: string[];
     imgUrl?: string;
+    published?: boolean;
     overrides?: Partial<Record<Locale, Partial<EventDefinition>>>;
 }[] = [
     {
@@ -893,6 +895,8 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/v-gostyah-grafini/?utm_source=hotel",
         dates: ["2026-09-12T15:00"],
+        // Скрыто: не подтверждено, состоится ли мероприятие.
+        published: false,
     },
     {
         baseSlug: "wine-casino-august",
@@ -918,7 +922,15 @@ const EVENT_DUPLICATES: {
 function withDuplicates(locale: Locale): EventDefinition[] {
     const base = BaseEvents[locale];
     const dups = EVENT_DUPLICATES.map(
-        ({ baseSlug, slug, bookingUrl, dates, imgUrl, overrides }) => {
+        ({
+            baseSlug,
+            slug,
+            bookingUrl,
+            dates,
+            imgUrl,
+            published,
+            overrides,
+        }) => {
             const original = base.find((event) => event.slug === baseSlug);
             if (!original) {
                 throw new Error(
@@ -931,6 +943,7 @@ function withDuplicates(locale: Locale): EventDefinition[] {
                 bookingUrl,
                 dates,
                 ...(imgUrl ? { imgUrl } : {}),
+                ...(published === undefined ? {} : { published }),
                 ...overrides?.[locale],
             };
         },
