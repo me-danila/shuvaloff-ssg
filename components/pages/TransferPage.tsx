@@ -42,8 +42,7 @@ const copyByLocale: Record<Locale, TransferCopy> = {
         otherServicesTitle: "Другие услуги",
         items: [
             "Встреча с именной табличкой водителем в деловом костюме",
-            "Просторный, статусный и максимально комфортный Mercedes-Benz E-класса",
-            "Кресла с функцией массажа",
+            "Статусный и комфортабельный Mercedes-Benz E-класса",
             "Бутилированная вода, салфетки, зарядки в салоне",
             "Сопровождение с зонтом в случае дождя",
             "Музыка по вашему настроению или из вашего плейлиста",
@@ -76,8 +75,7 @@ const copyByLocale: Record<Locale, TransferCopy> = {
         otherServicesTitle: "Other services",
         items: [
             "Meet-and-greet with a personalized sign by a driver in a business suit",
-            "The spacious, prestigious, and supremely comfortable Mercedes-Benz E-Class",
-            "Seats with massage function",
+            "A prestigious and comfortable Mercedes-Benz E-Class",
             "Bottled water, napkins, and chargers in the cabin",
             "An umbrella provided in case of rain",
             "Music to suit your mood or from your playlist",
@@ -206,7 +204,7 @@ export default function TransferPage({ locale }: { locale: Locale }) {
             <section className="mx-6 flex flex-col gap-4 xl:max-w-7xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] xl:gap-8 xl:items-start">
                 <FadeUp className="relative w-full h-60 md:h-80 xl:h-full overflow-hidden rounded-md">
                     <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/06/hf_20260604_144842_063a0fa9-b31d-4114-9e32-e077ede99549-2.avif"
+                        src="https://academia.spb.ru/wp-content/uploads/2026/08/hf_20260303_215442_9e8039bb-e188-46a1-b47a-f7cd7f263795.avif"
                         alt={copy.title}
                         fill
                         sizes="(max-width: 1200px) 100vw, 55vw"
