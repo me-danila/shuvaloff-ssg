@@ -449,14 +449,14 @@ export const AllServices: Record<Locale, Service[]> = {
             fullDescription: (
                 <>
                     Погрузитесь в&nbsp;историю Петербурга:
-                    на&nbsp;комфортабельном GAC M8 вас доставят к&nbsp;одному
-                    из&nbsp;самых красивых особняков на&nbsp;набережной
-                    Фонтанки. Вас ждёт прогулка по&nbsp;парадным залам
-                    Шуваловского дворца, в&nbsp;котором расположен Музей
-                    Фаберже, знакомство с&nbsp;его легендами и&nbsp;тайнами,
-                    а&nbsp;также изысканное чаепитие с&nbsp;десертом,
-                    вдохновлённым творчеством Карла Фаберже. Завершение
-                    дня&nbsp;&mdash; возвращение в&nbsp;отель
+                    на&nbsp;комфортабельном Mercedes-Benz E-класса вас доставят
+                    к&nbsp;одному из&nbsp;самых красивых особняков
+                    на&nbsp;набережной Фонтанки. Вас ждёт прогулка
+                    по&nbsp;парадным залам Шуваловского дворца, в&nbsp;котором
+                    расположен Музей Фаберже, знакомство с&nbsp;его легендами
+                    и&nbsp;тайнами, а&nbsp;также изысканное чаепитие
+                    с&nbsp;десертом, вдохновлённым творчеством Карла Фаберже.
+                    Завершение дня&nbsp;&mdash; возвращение в&nbsp;отель
                     на&nbsp;VIP-трансфере, сохраняя в&nbsp;памяти незабываемые
                     впечатления от&nbsp;дня, проведенного в&nbsp;окружении
                     истории и&nbsp;красоты.
@@ -1044,14 +1044,14 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "history-trip",
             fullDescription: (
                 <>
-                    Immerse yourself in the history of St. Petersburg: an
-                    comfortable GAC M8 will take you to one of the most
-                    beautiful mansions on the Fontanka Embankment. A walk
-                    through the ceremonial halls of the Shuvalov Palace, which
-                    houses the Faberge Museum, awaits you, where you'll get to
-                    know its legends and secrets, and enjoy an exquisite tea
-                    party with a dessert inspired by the work of Carl Faberge.
-                    The day concludes with a return to the hotel by VIP
+                    Immerse yourself in the history of St. Petersburg: a
+                    comfortable Mercedes-Benz E-Class will take you to one of
+                    the most beautiful mansions on the Fontanka Embankment. A
+                    walk through the ceremonial halls of the Shuvalov Palace,
+                    which houses the Faberge Museum, awaits you, where you'll
+                    get to know its legends and secrets, and enjoy an exquisite
+                    tea party with a dessert inspired by the work of Carl
+                    Faberge. The day concludes with a return to the hotel by VIP
                     transfer, keeping unforgettable impressions of a day spent
                     surrounded by history and beauty.
                 </>

@@ -31,18 +31,18 @@ type TransferCopy = {
 const copyByLocale: Record<Locale, TransferCopy> = {
     ru: {
         title: "ТРАНСФЕР",
-        subtitle: "GAC M8",
+        subtitle: "Mercedes-Benz E-класса",
         orderButton: "ЗАКАЗАТЬ",
         description1:
             "Индивидуальный трансфер без ожиданий и суеты. Мы встретим вас в аэропорту или на вокзале, доставим в отель и обеспечим передвижение по Петербургу во время вашего отдыха.",
         description2:
-            "GAC M8 — это сочетание статуса, комфорта и безопасности. Просторный салон с премиальной отделкой и шумоизоляцией и мягкая подвеска гарантируют приятную поездку даже после длительного перелета.",
+            "Mercedes-Benz E-класса — это сочетание статуса, комфорта и безопасности. Просторный салон с премиальной отделкой и шумоизоляцией и мягкая подвеска гарантируют приятную поездку даже после длительного перелета.",
         description3:
             "Закажите трансфер через консьерж-службу или добавьте его к вашему бронированию.",
         otherServicesTitle: "Другие услуги",
         items: [
             "Встреча с именной табличкой водителем в деловом костюме",
-            "Просторный, статусный и максимально комфортный GAC M8",
+            "Просторный, статусный и максимально комфортный Mercedes-Benz E-класса",
             "Кресла с функцией массажа",
             "Бутилированная вода, салфетки, зарядки в салоне",
             "Сопровождение с зонтом в случае дождя",
@@ -65,18 +65,18 @@ const copyByLocale: Record<Locale, TransferCopy> = {
     },
     en: {
         title: "TRANSFER",
-        subtitle: "GAC M8",
+        subtitle: "Mercedes-Benz E-Class",
         orderButton: "ORDER",
         description1:
             "A private transfer with no waiting or hassle. We’ll meet you at the airport or train station, take you to your hotel, and handle your transportation around St. Petersburg during your stay.",
         description2:
-            "The GAC M8 combines prestige, comfort, and safety. A spacious interior with premium finishes and soundproofing, along with a smooth suspension, guarantee a pleasant ride even after a long flight.",
+            "The Mercedes-Benz E-Class combines prestige, comfort, and safety. A spacious interior with premium finishes and soundproofing, along with a smooth suspension, guarantee a pleasant ride even after a long flight.",
         description3:
             "Book a transfer through the concierge service or add it to your reservation.",
         otherServicesTitle: "Other services",
         items: [
             "Meet-and-greet with a personalized sign by a driver in a business suit",
-            "The spacious, prestigious, and supremely comfortable GAC M8",
+            "The spacious, prestigious, and supremely comfortable Mercedes-Benz E-Class",
             "Seats with massage function",
             "Bottled water, napkins, and chargers in the cabin",
             "An umbrella provided in case of rain",
