@@ -58,13 +58,14 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/sales/aeroflot/",
             actionType: "details",
         },
-        {
-            title: "В гостях у Графини: Светский этюд в Особняке",
-            subtitle:
-                "Отдых в особняке Шувалова с посещением мастер-класса по живописи «В гостях у графини»",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/%D0%92_%D0%BC%D0%B0%D1%81%D0%BB%D0%BE.avif",
-            bookingUrl: "/booking/?&be-offer=965554",
-        },
+        // Скрыто: предложение пока неактивно.
+        // {
+        //     title: "В гостях у Графини: Светский этюд в Особняке",
+        //     subtitle:
+        //         "Отдых в особняке Шувалова с посещением мастер-класса по живописи «В гостях у графини»",
+        //     imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/%D0%92_%D0%BC%D0%B0%D1%81%D0%BB%D0%BE.avif",
+        //     bookingUrl: "/booking/?&be-offer=965554",
+        // },
         {
             title: "Графский Петербург",
             subtitle:
@@ -156,13 +157,14 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/sales/aeroflot/",
             actionType: "details",
         },
-        {
-            title: "Guest of the Countess: A Society Étude at the Mansion",
-            subtitle:
-                "A stay at the Shuvalov Mansion with a painting master class, “Guest of the Countess”",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/%D0%92_%D0%BC%D0%B0%D1%81%D0%BB%D0%BE.avif",
-            bookingUrl: "/booking/?&be-offer=965554",
-        },
+        // Скрыто: предложение пока неактивно.
+        // {
+        //     title: "Guest of the Countess: A Society Étude at the Mansion",
+        //     subtitle:
+        //         "A stay at the Shuvalov Mansion with a painting master class, “Guest of the Countess”",
+        //     imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/%D0%92_%D0%BC%D0%B0%D1%81%D0%BB%D0%BE.avif",
+        //     bookingUrl: "/booking/?&be-offer=965554",
+        // },
         {
             title: "Aristocratic St. Petersburg",
             subtitle:

@@ -126,7 +126,7 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
             "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA_%D0%B3%D1%80%D0%B0%D1%84%D0%B0.pdf",
         graphTitle: "Состав графского завтрака",
         graphImage:
-            "https://academia.spb.ru/wp-content/uploads/2026/04/%D0%93%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA.avif",
+            "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
         graphSections: [
             {
                 heading: "ОСНОВА",
@@ -261,7 +261,7 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
             "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA_%D0%B3%D1%80%D0%B0%D1%84%D0%B0.pdf",
         graphTitle: "The Count's Breakfast Menu",
         graphImage:
-            "https://academia.spb.ru/wp-content/uploads/2026/04/%D0%93%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA.avif",
+            "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
         graphSections: [
             {
                 heading: "MAIN COURSE",
@@ -562,7 +562,7 @@ export default function AristocraticBreakfastPage({
                 </FadeUp>
                 <div className="px-6 py-2 flex flex-col gap-4 xl:my-2 xl:flex-1 xl:gap-4">
                     <FadeUp>
-                        <h3 className="font-alistair text-blue-800 text-4xl xl:text-5xl">
+                        <h3 className="font-alistair font-normal text-blue-800 text-4xl xl:text-5xl">
                             {copy.graphTitle}:
                         </h3>
                     </FadeUp>
@@ -601,7 +601,7 @@ export default function AristocraticBreakfastPage({
 
             <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0 xl:gap-6">
                 <FadeUp>
-                    <h3 className="font-alistair text-blue-800 text-4xl xl:text-5xl">
+                    <h3 className="font-alistair font-normal text-blue-800 text-4xl xl:text-5xl">
                         {copy.quoteTitle1}
                     </h3>
                 </FadeUp>
