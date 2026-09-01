@@ -108,6 +108,31 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "aristocratic-breakfast",
         },
         {
+            title: "Графский завтрак в номер",
+            subtitle:
+                "Закажите подачу легендарного Графского завтрака в номер и почувствуйте себя жителем дворянского особняка XIX века!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_8457-1.avif",
+            slug: "aristocratic-breakfast-in-room",
+            fullDescription: (
+                <>
+                    Графский завтрак&nbsp;&mdash; это гастрономическое
+                    путешествие сквозь время, в&nbsp;котором каждая деталь
+                    погружает вас в&nbsp;аристократический антураж имперского
+                    Петербурга. Изысканная сервировка и&nbsp;подача
+                    на&nbsp;уникальной винтажной посуде превращает завтрак
+                    в&nbsp;роскошную и&nbsp;неторопливую трапезу и&nbsp;изящный
+                    ритуал, который обеспечит яркие впечатления.
+                    <br />
+                    <br />
+                    Подарите себе утро в&nbsp;изысканной обстановке без спешки
+                    и&nbsp;суеты с&nbsp;завтраком в&nbsp;духе аристократических
+                    традиций Петербурга!
+                </>
+            ),
+            price: "15 000 ₽",
+            comment: "Графские завтраки подаются ежедневно с 10:00 до 12:00.",
+        },
+        {
             title: "Детский завтрак от шефа",
             subtitle:
                 "Специально для маленьких гостей особняка концепт-шеф Илья Харченко подготовил детское сет-меню вкусных и полезных завтраков, которые одобрят и дети, и родители.",
@@ -140,31 +165,6 @@ export const AllServices: Record<Locale, Service[]> = {
                     детей от&nbsp;0 до&nbsp;13 лет включительно
                 </>
             ),
-        },
-        {
-            title: "Графский завтрак в номер",
-            subtitle:
-                "Закажите подачу легендарного Графского завтрака в номер и почувствуйте себя жителем дворянского особняка XIX века!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_8457-1.avif",
-            slug: "aristocratic-breakfast-in-room",
-            fullDescription: (
-                <>
-                    Графский завтрак&nbsp;&mdash; это гастрономическое
-                    путешествие сквозь время, в&nbsp;котором каждая деталь
-                    погружает вас в&nbsp;аристократический антураж имперского
-                    Петербурга. Изысканная сервировка и&nbsp;подача
-                    на&nbsp;уникальной винтажной посуде превращает завтрак
-                    в&nbsp;роскошную и&nbsp;неторопливую трапезу и&nbsp;изящный
-                    ритуал, который обеспечит яркие впечатления.
-                    <br />
-                    <br />
-                    Подарите себе утро в&nbsp;изысканной обстановке без спешки
-                    и&nbsp;суеты с&nbsp;завтраком в&nbsp;духе аристократических
-                    традиций Петербурга!
-                </>
-            ),
-            price: "15 000 ₽",
-            comment: "Графские завтраки подаются ежедневно с 10:00 до 12:00.",
         },
         {
             title: "ACADEMIA СПА",
@@ -719,6 +719,31 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "aristocratic-breakfast",
         },
         {
+            title: "Aristocratic Breakfast to Room",
+            subtitle:
+                "Order the legendary Count's Breakfast to be served in your room and feel like a resident of a 19th-century aristocratic mansion!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_8457-1.avif",
+            slug: "aristocratic-breakfast-in-room",
+            fullDescription: (
+                <>
+                    The Count’s Breakfast is a gastronomic journey through time,
+                    in which every detail immerses you in the aristocratic
+                    atmosphere of imperial St. Petersburg. The exquisite table
+                    setting and presentation on unique vintage tableware
+                    transform breakfast into a luxurious, leisurely meal and an
+                    elegant ritual that is sure to leave a lasting impression.
+                    <br />
+                    <br />
+                    Treat yourself to a morning in an elegant setting, free from
+                    the hustle and bustle, with a breakfast in the spirit of St.
+                    Petersburg’s aristocratic traditions!
+                </>
+            ),
+            price: "15 000 ₽",
+            comment:
+                "The Graf Breakfast is served daily from 10:00 a.m. to 12:00 p.m.",
+        },
+        {
             title: "Chef's Kids Breakfast",
             subtitle:
                 "Especially for the mansion's little guests, concept chef Ilya Kharchenko has created a children's set menu of tasty and wholesome breakfasts that both kids and parents will approve of.",
@@ -751,31 +776,6 @@ export const AllServices: Record<Locale, Service[]> = {
                     to 13 inclusive
                 </>
             ),
-        },
-        {
-            title: "Aristocratic Breakfast to Room",
-            subtitle:
-                "Order the legendary Count's Breakfast to be served in your room and feel like a resident of a 19th-century aristocratic mansion!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_8457-1.avif",
-            slug: "aristocratic-breakfast-in-room",
-            fullDescription: (
-                <>
-                    The Count’s Breakfast is a gastronomic journey through time,
-                    in which every detail immerses you in the aristocratic
-                    atmosphere of imperial St. Petersburg. The exquisite table
-                    setting and presentation on unique vintage tableware
-                    transform breakfast into a luxurious, leisurely meal and an
-                    elegant ritual that is sure to leave a lasting impression.
-                    <br />
-                    <br />
-                    Treat yourself to a morning in an elegant setting, free from
-                    the hustle and bustle, with a breakfast in the spirit of St.
-                    Petersburg’s aristocratic traditions!
-                </>
-            ),
-            price: "15 000 ₽",
-            comment:
-                "The Graf Breakfast is served daily from 10:00 a.m. to 12:00 p.m.",
         },
         {
             title: "ACADEMIA SPA",

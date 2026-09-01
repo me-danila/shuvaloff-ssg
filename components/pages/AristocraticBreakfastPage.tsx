@@ -332,37 +332,37 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
 const descriptionImages: Record<Locale, { src: string; alt: string }[]> = {
     ru: [
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9220.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/Bazaart_6B62327A-C969-4AB4-AE88-C88273ABB0F0.avif",
             alt: "Бутик-ресторан ACADEMIA Шувалова 1",
         },
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9221.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/IMG_1182.avif",
             alt: "Бутик-ресторан ACADEMIA Шувалова 2",
         },
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9119.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/Bazaart_BF1B4DBE-F6A3-44A7-8E8B-D622BFE81BB2.avif",
             alt: "Бутик-ресторан ACADEMIA Шувалова 3",
         },
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9117.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/IMG_1186.avif",
             alt: "Бутик-ресторан ACADEMIA Шувалова 4",
         },
     ],
     en: [
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9220.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/Bazaart_6B62327A-C969-4AB4-AE88-C88273ABB0F0.avif",
             alt: "ACADEMIA Bar SHUVALOFF 1",
         },
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9221.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/IMG_1182.avif",
             alt: "ACADEMIA Bar SHUVALOFF 2",
         },
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9119.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/Bazaart_BF1B4DBE-F6A3-44A7-8E8B-D622BFE81BB2.avif",
             alt: "ACADEMIA Bar SHUVALOFF 3",
         },
         {
-            src: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_9117.avif",
+            src: "https://academia.spb.ru/wp-content/uploads/2026/09/IMG_1186.avif",
             alt: "ACADEMIA Bar SHUVALOFF 4",
         },
     ],
@@ -610,13 +610,13 @@ export default function AristocraticBreakfastPage({
                 </FadeUp>
             </section>
 
-            <section className="relative aspect-4/3 min-h-[350px] w-full overflow-hidden rounded xl:aspect-5/2 xl:w-[98%] xl:mx-auto xl:rounded-xl">
+            <section className="relative aspect-4/3 min-h-[350px] w-full overflow-hidden rounded xl:aspect-2/1 xl:w-[98%] xl:mx-auto xl:rounded-xl">
                 <Image
-                    src="https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B3%D1%80%D0%B0%D1%84%D1%81%D0%BA%D0%B8%D0%B9-%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D1%84%D0%BE%D0%BD.avif"
+                    src="https://academia.spb.ru/wp-content/uploads/2026/09/IMG_1179.avif"
                     alt={copy.titleAlt}
                     fill
                     loading="lazy"
-                    className="object-cover"
+                    className="object-cover object-[center_65%]"
                 />
             </section>
 
