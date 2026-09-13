@@ -59,8 +59,8 @@ export default function Footer({ locale }: { locale: Locale }) {
             : "Follow us on social media to be the first to know about announcements, news, and special offers.";
     const copyrightText =
         locale === "ru"
-            ? "© 2026 Отель «ACADEMIA Особняк SHUVALOFF», «ACADEMILAND»"
-            : "© 2026 ACADEMIA Mansion Shuvaloff Hotel, ACADEMILAND";
+            ? "© 2026 ООО «ОТЕЛЬ АКАДЕМИЯ ОСОБНЯК ШУВАЛОВА», «ACADEMILAND»"
+            : "© 2026 ACADEMIA Mansion Shuvaloff LLC, ACADEMILAND";
     const cityText =
         locale === "ru" ? "®, г. Санкт-Петербург" : "®, Saint Petersburg";
 
