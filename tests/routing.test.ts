@@ -200,7 +200,12 @@ describe("hasEnglishVersion", () => {
     });
 
     test("RU_ONLY_SEGMENTS is the expected set", () => {
-        expect([...RU_ONLY_SEGMENTS]).toEqual(["/blog", "/policy", "/legal"]);
+        expect([...RU_ONLY_SEGMENTS]).toEqual([
+            "/blog",
+            "/policy",
+            "/legal",
+            "/consent",
+        ]);
     });
 });
 

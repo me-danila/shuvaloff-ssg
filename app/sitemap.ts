@@ -63,6 +63,7 @@ const staticRuRoutes = [
     "/",
     "/aristocratic-spb/",
     "/booking/",
+    "/consent/",
     "/events/",
     "/history/",
     "/legal/",
