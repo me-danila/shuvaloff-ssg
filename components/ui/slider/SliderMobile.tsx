@@ -6,6 +6,8 @@ import { useSlider } from "@/hooks/useSlider";
 type SliderImage = {
     src: string;
     alt: string;
+    /** CSS object-position: кадрирование, когда центр обрезает главное. */
+    objectPosition?: string;
 };
 
 type SliderProps = {
@@ -33,6 +35,11 @@ export default function SliderMobile({ images }: SliderProps) {
                             sizes="(max-width: 1200px) 100vw, 575px"
                             loading="lazy"
                             className="object-cover rounded-lg"
+                            style={
+                                img.objectPosition
+                                    ? { objectPosition: img.objectPosition }
+                                    : undefined
+                            }
                         />
                     </div>
                 ))}
