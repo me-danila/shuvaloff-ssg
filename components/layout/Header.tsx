@@ -92,8 +92,8 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             ],
         },
         {
-            label: "Графский Петербург",
-            href: "/aristocratic-spb/",
+            label: "Графская осень",
+            href: "/counts-autumn/",
         },
         {
             label: "Водные прогулки",
@@ -149,8 +149,8 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             ],
         },
         {
-            label: "Aristocratic St. Petersburg",
-            href: "/aristocratic-spb/",
+            label: "Count's Autumn",
+            href: "/counts-autumn/",
         },
         {
             label: "Boat tours",
@@ -218,7 +218,7 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Акции", href: "/sales/" },
-                { label: "Графский Петербург", href: "/aristocratic-spb/" },
+                { label: "Графская осень", href: "/counts-autumn/" },
                 { label: "Мероприятия", href: "/events/" },
                 { label: "Реферальная программа", href: "/rewards/referral/" },
                 {
@@ -278,8 +278,8 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
             submenu: [
                 { label: "Offers", href: "/sales/" },
                 {
-                    label: "Aristocratic St. Petersburg",
-                    href: "/aristocratic-spb/",
+                    label: "Count's Autumn",
+                    href: "/counts-autumn/",
                 },
                 { label: "Events", href: "/events/" },
                 { label: "Referral program", href: "/rewards/referral/" },

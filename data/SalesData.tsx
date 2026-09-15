@@ -22,6 +22,14 @@ export type Sale = {
 export const AllSales: Record<Locale, Sale[]> = {
     ru: [
         {
+            title: "Графская осень",
+            subtitle:
+                "Атмосферный сценарий отдыха с аристократическими традициями",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/горизонталь-1.png",
+            bookingUrl: "/booking/?&be-offer=972472",
+            detailsUrl: "/counts-autumn/",
+        },
+        {
             title: "Промокод GENIUS",
             subtitle:
                 "Получите бонус при первом бронировании на сайте. Гарантия лучшей цены",
@@ -120,6 +128,14 @@ export const AllSales: Record<Locale, Sale[]> = {
         // },
     ],
     en: [
+        {
+            title: "Count's Autumn",
+            subtitle:
+                "An atmospheric getaway scripted around aristocratic traditions",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/горизонталь-1.png",
+            bookingUrl: "/booking/?&be-offer=972472",
+            detailsUrl: "/counts-autumn/",
+        },
         {
             title: "GENIUS Promocode",
             subtitle:

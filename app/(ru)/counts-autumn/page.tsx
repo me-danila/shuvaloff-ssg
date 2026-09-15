@@ -7,6 +7,8 @@ export const metadata: Metadata = buildPageMetadata({
     path: "/counts-autumn/",
     title: "Графская осень — ACADEMIA Особняк Шувалова",
     description: "Атмосферный сценарий отдыха с аристократическими традициями",
+    ogImage:
+        "https://academia.spb.ru/wp-content/uploads/2026/09/горизонталь-1.png",
 });
 
 export default function CountsAutumn() {
