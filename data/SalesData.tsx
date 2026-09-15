@@ -37,8 +37,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
         {
             title: "Длительное проживание",
-            subtitle:
-                "Скидка 20% при бронировании от 5 ночей. Скидка 15% на проживание в сентябре",
+            subtitle: "Скидка 20% при бронировании от 5 ночей",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
             bookingUrl: "/booking?be-offer=588673",
         },
@@ -110,14 +109,15 @@ export const AllSales: Record<Locale, Sale[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
             bookingUrl: "/booking?promo-code-plain=rzd",
         },
-        {
-            title: "Семейное путешествие",
-            subtitle:
-                "Семейная поездка — маленькое приключение для всех. По промокоду FAMILY мы сделаем ваше путешествие еще теплее и комфортнее",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/1fb679af26b0660b3995ee5ffe668aca8196c3dd-1.avif",
-            bookingUrl:
-                "/booking?hotel_id=41018&be-offer=611613&promo-code-plain=family",
-        },
+        // Скрыто: предложение пока неактивно.
+        // {
+        //     title: "Семейное путешествие",
+        //     subtitle:
+        //         "Семейная поездка — маленькое приключение для всех. По промокоду FAMILY мы сделаем ваше путешествие еще теплее и комфортнее",
+        //     imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/1fb679af26b0660b3995ee5ffe668aca8196c3dd-1.avif",
+        //     bookingUrl:
+        //         "/booking?hotel_id=41018&be-offer=611613&promo-code-plain=family",
+        // },
     ],
     en: [
         {
@@ -136,8 +136,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
         {
             title: "Long Stay Offer",
-            subtitle:
-                "20% off when booking 5 nights or more. 15% off September stays",
+            subtitle: "20% off when booking 5 nights or more",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
             bookingUrl: "/booking?be-offer=588673",
         },
@@ -208,13 +207,14 @@ export const AllSales: Record<Locale, Sale[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/IMG_2937-1.avif",
             bookingUrl: "/booking?promo-code-plain=rzd",
         },
-        {
-            title: "Family Journey",
-            subtitle:
-                "A family trip is a little adventure for everyone. Use the promo code FAMILY, and we’ll make your trip even cozier and more comfortable",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/1fb679af26b0660b3995ee5ffe668aca8196c3dd-1.avif",
-            bookingUrl:
-                "/booking?hotel_id=41018&be-offer=611613&promo-code-plain=family",
-        },
+        // Скрыто: предложение пока неактивно.
+        // {
+        //     title: "Family Journey",
+        //     subtitle:
+        //         "A family trip is a little adventure for everyone. Use the promo code FAMILY, and we’ll make your trip even cozier and more comfortable",
+        //     imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/1fb679af26b0660b3995ee5ffe668aca8196c3dd-1.avif",
+        //     bookingUrl:
+        //         "/booking?hotel_id=41018&be-offer=611613&promo-code-plain=family",
+        // },
     ],
 };
