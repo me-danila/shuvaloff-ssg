@@ -56,8 +56,17 @@ function ParallaxDesktop({
     const y = useTransform(scrollYProgress, [0, 1], [-offset, offset]);
 
     return (
-        <div ref={ref} className={`overflow-hidden ${className}`}>
-            <m.div className="relative h-full w-full" style={{ y }}>
+        <div ref={ref} className={`relative overflow-hidden ${className}`}>
+            {/* Слой выше контейнера на 2×offset и поднят на offset: иначе на
+                краях сдвига из-под картинки видна полоса фона. */}
+            <m.div
+                className="absolute inset-x-0 w-full"
+                style={{
+                    y,
+                    top: -offset,
+                    height: `calc(100% + ${offset * 2}px)`,
+                }}
+            >
                 {children}
             </m.div>
         </div>
