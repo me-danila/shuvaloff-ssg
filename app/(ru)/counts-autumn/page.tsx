@@ -6,7 +6,8 @@ export const metadata: Metadata = buildPageMetadata({
     locale: "ru",
     path: "/counts-autumn/",
     title: "Графская осень — ACADEMIA Особняк Шувалова",
-    description: "Аристократический отдых в Петербурге",
+    description:
+        "Атмосферный сценарий отдыха с аристократическими традициями в особняке графа Шувалова",
 });
 
 export default function CountsAutumn() {

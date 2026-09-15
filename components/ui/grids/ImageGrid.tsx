@@ -8,9 +8,15 @@ type ImageItem = {
 interface ImageGridProps {
     images: [ImageItem] | [ImageItem, ImageItem];
     className?: string;
+    /** На мобиле показывать только первое фото: два квадрата в ряд мельчат. */
+    singleOnMobile?: boolean;
 }
 
-export default function ImageGrid({ images, className = "" }: ImageGridProps) {
+export default function ImageGrid({
+    images,
+    className = "",
+    singleOnMobile = false,
+}: ImageGridProps) {
     // Single image — full width
     if (images.length === 1) {
         return (
@@ -39,17 +45,31 @@ export default function ImageGrid({ images, className = "" }: ImageGridProps) {
         ${className}
       `}
         >
-            <div className="relative overflow-hidden rounded aspect-square md:aspect-auto md:h-full">
+            <div
+                className={`relative overflow-hidden rounded aspect-square md:aspect-auto md:h-full ${
+                    singleOnMobile
+                        ? "max-md:col-span-2 max-md:aspect-[16/9]"
+                        : ""
+                }`}
+            >
                 <Image
                     src={images[0].src}
                     alt={images[0].alt ?? ""}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 66vw"
+                    sizes={
+                        singleOnMobile
+                            ? "(max-width: 768px) 100vw, 66vw"
+                            : "(max-width: 768px) 50vw, 66vw"
+                    }
                 />
             </div>
 
-            <div className="relative overflow-hidden rounded aspect-square md:aspect-auto md:h-full">
+            <div
+                className={`relative overflow-hidden rounded aspect-square md:aspect-auto md:h-full ${
+                    singleOnMobile ? "max-md:hidden" : ""
+                }`}
+            >
                 <Image
                     src={images[1].src}
                     alt={images[1].alt ?? ""}

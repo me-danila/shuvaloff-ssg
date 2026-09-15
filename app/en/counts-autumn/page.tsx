@@ -6,7 +6,8 @@ export const metadata: Metadata = buildPageMetadata({
     locale: "en",
     path: "/counts-autumn/",
     title: "Count's Autumn — ACADEMIA Mansion Shuvaloff",
-    description: "An aristocratic getaway in St. Petersburg",
+    description:
+        "An atmospheric getaway scripted around aristocratic traditions at Count Shuvalov's mansion",
 });
 
 export default function EnCountsAutumn() {

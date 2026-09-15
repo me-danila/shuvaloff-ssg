@@ -61,7 +61,8 @@ type PageCopy = {
 const copyByLocale: Record<Locale, PageCopy> = {
     ru: {
         title: "Графская осень",
-        additionalTitle: "Аристократический отдых в Петербурге",
+        additionalTitle:
+            "Атмосферный сценарий отдыха с аристократическими традициями в особняке графа Шувалова",
         bookLabel: "Забронировать",
         bullets: [
             "Атмосферный исторический особняк",
@@ -69,8 +70,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "Лучший опыт погружения в эпоху XIX века",
         ],
         cityTitle: "Графская осень —",
-        cityDescription:
-            "атмосферный сценарий отдыха с аристократическими традициями в особняке графа Шувалова.",
+        cityDescription: "готовая программа отдыха в осеннем Петербурге.",
         days: [
             {
                 title: "1 день:",
@@ -138,10 +138,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "Служба консьержей ACADEMIA поможет организовать дополнительную культурную программу: эксклюзивные экскурсии, например, на Императорский фарфоровый завод с мастер-классом, Эрмитаж или Русский музей без очереди, билеты на камерные концерты, знаковые спектакли и актуальные выставки.",
         footerText: (
             <>
-                Специальное предложение &laquo;Графская осень&raquo;
-                от&nbsp;ACADEMIA Особняк Шувалова&nbsp;&mdash; это готовая
-                программа аристократического отдыха в&nbsp;осеннем Петербурге,
-                в&nbsp;которой уже продуманы все детали.
+                Соберите особую коллекцию впечатлений вашего аристократического
+                отдыха!
             </>
         ),
         alts: {
@@ -159,7 +157,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     },
     en: {
         title: "Count's Autumn",
-        additionalTitle: "An aristocratic getaway in St. Petersburg",
+        additionalTitle:
+            "An atmospheric getaway scripted around aristocratic traditions at Count Shuvalov's mansion",
         bookLabel: "Book now",
         bullets: [
             "Atmospheric historic mansion",
@@ -167,8 +166,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "The best immersion into the 19th-century era",
         ],
         cityTitle: "Count's Autumn —",
-        cityDescription:
-            "an atmospheric getaway scripted around aristocratic traditions at Count Shuvalov's mansion.",
+        cityDescription: "a ready-made autumn getaway in St. Petersburg.",
         days: [
             {
                 title: "Day 1:",
@@ -239,10 +237,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "The ACADEMIA concierge service will help arrange an additional cultural programme: exclusive tours — for example, to the Imperial Porcelain Factory with a master class — skip-the-line access to the Hermitage or the Russian Museum, and tickets to chamber concerts, landmark performances and current exhibitions.",
         footerText: (
             <>
-                The &laquo;Count's Autumn&raquo; special offer from ACADEMIA
-                Mansion Shuvaloff&nbsp;&mdash; a ready-made programme of
-                aristocratic leisure in autumn St. Petersburg, with every detail
-                already thought through.
+                Collect a special collection of impressions from your
+                aristocratic getaway!
             </>
         ),
         alts: {
@@ -282,12 +278,14 @@ const cultureImages = [
 const seo = {
     ru: {
         name: "Графская осень",
-        description: "Аристократический отдых в Петербурге",
+        description:
+            "Атмосферный сценарий отдыха с аристократическими традициями в особняке графа Шувалова",
         crumbs: ["Главная"],
     },
     en: {
         name: "Count's Autumn",
-        description: "An aristocratic getaway in St. Petersburg",
+        description:
+            "An atmospheric getaway scripted around aristocratic traditions at Count Shuvalov's mansion",
         crumbs: ["Home"],
     },
 } as const;
@@ -325,6 +323,8 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                 image={{
                     src: "https://academia.spb.ru/wp-content/uploads/2026/09/горизонталь-1.png",
                     alt: copy.alts.mainHero,
+                    // На мобиле кадр по центру срезает людей.
+                    className: "max-xl:object-[17%_center]",
                 }}
                 button={{
                     label: copy.bookLabel,
@@ -357,7 +357,7 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                         {copy.cityTitle}
                     </p>
                     <p>{copy.cityDescription}</p>
-                    <div className="relative h-80 overflow-hidden rounded xl:h-full">
+                    <div className="relative h-56 overflow-hidden rounded xl:h-full">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/09/hf_20260911_213818_4369aade-1332-4494-8682-4d37758e336e-2.png"
                             alt={copy.alts.city}
@@ -457,6 +457,7 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                     {copy.specialMeetingDescription}
                 </p>
                 <ImageGrid
+                    singleOnMobile
                     images={[
                         {
                             src: "https://academia.spb.ru/wp-content/uploads/2026/09/hf_20260911_225619_e33d1118-cf9d-4251-8d06-e1e37aff8962-1.png",
@@ -481,13 +482,14 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                         {copy.spaDescription}
                     </p>
                     <ImageGrid
+                        singleOnMobile
                         images={[
                             {
                                 src: "https://academia.spb.ru/wp-content/uploads/2026/09/hf_20260912_003336_9c331aba-3cdf-4240-bfba-593db4ad381b-1.png",
                                 alt: copy.alts.spa,
                             },
                             {
-                                src: "https://academia.spb.ru/wp-content/uploads/2026/09/не-ну-вдруг.png",
+                                src: "https://academia.spb.ru/wp-content/uploads/2026/09/ChatGPT-Image-15-сент.-2026-г.-15_51_54.jpg",
                                 alt: copy.alts.spa,
                             },
                         ]}
@@ -510,14 +512,6 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                             className="object-cover"
                         />
                     </div>
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/04/Rectangle-209.png"
-                        alt={copy.alts.breakfast}
-                        width={210}
-                        height={200}
-                        loading="lazy"
-                        className="object-cover hidden xl:block xl:absolute xl:top-1 xl:-right-24 rounded"
-                    />
                 </div>
                 <div className="flex flex-col gap-4 w-full">
                     <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">
@@ -547,6 +541,7 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                     </StaggerItem>
                     <StaggerItem>
                         <ImageGrid
+                            singleOnMobile
                             images={[
                                 {
                                     src: "https://academia.spb.ru/wp-content/uploads/2026/09/hf_20260911_232627_6aaffcd6-6661-45bd-b7c9-d21a1cce0050-scaled.png",
@@ -580,25 +575,15 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                     <div className="xl:hidden space-y-4">
                         <p>{copy.cultureConcierge}</p>
 
-                        <div className="grid grid-cols-2 gap-2">
-                            {cultureImages.map((src, i) => (
-                                <div
-                                    className="relative aspect-square overflow-hidden rounded"
-                                    key={src}
-                                >
-                                    <Image
-                                        src={src}
-                                        alt={
-                                            i === 0
-                                                ? copy.alts.culture1
-                                                : copy.alts.culture2
-                                        }
-                                        fill
-                                        className={`object-cover ${i === 0 ? "object-right" : ""}`}
-                                        sizes="50vw"
-                                    />
-                                </div>
-                            ))}
+                        {/* Только первое фото: пара квадратов на мобиле мельчит. */}
+                        <div className="relative aspect-[16/9] overflow-hidden rounded">
+                            <Image
+                                src={cultureImages[0]}
+                                alt={copy.alts.culture1}
+                                fill
+                                className="object-cover object-right"
+                                sizes="100vw"
+                            />
                         </div>
                     </div>
 
@@ -641,7 +626,9 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                 className="xl:text-center m-6 flex flex-col gap-4"
             >
                 <StaggerItem>
-                    <p className="xl:max-w-5xl xl:mx-auto">{copy.footerText}</p>
+                    <p className="font-alistair text-2xl/7 xl:text-4xl/10 xl:max-w-5xl xl:mx-auto">
+                        {copy.footerText}
+                    </p>
                 </StaggerItem>
                 <StaggerItem className="flex flex-col gap-3 my-4 xl:flex-row xl:justify-center">
                     <Button

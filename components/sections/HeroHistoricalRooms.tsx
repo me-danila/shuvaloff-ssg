@@ -12,7 +12,7 @@ type HeroHistoricalRoomsProps = {
     title: React.ReactNode;
     additionalTitle?: React.ReactNode;
     subtitle?: React.ReactNode;
-    image: { src: string; alt: string };
+    image: { src: string; alt: string; className?: string };
     button?: { label: string; href: string };
     withBookingForm?: boolean;
 };
@@ -38,7 +38,7 @@ export default function HeroHistoricalRooms({
             </div>
 
             {/* Фото с подписью */}
-            <div className="relative mx-6 xl:mx-0 rounded-md overflow-hidden aspect-3/4 xl:aspect-14/6 flex items-end p-6 justify-center">
+            <div className="relative mx-6 xl:mx-0 rounded-md overflow-hidden aspect-3/4 xl:aspect-14/6 flex items-end p-6 pb-14 xl:pb-16 justify-center">
                 <FadeIn
                     duration={0.9}
                     className="absolute inset-0 h-full w-full"
@@ -50,7 +50,7 @@ export default function HeroHistoricalRooms({
                             fill
                             sizes="100vw"
                             loading="eager"
-                            className="object-cover"
+                            className={`object-cover ${image.className ?? ""}`}
                         />
                     </Parallax>
                 </FadeIn>
