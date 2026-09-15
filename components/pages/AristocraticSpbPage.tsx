@@ -405,7 +405,7 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
 
             <section className="mx-6 flex flex-col gap-4 xl:w-full xl:max-w-7xl xl:mx-auto xl:flex-row xl:gap-8 my-4 xl:my-6">
                 <div className="flex flex-col gap-4 xl:w-full">
-                    <p className="font-history uppercase text-3xl/2 xl:text-4xl/4">
+                    <p className="font-history font-semibold uppercase text-3xl/2 xl:text-4xl/4">
                         {copy.cityTitle}
                     </p>
                     <p>{copy.cityDescription}</p>
