@@ -59,10 +59,12 @@ export default function Footer({ locale }: { locale: Locale }) {
             : "Follow us on social media to be the first to know about announcements, news, and special offers.";
     const copyrightText =
         locale === "ru"
-            ? "© 2026 ООО «ОТЕЛЬ АКАДЕМИЯ ОСОБНЯК ШУВАЛОВА», «ACADEMILAND»"
-            : "© 2026 ACADEMIA Mansion Shuvaloff LLC, ACADEMILAND";
+            ? "© 2026 «ACADEMILAND» ® г. Санкт-Петербург"
+            : "© 2026 ACADEMILAND ®, Saint Petersburg";
     const cityText =
-        locale === "ru" ? "®, г. Санкт-Петербург" : "®, Saint Petersburg";
+        locale === "ru"
+            ? "ООО «Отель Академиа Особняк Шувалова» ИНН 7840109542"
+            : "ACADEMIA Mansion SHUVALOFF LLC INN 7840109542";
 
     const newsletterTitle =
         locale === "ru" ? "Ежемесячная рассылка" : "Monthly newsletter";
@@ -260,7 +262,14 @@ export default function Footer({ locale }: { locale: Locale }) {
                                 y={0}
                                 className="text-xs leading-snug text-white/50"
                             >
-                                {copyrightText} {cityText}
+                                {copyrightText}
+                            </StaggerItem>
+
+                            <StaggerItem
+                                y={0}
+                                className="text-xs leading-snug text-white/50"
+                            >
+                                {cityText}
                             </StaggerItem>
 
                             <StaggerItem
