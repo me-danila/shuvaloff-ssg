@@ -47,7 +47,6 @@ type PageCopy = {
     alts: {
         mainHero: string;
         city: string;
-        coatOfArms: string;
         entrance: string;
         lounge: string;
         spa: string;
@@ -62,7 +61,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     ru: {
         title: "Графская осень",
         additionalTitle:
-            "Атмосферный сценарий отдыха с аристократическими традициями в особняке графа Шувалова",
+            "Атмосферный сценарий отдыха с аристократическими традициями",
         bookLabel: "Забронировать",
         bullets: [
             "Атмосферный исторический особняк",
@@ -145,7 +144,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
         alts: {
             mainHero: "Графская осень",
             city: "Графская осень в особняке Шувалова",
-            coatOfArms: "Герб ACADEMIA Особняк Шувалова",
             entrance: "Вход",
             lounge: "Лаундж",
             spa: "Ритуал парения «Графские традиции»",
@@ -158,7 +156,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     en: {
         title: "Count's Autumn",
         additionalTitle:
-            "An atmospheric getaway scripted around aristocratic traditions at Count Shuvalov's mansion",
+            "An atmospheric getaway scripted around aristocratic traditions",
         bookLabel: "Book now",
         bullets: [
             "Atmospheric historic mansion",
@@ -244,7 +242,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
         alts: {
             mainHero: "Count's Autumn",
             city: "Count's Autumn at the Shuvalov Mansion",
-            coatOfArms: "ACADEMIA Mansion Shuvaloff Coat of Arms",
             entrance: "Entrance",
             lounge: "Lounge",
             spa: "The «Count's Traditions» steam ritual",
@@ -279,13 +276,13 @@ const seo = {
     ru: {
         name: "Графская осень",
         description:
-            "Атмосферный сценарий отдыха с аристократическими традициями в особняке графа Шувалова",
+            "Атмосферный сценарий отдыха с аристократическими традициями",
         crumbs: ["Главная"],
     },
     en: {
         name: "Count's Autumn",
         description:
-            "An atmospheric getaway scripted around aristocratic traditions at Count Shuvalov's mansion",
+            "An atmospheric getaway scripted around aristocratic traditions",
         crumbs: ["Home"],
     },
 } as const;
@@ -386,16 +383,7 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                 </StaggerContainer>
             </section>
 
-            <section className="mx-6 mt-6 flex flex-col gap-8 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto">
-                <FadeUp className="relative overflow-hidden rounded max-xl:h-60 w-full xl:min-h-[200px]">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/04/герб-кириллица-наполовину-копия-1.png"
-                        alt={copy.alts.coatOfArms}
-                        fill
-                        loading="lazy"
-                        className="object-contain xl:object-right"
-                    />
-                </FadeUp>
+            <section className="mx-6 mt-6 xl:w-full xl:max-w-7xl xl:mx-auto">
                 <FadeUp className="flex flex-col gap-2">
                     <h2>{copy.visitTitle}</h2>
                     <p>{copy.visitDescription}</p>
