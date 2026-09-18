@@ -22,7 +22,8 @@ type PageCopy = {
     cityDescription: string;
     days: {
         title: string;
-        content: React.ReactNode;
+        heading: string;
+        items: React.ReactNode[];
     }[];
     day1Title1: string;
     day2Title1: string;
@@ -73,31 +74,30 @@ const copyByLocale: Record<Locale, PageCopy> = {
         days: [
             {
                 title: "1 день:",
-                content: (
+                heading: "Отдых по-графски",
+                items: [
                     <>
-                        <strong>Отдых по-графски</strong>
-                        <span className="block h-1 xl:h-2"></span>• Трансфер
-                        с&nbsp;вокзала&nbsp;/ из&nbsp;аэропорта в&nbsp;особняк
-                        <br />• Личное приветствие графской семьей
-                        и&nbsp;заселение
-                        <br />• Трансфер в&nbsp;&laquo;Мастерскую пара&raquo;
-                        <br />• Ритуал парения &laquo;Графские традиции&raquo;
-                        <br />• Трансфер в&nbsp;особняк
-                        <br />• Сет &laquo;Буржуа&raquo; в&nbsp;ресторане
-                    </>
-                ),
+                        Трансфер с&nbsp;вокзала&nbsp;/ из&nbsp;аэропорта
+                        в&nbsp;особняк
+                    </>,
+                    <>Личное приветствие графской семьей и&nbsp;заселение</>,
+                    <>Трансфер в&nbsp;&laquo;Мастерскую пара&raquo;</>,
+                    <>Ритуал парения &laquo;Графские традиции&raquo;</>,
+                    <>Трансфер в&nbsp;особняк</>,
+                    <>Сет &laquo;Буржуа&raquo; в&nbsp;ресторане</>,
+                ],
             },
             {
                 title: "2 день:",
-                content: (
+                heading: "Графский эпилог",
+                items: [
                     <>
-                        <strong>Графский эпилог</strong>
-                        <span className="block h-1 xl:h-2"></span>• Легендарный
-                        &laquo;Графский завтрак&raquo;&nbsp;&mdash; лучший
-                        завтрак России по&nbsp;версии Where to&nbsp;eat'26
-                        <br />• Трансфер в&nbsp;аэропорт&nbsp;/ на&nbsp;вокзал
-                    </>
-                ),
+                        Легендарный &laquo;Графский завтрак&raquo;&nbsp;&mdash;
+                        лучший завтрак России по&nbsp;версии Where
+                        to&nbsp;eat'26
+                    </>,
+                    <>Трансфер в&nbsp;аэропорт&nbsp;/ на&nbsp;вокзал</>,
+                ],
             },
         ],
         day1Title1: "1 день. Дневное время",
@@ -168,34 +168,27 @@ const copyByLocale: Record<Locale, PageCopy> = {
         days: [
             {
                 title: "Day 1:",
-                content: (
-                    <>
-                        <strong>A Count's-Style Getaway</strong>
-                        <span className="block h-1 xl:h-2"></span>• Transfer
-                        from the train station / airport to the mansion
-                        <br />• Personal welcome by the count's family and
-                        check-in
-                        <br />• Transfer to the &laquo;Steam Workshop&raquo;
-                        <br />• The &laquo;Count's Traditions&raquo; steam
-                        ritual
-                        <br />• Transfer back to the mansion
-                        <br />• The &laquo;Bourgeois&raquo; set menu at the
-                        restaurant
-                    </>
-                ),
+                heading: "A Count's-Style Getaway",
+                items: [
+                    "Transfer from the train station / airport to the mansion",
+                    "Personal welcome by the count's family and check-in",
+                    <>Transfer to the &laquo;Steam Workshop&raquo;</>,
+                    <>The &laquo;Count's Traditions&raquo; steam ritual</>,
+                    "Transfer back to the mansion",
+                    <>The &laquo;Bourgeois&raquo; set menu at the restaurant</>,
+                ],
             },
             {
                 title: "Day 2:",
-                content: (
+                heading: "The Count's Epilogue",
+                items: [
                     <>
-                        <strong>The Count's Epilogue</strong>
-                        <span className="block h-1 xl:h-2"></span>• The
-                        legendary &laquo;Count's Breakfast&raquo;&nbsp;&mdash;
-                        the best breakfast in Russia according to Where
-                        to&nbsp;eat'26
-                        <br />• Transfer to the airport / train station
-                    </>
-                ),
+                        The legendary &laquo;Count's
+                        Breakfast&raquo;&nbsp;&mdash; the best breakfast in
+                        Russia according to Where to&nbsp;eat'26
+                    </>,
+                    "Transfer to the airport / train station",
+                ],
             },
         ],
         day1Title1: "Day 1. Daytime",
@@ -377,7 +370,23 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                             <p className="font-alistair text-2xl -mt-2 xl:text-3xl w-full max-w-[85px]">
                                 {day.title}
                             </p>
-                            <p>{day.content}</p>
+                            <div>
+                                <p>
+                                    <strong>{day.heading}</strong>
+                                </p>
+                                <ul className="mt-1 xl:mt-2">
+                                    {day.items.map((item, i) => (
+                                        <li
+                                            // biome-ignore lint/suspicious/noArrayIndexKey: статичный список, порядок не меняется
+                                            key={i}
+                                            className="flex gap-[0.4em]"
+                                        >
+                                            <span aria-hidden="true">•</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </StaggerItem>
                     ))}
                 </StaggerContainer>

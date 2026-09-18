@@ -38,7 +38,7 @@ export default function HeroHistoricalRooms({
             </div>
 
             {/* Фото с подписью */}
-            <div className="relative mx-6 xl:mx-0 rounded-md overflow-hidden aspect-3/4 xl:aspect-14/6 flex items-end p-6 pb-24 xl:pb-28 justify-center">
+            <div className="relative mx-6 xl:mx-0 rounded-md overflow-hidden aspect-3/4 xl:aspect-14/6 flex items-end p-6 pb-14 xl:pb-28 justify-center">
                 <FadeIn
                     duration={0.9}
                     className="absolute inset-0 h-full w-full"
