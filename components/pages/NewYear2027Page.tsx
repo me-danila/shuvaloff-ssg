@@ -511,6 +511,7 @@ export default function NewYear2027Page({ locale }: { locale: Locale }) {
             <HeroFullscreen
                 title={copy.title}
                 description={copy.subtitle}
+                wideDescription
                 caption={<time dateTime={EVENT_START}>{copy.date}</time>}
                 image={{ src: NEW_YEAR_2027_HERO_IMAGE, alt: copy.heroAlt }}
                 gradient

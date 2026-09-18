@@ -13,6 +13,8 @@ type HeroFullscreenProps = {
     actions?: React.ReactNode;
     /** Затемнение к низу кадра — для пёстрых фото, где белый текст теряется. */
     gradient?: boolean;
+    /** Широкий блок описания на десктопе — для длинного подзаголовка. */
+    wideDescription?: boolean;
 };
 
 /**
@@ -27,6 +29,7 @@ export default function HeroFullscreen({
     image,
     actions,
     gradient = false,
+    wideDescription = false,
 }: HeroFullscreenProps) {
     return (
         <section>
@@ -66,7 +69,9 @@ export default function HeroFullscreen({
                             </h1>
                         </StaggerItem>
                         {description && (
-                            <StaggerItem className="relative flex-1 min-w-0 xl:max-w-xl xl:mx-auto">
+                            <StaggerItem
+                                className={`relative flex-1 min-w-0 xl:mx-auto ${wideDescription ? "xl:max-w-4xl" : "xl:max-w-xl"}`}
+                            >
                                 <p className="text-base">{description}</p>
                             </StaggerItem>
                         )}
