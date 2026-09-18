@@ -23,7 +23,7 @@ type PageCopy = {
     days: {
         title: string;
         heading: string;
-        items: React.ReactNode[];
+        items: { id: string; text: React.ReactNode }[];
     }[];
     day1Title1: string;
     day2Title1: string;
@@ -76,27 +76,63 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "1 день:",
                 heading: "Отдых по-графски",
                 items: [
-                    <>
-                        Трансфер с&nbsp;вокзала&nbsp;/ из&nbsp;аэропорта
-                        в&nbsp;особняк
-                    </>,
-                    <>Личное приветствие графской семьей и&nbsp;заселение</>,
-                    <>Трансфер в&nbsp;&laquo;Мастерскую пара&raquo;</>,
-                    <>Ритуал парения &laquo;Графские традиции&raquo;</>,
-                    <>Трансфер в&nbsp;особняк</>,
-                    <>Сет &laquo;Буржуа&raquo; в&nbsp;ресторане</>,
+                    {
+                        id: "arrival",
+                        text: (
+                            <>
+                                Трансфер с&nbsp;вокзала&nbsp;/ из&nbsp;аэропорта
+                                в&nbsp;особняк
+                            </>
+                        ),
+                    },
+                    {
+                        id: "welcome",
+                        text: (
+                            <>
+                                Личное приветствие графской семьей
+                                и&nbsp;заселение
+                            </>
+                        ),
+                    },
+                    {
+                        id: "to-spa",
+                        text: (
+                            <>Трансфер в&nbsp;&laquo;Мастерскую пара&raquo;</>
+                        ),
+                    },
+                    {
+                        id: "spa",
+                        text: (
+                            <>Ритуал парения &laquo;Графские традиции&raquo;</>
+                        ),
+                    },
+                    { id: "to-mansion", text: <>Трансфер в&nbsp;особняк</> },
+                    {
+                        id: "dinner",
+                        text: <>Сет &laquo;Буржуа&raquo; в&nbsp;ресторане</>,
+                    },
                 ],
             },
             {
                 title: "2 день:",
                 heading: "Графский эпилог",
                 items: [
-                    <>
-                        Легендарный &laquo;Графский завтрак&raquo;&nbsp;&mdash;
-                        лучший завтрак России по&nbsp;версии Where
-                        to&nbsp;eat'26
-                    </>,
-                    <>Трансфер в&nbsp;аэропорт&nbsp;/ на&nbsp;вокзал</>,
+                    {
+                        id: "breakfast",
+                        text: (
+                            <>
+                                Легендарный &laquo;Графский
+                                завтрак&raquo;&nbsp;&mdash; лучший завтрак
+                                России по&nbsp;версии Where to&nbsp;eat'26
+                            </>
+                        ),
+                    },
+                    {
+                        id: "departure",
+                        text: (
+                            <>Трансфер в&nbsp;аэропорт&nbsp;/ на&nbsp;вокзал</>
+                        ),
+                    },
                 ],
             },
         ],
@@ -170,24 +206,57 @@ const copyByLocale: Record<Locale, PageCopy> = {
                 title: "Day 1:",
                 heading: "A Count's-Style Getaway",
                 items: [
-                    "Transfer from the train station / airport to the mansion",
-                    "Personal welcome by the count's family and check-in",
-                    <>Transfer to the &laquo;Steam Workshop&raquo;</>,
-                    <>The &laquo;Count's Traditions&raquo; steam ritual</>,
-                    "Transfer back to the mansion",
-                    <>The &laquo;Bourgeois&raquo; set menu at the restaurant</>,
+                    {
+                        id: "arrival",
+                        text: "Transfer from the train station / airport to the mansion",
+                    },
+                    {
+                        id: "welcome",
+                        text: "Personal welcome by the count's family and check-in",
+                    },
+                    {
+                        id: "to-spa",
+                        text: <>Transfer to the &laquo;Steam Workshop&raquo;</>,
+                    },
+                    {
+                        id: "spa",
+                        text: (
+                            <>
+                                The &laquo;Count's Traditions&raquo; steam
+                                ritual
+                            </>
+                        ),
+                    },
+                    { id: "to-mansion", text: "Transfer back to the mansion" },
+                    {
+                        id: "dinner",
+                        text: (
+                            <>
+                                The &laquo;Bourgeois&raquo; set menu at the
+                                restaurant
+                            </>
+                        ),
+                    },
                 ],
             },
             {
                 title: "Day 2:",
                 heading: "The Count's Epilogue",
                 items: [
-                    <>
-                        The legendary &laquo;Count's
-                        Breakfast&raquo;&nbsp;&mdash; the best breakfast in
-                        Russia according to Where to&nbsp;eat'26
-                    </>,
-                    "Transfer to the airport / train station",
+                    {
+                        id: "breakfast",
+                        text: (
+                            <>
+                                The legendary &laquo;Count's
+                                Breakfast&raquo;&nbsp;&mdash; the best breakfast
+                                in Russia according to Where to&nbsp;eat'26
+                            </>
+                        ),
+                    },
+                    {
+                        id: "departure",
+                        text: "Transfer to the airport / train station",
+                    },
                 ],
             },
         ],
@@ -375,14 +444,13 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                                     <strong>{day.heading}</strong>
                                 </p>
                                 <ul className="mt-1 xl:mt-2">
-                                    {day.items.map((item, i) => (
+                                    {day.items.map((item) => (
                                         <li
-                                            // biome-ignore lint/suspicious/noArrayIndexKey: статичный список, порядок не меняется
-                                            key={i}
+                                            key={item.id}
                                             className="flex gap-[0.4em]"
                                         >
                                             <span aria-hidden="true">•</span>
-                                            <span>{item}</span>
+                                            <span>{item.text}</span>
                                         </li>
                                     ))}
                                 </ul>
