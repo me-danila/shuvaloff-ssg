@@ -419,6 +419,20 @@ const mobileSubmenuVariants = {
     },
 };
 
+/**
+ * Страницы с полноэкранным hero: хедер закреплён поверх первого экрана
+ * и до прокрутки остаётся прозрачным.
+ */
+const FIXED_HEADER_PATHS = new Set([
+    "/",
+    //    "/wedding",
+    "/spasibo_wedding",
+    "/events",
+    "/photo-shoot",
+    "/new-year-2027",
+    "/services/aristocratic-breakfast",
+]);
+
 export default function Header({ locale }: { locale: Locale }) {
     const pathname = usePathname() || "/";
     const copy = copyByLocale[locale];
@@ -434,13 +448,7 @@ export default function Header({ locale }: { locale: Locale }) {
             window.location.href = `${localizeHref("/", locale)}#contacts`;
         }
     };
-    const isHeaderFixed =
-        normalizedPath === "/" ||
-        //        normalizedPath === "/wedding" ||
-        normalizedPath === "/spasibo_wedding" ||
-        normalizedPath === "/events" ||
-        normalizedPath === "/photo-shoot" ||
-        normalizedPath === "/services/aristocratic-breakfast";
+    const isHeaderFixed = FIXED_HEADER_PATHS.has(normalizedPath);
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -475,14 +483,7 @@ export default function Header({ locale }: { locale: Locale }) {
         setMenuOpen(false);
     };
 
-    const isLight =
-        !scrolled &&
-        normalizedPath !== "/" &&
-        //        normalizedPath !== "/wedding" &&
-        normalizedPath !== "/spasibo_wedding" &&
-        normalizedPath !== "/events" &&
-        normalizedPath !== "/photo-shoot" &&
-        normalizedPath !== "/services/aristocratic-breakfast";
+    const isLight = !scrolled && !isHeaderFixed;
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const activeSubmenuIndex = navItems.findIndex(
         (item) => item.label === activeSubmenu,

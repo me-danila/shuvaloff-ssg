@@ -86,6 +86,7 @@ ${servicesRu}
 - [Специальные предложения](${SITE_URL}/sales/): актуальные акции и спецпредложения
 - [Услуги](${SITE_URL}/services/all/): трансфер, водные прогулки, завтраки, СПА и другие услуги
 - [История особняка](${SITE_URL}/history/): история особняка Шувалова и рода Шуваловых
+- [Новый год 2027 в особняке](${SITE_URL}/new-year-2027/): «Графский Новый год» 31 декабря 2026, начало в 20:00 — театрализованная программа в духе светского салона XIX века, графская семья, праздничный ужин с живой музыкой
 - [Свадьба в особняке](${SITE_URL}/wedding/): проведение свадеб в исторических интерьерах
 - [Отзывы](${SITE_URL}/reviews/): отзывы гостей отеля
 - [Блог](${SITE_URL}/blog/): статьи об аристократическом Петербурге, истории особняка и гиды по городу
@@ -132,6 +133,7 @@ Today, the carefully restored building with preserved heritage elements has ente
 - [Special offers](${SITE_URL}/en/sales/): current promotions and special offers
 - [Services](${SITE_URL}/en/services/all/): transfers, boat tours, breakfasts, spa, and more
 - [History](${SITE_URL}/en/history/): the history of Shuvalov Mansion and the Shuvalov family
+- [New Year 2027 at the mansion](${SITE_URL}/en/new-year-2027/): Count's New Year on 31 December 2026 from 8:00 PM — a theatrical 19th-century salon programme, the Count's family, a festive dinner with live music
 - [Weddings](${SITE_URL}/en/wedding/): weddings in the historic interiors
 - [Reviews](${SITE_URL}/en/reviews/): guest reviews
 
