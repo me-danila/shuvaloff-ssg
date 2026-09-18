@@ -50,6 +50,14 @@ export const AllSales: Record<Locale, Sale[]> = {
             bookingUrl: "/booking?be-offer=588673",
         },
         {
+            title: "Графский Новый год в особняке",
+            subtitle:
+                "Встречайте Новый год 31 декабря в гостях у графа Шувалова",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/00204123-cb56-4391-9.png",
+            bookingUrl: "/booking/?&be-offer=973214%2C973208",
+            detailsUrl: "/new-year-2027/",
+        },
+        {
             title: "День рождения",
             subtitle:
                 "Специальные привилегии для именинников и скидка 15% от 2 ночей",
@@ -155,6 +163,14 @@ export const AllSales: Record<Locale, Sale[]> = {
             subtitle: "20% off when booking 5 nights or more",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/IMG_1062.avif",
             bookingUrl: "/booking?be-offer=588673",
+        },
+        {
+            title: "Count's New Year at the Mansion",
+            subtitle:
+                "Celebrate New Year's Eve on 31 December as guests of Count Shuvalov",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/00204123-cb56-4391-9.png",
+            bookingUrl: "/booking/?&be-offer=973214%2C973208",
+            detailsUrl: "/new-year-2027/",
         },
         {
             title: "Birthday Offer",
