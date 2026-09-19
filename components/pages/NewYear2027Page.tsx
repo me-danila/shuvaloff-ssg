@@ -112,9 +112,13 @@ const copyByLocale: Record<Locale, PageCopy> = {
         subtitle: (
             <>
                 Встречайте Новый год в&nbsp;Петербурге в&nbsp;гостях
-                у&nbsp;графа Шувалова. Театрализованная программа
-                с&nbsp;атмосферой светского салона XIX&nbsp;века, графская семья
-                и&nbsp;праздничный ужин с&nbsp;живой музыкой.
+                у&nbsp;графа Шувалова.
+                <span className="max-xl:hidden">
+                    {" "}
+                    Театрализованная программа с&nbsp;атмосферой светского
+                    салона XIX&nbsp;века, графская семья и&nbsp;праздничный ужин
+                    с&nbsp;живой музыкой.
+                </span>
             </>
         ),
         date: <>31&nbsp;декабря 2026&nbsp;| начало в&nbsp;20:00</>,
@@ -284,9 +288,14 @@ const copyByLocale: Record<Locale, PageCopy> = {
         subtitle: (
             <>
                 Celebrate New Year in&nbsp;Saint Petersburg as&nbsp;guests
-                of&nbsp;Count Shuvalov. A&nbsp;theatrical programme with the
-                atmosphere of&nbsp;a&nbsp;19th-century high-society salon, the
-                Count&rsquo;s family and a&nbsp;festive dinner with live music.
+                of&nbsp;Count Shuvalov.
+                <span className="max-xl:hidden">
+                    {" "}
+                    A&nbsp;theatrical programme with the atmosphere
+                    of&nbsp;a&nbsp;19th-century high-society salon, the
+                    Count&rsquo;s family and a&nbsp;festive dinner with live
+                    music.
+                </span>
             </>
         ),
         date: <>31&nbsp;December 2026&nbsp;| starts at&nbsp;8:00&nbsp;PM</>,
@@ -513,7 +522,12 @@ export default function NewYear2027Page({ locale }: { locale: Locale }) {
                 description={copy.subtitle}
                 wideDescription
                 caption={<time dateTime={EVENT_START}>{copy.date}</time>}
-                image={{ src: NEW_YEAR_2027_HERO_IMAGE, alt: copy.heroAlt }}
+                compactMobile
+                image={{
+                    src: NEW_YEAR_2027_HERO_IMAGE,
+                    alt: copy.heroAlt,
+                    className: "max-xl:object-[28%_bottom]",
+                }}
                 gradient
                 actions={
                     <div className="flex flex-col gap-4 mt-2 md:flex-row md:justify-center">
@@ -542,7 +556,7 @@ export default function NewYear2027Page({ locale }: { locale: Locale }) {
             <div className="bg-[#efe8e0] pt-8 pb-12 xl:pt-0 xl:pb-20">
                 <FadeUp className="relative z-10 mx-6 bg-[#f7f2ea] xl:mx-auto xl:-mt-14 xl:w-full xl:max-w-6xl xl:p-5 xl:shadow-[0_12px_40px_rgba(55,42,36,0.08)]">
                     <section className="border border-[#ccad6b] px-5 py-8 text-center text-brand-brown xl:px-12 xl:py-10">
-                        <h2 className="font-normal text-xl xl:text-[32px]">
+                        <h2 className="font-bold text-xl xl:text-[32px]">
                             {copy.introTitle}
                         </h2>
                         <p className="mt-4 xl:mt-6 xl:mx-auto xl:max-w-2xl">

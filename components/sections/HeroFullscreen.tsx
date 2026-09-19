@@ -15,6 +15,8 @@ type HeroFullscreenProps = {
     gradient?: boolean;
     /** Широкий блок описания на десктопе — для длинного подзаголовка. */
     wideDescription?: boolean;
+    /** На мобиле кадр по высоте min-h-[32rem] вместо вытянутого 8:15. */
+    compactMobile?: boolean;
 };
 
 /**
@@ -30,10 +32,13 @@ export default function HeroFullscreen({
     actions,
     gradient = false,
     wideDescription = false,
+    compactMobile = false,
 }: HeroFullscreenProps) {
     return (
         <section>
-            <div className="relative overflow-hidden aspect-8/15 xl:aspect-[unset] xl:min-h-screen">
+            <div
+                className={`relative overflow-hidden xl:aspect-[unset] xl:min-h-screen ${compactMobile ? "min-h-[32rem]" : "aspect-8/15"}`}
+            >
                 <FadeIn
                     duration={0.9}
                     className="absolute inset-0 h-full w-full"
