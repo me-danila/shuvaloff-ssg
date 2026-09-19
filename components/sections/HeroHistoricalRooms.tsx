@@ -4,6 +4,7 @@ import {
     BookingFormMobile,
 } from "@/components/sections/BookingFormResponsive";
 import Button from "@/components/ui/Button";
+import ButtonNotice from "@/components/ui/ButtonNotice";
 import { FadeIn } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
@@ -15,6 +16,8 @@ type HeroHistoricalRoomsProps = {
     image: { src: string; alt: string; className?: string };
     button?: { label: string; href: string };
     withBookingForm?: boolean;
+    /** Плашка в виде кнопки на месте формы бронирования (никуда не ведёт). */
+    notice?: React.ReactNode;
 };
 
 export default function HeroHistoricalRooms({
@@ -24,6 +27,7 @@ export default function HeroHistoricalRooms({
     image,
     button,
     withBookingForm = false,
+    notice,
 }: HeroHistoricalRoomsProps) {
     return (
         <section>
@@ -78,12 +82,24 @@ export default function HeroHistoricalRooms({
                     </Button>
                 )}
 
+                {notice && (
+                    <ButtonNotice className="absolute inset-x-6 bottom-8 z-10 max-xl:hidden">
+                        {notice}
+                    </ButtonNotice>
+                )}
+
                 {withBookingForm && (
                     <div className="absolute inset-x-6 bottom-8 z-10 hidden xl:block">
                         <BookingFormDesktop />
                     </div>
                 )}
             </div>
+
+            {notice && (
+                <ButtonNotice className="mx-6 mt-4 xl:hidden">
+                    {notice}
+                </ButtonNotice>
+            )}
 
             {withBookingForm && (
                 <div className="xl:hidden">

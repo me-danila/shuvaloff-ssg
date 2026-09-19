@@ -6,6 +6,7 @@ import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
+import ButtonNotice from "@/components/ui/ButtonNotice";
 import Divider from "@/components/ui/Divider";
 import OffersGrid, {
     type SpecialOfferItem,
@@ -166,6 +167,7 @@ const AMENITY_ICONS = [
 type PageCopy = {
     amenities: { label: string }[];
     title: string;
+    season: React.ReactNode;
     bookLabel: string;
     orderLabel: string;
     compositionLabel: string;
@@ -248,6 +250,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
             { label: "Санузел" },
         ],
         title: "Водные прогулки и экскурсии",
+        season: (
+            <>
+                Период водной навигации ACADEMIA: май&nbsp;— сентябрь
+                2027&nbsp;г.
+            </>
+        ),
         bookLabel: "Забронировать",
         orderLabel: "Заказать",
         compositionLabel: "Состав",
@@ -462,6 +470,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             { label: "Restroom" },
         ],
         title: "Boat Tours and Excursions",
+        season: <>ACADEMIA&rsquo;s sailing season: May&ndash;September 2027</>,
         bookLabel: "Book Now",
         orderLabel: "Order",
         compositionLabel: "Composition",
@@ -764,11 +773,11 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
 
             <HeroHistoricalRooms
                 title={copy.title}
+                notice={copy.season}
                 image={{
                     src: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7062-%D1%80%D0%B5%D0%B4-1.avif",
                     alt: copy.title,
                 }}
-                withBookingForm
             />
 
             <FadeUp
@@ -1020,6 +1029,10 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                     </div>
                 </div>
             </section>
+
+            <ButtonNotice className="mx-6 my-4 xl:my-8">
+                {copy.season}
+            </ButtonNotice>
 
             <OffersGrid
                 offers={serviceOffers}
