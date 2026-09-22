@@ -22,18 +22,34 @@ export type Service = {
 export const AllServices: Record<Locale, Service[]> = {
     ru: [
         {
-            title: "Водные прогулки",
+            title: "Завтрак от шефа",
             subtitle:
-                "Яхты и катеры для прогулок по рекам и каналам Санкт-Петербурга",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
-            slug: "boat-tours",
-        },
-        {
-            title: "ACADEMIA Консьерж‑сервис",
-            subtitle:
-                "Наша консьерж служба освободит Вас не только от рутинных дел, но и погрузит в эпоху историзма, что позволит Вам почувствовать себя настоящим графом и княгиней!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/concierge.png",
-            slug: "concierge",
+                "Завтрак в Бар-ресторан ACADEMIA Шувалова — это не просто первый прием пищи, а часть изысканного и вкусного ритуала.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
+            slug: "breakfast",
+            fullDescription: (
+                <>
+                    Специально для гостей отеля бренд-шеф Илья Харченко создал
+                    разнообразное меню завтраков. В&nbsp;нем есть все самые
+                    любимые и&nbsp;беспроигрышные позиции: сырники
+                    с&nbsp;клубничным соусом, овсянка с&nbsp;яблочным конфи или
+                    скрембл с&nbsp;трюфелем и&nbsp;креветками&nbsp;&mdash; всё
+                    приготовлено с&nbsp;любовью и&nbsp;вниманием.
+                    <br />
+                    Если у&nbsp;вас будут вопросы или потребуется помощь
+                    с&nbsp;заказом&nbsp;&mdash; мы&nbsp;на&nbsp;связи
+                    и&nbsp;всегда рады помочь.
+                </>
+            ),
+            links: [
+                {
+                    label: "Меню завтраков",
+                    href: "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D0%BE%D1%82-%D1%88%D0%B5%D1%84%D0%B0.pdf",
+                },
+            ],
+            price: "1 800 ₽",
+            comment:
+                "Время подачи завтраков в бутик-ресторане: с 8:00 до 12:00.",
         },
         {
             title: "Проживание с животными",
@@ -71,41 +87,32 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "transfer",
         },
         {
-            title: "Завтрак от шефа",
-            subtitle:
-                "Завтрак в Бар-ресторан ACADEMIA Шувалова — это не просто первый прием пищи, а часть изысканного и вкусного ритуала.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
-            slug: "breakfast",
-            fullDescription: (
-                <>
-                    Специально для гостей отеля бренд-шеф Илья Харченко создал
-                    разнообразное меню завтраков. В&nbsp;нем есть все самые
-                    любимые и&nbsp;беспроигрышные позиции: сырники
-                    с&nbsp;клубничным соусом, овсянка с&nbsp;яблочным конфи или
-                    скрембл с&nbsp;трюфелем и&nbsp;креветками&nbsp;&mdash; всё
-                    приготовлено с&nbsp;любовью и&nbsp;вниманием.
-                    <br />
-                    Если у&nbsp;вас будут вопросы или потребуется помощь
-                    с&nbsp;заказом&nbsp;&mdash; мы&nbsp;на&nbsp;связи
-                    и&nbsp;всегда рады помочь.
-                </>
-            ),
-            links: [
-                {
-                    label: "Меню завтраков",
-                    href: "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D0%BE%D1%82-%D1%88%D0%B5%D1%84%D0%B0.pdf",
-                },
-            ],
-            price: "1 800 ₽",
-            comment:
-                "Время подачи завтраков в бутик-ресторане: с 8:00 до 12:00.",
-        },
-        {
             title: "Графский завтрак",
             subtitle:
                 "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
             slug: "aristocratic-breakfast",
+        },
+        {
+            title: "ACADEMIA СПА",
+            subtitle:
+                "Мы создали ACADEMIA СПА для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своём внутреннем комфорте",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
+            externalLink: "https://academia-spa.ru/",
+        },
+        {
+            title: "ACADEMIA Консьерж‑сервис",
+            subtitle:
+                "Наша консьерж служба освободит Вас не только от рутинных дел, но и погрузит в эпоху историзма, что позволит Вам почувствовать себя настоящим графом и княгиней!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/concierge.png",
+            slug: "concierge",
+        },
+        {
+            title: "Водные прогулки",
+            subtitle:
+                "Яхты и катеры для прогулок по рекам и каналам Санкт-Петербурга",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
+            slug: "boat-tours",
         },
         {
             title: "Графский завтрак в номер",
@@ -165,13 +172,6 @@ export const AllServices: Record<Locale, Service[]> = {
                     детей от&nbsp;0 до&nbsp;13 лет включительно
                 </>
             ),
-        },
-        {
-            title: "ACADEMIA СПА",
-            subtitle:
-                "Мы создали ACADEMIA СПА для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своём внутреннем комфорте",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
-            externalLink: "https://academia-spa.ru/",
         },
         //        {
         //            title: "Девайсы для красоты и здоровья",
@@ -635,18 +635,32 @@ export const AllServices: Record<Locale, Service[]> = {
     ],
     en: [
         {
-            title: "Boat tours",
+            title: "Chef's Breakfast",
             subtitle:
-                "Yachts and boats for trips along the rivers and canals of St. Petersburg",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
-            externalLink: "https://academia.spb.ru/en/boat-tours/",
-        },
-        {
-            title: "ACADEMIA Concierge Service",
-            subtitle:
-                "Our concierge service will free you not only from routine tasks but also immerse you in the era of historicism, allowing you to feel like a real count and princess!",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/concierge.png",
-            slug: "concierge",
+                "Breakfast at ACADEMIA Shuvaloff Bar-Restaurant is not just the first meal, but part of an exquisite and delicious ritual.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
+            slug: "breakfast",
+            fullDescription: (
+                <>
+                    Specially for hotel guests, brand chef Ilya Kharchenko has
+                    created a diverse breakfast menu. It features all the most
+                    beloved and winning options: syrniki with strawberry sauce,
+                    oatmeal with apple confit, or scramble with truffle and
+                    shrimp — everything is prepared with love and attention.
+                    <br />
+                    If you have any questions or need help with your order — we
+                    are here and always happy to help.
+                </>
+            ),
+            links: [
+                {
+                    label: "Breakfast Menu",
+                    href: "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D0%BE%D1%82-%D1%88%D0%B5%D1%84%D0%B0.pdf",
+                },
+            ],
+            price: "1 800 ₽",
+            comment:
+                "Breakfast serving hours in the boutique restaurant: 8:00 AM to 12:00 PM.",
         },
         {
             title: "Pet-Friendly Stay",
@@ -684,39 +698,32 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "transfer",
         },
         {
-            title: "Chef's Breakfast",
-            subtitle:
-                "Breakfast at ACADEMIA Shuvaloff Bar-Restaurant is not just the first meal, but part of an exquisite and delicious ritual.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
-            slug: "breakfast",
-            fullDescription: (
-                <>
-                    Specially for hotel guests, brand chef Ilya Kharchenko has
-                    created a diverse breakfast menu. It features all the most
-                    beloved and winning options: syrniki with strawberry sauce,
-                    oatmeal with apple confit, or scramble with truffle and
-                    shrimp — everything is prepared with love and attention.
-                    <br />
-                    If you have any questions or need help with your order — we
-                    are here and always happy to help.
-                </>
-            ),
-            links: [
-                {
-                    label: "Breakfast Menu",
-                    href: "https://static.academia.spb.ru/files/%D0%97%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D0%BA-%D0%BE%D1%82-%D1%88%D0%B5%D1%84%D0%B0.pdf",
-                },
-            ],
-            price: "1 800 ₽",
-            comment:
-                "Breakfast serving hours in the boutique restaurant: 8:00 AM to 12:00 PM.",
-        },
-        {
             title: "Aristocratic breakfast",
             subtitle:
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
             slug: "aristocratic-breakfast",
+        },
+        {
+            title: "ACADEMIA SPA",
+            subtitle:
+                "We created ACADEMIA SPA for those who value high service standards, self-care, and their inner comfort.",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
+            externalLink: "https://academia-spa.ru/",
+        },
+        {
+            title: "ACADEMIA Concierge Service",
+            subtitle:
+                "Our concierge service will free you not only from routine tasks but also immerse you in the era of historicism, allowing you to feel like a real count and princess!",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/concierge.png",
+            slug: "concierge",
+        },
+        {
+            title: "Boat tours",
+            subtitle:
+                "Yachts and boats for trips along the rivers and canals of St. Petersburg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/05/IMG_7080.avif",
+            externalLink: "https://academia.spb.ru/en/boat-tours/",
         },
         {
             title: "Aristocratic Breakfast to Room",
@@ -776,13 +783,6 @@ export const AllServices: Record<Locale, Service[]> = {
                     to 13 inclusive
                 </>
             ),
-        },
-        {
-            title: "ACADEMIA SPA",
-            subtitle:
-                "We created ACADEMIA SPA for those who value high service standards, self-care, and their inner comfort.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
-            externalLink: "https://academia-spa.ru/",
         },
         //        {
         //            title: "Beauty & Health Devices",
