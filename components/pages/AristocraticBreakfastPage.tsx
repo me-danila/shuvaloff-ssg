@@ -166,6 +166,11 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 Стоимость:
                 <br />5 500 ₽ — на одну персону
                 <br />8 500 ₽ — на две персоны
+                <br />
+                <br />В период новогодних праздников с 31 декабря по 10 января:
+                <br />6 500 ₽ — на одну персону
+                <br />
+                10 000 ₽ — на две персоны
             </>
         ),
         quoteTitle1: "Это не подача — это настоящий ритуал.",
@@ -303,6 +308,14 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
                 5,500 ₽ — for one person
                 <br />
                 8,500 ₽ — for two persons
+                <br />
+                <br />
+                During the New Year's holiday period, from December 31 through
+                January 10:
+                <br />
+                6,500 ₽ — for one person
+                <br />
+                10,000 ₽ — for two persons
             </>
         ),
         quoteTitle1: "It’s not just a serve — it’s a real ritual.",
