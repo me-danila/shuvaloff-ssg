@@ -59,8 +59,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
         {
             title: "День рождения",
-            subtitle:
-                "Специальные привилегии для именинников и скидка 15% от 2 ночей",
+            subtitle: "Привилегии для именинников и скидка 20%",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
             bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
         },
@@ -175,7 +174,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         {
             title: "Birthday Offer",
             subtitle:
-                "Special privileges for birthday guests and 15% discount for stays of 2 nights or more",
+                "Special offers for people celebrating their birthdays and a 20% discount",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/hbd.avif",
             bookingUrl: "/booking/?be-offer=588931&promo-code-plain=birthday",
         },
