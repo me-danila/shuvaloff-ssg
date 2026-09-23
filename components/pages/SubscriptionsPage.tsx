@@ -264,8 +264,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=395664",
                     ctaLabel: "Выбрать",
-                    priceTotal: "75 000 ₽",
-                    pricePerNight: "7 500 ₽",
+                    priceTotal: "50 000 ₽",
+                    pricePerNight: "5 000 ₽",
                 },
                 {
                     title: "15 ночей",
@@ -281,8 +281,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=395597",
                     ctaLabel: "Выбрать",
-                    priceTotal: "105 000 ₽",
-                    pricePerNight: "7 000 ₽",
+                    priceTotal: "75 000 ₽",
+                    pricePerNight: "5 000 ₽",
                 },
             ],
         },
@@ -313,8 +313,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=395663",
                     ctaLabel: "Выбрать",
-                    priceTotal: "100 000 ₽",
-                    pricePerNight: "10 000 ₽",
+                    priceTotal: "75 000 ₽",
+                    pricePerNight: "7 500 ₽",
                 },
                 {
                     title: "15 ночей",
@@ -330,8 +330,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=394887",
                     ctaLabel: "Выбрать",
-                    priceTotal: "142 500 ₽",
-                    pricePerNight: "9 500 ₽",
+                    priceTotal: "112 500 ₽",
+                    pricePerNight: "7 500 ₽",
                 },
             ],
         },
@@ -364,8 +364,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=395664",
                     ctaLabel: "Choose",
-                    priceTotal: "75 000 ₽",
-                    pricePerNight: "7 500 ₽",
+                    priceTotal: "50 000 ₽",
+                    pricePerNight: "5 000 ₽",
                 },
                 {
                     title: "15 nights",
@@ -381,8 +381,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=395597",
                     ctaLabel: "Choose",
-                    priceTotal: "105 000 ₽",
-                    pricePerNight: "7 000 ₽",
+                    priceTotal: "75 000 ₽",
+                    pricePerNight: "5 000 ₽",
                 },
             ],
         },
@@ -413,8 +413,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=395663",
                     ctaLabel: "Choose",
-                    priceTotal: "100 000 ₽",
-                    pricePerNight: "10 000 ₽",
+                    priceTotal: "75 000 ₽",
+                    pricePerNight: "7 500 ₽",
                 },
                 {
                     title: "15 nights",
@@ -430,8 +430,8 @@ const extrasByLocale: Record<Locale, SubscriptionRoomExtra[]> = {
                     bookingHref:
                         "?tl-booking-open=true&tl-booking-scenario=42761-subscription&be-room=394887",
                     ctaLabel: "Choose",
-                    priceTotal: "142 500 ₽",
-                    pricePerNight: "9 500 ₽",
+                    priceTotal: "112 500 ₽",
+                    pricePerNight: "7 500 ₽",
                 },
             ],
         },
