@@ -476,6 +476,37 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-09-03T19:00"],
         },
+        {
+            slug: "silver-age-petersburg",
+            title: "Лекция от историка: «Из жизни Петербурга Серебряного века. Между „Башней“ и подвалом „Бродячей собаки“»",
+            subtitle: "Серебряный век через реальные судьбы его героев",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/1_1_1.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/peterburg-serebryanogo-veka/?utm_source=hotel",
+            fullDescription: (
+                <>
+                    Петербург начала XX&nbsp;века&nbsp;&mdash; между двумя
+                    знаковыми местами Серебряного века: квартирой Вячеслава
+                    Иванова на&nbsp;Таврической, известной как «Башня»,
+                    и&nbsp;артистическим подвалом «Бродячей собаки».
+                    На&nbsp;лекции&nbsp;&mdash; истории Александра Блока, Анны
+                    Ахматовой, Николая Гумилёва, Михаила Кузмина, Ольги
+                    Судейкиной и&nbsp;Владимира Маяковского: встречи, дружбы,
+                    конфликты и&nbsp;события, происходившие между этими двумя
+                    мирами.
+                    <br />
+                    <br />
+                    Разговор основан на&nbsp;дневниках, мемуарах и&nbsp;стихах
+                    и&nbsp;позволяет увидеть Серебряный век через реальные
+                    судьбы его героев.
+                    <br />
+                    <br />
+                    Для гостей, проживающих в&nbsp;отелях коллекции ACADEMIA,
+                    посещение мероприятия бесплатно.
+                </>
+            ),
+            dates: ["2026-10-08T19:00"],
+        },
     ],
     en: [
         {
@@ -821,6 +852,37 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-09-03T19:00"],
         },
+        {
+            slug: "silver-age-petersburg",
+            title: 'Historian\'s lecture: "Life in Silver Age Petersburg. Between the Tower and the Stray Dog cellar"',
+            subtitle: "The Silver Age through the real lives of its heroes",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/1_1_1.jpg",
+            bookingUrl:
+                "https://shuvaloff.academia-rest.ru/afisha/peterburg-serebryanogo-veka/?utm_source=hotel",
+            fullDescription: (
+                <>
+                    Petersburg in&nbsp;the early 20th&nbsp;century, between two
+                    landmark places of&nbsp;the Silver Age: Vyacheslav Ivanov's
+                    apartment on&nbsp;Tavricheskaya Street, known as&nbsp;the
+                    Tower, and&nbsp;the artistic cellar of&nbsp;the Stray Dog.
+                    The&nbsp;lecture tells the stories of&nbsp;Alexander Blok,
+                    Anna Akhmatova, Nikolai Gumilev, Mikhail Kuzmin, Olga
+                    Sudeikina, and&nbsp;Vladimir Mayakovsky: the meetings,
+                    friendships, conflicts, and&nbsp;events that unfolded
+                    between these two worlds.
+                    <br />
+                    <br />
+                    The&nbsp;talk draws on&nbsp;diaries, memoirs,
+                    and&nbsp;poems, showing the Silver Age through the real
+                    lives of&nbsp;its heroes.
+                    <br />
+                    <br />
+                    For guests staying at&nbsp;ACADEMIA collection hotels,
+                    attendance is&nbsp;free of&nbsp;charge.
+                </>
+            ),
+            dates: ["2026-10-08T19:00"],
+        },
     ],
 };
 
@@ -915,6 +977,54 @@ const EVENT_DUPLICATES: {
             ru: countDinner("ru", "8 500 ₽"),
             en: countDinner("en", "8 500 ₽"),
         },
+    },
+    {
+        baseSlug: "income-house",
+        slug: "income-house-october",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
+        dates: ["2026-10-01T19:00"],
+    },
+    {
+        baseSlug: "one-night-in-petersburg-1899",
+        slug: "one-night-in-petersburg-1899-october",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
+        dates: ["2026-10-15T19:00"],
+    },
+    {
+        baseSlug: "count-dinner-benois",
+        slug: "count-dinner-benois-october",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa/?utm_source=hotel",
+        dates: ["2026-10-16T19:00"],
+        imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/meet-3.png",
+    },
+    {
+        baseSlug: "masonic-petersburg",
+        slug: "masonic-petersburg-october",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-october/?utm_source=hotel",
+        dates: ["2026-10-22T19:00"],
+    },
+    {
+        baseSlug: "count-dinner-august",
+        slug: "count-dinner-october",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-october/?utm_source=hotel",
+        dates: ["2026-10-23T19:00"],
+        imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ужин-темнее.png",
+        overrides: {
+            ru: countDinner("ru", "8 500 ₽"),
+            en: countDinner("en", "8 500 ₽"),
+        },
+    },
+    {
+        baseSlug: "noble-investments",
+        slug: "noble-investments-october",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
+        dates: ["2026-10-29T19:00"],
     },
 ];
 
