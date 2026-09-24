@@ -21,7 +21,7 @@ type CardResidenceProps = {
     description: string;
     prevLabel: string;
     nextLabel: string;
-    // Пока реальных фото нет — рендерим заполнители; их число задаёт счётчик.
+    // Пока реальных фото нет — рендерим заполнители; их число задает счетчик.
     // Когда появятся фото, передать `images` — заполнители исчезнут сами.
     photoCount?: number;
     images?: ResidenceImage[];

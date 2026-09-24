@@ -16,7 +16,7 @@ import type { Locale } from "@/lib/i18n/routing";
 const PHOTO_SRC =
     "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_7033-2.jpg";
 
-// Web3Forms: приём заявки без своего бэкенда. access_key — публичный ключ из
+// Web3Forms: прием заявки без своего бэкенда. access_key — публичный ключ из
 // личного кабинета web3forms.com (привязан к почте-получателю). В бандле он не
 // секрет: спам отсекает honeypot-поле `botcheck` + лимиты на стороне сервиса.
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
@@ -88,7 +88,7 @@ const copyByLocale: Record<Locale, RequestCopy> = {
         loadingLabel: "Отправка...",
         errName: "Пожалуйста, укажите имя",
         errPhone: "Укажите корректный номер телефона",
-        errorLabel: "Что-то пошло не так. Попробуйте ещё раз.",
+        errorLabel: "Что-то пошло не так. Попробуйте еще раз.",
         photoAlt: "Фотосессия в интерьерах особняка Шувалова",
         successTitle: "Спасибо!",
         successText: (

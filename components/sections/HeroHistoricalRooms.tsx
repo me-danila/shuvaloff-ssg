@@ -16,7 +16,7 @@ type HeroHistoricalRoomsProps = {
     image: { src: string; alt: string; className?: string };
     button?: { label: string; href: string };
     withBookingForm?: boolean;
-    /** Плашка в виде кнопки на месте формы бронирования (никуда не ведёт). */
+    /** Плашка в виде кнопки на месте формы бронирования (никуда не ведет). */
     notice?: React.ReactNode;
 };
 

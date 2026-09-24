@@ -46,8 +46,8 @@ function SoldOutSticker() {
     );
 }
 
-// Общий текстовый блок (заголовок + абзацы + кнопка). headingClass задаёт цвет
-// заголовка: белый поверх фото на десктопе, тёмный — на сером фоне.
+// Общий текстовый блок (заголовок + абзацы + кнопка). headingClass задает цвет
+// заголовка: белый поверх фото на десктопе, темный — на сером фоне.
 function BannerText({
     headingClass,
     bodyClass = "max-w-lg",
@@ -152,7 +152,7 @@ export function BirthdayBannerSplit() {
                 <div className="relative order-first min-h-[300px] w-full self-stretch overflow-hidden xl:order-last xl:min-h-[520px]">
                     <Image
                         src={DESKTOP_BG}
-                        alt="Граф Шувалов с семьёй"
+                        alt="Граф Шувалов с семьей"
                         fill
                         sizes="(max-width: 1200px) 100vw, 55vw"
                         loading="lazy"

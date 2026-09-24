@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 /**
- * Колонки внутри статьи. Каждый прямой ребёнок — колонка.
+ * Колонки внутри статьи. Каждый прямой ребенок — колонка.
  * На мобильных складываются в одну колонку.
  */
 export default function Columns({ children }: { children: ReactNode }) {

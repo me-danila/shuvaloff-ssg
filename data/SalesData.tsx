@@ -13,7 +13,7 @@ export type Sale = {
     bookingUrl: string;
     actionType?: "booking" | "details";
     /**
-     * Второй, outline-CTA под кнопкой брони: ведёт на страницу предложения.
+     * Второй, outline-CTA под кнопкой брони: ведет на страницу предложения.
      * Путь пишем без локали — карточка локализует его сама.
      */
     detailsUrl?: string;

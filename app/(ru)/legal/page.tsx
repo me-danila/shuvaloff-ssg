@@ -56,7 +56,7 @@ export default function LegalPage() {
                     <FadeUp className="w-full xl:flex-1">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/06/Сертификат_Классификации_Шувалов_page-0001.jpg"
-                            alt="Свидетельство о присвоении категории звёзд"
+                            alt="Свидетельство о присвоении категории звезд"
                             width={800}
                             height={1100}
                             priority

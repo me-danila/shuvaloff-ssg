@@ -12,7 +12,7 @@ type Props = {
 
 export const dynamicParams = false;
 
-// Страницы 2..N; первая страница живёт на /blog/.
+// Страницы 2..N; первая страница живет на /blog/.
 // output: export запрещает пустой generateStaticParams, поэтому /blog/page/2/
 // существует всегда: пока статей ≤ 9 — пустая и noindex.
 export async function generateStaticParams() {

@@ -351,7 +351,7 @@ const seo = {
 
 const PARENT_PATHS = ["/"] as const;
 
-/** Блок трёх буллетов под hero: выключен, разметка оставлена на будущее. */
+/** Блок трех буллетов под hero: выключен, разметка оставлена на будущее. */
 const SHOW_BULLETS = false;
 
 export default function CountsAutumnPage({ locale }: { locale: Locale }) {
@@ -391,7 +391,7 @@ export default function CountsAutumnPage({ locale }: { locale: Locale }) {
                 }}
             />
 
-            {/* Блок трёх буллетов временно скрыт по просьбе заказчика —
+            {/* Блок трех буллетов временно скрыт по просьбе заказчика —
                 разметка и копирайт сохранены, чтобы вернуть его одним флагом. */}
             {SHOW_BULLETS && (
                 <StaggerContainer

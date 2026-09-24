@@ -5,7 +5,7 @@ import PhotoShootFormModal from "@/components/ui/modals/PhotoShootFormModal";
 
 /**
  * Пара CTA-кнопок для hero страницы /photo-shoot/. Вынесено в клиентский
- * компонент, потому что `renderTrigger` — функция, а её нельзя передать из
+ * компонент, потому что `renderTrigger` — функция, а ее нельзя передать из
  * серверного PhotoShootPage напрямую в клиентский PhotoShootFormModal. Кнопки
  * используют брендовый `Button`: «Оставить заявку» — обычный primary
  * (открывает модалку заявки), «Узнать стоимость» — light-glass-якорь на

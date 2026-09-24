@@ -102,7 +102,7 @@ export default function WeddingFormModal({
         loadingLabel: locale === "ru" ? "Отправка..." : "Sending...",
         errorLabel:
             locale === "ru"
-                ? "Что-то пошло не так. Попробуйте ещё раз."
+                ? "Что-то пошло не так. Попробуйте еще раз."
                 : "Something went wrong. Please try again.",
         errName:
             locale === "ru"

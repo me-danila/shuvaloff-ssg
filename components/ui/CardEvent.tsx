@@ -47,7 +47,7 @@ export default function CardEvent({ event }: { event: EventCard }) {
                     {event.title}
                 </a>
             </h3>
-            {/* flex-1 регион: растёт и держит кнопку внизу
+            {/* flex-1 регион: растет и держит кнопку внизу
                 при любом (в т.ч. пустом) описании */}
             <div className="flex flex-1 flex-col px-5">
                 {event.subtitle && (

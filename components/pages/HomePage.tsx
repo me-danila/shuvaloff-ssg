@@ -370,7 +370,7 @@ export default function HomePage({
 }: {
     locale: Locale;
     // Опциональный блок между «Спец. предложениями» и «Особняком с историей».
-    // На главной не задаётся — рендер идентичен прод-странице.
+    // На главной не задается — рендер идентичен прод-странице.
     afterOffers?: React.ReactNode;
 }) {
     const copy = homeCopyByLocale[locale];
@@ -431,7 +431,7 @@ export default function HomePage({
                 <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
                     {/* LCP-герой рендерится сразу видимым (без opacity:0-гейта
                         от framer): preload + priority больше не обесцениваются
-                        ожиданием гидратации. Fade сохранён для не-LCP элементов. */}
+                        ожиданием гидратации. Fade сохранен для не-LCP элементов. */}
                     <div className="absolute inset-0 h-full w-full">
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/06/ChatGPT-Image-28-%D0%BC%D0%B0%D1%8F-2026-%D0%B3.-15_43_59-1-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg"

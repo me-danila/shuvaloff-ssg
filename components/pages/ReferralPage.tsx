@@ -85,8 +85,8 @@ const copyByLocale: Record<Locale, RewardsCopy> = {
         transportTitle: "Путь в Петербург из Москвы — без лишних забот",
         transportDescription: (
             <>
-                Мы&nbsp;сделали всё, чтобы поездка началась легко: выберите
-                билеты на&nbsp;самолёт или &laquo;Сапсан&raquo; прямо
+                Мы&nbsp;сделали все, чтобы поездка началась легко: выберите
+                билеты на&nbsp;самолет или &laquo;Сапсан&raquo; прямо
                 на&nbsp;сайте&nbsp;&mdash; и&nbsp;сосредоточьтесь
                 на&nbsp;главном&nbsp;&mdash; предвкушении встречи с&nbsp;городом
                 и&nbsp;с&nbsp;ACADEMIA.

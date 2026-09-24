@@ -2,7 +2,7 @@
 
 // Отдельная копия WeddingFormModal под страницу /photo-shoot/. Сейчас логика и
 // поля идентичны, но вынесено в самостоятельный компонент, чтобы позже добавить
-// сюда специфичные для фотосъёмки поля, не затрагивая свадебную форму.
+// сюда специфичные для фотосъемки поля, не затрагивая свадебную форму.
 
 import Link from "next/link";
 import { useState } from "react";
@@ -106,7 +106,7 @@ export default function PhotoShootFormModal({
         loadingLabel: locale === "ru" ? "Отправка..." : "Sending...",
         errorLabel:
             locale === "ru"
-                ? "Что-то пошло не так. Попробуйте ещё раз."
+                ? "Что-то пошло не так. Попробуйте еще раз."
                 : "Something went wrong. Please try again.",
         errName:
             locale === "ru"

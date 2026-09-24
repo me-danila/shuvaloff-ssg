@@ -25,7 +25,7 @@ export default function EventsSlider({ cards }: EventsSliderProps) {
 
     // Стрелки только когда контент шире вьюпорта трека (есть куда листать).
     const [canScroll, setCanScroll] = useState(false);
-    // biome-ignore lint/correctness/useExhaustiveDependencies: пересчёт нужен при смене набора карточек — ширина контента меняется без ресайза трека
+    // biome-ignore lint/correctness/useExhaustiveDependencies: пересчет нужен при смене набора карточек — ширина контента меняется без ресайза трека
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;

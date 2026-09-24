@@ -20,10 +20,10 @@ declare global {
 }
 
 // id отеля в системе бронирования (TravelLine). Все категории номеров
-// относятся к одному отелю; room-type берётся из bookingUrl (?be-room=<id>).
+// относятся к одному отелю; room-type берется из bookingUrl (?be-room=<id>).
 const HOTEL_ID = "41018";
 
-// Путь к скрипту вывода цен. На проде отдаётся отдельно деплоящейся папкой
+// Путь к скрипту вывода цен. На проде отдается отдельно деплоящейся папкой
 // module-price-load/ в корне сайта; локально — из public/ этого репозитория.
 const PRICE_SCRIPT_SRC = "/module-price-load/assets/public/price-autoload.js";
 
@@ -66,7 +66,7 @@ export default function RoomCategoriesSection({
     // Подключаем скрипт module-price-load и расставляем цены. Инъекция вручную
     // (а не next/script) — потому что скрипт вешает автозапуск на уже прошедший
     // к моменту гидратации DOMContentLoaded, а next/script в static-export
-    // ненадёжно исполняет внешний бандл. Метод setLoadedPrices идемпотентен.
+    // ненадежно исполняет внешний бандл. Метод setLoadedPrices идемпотентен.
     useEffect(() => {
         const runPlacement = () => window.setLoadedPrices?.();
 

@@ -40,7 +40,7 @@ const sectionCopy: Record<Locale, { heading: string; steps: Step[] }> = {
                 caption: (
                     <>
                         Вы приезжаете
-                        <br />и проводите съёмку
+                        <br />и проводите съемку
                         <br />в выбранном интерьере
                     </>
                 ),

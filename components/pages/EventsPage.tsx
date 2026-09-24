@@ -16,7 +16,7 @@ import { buildWebPageSchema } from "@/lib/seo/schema";
 // EventsCalendar рендерится ниже сгиба (боковая колонка), не за интеракцией.
 // ssr:true оставляет HTML в SSG-выдаче (без CLS и без потерь для SEO), а его
 // клиентский JS (+ иконки phosphor) грузится отдельным ленивым чанком вне
-// критического пути. ssr:false здесь запрещён — EventsPage это Server Component.
+// критического пути. ssr:false здесь запрещен — EventsPage это Server Component.
 const EventsCalendar = dynamic(() => import("@/components/ui/EventsCalendar"), {
     ssr: true,
 });

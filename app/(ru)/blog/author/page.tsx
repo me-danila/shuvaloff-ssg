@@ -39,7 +39,7 @@ export default function EditorialPage() {
                 <h1 className="mt-4 normal-case">О редакции</h1>
                 <div className="mt-6 flex flex-col gap-4">
                     <p>
-                        Блог ведёт команда бутик-отеля ACADEMIA Особняк
+                        Блог ведет команда бутик-отеля ACADEMIA Особняк
                         Шувалова: консьержи, которые ежедневно составляют
                         маршруты для гостей, знатоки истории особняка
                         и&nbsp;рестораторы Графской кухни.

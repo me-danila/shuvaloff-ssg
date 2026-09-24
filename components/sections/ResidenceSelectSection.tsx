@@ -12,7 +12,7 @@ type Residence = {
     images?: ResidenceImage[];
 };
 
-// Заглавное фото каждой резиденции (первый слайд) — остаётся неизменным.
+// Заглавное фото каждой резиденции (первый слайд) — остается неизменным.
 const SHUVALOV_PHOTO =
     "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%BC%D1%83%D0%B6%D0%B8%D0%BA-%D0%B2-%D0%B7%D0%B5%D0%BB%D1%91%D0%BD%D0%BE%D0%BC.png";
 const DASHKOVA_PHOTO =
@@ -20,7 +20,7 @@ const DASHKOVA_PHOTO =
 
 // Остальные слайды (кириллица в имени → percent-encoded: д=%D0%B4, ш=%D1%88).
 // URL пишем целиком, без шаблонных подстановок: remoteOptimizedImages.cjs
-// собирает список удалённых картинок регуляркой по исходникам, и интерполяцию
+// собирает список удаленных картинок регуляркой по исходникам, и интерполяцию
 // он не раскрывает — из `...%D0%B4${n}.jpeg` в список попал бы literal `${n}`.
 const DASHKOVA_SLIDES = [
     "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%B41.jpeg",

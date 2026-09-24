@@ -39,7 +39,7 @@ export type EventCard = Omit<EventDefinition, "dates"> & {
     timeLabel: string;
 };
 
-// Общий «хвост» для исторических лекций (одинаков во всех трёх).
+// Общий «хвост» для исторических лекций (одинаков во всех трех).
 const LectureOutroRu = (
     <>
         Бар-ресторан ACADEMIA Шувалова приглашает гостей на&nbsp;исторические
@@ -84,7 +84,7 @@ const LectureOutroEn = (
 
 /**
  * Описание Графского ужина с подставляемой ценой. Копии на другие даты идут
- * по своей цене, а текст остаётся единым источником — иначе цена в `price`
+ * по своей цене, а текст остается единым источником — иначе цена в `price`
  * и цена внутри описания расходятся.
  */
 const CountDinnerDescription: Record<Locale, (price: string) => ReactNode> = {
@@ -140,6 +140,106 @@ function countDinner(locale: Locale, price: string) {
     return { price, fullDescription: CountDinnerDescription[locale](price) };
 }
 
+/** Описание Графского ужина с семьей Бенуа, цена подставляется. */
+const BenoisDinnerDescription: Record<Locale, (price: string) => ReactNode> = {
+    ru: (price) => (
+        <>
+            Бар-ресторан ACADEMIA Шувалова приглашает гостей на&nbsp;особенный
+            Графский ужин&nbsp;&mdash; камерный вечер в&nbsp;историческом
+            особняке, который объединит гастрономию, живое общение
+            и&nbsp;историю двух известных дворянских родов. Гостей вечера
+            встретит Граф Шувалов, а&nbsp;специальной гостьей станет Анастасия
+            Олеговна Мурзина-Бенуа&nbsp;&mdash; директор Музея-квартиры
+            Л.&nbsp;Н.&nbsp;Бенуа и&nbsp;праправнучка выдающегося архитектора
+            Леонтия Николаевича Бенуа.
+            <br />
+            <br />
+            В&nbsp;этот вечер гости соберутся за&nbsp;одним столом
+            в&nbsp;формате закрытого дворянского салона. Вместе с&nbsp;Графом
+            Шуваловым и&nbsp;представительницей семьи Бенуа они станут
+            участниками неспешной беседы о&nbsp;дворянской культуре Петербурга
+            XIX&nbsp;века. Анастасия Олеговна расскажет историю семьи
+            Бенуа&nbsp;&mdash; от&nbsp;приезда основателя рода в&nbsp;Россию
+            в&nbsp;конце XVIII&nbsp;века до&nbsp;получения дворянства, расцвета
+            семьи и&nbsp;ее вклада в&nbsp;архитектуру и&nbsp;культуру
+            Санкт-Петербурга. Это не&nbsp;лекция в&nbsp;привычном смысле,
+            а&nbsp;живая беседа, наполненная семейными историями, архивными
+            фактами и&nbsp;личными воспоминаниями.
+            <br />
+            <br />
+            Гастрономическим сопровождением вечера станет ужин из&nbsp;четырех
+            курсов. Гостей ждут закуски в&nbsp;стол с&nbsp;бокалом игристого,
+            авторская мимоза с&nbsp;угрем и&nbsp;вишневой наливкой, каре ягненка
+            по-дворянски с&nbsp;коктейлем «Русский акцент», а&nbsp;завершит
+            вечер медовик на&nbsp;гречишном меду в&nbsp;сопровождении коктейля
+            «Жженка». Каждый курс продолжает историю вечера, объединяя
+            гастрономические традиции дворянской России с&nbsp;современным
+            авторским взглядом.
+            <br />
+            <br />
+            <b>Стоимость: {price}</b>
+            <br />
+            <br />
+            В&nbsp;стоимость входит курсовой ужин и&nbsp;участие
+            в&nbsp;программе.
+        </>
+    ),
+    en: (price) => (
+        <>
+            ACADEMIA Shuvaloff Bar-Restaurant invites guests
+            to&nbsp;a&nbsp;special Count's Dinner&nbsp;&mdash; an&nbsp;intimate
+            evening in&nbsp;the historic mansion that brings together
+            gastronomy, live conversation, and&nbsp;the history of&nbsp;two
+            renowned noble families. Guests will be&nbsp;greeted by&nbsp;Count
+            Shuvalov, and&nbsp;the special guest will be&nbsp;Anastasia Olegovna
+            Murzina-Benois&nbsp;&mdash; director of&nbsp;the
+            L.&nbsp;N.&nbsp;Benois Museum-Apartment and&nbsp;the
+            great-great-granddaughter of&nbsp;the outstanding architect Leonty
+            Nikolaevich Benois.
+            <br />
+            <br />
+            This evening, guests will gather around a&nbsp;single table
+            in&nbsp;the format of&nbsp;a&nbsp;private aristocratic salon.
+            Together with Count Shuvalov and&nbsp;a&nbsp;representative
+            of&nbsp;the Benois family, they will take part
+            in&nbsp;an&nbsp;unhurried conversation about the noble culture
+            of&nbsp;19th-century St.&nbsp;Petersburg. Anastasia Olegovna will
+            tell the story of&nbsp;the Benois family&nbsp;&mdash; from the
+            arrival of&nbsp;the family's founder in&nbsp;Russia at&nbsp;the end
+            of&nbsp;the 18th century to&nbsp;their ennoblement, the family's
+            flourishing, and&nbsp;its contribution to&nbsp;the architecture
+            and&nbsp;culture of&nbsp;St.&nbsp;Petersburg. This is&nbsp;not
+            a&nbsp;lecture in&nbsp;the usual sense, but a&nbsp;lively
+            conversation filled with family stories, archival facts,
+            and&nbsp;personal recollections.
+            <br />
+            <br />
+            The&nbsp;gastronomic accompaniment of&nbsp;the evening will
+            be&nbsp;a&nbsp;four-course dinner. Guests can look forward
+            to&nbsp;shared starters with a&nbsp;glass of&nbsp;sparkling wine,
+            a&nbsp;signature mimosa with eel and&nbsp;cherry liqueur, rack
+            of&nbsp;lamb in&nbsp;the noble style with the &laquo;Russian
+            Accent&raquo; cocktail, and&nbsp;the evening will conclude with
+            a&nbsp;medovik honey cake made with buckwheat honey, accompanied
+            by&nbsp;the &laquo;Zhzhenka&raquo; cocktail. Each course continues
+            the story of&nbsp;the evening, blending the gastronomic traditions
+            of&nbsp;noble Russia with a&nbsp;modern signature perspective.
+            <br />
+            <br />
+            <b>Price: {price}</b>
+            <br />
+            <br />
+            The&nbsp;price includes a&nbsp;course dinner and&nbsp;participation
+            in&nbsp;the program.
+        </>
+    ),
+};
+
+/** Пара «цена + описание с этой же ценой» для ужина с семьей Бенуа. */
+function benoisDinner(locale: Locale, price: string) {
+    return { price, fullDescription: BenoisDinnerDescription[locale](price) };
+}
+
 const BaseEvents: Record<Locale, EventDefinition[]> = {
     ru: [
         {
@@ -152,9 +252,9 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                 "https://academia-shuvaloff.ru/booking/?date=2026-07-26",
             fullDescription: (
                 <>
-                    Вас ждёт приветственная наливка, розыгрыш приятных
+                    Вас ждет приветственная наливка, розыгрыш приятных
                     сюрпризов, десерт в&nbsp;подарок в&nbsp;ресторане
-                    и&nbsp;встреча с&nbsp;графской семьёй. Кроме того,
+                    и&nbsp;встреча с&nbsp;графской семьей. Кроме того,
                     в&nbsp;честь дня рождения особняка дарим вам участие
                     в&nbsp;мастер-классе по&nbsp;живописи с&nbsp;графиней
                     и&nbsp;винном казино, а&nbsp;вечером в&nbsp;ресторане для
@@ -167,7 +267,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     <b>13:00&nbsp;&ndash;&nbsp;23:00</b> &mdash; угощаем
                     десертом всех гостей
                     <br />
-                    <b>15:00&nbsp;&ndash;&nbsp;18:00</b> &mdash; создаём свою
+                    <b>15:00&nbsp;&ndash;&nbsp;18:00</b> &mdash; создаем свою
                     картину на&nbsp;мастер-классе по&nbsp;живописи
                     с&nbsp;графиней
                     <br />
@@ -184,7 +284,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     проживания.
                     <br />
                     <br />
-                    Ждём вас на&nbsp;праздник!
+                    Ждем вас на&nbsp;праздник!
                 </>
             ),
             dates: ["2026-07-26T13:00"],
@@ -265,18 +365,18 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             fullDescription: (
                 <>
                     Под руководством художницы гости распишут гребень-расческу,
-                    превращая её&nbsp;в&nbsp;авторский аксессуар. Формат
-                    подойдёт каждому&nbsp;&mdash; и&nbsp;тем, кто впервые
+                    превращая ее&nbsp;в&nbsp;авторский аксессуар. Формат
+                    подойдет каждому&nbsp;&mdash; и&nbsp;тем, кто впервые
                     пробует себя в&nbsp;живописи, и&nbsp;тем, кто уже знаком
                     с&nbsp;декоративными техниками. В&nbsp;процессе работы
                     графиня поделится историями своего рода и&nbsp;создаст
-                    атмосферу настоящего светского приёма.
+                    атмосферу настоящего светского приема.
                     <br />
                     <br />
                     Творческую часть дополнит гастрономическое сопровождение:
                     гостям подадут сет на&nbsp;выбор&nbsp;&mdash; мясной или
                     рыбный. Каждый включает закуску, горячее блюдо
-                    и&nbsp;напиток, а&nbsp;сам мастер-класс начнётся
+                    и&nbsp;напиток, а&nbsp;сам мастер-класс начнется
                     с&nbsp;приветственного бокала вина.
                     <br />
                     <br />
@@ -295,59 +395,13 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
         },
         {
             slug: "count-dinner-benois",
-            title: "Графский ужин с семьёй Бенуа",
+            title: "Графский ужин с семьей Бенуа",
             subtitle:
                 "Камерный гастрономический вечер в ACADEMIA особняке Шувалова",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/Графский-ужин_1-1-scaled.avif",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa?utm_campaign=hotel&utm_term=benua",
-            price: "9 500 ₽",
-            fullDescription: (
-                <>
-                    Бар-ресторан ACADEMIA Шувалова приглашает гостей
-                    на&nbsp;особенный Графский ужин&nbsp;&mdash; камерный вечер
-                    в&nbsp;историческом особняке, который объединит гастрономию,
-                    живое общение и&nbsp;историю двух известных дворянских
-                    родов. Гостей вечера встретит Граф Шувалов,
-                    а&nbsp;специальной гостьей станет Анастасия Олеговна
-                    Мурзина-Бенуа&nbsp;&mdash; директор Музея-квартиры
-                    Л.&nbsp;Н.&nbsp;Бенуа и&nbsp;праправнучка выдающегося
-                    архитектора Леонтия Николаевича Бенуа.
-                    <br />
-                    <br />
-                    В&nbsp;этот вечер гости соберутся за&nbsp;одним столом
-                    в&nbsp;формате закрытого дворянского салона. Вместе
-                    с&nbsp;Графом Шуваловым и&nbsp;представительницей семьи
-                    Бенуа они станут участниками неспешной беседы
-                    о&nbsp;дворянской культуре Петербурга XIX&nbsp;века.
-                    Анастасия Олеговна расскажет историю семьи
-                    Бенуа&nbsp;&mdash; от&nbsp;приезда основателя рода
-                    в&nbsp;Россию в&nbsp;конце XVIII&nbsp;века до&nbsp;получения
-                    дворянства, расцвета семьи и&nbsp;её вклада
-                    в&nbsp;архитектуру и&nbsp;культуру Санкт-Петербурга. Это
-                    не&nbsp;лекция в&nbsp;привычном смысле, а&nbsp;живая беседа,
-                    наполненная семейными историями, архивными фактами
-                    и&nbsp;личными воспоминаниями.
-                    <br />
-                    <br />
-                    Гастрономическим сопровождением вечера станет ужин
-                    из&nbsp;четырёх курсов. Гостей ждут закуски в&nbsp;стол
-                    с&nbsp;бокалом игристого, авторская мимоза с&nbsp;угрем
-                    и&nbsp;вишнёвой наливкой, каре ягнёнка по-дворянски
-                    с&nbsp;коктейлем «Русский акцент», а&nbsp;завершит вечер
-                    медовик на&nbsp;гречишном меду в&nbsp;сопровождении коктейля
-                    «Жжёнка». Каждый курс продолжает историю вечера, объединяя
-                    гастрономические традиции дворянской России
-                    с&nbsp;современным авторским взглядом.
-                    <br />
-                    <br />
-                    <b>Стоимость: 9 500 ₽</b>
-                    <br />
-                    <br />
-                    В&nbsp;стоимость входит курсовой ужин и&nbsp;участие
-                    в&nbsp;программе.
-                </>
-            ),
+            ...benoisDinner("ru", "9 500 ₽"),
             dates: ["2026-07-24T19:00"],
         },
         {
@@ -480,7 +534,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             slug: "silver-age-petersburg",
             title: "Лекция от историка: «Из жизни Петербурга Серебряного века. Между „Башней“ и подвалом „Бродячей собаки“»",
             subtitle: "Серебряный век через реальные судьбы его героев",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/1_1_1.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ChatGPT-Image-23-сент.-2026-г.-18_03_20.png",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/peterburg-serebryanogo-veka/?utm_source=hotel",
             fullDescription: (
@@ -490,7 +544,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     Иванова на&nbsp;Таврической, известной как «Башня»,
                     и&nbsp;артистическим подвалом «Бродячей собаки».
                     На&nbsp;лекции&nbsp;&mdash; истории Александра Блока, Анны
-                    Ахматовой, Николая Гумилёва, Михаила Кузмина, Ольги
+                    Ахматовой, Николая Гумилева, Михаила Кузмина, Ольги
                     Судейкиной и&nbsp;Владимира Маяковского: встречи, дружбы,
                     конфликты и&nbsp;события, происходившие между этими двумя
                     мирами.
@@ -644,60 +698,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/Графский-ужин_1-1-scaled.avif",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa?utm_campaign=hotel&utm_term=benua",
-            price: "9 500 ₽",
-            fullDescription: (
-                <>
-                    ACADEMIA Shuvaloff Bar-Restaurant invites guests
-                    to&nbsp;a&nbsp;special Count's Dinner&nbsp;&mdash;
-                    an&nbsp;intimate evening in&nbsp;the historic mansion that
-                    brings together gastronomy, live conversation, and&nbsp;the
-                    history of&nbsp;two renowned noble families. Guests will
-                    be&nbsp;greeted by&nbsp;Count Shuvalov, and&nbsp;the special
-                    guest will be&nbsp;Anastasia Olegovna
-                    Murzina-Benois&nbsp;&mdash; director of&nbsp;the
-                    L.&nbsp;N.&nbsp;Benois Museum-Apartment and&nbsp;the
-                    great-great-granddaughter of&nbsp;the outstanding architect
-                    Leonty Nikolaevich Benois.
-                    <br />
-                    <br />
-                    This evening, guests will gather around a&nbsp;single table
-                    in&nbsp;the format of&nbsp;a&nbsp;private aristocratic
-                    salon. Together with Count Shuvalov
-                    and&nbsp;a&nbsp;representative of&nbsp;the Benois family,
-                    they will take part in&nbsp;an&nbsp;unhurried conversation
-                    about the noble culture of&nbsp;19th-century
-                    St.&nbsp;Petersburg. Anastasia Olegovna will tell the story
-                    of&nbsp;the Benois family&nbsp;&mdash; from the arrival
-                    of&nbsp;the family's founder in&nbsp;Russia at&nbsp;the end
-                    of&nbsp;the 18th century to&nbsp;their ennoblement, the
-                    family's flourishing, and&nbsp;its contribution to&nbsp;the
-                    architecture and&nbsp;culture of&nbsp;St.&nbsp;Petersburg.
-                    This is&nbsp;not a&nbsp;lecture in&nbsp;the usual sense, but
-                    a&nbsp;lively conversation filled with family stories,
-                    archival facts, and&nbsp;personal recollections.
-                    <br />
-                    <br />
-                    The&nbsp;gastronomic accompaniment of&nbsp;the evening will
-                    be&nbsp;a&nbsp;four-course dinner. Guests can look forward
-                    to&nbsp;shared starters with a&nbsp;glass of&nbsp;sparkling
-                    wine, a&nbsp;signature mimosa with eel and&nbsp;cherry
-                    liqueur, rack of&nbsp;lamb in&nbsp;the noble style with the
-                    &laquo;Russian Accent&raquo; cocktail, and&nbsp;the evening
-                    will conclude with a&nbsp;medovik honey cake made with
-                    buckwheat honey, accompanied by&nbsp;the
-                    &laquo;Zhzhenka&raquo; cocktail. Each course continues the
-                    story of&nbsp;the evening, blending the gastronomic
-                    traditions of&nbsp;noble Russia with a&nbsp;modern signature
-                    perspective.
-                    <br />
-                    <br />
-                    <b>Price: 9 500 ₽</b>
-                    <br />
-                    <br />
-                    The&nbsp;price includes a&nbsp;course dinner
-                    and&nbsp;participation in&nbsp;the program.
-                </>
-            ),
+            ...benoisDinner("en", "9 500 ₽"),
             dates: ["2026-07-24T19:00"],
         },
         {
@@ -856,7 +857,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             slug: "silver-age-petersburg",
             title: 'Historian\'s lecture: "Life in Silver Age Petersburg. Between the Tower and the Stray Dog cellar"',
             subtitle: "The Silver Age through the real lives of its heroes",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/1_1_1.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ChatGPT-Image-23-сент.-2026-г.-18_03_20.png",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/peterburg-serebryanogo-veka/?utm_source=hotel",
             fullDescription: (
@@ -999,6 +1000,10 @@ const EVENT_DUPLICATES: {
             "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa/?utm_source=hotel",
         dates: ["2026-10-16T19:00"],
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/meet-3.png",
+        overrides: {
+            ru: benoisDinner("ru", "8 500 ₽"),
+            en: benoisDinner("en", "8 500 ₽"),
+        },
     },
     {
         baseSlug: "masonic-petersburg",
@@ -1097,7 +1102,7 @@ const MONTHS: Record<Locale, string[]> = {
     ],
 };
 
-/** Разбирает "YYYY-MM-DDTHH:mm" в подписи даты/времени без учёта таймзоны. */
+/** Разбирает "YYYY-MM-DDTHH:mm" в подписи даты/времени без учета таймзоны. */
 function formatOccurrence(start: string, locale: Locale) {
     const [datePart, timePart = "00:00"] = start.split("T");
     const [, month, day] = datePart.split("-").map(Number);
@@ -1108,7 +1113,7 @@ function formatOccurrence(start: string, locale: Locale) {
 /**
  * Опубликованные мероприятия локали — единая точка фильтрации по `published`.
  * Все публичные списки (афиша, календарь, sitemap, generateStaticParams)
- * должны идти через неё, а не читать `AllEvents` напрямую.
+ * должны идти через нее, а не читать `AllEvents` напрямую.
  */
 export function getPublishedEvents(locale: Locale): EventDefinition[] {
     return AllEvents[locale].filter((event) => event.published !== false);

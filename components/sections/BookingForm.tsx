@@ -22,7 +22,7 @@ const COPY = {
 
 // Запасное сообщение показываем, если виджет так и не отрисовался.
 // TL-загрузчик (public/scripts/travelline.js) сам делает до 3 ретраев
-// с задержкой 2500 мс (~7,5 c плюс сеть), поэтому берём с запасом.
+// с задержкой 2500 мс (~7,5 c плюс сеть), поэтому берем с запасом.
 const LOAD_TIMEOUT_MS = 15000;
 
 type Status = "loading" | "ready" | "error";
@@ -61,7 +61,7 @@ export default function BookingForm() {
 
         // Снимаем скелетон, как только TL встроил виджет. Детект делаем ДВУМЯ
         // способами: MutationObserver (мгновенно) И короткий polling. Polling —
-        // страховка от гонок: на мобиле главной слот бронирования пересоздаётся
+        // страховка от гонок: на мобиле главной слот бронирования пересоздается
         // при гидратации (desktop→mobile), а при SPA-навигации observer может
         // не поймать вставку iframe — тогда скелетон залипал поверх рабочего
         // модуля (модуль через который идут продажи). Только читаем DOM, внутрь
@@ -84,7 +84,7 @@ export default function BookingForm() {
         pollId = window.setInterval(markReady, 300);
 
         timeoutId = window.setTimeout(() => {
-            // Виджет так и не встроился — запасное сообщение. Observer остаётся
+            // Виджет так и не встроился — запасное сообщение. Observer остается
             // активным: если TL догрузится позже, ошибка сменится на виджет.
             window.clearInterval(pollId);
             if (!settled) setStatus("error");
@@ -98,7 +98,7 @@ export default function BookingForm() {
     }, []);
 
     const handleRetry = () => {
-        // Полная перезагрузка — самый надёжный ретрай: внешний TL-загрузчик
+        // Полная перезагрузка — самый надежный ретрай: внешний TL-загрузчик
         // читает состояние при загрузке страницы и заново встраивает виджет.
         window.location.reload();
     };
@@ -131,7 +131,7 @@ export default function BookingForm() {
                             <div className="h-12 rounded bg-brand-brown/20 xl:h-12 xl:w-36" />
                         </div>
                     </div>
-                    {/* <output> несёт неявные role="status" + aria-live="polite" */}
+                    {/* <output> несет неявные role="status" + aria-live="polite" */}
                     <output className="sr-only">{t.loading}</output>
                 </div>
             )}
