@@ -1219,3 +1219,26 @@ export const AllServices: Record<Locale, Service[]> = {
         },
     ],
 };
+
+// Порядок только для страницы /services/all/ (на главной и в слайдере — порядок массива).
+// Ключ — slug или externalLink. Остальные услуги идут следом в исходном порядке.
+const allServicesPagePriority = [
+    "breakfast",
+    "pets",
+    "transfer",
+    "aristocratic-breakfast",
+    "https://academia-spa.ru/",
+    "lunch",
+    "dinner",
+    "aristocratic-breakfast-in-room",
+];
+
+export function getAllServicesPageOrder(locale: Locale): Service[] {
+    const rank = (service: Service) => {
+        const index = allServicesPagePriority.indexOf(
+            service.slug ?? service.externalLink,
+        );
+        return index === -1 ? allServicesPagePriority.length : index;
+    };
+    return [...AllServices[locale]].sort((a, b) => rank(a) - rank(b));
+}

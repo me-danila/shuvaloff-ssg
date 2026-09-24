@@ -3,7 +3,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import ServicesGrid from "@/components/ui/grids/ServicesGrid";
 import { FadeUp } from "@/components/ui/Motion";
-import { AllServices } from "@/data/ServicesData";
+import { getAllServicesPageOrder } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
@@ -45,7 +45,8 @@ const copyByLocale: Record<Locale, AllServicesCopy> = {
 
 export default function AllServicesPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
-    const services = AllServices[locale].filter((service) => service.slug);
+    const orderedServices = getAllServicesPageOrder(locale);
+    const services = orderedServices.filter((service) => service.slug);
 
     return (
         <main
@@ -107,7 +108,7 @@ export default function AllServicesPage({ locale }: { locale: Locale }) {
             </section>
             <section className="bg-brand-light py-8 xl:py-12">
                 <div className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
-                    <ServicesGrid locale={locale} />
+                    <ServicesGrid locale={locale} services={orderedServices} />
                 </div>
             </section>
             <Divider />
