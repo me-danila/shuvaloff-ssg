@@ -38,8 +38,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         },
         {
             title: "Раннее бронирование",
-            subtitle:
-                "Планируйте поездку заранее от 3 ночей с сентября по декабрь скидка от 15%",
+            subtitle: "Планируйте поездку заранее от 3 ночей со скидкой 20%",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
             bookingUrl: "/booking?be-offer=588665",
         },
@@ -153,7 +152,7 @@ export const AllSales: Record<Locale, Sale[]> = {
         {
             title: "Early Booking",
             subtitle:
-                "Plan your trip in advance for a stay of 3 nights or more from September through December to receive a discount of 15% or more",
+                "Plan your trip in advance for a stay of 3 nights or more and get a 20% discount",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/09/stay.avif",
             bookingUrl: "/booking?be-offer=588665",
         },
