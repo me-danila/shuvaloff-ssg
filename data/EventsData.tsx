@@ -582,21 +582,21 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     <br />• проживание в&nbsp;номере
                     <br />• новогодняя ночь в&nbsp;ресторане ACADEMIA Шувалова:
                     <br />
-                    &nbsp;&nbsp;&mdash; welcome-фуршет
+                    &nbsp;&nbsp;&nbsp;– welcome-фуршет
                     <br />
-                    &nbsp;&nbsp;&mdash; курсовой ужин (мясной или рыбный сет
+                    &nbsp;&nbsp;&nbsp;– курсовой ужин (мясной или рыбный сет
                     на&nbsp;выбор)
                     <br />
-                    &nbsp;&nbsp;&mdash; авторские коктейли
+                    &nbsp;&nbsp;&nbsp;– авторские коктейли
                     <br />
-                    &nbsp;&nbsp;&mdash; музыкальное сопровождение и&nbsp;ведущий
+                    &nbsp;&nbsp;&nbsp;– музыкальное сопровождение и&nbsp;ведущий
                     <br />
-                    &nbsp;&nbsp;&mdash; театрализованная программа
+                    &nbsp;&nbsp;&nbsp;– театрализованная программа
                     <br />
-                    &nbsp;&nbsp;&mdash; присутствие графа и&nbsp;графини
+                    &nbsp;&nbsp;&nbsp;– присутствие графа и&nbsp;графини
                     на&nbsp;празднике
                     <br />
-                    &nbsp;&nbsp;&mdash; поздравление от&nbsp;Деда Мороза
+                    &nbsp;&nbsp;&nbsp;– поздравление от&nbsp;Деда Мороза
                     и&nbsp;Снегурочки
                     <br />
                     <br />
