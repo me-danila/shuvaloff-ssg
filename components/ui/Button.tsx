@@ -2,7 +2,7 @@ import Link from "next/link";
 import type React from "react";
 import { isExternalHref } from "@/lib/i18n/routing";
 
-type ButtonVariant = "primary" | "primary-outline" | "light-glass";
+type ButtonVariant = "primary" | "primary-outline" | "light-glass" | "light";
 type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 type ButtonProps = {
@@ -28,6 +28,8 @@ const variants: Record<ButtonVariant, string> = {
     // наведении заливка делает кнопку неотличимой от `primary`.
     "light-glass":
         "border border-transparent bg-white/45 text-brand-red backdrop-blur-sm hover:text-white",
+    // Непрозрачный светлый фон + брендовый красный текст; при наведении — заливка.
+    light: "border border-transparent bg-brand-light text-brand-red hover:text-white",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -45,6 +47,7 @@ const fillVariants: Record<ButtonVariant, string> = {
     primary: "bg-brand-red-dark",
     "primary-outline": "bg-brand-red",
     "light-glass": "bg-brand-red",
+    light: "bg-brand-red",
 };
 
 export default function Button({

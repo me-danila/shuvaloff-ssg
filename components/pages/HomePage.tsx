@@ -13,6 +13,7 @@ const ContactsSection = dynamic(
 
 import HomeServicesSection from "@/components/sections/HomeServicesSection";
 import ImpressionsGrid from "@/components/sections/ImpressionsGrid";
+import NewYearNightSection from "@/components/sections/NewYearNightSection";
 import RoomCategoriesSection from "@/components/sections/RoomCategoriesSection";
 import SpecialOffersSection from "@/components/sections/SpecialOffersSection";
 import StructuredData from "@/components/seo/StructuredData";
@@ -492,6 +493,8 @@ export default function HomePage({
             </Suspense>
 
             <SpecialOffersSection sales={AllSales[locale]} locale={locale} />
+
+            <NewYearNightSection locale={locale} />
 
             {afterOffers}
 
