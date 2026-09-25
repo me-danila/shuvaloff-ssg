@@ -561,6 +561,69 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ),
             dates: ["2026-10-08T19:00"],
         },
+        {
+            slug: "new-year-2027",
+            title: "Графский Новый год в особняке",
+            subtitle:
+                "Встречайте Новый год 31 декабря в гостях у графа Шувалова",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/00204123-cb56-4391-9.png",
+            bookingUrl: "/booking/?&be-offer=973214%2C973208",
+            price: "от 30 000 ₽",
+            fullDescription: (
+                <>
+                    Новогодняя ночь в&nbsp;камерной атмосфере светского салона
+                    XIX&nbsp;века с&nbsp;театрализованной программой: графская
+                    семья и&nbsp;аристократические традиции дома Шуваловых,
+                    праздничный стол с&nbsp;welcome-фуршетом и&nbsp;курсовым
+                    ужином, живая музыка, вокал и&nbsp;танцы.
+                    <br />
+                    <br />
+                    <b>В&nbsp;стоимость включено:</b>
+                    <br />• проживание в&nbsp;номере
+                    <br />• новогодняя ночь в&nbsp;ресторане ACADEMIA Шувалова:
+                    <br />
+                    &nbsp;&nbsp;&mdash; welcome-фуршет
+                    <br />
+                    &nbsp;&nbsp;&mdash; курсовой ужин (мясной или рыбный сет
+                    на&nbsp;выбор)
+                    <br />
+                    &nbsp;&nbsp;&mdash; авторские коктейли
+                    <br />
+                    &nbsp;&nbsp;&mdash; музыкальное сопровождение и&nbsp;ведущий
+                    <br />
+                    &nbsp;&nbsp;&mdash; театрализованная программа
+                    <br />
+                    &nbsp;&nbsp;&mdash; присутствие графа и&nbsp;графини
+                    на&nbsp;празднике
+                    <br />
+                    &nbsp;&nbsp;&mdash; поздравление от&nbsp;Деда Мороза
+                    и&nbsp;Снегурочки
+                    <br />
+                    <br />
+                    <b>Выберите ваш зал:</b>
+                    <br />
+                    <b>Гостиная</b>&nbsp;&mdash; для новогодней ночи
+                    в&nbsp;атмосфере большого светского приема,
+                    от&nbsp;50&nbsp;000&nbsp;₽ / персона
+                    <br />
+                    <b>Бар</b>&nbsp;&mdash; для более динамичного формата ближе
+                    к&nbsp;бару и&nbsp;музыкальной программе,
+                    от&nbsp;30&nbsp;000&nbsp;₽ / персона
+                    <br />
+                    <b>Кабинет</b>&nbsp;&mdash; для камерного праздника
+                    в&nbsp;небольшой компании, от&nbsp;35&nbsp;000&nbsp;₽ /
+                    персона
+                    <br />
+                    <br />
+                    <b>Круглосуточный отдел бронирования:</b>
+                    <br />
+                    <a href="tel:+78125659650">+7 (812) 565-96-50</a>
+                    <br />
+                    <a href="tel:+79111966211">+7 (911) 196-62-11</a>
+                </>
+            ),
+            dates: ["2026-12-31T20:00"],
+        },
     ],
     en: [
         {
@@ -883,6 +946,71 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                 </>
             ),
             dates: ["2026-10-08T19:00"],
+        },
+        {
+            slug: "new-year-2027",
+            title: "Count's New Year at the Mansion",
+            subtitle:
+                "Celebrate New Year's Eve on 31 December as guests of Count Shuvalov",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/00204123-cb56-4391-9.png",
+            bookingUrl: "/booking/?&be-offer=973214%2C973208",
+            price: "from 30 000 ₽",
+            fullDescription: (
+                <>
+                    New Year's Eve in&nbsp;the intimate atmosphere
+                    of&nbsp;a&nbsp;19th-century high-society salon, with
+                    a&nbsp;theatrical programme: the count's family and&nbsp;the
+                    aristocratic traditions of&nbsp;the Shuvalov house,
+                    a&nbsp;festive table with a&nbsp;welcome buffet and&nbsp;a
+                    multi-course dinner, live music, vocals, and&nbsp;dancing.
+                    <br />
+                    <br />
+                    <b>The price includes:</b>
+                    <br />• a&nbsp;stay in&nbsp;a&nbsp;room
+                    <br />• New Year's Eve at&nbsp;ACADEMIA Shuvaloff
+                    restaurant:
+                    <br />
+                    &nbsp;&nbsp;&mdash; welcome buffet
+                    <br />
+                    &nbsp;&nbsp;&mdash; multi-course dinner (meat or&nbsp;fish
+                    set of&nbsp;your choice)
+                    <br />
+                    &nbsp;&nbsp;&mdash; signature cocktails
+                    <br />
+                    &nbsp;&nbsp;&mdash; live music and&nbsp;a&nbsp;host
+                    <br />
+                    &nbsp;&nbsp;&mdash; theatrical programme
+                    <br />
+                    &nbsp;&nbsp;&mdash; the Count and&nbsp;Countess attending
+                    the celebration
+                    <br />
+                    &nbsp;&nbsp;&mdash; greetings from Ded Moroz
+                    and&nbsp;Snegurochka
+                    <br />
+                    <br />
+                    <b>Choose your hall:</b>
+                    <br />
+                    <b>Drawing Room</b>&nbsp;&mdash; for a&nbsp;New Year's Eve
+                    in&nbsp;the atmosphere of&nbsp;a&nbsp;grand society
+                    reception, from&nbsp;50&nbsp;000&nbsp;₽ per person
+                    <br />
+                    <b>Bar</b>&nbsp;&mdash; for a&nbsp;livelier format close
+                    to&nbsp;the bar and&nbsp;the music programme,
+                    from&nbsp;30&nbsp;000&nbsp;₽ per person
+                    <br />
+                    <b>Study</b>&nbsp;&mdash; for an&nbsp;intimate celebration
+                    in&nbsp;a&nbsp;small group, from&nbsp;35&nbsp;000&nbsp;₽ per
+                    person
+                    <br />
+                    <br />
+                    <b>24/7 reservations:</b>
+                    <br />
+                    <a href="tel:+78125659650">+7 (812) 565-96-50</a>
+                    <br />
+                    <a href="tel:+79111966211">+7 (911) 196-62-11</a>
+                </>
+            ),
+            dates: ["2026-12-31T20:00"],
         },
     ],
 };
