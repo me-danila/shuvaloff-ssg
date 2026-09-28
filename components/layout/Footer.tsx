@@ -59,8 +59,8 @@ export default function Footer({ locale }: { locale: Locale }) {
             : "Follow us on social media to be the first to know about announcements, news, and special offers.";
     const copyrightText =
         locale === "ru"
-            ? "© 2026 «ACADEMILAND» ® г. Санкт-Петербург"
-            : "© 2026 ACADEMILAND ®, Saint Petersburg";
+            ? "© 2026 «ACADEMIA BOUTIQUE HOTELS» ® г. Санкт-Петербург"
+            : "© 2026 ACADEMIA BOUTIQUE HOTELS ®, Saint Petersburg";
     const cityText =
         locale === "ru"
             ? "ООО «Отель Академиа Особняк Шувалова» ИНН 7840109542"
