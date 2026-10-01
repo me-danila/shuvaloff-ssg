@@ -66,7 +66,16 @@ const seo = {
 
 const CRUMB_PATHS = ["/"];
 
-export default function EventsPage({ locale }: { locale: Locale }) {
+const DEFAULT_HERO_SRC =
+    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F.png";
+
+export default function EventsPage({
+    locale,
+    heroSrc = DEFAULT_HERO_SRC,
+}: {
+    locale: Locale;
+    heroSrc?: string;
+}) {
     const copy = eventsCopyByLocale[locale];
 
     return (
@@ -98,7 +107,7 @@ export default function EventsPage({ locale }: { locale: Locale }) {
                         className="absolute inset-0 h-full w-full"
                     >
                         <Image
-                            src="https://academia.spb.ru/wp-content/uploads/2026/07/%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F.png"
+                            src={heroSrc}
                             alt={copy.heroAlt}
                             fill
                             priority
