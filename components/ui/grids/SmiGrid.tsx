@@ -41,7 +41,7 @@ export default function SmiGrid({ locale }: { locale: Locale }) {
                                     )}
                                     width={260}
                                     height={80}
-                                    className="h-12 max-h-12 w-auto max-w-full object-contain md:h-14 md:max-h-14"
+                                    className={`h-12 max-h-12 w-auto max-w-full object-contain md:h-14 md:max-h-14${article.whiteLogo ? " brightness-0 invert" : ""}`}
                                     unoptimized
                                 />
                             </div>

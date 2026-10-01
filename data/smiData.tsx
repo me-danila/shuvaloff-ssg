@@ -5,9 +5,33 @@ export type SmiArticle = {
     text: string;
     /** Название издания — используется как alt для логотипа. */
     outlet: string;
+    /** Перекрасить логотип в белый (для тёмных/цветных SVG). */
+    whiteLogo?: boolean;
 };
 
 export const smiArticles: SmiArticle[] = [
+    {
+        backgroundImageUrl:
+            "https://academia.spb.ru/wp-content/uploads/2026/10/e135f5e5-6b70-420b-9d72-683f87563b58.webp",
+        logoUrl:
+            "https://academia.spb.ru/wp-content/uploads/2026/10/svgviewer-output.svg",
+        externalUrl:
+            "https://thefair.ru/article/zamedlit_vremia_kak_academia_osobniak_suvalova_prevrashhaet_svadbu_v_grafskii_priem",
+        text: "«Замедлить время»: как ACADEMIA Особняк Шувалова превращает свадьбу в графский прием",
+        outlet: "The Fair",
+        whiteLogo: true,
+    },
+    {
+        backgroundImageUrl:
+            "https://academia.spb.ru/wp-content/uploads/2026/10/846106db4d5486f489541d13277873b4-1024x556-1.jpg",
+        logoUrl:
+            "https://academia.spb.ru/wp-content/uploads/2026/10/svgviewer-output-1.svg",
+        externalUrl:
+            "https://peopletalk.ru/article/zapiski-puteshestvennika-grafskij-uikend-v-sankt-peterburge-i-svadba-na-sejshelah/",
+        text: "Записки путешественника: графский уикенд в Санкт-Петербурге и свадьба на Сейшелах",
+        outlet: "PeopleTalk",
+        whiteLogo: true,
+    },
     {
         backgroundImageUrl:
             "https://academia.spb.ru/wp-content/uploads/2025/12/shuvaloff.avif",
