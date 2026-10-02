@@ -559,7 +559,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     посещение мероприятия бесплатно.
                 </>
             ),
-            dates: ["2026-10-08T19:00"],
+            dates: ["2026-10-08T18:00"],
         },
         {
             slug: "new-year-2027",
@@ -945,7 +945,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     attendance is&nbsp;free of&nbsp;charge.
                 </>
             ),
-            dates: ["2026-10-08T19:00"],
+            dates: ["2026-10-08T18:00"],
         },
         {
             slug: "new-year-2027",
@@ -1119,7 +1119,7 @@ const EVENT_DUPLICATES: {
         slug: "one-night-in-petersburg-1899-october",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
-        dates: ["2026-10-15T19:00"],
+        dates: ["2026-10-15T18:00"],
     },
     {
         baseSlug: "count-dinner-benois",
@@ -1138,7 +1138,7 @@ const EVENT_DUPLICATES: {
         slug: "masonic-petersburg-october",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-october/?utm_source=hotel",
-        dates: ["2026-10-22T19:00"],
+        dates: ["2026-10-22T18:00"],
     },
     {
         baseSlug: "count-dinner-august",
@@ -1159,35 +1159,35 @@ const EVENT_DUPLICATES: {
         slug: "noble-investments-october",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
-        dates: ["2026-10-29T19:00"],
+        dates: ["2026-10-29T18:00"],
     },
     {
         baseSlug: "income-house",
         slug: "income-house-november",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-noyabr/?utm_source=hotel",
-        dates: ["2026-11-05T19:00"],
+        dates: ["2026-11-05T18:00"],
     },
     {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-november",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
-        dates: ["2026-11-06T19:00"],
+        dates: ["2026-11-07T19:00"],
     },
     {
         baseSlug: "silver-age-petersburg",
         slug: "silver-age-petersburg-november",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/serebryaniy-vek/?utm_source=hotel",
-        dates: ["2026-11-12T19:00"],
+        dates: ["2026-11-12T18:00"],
     },
     {
         baseSlug: "one-night-in-petersburg-1899",
         slug: "one-night-in-petersburg-1899-november",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/one-night-noyabr/?utm_source=hotel",
-        dates: ["2026-11-19T19:00"],
+        dates: ["2026-11-19T18:00"],
     },
     {
         baseSlug: "count-dinner-august",
@@ -1206,7 +1206,7 @@ const EVENT_DUPLICATES: {
         slug: "masonic-petersburg-november",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg/?utm_source=hotel",
-        dates: ["2026-11-26T19:00"],
+        dates: ["2026-11-26T18:00"],
     },
 ];
 
