@@ -1161,6 +1161,53 @@ const EVENT_DUPLICATES: {
             "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
         dates: ["2026-10-29T19:00"],
     },
+    {
+        baseSlug: "income-house",
+        slug: "income-house-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-noyabr/?utm_source=hotel",
+        dates: ["2026-11-05T19:00"],
+    },
+    {
+        baseSlug: "wine-casino-august",
+        slug: "wine-casino-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
+        dates: ["2026-11-06T19:00"],
+    },
+    {
+        baseSlug: "silver-age-petersburg",
+        slug: "silver-age-petersburg-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/serebryaniy-vek/?utm_source=hotel",
+        dates: ["2026-11-12T19:00"],
+    },
+    {
+        baseSlug: "one-night-in-petersburg-1899",
+        slug: "one-night-in-petersburg-1899-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/one-night-noyabr/?utm_source=hotel",
+        dates: ["2026-11-19T19:00"],
+    },
+    {
+        baseSlug: "count-dinner-august",
+        slug: "count-dinner-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
+        dates: ["2026-11-20T19:00"],
+        imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ужин-темнее.png",
+        overrides: {
+            ru: countDinner("ru", "8 500 ₽"),
+            en: countDinner("en", "8 500 ₽"),
+        },
+    },
+    {
+        baseSlug: "masonic-petersburg",
+        slug: "masonic-petersburg-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg/?utm_source=hotel",
+        dates: ["2026-11-26T19:00"],
+    },
 ];
 
 /** Достраивает список локали дублями из EVENT_DUPLICATES. */
