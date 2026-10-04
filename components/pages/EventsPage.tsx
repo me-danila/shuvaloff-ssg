@@ -72,11 +72,23 @@ const DEFAULT_HERO_SRC =
 export default function EventsPage({
     locale,
     heroSrc = DEFAULT_HERO_SRC,
+    compactHero = false,
 }: {
     locale: Locale;
     heroSrc?: string;
+    /** Пониже hero, заголовок вверху под шапкой, без формы бронирования. */
+    compactHero?: boolean;
 }) {
     const copy = eventsCopyByLocale[locale];
+    const heroTitle = (
+        <FadeIn duration={1}>
+            <h1
+                className={`font-alistair text-4xl normal-case xl:text-5xl font-normal ${compactHero ? "leading-[1.05]" : "leading-tight xl:mb-4"}`}
+            >
+                {copy.heroTitle}
+            </h1>
+        </FadeIn>
+    );
 
     return (
         <main
@@ -101,7 +113,13 @@ export default function EventsPage({
             />
 
             <section>
-                <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
+                <div
+                    className={
+                        compactHero
+                            ? "relative overflow-hidden aspect-4/5 md:aspect-4/3 xl:aspect-[unset] xl:h-[78vh] xl:min-h-[40rem]"
+                            : "relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen"
+                    }
+                >
                     <FadeIn
                         duration={0.9}
                         className="absolute inset-0 h-full w-full"
@@ -116,20 +134,24 @@ export default function EventsPage({
                         />
                     </FadeIn>
 
-                    <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">
-                        <FadeIn duration={1}>
-                            <h1 className="font-alistair text-4xl normal-case leading-tight xl:text-5xl xl:mb-4 font-normal">
-                                {copy.heroTitle}
-                            </h1>
-                        </FadeIn>
-                        <Suspense
-                            fallback={
-                                <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
-                            }
-                        >
-                            <BookingFormDesktop />
-                        </Suspense>
-                    </div>
+                    {compactHero && (
+                        <div className="absolute top-28 md:top-32 xl:top-44 inset-x-0 text-center text-white z-10 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto">
+                            {heroTitle}
+                        </div>
+                    )}
+
+                    {!compactHero && (
+                        <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">
+                            {heroTitle}
+                            <Suspense
+                                fallback={
+                                    <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
+                                }
+                            >
+                                <BookingFormDesktop />
+                            </Suspense>
+                        </div>
+                    )}
                 </div>
             </section>
 

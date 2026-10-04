@@ -240,7 +240,7 @@ export const AllServices: Record<Locale, Service[]> = {
                 },
             ],
             price: "2 250 ₽",
-            comment: "Время подачи в бутик-ресторане: с 12:00 до 22:30.",
+            comment: "Время подачи в бутик-ресторане: с 12:00 до 20:30.",
         },
         {
             title: "Аристократический вечер Ruinart",
@@ -418,7 +418,7 @@ export const AllServices: Record<Locale, Service[]> = {
                 },
             ],
             price: "2 250 ₽",
-            comment: "Время подачи в бутик-ресторане: с 12:00 до 22:30.",
+            comment: "Время подачи в бутик-ресторане: с 12:00 до 20:30.",
         },
         {
             title: "Хранение багажа",
@@ -849,7 +849,7 @@ export const AllServices: Record<Locale, Service[]> = {
             ],
             price: "2 250 ₽",
             comment:
-                "Serving hours in the boutique restaurant: 12:00 PM to 10:30 PM.",
+                "Serving hours in the boutique restaurant: 12:00 PM to 8:30 PM.",
         },
         {
             title: "Aristocratic Evening Ruinart",
@@ -1014,7 +1014,7 @@ export const AllServices: Record<Locale, Service[]> = {
             ],
             price: "2 250 ₽",
             comment:
-                "Serving hours in the boutique restaurant: 12:00 PM to 10:30 PM.",
+                "Serving hours in the boutique restaurant: 12:00 PM to 8:30 PM.",
         },
         {
             title: "Luggage Storage",
