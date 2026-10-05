@@ -1,6 +1,9 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import { BookingFormMobile } from "@/components/sections/BookingFormResponsive";
+import {
+    BookingFormDesktop,
+    BookingFormMobile,
+} from "@/components/sections/BookingFormResponsive";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
@@ -123,6 +126,16 @@ export default function EventsPage({ locale }: { locale: Locale }) {
                                 {copy.heroTitle}
                             </h1>
                         </FadeIn>
+                    </div>
+
+                    <div className="absolute bottom-16 inset-x-0 z-10 hidden xl:block xl:max-w-7xl xl:mx-auto">
+                        <Suspense
+                            fallback={
+                                <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
+                            }
+                        >
+                            <BookingFormDesktop />
+                        </Suspense>
                     </div>
                 </div>
             </section>
