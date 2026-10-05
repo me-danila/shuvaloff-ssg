@@ -1,9 +1,6 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import {
-    BookingFormDesktop,
-    BookingFormMobile,
-} from "@/components/sections/BookingFormResponsive";
+import { BookingFormMobile } from "@/components/sections/BookingFormResponsive";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
@@ -66,29 +63,13 @@ const seo = {
 
 const CRUMB_PATHS = ["/"];
 
-const DEFAULT_HERO_SRC =
-    "https://academia.spb.ru/wp-content/uploads/2026/07/%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F.png";
+const HERO_SRC =
+    "https://academia.spb.ru/wp-content/uploads/2026/10/%D0%92%D0%B5%D1%87%D0%B5%D1%80%D0%BD%D1%8F%D1%8F_%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_%D0%B2_%D1%81%D1%82%D0%B0%D1%80%D0%B8%D0%BD%D0%BD%D0%BE%D0%BC_%D1%81%D0%B0%D0%BB%D0%BE%D0%BD%D0%B5_2.png";
+const HERO_MOBILE_SRC =
+    "https://academia.spb.ru/wp-content/uploads/2026/10/Period-Salon-Reading-Scene.png";
 
-export default function EventsPage({
-    locale,
-    heroSrc = DEFAULT_HERO_SRC,
-    compactHero = false,
-}: {
-    locale: Locale;
-    heroSrc?: string;
-    /** Пониже hero, заголовок вверху под шапкой, без формы бронирования. */
-    compactHero?: boolean;
-}) {
+export default function EventsPage({ locale }: { locale: Locale }) {
     const copy = eventsCopyByLocale[locale];
-    const heroTitle = (
-        <FadeIn duration={1}>
-            <h1
-                className={`font-alistair text-4xl normal-case xl:text-5xl font-normal ${compactHero ? "leading-[1.05]" : "leading-tight xl:mb-4"}`}
-            >
-                {copy.heroTitle}
-            </h1>
-        </FadeIn>
-    );
 
     return (
         <main
@@ -113,45 +94,36 @@ export default function EventsPage({
             />
 
             <section>
-                <div
-                    className={
-                        compactHero
-                            ? "relative overflow-hidden aspect-4/5 md:aspect-4/3 xl:aspect-[unset] xl:h-[78vh] xl:min-h-[40rem]"
-                            : "relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen"
-                    }
-                >
+                <div className="relative overflow-hidden aspect-4/5 md:aspect-4/3 xl:aspect-[unset] xl:h-[78vh] xl:min-h-[40rem]">
                     <FadeIn
                         duration={0.9}
                         className="absolute inset-0 h-full w-full"
                     >
                         <Image
-                            src={heroSrc}
+                            src={HERO_MOBILE_SRC}
                             alt={copy.heroAlt}
                             fill
                             priority
                             sizes="100vw"
-                            className="object-cover object-bottom bg-gray-100"
+                            className="object-cover object-bottom bg-gray-100 xl:hidden"
+                        />
+                        <Image
+                            src={HERO_SRC}
+                            alt={copy.heroAlt}
+                            fill
+                            priority
+                            sizes="100vw"
+                            className="object-cover object-bottom bg-gray-100 max-xl:hidden"
                         />
                     </FadeIn>
 
-                    {compactHero && (
-                        <div className="absolute top-28 md:top-32 xl:top-44 inset-x-0 text-center text-white z-10 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto">
-                            {heroTitle}
-                        </div>
-                    )}
-
-                    {!compactHero && (
-                        <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">
-                            {heroTitle}
-                            <Suspense
-                                fallback={
-                                    <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
-                                }
-                            >
-                                <BookingFormDesktop />
-                            </Suspense>
-                        </div>
-                    )}
+                    <div className="absolute top-28 md:top-32 xl:top-44 inset-x-0 text-center text-white z-10 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto">
+                        <FadeIn duration={1}>
+                            <h1 className="font-alistair text-4xl normal-case xl:text-5xl font-normal leading-[1.05]">
+                                {copy.heroTitle}
+                            </h1>
+                        </FadeIn>
+                    </div>
                 </div>
             </section>
 
