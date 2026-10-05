@@ -1,3 +1,4 @@
+export { default as AwardStarIcon } from "./AwardStarIcon";
 export { default as BedIcon } from "./BedIcon";
 export { default as CallIcon } from "./CallIcon";
 export { default as CameraIcon } from "./CameraIcon";

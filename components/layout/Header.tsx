@@ -428,6 +428,7 @@ const FIXED_HEADER_PATHS = new Set([
     //    "/wedding",
     "/spasibo_wedding",
     "/events",
+    "/home-vote-test",
     "/photo-shoot",
     "/new-year-2027",
     "/services/aristocratic-breakfast",
