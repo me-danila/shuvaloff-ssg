@@ -26,6 +26,7 @@ export async function GET() {
 - [Услуги](${SITE_URL}/services/all/): трансфер, водные прогулки, завтраки, СПА и другие услуги
 - [История особняка](${SITE_URL}/history/): история особняка Шувалова и рода Шуваловых
 - [Новый год 2027 в особняке](${SITE_URL}/new-year-2027/): «Графский Новый год» 31 декабря 2026, начало в 20:00 — театрализованная программа в духе светского салона XIX века, графская семья, праздничный ужин с живой музыкой
+- [Премия «Лучший бутик-отель 2026»](${SITE_URL}/national-award-2026/): особняк Шувалова номинирован на «Национальную гостиничную премию» в категории «Лучший бутик-отель 2026» — голосование на hotelawards.ru
 - [Свадьба в особняке](${SITE_URL}/wedding/): проведение свадеб в исторических интерьерах
 - [Отзывы](${SITE_URL}/reviews/): отзывы гостей отеля
 
@@ -46,6 +47,7 @@ ${articles}
 - [Services (EN)](${SITE_URL}/en/services/all/): transfer, boat tours, breakfasts, SPA and more
 - [History (EN)](${SITE_URL}/en/history/): history of the Shuvalov mansion
 - [New Year 2027 at the mansion (EN)](${SITE_URL}/en/new-year-2027/): Count's New Year on 31 December 2026 from 8:00 PM — a theatrical 19th-century salon programme, the Count's family, a festive dinner with live music
+- [Best Boutique Hotel 2026 nomination (EN)](${SITE_URL}/en/national-award-2026/): Shuvaloff Mansion is nominated for «Best Boutique Hotel 2026» at the National Hotel Award — voting on hotelawards.ru
 
 ## Служебное
 
