@@ -4,6 +4,7 @@ import {
     getLocaleAlternates,
     withOfficialSiteSuffix,
 } from "@/lib/i18n/metadata";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo/site";
 
 const TITLE = "Блог — ACADEMIA Особняк Шувалова";
 const DOC_TITLE = withOfficialSiteSuffix(TITLE, "ru");
@@ -24,6 +25,9 @@ export const metadata: Metadata = {
         description: DESCRIPTION,
         url: "/blog/",
         type: "website",
+        images: [
+            { url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: TITLE },
+        ],
     },
 };
 

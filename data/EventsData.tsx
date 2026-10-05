@@ -500,7 +500,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: "Лекция от историка: «Куда инвестировали дворяне во второй половине XIX века»",
             subtitle:
                 "В основе лекции живые истории из писем, дневников и архивов",
-            imgUrl: "https://static.tildacdn.com/tild6361-6564-4661-b163-666239633738/_2.png",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/2-1.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
             fullDescription: (
@@ -886,7 +886,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: 'Historian\'s lecture: "Where the nobility invested in the second half of the 19th century"',
             subtitle:
                 "The lecture is built on living stories from letters, diaries, and archives",
-            imgUrl: "https://static.tildacdn.com/tild6361-6564-4661-b163-666239633738/_2.png",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/2-1.jpg",
             bookingUrl:
                 "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
             fullDescription: (

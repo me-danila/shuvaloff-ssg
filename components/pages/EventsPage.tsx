@@ -63,7 +63,7 @@ const seo = {
 
 const CRUMB_PATHS = ["/"];
 
-const HERO_SRC =
+export const EVENTS_HERO_IMAGE =
     "https://academia.spb.ru/wp-content/uploads/2026/10/%D0%92%D0%B5%D1%87%D0%B5%D1%80%D0%BD%D1%8F%D1%8F_%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D1%8F_%D0%B2_%D1%81%D1%82%D0%B0%D1%80%D0%B8%D0%BD%D0%BD%D0%BE%D0%BC_%D1%81%D0%B0%D0%BB%D0%BE%D0%BD%D0%B5_2.png";
 const HERO_MOBILE_SRC =
     "https://academia.spb.ru/wp-content/uploads/2026/10/Period-Salon-Reading-Scene.png";
@@ -108,7 +108,7 @@ export default function EventsPage({ locale }: { locale: Locale }) {
                             className="object-cover object-bottom bg-gray-100 xl:hidden"
                         />
                         <Image
-                            src={HERO_SRC}
+                            src={EVENTS_HERO_IMAGE}
                             alt={copy.heroAlt}
                             fill
                             priority

@@ -13,6 +13,7 @@ import {
     getLocaleAlternates,
     withOfficialSiteSuffix,
 } from "@/lib/i18n/metadata";
+import { resolveOgImage } from "@/lib/seo/ogImages";
 import { buildBlogPostingSchema } from "@/lib/seo/schema";
 import { SITE_NAME } from "@/lib/seo/site";
 
@@ -42,6 +43,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const meta = await getPostMeta(slug);
+    const ogImage = resolveOgImage(`/blog/${slug}/`, meta.image) ?? meta.image;
+    const ogOverride = ogImage !== meta.image;
 
     const docTitle = withOfficialSiteSuffix(
         `${meta.title} — ${SITE_NAME}`,
@@ -63,19 +66,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             authors: [meta.author ?? SITE_NAME],
             ...(meta.tags?.length ? { tags: meta.tags } : {}),
             images: [
-                {
-                    url: meta.image,
-                    width: 1200,
-                    height: 630,
-                    alt: meta.imageAlt,
-                },
+                ogOverride
+                    ? { url: ogImage, alt: meta.imageAlt }
+                    : {
+                          url: ogImage,
+                          width: 1200,
+                          height: 630,
+                          alt: meta.imageAlt,
+                      },
             ],
         },
         twitter: {
             card: "summary_large_image",
             title: docTitle,
             description: meta.description,
-            images: [meta.image],
+            images: [ogImage],
         },
     };
 }

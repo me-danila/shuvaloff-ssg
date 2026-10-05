@@ -5,6 +5,7 @@ import {
     normalizePath,
     stripLocalePrefix,
 } from "@/lib/i18n/routing";
+import { resolveOgImage } from "@/lib/seo/ogImages";
 import {
     DEFAULT_OG_IMAGE,
     getAbsoluteUrl,
@@ -83,14 +84,15 @@ export const getLocaleAlternates = (path: string, locale: Locale) => {
  * twitter block. A child openGraph replaces (not deep-merges) the root
  * layout's openGraph, so title/description/type are re-emitted here to avoid
  * losing them. `ogImage` lets detail routes surface an image already present
- * on the page; when omitted the site-wide default is used.
+ * on the page; when omitted the site-wide default is used. Entries in
+ * lib/seo/ogImages.ts can override or replace it (see resolveOgImage).
  */
 export const buildPageMetadata = ({
     locale,
     path,
     title,
     description,
-    ogImage,
+    ogImage: pageOgImage,
     ogType = "website",
 }: {
     locale: Locale;
@@ -100,6 +102,7 @@ export const buildPageMetadata = ({
     ogImage?: string;
     ogType?: "website" | "article";
 }): Metadata => {
+    const ogImage = resolveOgImage(path, pageOgImage);
     const imageUrl = toAbsoluteImage(ogImage ?? DEFAULT_OG_IMAGE);
     const docTitle = withOfficialSiteSuffix(title, locale);
     const ogImageEntry = ogImage
