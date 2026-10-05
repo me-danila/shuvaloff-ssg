@@ -29,18 +29,18 @@ const copyByLocale: Record<Locale, PageCopy> = {
         ),
         // Рукописный шрифт — без капса, поэтому «Academia», а не «ACADEMIA».
         additionalTitle:
-            "Благодарим вас за выбор коллекции особняков Academia!",
+            "Благодарим вас за\u00A0выбор коллекции особняков Academia!",
         lead: (
             <>
-                Как вы знаете, мы часто участвуем в&nbsp;различных престижных
-                премиях и, что особенно приятно, мы побеждаем с&nbsp;помощью
-                вашей поддержки!
+                Как вы&nbsp;знаете, мы&nbsp;часто участвуем в&nbsp;различных
+                престижных премиях и, что особенно приятно, мы&nbsp;побеждаем
+                с&nbsp;помощью вашей поддержки!
             </>
         ),
         nomination: (
             <>
                 Отель ACADEMIA особняк Шувалова номинирован на&nbsp;премию
-                &laquo;Лучший бутик-отель 2026&raquo;
+                &laquo;Лучший бутик&#8209;отель&nbsp;2026&raquo;
                 от&nbsp;&laquo;Национальной гостиничной премии&raquo;
             </>
         ),
@@ -53,20 +53,26 @@ const copyByLocale: Record<Locale, PageCopy> = {
             <>
                 Dear guest,
                 <br />
-                every vote matters to us!
+                every vote matters to&nbsp;us!
             </>
         ),
         additionalTitle:
             "Thank you for choosing the Academia mansion collection!",
-        lead: "As you know, we often take part in prestigious awards — and, best of all, we win thanks to your support!",
+        lead: (
+            <>
+                As&nbsp;you know, we&nbsp;often take part in&nbsp;prestigious
+                awards&nbsp;&mdash; and, best of&nbsp;all, we&nbsp;win thanks
+                to&nbsp;your support!
+            </>
+        ),
         nomination: (
             <>
-                ACADEMIA Shuvaloff Mansion is nominated for &laquo;Best Boutique
-                Hotel 2026&raquo; at the National Hotel Award
+                ACADEMIA Shuvaloff Mansion is&nbsp;nominated for &ldquo;Best
+                Boutique Hotel&nbsp;2026&rdquo; at&nbsp;the National Hotel Award
             </>
         ),
         voteLabel: "Vote",
-        imageAlt: "Shuvaloff Mansion — nominee for «Best Boutique Hotel 2026»",
+        imageAlt: "Shuvaloff Mansion — nominee for “Best Boutique Hotel 2026”",
     },
 };
 
@@ -113,7 +119,7 @@ export default function NationalAward2026Page({ locale }: { locale: Locale }) {
                     className="relative h-[min(32svh,16rem)] min-h-40 overflow-hidden rounded-md xl:h-[min(32rem,calc(100svh-14rem))]"
                 >
                     <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/02/02_MMI_9908_327_maxiimov-1.avif"
+                        src="https://academia.spb.ru/wp-content/uploads/2026/06/ChatGPT-Image-28-%D0%BC%D0%B0%D1%8F-2026-%D0%B3.-15_43_59-1-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg"
                         alt={copy.imageAlt}
                         fill
                         sizes="(min-width: 1280px) 26rem, 100vw"
