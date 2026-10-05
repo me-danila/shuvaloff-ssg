@@ -327,6 +327,7 @@ function EventsIcon({ className }: HeroIconProps) {
     );
 }
 
+// Звезда «Национальной гостиничной премии» в общем боксе иконок hero.
 function VoteIcon({ className }: HeroIconProps) {
     return <AwardStarIcon size={HERO_ICON_BOX} className={className} />;
 }
@@ -368,179 +369,22 @@ const heroButtons = [
         external: false,
         Icon: EventsIcon,
     },
+    {
+        label: {
+            ru: "Проголосуйте за нас",
+            en: "Vote for us",
+        },
+        href: "/national-award-2026/",
+        external: false,
+        Icon: VoteIcon,
+    },
 ];
-
-const VOTE_HREF = "/national-award-2026/";
-const voteLabel: Record<Locale, string> = {
-    ru: "Проголосуйте за нас",
-    en: "Vote for us",
-};
-
-// button — еще одна кнопка под «Спа» и «Мероприятиями»;
-// left / right — карточка со звездой, как на academia.spb.ru, на уровне
-// кнопок; bottom-left / bottom-right — на уровне заголовка hero.
-export type VoteVariant =
-    | "button"
-    | "left"
-    | "right"
-    | "bottom-left"
-    | "bottom-right";
-
-function VoteCard({ locale }: { locale: Locale }) {
-    return (
-        <Link
-            href={localizeHref(VOTE_HREF, locale)}
-            className="flex w-24 flex-col items-center gap-1.5 rounded-lg bg-black/40 px-2 py-2.5 text-center text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:w-auto xl:gap-3 xl:px-5 xl:py-4"
-        >
-            <AwardStarIcon className="h-auto w-8 xl:w-16" />
-            <span className="text-[10px] font-normal uppercase leading-tight xl:text-xs">
-                {voteLabel[locale]}
-            </span>
-        </Link>
-    );
-}
-
-function HomeHero({
-    locale,
-    heading,
-    voteVariant,
-    isPrimary,
-}: {
-    locale: Locale;
-    heading: React.ReactNode;
-    voteVariant?: VoteVariant;
-    // Первый hero: LCP-приоритет картинки, <h1> и виджет бронирования
-    // (у виджета фиксированные id — на странице он может быть только один).
-    isPrimary: boolean;
-}) {
-    const buttons =
-        voteVariant === "button"
-            ? [
-                  ...heroButtons,
-                  {
-                      label: voteLabel,
-                      href: VOTE_HREF,
-                      external: false,
-                      Icon: VoteIcon,
-                  },
-              ]
-            : heroButtons;
-    const HeadingTag = isPrimary ? "h1" : "p";
-    const isBottomVote =
-        voteVariant === "bottom-left" || voteVariant === "bottom-right";
-
-    return (
-        <section>
-            <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
-                {/* LCP-герой рендерится сразу видимым (без opacity:0-гейта
-                    от framer): preload + priority больше не обесцениваются
-                    ожиданием гидратации. Fade сохранен для не-LCP элементов. */}
-                <div className="absolute inset-0 h-full w-full">
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/06/ChatGPT-Image-28-%D0%BC%D0%B0%D1%8F-2026-%D0%B3.-15_43_59-1-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg"
-                        alt="ACADEMIA Особняк Шувалова"
-                        fill
-                        priority={isPrimary}
-                        fetchPriority={isPrimary ? "high" : undefined}
-                        sizes="100vw"
-                        className="object-cover bg-gray-100"
-                    />
-                </div>
-
-                <div className="absolute inset-x-0 top-20 z-10 flex items-start gap-3 px-8 xl:px-0 xl:top-40 xl:max-w-7xl xl:mx-auto xl:gap-6">
-                    <StaggerContainer className="flex flex-col items-start gap-3">
-                        {buttons.map((b) => (
-                            <StaggerItem key={b.href}>
-                                <Link
-                                    href={
-                                        b.external
-                                            ? b.href
-                                            : localizeHref(b.href, locale)
-                                    }
-                                    target={b.external ? "_blank" : undefined}
-                                    rel={
-                                        b.external
-                                            ? "noopener noreferrer"
-                                            : undefined
-                                    }
-                                    className="flex w-fit items-center gap-3 rounded-lg bg-black/40 px-5 py-3 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:px-6 xl:py-4"
-                                >
-                                    <b.Icon className="shrink-0" />
-                                    <span className="text-sm font-semibold">
-                                        {b.label[locale]}
-                                    </span>
-                                </Link>
-                            </StaggerItem>
-                        ))}
-                    </StaggerContainer>
-
-                    {voteVariant === "left" && (
-                        <FadeIn delay={0.4}>
-                            <VoteCard locale={locale} />
-                        </FadeIn>
-                    )}
-                </div>
-
-                {voteVariant === "right" && (
-                    <div className="pointer-events-none absolute inset-x-0 top-20 z-10 flex justify-end px-8 xl:px-0 xl:top-40 xl:max-w-7xl xl:mx-auto">
-                        <FadeIn delay={0.4} className="pointer-events-auto">
-                            <VoteCard locale={locale} />
-                        </FadeIn>
-                    </div>
-                )}
-
-                <div
-                    className={`absolute md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6 ${
-                        // На узких телефонах карточка над заголовком упирается
-                        // в кнопки — опускаем блок и сжимаем отступ.
-                        isBottomVote ? "bottom-6 gap-2" : "bottom-10 gap-3"
-                    }`}
-                >
-                    {isBottomVote && (
-                        // Мобила: над заголовком (рядом с ним нет места).
-                        // Десктоп: сбоку от заголовка, по центру его строки.
-                        <FadeIn
-                            delay={0.4}
-                            className={`xl:absolute xl:top-7.5 xl:z-10 ${
-                                voteVariant === "bottom-left"
-                                    ? "self-start xl:left-0"
-                                    : "self-end xl:right-0"
-                            }`}
-                        >
-                            <div className="xl:-translate-y-1/2">
-                                <VoteCard locale={locale} />
-                            </div>
-                        </FadeIn>
-                    )}
-                    <FadeIn duration={1}>
-                        <HeadingTag className="font-alistair text-4xl normal-case leading-tight xl:text-5xl xl:mb-4 font-normal">
-                            {heading}
-                        </HeadingTag>
-                    </FadeIn>
-                    {isPrimary && (
-                        <Suspense
-                            fallback={
-                                <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
-                            }
-                        >
-                            <BookingFormDesktop />
-                        </Suspense>
-                    )}
-                </div>
-            </div>
-        </section>
-    );
-}
 
 export default function HomePage({
     locale,
     afterOffers,
-    voteVariants,
 }: {
     locale: Locale;
-    // Тест вариантов кнопки голосования: по hero на каждый вариант подряд.
-    // На главной не задается — один hero без кнопки.
-    voteVariants?: VoteVariant[];
     // Опциональный блок между «Спец. предложениями» и «Особняком с историей».
     // На главной не задается — рендер идентичен прод-странице.
     afterOffers?: React.ReactNode;
@@ -599,23 +443,65 @@ export default function HomePage({
                     ],
                 })}
             />
-            {voteVariants ? (
-                voteVariants.map((variant, i) => (
-                    <HomeHero
-                        key={variant}
-                        locale={locale}
-                        heading={copy.heroHeading}
-                        voteVariant={variant}
-                        isPrimary={i === 0}
-                    />
-                ))
-            ) : (
-                <HomeHero
-                    locale={locale}
-                    heading={copy.heroHeading}
-                    isPrimary
-                />
-            )}
+            <section>
+                <div className="relative overflow-hidden aspect-8/11 xl:aspect-[unset] xl:min-h-screen">
+                    {/* LCP-герой рендерится сразу видимым (без opacity:0-гейта
+                        от framer): preload + priority больше не обесцениваются
+                        ожиданием гидратации. Fade сохранен для не-LCP элементов. */}
+                    <div className="absolute inset-0 h-full w-full">
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/06/ChatGPT-Image-28-%D0%BC%D0%B0%D1%8F-2026-%D0%B3.-15_43_59-1-%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg"
+                            alt="ACADEMIA Особняк Шувалова"
+                            fill
+                            priority
+                            fetchPriority="high"
+                            sizes="100vw"
+                            className="object-cover bg-gray-100"
+                        />
+                    </div>
+
+                    <StaggerContainer className="absolute inset-x-0 top-20 z-10 flex flex-col items-start gap-3 px-8 xl:px-0 xl:top-40 xl:max-w-7xl xl:mx-auto">
+                        {heroButtons.map((b) => (
+                            <StaggerItem key={b.href}>
+                                <Link
+                                    href={
+                                        b.external
+                                            ? b.href
+                                            : localizeHref(b.href, locale)
+                                    }
+                                    target={b.external ? "_blank" : undefined}
+                                    rel={
+                                        b.external
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                    className="flex w-fit items-center gap-3 rounded-lg bg-black/40 px-5 py-3 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-black/60 xl:px-6 xl:py-4"
+                                >
+                                    <b.Icon className="shrink-0" />
+                                    <span className="text-sm font-semibold">
+                                        {b.label[locale]}
+                                    </span>
+                                </Link>
+                            </StaggerItem>
+                        ))}
+                    </StaggerContainer>
+
+                    <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-8 xl:px-0 xl:max-w-7xl xl:mx-auto xl:gap-6">
+                        <FadeIn duration={1}>
+                            <h1 className="font-alistair text-4xl normal-case leading-tight xl:text-5xl xl:mb-4 font-normal">
+                                {copy.heroHeading}
+                            </h1>
+                        </FadeIn>
+                        <Suspense
+                            fallback={
+                                <div className="h-20 animate-pulse bg-white/10 rounded-lg" />
+                            }
+                        >
+                            <BookingFormDesktop />
+                        </Suspense>
+                    </div>
+                </div>
+            </section>
 
             <Suspense fallback={null}>
                 <BookingFormMobile />
