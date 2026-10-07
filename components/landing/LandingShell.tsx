@@ -1,6 +1,6 @@
 import SkipLink from "@/components/a11y/SkipLink";
+import LandingFooter from "@/components/landing/LandingFooter";
 import LandingHeader from "@/components/landing/LandingHeader";
-import Footer from "@/components/layout/Footer";
 import type { LandingDictionary } from "@/data/landing";
 
 /**
@@ -21,13 +21,13 @@ export default function LandingShell({
             <LandingHeader dict={dict} />
             <main
                 id="main-content"
+                data-landing-main
                 tabIndex={-1}
                 className="scroll-mt-24 focus:outline-none"
             >
                 {children}
             </main>
-            {/* Временно — футер основного сайта (EN), пока нет ТЗ на футер лендинга. */}
-            <Footer locale="en" />
+            <LandingFooter dict={dict.footer} locale={dict.locale} />
         </>
     );
 }

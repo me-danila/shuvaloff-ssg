@@ -2,6 +2,7 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useRef } from "react";
+import { LANDING_ARROW_CLASS } from "@/components/landing/constants";
 import CardServiceBig from "@/components/ui/CardServiceBig";
 import { SquareIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
@@ -15,23 +16,24 @@ export type LandingRoomCard = {
 };
 
 // Стрелки — как у «Мира ACADEMIA» на главной (HomeServicesSection).
-const ARROW_CLASS =
-    "flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-stone-100 text-stone-600 transition-colors duration-300 hover:bg-stone-200 active:bg-[#5c1f26] active:text-white";
-
 /**
  * Лента категорий номеров по образцу «Мира ACADEMIA» на главной: карточки
  * CardServiceBig (название, фото, площадь, описание, «Забронировать»),
- * десктоп — 4 в ряд и листание стрелками по кругу, мобила — одна карточка
- * на экран, свайп со snap.
+ * 1 карточка на экран на мобиле, 2 на планшете, 3 на узком ноутбуке, 4 на
+ * десктопе; листание стрелками
+ * по кругу (на всех ширинах — мышью ленту не потянуть) и свайпом.
  */
 export default function LandingRoomsCarousel({
     title,
     cards,
     labels,
+    titleHeightClassName = "",
 }: {
     title: string;
     cards: LandingRoomCard[];
     labels: { book: string; prev: string; next: string };
+    /** Высота заголовков карточек, чтобы фото в ряду стояли ровно. */
+    titleHeightClassName?: string;
 }) {
     const trackRef = useRef<HTMLDivElement>(null);
 
@@ -57,21 +59,24 @@ export default function LandingRoomsCarousel({
     };
 
     return (
-        <section id="rooms" className="scroll-mt-16 py-10 xl:py-16">
-            <div className="mx-6 flex flex-col gap-8 xl:mx-auto xl:w-full xl:max-w-7xl xl:gap-12">
+        <section id="rooms" className="scroll-mt-16 bg-white py-10 xl:py-16">
+            <div className="mx-6 flex flex-col gap-6 xl:mx-auto xl:w-full xl:max-w-7xl xl:gap-9">
                 <FadeUp>
                     <h2 className="text-center text-[#3d2b22]">{title}</h2>
                 </FadeUp>
 
                 <div className="flex flex-col gap-4 xl:gap-6">
+                    {/* data-lenis-prevent-horizontal: горизонтальный жест
+                        тачпада отдаем браузеру, иначе Lenis его глотает. */}
                     <div
                         ref={trackRef}
+                        data-lenis-prevent-horizontal
                         className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto"
                     >
                         {cards.map((card) => (
                             <div
                                 key={card.title}
-                                className="flex min-w-full snap-start xl:min-w-[calc((100%-3rem)/4)]"
+                                className="flex min-w-full snap-start md:min-w-[calc((100%-1rem)/2)] lg:min-w-[calc((100%-2rem)/3)] xl:min-w-[calc((100%-3rem)/4)]"
                             >
                                 <CardServiceBig
                                     title={card.title}
@@ -80,6 +85,7 @@ export default function LandingRoomsCarousel({
                                     href={card.href}
                                     ctaLabel={labels.book}
                                     backgroundClassName="bg-stone-100"
+                                    titleHeightClassName={titleHeightClassName}
                                     meta={
                                         <span className="flex items-center gap-2">
                                             <SquareIcon
@@ -94,12 +100,12 @@ export default function LandingRoomsCarousel({
                         ))}
                     </div>
 
-                    <div className="mt-4 hidden items-center justify-center gap-6 xl:mt-6 xl:flex">
+                    <div className="mt-4 flex items-center justify-center gap-6 xl:mt-6">
                         <button
                             type="button"
                             aria-label={labels.prev}
                             onClick={() => go(-1)}
-                            className={ARROW_CLASS}
+                            className={LANDING_ARROW_CLASS}
                         >
                             <ArrowLeftIcon size={20} weight="light" />
                         </button>
@@ -107,7 +113,7 @@ export default function LandingRoomsCarousel({
                             type="button"
                             aria-label={labels.next}
                             onClick={() => go(1)}
-                            className={ARROW_CLASS}
+                            className={LANDING_ARROW_CLASS}
                         >
                             <ArrowRightIcon size={20} weight="light" />
                         </button>

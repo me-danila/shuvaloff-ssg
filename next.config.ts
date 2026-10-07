@@ -29,6 +29,11 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "static.academia.spb.ru",
             },
+            {
+                // Фото ресторана с его сайта (лендинги, плитка «Ресторан»).
+                protocol: "https",
+                hostname: "static.tildacdn.com",
+            },
         ],
     },
 };

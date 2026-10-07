@@ -2,13 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { detectLocaleFromPath } from "@/lib/i18n/routing";
+import { detectHtmlLang, type HtmlLang } from "@/lib/i18n/routing";
 
 declare global {
     interface Window {
         __academiaTravelLine?: {
-            refresh: (locale?: "ru" | "en") => void;
-            init: (locale?: "ru" | "en") => void;
+            refresh: (locale?: HtmlLang) => void;
+            init: (locale?: HtmlLang) => void;
         };
     }
 }
@@ -25,7 +25,9 @@ export default function TravelLineManager() {
     const pathname = usePathname() || "/";
 
     useEffect(() => {
-        const locale = detectLocaleFromPath(pathname);
+        // Язык виджетов = язык страницы: на лендингах /it/, /de/, … TravelLine
+        // открывается на языке лендинга, а не на английском.
+        const locale = detectHtmlLang(pathname);
         const onReady = () => {
             window.__academiaTravelLine?.refresh(locale);
         };

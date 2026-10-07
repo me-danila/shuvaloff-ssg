@@ -41,10 +41,14 @@
                   },
               };
 
+    // ru — основной сайт, en — /en/, остальные — лендинги /it/, /de/, …
+    var LOCALES = ["ru", "en", "it", "de", "fr", "es"];
+
     function getLocale(locale) {
-        if (locale === "en" || locale === "ru") return locale;
-        var path = w.location && w.location.pathname;
-        return path === "/en" || path.indexOf("/en/") === 0 ? "en" : "ru";
+        if (LOCALES.indexOf(locale) !== -1) return locale;
+        var path = (w.location && w.location.pathname) || "/";
+        var segment = path.split("/")[1] || "";
+        return LOCALES.indexOf(segment) !== -1 ? segment : "ru";
     }
 
     function getIntegration() {

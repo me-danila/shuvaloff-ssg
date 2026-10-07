@@ -39,7 +39,10 @@ export default function LandingServices({
         <section className="py-8 xl:py-10">
             {/* Видимого заголовка нет по макету; h2 остается для скринридеров. */}
             <h2 className="sr-only">{dict.title}</h2>
-            <StaggerContainer className="no-scrollbar flex snap-x snap-mandatory scroll-px-6 overflow-x-auto px-6 lg:grid lg:snap-none lg:grid-cols-5 lg:grid-rows-[auto_auto_1fr] lg:overflow-visible xl:mx-auto xl:max-w-7xl xl:px-0">
+            <StaggerContainer
+                data-lenis-prevent-horizontal
+                className="no-scrollbar flex snap-x snap-mandatory scroll-px-6 overflow-x-auto px-6 lg:grid lg:snap-none lg:grid-cols-5 lg:grid-rows-[auto_auto_1fr] lg:overflow-visible xl:mx-auto xl:max-w-7xl xl:px-0"
+            >
                 {dict.items.map((item) => {
                     const ItemIcon = ICONS[item.icon];
                     return (

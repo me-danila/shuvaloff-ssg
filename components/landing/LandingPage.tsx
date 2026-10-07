@@ -1,6 +1,9 @@
 import { LANDING_HERO_ATTR } from "@/components/landing/constants";
+import LandingContacts from "@/components/landing/LandingContacts";
 import LandingMansion from "@/components/landing/LandingMansion";
+import LandingOffers from "@/components/landing/LandingOffers";
 import LandingRooms from "@/components/landing/LandingRooms";
+import LandingScenarios from "@/components/landing/LandingScenarios";
 import LandingServices from "@/components/landing/LandingServices";
 import HeroFullscreen from "@/components/sections/HeroFullscreen";
 import type { LandingDictionary } from "@/data/landing";
@@ -31,7 +34,10 @@ export default function LandingPage({ dict }: { dict: LandingDictionary }) {
             />
             <LandingServices dict={dict.services} />
             <LandingMansion dict={dict.mansion} />
-            <LandingRooms dict={dict.rooms} />
+            <LandingRooms dict={dict.rooms} locale={dict.locale} />
+            <LandingOffers dict={dict.offers} locale={dict.locale} />
+            <LandingScenarios dict={dict.scenarios} locale={dict.locale} />
+            <LandingContacts dict={dict.contacts} locale={dict.locale} />
         </>
     );
 }

@@ -23,6 +23,11 @@ type CardServiceBigProps = {
     href?: string;
     /** Строка под фото (например, площадь номера). */
     meta?: React.ReactNode;
+    /**
+     * Высота заголовка. По умолчанию фиксированная — под названия услуг в
+     * 2–3 строки; для однострочных названий (номера) — "" (по содержимому).
+     */
+    titleHeightClassName?: string;
 };
 
 export default function CardServiceBig({
@@ -36,6 +41,7 @@ export default function CardServiceBig({
     backgroundClassName = "bg-white",
     href: hrefOverride,
     meta,
+    titleHeightClassName = "h-[6.5rem]",
 }: CardServiceBigProps) {
     const locale = useLocale();
     const isExternal = Boolean(externalLink);
@@ -58,7 +64,9 @@ export default function CardServiceBig({
         <article
             className={`flex w-full flex-col overflow-hidden rounded-[4px] ${backgroundClassName} pb-7 text-center`}
         >
-            <h3 className="flex h-[6.5rem] items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]">
+            <h3
+                className={`flex ${titleHeightClassName} items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]`}
+            >
                 <a
                     href={href}
                     target={isExternal ? "_blank" : undefined}

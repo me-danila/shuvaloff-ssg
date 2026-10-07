@@ -136,6 +136,16 @@ select {
     }
 }
 
+/* Лендинги: плавная прокрутка к якорям (меню Rooms / History / Offers,
+   «наверх» в футере). scroll-margin-top секций учитывается браузером.
+   Lenis на десктопе не мешает: свою прокрутку он делает с behavior
+   "instant". Только лендинги — основной сайт не трогаем. */
+@media (prefers-reduced-motion: no-preference) {
+    html:has([data-landing-main]) {
+        scroll-behavior: smooth;
+    }
+}
+
 /* HotBot */
 html body.hotbot-widget-container {
     --font-family: var(--font-century), sans-serif;

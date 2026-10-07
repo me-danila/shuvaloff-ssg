@@ -107,3 +107,19 @@ export const localizeHref = (href: string, locale: Locale): string => {
     const enPath = path === "/" ? "/en/" : `/en${path}`;
     return `${enPath}${url.search}${url.hash}`;
 };
+
+/**
+ * Ссылка с лендинга. EN-лендинг ведет на страницы полного EN-сайта
+ * (/en/booking/…), остальные — на свои страницы под префиксом языка
+ * (/it/booking/…). Query и hash сохраняются: TravelLine читает be-offer,
+ * be-room, promo-code-plain из адреса страницы.
+ */
+export const landingHref = (href: string, locale: LandingLocale): string => {
+    if (locale === "en" || isExternalHref(href)) {
+        return localizeHref(href, "en");
+    }
+
+    const url = new URL(href, "https://academia.local");
+    const path = stripLocalePrefix(url.pathname);
+    return `/${locale}${path}${url.search}${url.hash}`;
+};

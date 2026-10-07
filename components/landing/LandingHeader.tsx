@@ -2,10 +2,7 @@
 
 import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import {
-    LANDING_BOOKING_ANCHOR,
-    LANDING_HERO_ATTR,
-} from "@/components/landing/constants";
+import { LANDING_HERO_ATTR } from "@/components/landing/constants";
 import {
     menuItemVariants,
     menuListVariants,
@@ -17,7 +14,11 @@ import BurgerButton from "@/components/ui/BurgerButton";
 import Button from "@/components/ui/Button";
 import Image from "@/components/ui/OptimizedImage";
 import { LANDING_LANGUAGE_NAMES, type LandingDictionary } from "@/data/landing";
-import { LANDING_LOCALES, LANDING_PATHS } from "@/lib/i18n/routing";
+import {
+    LANDING_LOCALES,
+    LANDING_PATHS,
+    landingHref,
+} from "@/lib/i18n/routing";
 
 const MOBILE_MENU_ID = "landing-mobile-menu";
 
@@ -43,6 +44,9 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
     const headerRef = useRef<HTMLElement>(null);
     // SSR и первый кадр — поверх hero: лендинг всегда начинается с него.
     const [overHero, setOverHero] = useState(true);
+    // Якоря — с путем лендинга: хедер стоит и на /xx/booking/, где секций
+    // нет. На самом лендинге браузер просто прокручивает к секции.
+    const home = LANDING_PATHS[dict.locale];
     const [menuOpen, setMenuOpen] = useState(false);
     // Тот же порог, что у основного хедера (components/layout/Header).
     const [scrolled, setScrolled] = useState(false);
@@ -127,7 +131,7 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                             {dict.ui.nav.map((item) => (
                                 <li key={item.href}>
                                     <a
-                                        href={item.href}
+                                        href={`${home}${item.href}`}
                                         className="whitespace-nowrap text-sm font-semibold uppercase transition-opacity duration-200 hover:opacity-70"
                                     >
                                         {item.label}
@@ -160,7 +164,7 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                             }`}
                         >
                             <Button
-                                href={LANDING_BOOKING_ANCHOR}
+                                href={landingHref("/booking/", dict.locale)}
                                 variant="primary"
                                 size="xs"
                             >
@@ -169,7 +173,7 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                         </div>
                         <div className="hidden lg:block">
                             <Button
-                                href={LANDING_BOOKING_ANCHOR}
+                                href={landingHref("/booking/", dict.locale)}
                                 variant="primary"
                                 size="xs"
                             >
@@ -225,7 +229,7 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                                         variants={menuItemVariants}
                                     >
                                         <a
-                                            href={item.href}
+                                            href={`${home}${item.href}`}
                                             onClick={closeMenu}
                                             className="block py-3 text-sm uppercase text-brand-brown transition-colors hover:text-brand-brown"
                                         >

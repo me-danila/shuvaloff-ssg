@@ -49,9 +49,60 @@ export type LandingDictionary = {
         prev: string;
         next: string;
     };
+    /** Спецпредложения: 4 карточки, клик — форма бронирования. */
+    offers: {
+        title: string;
+        items: LandingOffer[];
+        book: string;
+    };
+    /**
+     * Сценарии особняка: 3 крупные карточки тематических пакетов, клик —
+     * бронирование с оффером пакета.
+     */
+    scenarios: {
+        title: string;
+        items: LandingOffer[];
+        book: string;
+    };
+    /** Контакты: карта Google слева, адрес / e-mail / WhatsApp справа. */
+    contacts: {
+        title: string;
+        subtitle: string;
+        address: string;
+        whatsapp: string;
+        mapTitle: string;
+        book: string;
+    };
+    /**
+     * Страница бронирования лендинга (/it/booking/ …): заголовок и строка
+     * про GENIUS, как на /booking/ основного сайта. У EN-лендинга
+     * бронирование — /en/booking/ полного сайта, эти тексты там не нужны.
+     */
+    booking: {
+        metaTitle: string;
+        metaDescription: string;
+        title: string;
+        line1: string;
+        line2: string;
+        line3: string;
+    };
+    /** Футер: языки, соцсети, юридическая информация. */
+    footer: {
+        home: string;
+        languages: string;
+        social: string;
+        socialText: string;
+        legal: string;
+        policy: string;
+        legalInfo: string;
+        copyright: string;
+        company: string;
+    };
     /** «Исторический особняк в центре»: карточки с листалкой. */
     mansion: {
         title: string;
+        /** 4 плитки под заголовком, перед слайдером «История / Локация». */
+        tiles: LandingMansionTile[];
         slides: LandingMansionSlide[];
         prev: string;
         next: string;
@@ -67,6 +118,31 @@ export type LandingRoomCategory = {
     rooms: string[];
     title: string;
     text: string;
+};
+
+/**
+ * Спецпредложение или сценарий. Фото, ссылка бронирования (с оффером/
+ * промокодом) и детальная страница — из data/SalesData (AllSales.en) по
+ * bookingUrl.
+ */
+export type LandingOffer = {
+    bookingUrl: string;
+    title: string;
+    text: string;
+    /** CSS object-position фото, если кадр обрезается (вертикальная карточка). */
+    imagePosition?: string;
+};
+
+/**
+ * Плитка блока «Особняк»: фото, название, текст; вся плитка — ссылка
+ * (внешние — в новой вкладке, «#…» — якорь секции лендинга).
+ */
+export type LandingMansionTile = {
+    title: string;
+    text: string;
+    href: string;
+    external?: boolean;
+    image: string;
 };
 
 /** Слайд блока «Особняк»: фото слева; надзаголовок, заголовок, текст справа. */

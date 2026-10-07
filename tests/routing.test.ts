@@ -5,6 +5,7 @@ import {
     detectLocaleFromPath,
     hasEnglishVersion,
     isExternalHref,
+    landingHref,
     localizeHref,
     normalizePath,
     RU_ONLY_SEGMENTS,
@@ -262,5 +263,30 @@ describe("landing locales", () => {
         expect(detectHtmlLang("/it/")).toBe("it");
         expect(detectHtmlLang("/en/visit/")).toBe("en");
         expect(detectHtmlLang("/rooms/")).toBe("ru");
+    });
+});
+
+describe("landingHref", () => {
+    test("EN landing links to the full EN site", () => {
+        expect(landingHref("/booking/?be-offer=1", "en")).toBe(
+            "/en/booking/?be-offer=1",
+        );
+    });
+
+    test("landing-only locales link under their own prefix", () => {
+        expect(landingHref("/booking?be-offer=588665", "it")).toBe(
+            "/it/booking?be-offer=588665",
+        );
+        expect(landingHref("/booking/?&be-room=7#x", "de")).toBe(
+            "/de/booking/?&be-room=7#x",
+        );
+    });
+
+    test("drops an existing /en prefix before re-prefixing", () => {
+        expect(landingHref("/en/booking/", "fr")).toBe("/fr/booking/");
+    });
+
+    test("leaves external links untouched", () => {
+        expect(landingHref("https://wa.me/1", "es")).toBe("https://wa.me/1");
     });
 });
