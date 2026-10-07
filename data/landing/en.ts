@@ -58,4 +58,35 @@ export const en: LandingDictionary = {
             },
         ],
     },
+    mansion: {
+        title: "A historic mansion in the city centre",
+        slides: [
+            {
+                label: "History",
+                image: {
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/03/img250-1.png",
+                    alt: "Drawing of the ACADEMIA Shuvalov Mansion façade",
+                },
+                title: "A mansion steeped in history",
+                paragraphs: [
+                    "The mansion that now houses the hotel is situated on Mokhovaya Street, which dates back to the time when the city on the Neva was first founded. Originally, the area was home to ‘khamovniki’—weavers who made sails for the fleet.",
+                    "In 1854, the plot was purchased by Major-General and Actual State Councillor Count Andrei Pavlovich Shuvalov. On his instructions, the two-storey building was converted into a three-storey mansion with a grand façade and the family coat of arms — three unicorns, the heraldic symbol of the Shuvalov family. Later, in 1913–1914, the interiors of the second floor were designed by the architect Ivan Fomin for the Count’s daughter, Elizaveta Vorontsova-Dashkova.",
+                    "Today, the carefully restored building, with its lovingly preserved heritage details, is home to the ACADEMIA Shuvalov Mansion Hotel. The mansion has been given a new lease of life and once again warmly welcomes guests.",
+                ],
+            },
+            {
+                label: "Location",
+                image: {
+                    src: "https://academia.spb.ru/wp-content/uploads/2025/09/fasad.avif",
+                    alt: "Façade of the ACADEMIA Shuvalov Mansion Hotel on Mokhovaya Street",
+                },
+                title: "A stone’s throw from the city centre",
+                paragraphs: [
+                    "The mansion is situated on Mokhovaya Street, next to the Summer Garden, Mikhailovsky Castle and the Fontanka embankment — within walking distance of the city centre’s main attractions.",
+                ],
+            },
+        ],
+        prev: "Previous",
+        next: "Next",
+    },
 };

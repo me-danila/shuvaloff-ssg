@@ -41,6 +41,22 @@ export type LandingDictionary = {
             text: string;
         }[];
     };
+    /** «Исторический особняк в центре»: карточки с листалкой. */
+    mansion: {
+        title: string;
+        slides: LandingMansionSlide[];
+        prev: string;
+        next: string;
+    };
+};
+
+/** Слайд блока «Особняк»: фото слева; надзаголовок, заголовок, текст справа. */
+export type LandingMansionSlide = {
+    /** Надзаголовок слайда и подпись в указателе между стрелками. */
+    label: string;
+    image: { src: string; alt: string };
+    title: string;
+    paragraphs: string[];
 };
 
 /** Ключ иконки преимущества — сами иконки в components/landing/LandingServices. */

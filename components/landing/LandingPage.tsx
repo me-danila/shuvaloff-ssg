@@ -1,4 +1,5 @@
 import { LANDING_HERO_ATTR } from "@/components/landing/constants";
+import LandingMansion from "@/components/landing/LandingMansion";
 import LandingServices from "@/components/landing/LandingServices";
 import HeroFullscreen from "@/components/sections/HeroFullscreen";
 import type { LandingDictionary } from "@/data/landing";
@@ -28,6 +29,7 @@ export default function LandingPage({ dict }: { dict: LandingDictionary }) {
                 frameData={{ [LANDING_HERO_ATTR]: "" }}
             />
             <LandingServices dict={dict.services} />
+            <LandingMansion dict={dict.mansion} />
         </>
     );
 }

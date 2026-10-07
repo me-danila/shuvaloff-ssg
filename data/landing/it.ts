@@ -24,4 +24,5 @@ export const it: LandingDictionary = {
     // Заглушка: EN-тексты до утверждения переводов.
     hero: en.hero,
     services: en.services,
+    mansion: en.mansion,
 };
