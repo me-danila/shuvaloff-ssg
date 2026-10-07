@@ -1,3 +1,4 @@
+import { en } from "./en";
 import type { LandingDictionary } from "./types";
 
 export const fr: LandingDictionary = {
@@ -11,7 +12,10 @@ export const fr: LandingDictionary = {
     ui: {
         skipLink: "Aller au contenu principal",
         languageSwitcherLabel: "Langue",
+        navLabel: "Principal",
         book: "Réserver",
+        // Заглушка: EN-подписи до утверждения переводов.
+        nav: en.ui.nav,
     },
     hero: {
         title: "ACADEMIA Mansion Shuvaloff",

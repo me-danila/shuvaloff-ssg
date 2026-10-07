@@ -11,7 +11,13 @@ export const en: LandingDictionary = {
     ui: {
         skipLink: "Skip to main content",
         languageSwitcherLabel: "Language",
+        navLabel: "Main",
         book: "Book",
+        nav: [
+            { label: "Rooms", href: "#rooms" },
+            { label: "History", href: "#history" },
+            { label: "Offers", href: "#offers" },
+        ],
     },
     hero: {
         title: "ACADEMIA Mansion Shuvaloff",

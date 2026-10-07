@@ -18,7 +18,10 @@ export type LandingDictionary = {
     ui: {
         skipLink: string;
         languageSwitcherLabel: string;
+        navLabel: string;
         book: string;
+        /** Навигация по секциям лендинга (якоря: #rooms, #history, …). */
+        nav: { label: string; href: `#${string}` }[];
     };
     hero: {
         title: string;
