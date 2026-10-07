@@ -1,3 +1,4 @@
+import { landingLlmsLines } from "@/data/landing";
 import { AllRooms, type Room } from "@/data/RoomsData";
 import { AllServices, type Service } from "@/data/ServicesData";
 import { getAllPosts } from "@/lib/blog";
@@ -138,6 +139,12 @@ Today, the carefully restored building with preserved heritage elements has ente
 - [Best Boutique Hotel 2026 nomination](${SITE_URL}/en/national-award-2026/): Shuvaloff Mansion is nominated for «Best Boutique Hotel 2026» at the National Hotel Award — voting on hotelawards.ru
 - [Weddings](${SITE_URL}/en/wedding/): weddings in the historic interiors
 - [Reviews](${SITE_URL}/en/reviews/): guest reviews
+
+## Other languages
+
+Short one-page guides for international guests (rooms, offers, booking in the visitor's language):
+
+${landingLlmsLines(SITE_URL)}
 
 ## Служебное
 

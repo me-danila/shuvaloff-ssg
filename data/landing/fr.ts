@@ -7,7 +7,7 @@ import type { LandingDictionary } from "./types";
 // типографика: неразрывный пробел перед « : », « % » и внутри « ».
 export const fr: LandingDictionary = {
     locale: "fr",
-    draft: true,
+    draft: false,
     meta: {
         title: "ACADEMIA Mansion Shuvaloff — Hôtel boutique à Saint-Pétersbourg",
         description:

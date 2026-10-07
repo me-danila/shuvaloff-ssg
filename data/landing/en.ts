@@ -2,7 +2,7 @@ import type { LandingDictionary } from "./types";
 
 export const en: LandingDictionary = {
     locale: "en",
-    draft: true,
+    draft: false,
     meta: {
         title: "ACADEMIA Mansion Shuvaloff — Boutique hotel in Saint Petersburg",
         description:
@@ -73,10 +73,7 @@ export const en: LandingDictionary = {
                 text: "Signature cuisine at the ACADEMIA Shuvalov restaurant",
                 href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
                 external: true,
-                // Зал ресторана — обложка shuvaloff.academia-rest.ru (Tilda CDN).
-                // TODO: перезалить на academia.spb.ru, чтобы не зависеть от
-                // сайта ресторана.
-                image: "https://static.tildacdn.com/tild6562-6162-4132-a230-623735613963/visualelectric-17508.jpg",
+                image: "https://academia.spb.ru/wp-content/uploads/2026/10/8508439979846534-opt-1920.webp",
             },
             {
                 title: "ACADEMIA Massage & Spa",

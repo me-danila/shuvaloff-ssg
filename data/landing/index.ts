@@ -1,4 +1,4 @@
-import type { LandingLocale } from "@/lib/i18n/routing";
+import { LANDING_PATHS, type LandingLocale } from "@/lib/i18n/routing";
 import { de } from "./de";
 import { en } from "./en";
 import { es } from "./es";
@@ -24,3 +24,16 @@ export const LANDING_LANGUAGE_NAMES: Record<LandingLocale, string> = {
     fr: "Français",
     es: "Español",
 };
+
+/**
+ * Строки llms.txt / llms-full.txt про опубликованные лендинги (draft: false):
+ * «- [Тайтл](URL) (Язык): описание». Пусто, пока все лендинги черновики.
+ */
+export const landingLlmsLines = (siteUrl: string): string =>
+    Object.values(LANDING_DICTIONARIES)
+        .filter((dict) => !dict.draft)
+        .map(
+            (dict) =>
+                `- [${dict.meta.title}](${new URL(LANDING_PATHS[dict.locale], siteUrl)}) (${LANDING_LANGUAGE_NAMES[dict.locale]}): ${dict.meta.description}`,
+        )
+        .join("\n");

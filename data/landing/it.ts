@@ -6,7 +6,7 @@ import type { LandingDictionary } from "./types";
 // интерфейса, контакты и футер — перевод по EN-версии.
 export const it: LandingDictionary = {
     locale: "it",
-    draft: true,
+    draft: false,
     meta: {
         title: "ACADEMIA Mansion Shuvaloff — Boutique hotel a San Pietroburgo",
         description:

@@ -1,3 +1,4 @@
+import { landingLlmsLines } from "@/data/landing";
 import { getAllPosts } from "@/lib/blog";
 import { HOTEL_ADDRESS, HOTEL_CONTACTS, SITE_URL } from "@/lib/seo/site";
 
@@ -48,6 +49,12 @@ ${articles}
 - [History (EN)](${SITE_URL}/en/history/): history of the Shuvalov mansion
 - [New Year 2027 at the mansion (EN)](${SITE_URL}/en/new-year-2027/): Count's New Year on 31 December 2026 from 8:00 PM — a theatrical 19th-century salon programme, the Count's family, a festive dinner with live music
 - [Best Boutique Hotel 2026 nomination (EN)](${SITE_URL}/en/national-award-2026/): Shuvaloff Mansion is nominated for «Best Boutique Hotel 2026» at the National Hotel Award — voting on hotelawards.ru
+
+## Other languages
+
+Short one-page guides for international guests (rooms, offers, booking in the visitor's language):
+
+${landingLlmsLines(SITE_URL)}
 
 ## Служебное
 
