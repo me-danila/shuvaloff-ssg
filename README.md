@@ -61,27 +61,22 @@ the export*).
 ```
 next build                    # SSG render → out/ (HTML, JS, RSC payloads)
 next-image-export-optimizer   # rewrite <Image> assets → WEBP in out/, fetch + cache remote images
-node scripts/fix-en-lang.mjs  # post-process out/en/*.html to fix EN locale signals
+node scripts/fix-locale-lang.mjs  # post-process out/{en,it,de,fr,es}/*.html: <html lang>
 ```
 
-### Why `fix-en-lang.mjs` exists
+### Why `fix-locale-lang.mjs` exists
 
-There is a **single shared root layout** (`app/layout.tsx`); there is no
-`app/en/layout.tsx`. At build time that layout cannot know whether it is
-rendering an RU or EN route, so it hardcodes RU-flavoured locale signals that
-every EN page inherits. The Metadata API cannot override some of them per page
-(`<html lang>` is not settable via metadata; a child `openGraph` *replaces*
-rather than deep-merges the layout's, so patching `og:locale` there would drop
-`og:image`/`og:type`). The script therefore rewrites three things **in
-`out/en/*.html` only**, leaving RU output untouched:
-
-1. `<html lang="ru">` → `lang="en"`
-2. `og:locale` `ru_RU`→`en_US` and `og:locale:alternate` `en_US`→`ru_RU`
-3. the `WebSite` JSON-LD node's `"inLanguage":"ru"` → `"en"`
+There is a **single shared root layout** (`app/layout.tsx`) that hardcodes
+`<html lang="ru">`; the Metadata API cannot set `<html lang>` per route. The
+script rewrites `lang` in the first `<html>` tag of every HTML file under
+`out/en/` (→ `en`) and the landing dirs `out/it|de|fr|es/` (→ that language),
+leaving RU output untouched. The other locale signals (`og:locale`, WebSite
+`inLanguage`) are emitted natively by the per-locale layouts and metadata
+builders, so they need no patching.
 
 It uses Node built-ins only, is tightly scoped by anchored regexes, and runs as
-the **final** build step. Because it operates on `out/en/`, corrected locale
-signals only appear in a real `bun run build`, never in `bun dev`.
+the **final** build step. Corrected `lang` therefore only appears in a real
+`bun run build`, never in `bun dev`.
 
 At runtime, `components/i18n/HtmlLangSync.tsx` also syncs
 `document.documentElement.lang` from the pathname after hydration.
@@ -95,7 +90,10 @@ app/
   <section>/page.tsx    # RU route: exports metadata + renders components/pages/<X>Page
   rooms/[slug]/         # dynamic routes: generateStaticParams + dynamicParams=false
   blog/[slug]/          # MDX blog post route (+ /blog/page/[n], /blog/author, feed.xml)
-  en/                   # English mirror; en/<section>/page.tsx renders the same <X>Page locale="en"
+  (ru)/                 # RU site (route group, URLs at the root) — SiteShell locale="ru"
+  en/(site)/            # English mirror; renders the same <X>Page locale="en" in SiteShell
+  en/(landing)/visit/   # /en/visit/ landing — LandingShell, no full-site chrome
+  (landing)/[lang]/     # /it/ /de/ /fr/ /es/ landings — generateStaticParams, dynamicParams=false
   robots.ts sitemap.ts manifest.ts   # generated metadata routes
   llms.txt/ llms-full.txt/           # LLM-facing text routes
 
@@ -104,6 +102,7 @@ components/
   sections/  ui/  layout/  blog/  seo/  a11y/  i18n/
 
 content/blog/*.mdx      # blog posts (export `meta` + default MDX component)
+data/landing/*.ts       # landing dictionaries, one per language (+ types.ts)
 data/*.tsx              # RoomsData / ServicesData / EventsData / SalesData / smiData, keyed by locale
 lib/
   i18n/routing.tsx      # pure locale logic (localizeHref, stripLocalePrefix, …)
@@ -113,7 +112,7 @@ lib/
   seo/site.ts           # site constants (URL, name, address, contacts, images)
   blog.ts               # MDX post loading, related posts, pagination
 scripts/
-  fix-en-lang.mjs       # post-build EN locale fix (part of `build`)
+  fix-locale-lang.mjs   # post-build <html lang> fix for en + landings (part of `build`)
   indexnow.mjs          # IndexNow submission (post-deploy)
 public/scripts/*.js     # third-party widgets loaded from the layout (see Conventions)
 mdx-components.tsx       # global MDX element mapping (img→figure, custom Columns/FAQ, etc.)
@@ -139,6 +138,28 @@ TypeScript path alias: `@/*` → repo root (`tsconfig.json`).
   (`RU_ONLY_SEGMENTS`). They emit no `en` hreflang and point `x-default` at the
   RU page. `getLocaleAlternates` (`lib/i18n/metadata.ts`) encodes this for
   canonical + `hreflang`.
+
+
+### Landings (it / de / fr / es + en/visit)
+
+- One-page landings, independent from the full site: own `LandingShell`
+  (`components/landing/`) with its own header/footer. One template for all
+  languages; each language is a dictionary in `data/landing/<lang>.ts`.
+  Optional dictionary fields = optional sections (e.g. visa info on EN only).
+- URLs: `/it/`, `/de/`, `/fr/`, `/es/` (`app/(landing)/[lang]/`) and
+  `/en/visit/` (`app/en/(landing)/visit/`). Source of truth:
+  `LANDING_LOCALES` / `LANDING_PATHS` in `lib/i18n/routing.tsx`.
+- hreflang: a **separate cluster** from the full site — all five landings
+  link to each other, `x-default` → `/en/visit/` (`getLandingAlternates`).
+  `/en/` and `/en/visit/` never reference each other.
+- `detectLocaleFromPath` returns `en` on `/it|de|fr|es/`, so shared widgets
+  (TravelLine, modals) that only know ru/en fall back to English there;
+  `detectHtmlLang` gives the exact language for `<html lang>`.
+- `draft: true` in a dictionary → `noindex` and excluded from the sitemap.
+  Flip it to `false` once the texts are approved.
+- Adding a language: new dictionary + entry in `LANDING_ONLY_LOCALES`,
+  `LANDING_PATHS`, `LANDING_OG_LOCALE` and `LOCALES` in
+  `scripts/fix-locale-lang.mjs`.
 
 ## SEO / metadata
 

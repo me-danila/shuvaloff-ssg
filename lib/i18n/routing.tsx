@@ -5,9 +5,54 @@ export const normalizePath = (value: string): string => {
     return normalized || "/";
 };
 
+/**
+ * Языки одностраничных лендингов. `en` — /en/visit/ внутри EN-ветки, остальные
+ * живут в собственном корне (/it/, /de/, …) и полного сайта не имеют.
+ */
+export const LANDING_LOCALES = ["en", "it", "de", "fr", "es"] as const;
+export type LandingLocale = (typeof LANDING_LOCALES)[number];
+
+/** Языки, у которых есть только лендинг (без полного сайта). */
+export const LANDING_ONLY_LOCALES = ["it", "de", "fr", "es"] as const;
+export type LandingOnlyLocale = (typeof LANDING_ONLY_LOCALES)[number];
+
+export const LANDING_PATHS: Record<LandingLocale, string> = {
+    en: "/en/visit/",
+    it: "/it/",
+    de: "/de/",
+    fr: "/fr/",
+    es: "/es/",
+};
+
+/** Язык документа: всё, что может стоять в `<html lang>`. */
+export type HtmlLang = Locale | LandingOnlyLocale;
+
+export const isLandingOnlyLocale = (
+    value: string,
+): value is LandingOnlyLocale =>
+    (LANDING_ONLY_LOCALES as readonly string[]).includes(value);
+
+/** `it` для /it и /it/…, иначе null (граница по сегменту: /italy — null). */
+export const detectLandingOnlyLocale = (
+    value: string,
+): LandingOnlyLocale | null => {
+    const segment = value.split("/")[1] ?? "";
+    return isLandingOnlyLocale(segment) ? segment : null;
+};
+
+/**
+ * Локаль контента полного сайта (ru | en). Лендинги без полного сайта
+ * (/it/, /de/, …) получают `en`: общие компоненты и виджеты (TravelLine,
+ * модалки) умеют только ru/en, и иностранцу английский ближе русского.
+ */
 export const detectLocaleFromPath = (value: string): Locale => {
+    if (detectLandingOnlyLocale(value)) return "en";
     return value === "/en" || value.startsWith("/en/") ? "en" : "ru";
 };
+
+/** Язык для `<html lang>`: точный язык лендинга или ru/en полного сайта. */
+export const detectHtmlLang = (value: string): HtmlLang =>
+    detectLandingOnlyLocale(value) ?? detectLocaleFromPath(value);
 
 export const stripLocalePrefix = (value: string): string => {
     if (value === "/en" || value === "/en/") {

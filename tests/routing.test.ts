@@ -1,5 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import {
+    detectHtmlLang,
+    detectLandingOnlyLocale,
     detectLocaleFromPath,
     hasEnglishVersion,
     isExternalHref,
@@ -240,5 +242,25 @@ describe("locale round-trip invariant", () => {
         "/policy/cookies",
     ])("RU-only path %p has no english version", (path) => {
         expect(hasEnglishVersion(path)).toBe(false);
+    });
+});
+
+describe("landing locales", () => {
+    test("landing roots are detected by segment", () => {
+        expect(detectLandingOnlyLocale("/it/")).toBe("it");
+        expect(detectLandingOnlyLocale("/de")).toBe("de");
+        expect(detectLandingOnlyLocale("/italy/")).toBeNull();
+        expect(detectLandingOnlyLocale("/en/visit/")).toBeNull();
+    });
+
+    test("landing-only paths fall back to en content locale", () => {
+        expect(detectLocaleFromPath("/fr/")).toBe("en");
+        expect(detectLocaleFromPath("/es")).toBe("en");
+    });
+
+    test("html lang is exact for landings, ru/en for the full site", () => {
+        expect(detectHtmlLang("/it/")).toBe("it");
+        expect(detectHtmlLang("/en/visit/")).toBe("en");
+        expect(detectHtmlLang("/rooms/")).toBe("ru");
     });
 });

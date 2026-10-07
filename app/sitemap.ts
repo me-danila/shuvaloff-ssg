@@ -1,9 +1,11 @@
 import { execSync } from "node:child_process";
 import type { MetadataRoute } from "next";
 import { getPublishedEvents } from "@/data/EventsData";
+import { LANDING_DICTIONARIES } from "@/data/landing";
 import { AllRooms } from "@/data/RoomsData";
 import { AllServices } from "@/data/ServicesData";
 import { getAllPosts } from "@/lib/blog";
+import { LANDING_PATHS } from "@/lib/i18n/routing";
 import { getAbsoluteUrl } from "@/lib/seo/site";
 
 export const dynamic = "force-static";
@@ -54,8 +56,8 @@ function gitLastModified(relPath: string): Date {
 
 /** Map a sitemap route path to the page.tsx source file that renders it. */
 function routeSourceFile(path: string, locale: "ru" | "en"): string {
-    // RU routes live in the app/(ru) route group (URLs unaffected).
-    const base = locale === "en" ? "app/en" : "app/(ru)";
+    // RU and EN routes live in route groups (URLs unaffected).
+    const base = locale === "en" ? "app/en/(site)" : "app/(ru)";
     return path === "/" ? `${base}/page.tsx` : `${base}${path}page.tsx`;
 }
 
@@ -159,6 +161,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: "weekly" as const,
             priority: path === "/" ? 0.9 : 0.7,
         })),
+        // Лендинги: только утверждённые (draft: false). Источник даты —
+        // словарь языка, тексты меняются именно там.
+        ...Object.values(LANDING_DICTIONARIES)
+            .filter((dict) => !dict.draft)
+            .map((dict) => ({
+                url: getAbsoluteUrl(LANDING_PATHS[dict.locale]),
+                lastModified: gitLastModified(`data/landing/${dict.locale}.ts`),
+                changeFrequency: "monthly" as const,
+                priority: 0.8,
+            })),
         ...AllRooms.ru.map((room) => ({
             url: getAbsoluteUrl(
                 room.isHistorical

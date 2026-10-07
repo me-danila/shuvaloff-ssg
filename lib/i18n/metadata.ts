@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import type { Locale } from "@/lib/i18n/routing";
+import type { LandingLocale, Locale } from "@/lib/i18n/routing";
 import {
     hasEnglishVersion,
+    LANDING_LOCALES,
+    LANDING_PATHS,
     normalizePath,
     stripLocalePrefix,
 } from "@/lib/i18n/routing";
@@ -126,6 +128,79 @@ export const buildPageMetadata = ({
         twitter: {
             card: "summary_large_image",
             title: docTitle,
+            description,
+            images: [imageUrl],
+        },
+    };
+};
+
+const LANDING_OG_LOCALE: Record<LandingLocale, string> = {
+    en: "en_US",
+    it: "it_IT",
+    de: "de_DE",
+    fr: "fr_FR",
+    es: "es_ES",
+};
+
+/**
+ * hreflang-кластер лендингов: /en/visit/ ↔ /it/ ↔ /de/ ↔ /fr/ ↔ /es/.
+ * Отдельный от кластера полного сайта (ru ↔ en): одна страница не может быть
+ * `en` в двух кластерах, поэтому /en/ и /en/visit/ друг на друга не ссылаются.
+ * x-default — английский лендинг: иностранцу без своего языка он ближе всего.
+ */
+export const getLandingAlternates = (locale: LandingLocale) => ({
+    canonical: LANDING_PATHS[locale],
+    languages: {
+        ...(Object.fromEntries(
+            LANDING_LOCALES.map((l) => [l, LANDING_PATHS[l]]),
+        ) as Record<LandingLocale, string>),
+        "x-default": LANDING_PATHS.en,
+    },
+});
+
+/**
+ * Metadata лендинга. Тайтл берётся из словаря как есть (без суффикса
+ * «Официальный сайт» — он есть только на ru/en). `draft` — пока тексты
+ * не утверждены: noindex, и лендинг не попадает в sitemap/llms.
+ */
+export const buildLandingMetadata = ({
+    locale,
+    title,
+    description,
+    ogImage,
+    draft,
+}: {
+    locale: LandingLocale;
+    title: string;
+    description: string;
+    ogImage?: string;
+    draft?: boolean;
+}): Metadata => {
+    const imageUrl = toAbsoluteImage(ogImage ?? DEFAULT_OG_IMAGE);
+    const ogImageEntry = ogImage
+        ? { url: imageUrl, alt: title }
+        : { url: imageUrl, ...OG_DEFAULT_IMAGE_DIMENSIONS, alt: title };
+
+    return {
+        title,
+        description,
+        alternates: getLandingAlternates(locale),
+        ...(draft ? { robots: { index: false, follow: false } } : {}),
+        openGraph: {
+            type: "website",
+            url: getAbsoluteUrl(LANDING_PATHS[locale]),
+            siteName: getSiteName("en"),
+            locale: LANDING_OG_LOCALE[locale],
+            alternateLocale: LANDING_LOCALES.filter((l) => l !== locale).map(
+                (l) => LANDING_OG_LOCALE[l],
+            ),
+            title,
+            description,
+            images: [ogImageEntry],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
             description,
             images: [imageUrl],
         },

@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import SiteShell from "@/components/layout/SiteShell";
 import { DEFAULT_OG_IMAGE, getSiteName } from "@/lib/seo/site";
 
 /**
- * EN locale layout. Wraps every /en route in the shared chrome with an explicit
- * `locale="en"`, and re-emits the full OpenGraph block in English as the
+ * EN segment layout. Re-emits the full OpenGraph block in English as the
  * default (openGraph on a child REPLACES the parent's, so it must be complete)
  * — so EN pages get `og:locale=en_US` natively even without a per-page
- * override. `<html lang>` still comes from the single root and is corrected for
- * EN by HtmlLangSync + the post-build lang rewrite.
+ * override. `<html lang>` still comes from the single root and is corrected by
+ * HtmlLangSync + the post-build lang rewrite.
+ *
+ * Chrome lives one level down, so the two EN trees stay independent:
+ *   - app/en/(site)/    — full EN site in the shared SiteShell
+ *   - app/en/(landing)/ — /en/visit/ landing in the LandingShell
  */
 export const metadata: Metadata = {
     openGraph: {
@@ -23,5 +25,5 @@ export const metadata: Metadata = {
 export default function EnLayout({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
-    return <SiteShell locale="en">{children}</SiteShell>;
+    return children;
 }

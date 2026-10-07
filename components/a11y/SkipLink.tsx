@@ -10,13 +10,20 @@ const SKIP_LINK_LABEL: Record<Locale, string> = {
  * Визуально скрыт (сдвинут за верхнюю кромку вьюпорта) и появляется только
  * при получении фокуса с клавиатуры — для пользователя мыши ничего не меняется.
  */
-export default function SkipLink({ locale }: { locale: Locale }) {
+export default function SkipLink({
+    locale,
+    label,
+}: {
+    locale: Locale;
+    /** Подпись на языке без полного сайта (лендинги it/de/fr/es). */
+    label?: string;
+}) {
     return (
         <a
             href="#main-content"
             className="fixed left-4 top-4 z-[100] -translate-y-[200%] rounded-md bg-white px-4 py-2.5 text-sm font-medium text-brand-brown shadow-lg transition-transform duration-200 focus:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brown focus-visible:ring-offset-2"
         >
-            {SKIP_LINK_LABEL[locale]}
+            {label ?? SKIP_LINK_LABEL[locale]}
         </a>
     );
 }

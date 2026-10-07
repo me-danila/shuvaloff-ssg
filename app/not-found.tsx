@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 // Global 404 (out/404.html) renders in the root layout, which no longer holds
 // the chrome — wrap it in the RU shell explicitly. The /en 404 is handled by
-// app/en/not-found.tsx inside app/en/layout.tsx (EN shell) automatically.
+// app/en/not-found.tsx (wraps itself in the EN shell).
 export default function NotFound() {
     return (
         <SiteShell locale="ru">

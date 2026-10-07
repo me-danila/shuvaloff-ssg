@@ -1,5 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { getLocaleAlternates } from "@/lib/i18n/metadata";
+import {
+    buildLandingMetadata,
+    getLandingAlternates,
+    getLocaleAlternates,
+} from "@/lib/i18n/metadata";
 
 describe("getLocaleAlternates — bilingual pages", () => {
     test("ru locale: canonical is the russian path", () => {
@@ -78,5 +82,29 @@ describe("getLocaleAlternates — RU-only pages", () => {
         const alt = getLocaleAlternates("/blog/spb-guide", "ru");
         expect(alt.canonical).toBe("/blog/spb-guide/");
         expect(alt.languages).not.toHaveProperty("en");
+    });
+});
+
+describe("landing metadata", () => {
+    test("landing cluster links all landings, x-default is /en/visit/", () => {
+        const alt = getLandingAlternates("it");
+        expect(alt.canonical).toBe("/it/");
+        expect(alt.languages).toEqual({
+            en: "/en/visit/",
+            it: "/it/",
+            de: "/de/",
+            fr: "/fr/",
+            es: "/es/",
+            "x-default": "/en/visit/",
+        });
+    });
+
+    test("draft landing is noindex, published one is not", () => {
+        const base = { locale: "de" as const, title: "t", description: "d" };
+        expect(buildLandingMetadata({ ...base, draft: true }).robots).toEqual({
+            index: false,
+            follow: false,
+        });
+        expect(buildLandingMetadata(base).robots).toBeUndefined();
     });
 });
