@@ -32,4 +32,21 @@ export type LandingDictionary = {
         title: string;
         subtitle: string;
     };
+    /** «Что мы берем на себя»: преимущества с иконками. */
+    services: {
+        title: string;
+        items: {
+            icon: LandingServiceIcon;
+            title: string;
+            text: string;
+        }[];
+    };
 };
+
+/** Ключ иконки преимущества — сами иконки в components/landing/LandingServices. */
+export type LandingServiceIcon =
+    | "visa"
+    | "card"
+    | "transfer"
+    | "concierge"
+    | "gift";

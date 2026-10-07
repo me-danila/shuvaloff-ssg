@@ -1,4 +1,5 @@
 import { LANDING_HERO_ATTR } from "@/components/landing/constants";
+import LandingServices from "@/components/landing/LandingServices";
 import HeroFullscreen from "@/components/sections/HeroFullscreen";
 import type { LandingDictionary } from "@/data/landing";
 
@@ -26,8 +27,7 @@ export default function LandingPage({ dict }: { dict: LandingDictionary }) {
                 frameSizeClassName="aspect-8/11 xl:aspect-[unset] xl:h-[80vh] xl:min-h-[40rem]"
                 frameData={{ [LANDING_HERO_ATTR]: "" }}
             />
-            {/* Заглушка под следующие секции — чтобы было куда скроллить. */}
-            <section className="min-h-screen bg-brand-light" />
+            <LandingServices dict={dict.services} />
         </>
     );
 }

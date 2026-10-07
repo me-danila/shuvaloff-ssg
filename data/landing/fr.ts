@@ -23,4 +23,5 @@ export const fr: LandingDictionary = {
     },
     // Заглушка: EN-тексты до утверждения переводов.
     hero: en.hero,
+    services: en.services,
 };
