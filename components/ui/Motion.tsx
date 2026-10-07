@@ -1,10 +1,20 @@
 "use client";
 
-import { type HTMLMotionProps, m, useReducedMotion } from "framer-motion";
+import { type HTMLMotionProps, m } from "framer-motion";
 import { forwardRef, type ReactNode } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type BaseDivProps = Omit<HTMLMotionProps<"div">, "children">;
 export const GENTLE_EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * prefers-reduced-motion без расхождения гидрации. framer-motion'овский
+ * useReducedMotion отдаёт на сервере null, а на клиенте сразу true — и
+ * `initial` (opacity 0 vs 1) расходится с SSR-разметкой. useMediaQuery
+ * возвращает false до монтирования, поэтому `initial` всегда одинаковый, а
+ * при reduce элемент после гидрации мгновенно показывается через `animate`.
+ */
+const useReduceMotion = () => useMediaQuery("(prefers-reduced-motion: reduce)");
 
 type MotionProps = BaseDivProps & {
     children: ReactNode;
@@ -23,18 +33,22 @@ export function FadeIn({
     once = true,
     ...props
 }: MotionProps) {
-    const shouldReduce = useReducedMotion();
+    const shouldReduce = useReduceMotion();
     return (
         <m.div
-            initial={shouldReduce ? { opacity: 1 } : { opacity: 0 }}
-            animate={mode === "mount" ? { opacity: 1 } : undefined}
-            whileInView={mode === "inView" ? { opacity: 1 } : undefined}
+            initial={{ opacity: 0 }}
+            animate={
+                shouldReduce || mode === "mount" ? { opacity: 1 } : undefined
+            }
+            whileInView={
+                !shouldReduce && mode === "inView" ? { opacity: 1 } : undefined
+            }
             viewport={mode === "inView" ? { once, amount: 0.12 } : undefined}
-            transition={{
-                duration,
-                delay,
-                ease: GENTLE_EASE,
-            }}
+            transition={
+                shouldReduce
+                    ? { duration: 0 }
+                    : { duration, delay, ease: GENTLE_EASE }
+            }
             {...props}
         >
             {children}
@@ -51,18 +65,26 @@ export function FadeUp({
     once = true,
     ...props
 }: MotionProps) {
-    const shouldReduce = useReducedMotion();
+    const shouldReduce = useReduceMotion();
     return (
         <m.div
-            initial={shouldReduce ? { opacity: 1, y: 0 } : { opacity: 0, y }}
-            animate={mode === "mount" ? { opacity: 1, y: 0 } : undefined}
-            whileInView={mode === "inView" ? { opacity: 1, y: 0 } : undefined}
+            initial={{ opacity: 0, y }}
+            animate={
+                shouldReduce || mode === "mount"
+                    ? { opacity: 1, y: 0 }
+                    : undefined
+            }
+            whileInView={
+                !shouldReduce && mode === "inView"
+                    ? { opacity: 1, y: 0 }
+                    : undefined
+            }
             viewport={mode === "inView" ? { once, amount: 0.12 } : undefined}
-            transition={{
-                duration,
-                delay,
-                ease: GENTLE_EASE,
-            }}
+            transition={
+                shouldReduce
+                    ? { duration: 0 }
+                    : { duration, delay, ease: GENTLE_EASE }
+            }
             {...props}
         >
             {children}
@@ -94,22 +116,23 @@ export const StaggerContainer = forwardRef<
         },
         ref,
     ) => {
-        const shouldReduce = useReducedMotion();
+        const shouldReduce = useReduceMotion();
         return (
             <m.div
                 ref={ref}
                 onScroll={onScroll}
-                initial={shouldReduce ? "show" : "hidden"}
-                animate={mode === "mount" ? "show" : undefined}
-                whileInView={mode === "inView" ? "show" : undefined}
+                initial="hidden"
+                animate={shouldReduce || mode === "mount" ? "show" : undefined}
+                whileInView={
+                    !shouldReduce && mode === "inView" ? "show" : undefined
+                }
                 viewport={mode === "inView" ? { once, amount } : undefined}
                 variants={{
                     hidden: {},
                     show: {
-                        transition: {
-                            staggerChildren,
-                            delayChildren: delay,
-                        },
+                        transition: shouldReduce
+                            ? { staggerChildren: 0, delayChildren: 0 }
+                            : { staggerChildren, delayChildren: delay },
                     },
                 }}
                 {...props}
@@ -130,16 +153,18 @@ export function StaggerItem({
     children: ReactNode;
     y?: number;
 }) {
+    const shouldReduce = useReduceMotion();
     return (
         <m.div
             variants={{
                 hidden: { opacity: 0, y },
                 show: { opacity: 1, y: 0 },
             }}
-            transition={{
-                duration: 0.72,
-                ease: GENTLE_EASE,
-            }}
+            transition={
+                shouldReduce
+                    ? { duration: 0 }
+                    : { duration: 0.72, ease: GENTLE_EASE }
+            }
             {...props}
         >
             {children}
