@@ -14,6 +14,10 @@ export const es: LandingDictionary = {
         languageSwitcherLabel: "Idioma",
         navLabel: "Principal",
         book: "Reservar",
+        bookNow: "Reservar ahora",
+        menuLabel: "Menú",
+        openMenu: "Abrir menú",
+        closeMenu: "Cerrar menú",
         // Заглушка: EN-подписи до утверждения переводов.
         nav: en.ui.nav,
     },

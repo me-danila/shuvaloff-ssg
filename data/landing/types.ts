@@ -20,6 +20,11 @@ export type LandingDictionary = {
         languageSwitcherLabel: string;
         navLabel: string;
         book: string;
+        /** Кнопка бронирования в мобильном хедере. */
+        bookNow: string;
+        menuLabel: string;
+        openMenu: string;
+        closeMenu: string;
         /** Навигация по секциям лендинга (якоря: #rooms, #history, …). */
         nav: { label: string; href: `#${string}` }[];
     };

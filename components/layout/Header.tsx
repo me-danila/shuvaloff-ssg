@@ -11,6 +11,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { flushSync } from "react-dom";
+import {
+    menuItemVariants,
+    menuListVariants,
+    OVERLAY_TRANSITION,
+    overlayVariants,
+    PANEL_TRANSITION,
+} from "@/components/layout/menuMotion";
+import BurgerButton from "@/components/ui/BurgerButton";
 import Button from "@/components/ui/Button";
 import { GENTLE_EASE } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -319,22 +327,6 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
     ],
 };
 
-const OVERLAY_TRANSITION = {
-    duration: 0.32,
-    ease: GENTLE_EASE,
-} as const;
-
-const PANEL_TRANSITION = {
-    duration: 0.58,
-    ease: GENTLE_EASE,
-} as const;
-
-const overlayVariants = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
-    exit: { opacity: 0 },
-};
-
 const mobilePanelVariants = {
     hidden: { x: "-100%", opacity: 0.92, scale: 0.985 },
     show: { x: 0, opacity: 1, scale: 1 },
@@ -351,28 +343,6 @@ const submenuPanelVariants = {
     hidden: { x: -18, opacity: 0, scale: 0.98 },
     show: { x: 0, opacity: 1, scale: 1 },
     exit: { x: -12, opacity: 0, scale: 0.985 },
-};
-
-const menuListVariants = {
-    hidden: {},
-    show: {
-        transition: {
-            staggerChildren: 0.055,
-            delayChildren: 0.08,
-        },
-    },
-};
-
-const menuItemVariants = {
-    hidden: { opacity: 0, x: -18 },
-    show: {
-        opacity: 1,
-        x: 0,
-        transition: {
-            duration: 0.42,
-            ease: GENTLE_EASE,
-        },
-    },
 };
 
 const submenuListVariants = {
@@ -718,17 +688,13 @@ export default function Header({ locale }: { locale: Locale }) {
                             </span>
                             {copy.loginButton}
                         </a>
-                        <button
-                            type="button"
+                        <BurgerButton
                             onClick={() => setMenuOpen(true)}
-                            className={`xl:hidden flex flex-col gap-1.5 cursor-pointer transition-colors duration-300 ${
+                            label={copy.openMenuAria}
+                            className={`xl:hidden transition-colors duration-300 ${
                                 isLight ? "text-brand-brown" : "text-white"
                             }`}
-                            aria-label={copy.openMenuAria}
-                        >
-                            <span className="block w-5 h-px bg-current" />
-                            <span className="block w-5 h-px bg-current" />
-                        </button>
+                        />
                     </div>
                 </div>
                 <div>

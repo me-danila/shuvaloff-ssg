@@ -13,6 +13,10 @@ export const en: LandingDictionary = {
         languageSwitcherLabel: "Language",
         navLabel: "Main",
         book: "Book",
+        bookNow: "Book now",
+        menuLabel: "Menu",
+        openMenu: "Open menu",
+        closeMenu: "Close menu",
         nav: [
             { label: "Rooms", href: "#rooms" },
             { label: "History", href: "#history" },
