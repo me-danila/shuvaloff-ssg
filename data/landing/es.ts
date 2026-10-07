@@ -21,8 +21,6 @@ export const es: LandingDictionary = {
         // Заглушка: EN-подписи до утверждения переводов.
         nav: en.ui.nav,
     },
-    hero: {
-        title: "ACADEMIA Mansion Shuvaloff",
-        subtitle: "Hotel boutique en el corazón de San Petersburgo",
-    },
+    // Заглушка: EN-тексты до утверждения переводов.
+    hero: en.hero,
 };

@@ -25,6 +25,7 @@ export const en: LandingDictionary = {
     },
     hero: {
         title: "ACADEMIA Mansion Shuvaloff",
-        subtitle: "Boutique hotel in the heart of Saint Petersburg",
+        subtitle:
+            "Immerse yourself in the 19th century and meet the family of the Counts",
     },
 };

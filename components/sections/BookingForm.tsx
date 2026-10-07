@@ -106,15 +106,18 @@ export default function BookingForm() {
     return (
         <section
             id="block-search"
-            className="relative w-full max-w-7xl mx-auto xl:bg-brand-light rounded min-h-[200px] xl:min-h-[92px]"
+            className="relative w-full max-w-7xl mx-auto scroll-mt-24 xl:bg-brand-light rounded min-h-[200px] xl:min-h-[92px]"
             aria-busy={status === "loading"}
             suppressHydrationWarning
         >
-            {/* Точка монтирования TL — всегда в DOM, всегда пустая для загрузчика */}
+            {/* Точка монтирования TL — всегда в DOM, всегда пустая для загрузчика.
+                color-scheme у iframe: сайт объявляет `light`, документ TL — нет;
+                при темной теме ОС браузер из-за этого расхождения заливает
+                iframe непрозрачным темным фоном. `normal` убирает подложку. */}
             <div
                 ref={containerRef}
                 id="tl-search-form"
-                className="px-6"
+                className="px-6 [&_iframe]:[color-scheme:normal]"
                 suppressHydrationWarning
             />
 

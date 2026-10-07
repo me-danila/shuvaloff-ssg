@@ -2,7 +2,10 @@
 
 import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { LANDING_HERO_ATTR } from "@/components/landing/constants";
+import {
+    LANDING_BOOKING_ANCHOR,
+    LANDING_HERO_ATTR,
+} from "@/components/landing/constants";
 import {
     menuItemVariants,
     menuListVariants,
@@ -156,12 +159,20 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                                     : "pointer-events-none translate-y-1 opacity-0"
                             }`}
                         >
-                            <Button href="#booking" variant="primary" size="xs">
+                            <Button
+                                href={LANDING_BOOKING_ANCHOR}
+                                variant="primary"
+                                size="xs"
+                            >
                                 {dict.ui.bookNow}
                             </Button>
                         </div>
                         <div className="hidden lg:block">
-                            <Button href="#booking" variant="primary" size="xs">
+                            <Button
+                                href={LANDING_BOOKING_ANCHOR}
+                                variant="primary"
+                                size="xs"
+                            >
                                 {dict.ui.book}
                             </Button>
                         </div>
