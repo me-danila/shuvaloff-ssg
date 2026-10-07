@@ -41,6 +41,14 @@ export type LandingDictionary = {
             text: string;
         }[];
     };
+    /** Номерной фонд: карточки категорий, клик — бронирование. */
+    rooms: {
+        title: string;
+        categories: LandingRoomCategory[];
+        book: string;
+        prev: string;
+        next: string;
+    };
     /** «Исторический особняк в центре»: карточки с листалкой. */
     mansion: {
         title: string;
@@ -48,6 +56,17 @@ export type LandingDictionary = {
         prev: string;
         next: string;
     };
+};
+
+/**
+ * Категория номерного фонда. Фото, площадь и ссылка бронирования берутся из
+ * data/RoomsData по slug; несколько slug — объединенная категория (площадь
+ * диапазоном, бронирование без предвыбора).
+ */
+export type LandingRoomCategory = {
+    rooms: string[];
+    title: string;
+    text: string;
 };
 
 /** Слайд блока «Особняк»: фото слева; надзаголовок, заголовок, текст справа. */

@@ -2,16 +2,14 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useState } from "react";
+import { LANDING_ARROW_CLASS } from "@/components/landing/constants";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { LandingDictionary } from "@/data/landing";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useSlider } from "@/hooks/useSlider";
 
-// Стрелки и указатель между ними — как у «Категорий номеров» на главной
-// (там между стрелками кнопка-пилюля «Все номера»).
-const ARROW_CLASS =
-    "flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white";
+// Указатель между стрелками — как пилюля «Все номера» у «Категорий номеров».
 const PILL_CLASS =
     "flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-7 text-xs uppercase tracking-widest text-stone-600 transition-colors duration-300 hover:bg-stone-100 active:bg-[#5c1f26] active:text-white";
 
@@ -113,7 +111,7 @@ export default function LandingMansion({
                         type="button"
                         aria-label={dict.prev}
                         onClick={() => go(-1)}
-                        className={`hidden xl:flex ${ARROW_CLASS}`}
+                        className={`hidden xl:flex ${LANDING_ARROW_CLASS}`}
                     >
                         <ArrowLeftIcon size={20} weight="light" />
                     </button>
@@ -130,7 +128,7 @@ export default function LandingMansion({
                         type="button"
                         aria-label={dict.next}
                         onClick={() => go(1)}
-                        className={`hidden xl:flex ${ARROW_CLASS}`}
+                        className={`hidden xl:flex ${LANDING_ARROW_CLASS}`}
                     >
                         <ArrowRightIcon size={20} weight="light" />
                     </button>

@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import Button from "@/components/ui/Button";
 import Image from "@/components/ui/OptimizedImage";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
@@ -18,6 +19,10 @@ type CardServiceBigProps = {
     /** Показывать раздельные действия: «Заказать» (если есть slug) + «Подробнее». */
     showOrder?: boolean;
     backgroundClassName?: string;
+    /** Своя ссылка вместо страницы услуги (например, бронирование номера). */
+    href?: string;
+    /** Строка под фото (например, площадь номера). */
+    meta?: React.ReactNode;
 };
 
 export default function CardServiceBig({
@@ -29,6 +34,8 @@ export default function CardServiceBig({
     ctaLabel,
     showOrder = false,
     backgroundClassName = "bg-white",
+    href: hrefOverride,
+    meta,
 }: CardServiceBigProps) {
     const locale = useLocale();
     const isExternal = Boolean(externalLink);
@@ -41,9 +48,11 @@ export default function CardServiceBig({
           ? ctaLabel
           : (ctaLabel?.[locale] ?? defaultDetailsLabel);
 
-    const href = slug
-        ? localizeHref(`/services/${slug}/`, locale)
-        : (externalLink ?? "#");
+    const href =
+        hrefOverride ??
+        (slug
+            ? localizeHref(`/services/${slug}/`, locale)
+            : (externalLink ?? "#"));
 
     return (
         <article
@@ -75,6 +84,11 @@ export default function CardServiceBig({
                     className="object-cover object-center"
                 />
             </a>
+            {meta && (
+                <div className="mt-5 flex justify-center px-5 text-xs text-[#372a24]/80">
+                    {meta}
+                </div>
+            )}
             {subtitle && (
                 <p className="mt-5 flex-1 px-5 text-sm leading-6 text-[#372a24] xl:text-base">
                     {subtitle}

@@ -25,4 +25,5 @@ export const fr: LandingDictionary = {
     hero: en.hero,
     services: en.services,
     mansion: en.mansion,
+    rooms: en.rooms,
 };

@@ -89,4 +89,47 @@ export const en: LandingDictionary = {
         prev: "Previous",
         next: "Next",
     },
+    rooms: {
+        title: "Room categories",
+        categories: [
+            {
+                rooms: ["standard"],
+                title: "Standard",
+                text: "A classic hotel room with a double bed featuring an orthopaedic mattress and a spacious bathroom with a shower",
+            },
+            {
+                rooms: ["superior"],
+                title: "Superior",
+                text: "An upgraded room with a double bed, a seating area and a spacious bathroom with a shower",
+            },
+            {
+                rooms: ["superior-mansarda"],
+                title: "Superior Attic Room",
+                text: "An upgraded attic room with a double bed, a seating area and a spacious bathroom with a shower",
+            },
+            {
+                rooms: ["junior-suite"],
+                title: "Junior Suite",
+                text: "A superior room featuring a separate bedroom, a lounge area and a spacious bathroom",
+            },
+            {
+                rooms: ["junior-suite-mansarda"],
+                title: "Attic Junior Suite",
+                text: "A superior room in the attic with a separate bedroom, a lounge area and a spacious bathroom",
+            },
+            {
+                rooms: ["suite"],
+                title: "Two-Room Suite",
+                text: "A three-room suite with two separate bedrooms, a living room and a spacious bathroom",
+            },
+            {
+                rooms: ["dashkova", "shuvalov"],
+                title: "Historic Suites",
+                text: "Heritage residences with original décor and antiques from the late 19th and early 20th centuries",
+            },
+        ],
+        book: "Book now",
+        prev: "Previous",
+        next: "Next",
+    },
 };
