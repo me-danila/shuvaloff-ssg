@@ -70,13 +70,13 @@ export const en: LandingDictionary = {
             },
             {
                 title: "Restaurant",
-                text: "Signature cuisine at the ACADEMIA Shuvalov restaurant",
+                text: "Signature cuisine at the ACADEMIA Shuvaloff restaurant",
                 href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
                 external: true,
                 image: "https://academia.spb.ru/wp-content/uploads/2026/10/8508439979846534-opt-1920.webp",
             },
             {
-                title: "ACADEMIA Massage & Spa",
+                title: "ACADEMIA SPA",
                 text: "A centre for wellness and professional massage",
                 href: "https://n1533570.yclients.com/company/1383054/personal/menu?o=",
                 external: true,
@@ -95,20 +95,20 @@ export const en: LandingDictionary = {
                 label: "History",
                 image: {
                     src: "https://academia.spb.ru/wp-content/uploads/2026/03/img250-1.png",
-                    alt: "Drawing of the ACADEMIA Shuvalov Mansion façade",
+                    alt: "Drawing of the ACADEMIA Shuvaloff Mansion façade",
                 },
                 title: "A mansion steeped in history",
                 paragraphs: [
                     "The mansion that now houses the hotel is situated on Mokhovaya Street, which dates back to the time when the city on the Neva was first founded. Originally, the area was home to ‘khamovniki’—weavers who made sails for the fleet.",
-                    "In 1854, the plot was purchased by Major-General and Actual State Councillor Count Andrei Pavlovich Shuvalov. On his instructions, the two-storey building was converted into a three-storey mansion with a grand façade and the family coat of arms — three unicorns, the heraldic symbol of the Shuvalov family. Later, in 1913–1914, the interiors of the second floor were designed by the architect Ivan Fomin for the Count’s daughter, Elizaveta Vorontsova-Dashkova.",
-                    "Today, the carefully restored building, with its lovingly preserved heritage details, is home to the ACADEMIA Shuvalov Mansion Hotel. The mansion has been given a new lease of life and once again warmly welcomes guests.",
+                    "In 1854, the plot was purchased by Major-General and Actual State Councillor Count Andrei Pavlovich Shuvaloff. On his instructions, the two-storey building was converted into a three-storey mansion with a grand façade and the family coat of arms — three unicorns, the heraldic symbol of the Shuvaloff family. Later, in 1913–1914, the interiors of the second floor were designed by the architect Ivan Fomin for the Count’s daughter, Elizaveta Vorontsova-Dashkova.",
+                    "Today, the carefully restored building, with its lovingly preserved heritage details, is home to the ACADEMIA Shuvaloff Mansion Hotel. The mansion has been given a new lease of life and once again warmly welcomes guests.",
                 ],
             },
             {
                 label: "Location",
                 image: {
-                    src: "https://academia.spb.ru/wp-content/uploads/2025/09/fasad.avif",
-                    alt: "Façade of the ACADEMIA Shuvalov Mansion Hotel on Mokhovaya Street",
+                    src: "https://academia.spb.ru/wp-content/uploads/2026/10/03_MMI_9862_328_maxiimov_0.jpg",
+                    alt: "Façade of the ACADEMIA Shuvaloff Mansion Hotel on Mokhovaya Street",
                 },
                 title: "A stone’s throw from the city centre",
                 paragraphs: [
@@ -217,7 +217,7 @@ export const en: LandingDictionary = {
         subtitle: "24/7 booking department",
         address: "10 Mokhovaya St, Saint Petersburg",
         whatsapp: "Message us on WhatsApp",
-        mapTitle: "ACADEMIA Mansion Shuvaloff on Google Maps",
+        mapTitle: "ACADEMIA Mansion Shuvaloff on the map",
         book: "Book now",
     },
     booking: {

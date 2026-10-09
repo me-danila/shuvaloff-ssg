@@ -28,7 +28,7 @@ export const it: LandingDictionary = {
         ]),
     },
     hero: {
-        title: "ACADEMIA Palazzo Shuvalov",
+        title: "ACADEMIA Palazzo Shuvaloff",
         subtitle:
             "Immergetevi nel XIX secolo e incontrate la famiglia dei conti",
     },
@@ -66,10 +66,10 @@ export const it: LandingDictionary = {
             },
             {
                 title: "Ristorante",
-                text: "Cucina d'autore al ristorante ACADEMIA Shuvalov",
+                text: "Cucina d'autore al ristorante ACADEMIA Shuvaloff",
             },
             {
-                title: "ACADEMIA Massaggi & Spa",
+                title: "ACADEMIA SPA",
                 text: "Centro di recupero e massaggi professionali",
             },
             {
@@ -82,20 +82,20 @@ export const it: LandingDictionary = {
                 label: "Storia",
                 image: {
                     ...en.mansion.slides[0].image,
-                    alt: "Disegno della facciata del Palazzo Shuvalov ACADEMIA",
+                    alt: "Disegno della facciata del Palazzo Shuvaloff ACADEMIA",
                 },
                 title: "Una dimora storica",
                 paragraphs: [
                     "La dimora che oggi ospita l’hotel si trova in via Mokhovaya, una strada che risale ai tempi della fondazione della città sulla Neva. In origine qui vivevano i «khamovniki», tessitori che realizzavano le vele per la flotta.",
-                    "Nel 1854 il terreno fu acquistato dal generale di divisione e consigliere di Stato effettivo conte Andrei Pavlovich Shuvalov. Su sua richiesta, l’edificio a due piani fu trasformato in una dimora a tre piani con una facciata di rappresentanza e lo stemma di famiglia: tre unicorni, simbolo araldico della casata degli Shuvalov. Successivamente, negli anni 1913–1914, gli interni del primo piano furono allestiti dall’architetto Ivan Fomin per la figlia del conte, Elisabetta Vorontsova-Dashkova.",
-                    "Oggi, nell’edificio accuratamente restaurato, con gli elementi del patrimonio culturale riportati al loro antico splendore, ha sede l'hotel ACADEMIA Palazzo Shuvalov. La dimora rivive una nuova vita e accoglie nuovamente con calore i propri ospiti.",
+                    "Nel 1854 il terreno fu acquistato dal generale di divisione e consigliere di Stato effettivo conte Andrei Pavlovich Shuvaloff. Su sua richiesta, l’edificio a due piani fu trasformato in una dimora a tre piani con una facciata di rappresentanza e lo stemma di famiglia: tre unicorni, simbolo araldico della casata degli Shuvaloff. Successivamente, negli anni 1913–1914, gli interni del primo piano furono allestiti dall’architetto Ivan Fomin per la figlia del conte, Elisabetta Vorontsova-Dashkova.",
+                    "Oggi, nell’edificio accuratamente restaurato, con gli elementi del patrimonio culturale riportati al loro antico splendore, ha sede l'hotel ACADEMIA Palazzo Shuvaloff. La dimora rivive una nuova vita e accoglie nuovamente con calore i propri ospiti.",
                 ],
             },
             {
                 label: "Posizione",
                 image: {
                     ...en.mansion.slides[1].image,
-                    alt: "Facciata dell’hotel ACADEMIA Palazzo Shuvalov in via Mokhovaya",
+                    alt: "Facciata dell’hotel ACADEMIA Palazzo Shuvaloff in via Mokhovaya",
                 },
                 title: "A due passi dal centro",
                 paragraphs: [
@@ -108,33 +108,27 @@ export const it: LandingDictionary = {
     },
     rooms: {
         title: "Categorie di camere",
+        // Названия категорий — как на EN (не переводим), только описания.
         categories: withTexts(en.rooms.categories, [
             {
-                title: "Standard",
                 text: "Camera d'albergo classica con letto matrimoniale dotato di materasso ortopedico e ampio bagno con doccia",
             },
             {
-                title: "Superior",
                 text: "Camera superior con letto matrimoniale, zona relax e ampio bagno con doccia",
             },
             {
-                title: "Camera Superior mansarda",
                 text: "Camera mansarda di categoria superiore con letto matrimoniale, zona relax e ampio bagno con doccia",
             },
             {
-                title: "Junior Suite",
                 text: "Camera di categoria superiore con camera da letto separata, salottino e ampio bagno",
             },
             {
-                title: "Junior Suite mansarda",
                 text: "Camera di categoria superiore situata nella mansarda, con camera da letto separata, salotto e ampio bagno",
             },
             {
-                title: "Suite a due stanze",
                 text: "Camera a tre stanze con due camere da letto separate, salotto e ampio bagno",
             },
             {
-                title: "Suite storiche",
                 // Сокращено по смыслу, как в EN: полный текст ТЗ не влезает
                 // в карточку.
                 text: "Residenze storiche con finiture originali e oggetti d’antiquariato della fine del XIX e dell’inizio del XX secolo",
@@ -189,13 +183,13 @@ export const it: LandingDictionary = {
         subtitle: "Ufficio prenotazioni 24/7",
         address: "Via Mokhovaya 10, San Pietroburgo",
         whatsapp: "Scrivici su WhatsApp",
-        mapTitle: "ACADEMIA Palazzo Shuvalov su Google Maps",
+        mapTitle: "ACADEMIA Palazzo Shuvaloff sulla mappa",
         book: "Prenota ora",
     },
     booking: {
-        metaTitle: "Prenotazione camere — ACADEMIA Palazzo Shuvalov",
+        metaTitle: "Prenotazione camere — ACADEMIA Palazzo Shuvaloff",
         metaDescription:
-            "Garanzia del miglior prezzo prenotando le camere dell’hotel ACADEMIA Palazzo Shuvalov sul sito ufficiale",
+            "Garanzia del miglior prezzo prenotando le camere dell’hotel ACADEMIA Palazzo Shuvaloff sul sito ufficiale",
         title: "Prenotazione camere",
         line1: "Prenotando sul sito ufficiale ti garantiamo le condizioni migliori.",
         line2: "Clicca su",

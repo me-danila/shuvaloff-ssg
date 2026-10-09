@@ -28,7 +28,7 @@ export const de: LandingDictionary = {
         ]),
     },
     hero: {
-        title: "ACADEMIA Shuvalov-Anwesen",
+        title: "ACADEMIA Shuvaloff-Anwesen",
         subtitle:
             "Tauchen Sie ein ins 19. Jahrhundert und lernen Sie die Grafenfamilie kennen",
     },
@@ -66,10 +66,10 @@ export const de: LandingDictionary = {
             },
             {
                 title: "Restaurant",
-                text: "Kreative Küche im Restaurant ACADEMIA Shuvalov",
+                text: "Kreative Küche im Restaurant ACADEMIA Shuvaloff",
             },
             {
-                title: "ACADEMIA Massage & Spa",
+                title: "ACADEMIA SPA",
                 text: "Studio für Regeneration und professionelle Massagen",
             },
             {
@@ -82,20 +82,20 @@ export const de: LandingDictionary = {
                 label: "Geschichte",
                 image: {
                     ...en.mansion.slides[0].image,
-                    alt: "Zeichnung der Fassade des ACADEMIA Shuvalov-Anwesens",
+                    alt: "Zeichnung der Fassade des ACADEMIA Shuvaloff-Anwesens",
                 },
                 title: "Ein Herrenhaus mit Geschichte",
                 paragraphs: [
                     "Das Herrenhaus, in dem sich heute das Hotel befindet, liegt in der Mokhova-Straße, die bereits zur Zeit der Gründung der Stadt an der Newa entstand. Ursprünglich lebten hier die „Khamovniki“ – Weber, die Segel für die Flotte herstellten.",
-                    "Im Jahr 1854 erwarb Generalmajor und tatsächlicher Staatsrat Graf Andrej Pawlowitsch Shuvalov das Grundstück. In seinem Auftrag wurde das zweistöckige Gebäude zu einem dreistöckigen Herrenhaus mit einer repräsentativen Fassade und dem Familienwappen – drei Einhörnern, dem heraldischen Symbol des Geschlechts der Schuwalovs – umgebaut. Später, in den Jahren 1913–1914, gestaltete der Architekt Ivan Fomin die Innenräume des ersten Stockwerks für die Tochter des Grafen, Elizaveta Vorontsova-Dashkova.",
-                    "Heute befindet sich in dem sorgfältig restaurierten Gebäude mit seinen wiederhergestellten Elementen des Kulturerbes das Hotel ACADEMIA „Shuvalov-Anwesen“. Die Villa erlebt eine neue Blütezeit und heißt ihre Gäste wieder herzlich willkommen.",
+                    "Im Jahr 1854 erwarb Generalmajor und tatsächlicher Staatsrat Graf Andrej Pawlowitsch Shuvaloff das Grundstück. In seinem Auftrag wurde das zweistöckige Gebäude zu einem dreistöckigen Herrenhaus mit einer repräsentativen Fassade und dem Familienwappen – drei Einhörnern, dem heraldischen Symbol des Geschlechts der Shuvaloffs – umgebaut. Später, in den Jahren 1913–1914, gestaltete der Architekt Ivan Fomin die Innenräume des ersten Stockwerks für die Tochter des Grafen, Elizaveta Vorontsova-Dashkova.",
+                    "Heute befindet sich in dem sorgfältig restaurierten Gebäude mit seinen wiederhergestellten Elementen des Kulturerbes das Hotel ACADEMIA „Shuvaloff-Anwesen“. Die Villa erlebt eine neue Blütezeit und heißt ihre Gäste wieder herzlich willkommen.",
                 ],
             },
             {
                 label: "Lage",
                 image: {
                     ...en.mansion.slides[1].image,
-                    alt: "Fassade des Hotels ACADEMIA Shuvalov-Anwesen in der Mokhova-Straße",
+                    alt: "Fassade des Hotels ACADEMIA Shuvaloff-Anwesen in der Mokhova-Straße",
                 },
                 title: "Nur einen Katzensprung vom Zentrum entfernt",
                 paragraphs: [
@@ -108,33 +108,27 @@ export const de: LandingDictionary = {
     },
     rooms: {
         title: "Zimmerkategorien",
+        // Названия категорий — как на EN (не переводим), только описания.
         categories: withTexts(en.rooms.categories, [
             {
-                title: "Standard",
                 text: "Klassisches Hotelzimmer mit einem Doppelbett mit orthopädischer Matratze und einem geräumigen Badezimmer mit Dusche",
             },
             {
-                title: "Superior",
                 text: "Zimmer der gehobenen Kategorie mit einem Doppelbett, einer Sitzecke und einem geräumigen Badezimmer mit Dusche",
             },
             {
-                title: "Superior-Zimmer im Dachgeschoss",
                 text: "Verbessertes Zimmer im Dachgeschoss mit einem Doppelbett, einer Sitzecke und einem geräumigen Badezimmer mit Dusche",
             },
             {
-                title: "Junior-Suite",
                 text: "Zimmer mit erhöhtem Komfort, separatem Schlafzimmer, Wohnzimmer zum Entspannen und geräumigem Badezimmer",
             },
             {
-                title: "Junior-Suite im Dachgeschoss",
                 text: "Zimmer mit gehobenem Komfort im Dachgeschoss mit separatem Schlafzimmer, Wohnzimmer zum Entspannen und geräumigem Badezimmer",
             },
             {
-                title: "Zweizimmer-Suite",
                 text: "Dreizimmer-Suite mit zwei separaten Schlafzimmern, Wohnzimmer und geräumigem Badezimmer",
             },
             {
-                title: "Historische Suiten",
                 // Сокращено по смыслу, как в EN: полный текст ТЗ не влезает
                 // в карточку.
                 text: "Historische Residenzen mit originaler Ausstattung und Antiquitäten aus dem späten 19. und frühen 20. Jahrhundert",
@@ -189,13 +183,13 @@ export const de: LandingDictionary = {
         subtitle: "Reservierungsabteilung rund um die Uhr",
         address: "Mokhova-Straße 10, Sankt Petersburg",
         whatsapp: "Schreiben Sie uns auf WhatsApp",
-        mapTitle: "ACADEMIA Shuvalov-Anwesen auf Google Maps",
+        mapTitle: "ACADEMIA Shuvaloff-Anwesen auf der Karte",
         book: "Jetzt buchen",
     },
     booking: {
-        metaTitle: "Zimmerbuchung — ACADEMIA Shuvalov-Anwesen",
+        metaTitle: "Zimmerbuchung — ACADEMIA Shuvaloff-Anwesen",
         metaDescription:
-            "Bestpreisgarantie bei der Zimmerbuchung im Hotel ACADEMIA Shuvalov-Anwesen auf der offiziellen Website",
+            "Bestpreisgarantie bei der Zimmerbuchung im Hotel ACADEMIA Shuvaloff-Anwesen auf der offiziellen Website",
         title: "Zimmerbuchung",
         line1: "Bei einer Buchung auf der offiziellen Website garantieren wir Ihnen die besten Konditionen.",
         line2: "Klicken Sie auf",

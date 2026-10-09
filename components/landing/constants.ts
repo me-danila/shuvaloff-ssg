@@ -15,11 +15,3 @@ export const LANDING_ARROW_CLASS =
 export const LANDING_WHATSAPP = {
     href: "https://wa.me/78125659650",
 };
-
-/**
- * Карта Google. Отеля в Google Maps нет; по названию находится ACADEMIA BAR
- * SHUVALOFF в том же здании — оставляем его как ориентир. Когда отель
- * заведут (Google Business Profile), искать по названию отеля.
- */
-export const LANDING_MAP_QUERY =
-    "ACADEMIA BAR SHUVALOFF, Mokhovaya St 10, Saint Petersburg";

@@ -4,16 +4,13 @@ import {
     MapPinIcon,
     WhatsappLogoIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import {
-    LANDING_MAP_QUERY,
-    LANDING_WHATSAPP,
-} from "@/components/landing/constants";
+import { LANDING_WHATSAPP } from "@/components/landing/constants";
+import LandingYandexMap from "@/components/landing/LandingYandexMap";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
-import Image from "@/components/ui/OptimizedImage";
 import type { LandingDictionary } from "@/data/landing";
 import { type LandingLocale, landingHref } from "@/lib/i18n/routing";
-import { HOTEL_CONTACTS, HOTEL_GEO } from "@/lib/seo/site";
+import { HOTEL_CONTACTS } from "@/lib/seo/site";
 
 type ContactLink = {
     href: string;
@@ -23,18 +20,15 @@ type ContactLink = {
     external?: boolean;
 };
 
-const MAP_QUERY = encodeURIComponent(LANDING_MAP_QUERY);
+/** Отель в Яндекс Картах — как адрес в контактах основного сайта. */
+const YANDEX_MAPS_URL =
+    "https://yandex.com/maps/org/academia_mansion_shuvaloff/71619247470/";
 
 /**
  * Контакты — разметка ContactsSection основного сайта (заголовок,
  * подзаголовок, строки с иконкой в круге, кнопка), но карта слева, контент
- * справа, и карта Google вместо Яндекса. Порядок строк: адрес, e-mail,
- * WhatsApp.
- *
- * Карта — встраиваемый iframe Google без API-ключа, грузится лениво
- * (loading="lazy"); под ним статичная картинка карты основного сайта, она
- * видна, пока iframe не загрузился. Цвета приглушены (saturate), но
- * красный пин Google остается заметным.
+ * справа. Порядок строк: адрес, e-mail, WhatsApp. Карта — Яндекс, как на
+ * основном сайте (LandingYandexMap).
  */
 export default function LandingContacts({
     dict,
@@ -45,7 +39,7 @@ export default function LandingContacts({
 }) {
     const contacts: ContactLink[] = [
         {
-            href: `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`,
+            href: YANDEX_MAPS_URL,
             label: dict.address,
             Icon: MapPinIcon,
             itemProp: "hasMap",
@@ -78,36 +72,11 @@ export default function LandingContacts({
             <meta itemProp="telephone" content={HOTEL_CONTACTS.telephone} />
             <div className="flex flex-col gap-4 xl:mx-auto xl:max-w-7xl xl:flex-row xl:items-center xl:gap-16">
                 {/* Карта — слева на десктопе, под контактами на мобиле. */}
-                <div
+                <LandingYandexMap
+                    alt={dict.mapTitle}
+                    address={dict.address}
                     className="relative order-last h-64 w-full overflow-hidden xl:order-first xl:h-95 xl:w-185 xl:shrink-0"
-                    itemProp="geo"
-                    itemScope
-                    itemType="https://schema.org/GeoCoordinates"
-                >
-                    <meta
-                        itemProp="latitude"
-                        content={String(HOTEL_GEO.latitude)}
-                    />
-                    <meta
-                        itemProp="longitude"
-                        content={String(HOTEL_GEO.longitude)}
-                    />
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/03/map-new.png"
-                        alt=""
-                        fill
-                        sizes="(max-width: 1200px) 100vw, 740px"
-                        loading="lazy"
-                        className="object-cover"
-                    />
-                    <iframe
-                        title={dict.mapTitle}
-                        src={`https://maps.google.com/maps?q=${MAP_QUERY}&z=15&hl=en&output=embed`}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        className="absolute inset-0 h-full w-full border-0 saturate-[.35]"
-                    />
-                </div>
+                />
 
                 <div className="mx-6 my-4 flex flex-col gap-2 xl:mx-0 xl:my-8 xl:min-w-84">
                     <FadeUp>

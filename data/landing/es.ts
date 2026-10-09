@@ -28,7 +28,7 @@ export const es: LandingDictionary = {
         ]),
     },
     hero: {
-        title: "ACADEMIA Mansión Shuvalov",
+        title: "ACADEMIA Mansión Shuvaloff",
         subtitle:
             "Sumérgete en el siglo XIX y conoce a la familia de los condes",
     },
@@ -66,10 +66,10 @@ export const es: LandingDictionary = {
             },
             {
                 title: "Restaurante",
-                text: "Cocina de autor en restaurante ACADEMIA Shuvalov",
+                text: "Cocina de autor en restaurante ACADEMIA Shuvaloff",
             },
             {
-                title: "ACADEMIA Masaje y Spa",
+                title: "ACADEMIA SPA",
                 text: "Estudio de recuperación y masaje profesional",
             },
             {
@@ -82,20 +82,20 @@ export const es: LandingDictionary = {
                 label: "Historia",
                 image: {
                     ...en.mansion.slides[0].image,
-                    alt: "Dibujo de la fachada de la Mansión Shuvalov ACADEMIA",
+                    alt: "Dibujo de la fachada de la Mansión Shuvaloff ACADEMIA",
                 },
                 title: "Una mansión con historia",
                 paragraphs: [
                     "La mansión en la que actualmente se encuentra el hotel está situada en la calle Mokhovaya, que ya existía en la época de la fundación de la ciudad a orillas del río Neva. En un principio, aquí vivían los «khamovniki», unos tejedores que confeccionaban velas para la flota.",
-                    "En 1854, el terreno fue adquirido por el general de división y consejero de Estado titular, el conde Andréi Pávlovich Shuvalov. Por encargo suyo, el edificio de dos plantas se reformó para convertirlo en una mansión de tres plantas con una fachada principal y el escudo familiar: tres unicornios, símbolo heráldico de la familia Shuvalov. Más tarde, entre 1913 y 1914, el arquitecto Iván Fomin diseñó los interiores de la primera planta para la hija del conde, Elizaveta Vorontsova-Dashkova.",
-                    "En la actualidad, el edificio, cuidadosamente restaurado y con sus elementos de patrimonio cultural recuperados, alberga el hotel ACADEMIA Mansión Shuvalov. La mansión ha cobrado nueva vida y vuelve a recibir a sus huéspedes con los brazos abiertos.",
+                    "En 1854, el terreno fue adquirido por el general de división y consejero de Estado titular, el conde Andréi Pávlovich Shuvaloff. Por encargo suyo, el edificio de dos plantas se reformó para convertirlo en una mansión de tres plantas con una fachada principal y el escudo familiar: tres unicornios, símbolo heráldico de la familia Shuvaloff. Más tarde, entre 1913 y 1914, el arquitecto Iván Fomin diseñó los interiores de la primera planta para la hija del conde, Elizaveta Vorontsova-Dashkova.",
+                    "En la actualidad, el edificio, cuidadosamente restaurado y con sus elementos de patrimonio cultural recuperados, alberga el hotel ACADEMIA Mansión Shuvaloff. La mansión ha cobrado nueva vida y vuelve a recibir a sus huéspedes con los brazos abiertos.",
                 ],
             },
             {
                 label: "Ubicación",
                 image: {
                     ...en.mansion.slides[1].image,
-                    alt: "Fachada del hotel ACADEMIA Mansión Shuvalov en la calle Mokhovaya",
+                    alt: "Fachada del hotel ACADEMIA Mansión Shuvaloff en la calle Mokhovaya",
                 },
                 title: "A un paso de lo más importante",
                 paragraphs: [
@@ -108,33 +108,27 @@ export const es: LandingDictionary = {
     },
     rooms: {
         title: "Categorías de habitaciones",
+        // Названия категорий — как на EN (не переводим), только описания.
         categories: withTexts(en.rooms.categories, [
             {
-                title: "Estándar",
                 text: "Habitación clásica de hotel con cama de matrimonio con colchón ortopédico y un amplio cuarto de baño con ducha",
             },
             {
-                title: "Superior",
                 text: "Habitación superior con cama de matrimonio, zona de descanso y un amplio cuarto de baño con ducha",
             },
             {
-                title: "Superior abuhardillada",
                 text: "Habitación mejorada en el ático con cama de matrimonio, zona de descanso y un amplio cuarto de baño con ducha",
             },
             {
-                title: "Junior Suite",
                 text: "Habitación de mayor confort con dormitorio independiente, salón para descansar y un amplio cuarto de baño",
             },
             {
-                title: "Junior Suite en el ático",
                 text: "Habitación de mayor confort en el ático con dormitorio independiente, salón para relajarse y un amplio cuarto de baño",
             },
             {
-                title: "Suite de dos habitaciones",
                 text: "Habitación de tres habitaciones con dos dormitorios independientes, salón y un amplio cuarto de baño",
             },
             {
-                title: "Suites históricas",
                 // Сокращено по смыслу, как в EN: полный текст ТЗ не влезает
                 // в карточку.
                 text: "Residencias históricas con decoración original y antigüedades de finales del siglo XIX y principios del XX",
@@ -189,13 +183,13 @@ export const es: LandingDictionary = {
         subtitle: "Departamento de reservas 24/7",
         address: "Calle Mokhovaya, 10, San Petersburgo",
         whatsapp: "Escríbenos por WhatsApp",
-        mapTitle: "ACADEMIA Mansión Shuvalov en Google Maps",
+        mapTitle: "ACADEMIA Mansión Shuvaloff en el mapa",
         book: "Reservar ahora",
     },
     booking: {
-        metaTitle: "Reserva de habitaciones — ACADEMIA Mansión Shuvalov",
+        metaTitle: "Reserva de habitaciones — ACADEMIA Mansión Shuvaloff",
         metaDescription:
-            "Garantía del mejor precio al reservar habitaciones en el hotel ACADEMIA Mansión Shuvalov en la web oficial",
+            "Garantía del mejor precio al reservar habitaciones en el hotel ACADEMIA Mansión Shuvaloff en la web oficial",
         title: "Reserva de habitaciones",
         line1: "Te garantizamos las mejores condiciones al reservar en la web oficial.",
         line2: "Haz clic en",

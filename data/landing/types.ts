@@ -64,7 +64,7 @@ export type LandingDictionary = {
         items: LandingOffer[];
         book: string;
     };
-    /** Контакты: карта Google слева, адрес / e-mail / WhatsApp справа. */
+    /** Контакты: Яндекс-карта слева, адрес / e-mail / WhatsApp справа. */
     contacts: {
         title: string;
         subtitle: string;
