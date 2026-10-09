@@ -202,7 +202,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Ужин от шефа",
             subtitle:
                 "С радостью приглашаем вас провести время в Бар-ресторан ACADEMIA Шувалова — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/dinner-scaled.jpg",
             slug: "dinner",
             fullDescription: (
                 <>
@@ -380,7 +380,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Обед от шефа",
             subtitle:
                 "С радостью приглашаем вас провести время в Бар-ресторан ACADEMIA Шувалова — бутик-ресторане, расположенном в бывшем кабинете графа Шувалова.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/%D0%A1%D1%83%D0%BF%D1%8B%D0%9E%D1%82%D0%A8%D0%B5%D1%84%D0%B0-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/lunch.jpg",
             slug: "lunch",
             fullDescription: (
                 <>
@@ -813,7 +813,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Chef's Dinner",
             subtitle:
                 "We are happy to invite you to spend time at ACADEMIA Shuvaloff Bar-Restaurant — a boutique restaurant located in the former office of Count Shuvalov.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/dinner-scaled.jpg",
             slug: "dinner",
             fullDescription: (
                 <>
@@ -978,7 +978,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Chef's Lunch",
             subtitle:
                 "We are happy to invite you to spend time at ACADEMIA Shuvaloff Bar-Restaurant — a boutique restaurant located in the former office of Count Shuvalov.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/%D0%A1%D1%83%D0%BF%D1%8B%D0%9E%D1%82%D0%A8%D0%B5%D1%84%D0%B0-1.avif",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/lunch.jpg",
             slug: "lunch",
             fullDescription: (
                 <>

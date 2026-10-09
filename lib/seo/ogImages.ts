@@ -47,8 +47,6 @@ export const OG_IMAGE_OVERRIDES: Record<string, string> = {
         "https://academia.spb.ru/wp-content/uploads/2026/10/ChatGPT-Image-6-%D0%B0%D0%B2%D0%B3.-2026-%D0%B3.-10_56_42.jpg",
     "/services/luggage/":
         "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_2163.jpg",
-    "/services/lunch/":
-        "https://academia.spb.ru/wp-content/uploads/2026/10/%D0%A1%D1%83%D0%BF%D1%8B%D0%9E%D1%82%D0%A8%D0%B5%D1%84%D0%B0-1.jpg",
     "/services/romantic/":
         "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_0162-2-1.jpg",
     "/events/count-dinner-benois/":
@@ -81,8 +79,6 @@ const OG_IMAGE_REPLACEMENTS: Record<string, string> = {
         "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_5179-1-2-2-scaled.jpg",
     "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg":
         "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_9662-1-2.jpg",
-    "https://academia.spb.ru/wp-content/uploads/2026/07/ГорячееОтШефа4-горизонталь.png":
-        "https://academia.spb.ru/wp-content/uploads/2026/10/%D0%93%D0%BE%D1%80%D1%8F%D1%87%D0%B5%D0%B5%D0%9E%D1%82%D0%A8%D0%B5%D1%84%D0%B04-%D0%B3%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%BD%D1%82%D0%B0%D0%BB%D1%8C.jpg",
     "https://academia.spb.ru/wp-content/uploads/2026/07/Доходный-дом.png":
         "https://academia.spb.ru/wp-content/uploads/2026/10/%D0%94%D0%BE%D1%85%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9-%D0%B4%D0%BE%D0%BC.jpg",
     "https://academia.spb.ru/wp-content/uploads/2026/07/Масонский-Петербург.png":
