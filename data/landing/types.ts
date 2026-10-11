@@ -116,7 +116,11 @@ export type LandingDictionary = {
  */
 export type LandingRoomCategory = {
     rooms: string[];
-    title: string;
+    /**
+     * Название — только для объединенной категории (несколько slug). У
+     * одиночной берется из data/RoomsData, как на /en/rooms/.
+     */
+    title?: string;
     text: string;
 };
 

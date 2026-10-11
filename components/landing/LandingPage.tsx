@@ -24,12 +24,12 @@ export default function LandingPage({ dict }: { dict: LandingDictionary }) {
                 title={dict.hero.title}
                 caption={dict.hero.subtitle}
                 image={{ src: HERO_IMAGE, alt: dict.hero.title }}
-                gradient
                 withBookingForm
                 tightTitle
                 wideDescription
-                // Мобила — пропорции hero главной (8:11), десктоп — 80vh.
-                frameSizeClassName="aspect-8/11 xl:aspect-[unset] xl:h-[80vh] xl:min-h-[40rem]"
+                // Размер и фото — как у hero главной: мобила 8:11, десктоп — весь
+                // экран, без затемнения поверх фото.
+                frameSizeClassName="aspect-8/11 xl:aspect-[unset] xl:min-h-screen"
                 frameData={{ [LANDING_HERO_ATTR]: "" }}
             />
             <LandingServices dict={dict.services} />

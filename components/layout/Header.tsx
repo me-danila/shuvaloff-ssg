@@ -616,7 +616,7 @@ export default function Header({ locale }: { locale: Locale }) {
                         className="absolute left-1/2 -translate-x-1/2"
                     >
                         <Image
-                            src="/logo.svg"
+                            src={locale === "en" ? "/logo-en.svg" : "/logo.svg"}
                             alt={copy.logoAlt}
                             width={150}
                             height={38}

@@ -167,7 +167,11 @@ export default function Footer({ locale }: { locale: Locale }) {
                                 aria-label={homeAria}
                             >
                                 <Image
-                                    src="/logo.svg"
+                                    src={
+                                        locale === "en"
+                                            ? "/logo-en.svg"
+                                            : "/logo.svg"
+                                    }
                                     alt={logoAlt}
                                     width={130}
                                     height={44}
@@ -299,7 +303,7 @@ export default function Footer({ locale }: { locale: Locale }) {
                         aria-label={homeAria}
                     >
                         <Image
-                            src="/logo.svg"
+                            src={locale === "en" ? "/logo-en.svg" : "/logo.svg"}
                             alt={logoAlt}
                             width={130}
                             height={44}

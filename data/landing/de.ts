@@ -108,7 +108,8 @@ export const de: LandingDictionary = {
     },
     rooms: {
         title: "Zimmerkategorien",
-        // Названия категорий — как на EN (не переводим), только описания.
+        // Названия категорий не переводим (берутся из data/RoomsData, как на
+        // /en/rooms/), здесь только описания.
         categories: withTexts(en.rooms.categories, [
             {
                 text: "Klassisches Hotelzimmer mit einem Doppelbett mit orthopädischer Matratze und einem geräumigen Badezimmer mit Dusche",
@@ -129,9 +130,10 @@ export const de: LandingDictionary = {
                 text: "Dreizimmer-Suite mit zwei separaten Schlafzimmern, Wohnzimmer und geräumigem Badezimmer",
             },
             {
-                // Сокращено по смыслу, как в EN: полный текст ТЗ не влезает
-                // в карточку.
-                text: "Historische Residenzen mit originaler Ausstattung und Antiquitäten aus dem späten 19. und frühen 20. Jahrhundert",
+                text: "Eine großzügige historische Suite, die Graf Shuvaloff gewidmet ist. Sie ist im Stil des strengen Neoklassizismus mit authentischen antiken Details gestaltet. Das Interieur spiegelt einen reifen Geschmack, Charakterstärke und die Achtung vor den Traditionen des Adelsgeschlechts wider.",
+            },
+            {
+                text: "Eine elegante Suite, benannt zu Ehren von Jelisaweta Andrejewna Woronzowa-Daschkowa (geb. Schuwalowa, 1845–1924). Das farbenfrohe und zugleich erlesene Interieur spiegelt die vielschichtige Persönlichkeit der Hausherrin wider.",
             },
         ]),
         book: "Jetzt buchen",

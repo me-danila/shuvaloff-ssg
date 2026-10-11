@@ -57,7 +57,7 @@ export default function LandingFooter({
             <div className="mx-auto flex max-w-120 flex-col items-center gap-10 px-6 py-12 text-center md:grid md:max-w-7xl md:grid-cols-4 md:items-start md:gap-x-16 md:gap-y-8 md:text-left xl:px-0">
                 <a href="#main-content" aria-label={dict.home}>
                     <Image
-                        src="/logo.svg"
+                        src="/logo-en.svg"
                         alt="ACADEMIA Mansion Shuvaloff"
                         width={130}
                         height={44}

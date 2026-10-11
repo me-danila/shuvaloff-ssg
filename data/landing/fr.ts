@@ -109,7 +109,8 @@ export const fr: LandingDictionary = {
     },
     rooms: {
         title: "Catégories de chambres",
-        // Названия категорий — как на EN (не переводим), только описания.
+        // Названия категорий не переводим (берутся из data/RoomsData, как на
+        // /en/rooms/), здесь только описания.
         categories: withTexts(en.rooms.categories, [
             {
                 text: "Chambre d'hôtel classique dotée d'un lit double avec matelas orthopédique et d'une salle de bains spacieuse avec douche",
@@ -130,9 +131,10 @@ export const fr: LandingDictionary = {
                 text: "Chambre à trois pièces comprenant deux chambres séparées, un salon et une salle de bains spacieuse",
             },
             {
-                // Сокращено по смыслу, как в EN: полный текст ТЗ не влезает
-                // в карточку.
-                text: "Résidences historiques au décor d’origine, ornées d’objets anciens de la fin du XIXe et du début du XXe siècle",
+                text: "Une vaste suite historique dédiée au comte Shuvaloff. Conçue dans un style néoclassique rigoureux et ornée de véritables pièces d’antiquaire, elle reflète, par son intérieur, l’esthétique d’un goût mûr, la force de caractère et le respect des traditions de la lignée.",
+            },
+            {
+                text: "Une suite élégante, nommée en l’honneur d’Élisabeth Andreïevna Vorontsova-Dachkova (née Chouvalova, 1845–1924). Son intérieur, vif mais raffiné, reflète la personnalité aux multiples facettes de la maîtresse de maison.",
             },
         ]),
         book: "Réserver",

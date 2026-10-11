@@ -87,7 +87,7 @@ export const en: LandingDictionary = {
                 text: "Historic residences featuring antiques and authentic period décor",
                 // Якорь секции номеров на этой же странице.
                 href: "#rooms",
-                image: "https://academia.spb.ru/wp-content/uploads/2026/03/sh1.jpg",
+                image: "https://academia.spb.ru/wp-content/uploads/2026/10/Frame-2-scaled.png",
             },
         ],
         slides: [
@@ -121,41 +121,40 @@ export const en: LandingDictionary = {
     },
     rooms: {
         title: "Room categories",
+        // Названия — из data/RoomsData (как на /en/rooms/), здесь только
+        // описания.
         categories: [
             {
                 rooms: ["standard"],
-                title: "Standard",
                 text: "A classic hotel room with a double bed featuring an orthopaedic mattress and a spacious bathroom with a shower",
             },
             {
                 rooms: ["superior"],
-                title: "Superior",
                 text: "An upgraded room with a double bed, a seating area and a spacious bathroom with a shower",
             },
             {
                 rooms: ["superior-mansarda"],
-                title: "Superior Attic Room",
                 text: "An upgraded attic room with a double bed, a seating area and a spacious bathroom with a shower",
             },
             {
                 rooms: ["junior-suite"],
-                title: "Junior Suite",
                 text: "A superior room featuring a separate bedroom, a lounge area and a spacious bathroom",
             },
             {
                 rooms: ["junior-suite-mansarda"],
-                title: "Attic Junior Suite",
                 text: "A superior room in the attic with a separate bedroom, a lounge area and a spacious bathroom",
             },
             {
                 rooms: ["suite"],
-                title: "Two-Room Suite",
                 text: "A three-room suite with two separate bedrooms, a living room and a spacious bathroom",
             },
             {
-                rooms: ["dashkova", "shuvalov"],
-                title: "Historic Suites",
-                text: "Heritage residences with original décor and antiques from the late 19th and early 20th centuries",
+                rooms: ["shuvalov"],
+                text: "A spacious historic suite dedicated to Count Shuvaloff. Decorated in the style of strict neoclassicism with authentic antique details, its interior reflects an aesthetic of mature taste, strength of character and respect for the traditions of his lineage.",
+            },
+            {
+                rooms: ["dashkova"],
+                text: "An elegant suite named in honour of Elizaveta Andreevna Vorontsova-Dashkova (née Shuvalova, 1845–1924). Its vivid yet refined interior reflects the many-sided personality of the lady of the house.",
             },
         ],
         book: "Book now",

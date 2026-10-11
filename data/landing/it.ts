@@ -48,7 +48,7 @@ export const it: LandingDictionary = {
                 text: "Vi verremo a prendere all'aeroporto e vi organizzeremo un'auto per raggiungere qualsiasi punto della città",
             },
             {
-                title: "Concierge digitale 24 ore su 24, 7 giorni su 7",
+                title: "Concierge digitale\n24 ore su 24, 7 giorni su 7",
                 text: "Affidateci l'organizzazione del vostro tempo libero. Vi aiuteremo a prenotare un ristorante, a fissare un appuntamento per un massaggio, ad acquistare biglietti per il teatro e a organizzare un'escursione esclusiva",
             },
             {
@@ -108,7 +108,8 @@ export const it: LandingDictionary = {
     },
     rooms: {
         title: "Categorie di camere",
-        // Названия категорий — как на EN (не переводим), только описания.
+        // Названия категорий не переводим (берутся из data/RoomsData, как на
+        // /en/rooms/), здесь только описания.
         categories: withTexts(en.rooms.categories, [
             {
                 text: "Camera d'albergo classica con letto matrimoniale dotato di materasso ortopedico e ampio bagno con doccia",
@@ -129,9 +130,10 @@ export const it: LandingDictionary = {
                 text: "Camera a tre stanze con due camere da letto separate, salotto e ampio bagno",
             },
             {
-                // Сокращено по смыслу, как в EN: полный текст ТЗ не влезает
-                // в карточку.
-                text: "Residenze storiche con finiture originali e oggetti d’antiquariato della fine del XIX e dell’inizio del XX secolo",
+                text: "Un’ampia suite storica dedicata al conte Shuvaloff. Allestita in uno stile neoclassico rigoroso, con autentici dettagli d’antiquariato, riflette nei suoi interni un gusto maturo, la forza di carattere e il rispetto per le tradizioni della casata.",
+            },
+            {
+                text: "Un’elegante suite intitolata a Elizaveta Andreevna Vorontsova-Dashkova (nata Shuvalova, 1845–1924). I suoi interni, vivaci ma raffinati, riflettono la personalità poliedrica della padrona di casa.",
             },
         ]),
         book: "Prenota ora",

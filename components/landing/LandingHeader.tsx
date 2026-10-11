@@ -114,7 +114,7 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                         className="justify-self-start"
                     >
                         <Image
-                            src="/logo.svg"
+                            src="/logo-en.svg"
                             alt="ACADEMIA Mansion Shuvaloff"
                             width={130}
                             height={33}

@@ -56,7 +56,9 @@ export default function LandingServices({
                                 className="text-brand-red"
                                 aria-hidden="true"
                             />
-                            <h3 className="font-history text-lg uppercase leading-tight text-brand-brown lg:mt-4 xl:text-xl">
+                            {/* "\n" в заголовке — перенос строки только на десктопе
+                                (lg+); на мобиле текст сплошной. */}
+                            <h3 className="font-history text-lg uppercase leading-tight text-brand-brown lg:mt-4 lg:whitespace-pre-line xl:text-xl">
                                 {item.title}
                             </h3>
                             <p className="text-brand-brown/75 lg:mt-2 xl:text-sm/6">

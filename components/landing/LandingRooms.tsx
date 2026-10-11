@@ -46,12 +46,18 @@ export default function LandingRooms({
         const areas = rooms.flatMap((room) => areaNumbers(room.area));
         const [first] = rooms;
 
+        // Название — как на /en/rooms/ (на всех языках не переводим). На
+        // лендингах бренд пишется Shuvaloff, поэтому правим написание.
+        const title = (
+            rooms.length === 1 ? first.title : (category.title ?? first.title)
+        ).replace(/Shuvalov\b/g, "Shuvaloff");
+
         return {
-            title: category.title,
+            title,
             text: category.text,
             image: {
                 src: (rooms.at(-1) ?? first).image.src,
-                alt: category.title,
+                alt: title,
             },
             area: formatArea(Math.min(...areas), Math.max(...areas)),
             href: landingHref(
