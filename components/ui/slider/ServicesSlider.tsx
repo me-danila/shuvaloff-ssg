@@ -100,6 +100,7 @@ export default function ServicesSlider({ services }: ServicesSliderProps) {
                         <CardServiceBig
                             title={service.title}
                             imgUrl={service.imgUrl}
+                            imgPosition={service.imgPosition}
                             slug={service.slug}
                             externalLink={service.externalLink}
                         />

@@ -735,6 +735,7 @@ export default function HomePage({
                 services={AllServices[locale].map((s) => ({
                     title: s.title,
                     imgUrl: s.imgUrl,
+                    imgPosition: s.imgPosition,
                     slug: s.slug,
                     externalLink: s.externalLink,
                 }))}

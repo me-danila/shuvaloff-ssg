@@ -110,6 +110,11 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             priority
                             sizes="(max-width: 1280px) 100vw, 50vw"
                             className="object-cover"
+                            style={
+                                service.imgPosition
+                                    ? { objectPosition: service.imgPosition }
+                                    : undefined
+                            }
                         />
                     </FadeUp>
 

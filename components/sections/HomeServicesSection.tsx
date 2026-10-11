@@ -10,6 +10,7 @@ import { localizeHref } from "@/lib/i18n/routing";
 type HomeServiceItem = {
     title: string;
     imgUrl: string;
+    imgPosition?: string;
     slug?: string;
     externalLink?: string;
 };
@@ -122,6 +123,7 @@ export default function HomeServicesSection({
                             <CardServiceBig
                                 title={service.title}
                                 imgUrl={service.imgUrl}
+                                imgPosition={service.imgPosition}
                                 slug={service.slug}
                                 externalLink={service.externalLink}
                                 backgroundClassName="bg-stone-100"

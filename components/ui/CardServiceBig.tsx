@@ -12,6 +12,8 @@ type CardServiceBigCtaLabel = string | Partial<Record<Locale, string>>;
 type CardServiceBigProps = {
     title: string;
     imgUrl: string;
+    /** object-position фото (по умолчанию — центр). */
+    imgPosition?: string;
     subtitle?: string;
     slug?: string;
     externalLink?: string;
@@ -33,6 +35,7 @@ type CardServiceBigProps = {
 export default function CardServiceBig({
     title,
     imgUrl,
+    imgPosition,
     subtitle,
     slug,
     externalLink,
@@ -90,6 +93,11 @@ export default function CardServiceBig({
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     loading="lazy"
                     className="object-cover object-center"
+                    style={
+                        imgPosition
+                            ? { objectPosition: imgPosition }
+                            : undefined
+                    }
                 />
             </a>
             {meta && (

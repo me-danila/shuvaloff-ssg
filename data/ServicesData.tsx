@@ -13,6 +13,8 @@ export type Service = {
     title: string;
     subtitle: string;
     imgUrl: string;
+    /** object-position фото, если кадрирование по центру режет главное. */
+    imgPosition?: string;
     fullDescription?: ReactNode;
     links?: ServiceLink[];
     price?: string;
@@ -106,6 +108,31 @@ export const AllServices: Record<Locale, Service[]> = {
                 "Наша консьерж служба освободит Вас не только от рутинных дел, но и погрузит в эпоху историзма, что позволит Вам почувствовать себя настоящим графом и княгиней!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/concierge.png",
             slug: "concierge",
+        },
+        {
+            title: "Предложение в особняке",
+            subtitle:
+                "Изысканный сценарий предложения руки и сердца в атмосфере графского особняка",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/HWUihZcdlvg8n5kaHGkh4MXPRWdtTU7zKWX4CmYCuyKvVTo5rHuXoOwBMIpokaN.jpeg",
+            imgPosition: "center 22%",
+            slug: "proposal",
+            fullDescription: (
+                <>
+                    Необычный сценарий для предложения руки и&nbsp;сердца
+                    в&nbsp;старинном особняке с&nbsp;участием графской семьи,
+                    которая поможет создать особую атмосферу для самых важных
+                    слов.
+                    <br />
+                    <br />
+                    Для красивого продолжения этого важного дня
+                    в&nbsp;аристократической обстановке проведите ночь
+                    в&nbsp;одном из&nbsp;исторических люксов особняка.
+                    Вы&nbsp;также можете заказать романтическое украшение
+                    номера, букет любимых цветов, сет к&nbsp;вину, «Графский
+                    завтрак» на&nbsp;утро или спа-ритуал для двоих.
+                </>
+            ),
+            price: "от 10 000 ₽",
         },
         {
             title: "Водные прогулки",
@@ -717,6 +744,30 @@ export const AllServices: Record<Locale, Service[]> = {
                 "Our concierge service will free you not only from routine tasks but also immerse you in the era of historicism, allowing you to feel like a real count and princess!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/concierge.png",
             slug: "concierge",
+        },
+        {
+            title: "Proposal at the Mansion",
+            subtitle:
+                "An exquisite marriage proposal scenario in the atmosphere of a count's mansion",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/HWUihZcdlvg8n5kaHGkh4MXPRWdtTU7zKWX4CmYCuyKvVTo5rHuXoOwBMIpokaN.jpeg",
+            imgPosition: "center 22%",
+            slug: "proposal",
+            fullDescription: (
+                <>
+                    An unusual scenario for a marriage proposal in a historic
+                    mansion, with the count's family taking part to help create
+                    a special atmosphere for the most important words.
+                    <br />
+                    <br />
+                    For a beautiful continuation of this important day in
+                    aristocratic surroundings, spend the night in one of the
+                    mansion's historic suites. You can also order romantic room
+                    decoration, a bouquet of favourite flowers, a wine set, an
+                    Aristocratic breakfast the next morning or a spa ritual for
+                    two.
+                </>
+            ),
+            price: "from 10 000 ₽",
         },
         {
             title: "Boat tours",

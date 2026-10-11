@@ -135,6 +135,7 @@ export default function ServicesPage({ locale }: { locale: Locale }) {
                             <CardServiceBig
                                 title={service.title}
                                 imgUrl={service.imgUrl}
+                                imgPosition={service.imgPosition}
                                 slug={service.slug}
                                 externalLink={service.externalLink}
                             />

@@ -6,6 +6,7 @@ import type { Locale } from "@/lib/i18n/routing";
 type ServicesGridItem = {
     title: string;
     imgUrl: string;
+    imgPosition?: string;
     slug?: string;
     externalLink?: string;
 };
@@ -31,6 +32,7 @@ export default function ServicesGrid({
                     <CardServiceBig
                         title={service.title}
                         imgUrl={service.imgUrl}
+                        imgPosition={service.imgPosition}
                         slug={service.slug}
                         externalLink={service.externalLink}
                         showOrder
