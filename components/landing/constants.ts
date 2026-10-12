@@ -8,10 +8,7 @@ export const LANDING_HERO_ATTR = "data-landing-hero" as const;
 export const LANDING_ARROW_CLASS =
     "flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-stone-100 text-stone-600 transition-colors duration-300 hover:bg-stone-200 active:bg-[#5c1f26] active:text-white";
 
-/**
- * WhatsApp отеля для блока «Контакты».
- * TODO: временно основной номер — заменить на номер WhatsApp от отеля.
- */
+/** WhatsApp отеля для блока «Контакты». */
 export const LANDING_WHATSAPP = {
-    href: "https://wa.me/78125659650",
+    href: "https://wa.me/79668342743",
 };
