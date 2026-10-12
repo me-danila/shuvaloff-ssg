@@ -113,8 +113,8 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Предложение в особняке",
             subtitle:
                 "Изысканный сценарий предложения руки и сердца в атмосфере графского особняка",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/HWUihZcdlvg8n5kaHGkh4MXPRWdtTU7zKWX4CmYCuyKvVTo5rHuXoOwBMIpokaN.jpeg",
-            imgPosition: "center 22%",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_6258.jpg",
+            imgPosition: "center 70%",
             slug: "proposal",
             fullDescription: (
                 <>
@@ -749,8 +749,8 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Proposal at the Mansion",
             subtitle:
                 "An exquisite marriage proposal scenario in the atmosphere of a count's mansion",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/HWUihZcdlvg8n5kaHGkh4MXPRWdtTU7zKWX4CmYCuyKvVTo5rHuXoOwBMIpokaN.jpeg",
-            imgPosition: "center 22%",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_6258.jpg",
+            imgPosition: "center 70%",
             slug: "proposal",
             fullDescription: (
                 <>
