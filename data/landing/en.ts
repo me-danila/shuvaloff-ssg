@@ -122,7 +122,7 @@ export const en: LandingDictionary = {
     rooms: {
         title: "Room categories",
         // Названия — из data/RoomsData (как на /en/rooms/), здесь только
-        // описания.
+        // описания; у исторических люксов название свое.
         categories: [
             {
                 rooms: ["standard"],
@@ -150,10 +150,12 @@ export const en: LandingDictionary = {
             },
             {
                 rooms: ["shuvalov"],
+                title: "Suite Shuvalov",
                 text: "A spacious historic suite dedicated to Count Shuvaloff. Decorated in the style of strict neoclassicism with authentic antique details, its interior reflects an aesthetic of mature taste, strength of character and respect for the traditions of his lineage.",
             },
             {
                 rooms: ["dashkova"],
+                title: "Suite Dashkova",
                 text: "An elegant suite named in honour of Elizaveta Andreevna Vorontsova-Dashkova (née Shuvalova, 1845–1924). Its vivid yet refined interior reflects the many-sided personality of the lady of the house.",
             },
         ],
@@ -172,7 +174,7 @@ export const en: LandingDictionary = {
             {
                 bookingUrl: "/booking?be-offer=588665",
                 title: "Early Booking",
-                text: "Book 3+ nights between September and December and save 15% or more",
+                text: "Book 3+ nights between September and December and save 20% or more",
             },
             {
                 bookingUrl: "/booking?be-offer=588673",

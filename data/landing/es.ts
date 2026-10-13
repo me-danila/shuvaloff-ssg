@@ -109,7 +109,8 @@ export const es: LandingDictionary = {
     rooms: {
         title: "Categorías de habitaciones",
         // Названия категорий не переводим (берутся из data/RoomsData, как на
-        // /en/rooms/), здесь только описания.
+        // /en/rooms/), здесь только описания; у исторических люксов название
+        // свое.
         categories: withTexts(en.rooms.categories, [
             {
                 text: "Habitación clásica de hotel con cama de matrimonio con colchón ortopédico y un amplio cuarto de baño con ducha",
@@ -130,9 +131,11 @@ export const es: LandingDictionary = {
                 text: "Habitación de tres habitaciones con dos dormitorios independientes, salón y un amplio cuarto de baño",
             },
             {
+                title: "Suite Shuvalov",
                 text: "Una amplia suite histórica dedicada al conde Shuvaloff. Decorada en un estilo neoclásico riguroso, con auténticos detalles de anticuario, su interior refleja un gusto maduro, la fortaleza de carácter y el respeto por las tradiciones del linaje.",
             },
             {
+                title: "Suite Dashkova",
                 text: "Una elegante suite que lleva el nombre de Elizaveta Andréyevna Vorontsova-Dashkova (de soltera Shuvalova, 1845–1924). Su interior, vivo pero refinado, refleja la personalidad polifacética de la anfitriona de la mansión.",
             },
         ]),
@@ -149,7 +152,7 @@ export const es: LandingDictionary = {
             },
             {
                 title: "Reserva anticipada",
-                text: "Planifica tu viaje con antelación: a partir de 3 noches, de septiembre a diciembre, descuento del 15 %",
+                text: "Planifica tu viaje con antelación: a partir de 3 noches, de septiembre a diciembre, descuento del 20 %",
             },
             {
                 title: "Estancias prolongadas",

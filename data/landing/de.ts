@@ -109,7 +109,8 @@ export const de: LandingDictionary = {
     rooms: {
         title: "Zimmerkategorien",
         // Названия категорий не переводим (берутся из data/RoomsData, как на
-        // /en/rooms/), здесь только описания.
+        // /en/rooms/), здесь только описания; у исторических люксов название
+        // свое.
         categories: withTexts(en.rooms.categories, [
             {
                 text: "Klassisches Hotelzimmer mit einem Doppelbett mit orthopädischer Matratze und einem geräumigen Badezimmer mit Dusche",
@@ -130,9 +131,11 @@ export const de: LandingDictionary = {
                 text: "Dreizimmer-Suite mit zwei separaten Schlafzimmern, Wohnzimmer und geräumigem Badezimmer",
             },
             {
+                title: "Suite Schuwalow",
                 text: "Eine großzügige historische Suite, die Graf Shuvaloff gewidmet ist. Sie ist im Stil des strengen Neoklassizismus mit authentischen antiken Details gestaltet. Das Interieur spiegelt einen reifen Geschmack, Charakterstärke und die Achtung vor den Traditionen des Adelsgeschlechts wider.",
             },
             {
+                title: "Suite Daschkowa",
                 text: "Eine elegante Suite, benannt zu Ehren von Jelisaweta Andrejewna Woronzowa-Daschkowa (geb. Schuwalowa, 1845–1924). Das farbenfrohe und zugleich erlesene Interieur spiegelt die vielschichtige Persönlichkeit der Hausherrin wider.",
             },
         ]),
@@ -149,7 +152,7 @@ export const de: LandingDictionary = {
             },
             {
                 title: "Frühbucherrabatt",
-                text: "Planen Sie Ihre Reise im Voraus – ab 3 Übernachtungen von September bis Dezember erhalten Sie einen Rabatt von 15 %",
+                text: "Planen Sie Ihre Reise im Voraus – ab 3 Übernachtungen von September bis Dezember erhalten Sie einen Rabatt von 20 %",
             },
             {
                 title: "Langzeitaufenthalt",
