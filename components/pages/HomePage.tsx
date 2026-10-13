@@ -19,7 +19,6 @@ import SpecialOffersSection from "@/components/sections/SpecialOffersSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
-import { AwardStarIcon } from "@/components/ui/icons";
 import {
     FadeIn,
     FadeUp,
@@ -327,11 +326,6 @@ function EventsIcon({ className }: HeroIconProps) {
     );
 }
 
-// Звезда «Национальной гостиничной премии» в общем боксе иконок hero.
-function VoteIcon({ className }: HeroIconProps) {
-    return <AwardStarIcon size={HERO_ICON_BOX} className={className} />;
-}
-
 const heroButtons = [
     {
         label: {
@@ -368,15 +362,6 @@ const heroButtons = [
         href: "/events/",
         external: false,
         Icon: EventsIcon,
-    },
-    {
-        label: {
-            ru: "Проголосуйте за нас",
-            en: "Vote for us",
-        },
-        href: "/national-award-2026/",
-        external: false,
-        Icon: VoteIcon,
     },
 ];
 
