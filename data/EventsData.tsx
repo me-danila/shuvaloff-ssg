@@ -1127,6 +1127,8 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa/?utm_source=hotel",
         dates: ["2026-10-16T19:00"],
+        // Скрыто: мероприятие не состоится.
+        published: false,
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/meet-3.png",
         overrides: {
             ru: benoisDinner("ru", "8 500 ₽"),
