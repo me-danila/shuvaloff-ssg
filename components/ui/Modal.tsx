@@ -9,6 +9,8 @@ interface Props {
     children: React.ReactNode;
     maxWidth?: string;
     bgColor?: string;
+    /** Доп. классы панели, например ограничение высоты для прокрутки внутри. */
+    panelClassName?: string;
     ariaLabel?: string;
     ariaLabelledby?: string;
 }
@@ -19,6 +21,7 @@ export function Modal({
     children,
     maxWidth = "max-w-2xl",
     bgColor = "bg-white",
+    panelClassName = "",
     ariaLabel,
     ariaLabelledby,
 }: Props) {
@@ -114,7 +117,9 @@ export function Modal({
             aria-label={ariaLabelledby ? undefined : ariaLabel}
             aria-labelledby={ariaLabelledby}
             aria-modal="true"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 outline-none"
+            // z-index выше сторонних виджетов (ИИ-помощник, «Акции» TravelLine —
+            // у них ~2147483640), иначе они перекрывают содержимое модалки.
+            className="fixed inset-0 z-[2147483646] flex items-center justify-center p-4 outline-none"
             role="dialog"
             tabIndex={-1}
         >
@@ -125,7 +130,7 @@ export function Modal({
                 type="button"
             />
             <div
-                className={`relative z-10 w-full ${bgColor} ${maxWidth} min-h-fit overflow-y-auto rounded-md text-black`}
+                className={`relative z-10 w-full ${bgColor} ${maxWidth} min-h-fit overflow-y-auto rounded-md text-black ${panelClassName}`}
             >
                 {children}
             </div>

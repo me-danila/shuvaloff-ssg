@@ -25,6 +25,7 @@ import {
     StaggerContainer,
     StaggerItem,
 } from "@/components/ui/Motion";
+import WauPromoModal from "@/components/ui/modals/WauPromoModal";
 import Image from "@/components/ui/OptimizedImage";
 import { Parallax } from "@/components/ui/Parallax";
 import { AllRooms, toRoomListItem } from "@/data/RoomsData";
@@ -771,6 +772,7 @@ export default function HomePage({
                 <Divider />
             </div>
             <ContactsSection />
+            <WauPromoModal locale={locale} />
         </main>
     );
 }
