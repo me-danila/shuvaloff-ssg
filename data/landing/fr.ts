@@ -62,7 +62,7 @@ export const fr: LandingDictionary = {
         title: "Une demeure historique au cœur de la ville",
         tiles: withTexts(en.mansion.tiles, [
             {
-                title: "Petits-déjeuners comtaux",
+                title: "Petits-déjeuners aristocratiques",
                 text: "Une matinée dans des intérieurs du XIXe siècle avec un petit-déjeuner classique de Saint-Pétersbourg",
             },
             {
