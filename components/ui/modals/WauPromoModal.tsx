@@ -258,7 +258,20 @@ export default function WauPromoModal({ locale }: { locale: Locale }) {
                 <WauGallery locale={locale} />
                 <div className="flex flex-col items-start gap-4 px-2 pb-3 md:flex-1 md:justify-center md:px-0 md:py-4 md:pr-4">
                     <h2 id={TITLE_ID} className="xl:text-3xl">
-                        ACADEMIA × WAU
+                        ACADEMIA{" "}
+                        <svg
+                            aria-hidden="true"
+                            viewBox="0 0 10 10"
+                            className="mx-[0.1em] inline-block h-[0.55em] w-[0.55em] align-[0.1em]"
+                        >
+                            <path
+                                d="M1 1l8 8M9 1l-8 8"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="butt"
+                            />
+                        </svg>
+                        <span className="sr-only">×</span> WAU
                     </h2>
                     <div className="flex flex-col gap-3">
                         {copy.paragraphs.map((lines) => (
