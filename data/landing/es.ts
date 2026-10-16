@@ -61,7 +61,7 @@ export const es: LandingDictionary = {
         title: "Una mansión histórica en el centro de la ciudad",
         tiles: withTexts(en.mansion.tiles, [
             {
-                title: "Desayunos de la nobleza",
+                title: "Desayuno aristocrático",
                 text: "Una mañana en un entorno del siglo XIX con un desayuno clásico de San Petersburgo",
             },
             {
@@ -173,7 +173,7 @@ export const es: LandingDictionary = {
                 text: "Un evocador escenario de descanso aristocrático otoñal",
             },
             {
-                title: "San Petersburgo condal",
+                title: "San Petersburgo aristocrático",
                 text: "Una estancia al estilo de las fastuosas tradiciones aristocráticas (de mayo a septiembre)",
             },
             {
