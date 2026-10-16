@@ -39,7 +39,7 @@ const dropdownVariants = {
  * Мобила: лого | Book now (с началом скролла) + бургер; навигация и
  * языки — в выпадающем меню
  * (панель, оверлей и анимация пунктов — как у мобильного меню основного
- * хедера). Переключатель ведёт только между лендингами (EN → /en/visit/).
+ * хедера). Переключатель: RU — полный русский сайт, остальные — лендинги (EN → /en/visit/).
  */
 export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
     const headerRef = useRef<HTMLElement>(null);
@@ -266,6 +266,17 @@ function LanguageLinks({
 }) {
     return (
         <ul className={`flex items-center text-sm uppercase ${className}`}>
+            <li>
+                <a
+                    href="/"
+                    hrefLang="ru"
+                    lang="ru"
+                    title="Русский"
+                    className="font-medium opacity-80 hover:opacity-100"
+                >
+                    ru
+                </a>
+            </li>
             {LANDING_LOCALES.map((l) => (
                 <li key={l}>
                     <a

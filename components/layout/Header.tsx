@@ -9,7 +9,7 @@ import {
 import { AnimatePresence, m } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import {
     menuItemVariants,
@@ -26,6 +26,7 @@ import SocialLinks from "@/components/ui/SocialLinks";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
     hasEnglishVersion,
+    LANDING_PATHS,
     type Locale,
     localizeHref,
     normalizePath,
@@ -390,6 +391,27 @@ const mobileSubmenuVariants = {
 };
 
 /**
+ * Языки, у которых есть только лендинг: в переключателе после RU/EN, порядок
+ * как в футере лендинга (IT · FR · ES · DE). Ведут на лендинги — плейн <a>,
+ * у лендингов свой layout. Десктоп — выпадашка по hover, мобила — по тапу
+ * (рядом с лого места на шесть языков в строку нет).
+ * Подписи — самоназвания (как LANDING_LANGUAGE_NAMES, но без импорта
+ * словарей лендингов в клиентский бандл хедера).
+ */
+const LANDING_LANGUAGE_LINKS = [
+    { code: "it", name: "Italiano" },
+    { code: "fr", name: "Français" },
+    { code: "es", name: "Español" },
+    { code: "de", name: "Deutsch" },
+].map(({ code, name }) => ({
+    code,
+    name,
+    href: LANDING_PATHS[code as keyof typeof LANDING_PATHS],
+}));
+
+const MOBILE_LANG_MENU_ID = "header-mobile-languages";
+
+/**
  * Страницы с полноэкранным hero: хедер закреплен поверх первого экрана
  * и до прокрутки остается прозрачным.
  */
@@ -421,6 +443,8 @@ export default function Header({ locale }: { locale: Locale }) {
     const isHeaderFixed = FIXED_HEADER_PATHS.has(normalizedPath);
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [mobileLangOpen, setMobileLangOpen] = useState(false);
+    const mobileLangRef = useRef<HTMLDivElement>(null);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
     // Keyboard-only: tracks which desktop dropdown currently holds keyboard
     // focus, purely to drive aria-expanded. The visual open/close is handled by
@@ -432,6 +456,25 @@ export default function Header({ locale }: { locale: Locale }) {
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
+
+    // Мобильная выпадашка языков: закрывается тапом мимо и по Esc.
+    useEffect(() => {
+        if (!mobileLangOpen) return;
+        const onPointerDown = (event: PointerEvent) => {
+            if (!mobileLangRef.current?.contains(event.target as Node)) {
+                setMobileLangOpen(false);
+            }
+        };
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") setMobileLangOpen(false);
+        };
+        document.addEventListener("pointerdown", onPointerDown);
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("pointerdown", onPointerDown);
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [mobileLangOpen]);
 
     useEffect(() => {
         if (!menuOpen) {
@@ -470,6 +513,11 @@ export default function Header({ locale }: { locale: Locale }) {
     const alternateHref = locale === "ru" ? enHref : ruHref;
     const currentLanguageLabel = locale.toUpperCase();
     const alternateLanguageLabel = alternateLocale.toUpperCase();
+    const languageOptionClass = `inline-flex h-11 w-11 items-center justify-center rounded-full border text-xs font-medium transition-colors duration-300 ${
+        isLight
+            ? "border-stone-300 bg-white text-brand-brown shadow-[0_10px_30px_rgba(0,0,0,0.16)] hover:border-brand-brown hover:text-brand-brown"
+            : "border-white/70 bg-[#100b08] text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:border-white hover:bg-[#100b08]"
+    }`;
     const buildMenuHref = (item: HeaderLinkItem) => {
         if (!item.href.startsWith("?")) {
             return localizeHref(item.href, locale);
@@ -531,23 +579,81 @@ export default function Header({ locale }: { locale: Locale }) {
             >
                 <div className="flex items-center h-14 px-5 px-8 xl:px-0 relative xl:h-20 xl:mx-auto xl:w-full xl:max-w-7xl">
                     <div className="flex items-center xl:gap-32">
-                        <div
-                            className={`flex items-center gap-2 text-xs tracking-wider transition-colors duration-300 xl:hidden ${
-                                isLight ? "text-[#96908D]" : "text-white/70"
-                            }`}
-                        >
-                            <Link
-                                href={ruHref}
-                                className={`font-medium ${locale === "ru" ? (isLight ? "text-brand-brown" : "text-white") : "opacity-80 hover:opacity-100"}`}
+                        <div ref={mobileLangRef} className="relative xl:hidden">
+                            <button
+                                type="button"
+                                onClick={() => setMobileLangOpen((v) => !v)}
+                                aria-expanded={mobileLangOpen}
+                                aria-controls={MOBILE_LANG_MENU_ID}
+                                aria-label={
+                                    locale === "ru"
+                                        ? "Выбрать язык"
+                                        : "Choose language"
+                                }
+                                className={`flex h-11 cursor-pointer items-center gap-1 text-xs font-medium tracking-wider transition-colors duration-300 ${
+                                    isLight ? "text-brand-brown" : "text-white"
+                                }`}
                             >
-                                RU
-                            </Link>
-                            <Link
-                                href={enHref}
-                                className={`font-medium ${locale === "en" ? (isLight ? "text-brand-brown" : "text-white") : "opacity-80 hover:opacity-100"}`}
-                            >
-                                ENG
-                            </Link>
+                                {currentLanguageLabel}
+                                <CaretDownIcon
+                                    size={9}
+                                    weight="bold"
+                                    aria-hidden="true"
+                                    className={`transition-transform duration-300 ${mobileLangOpen ? "rotate-180" : ""}`}
+                                />
+                            </button>
+                            {mobileLangOpen && (
+                                <ul
+                                    id={MOBILE_LANG_MENU_ID}
+                                    className={`absolute left-0 top-full z-50 flex min-w-[3.5rem] flex-col rounded-lg border py-1 text-xs font-medium uppercase tracking-wider ${
+                                        isLight
+                                            ? "border-stone-200 bg-white text-[#96908D] shadow-[0_10px_30px_rgba(0,0,0,0.16)]"
+                                            : "border-white/20 bg-[#100b08] text-white/70 shadow-[0_14px_40px_rgba(0,0,0,0.55)]"
+                                    }`}
+                                >
+                                    {[
+                                        {
+                                            code: "ru",
+                                            name: "Русский",
+                                            href: ruHref,
+                                        },
+                                        {
+                                            code: "en",
+                                            name: "English",
+                                            href: enHref,
+                                        },
+                                        ...LANDING_LANGUAGE_LINKS,
+                                    ].map(({ code, name, href }) => (
+                                        <li key={code}>
+                                            <a
+                                                href={href}
+                                                hrefLang={code}
+                                                lang={code}
+                                                title={name}
+                                                aria-current={
+                                                    code === locale
+                                                        ? "page"
+                                                        : undefined
+                                                }
+                                                onClick={() =>
+                                                    setMobileLangOpen(false)
+                                                }
+                                                className={`block px-4 py-2 ${
+                                                    code === locale
+                                                        ? isLight
+                                                            ? "text-brand-brown"
+                                                            : "text-white"
+                                                        : isLight
+                                                          ? "hover:text-brand-brown"
+                                                          : "hover:text-white"
+                                                }`}
+                                            >
+                                                {code}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                         <div className="group relative hidden xl:block">
                             <Link
@@ -575,21 +681,33 @@ export default function Header({ locale }: { locale: Locale }) {
                                 className="absolute left-0 top-full z-50 h-1.5 w-11"
                                 aria-hidden="true"
                             />
-                            <Link
-                                href={alternateHref}
-                                aria-label={
-                                    locale === "ru"
-                                        ? "Switch to English"
-                                        : "Переключить на русский"
-                                }
-                                className={`absolute left-0 top-[calc(100%+0.375rem)] z-50 inline-flex h-11 w-11 translate-y-1 items-center justify-center rounded-full border text-xs font-medium opacity-0 pointer-events-none transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto ${
-                                    isLight
-                                        ? "border-stone-300 bg-white text-brand-brown shadow-[0_10px_30px_rgba(0,0,0,0.16)] hover:border-brand-brown hover:text-brand-brown"
-                                        : "border-white/70 bg-[#100b08] text-white shadow-[0_14px_40px_rgba(0,0,0,0.55)] hover:border-white hover:bg-[#100b08]"
-                                }`}
-                            >
-                                {alternateLanguageLabel}
-                            </Link>
+                            <div className="absolute left-0 top-[calc(100%+0.375rem)] z-50 flex translate-y-1 flex-col gap-1.5 opacity-0 pointer-events-none transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto">
+                                <Link
+                                    href={alternateHref}
+                                    aria-label={
+                                        locale === "ru"
+                                            ? "Switch to English"
+                                            : "Переключить на русский"
+                                    }
+                                    className={languageOptionClass}
+                                >
+                                    {alternateLanguageLabel}
+                                </Link>
+                                {LANDING_LANGUAGE_LINKS.map(
+                                    ({ code, name, href }) => (
+                                        <a
+                                            key={code}
+                                            href={href}
+                                            hrefLang={code}
+                                            lang={code}
+                                            title={name}
+                                            className={`uppercase ${languageOptionClass}`}
+                                        >
+                                            {code}
+                                        </a>
+                                    ),
+                                )}
+                            </div>
                         </div>
                         <a
                             href={HOTEL_CONTACTS.telephoneHref}
