@@ -26,6 +26,7 @@ export const fr: LandingDictionary = {
             { label: "Chambres" },
             { label: "Histoire" },
             { label: "Offres" },
+            { footerLabel: "Assistance pour les visas" },
         ]),
     },
     hero: {
@@ -104,6 +105,7 @@ export const fr: LandingDictionary = {
                 ],
             },
         ]),
+        allServices: "Tous les services",
         prev: "Précédent",
         next: "Suivant",
     },

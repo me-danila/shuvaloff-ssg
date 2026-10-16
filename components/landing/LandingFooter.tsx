@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import LandingNavLink from "@/components/landing/LandingNavLink";
 import Image from "@/components/ui/OptimizedImage";
 import SocialLinks from "@/components/ui/SocialLinks";
 import { LANDING_LANGUAGE_NAMES, type LandingDictionary } from "@/data/landing";
@@ -28,18 +29,23 @@ const TEXT_CLASS = "text-sm leading-snug md:text-xs";
 /**
  * Футер лендинга. Цвета, логотип, соцсети и юр. строки — как в футере
  * основного сайта (Footer), но без рассылки и ссылок коллекции: колонки по
- * ТЗ — языки, соцсети, юридическая информация. Статичный.
+ * ТЗ — меню, языки, соцсети, юридическая информация. Статичный.
  *
- * Десктоп (md+): 4 колонки — логотип / языки / соцсети / юр. ссылки, под
+ * Меню — пункты хедера, но подписи на языке лендинга (Visa support в хедере
+ * везде по-английски, здесь — перевод).
+ *
+ * Десктоп (md+): 5 колонок — логотип / меню / языки / соцсети / юр. ссылки, под
  * ними строка с копирайтом и юрлицом. Мобила: единый список по центру.
  * Юр. документы — только на русском: ссылки на RU-страницы /policy/ и
  * /legal/ (hrefLang="ru").
  */
 export default function LandingFooter({
     dict,
+    menu,
     locale,
 }: {
     dict: LandingDictionary["footer"];
+    menu: { label: string; items: LandingDictionary["ui"]["nav"] };
     locale: LandingDictionary["locale"];
 }) {
     return (
@@ -54,7 +60,7 @@ export default function LandingFooter({
                 <meta key={href} itemProp="sameAs" content={href} />
             ))}
 
-            <div className="mx-auto flex max-w-120 flex-col items-center gap-10 px-6 py-12 text-center md:grid md:max-w-7xl md:grid-cols-4 md:items-start md:gap-x-16 md:gap-y-8 md:text-left xl:px-0">
+            <div className="mx-auto flex max-w-120 flex-col items-center gap-10 px-6 py-12 text-center md:grid md:max-w-7xl md:grid-cols-5 md:items-start md:gap-x-8 md:gap-y-8 xl:gap-x-16 md:text-left xl:px-0">
                 <a href="#main-content" aria-label={dict.home}>
                     <Image
                         src="/logo-en.svg"
@@ -64,6 +70,30 @@ export default function LandingFooter({
                         className="opacity-70 brightness-0 invert transition duration-200 hover:opacity-90"
                     />
                 </a>
+
+                <nav
+                    aria-labelledby="landing-footer-menu"
+                    className="flex flex-col items-center gap-3 md:items-start"
+                >
+                    <p id="landing-footer-menu" className={HEADING_CLASS}>
+                        {menu.label}
+                    </p>
+                    <ul
+                        className={`flex flex-col gap-2 md:gap-1.5 ${TEXT_CLASS}`}
+                    >
+                        {menu.items.map((item) => (
+                            <li key={item.href}>
+                                <LandingNavLink
+                                    href={item.href}
+                                    home={LANDING_PATHS[locale]}
+                                    className="transition-colors hover:text-white"
+                                >
+                                    {item.footerLabel ?? item.label}
+                                </LandingNavLink>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
 
                 <nav
                     aria-labelledby="landing-footer-languages"
@@ -142,7 +172,7 @@ export default function LandingFooter({
                     </ul>
                 </div>
 
-                <div className="flex flex-col gap-1 text-white md:col-span-4 md:text-white/50 md:flex-row md:gap-8 md:border-t md:border-white/10 md:pt-5">
+                <div className="flex flex-col gap-1 text-white md:col-span-5 md:text-white/50 md:flex-row md:gap-8 md:border-t md:border-white/10 md:pt-5">
                     {/* text-xs явно: глобальный стиль p увеличивает шрифт. */}
                     <p className="text-[12px] leading-snug md:text-xs">
                         {dict.copyright}

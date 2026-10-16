@@ -3,6 +3,7 @@
 import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { LANDING_HERO_ATTR } from "@/components/landing/constants";
+import LandingNavLink from "@/components/landing/LandingNavLink";
 import {
     menuItemVariants,
     menuListVariants,
@@ -44,8 +45,7 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
     const headerRef = useRef<HTMLElement>(null);
     // SSR и первый кадр — поверх hero: лендинг всегда начинается с него.
     const [overHero, setOverHero] = useState(true);
-    // Якоря — с путем лендинга: хедер стоит и на /xx/booking/, где секций
-    // нет. На самом лендинге браузер просто прокручивает к секции.
+    // Якоря — с путем лендинга (см. LandingNavLink).
     const home = LANDING_PATHS[dict.locale];
     const [menuOpen, setMenuOpen] = useState(false);
     // Тот же порог, что у основного хедера (components/layout/Header).
@@ -130,12 +130,13 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                         <ul className="flex items-center gap-10">
                             {dict.ui.nav.map((item) => (
                                 <li key={item.href}>
-                                    <a
-                                        href={`${home}${item.href}`}
+                                    <LandingNavLink
+                                        href={item.href}
+                                        home={home}
                                         className="whitespace-nowrap text-sm font-semibold uppercase transition-opacity duration-200 hover:opacity-70"
                                     >
                                         {item.label}
-                                    </a>
+                                    </LandingNavLink>
                                 </li>
                             ))}
                         </ul>
@@ -228,13 +229,14 @@ export default function LandingHeader({ dict }: { dict: LandingDictionary }) {
                                         key={item.href}
                                         variants={menuItemVariants}
                                     >
-                                        <a
-                                            href={`${home}${item.href}`}
+                                        <LandingNavLink
+                                            href={item.href}
+                                            home={home}
                                             onClick={closeMenu}
                                             className="block py-3 text-sm uppercase text-brand-brown transition-colors hover:text-brand-brown"
                                         >
                                             {item.label}
-                                        </a>
+                                        </LandingNavLink>
                                     </m.div>
                                 ))}
                             </m.nav>

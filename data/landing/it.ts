@@ -25,6 +25,7 @@ export const it: LandingDictionary = {
             { label: "Camere" },
             { label: "Storia" },
             { label: "Offerte" },
+            { footerLabel: "Assistenza per il visto" },
         ]),
     },
     hero: {
@@ -103,6 +104,7 @@ export const it: LandingDictionary = {
                 ],
             },
         ]),
+        allServices: "Tutti i servizi",
         prev: "Precedente",
         next: "Successivo",
     },

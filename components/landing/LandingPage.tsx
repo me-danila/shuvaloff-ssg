@@ -26,13 +26,18 @@ export default function LandingPage({ dict }: { dict: LandingDictionary }) {
                 image={{ src: HERO_IMAGE, alt: dict.hero.title }}
                 withBookingForm
                 tightTitle
+                // Десктоп: название над вывеской «Отель ACADEMIA Особняк
+                // Шувалова» на фасаде, подпись остается на месте. Фото —
+                // object-cover, вывеска на ~56% высоты кадра, поэтому отступ
+                // считается от размеров экрана (0 там, где не перекрывает).
+                titleClassName="xl:mb-[max(0px,calc(50vh-4.6vw-290px))]"
                 wideDescription
                 // Размер и фото — как у hero главной: мобила 8:11, десктоп — весь
                 // экран, без затемнения поверх фото.
                 frameSizeClassName="aspect-8/11 xl:aspect-[unset] xl:min-h-screen"
                 frameData={{ [LANDING_HERO_ATTR]: "" }}
             />
-            <LandingServices dict={dict.services} />
+            <LandingServices dict={dict.services} locale={dict.locale} />
             <LandingMansion dict={dict.mansion} />
             <LandingRooms dict={dict.rooms} locale={dict.locale} />
             <LandingOffers dict={dict.offers} locale={dict.locale} />

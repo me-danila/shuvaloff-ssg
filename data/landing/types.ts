@@ -25,8 +25,11 @@ export type LandingDictionary = {
         menuLabel: string;
         openMenu: string;
         closeMenu: string;
-        /** Навигация по секциям лендинга (якоря: #rooms, #history, …). */
-        nav: { label: string; href: `#${string}` }[];
+        /**
+         * Навигация: якоря секций лендинга (#rooms, #history, …) и внешние
+         * ссылки (открываются в новой вкладке). Те же пункты — в меню футера.
+         */
+        nav: LandingNavItem[];
     };
     hero: {
         title: string;
@@ -39,6 +42,11 @@ export type LandingDictionary = {
             icon: LandingServiceIcon;
             title: string;
             text: string;
+            /**
+             * Ссылка колонки: внешняя — в новой вкладке, внутренняя — через
+             * landingHref (/booking/ → /it/booking/ …).
+             */
+            href?: string;
         }[];
     };
     /** Номерной фонд: карточки категорий, клик — бронирование. */
@@ -104,9 +112,20 @@ export type LandingDictionary = {
         /** 4 плитки под заголовком, перед слайдером «История / Локация». */
         tiles: LandingMansionTile[];
         slides: LandingMansionSlide[];
+        /** Кнопка «Все услуги» под плитками. */
+        allServices: string;
         prev: string;
         next: string;
     };
+};
+
+/** Пункт меню хедера и футера. */
+export type LandingNavItem = {
+    label: string;
+    /** Якорь секции (`#rooms`) или внешний URL. */
+    href: string;
+    /** Подпись в меню футера, если отличается от хедера (Visa support). */
+    footerLabel?: string;
 };
 
 /**

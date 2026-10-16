@@ -9,6 +9,11 @@ import {
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import type { LandingDictionary } from "@/data/landing";
 import type { LandingServiceIcon } from "@/data/landing/types";
+import {
+    isExternalHref,
+    type LandingLocale,
+    landingHref,
+} from "@/lib/i18n/routing";
 
 // Трансфер и консьерж — те же иконки, что на их страницах основного сайта.
 const ICONS: Record<LandingServiceIcon, Icon> = {
@@ -18,6 +23,18 @@ const ICONS: Record<LandingServiceIcon, Icon> = {
     concierge: BellIcon,
     gift: GiftIcon,
 };
+
+// Иконка / заголовок / текст колонки; на десктопе — subgrid колонки.
+const ITEM_BODY_CLASS =
+    "flex flex-col gap-3 lg:row-span-3 lg:grid lg:grid-rows-subgrid lg:gap-0";
+
+/** Внешние ссылки — в новой вкладке, внутренние — в путь лендинга. */
+function serviceLinkProps(href: string, locale: LandingLocale) {
+    if (isExternalHref(href)) {
+        return { href, target: "_blank", rel: "noopener noreferrer" };
+    }
+    return { href: landingHref(href, locale) };
+}
 
 /**
  * «Что мы берем на себя» — компактная полоса из пяти равных колонок без
@@ -29,11 +46,14 @@ const ICONS: Record<LandingServiceIcon, Icon> = {
  * даже если какой-то заголовок переносится на две строки.
  * Мобила/планшет: горизонтальный скролл со snap; колонка ~3/4 экрана,
  * чтобы край следующей подсказывал прокрутку.
+ * Колонка с href — ссылка целиком (виза, бронирование, WhatsApp).
  */
 export default function LandingServices({
     dict,
+    locale,
 }: {
     dict: LandingDictionary["services"];
+    locale: LandingLocale;
 }) {
     return (
         <section className="py-8 xl:py-10">
@@ -45,11 +65,8 @@ export default function LandingServices({
             >
                 {dict.items.map((item) => {
                     const ItemIcon = ICONS[item.icon];
-                    return (
-                        <StaggerItem
-                            key={item.icon}
-                            className="flex w-[78%] shrink-0 snap-start flex-col gap-3 border-l border-brand-brown/15 px-5 first:border-l-0 first:pl-0 sm:w-[40%] lg:row-span-3 lg:grid lg:w-auto lg:grid-rows-subgrid lg:gap-0 lg:px-6 lg:last:pr-0 xl:px-8"
-                        >
+                    const content = (
+                        <>
                             <ItemIcon
                                 size={28}
                                 weight="light"
@@ -58,12 +75,29 @@ export default function LandingServices({
                             />
                             {/* "\n" в заголовке — перенос строки только на десктопе
                                 (lg+); на мобиле текст сплошной. */}
-                            <h3 className="font-history text-lg uppercase leading-tight text-brand-brown lg:mt-4 lg:whitespace-pre-line xl:text-xl">
+                            <h3 className="font-history text-lg uppercase leading-tight text-brand-brown transition-colors group-hover:text-brand-red lg:mt-4 lg:whitespace-pre-line xl:text-xl">
                                 {item.title}
                             </h3>
                             <p className="text-brand-brown/75 lg:mt-2 xl:text-sm/6">
                                 {item.text}
                             </p>
+                        </>
+                    );
+                    return (
+                        <StaggerItem
+                            key={item.icon}
+                            className="w-[78%] shrink-0 snap-start border-l border-brand-brown/15 px-5 first:border-l-0 first:pl-0 sm:w-[40%] lg:row-span-3 lg:grid lg:w-auto lg:grid-rows-subgrid lg:px-6 lg:last:pr-0 xl:px-8"
+                        >
+                            {item.href ? (
+                                <a
+                                    {...serviceLinkProps(item.href, locale)}
+                                    className={`group ${ITEM_BODY_CLASS}`}
+                                >
+                                    {content}
+                                </a>
+                            ) : (
+                                <div className={ITEM_BODY_CLASS}>{content}</div>
+                            )}
                         </StaggerItem>
                     );
                 })}

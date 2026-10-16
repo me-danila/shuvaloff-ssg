@@ -27,7 +27,11 @@ export default function LandingShell({
             >
                 {children}
             </main>
-            <LandingFooter dict={dict.footer} locale={dict.locale} />
+            <LandingFooter
+                dict={dict.footer}
+                menu={{ label: dict.ui.menuLabel, items: dict.ui.nav }}
+                locale={dict.locale}
+            />
         </>
     );
 }

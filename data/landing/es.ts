@@ -25,6 +25,7 @@ export const es: LandingDictionary = {
             { label: "Habitaciones" },
             { label: "Historia" },
             { label: "Ofertas" },
+            { footerLabel: "Asistencia para la tramitación de visados" },
         ]),
     },
     hero: {
@@ -103,6 +104,7 @@ export const es: LandingDictionary = {
                 ],
             },
         ]),
+        allServices: "Todos los servicios",
         prev: "Anterior",
         next: "Siguiente",
     },

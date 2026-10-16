@@ -1,5 +1,11 @@
 import type { LandingDictionary } from "./types";
 
+/** Анкета визовой поддержки (bpltech): пункт меню и колонка «Visa support». */
+const VISA_FORM_URL =
+    "https://www.bpltech.pro/guest_form/add/175a67939d61a46c4228b74d23823863/1/start/english/no#bplformtopiframewindow";
+/** Чат с отелем в WhatsApp: трансфер и консьерж. */
+const WHATSAPP_URL = "https://wa.me/79668342743";
+
 export const en: LandingDictionary = {
     locale: "en",
     draft: false,
@@ -21,6 +27,9 @@ export const en: LandingDictionary = {
             { label: "Rooms", href: "#rooms" },
             { label: "History", href: "#history" },
             { label: "Offers", href: "#offers" },
+            // В хедере — «Visa support» на всех языках (по ТЗ), в футере —
+            // перевод (footerLabel).
+            { label: "Visa support", href: VISA_FORM_URL },
         ],
     },
     hero: {
@@ -35,21 +44,25 @@ export const en: LandingDictionary = {
                 icon: "visa",
                 title: "Visa support",
                 text: "We can help with the invitation letter and the documents required to apply for a visa",
+                href: VISA_FORM_URL,
             },
             {
                 icon: "card",
                 title: "Card payments",
                 text: "We accept cards from any country, no matter your bank",
+                href: "/booking/",
             },
             {
                 icon: "transfer",
                 title: "Transfer",
                 text: "We’ll meet you at the airport and arrange a car to take you anywhere in the city",
+                href: WHATSAPP_URL,
             },
             {
                 icon: "concierge",
                 title: "24/7 Online Concierge",
                 text: "Let us take care of organising your leisure activities. We can help you book a restaurant, arrange a massage, buy theatre tickets or organise an exclusive tour",
+                href: WHATSAPP_URL,
             },
             {
                 icon: "gift",
@@ -116,6 +129,7 @@ export const en: LandingDictionary = {
                 ],
             },
         ],
+        allServices: "All Services",
         prev: "Previous",
         next: "Next",
     },

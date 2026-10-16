@@ -33,6 +33,8 @@ type HeroFullscreenProps = {
     frameSizeClassName?: string;
     /** Без больших десктопных отступов вокруг заголовка — подпись ближе к нему. */
     tightTitle?: boolean;
+    /** Доп. классы блока заголовка — например, приподнять его над подписью. */
+    titleClassName?: string;
     /** data-атрибуты кадра (без мобильной формы под ним) — для внешних наблюдателей. */
     frameData?: Record<`data-${string}`, string>;
 };
@@ -55,6 +57,7 @@ export default function HeroFullscreen({
     frameData,
     frameSizeClassName,
     tightTitle = false,
+    titleClassName = "",
 }: HeroFullscreenProps) {
     const frameSize =
         frameSizeClassName ??
@@ -97,7 +100,7 @@ export default function HeroFullscreen({
                         className={`absolute bottom-10 md:bottom-20 xl:bottom-20 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:mx-auto xl:gap-6 ${withBookingForm ? "xl:max-w-7xl xl:px-0" : "xl:max-w-5xl"}`}
                     >
                         <StaggerItem
-                            className={`relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md xl:max-w-5xl xl:mx-auto ${tightTitle ? "" : "xl:mb-6"}`}
+                            className={`relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md xl:max-w-5xl xl:mx-auto ${tightTitle ? "" : "xl:mb-6"} ${titleClassName}`}
                         >
                             <h1
                                 className={`text-2xl xl:text-5xl uppercase ${tightTitle ? "" : "xl:mt-10"}`}

@@ -2,7 +2,11 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useState } from "react";
-import { LANDING_ARROW_CLASS } from "@/components/landing/constants";
+import {
+    LANDING_ALL_SERVICES_HREF,
+    LANDING_ARROW_CLASS,
+} from "@/components/landing/constants";
+import Button from "@/components/ui/Button";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
 import type { LandingDictionary } from "@/data/landing";
@@ -16,7 +20,7 @@ const PILL_CLASS =
 /**
  * «Исторический особняк в центре»: серая секция — заголовок и 4 плитки
  * (завтраки, ресторан, спа, исторические резиденции — ведут на детальные
- * страницы); следом белая секция со слайдами «История» и «Локация»: серая
+ * страницы) и кнопка «Все услуги»; следом белая секция со слайдами «История» и «Локация»: серая
  * карточка «фото слева на всю высоту / текст справа». Под лентой —
  * стрелки и указатель «История → Локация», который тоже листает; на мобиле
  * плюс свайп. Лента на useSlider.
@@ -121,6 +125,17 @@ export default function LandingMansion({
                             </StaggerItem>
                         ))}
                     </StaggerContainer>
+
+                    {/* Все услуги — EN-страница основного сайта на всех языках. */}
+                    <FadeUp className="mt-8 flex justify-center xl:mt-12">
+                        <Button
+                            href={LANDING_ALL_SERVICES_HREF}
+                            variant="primary-outline"
+                            size="lg"
+                        >
+                            {dict.allServices}
+                        </Button>
+                    </FadeUp>
                 </div>
             </section>
 

@@ -25,6 +25,7 @@ export const de: LandingDictionary = {
             { label: "Zimmer" },
             { label: "Geschichte" },
             { label: "Angebote" },
+            { footerLabel: "Unterstützung bei der Visumbeantragung" },
         ]),
     },
     hero: {
@@ -103,6 +104,7 @@ export const de: LandingDictionary = {
                 ],
             },
         ]),
+        allServices: "Alle Dienstleistungen",
         prev: "Zurück",
         next: "Weiter",
     },

@@ -12,3 +12,6 @@ export const LANDING_ARROW_CLASS =
 export const LANDING_WHATSAPP = {
     href: "https://wa.me/79668342743",
 };
+
+/** Кнопка «Все услуги» под плитками особняка — на всех языках EN-страница. */
+export const LANDING_ALL_SERVICES_HREF = "/en/services/all/";
