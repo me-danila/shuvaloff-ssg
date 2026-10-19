@@ -129,6 +129,13 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://ibe.tlintegration.com" />
                 {/* Обычный <script>, не next/script: beforeInteractive не эмитится в HTML при output: "export" */}
                 <script src="/scripts/travelline.js" defer />
+                {/* smart callback */}
+                <script
+                    type="text/javascript"
+                    async
+                    src="//smartcallback.ru/api/SmartCallBack.js?t=ULqjqHzuF0KZPHNAFiMo"
+                    charSet="utf-8"
+                />
             </head>
             <body
                 className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
