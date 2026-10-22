@@ -120,7 +120,7 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         },
         {
             label: "СПА",
-            href: "https://academia-spa.ru/?utm_source=hotels",
+            href: "https://shuvaloff.academia-spa.ru/?utm_source=hotels",
             target: "_blank",
         },
         {
@@ -177,7 +177,7 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         },
         {
             label: "SPA",
-            href: "https://academia-spa.ru/?utm_source=hotels",
+            href: "https://shuvaloff.academia-spa.ru/?utm_source=hotels",
             target: "_blank",
         },
         {

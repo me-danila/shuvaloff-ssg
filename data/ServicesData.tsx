@@ -100,7 +100,7 @@ export const AllServices: Record<Locale, Service[]> = {
             subtitle:
                 "Мы создали ACADEMIA СПА для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своем внутреннем комфорте",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
-            externalLink: "https://academia-spa.ru/",
+            externalLink: "https://shuvaloff.academia-spa.ru/",
         },
         {
             title: "ACADEMIA Консьерж‑сервис",
@@ -736,7 +736,7 @@ export const AllServices: Record<Locale, Service[]> = {
             subtitle:
                 "We created ACADEMIA SPA for those who value high service standards, self-care, and their inner comfort.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
-            externalLink: "https://academia-spa.ru/",
+            externalLink: "https://shuvaloff.academia-spa.ru/",
         },
         {
             title: "ACADEMIA Concierge Service",
@@ -1278,7 +1278,7 @@ const allServicesPagePriority = [
     "pets",
     "transfer",
     "aristocratic-breakfast",
-    "https://academia-spa.ru/",
+    "https://shuvaloff.academia-spa.ru/",
     "lunch",
     "dinner",
     "aristocratic-breakfast-in-room",

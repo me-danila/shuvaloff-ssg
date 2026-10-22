@@ -351,7 +351,7 @@ const heroButtons = [
             ru: "Спа",
             en: "Spa",
         },
-        href: "https://academia-spa.ru/?utm_source=hotels",
+        href: "https://shuvaloff.academia-spa.ru/?utm_source=hotels",
         external: true,
         Icon: SpaIcon,
     },
