@@ -1162,6 +1162,8 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
         dates: ["2026-10-29T18:00"],
+        // Скрыто: мероприятие не состоится.
+        published: false,
     },
     {
         baseSlug: "income-house",
