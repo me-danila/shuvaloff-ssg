@@ -17,8 +17,11 @@ export type Service = {
     imgPosition?: string;
     fullDescription?: ReactNode;
     links?: ServiceLink[];
+    /** Несколько цен — через \n: каждая выводится с новой строки. */
     price?: string;
     comment?: ReactNode;
+    /** Не показывать в слайдере услуг на главной (страница без согласованной навигации). */
+    hideOnHome?: boolean;
 } & (ServiceWithSlug | ServiceWithExternal);
 
 export const AllServices: Record<Locale, Service[]> = {
@@ -94,6 +97,36 @@ export const AllServices: Record<Locale, Service[]> = {
                 "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
             slug: "aristocratic-breakfast",
+        },
+        {
+            title: "Чаепитие у графини",
+            subtitle:
+                "Проведите время в атмосфере дворянского дома XIX века за изысканным чайным столом с красивой сервировкой, любимыми десертами и особым чайным купажом.",
+            imgUrl: "/images/tea-party/card.jpg",
+            slug: "tea-party",
+            hideOnHome: true,
+            fullDescription: (
+                <>
+                    <strong>В&nbsp;меню:</strong> этажерка
+                    с&nbsp;мини-круассанами, фирменными трюфелями
+                    и&nbsp;десертами (наполеон, медовик с&nbsp;йогуртовым
+                    кремом, шу с&nbsp;кремом тирамису, павлова с&nbsp;клубникой
+                    и&nbsp;тарталетки с&nbsp;ягодами).
+                    <br />
+                    <br />
+                    Особый чайный купаж на&nbsp;ваш выбор дополняют малиновое
+                    и&nbsp;вишневое варенье и&nbsp;сливочное соленое масло.
+                </>
+            ),
+            price: "4 000 ₽ — чаепитие на 2 персоны\n7 500 ₽ — чаепитие с шампанским на 2 персоны",
+            comment: (
+                <>
+                    <strong>Время чаепития:</strong>
+                    <br />
+                    ежедневно в&nbsp;16:00 и&nbsp;17:00 по&nbsp;предварительному
+                    бронированию.
+                </>
+            ),
         },
         {
             title: "ACADEMIA СПА",
@@ -1278,6 +1311,7 @@ const allServicesPagePriority = [
     "pets",
     "transfer",
     "aristocratic-breakfast",
+    "tea-party",
     "https://shuvaloff.academia-spa.ru/",
     "lunch",
     "dinner",

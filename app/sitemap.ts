@@ -86,6 +86,7 @@ const staticRuRoutes = [
     "/smi/",
     "/subscriptions/",
     "/spasibo_wedding/",
+    "/tea-party/",
     "/wedding/",
 ];
 
@@ -207,7 +208,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 lastModified: gitLastModified(SERVICES_SOURCE),
                 changeFrequency: "weekly" as const,
                 priority: 0.7,
-                images: [service.imgUrl],
+                images: [getAbsoluteUrl(service.imgUrl)],
             })),
         ...AllServices.en
             .filter((service) => "slug" in service && service.slug)
@@ -216,7 +217,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 lastModified: gitLastModified(SERVICES_SOURCE),
                 changeFrequency: "weekly" as const,
                 priority: 0.6,
-                images: [service.imgUrl],
+                images: [getAbsoluteUrl(service.imgUrl)],
             })),
         ...getPublishedEvents("ru").map((event) => ({
             url: getAbsoluteUrl(`/events/${event.slug}/`, "ru"),

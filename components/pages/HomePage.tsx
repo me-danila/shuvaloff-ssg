@@ -718,13 +718,15 @@ export default function HomePage({
 
             <HomeServicesSection
                 locale={locale}
-                services={AllServices[locale].map((s) => ({
-                    title: s.title,
-                    imgUrl: s.imgUrl,
-                    imgPosition: s.imgPosition,
-                    slug: s.slug,
-                    externalLink: s.externalLink,
-                }))}
+                services={AllServices[locale]
+                    .filter((s) => !s.hideOnHome)
+                    .map((s) => ({
+                        title: s.title,
+                        imgUrl: s.imgUrl,
+                        imgPosition: s.imgPosition,
+                        slug: s.slug,
+                        externalLink: s.externalLink,
+                    }))}
             />
 
             <section className="flex flex-col gap-3 w-full px-6 xl:max-w-7xl xl:mx-auto xl:px-0 xl:py-12 xl:text-center">

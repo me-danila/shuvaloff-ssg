@@ -301,7 +301,7 @@ export const buildCollectionPageSchema = ({
                 position: index + 1,
                 url: getAbsoluteUrl(item.path, locale),
                 name: item.name,
-                image: item.image,
+                image: item.image && getAbsoluteUrl(item.image),
                 description: item.description,
             })),
         },
@@ -414,7 +414,7 @@ export const buildServiceSchema = ({
             name: service.title,
             description: service.subtitle,
             url: getAbsoluteUrl(path, locale),
-            image: service.imgUrl,
+            image: getAbsoluteUrl(service.imgUrl),
             provider: {
                 "@id": getHotelId(),
             },

@@ -1,5 +1,6 @@
 "use client";
 
+import PhotoStripSection from "@/components/sections/PhotoStripSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import {
@@ -661,27 +662,7 @@ export default function AristocraticBreakfastPage({
                 </FadeUp>
             </section>
 
-            <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
-                {descImages.map((img, idx) => (
-                    <StaggerItem
-                        key={img.src}
-                        className={`relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md ${idx === 2 ? "hidden xl:block" : ""}`}
-                    >
-                        <Image
-                            src={img.src}
-                            alt={img.alt}
-                            fill
-                            sizes={
-                                idx === 1
-                                    ? "(max-width: 1200px) 100vw, 33vw"
-                                    : "33vw"
-                            }
-                            loading="lazy"
-                            className="object-cover"
-                        />
-                    </StaggerItem>
-                ))}
-            </StaggerContainer>
+            <PhotoStripSection images={descImages} />
         </main>
     );
 }

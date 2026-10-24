@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
@@ -155,7 +156,16 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             {service.price && (
                                 <p className="mt-2 italic">
                                     {labels.price}
-                                    {service.price}
+                                    {service.price.includes("\n")
+                                        ? service.price
+                                              .split("\n")
+                                              .map((line) => (
+                                                  <Fragment key={line}>
+                                                      <br />
+                                                      {line}
+                                                  </Fragment>
+                                              ))
+                                        : service.price}
                                 </p>
                             )}
                             {service.comment && <p>{service.comment}</p>}
