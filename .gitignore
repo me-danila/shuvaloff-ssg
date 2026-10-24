@@ -56,3 +56,4 @@ server/module-price-load/cron.log
 # Скиллы Claude Code (taste-skill) — локально, не в git
 .claude/skills/
 skills-lock.json
+/public/images/**/nextImageExportOptimizer/
