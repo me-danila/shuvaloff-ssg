@@ -1189,23 +1189,23 @@ const EVENT_DUPLICATES: {
         published: false,
     },
     {
-        baseSlug: "one-night-in-petersburg-1899",
-        slug: "one-night-in-petersburg-1899-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/one-night-noyabr/?utm_source=hotel",
-        dates: ["2026-11-19T18:00"],
-    },
-    {
         baseSlug: "count-dinner-august",
         slug: "count-dinner-november",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
-        dates: ["2026-11-20T19:00"],
+        dates: ["2026-11-13T19:00"],
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ужин-темнее.png",
         overrides: {
             ru: countDinner("ru", "8 500 ₽"),
             en: countDinner("en", "8 500 ₽"),
         },
+    },
+    {
+        baseSlug: "one-night-in-petersburg-1899",
+        slug: "one-night-in-petersburg-1899-november",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/one-night-noyabr/?utm_source=hotel",
+        dates: ["2026-11-19T18:00"],
     },
     {
         baseSlug: "masonic-petersburg",
