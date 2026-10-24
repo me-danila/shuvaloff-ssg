@@ -22,6 +22,7 @@ import {
     countsFamilyImages,
     greetingServices,
 } from "@/data/countsFamilyGreetingsData";
+import type { Locale } from "@/lib/i18n/routing";
 import {
     isRuPhoneComplete,
     nextRuPhoneValue,
@@ -29,9 +30,6 @@ import {
     RU_PHONE_PREFIX,
 } from "@/lib/phoneMask";
 import { submitWeb3Form, WEB3FORMS_SITE_ACCESS_KEY } from "@/lib/web3forms";
-
-const copy = countsFamilyCopy.form;
-const occasionOptions = greetingServices.map((s) => s.title);
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
@@ -57,6 +55,12 @@ const INITIAL: FormState = {
 };
 
 const MAX_NAME = 100;
+// Иностранный номер в EN-версии: без маски, 7–15 цифр (E.164).
+const MAX_INTL_PHONE = 24;
+const isIntlPhoneValid = (raw: string) => {
+    const digits = raw.replace(/\D/g, "").length;
+    return digits >= 7 && digits <= 15;
+};
 
 const invalidRing = "ring-1 ring-brand-red";
 
@@ -69,7 +73,15 @@ function FieldError({ id, message }: { id: string; message?: string }) {
     );
 }
 
-export default function CountsFamilyRequestSection() {
+export default function CountsFamilyRequestSection({
+    locale,
+}: {
+    locale: Locale;
+}) {
+    const copy = countsFamilyCopy[locale].form;
+    const occasionOptions = greetingServices[locale].map((s) => s.title);
+    // Маска +7 — только в RU-версии; гости EN-версии вводят любой номер.
+    const ruPhone = locale === "ru";
     const uid = useId();
     const ids = {
         name: `${uid}-name-error`,
@@ -110,7 +122,7 @@ export default function CountsFamilyRequestSection() {
     // Маска телефона: при фокусе подставляем «+7 (», пустую маску при уходе
     // с поля стираем, чтобы снова был виден плейсхолдер.
     const handlePhoneFocus = () => {
-        if (!form.phone) update("phone", RU_PHONE_PREFIX);
+        if (ruPhone && !form.phone) update("phone", RU_PHONE_PREFIX);
     };
     const handlePhoneBlur = () => {
         if (form.phone === RU_PHONE_PREFIX) update("phone", "");
@@ -119,7 +131,10 @@ export default function CountsFamilyRequestSection() {
     const validate = (): Errors => {
         const next: Errors = {};
         if (!form.name.trim()) next.name = copy.errName;
-        if (!isRuPhoneComplete(form.phone)) next.phone = copy.errPhone;
+        const phoneOk = ruPhone
+            ? isRuPhoneComplete(form.phone)
+            : isIntlPhoneValid(form.phone);
+        if (!phoneOk) next.phone = copy.errPhone;
         // Начало диапазона без конца: календарь закрыли, не выбрав выезд.
         if (form.dates.from && !form.dates.to) next.dates = copy.errDates;
         if (!form.consent) next.consent = copy.errConsent;
@@ -238,15 +253,21 @@ export default function CountsFamilyRequestSection() {
                                     onChange={(e) =>
                                         update(
                                             "phone",
-                                            nextRuPhoneValue(
-                                                form.phone,
-                                                e.target.value,
-                                            ),
+                                            ruPhone
+                                                ? nextRuPhoneValue(
+                                                      form.phone,
+                                                      e.target.value,
+                                                  )
+                                                : e.target.value,
                                         )
                                     }
                                     onFocus={handlePhoneFocus}
                                     onBlur={handlePhoneBlur}
-                                    maxLength={RU_PHONE_MAX_LENGTH}
+                                    maxLength={
+                                        ruPhone
+                                            ? RU_PHONE_MAX_LENGTH
+                                            : MAX_INTL_PHONE
+                                    }
                                     placeholder={copy.phone}
                                     aria-label={copy.phone}
                                     aria-required="true"
@@ -276,7 +297,7 @@ export default function CountsFamilyRequestSection() {
                                     mode="range"
                                     value={form.dates}
                                     onChange={(range) => update("dates", range)}
-                                    locale="ru"
+                                    locale={locale}
                                     placeholder={copy.dates}
                                     describedBy={
                                         errors.dates

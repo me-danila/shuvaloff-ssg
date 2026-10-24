@@ -139,6 +139,7 @@ Today, the carefully restored building with preserved heritage elements has ente
 - [History](${SITE_URL}/en/history/): the history of Shuvalov Mansion and the Shuvalov family
 - [New Year 2027 at the mansion](${SITE_URL}/en/new-year-2027/): Count's New Year on 31 December 2026 from 8:00 PM — a theatrical 19th-century salon programme, the Count's family, a festive dinner with live music
 - [Tea with the Countess](${SITE_URL}/en/tea-party/): afternoon tea for two in the historic interiors of the count's mansion — tiered dessert stand, jam, special tea blend; daily at 4:00 PM and 5:00 PM by advance reservation; 4,000 RUB, with champagne 7,500 RUB
+- [Greetings from the Count's Family](${SITE_URL}/en/counts-family-greetings/): theatrical greetings from Count and Countess Shuvalov for mansion guests — birthday, wedding or anniversary, proposal, the Count's breakfast with a tour; Friday to Sunday by prior arrangement; from 5,500 RUB
 - [Weddings](${SITE_URL}/en/wedding/): weddings in the historic interiors
 - [Reviews](${SITE_URL}/en/reviews/): guest reviews
 

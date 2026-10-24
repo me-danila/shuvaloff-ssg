@@ -11,7 +11,7 @@ import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import {
     COUNTS_FAMILY_GREETINGS_PATH,
-    countsFamilyCopy as copy,
+    countsFamilyCopy,
     countsFamilyImages,
     countsFamilySeo,
     formatRub,
@@ -20,6 +20,7 @@ import {
     greetingGroups,
     greetingServices,
 } from "@/data/countsFamilyGreetingsData";
+import type { Locale } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
 import { getAbsoluteUrl } from "@/lib/seo/site";
 import { nbsp } from "@/lib/typography";
@@ -27,22 +28,32 @@ import { nbsp } from "@/lib/typography";
 // Отступ якорных целей под фиксированную шапку (как на соседних страницах).
 const SCROLL_MT = "scroll-mt-28 xl:scroll-mt-36";
 
-const steps: Step[] = copy.steps.items.map((step, i) => ({
-    id: step.id,
-    icon: (
-        <span aria-hidden="true" className="font-history text-3xl xl:text-4xl">
-            {i + 1}
-        </span>
-    ),
-    caption: (
-        <>
-            <strong className="block font-semibold">{step.title}</strong>
-            {step.text}
-        </>
-    ),
-}));
+const buildSteps = (locale: Locale): Step[] =>
+    countsFamilyCopy[locale].steps.items.map((step, i) => ({
+        id: step.id,
+        icon: (
+            <span
+                aria-hidden="true"
+                className="font-history text-3xl xl:text-4xl"
+            >
+                {i + 1}
+            </span>
+        ),
+        caption: (
+            <>
+                <strong className="block font-semibold">{step.title}</strong>
+                {step.text}
+            </>
+        ),
+    }));
 
-function ServiceDetails({ service }: { service: GreetingService }) {
+function ServiceDetails({
+    service,
+    locale,
+}: {
+    service: GreetingService;
+    locale: Locale;
+}) {
     return (
         <div className="border-t border-[#372a24]/15 pt-5 text-[#372a24]">
             <p className="font-history text-base font-semibold uppercase">
@@ -52,30 +63,38 @@ function ServiceDetails({ service }: { service: GreetingService }) {
                 {service.includes.map(nbsp).join("\u00a0· ")}
             </p>
             <p className="mt-4 text-lg">
-                {formatRub(service.price, service.fromPrice)}
+                {formatRub(service.price, service.fromPrice, locale)}
             </p>
         </div>
     );
 }
 
-export default function CountsFamilyGreetingsPage() {
+export default function CountsFamilyGreetingsPage({
+    locale,
+}: {
+    locale: Locale;
+}) {
+    const copy = countsFamilyCopy[locale];
+    const seo = countsFamilySeo[locale];
+    const services = greetingServices[locale];
+    const anchors = greetingAnchors[locale];
     return (
         <main className="flex flex-col gap-8 xl:gap-12">
             <StructuredData
                 data={buildWebPageSchema({
-                    locale: "ru",
+                    locale,
                     path: COUNTS_FAMILY_GREETINGS_PATH,
-                    name: countsFamilySeo.name,
-                    description: countsFamilySeo.description,
+                    name: seo.name,
+                    description: seo.description,
                     image: getAbsoluteUrl(countsFamilyImages.hero),
                     breadcrumbs: [
-                        { name: "Главная", path: "/" },
+                        { name: copy.breadcrumbHome, path: "/" },
                         {
-                            name: countsFamilySeo.name,
+                            name: seo.name,
                             path: COUNTS_FAMILY_GREETINGS_PATH,
                         },
                     ],
-                    offers: greetingServices.map((s) => ({
+                    offers: services.map((s) => ({
                         name: s.title,
                         description: s.description,
                         price: s.price,
@@ -98,7 +117,7 @@ export default function CountsFamilyGreetingsPage() {
                 }}
                 actions={
                     <AnchorButton
-                        targetId={greetingAnchors[0].targetId}
+                        targetId={anchors[0].targetId}
                         variant="primary"
                     >
                         {copy.hero.button}
@@ -116,7 +135,7 @@ export default function CountsFamilyGreetingsPage() {
                 <FadeUp delay={0.1}>
                     <nav aria-label={copy.anchorsLabel}>
                         <ul className="mt-6 flex flex-wrap justify-center gap-2 xl:mt-8 xl:gap-3">
-                            {greetingAnchors.map((anchor) => (
+                            {anchors.map((anchor) => (
                                 <li key={anchor.targetId}>
                                     <AnchorButton
                                         targetId={anchor.targetId}
@@ -133,7 +152,7 @@ export default function CountsFamilyGreetingsPage() {
             </section>
 
             {/* 5–6. Группы услуг: 3 / 2 / 1 колонки. */}
-            {greetingGroups.map((group) => (
+            {greetingGroups[locale].map((group) => (
                 <section
                     key={group.id}
                     id={group.id}
@@ -150,7 +169,7 @@ export default function CountsFamilyGreetingsPage() {
                             </h2>
                         </FadeUp>
                         <StaggerContainer className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:mt-10 xl:grid-cols-3">
-                            {greetingServices
+                            {services
                                 .filter((s) => s.group === group.id)
                                 .map((service) => (
                                     <StaggerItem
@@ -167,6 +186,7 @@ export default function CountsFamilyGreetingsPage() {
                                             details={
                                                 <ServiceDetails
                                                     service={service}
+                                                    locale={locale}
                                                 />
                                             }
                                             backgroundClassName="bg-[#ededeb]"
@@ -185,9 +205,9 @@ export default function CountsFamilyGreetingsPage() {
 
             {/* 7. Как это работает? */}
             <PhotoShootStepsSection
-                locale="ru"
+                locale={locale}
                 heading={copy.steps.title}
-                steps={steps}
+                steps={buildSteps(locale)}
             />
 
             {/* 8. Условия. */}
@@ -203,7 +223,7 @@ export default function CountsFamilyGreetingsPage() {
             </section>
 
             {/* 9–10. Финальный CTA, форма и «Спасибо». */}
-            <CountsFamilyRequestSection />
+            <CountsFamilyRequestSection locale={locale} />
 
             <Divider />
             <ContactsSection />

@@ -114,6 +114,7 @@ const staticEnRoutes = [
     "/subscriptions/",
     "/spasibo_wedding/",
     "/tea-party/",
+    "/counts-family-greetings/",
     "/wedding/",
 ];
 

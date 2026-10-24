@@ -49,6 +49,7 @@ ${articles}
 - [Historical suites (EN)](${SITE_URL}/en/rooms/historical/): cultural-heritage suites with authentic interiors
 - [Services (EN)](${SITE_URL}/en/services/all/): transfer, boat tours, breakfasts, SPA and more
 - [Tea with the Countess (EN)](${SITE_URL}/en/tea-party/): afternoon tea for two in the historic interiors of the count's mansion — tiered dessert stand, jam, special tea blend; daily at 4:00 PM and 5:00 PM by advance reservation; 4,000 RUB, with champagne 7,500 RUB
+- [Greetings from the Count's Family (EN)](${SITE_URL}/en/counts-family-greetings/): theatrical greetings from Count and Countess Shuvalov for mansion guests — birthday, wedding or anniversary, proposal, the Count's breakfast with a tour; Friday to Sunday by prior arrangement; from 5,500 RUB
 - [History (EN)](${SITE_URL}/en/history/): history of the Shuvalov mansion
 - [New Year 2027 at the mansion (EN)](${SITE_URL}/en/new-year-2027/): Count's New Year on 31 December 2026 from 8:00 PM — a theatrical 19th-century salon programme, the Count's family, a festive dinner with live music
 

@@ -209,7 +209,6 @@ describe("hasEnglishVersion", () => {
             "/legal",
             "/consent",
             "/poseidon",
-            "/counts-family-greetings",
         ]);
     });
 });
@@ -226,6 +225,7 @@ describe("locale round-trip invariant", () => {
         "/restaurant",
         "/tea-party/",
         "/services/tea-party/",
+        "/counts-family-greetings/",
     ];
 
     test.each(bilingual)(
