@@ -208,6 +208,7 @@ describe("hasEnglishVersion", () => {
             "/policy",
             "/legal",
             "/consent",
+            "/poseidon",
         ]);
     });
 });

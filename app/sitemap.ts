@@ -159,6 +159,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: "weekly" as const,
             priority: path === "/" ? 0.9 : 0.7,
         })),
+        // Промо /poseidon/ — своя группа роутов, вне app/(ru).
+        {
+            url: getAbsoluteUrl("/poseidon/", "ru"),
+            lastModified: gitLastModified("data/poseidonData.ts"),
+            changeFrequency: "monthly" as const,
+            priority: 0.6,
+        },
         // Лендинги: только утверждённые (draft: false). Источник даты —
         // словарь языка, тексты меняются именно там.
         ...Object.values(LANDING_DICTIONARIES)
