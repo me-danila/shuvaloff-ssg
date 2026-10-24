@@ -194,6 +194,7 @@ export const buildWebPageSchema = ({
     breadcrumbs,
     image,
     speakable,
+    offers,
 }: {
     locale: Locale;
     path: string;
@@ -202,6 +203,17 @@ export const buildWebPageSchema = ({
     breadcrumbs: BreadcrumbItem[];
     image?: string;
     speakable?: string[];
+    /**
+     * Услуги страницы с ценами в рублях → узел Service с OfferCatalog.
+     * minPrice — цена «от …» (PriceSpecification.minPrice вместо price).
+     */
+    offers?: Array<{
+        name: string;
+        description: string;
+        price: number;
+        minPrice?: boolean;
+        image?: string;
+    }>;
 }) => ({
     "@context": "https://schema.org",
     "@graph": [
@@ -236,6 +248,46 @@ export const buildWebPageSchema = ({
             ...buildBreadcrumbSchema(locale, breadcrumbs),
             "@id": `${getAbsoluteUrl(path, locale)}#breadcrumb`,
         },
+        ...(offers?.length
+            ? [
+                  {
+                      "@type": "Service",
+                      "@id": `${getAbsoluteUrl(path, locale)}#service`,
+                      name,
+                      description,
+                      url: getAbsoluteUrl(path, locale),
+                      provider: { "@id": getHotelId() },
+                      areaServed: HOTEL_ADDRESS.addressLocality,
+                      hasOfferCatalog: {
+                          "@type": "OfferCatalog",
+                          name,
+                          itemListElement: offers.map((offer) => ({
+                              "@type": "Offer",
+                              url: getAbsoluteUrl(path, locale),
+                              priceCurrency: "RUB",
+                              ...(offer.minPrice
+                                  ? {
+                                        priceSpecification: {
+                                            "@type": "PriceSpecification",
+                                            minPrice: offer.price,
+                                            priceCurrency: "RUB",
+                                        },
+                                    }
+                                  : { price: offer.price }),
+                              itemOffered: {
+                                  "@type": "Service",
+                                  name: offer.name,
+                                  description: offer.description,
+                                  image: offer.image
+                                      ? getAbsoluteUrl(offer.image)
+                                      : undefined,
+                                  provider: { "@id": getHotelId() },
+                              },
+                          })),
+                      },
+                  },
+              ]
+            : []),
     ],
 });
 

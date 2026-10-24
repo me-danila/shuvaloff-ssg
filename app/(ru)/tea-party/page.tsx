@@ -10,11 +10,11 @@ import { buildPageMetadata } from "@/lib/i18n/metadata";
 export const metadata: Metadata = buildPageMetadata({
     locale: "ru",
     path: TEA_PARTY_PATH,
-    title: teaPartySeo.title,
-    description: teaPartySeo.description,
+    title: teaPartySeo.ru.title,
+    description: teaPartySeo.ru.description,
     ogImage: teaPartyImages.hero,
 });
 
 export default function TeaParty() {
-    return <TeaPartyPage />;
+    return <TeaPartyPage locale="ru" />;
 }

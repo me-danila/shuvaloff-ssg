@@ -66,6 +66,7 @@ const staticRuRoutes = [
     "/aristocratic-spb/",
     "/booking/",
     "/counts-autumn/",
+    "/counts-family-greetings/",
     "/consent/",
     "/events/",
     "/history/",
@@ -112,6 +113,7 @@ const staticEnRoutes = [
     "/smi/",
     "/subscriptions/",
     "/spasibo_wedding/",
+    "/tea-party/",
     "/wedding/",
 ];
 

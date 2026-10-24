@@ -11,7 +11,8 @@ type ButtonProps = {
     children: React.ReactNode;
     href?: string;
     target?: string;
-    onClick?: () => void;
+    /** У ссылки (href) тоже вызывается — например, плавная прокрутка к якорю. */
+    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
     disabled?: boolean;
     className?: string;
     uppercase?: boolean;
@@ -88,14 +89,26 @@ export default function Button({
 
         if (requiresFullNavigation) {
             return (
-                <a href={href} target={target} rel={rel} className={classes}>
+                <a
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    onClick={onClick}
+                    className={classes}
+                >
                     {content}
                 </a>
             );
         }
 
         return (
-            <Link href={href} target={target} rel={rel} className={classes}>
+            <Link
+                href={href}
+                target={target}
+                rel={rel}
+                onClick={onClick}
+                className={classes}
+            >
                 {content}
             </Link>
         );

@@ -186,8 +186,6 @@ describe("hasEnglishVersion", () => {
         "/legal/terms",
         "/en/blog",
         "/en/policy",
-        "/tea-party/",
-        "/services/tea-party/",
     ])("RU-only path %p has NO english version", (path) => {
         expect(hasEnglishVersion(path)).toBe(false);
     });
@@ -211,8 +209,7 @@ describe("hasEnglishVersion", () => {
             "/legal",
             "/consent",
             "/poseidon",
-            "/tea-party",
-            "/services/tea-party",
+            "/counts-family-greetings",
         ]);
     });
 });
@@ -227,6 +224,8 @@ describe("locale round-trip invariant", () => {
         "/history/",
         "/contacts",
         "/restaurant",
+        "/tea-party/",
+        "/services/tea-party/",
     ];
 
     test.each(bilingual)(

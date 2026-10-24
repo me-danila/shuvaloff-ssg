@@ -6,30 +6,33 @@ import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import {
-    teaPartyCopy as copy,
     TEA_PARTY_BOOK_URL,
     TEA_PARTY_PATH,
     TEA_PARTY_VIDEO,
+    teaPartyCopy,
     teaPartyImages,
     teaPartySeo,
 } from "@/data/teaPartyData";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
 import { getAbsoluteUrl } from "@/lib/seo/site";
 
-/** /tea-party/ — «Чаепитие у графини», по образцу страницы графского завтрака. */
-export default function TeaPartyPage() {
+/** /tea-party/ и /en/tea-party/ — «Чаепитие у графини», по образцу страницы графского завтрака. */
+export default function TeaPartyPage({ locale }: { locale: Locale }) {
+    const copy = teaPartyCopy[locale];
+    const seo = teaPartySeo[locale];
     return (
         <main className="flex flex-col gap-4 xl:gap-16">
             <StructuredData
                 data={buildWebPageSchema({
-                    locale: "ru",
+                    locale,
                     path: TEA_PARTY_PATH,
-                    name: teaPartySeo.name,
-                    description: teaPartySeo.description,
+                    name: seo.name,
+                    description: seo.description,
                     image: getAbsoluteUrl(teaPartyImages.hero),
                     breadcrumbs: [
-                        { name: "Главная", path: "/" },
-                        { name: teaPartySeo.name, path: TEA_PARTY_PATH },
+                        { name: copy.breadcrumbHome, path: "/" },
+                        { name: seo.name, path: TEA_PARTY_PATH },
                     ],
                 })}
             />
@@ -126,7 +129,7 @@ export default function TeaPartyPage() {
                         {copy.bookTeaLabel}
                     </Button>
                     <Button
-                        href="/booking/"
+                        href={localizeHref("/booking/", locale)}
                         variant="primary-outline"
                         size="sm"
                     >
@@ -135,7 +138,7 @@ export default function TeaPartyPage() {
                 </FadeUp>
             </section>
 
-            <PhotoStripSection images={teaPartyImages.gallery} />
+            <PhotoStripSection images={teaPartyImages.gallery[locale]} />
         </main>
     );
 }

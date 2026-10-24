@@ -2,7 +2,7 @@
 
 // Форма розыгрыша на /poseidon/. Как и заявка на фотосессию, уходит напрямую
 // в Web3Forms (письмо менеджеру без своего бэкенда): клиентская валидация →
-// fetch → переход на /poseidon/thankyou/ с промокодом.
+// submitWeb3Form → переход на /poseidon/thankyou/ с промокодом.
 
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
@@ -19,8 +19,9 @@ import {
     RU_PHONE_MAX_LENGTH,
     RU_PHONE_PREFIX,
 } from "@/lib/phoneMask";
+import { submitWeb3Form } from "@/lib/web3forms";
 
-const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+// Свой ключ розыгрыша, отдельный от WEB3FORMS_SITE_ACCESS_KEY.
 const WEB3FORMS_ACCESS_KEY = "c988da60-7edf-4234-a95b-18ad5e51220d";
 
 const copy = poseidonCopy.form;
@@ -124,32 +125,18 @@ export default function PoseidonForm() {
         setValidationError(null);
         setStatus("loading");
 
-        try {
-            const res = await fetch(WEB3FORMS_ENDPOINT, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-                body: JSON.stringify({
-                    access_key: WEB3FORMS_ACCESS_KEY,
-                    subject: "Розыгрыш «Графские выходные» — Посейдон",
-                    from_name: "Сайт ACADEMIA — ACADEMIA × Посейдон",
-                    botcheck,
-                    Имя: name,
-                    Телефон: phone,
-                    Email: email,
-                    "Согласие на рассылку": form.consentAds ? "Да" : "Нет",
-                }),
-            });
-
-            const json = await res.json();
-            // При успехе кнопка остается в состоянии «Отправка...» до перехода.
-            if (json.success) router.push(POSEIDON_THANKYOU_PATH);
-            else setStatus("error");
-        } catch {
-            setStatus("error");
-        }
+        const ok = await submitWeb3Form(WEB3FORMS_ACCESS_KEY, {
+            subject: "Розыгрыш «Графские выходные» — Посейдон",
+            from_name: "Сайт ACADEMIA — ACADEMIA × Посейдон",
+            botcheck,
+            Имя: name,
+            Телефон: phone,
+            Email: email,
+            "Согласие на рассылку": form.consentAds ? "Да" : "Нет",
+        });
+        // При успехе кнопка остается в состоянии «Отправка...» до перехода.
+        if (ok) router.push(POSEIDON_THANKYOU_PATH);
+        else setStatus("error");
     };
 
     const loading = status === "loading";

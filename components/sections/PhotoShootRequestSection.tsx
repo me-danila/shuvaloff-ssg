@@ -5,22 +5,18 @@
 // endpoint с публичным access_key → письмо на почту менеджера. Правая колонка —
 // фото. Клиентская валидация → fetch → экран «Спасибо» / ошибка.
 
-import { CaretDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { type ReactNode, useState } from "react";
 import Button from "@/components/ui/Button";
 import DateField, { formatDateDMY } from "@/components/ui/DateField";
+import { requestFieldClass as fieldClass } from "@/components/ui/formStyles";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import SelectField from "@/components/ui/SelectField";
 import type { Locale } from "@/lib/i18n/routing";
+import { submitWeb3Form, WEB3FORMS_SITE_ACCESS_KEY } from "@/lib/web3forms";
 
 const PHOTO_SRC =
     "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_7033-2.jpg";
-
-// Web3Forms: прием заявки без своего бэкенда. access_key — публичный ключ из
-// личного кабинета web3forms.com (привязан к почте-получателю). В бандле он не
-// секрет: спам отсекает honeypot-поле `botcheck` + лимиты на стороне сервиса.
-const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
-const WEB3FORMS_ACCESS_KEY = "441c373c-1f8a-4fa5-8b06-92740270235d";
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
@@ -128,9 +124,6 @@ const copyByLocale: Record<Locale, RequestCopy> = {
     },
 };
 
-const fieldClass =
-    "w-full rounded-md bg-white px-5 py-4 text-sm text-neutral-700 placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition";
-
 export default function PhotoShootRequestSection({
     locale,
 }: {
@@ -144,12 +137,16 @@ export default function PhotoShootRequestSection({
     // Web3Forms молча отклонит заявку как спам.
     const [botcheck, setBotcheck] = useState(false);
 
+    const setValue =
+        (field: keyof FormState) =>
+        (value: string): void => {
+            setValidationError(null);
+            setForm((prev) => ({ ...prev, [field]: value }));
+        };
     const set =
         (field: keyof FormState) =>
-        (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
-            setValidationError(null);
-            setForm((prev) => ({ ...prev, [field]: e.target.value }));
-        };
+        (e: React.ChangeEvent<HTMLInputElement>): void =>
+            setValue(field)(e.target.value);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -170,31 +167,17 @@ export default function PhotoShootRequestSection({
         setValidationError(null);
         setStatus("loading");
 
-        try {
-            const res = await fetch(WEB3FORMS_ENDPOINT, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-                body: JSON.stringify({
-                    access_key: WEB3FORMS_ACCESS_KEY,
-                    subject: "Новая заявка на фотосессию",
-                    from_name: "Сайт ACADEMIA — Фотосессия",
-                    botcheck,
-                    Имя: name,
-                    Телефон: phone,
-                    Дата: form.date ? formatDateDMY(form.date) : "—",
-                    Резиденция: form.residence || "—",
-                    "Способ связи": form.contact || "—",
-                }),
-            });
-
-            const json = await res.json();
-            setStatus(json.success ? "success" : "error");
-        } catch {
-            setStatus("error");
-        }
+        const ok = await submitWeb3Form(WEB3FORMS_SITE_ACCESS_KEY, {
+            subject: "Новая заявка на фотосессию",
+            from_name: "Сайт ACADEMIA — Фотосессия",
+            botcheck,
+            Имя: name,
+            Телефон: phone,
+            Дата: form.date ? formatDateDMY(form.date) : "—",
+            Резиденция: form.residence || "—",
+            "Способ связи": form.contact || "—",
+        });
+        setStatus(ok ? "success" : "error");
     };
 
     const submitted = status === "success";
@@ -256,27 +239,13 @@ export default function PhotoShootRequestSection({
                                     className={`${fieldClass} cursor-pointer`}
                                 />
 
-                                <div className="relative">
-                                    <select
-                                        aria-label={copy.residencePlaceholder}
-                                        value={form.residence}
-                                        onChange={set("residence")}
-                                        className={`${fieldClass} cursor-pointer appearance-none pr-12`}
-                                    >
-                                        <option value="" disabled>
-                                            {copy.residencePlaceholder}
-                                        </option>
-                                        {copy.residenceOptions.map((opt) => (
-                                            <option key={opt} value={opt}>
-                                                {opt}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <CaretDownIcon
-                                        size={16}
-                                        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400"
-                                    />
-                                </div>
+                                <SelectField
+                                    value={form.residence}
+                                    onChange={setValue("residence")}
+                                    placeholder={copy.residencePlaceholder}
+                                    options={copy.residenceOptions}
+                                    className={fieldClass}
+                                />
 
                                 <input
                                     type="text"
@@ -298,27 +267,13 @@ export default function PhotoShootRequestSection({
                                     className={fieldClass}
                                 />
 
-                                <div className="relative">
-                                    <select
-                                        aria-label={copy.contactPlaceholder}
-                                        value={form.contact}
-                                        onChange={set("contact")}
-                                        className={`${fieldClass} cursor-pointer appearance-none pr-12`}
-                                    >
-                                        <option value="" disabled>
-                                            {copy.contactPlaceholder}
-                                        </option>
-                                        {copy.contactOptions.map((opt) => (
-                                            <option key={opt} value={opt}>
-                                                {opt}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <CaretDownIcon
-                                        size={16}
-                                        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400"
-                                    />
-                                </div>
+                                <SelectField
+                                    value={form.contact}
+                                    onChange={setValue("contact")}
+                                    placeholder={copy.contactPlaceholder}
+                                    options={copy.contactOptions}
+                                    className={fieldClass}
+                                />
 
                                 {validationError || status === "error" ? (
                                     <p

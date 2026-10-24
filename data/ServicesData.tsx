@@ -121,8 +121,8 @@ export const AllServices: Record<Locale, Service[]> = {
             price: "4 000 ₽ — чаепитие на 2 персоны\n7 500 ₽ — чаепитие с шампанским на 2 персоны",
             comment: (
                 <>
-                    Время чаепития: ежедневно в&nbsp;16:00 и&nbsp;17:00 по&nbsp;предварительному
-                    бронированию.
+                    Время чаепития: ежедневно в&nbsp;16:00 и&nbsp;17:00
+                    по&nbsp;предварительному бронированию.
                 </>
             ),
         },
@@ -761,6 +761,28 @@ export const AllServices: Record<Locale, Service[]> = {
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
             slug: "aristocratic-breakfast",
+        },
+        {
+            title: "Tea with the Countess",
+            subtitle:
+                "Spend time in the atmosphere of a 19th-century noble house at an exquisite tea table with elegant table settings, favourite desserts and a special tea blend.",
+            imgUrl: "/images/tea-party/card.jpg",
+            slug: "tea-party",
+            hideOnHome: true,
+            fullDescription: (
+                <>
+                    <strong>On the menu:</strong> a tiered stand with mini
+                    croissants, signature truffles and desserts (Napoleon cake,
+                    honey cake with yoghurt cream, choux with tiramisu cream,
+                    strawberry pavlova and berry tartlets).
+                    <br />
+                    <br />A special tea blend of your choice comes with
+                    raspberry and cherry jam and salted butter.
+                </>
+            ),
+            price: "4 000 ₽ — tea for 2\n7 500 ₽ — tea with champagne for 2",
+            comment:
+                "Tea time: daily at 4:00 PM and 5:00 PM, by advance reservation.",
         },
         {
             title: "ACADEMIA SPA",

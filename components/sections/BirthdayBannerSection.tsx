@@ -1,3 +1,4 @@
+import SplitBannerSection from "@/components/sections/SplitBannerSection";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
@@ -141,26 +142,15 @@ function BannerOverImage() {
 // Вариант 2 — текст на сером фоне + картинка рядом (люди).
 export function BirthdayBannerSplit() {
     return (
-        <section className="bg-[#ededeb]">
-            <div className="grid grid-cols-1 items-stretch gap-4 xl:grid-cols-[1fr_1.15fr] xl:gap-6">
-                <div className="flex flex-col items-start gap-4 px-6 py-10 text-left text-brand-brown xl:py-12 xl:pr-4 xl:pl-[max(1.5rem,calc((100vw-84rem)/2))]">
-                    <BannerText
-                        headingClass="text-brand-brown"
-                        bodyClass="max-w-2xl"
-                    />
-                </div>
-                <div className="relative order-first min-h-[300px] w-full self-stretch overflow-hidden xl:order-last xl:min-h-[520px]">
-                    <Image
-                        src={DESKTOP_BG}
-                        alt="Граф Шувалов с семьей"
-                        fill
-                        sizes="(max-width: 1200px) 100vw, 55vw"
-                        loading="lazy"
-                        className="object-cover object-[78%_50%]"
-                    />
-                </div>
-            </div>
-        </section>
+        <SplitBannerSection
+            image={{
+                src: DESKTOP_BG,
+                alt: "Граф Шувалов с семьей",
+                className: "object-[78%_50%]",
+            }}
+        >
+            <BannerText headingClass="text-brand-brown" bodyClass="max-w-2xl" />
+        </SplitBannerSection>
     );
 }
 

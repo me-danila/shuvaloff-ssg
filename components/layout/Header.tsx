@@ -424,6 +424,7 @@ const FIXED_HEADER_PATHS = new Set([
     "/new-year-2027",
     "/services/aristocratic-breakfast",
     "/tea-party",
+    "/counts-family-greetings",
 ]);
 
 export default function Header({ locale }: { locale: Locale }) {

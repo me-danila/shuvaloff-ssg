@@ -3,7 +3,7 @@ import { CallIcon, CameraIcon, EditIcon } from "@/components/ui/icons";
 import { FadeUp } from "@/components/ui/Motion";
 import type { Locale } from "@/lib/i18n/routing";
 
-type Step = { id: string; icon: ReactNode; caption: ReactNode };
+export type Step = { id: string; icon: ReactNode; caption: ReactNode };
 
 const iconClass = "h-6 w-6";
 
@@ -93,8 +93,20 @@ const sectionCopy: Record<Locale, { heading: string; steps: Step[] }> = {
     },
 };
 
-export default function PhotoShootStepsSection({ locale }: { locale: Locale }) {
-    const copy = sectionCopy[locale];
+// По умолчанию — шаги фотосессии; другие страницы передают свои heading/steps.
+export default function PhotoShootStepsSection({
+    locale,
+    heading,
+    steps,
+}: {
+    locale: Locale;
+    heading?: ReactNode;
+    steps?: Step[];
+}) {
+    const copy = {
+        heading: heading ?? sectionCopy[locale].heading,
+        steps: steps ?? sectionCopy[locale].steps,
+    };
 
     return (
         <section className="px-6 xl:px-0">

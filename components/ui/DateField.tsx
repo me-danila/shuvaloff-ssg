@@ -7,6 +7,10 @@
 // на React — при первом же изменении значения React возвращал type обратно в
 // "text", нативный пикер закрывался, верстка прыгала. Поэтому календарь свой:
 // значение хранится в ISO (YYYY-MM-DD), пользователю показывается дд.мм.гггг.
+//
+// Режимы: одна дата (по умолчанию) и диапазон (mode="range", например даты
+// проживания): первый клик ставит начало, второй — конец, после чего календарь
+// закрывается; если конец раньше начала, даты меняются местами.
 
 import {
     CalendarBlankIcon,
@@ -98,23 +102,52 @@ function buildGrid(year: number, month: number): Cell[] {
     return cells;
 }
 
-type Props = {
-    /** Значение в ISO: "YYYY-MM-DD" либо "" — дата не выбрана. */
-    value: string;
-    onChange: (iso: string) => void;
+/** Диапазон дат в ISO; пустая строка — граница не выбрана. */
+export type DateRange = { from: string; to: string };
+
+export const EMPTY_DATE_RANGE: DateRange = { from: "", to: "" };
+
+/** "15.08.2026 — 18.08.2026"; пустой диапазон — "". */
+export const formatDateRangeDMY = ({ from, to }: DateRange): string =>
+    from ? `${formatDateDMY(from)} — ${to ? formatDateDMY(to) : "…"}` : "";
+
+type CommonProps = {
     locale: Locale;
     placeholder: string;
     /** Классы поля — приходят из формы, чтобы совпасть с остальными полями. */
     className?: string;
+    /** id подсказки/ошибки под полем (aria-describedby у кнопки поля). */
+    describedBy?: string;
+    /** Поле с ошибкой валидации (aria-invalid у кнопки поля). */
+    invalid?: boolean;
 };
 
-export default function DateField({
-    value,
-    onChange,
-    locale,
-    placeholder,
-    className = "",
-}: Props) {
+type Props = CommonProps &
+    (
+        | {
+              mode?: "single";
+              /** Значение в ISO: "YYYY-MM-DD" либо "" — дата не выбрана. */
+              value: string;
+              onChange: (iso: string) => void;
+          }
+        | {
+              mode: "range";
+              value: DateRange;
+              onChange: (range: DateRange) => void;
+          }
+    );
+
+export default function DateField(props: Props) {
+    const { locale, placeholder, className = "", describedBy, invalid } = props;
+    const range: DateRange =
+        props.mode === "range"
+            ? props.value
+            : { from: props.value, to: props.value };
+    const hasValue = Boolean(range.from);
+    const displayValue =
+        props.mode === "range"
+            ? formatDateRangeDMY(props.value)
+            : formatDateDMY(props.value);
     const copy = UI_COPY[locale];
     const popoverId = useId();
     const wrapRef = useRef<HTMLDivElement>(null);
@@ -140,7 +173,7 @@ export default function DateField({
         const now = new Date();
         setTodayISO(toISO(now.getFullYear(), now.getMonth(), now.getDate()));
         // Открываем на месяце выбранной даты, иначе на текущем.
-        const picked = /^(\d{4})-(\d{2})-/.exec(value);
+        const picked = /^(\d{4})-(\d{2})-/.exec(range.from);
         setView(
             picked
                 ? { year: Number(picked[1]), month: Number(picked[2]) - 1 }
@@ -179,7 +212,26 @@ export default function DateField({
     };
 
     const pick = (iso: string) => {
-        onChange(iso);
+        if (props.mode !== "range") {
+            props.onChange(iso);
+            close();
+            return;
+        }
+        const { from, to } = props.value;
+        // Начало еще не выбрано или диапазон уже полный — начинаем заново.
+        if (!from || to) {
+            props.onChange({ from: iso, to: "" });
+            return;
+        }
+        props.onChange(
+            iso < from ? { from: iso, to: from } : { from, to: iso },
+        );
+        close();
+    };
+
+    const clear = () => {
+        if (props.mode === "range") props.onChange(EMPTY_DATE_RANGE);
+        else props.onChange("");
         close();
     };
 
@@ -197,11 +249,15 @@ export default function DateField({
                 aria-haspopup="dialog"
                 aria-expanded={open}
                 aria-controls={open ? popoverId : undefined}
-                aria-label={placeholder}
+                aria-label={
+                    hasValue ? `${placeholder}: ${displayValue}` : placeholder
+                }
+                aria-describedby={describedBy}
+                aria-invalid={invalid || undefined}
                 className={`${className} flex items-center justify-between gap-3 text-left`}
             >
-                <span className={value ? "" : "text-neutral-400"}>
-                    {value ? formatDateDMY(value) : placeholder}
+                <span className={hasValue ? "" : "text-neutral-400"}>
+                    {hasValue ? displayValue : placeholder}
                 </span>
                 <CalendarBlankIcon
                     size={18}
@@ -249,7 +305,13 @@ export default function DateField({
 
                         {cells.map((cell) => {
                             const isPast = cell.iso < todayISO;
-                            const isSelected = cell.iso === value;
+                            const isSelected =
+                                cell.iso === range.from ||
+                                cell.iso === range.to;
+                            const inRange =
+                                Boolean(range.to) &&
+                                cell.iso > range.from &&
+                                cell.iso < range.to;
                             return (
                                 <div
                                     key={cell.iso}
@@ -259,6 +321,11 @@ export default function DateField({
                                         type="button"
                                         disabled={isPast}
                                         onClick={() => pick(cell.iso)}
+                                        aria-pressed={
+                                            isSelected || inRange
+                                                ? true
+                                                : undefined
+                                        }
                                         aria-current={
                                             cell.iso === todayISO
                                                 ? "date"
@@ -269,9 +336,11 @@ export default function DateField({
                                             "flex h-8 w-8 items-center justify-center rounded-full text-sm transition-colors",
                                             isSelected
                                                 ? "bg-brand-red font-medium text-white"
-                                                : cell.inMonth
-                                                  ? "text-neutral-700 hover:bg-neutral-100"
-                                                  : "text-neutral-300 hover:bg-neutral-100",
+                                                : inRange
+                                                  ? "bg-neutral-100 text-neutral-800"
+                                                  : cell.inMonth
+                                                    ? "text-neutral-700 hover:bg-neutral-100"
+                                                    : "text-neutral-300 hover:bg-neutral-100",
                                             isPast
                                                 ? "pointer-events-none opacity-30"
                                                 : "cursor-pointer",
@@ -284,14 +353,11 @@ export default function DateField({
                         })}
                     </div>
 
-                    {value && (
+                    {hasValue && (
                         <div className="mt-3 text-center">
                             <button
                                 type="button"
-                                onClick={() => {
-                                    onChange("");
-                                    close();
-                                }}
+                                onClick={clear}
                                 className="cursor-pointer text-xs text-neutral-500 underline underline-offset-2 hover:text-neutral-800"
                             >
                                 {copy.clear}

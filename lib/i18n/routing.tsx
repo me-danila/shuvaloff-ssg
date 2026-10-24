@@ -76,8 +76,7 @@ export const RU_ONLY_SEGMENTS = [
     "/legal",
     "/consent",
     "/poseidon",
-    "/tea-party",
-    "/services/tea-party",
+    "/counts-family-greetings",
 ] as const;
 
 /**
