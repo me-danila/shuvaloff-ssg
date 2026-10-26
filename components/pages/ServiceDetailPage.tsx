@@ -10,7 +10,7 @@ import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
-import type { Locale } from "@/lib/i18n/routing";
+import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { buildServiceSchema } from "@/lib/seo/schema";
 import { ORDER_URL } from "@/lib/seo/site";
 
@@ -25,6 +25,7 @@ type ServiceDetailLabels = {
     breadcrumbServices: string;
     price: string;
     order: string;
+    details: string;
     otherServices: string;
 };
 
@@ -35,6 +36,7 @@ const labelsByLocale: Record<Locale, ServiceDetailLabels> = {
         breadcrumbServices: "Услуги",
         price: "Стоимость: ",
         order: "Заказать",
+        details: "Подробнее",
         otherServices: "Другие услуги",
     },
     en: {
@@ -43,6 +45,7 @@ const labelsByLocale: Record<Locale, ServiceDetailLabels> = {
         breadcrumbServices: "Services",
         price: "Price: ",
         order: "Order",
+        details: "Learn more",
         otherServices: "Other services",
     },
 };
@@ -120,6 +123,11 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                     </FadeUp>
 
                     <div className="flex flex-col gap-4 xl:flex-1 xl:gap-3">
+                        {service.intro && (
+                            <FadeUp delay={0.1}>
+                                <p>{service.intro}</p>
+                            </FadeUp>
+                        )}
                         <FadeUp delay={0.1}>
                             <p>{service.subtitle}</p>
                         </FadeUp>
@@ -170,15 +178,28 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             )}
                             {service.comment && <p>{service.comment}</p>}
 
-                            <Button
-                                href={ORDER_URL}
-                                target="_blank"
-                                variant="primary"
-                                size="xl"
-                                className="self-start mt-3"
-                            >
-                                {labels.order}
-                            </Button>
+                            <div className="mt-3 flex flex-wrap gap-3">
+                                <Button
+                                    href={ORDER_URL}
+                                    target="_blank"
+                                    variant="primary"
+                                    size="xl"
+                                >
+                                    {labels.order}
+                                </Button>
+                                {service.detailsHref && (
+                                    <Button
+                                        href={localizeHref(
+                                            service.detailsHref,
+                                            locale,
+                                        )}
+                                        variant="primary-outline"
+                                        size="xl"
+                                    >
+                                        {labels.details}
+                                    </Button>
+                                )}
+                            </div>
                         </FadeUp>
                     </div>
                 </div>

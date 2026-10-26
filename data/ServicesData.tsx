@@ -15,11 +15,15 @@ export type Service = {
     imgUrl: string;
     /** object-position фото, если кадрирование по центру режет главное. */
     imgPosition?: string;
+    /** Абзац перед subtitle на странице услуги (в карточках не показывается). */
+    intro?: ReactNode;
     fullDescription?: ReactNode;
     links?: ServiceLink[];
     /** Несколько цен — через \n: каждая выводится с новой строки. */
     price?: string;
     comment?: ReactNode;
+    /** Отдельная страница услуги: на /services/<slug>/ рядом с «Заказать» кнопка «Подробнее». */
+    detailsHref?: string;
     /** Не показывать в слайдере услуг на главной (страница без согласованной навигации). */
     hideOnHome?: boolean;
 } & (ServiceWithSlug | ServiceWithExternal);
@@ -105,6 +109,15 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "/images/tea-party/card.jpg",
             slug: "tea-party",
             hideOnHome: true,
+            detailsHref: "/tea-party/",
+            intro: (
+                <>
+                    Приглашаем погрузиться в&nbsp;аристократическую жизнь
+                    Петербурга XIX века и&nbsp;провести время за&nbsp;приятной
+                    беседой за&nbsp;чайной церемонией без&nbsp;спешки
+                    и&nbsp;суеты.
+                </>
+            ),
             fullDescription: (
                 <>
                     <strong>В&nbsp;меню:</strong> этажерка
@@ -121,8 +134,9 @@ export const AllServices: Record<Locale, Service[]> = {
             price: "4 000 ₽ — чаепитие на 2 персоны\n7 500 ₽ — чаепитие с шампанским на 2 персоны",
             comment: (
                 <>
-                    Время чаепития: ежедневно в&nbsp;16:00 и&nbsp;17:00
-                    по&nbsp;предварительному бронированию.
+                    <strong>Время чаепития:</strong> каждый день в&nbsp;16:00
+                    и&nbsp;17:00. По&nbsp;индивидуальному запросу можем
+                    рассмотреть подачу в&nbsp;другое время.
                 </>
             ),
         },
@@ -769,6 +783,8 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "/images/tea-party/card.jpg",
             slug: "tea-party",
             hideOnHome: true,
+            detailsHref: "/tea-party/",
+            intro: "We invite you to step into the aristocratic life of 19th-century Saint Petersburg and enjoy a pleasant conversation over an unhurried tea ceremony, far from the bustle.",
             fullDescription: (
                 <>
                     <strong>On the menu:</strong> a tiered stand with mini
@@ -781,8 +797,12 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "4 000 ₽ — tea for 2\n7 500 ₽ — tea with champagne for 2",
-            comment:
-                "Tea time: daily at 4:00 PM and 5:00 PM, by advance reservation.",
+            comment: (
+                <>
+                    <strong>Tea time:</strong> daily at 4:00 PM and 5:00 PM. On
+                    request, we can consider serving it at another time.
+                </>
+            ),
         },
         {
             title: "ACADEMIA SPA",

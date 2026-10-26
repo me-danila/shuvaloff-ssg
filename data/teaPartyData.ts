@@ -63,100 +63,150 @@ export const teaPartySeo: Record<
     ru: {
         title: "Чаепитие у графини в ACADEMIA Шувалова",
         description:
-            "Чаепитие в историческом интерьере графского особняка приглашает погрузиться в аристократическую жизнь Петербурга XIX века и провести время за приятной беседой без спешки и суеты.",
+            "Приглашаем погрузиться в аристократическую жизнь Петербурга XIX века и провести время за приятной беседой за чайной церемонией без спешки и суеты.",
         name: "Чаепитие у графини",
     },
     en: {
         title: "Tea with the Countess at ACADEMIA Shuvaloff",
         description:
-            "Afternoon tea in the historic interiors of a count's mansion invites you to step into the aristocratic life of 19th-century Saint Petersburg and enjoy an unhurried conversation, far from the bustle.",
+            "We invite you to step into the aristocratic life of 19th-century Saint Petersburg and enjoy a pleasant conversation over an unhurried tea ceremony, far from the bustle.",
         name: "Tea with the Countess",
     },
 };
 
-export type TeaPartyMenu = {
-    title: string;
-    note: string;
-    items: string[];
-    price: string;
+export type TeaPartyMenuItem = {
+    name: string;
+    /** Состав позиции — мелкой строкой под названием. */
+    details?: string;
 };
 
-const baseMenuItems: Record<Locale, string[]> = {
+export type TeaPartyMenu = {
+    icon: "tea" | "champagne";
+    title: string;
+    note: string;
+    price: string;
+    items: TeaPartyMenuItem[];
+};
+
+// Состав меню — как на странице чаепития сайта ресторана.
+const baseMenuItems: Record<Locale, TeaPartyMenuItem[]> = {
     ru: [
-        "Этажерка с\u00a0десертами\u00a0— Наполеон, медовик с\u00a0йогуртовым кремом, шу с\u00a0кремом тирамису, павлова с\u00a0клубникой, тарталетки с\u00a0клубникой и\u00a0малиной, фирменные трюфели ACADEMIA, мини-круассаны",
-        "Малиновое и\u00a0вишневое варенье",
-        "Сливочное соленое масло",
-        "2\u00a0бутылки воды без\u00a0газа",
-        "Чайный купаж на\u00a0выбор",
-        "Дополнение к\u00a0чаю",
+        {
+            name: "Этажерка с\u00a0десертами",
+            details:
+                "Наполеон, медовик с\u00a0йогуртовым кремом, шу с\u00a0кремом тирамису, павлова с\u00a0клубникой, тарталетки с\u00a0клубникой и\u00a0малиной, фирменные трюфели ACADEMIA, мини\u2011круассаны",
+        },
+        { name: "Малиновое и\u00a0вишневое варенье" },
+        { name: "Сливочное соленое масло" },
+        { name: "2\u00a0бутылки воды без\u00a0газа" },
+        {
+            name: "Чайный купаж на\u00a0выбор",
+            details: "Кусьми, Русский караван, Граф Суворов, Рихтер, Кошман",
+        },
+        {
+            name: "Дополнение к\u00a0чаю",
+            details: "Лимон, тимьян, бадьян, корица",
+        },
     ],
     en: [
-        "Tiered dessert stand\u00a0— Napoleon cake, honey cake with yoghurt cream, choux with tiramisu cream, strawberry pavlova, strawberry and raspberry tartlets, signature ACADEMIA truffles, mini croissants",
-        "Raspberry and cherry jam",
-        "Salted butter",
-        "2\u00a0bottles of still water",
-        "Tea blend of your choice",
-        "Tea accompaniment",
+        {
+            name: "Tiered dessert stand",
+            details:
+                "Napoleon cake, honey cake with yoghurt cream, choux with tiramisu cream, strawberry pavlova, strawberry and raspberry tartlets, signature ACADEMIA truffles, mini croissants",
+        },
+        { name: "Raspberry and cherry jam" },
+        { name: "Salted butter" },
+        { name: "2\u00a0bottles of still water" },
+        {
+            name: "Tea blend of your choice",
+            details: "Kusmi, Russian Caravan, Count Suvorov, Richter, Koshman",
+        },
+        {
+            name: "Tea accompaniment",
+            details: "Lemon, thyme, star anise, cinnamon",
+        },
     ],
+};
+
+const champagneItem: Record<Locale, TeaPartyMenuItem> = {
+    ru: {
+        name: "2\u00a0бокала шампанского",
+        details: "Champagne Thierry Fournier «Réserve» Extra Brut",
+    },
+    en: {
+        name: "2\u00a0glasses of champagne",
+        details: "Champagne Thierry Fournier “Réserve” Extra Brut",
+    },
 };
 
 export const teaPartyCopy = {
     ru: {
         title: "Чаепитие у\u00a0графини в\u00a0ACADEMIA Шувалова",
         subtitle:
-            "Чаепитие в\u00a0историческом интерьере графского особняка приглашает погрузиться в\u00a0аристократическую жизнь Петербурга XIX века и\u00a0провести время за\u00a0приятной беседой без\u00a0спешки и\u00a0суеты.",
+            "Приглашаем погрузиться в\u00a0аристократическую жизнь Петербурга XIX века и\u00a0провести время за\u00a0приятной беседой за\u00a0чайной церемонией без\u00a0спешки и\u00a0суеты.",
         bookLabel: "Забронировать",
         heroAlt:
             "Чаепитие у\u00a0графини в\u00a0историческом интерьере особняка Шувалова",
+        serving:
+            "Для\u00a0вас мы\u00a0сервируем этажерку с\u00a0десертами, мини-круассанами и\u00a0фирменными трюфелями ACADEMIA",
         description:
             "Проведите время в\u00a0атмосфере дворянского дома XIX века за\u00a0изысканным чайным столом с\u00a0красивой сервировкой, любимыми десертами и\u00a0особым чайным купажом. Отличный вариант для\u00a0камерной встречи вдвоем, небольшого праздника или истинно петербургского акцента в\u00a0вашем путешествии.",
         menus: [
             {
+                icon: "tea",
                 title: "Чаепитие",
                 note: "Сервируется на\u00a0две персоны",
+                price: "4\u00a0000\u00a0₽",
                 items: baseMenuItems.ru,
-                price: "Стоимость: 4\u00a0000\u00a0₽",
             },
             {
+                icon: "champagne",
                 title: "Чаепитие с\u00a0шампанским",
                 note: "Сервируется на\u00a0две персоны",
-                items: [...baseMenuItems.ru, "2\u00a0бокала шампанского"],
-                price: "Стоимость: 7\u00a0500\u00a0₽",
+                price: "7\u00a0500\u00a0₽",
+                items: [...baseMenuItems.ru, champagneItem.ru],
             },
         ] satisfies TeaPartyMenu[],
-        scheduleLabel: "Время чаепития:",
+        scheduleLabel:
+            "Чаепития мы подаем каждый день в\u00a016:00 и\u00a017:00",
         schedule:
-            "ежедневно в\u00a016:00 и\u00a017:00 по\u00a0предварительному бронированию.",
-        bookTeaLabel: "Забронировать чаепитие",
+            "По\u00a0индивидуальному запросу можем рассмотреть подачу в\u00a0другое время",
+        orderLabel: "Заказать",
+        bookTeaLabel: "Забронировать услугу",
         bookHotelLabel: "Забронировать отель",
         breadcrumbHome: "Главная",
     },
     en: {
         title: "Tea with the Countess at ACADEMIA Shuvaloff",
         subtitle:
-            "Afternoon tea in the historic interiors of a count's mansion invites you to step into the aristocratic life of 19th-century Saint Petersburg and enjoy an unhurried conversation, far from the bustle.",
+            "We invite you to step into the aristocratic life of 19th-century Saint Petersburg and enjoy a pleasant conversation over an unhurried tea ceremony, far from the bustle.",
         bookLabel: "Book",
         heroAlt:
             "Tea with the Countess in the historic interiors of the Shuvaloff Mansion",
+        serving:
+            "We serve a tiered stand with desserts, mini croissants and signature ACADEMIA truffles just for you",
         description:
             "Spend time in the atmosphere of a 19th-century noble house at an exquisite tea table with elegant table settings, favourite desserts and a special tea blend. A perfect choice for an intimate meeting for two, a small celebration or a truly Saint Petersburg touch to your trip.",
         menus: [
             {
+                icon: "tea",
                 title: "Tea",
                 note: "Served for two",
+                price: "4\u00a0000\u00a0₽",
                 items: baseMenuItems.en,
-                price: "Price: 4\u00a0000\u00a0₽",
             },
             {
+                icon: "champagne",
                 title: "Tea with champagne",
                 note: "Served for two",
-                items: [...baseMenuItems.en, "2\u00a0glasses of champagne"],
-                price: "Price: 7\u00a0500\u00a0₽",
+                price: "7\u00a0500\u00a0₽",
+                items: [...baseMenuItems.en, champagneItem.en],
             },
         ] satisfies TeaPartyMenu[],
-        scheduleLabel: "Tea time:",
-        schedule: "daily at 4:00 PM and 5:00 PM, by advance reservation.",
-        bookTeaLabel: "Book tea",
+        scheduleLabel: "We serve afternoon tea daily at 4:00 PM and 5:00 PM",
+        schedule: "On request, we can consider serving it at another time",
+        orderLabel: "Order",
+        bookTeaLabel: "Book the service",
         bookHotelLabel: "Book a room",
         breadcrumbHome: "Home",
     },
