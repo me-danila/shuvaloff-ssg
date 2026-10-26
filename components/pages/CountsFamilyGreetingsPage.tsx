@@ -5,7 +5,6 @@ import PhotoShootStepsSection, {
     type Step,
 } from "@/components/sections/PhotoShootStepsSection";
 import StructuredData from "@/components/seo/StructuredData";
-import AnchorButton from "@/components/ui/AnchorButton";
 import CardServiceBig from "@/components/ui/CardServiceBig";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
@@ -16,7 +15,6 @@ import {
     countsFamilySeo,
     formatRub,
     type GreetingService,
-    greetingAnchors,
     greetingGroups,
     greetingServices,
 } from "@/data/countsFamilyGreetingsData";
@@ -57,14 +55,16 @@ function ServiceDetails({
     return (
         <div className="border-t border-[#372a24]/15 pt-5 text-[#372a24]">
             <p className="font-history text-base font-semibold uppercase">
-                {service.includesLabel}:
+                {countsFamilyCopy[locale].priceLabel}:
             </p>
-            <p className="mt-2 text-base">
-                {service.includes.map(nbsp).join("\u00a0· ")}
-            </p>
-            <p className="mt-4 text-lg">
+            <p className="mt-1 text-lg">
                 {formatRub(service.price, service.fromPrice, locale)}
             </p>
+            <ul className="mt-3 flex flex-col gap-0.5 text-base">
+                {service.includes.map((item) => (
+                    <li key={item}>{nbsp(item)}</li>
+                ))}
+            </ul>
         </div>
     );
 }
@@ -77,7 +77,6 @@ export default function CountsFamilyGreetingsPage({
     const copy = countsFamilyCopy[locale];
     const seo = countsFamilySeo[locale];
     const services = greetingServices[locale];
-    const anchors = greetingAnchors[locale];
     return (
         <main className="flex flex-col gap-8 xl:gap-12">
             <StructuredData
@@ -95,7 +94,7 @@ export default function CountsFamilyGreetingsPage({
                         },
                     ],
                     offers: services.map((s) => ({
-                        name: s.title,
+                        name: s.offerName ?? s.title,
                         description: s.description,
                         price: s.price,
                         minPrice: s.fromPrice,
@@ -107,25 +106,17 @@ export default function CountsFamilyGreetingsPage({
             {/* 2. Hero — полноэкранный, как на /photo-shoot/. */}
             <HeroFullscreen
                 title={copy.hero.title}
-                caption={copy.hero.subtitle}
                 titleClassName="xl:max-w-2xl! xl:mb-2!"
                 wideDescription
+                withBookingForm
                 image={{
                     src: countsFamilyImages.hero,
                     alt: copy.hero.imageAlt,
-                    className: "object-[50%_20%]! xl:object-[50%_25%]!",
+                    className: "object-[50%_40%]!",
                 }}
-                actions={
-                    <AnchorButton
-                        targetId={anchors[0].targetId}
-                        variant="primary"
-                    >
-                        {copy.hero.button}
-                    </AnchorButton>
-                }
             />
 
-            {/* 3–4. Вводный текст и кнопки-якоря. */}
+            {/* 3. Вводный текст и подпись-слоган. */}
             <section className="px-6 text-center text-brand-brown">
                 <FadeUp>
                     <p className="mx-auto max-w-3xl text-base leading-relaxed xl:text-lg">
@@ -133,21 +124,9 @@ export default function CountsFamilyGreetingsPage({
                     </p>
                 </FadeUp>
                 <FadeUp delay={0.1}>
-                    <nav aria-label={copy.anchorsLabel}>
-                        <ul className="mt-6 flex flex-wrap justify-center gap-2 xl:mt-8 xl:gap-3">
-                            {anchors.map((anchor) => (
-                                <li key={anchor.targetId}>
-                                    <AnchorButton
-                                        targetId={anchor.targetId}
-                                        variant="primary-outline"
-                                        size="sm"
-                                    >
-                                        {anchor.label}
-                                    </AnchorButton>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+                    <p className="mt-4 font-alistair text-2xl xl:mt-6 xl:text-4xl">
+                        {copy.tagline}
+                    </p>
                 </FadeUp>
             </section>
 
@@ -192,7 +171,13 @@ export default function CountsFamilyGreetingsPage({
                                             backgroundClassName="bg-[#ededeb]"
                                             imageFirst
                                             imageAspectClassName="aspect-4/5"
-                                            titleHeightClassName=""
+                                            titleHeightClassName={
+                                                // «Особые события»: названия в 1–2 строки —
+                                                // общая высота, чтобы описания начинались с одной линии.
+                                                group.id === "special"
+                                                    ? "md:min-h-[6.5rem]"
+                                                    : ""
+                                            }
                                             subtitleSpacingClassName="mt-0"
                                             orderOnly
                                         />

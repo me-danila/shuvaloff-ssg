@@ -48,7 +48,9 @@ export type GreetingService = {
     group: GreetingGroupId;
     title: string;
     description: string;
-    includesLabel: string;
+    /** Полное название для Schema.org, когда в карточке короткое («Для мужчины»). */
+    offerName?: string;
+    /** Состав — списком под ценой. */
     includes: string[];
     price: number;
     /** Цена «от …». */
@@ -62,12 +64,12 @@ const greetingServicesRu: GreetingService[] = [
     {
         id: "birthday-man",
         group: "birthday",
-        title: "Поздравление с днем рождения для мужчины",
+        title: "Для мужчины",
+        offerName: "Поздравление с днем рождения для мужчины",
         description: nbsp(
             "Поздравьте дорогого вам человека в необычном формате. Граф или графиня лично поздравит именинника, вручит открытку с персональными пожеланиями и подарит игристое.",
         ),
-        includesLabel: "Что включено",
-        includes: ["личное поздравление", "открытка", "игристое"],
+        includes: ["поздравление", "открытка", "игристое"],
         price: 5500,
         fromPrice: false,
         image: `${IMG}/birthday-man.jpg`,
@@ -76,12 +78,12 @@ const greetingServicesRu: GreetingService[] = [
     {
         id: "birthday-woman",
         group: "birthday",
-        title: "Поздравление с днем рождения для женщины",
+        title: "Для женщины",
+        offerName: "Поздравление с днем рождения для женщины",
         description: nbsp(
             "Добавьте неожиданных эмоций в день рождения с личным поздравлением от графа Шувалова, персональной открыткой с пожеланиями и букетом цветов.",
         ),
-        includesLabel: "Что включено",
-        includes: ["личное поздравление", "открытка", "букет цветов"],
+        includes: ["поздравление", "открытка", "букет цветов"],
         price: 9500,
         fromPrice: false,
         image: `${IMG}/birthday-woman.jpg`,
@@ -90,16 +92,16 @@ const greetingServicesRu: GreetingService[] = [
     {
         id: "birthday-child",
         group: "birthday",
-        title: "Поздравление с днем рождения для ребенка",
+        title: "Для ребенка",
+        offerName: "Поздравление с днем рождения для ребенка",
         description: nbsp(
             "Яркие впечатления для вашего ребенка в день рождения с личным поздравлением от графа или графини, памятной открыткой и трогательным игрушечным медвежонком в подарок.",
         ),
-        includesLabel: "Что включено",
-        includes: ["личное поздравление", "открытка", "медвежонок"],
+        includes: ["поздравление", "открытка", "медвежонок"],
         price: 7500,
         fromPrice: false,
         image: `${IMG}/birthday-child.jpg`,
-        imgPosition: "45% center",
+        imgPosition: "center 40%",
     },
     {
         id: "wedding",
@@ -108,8 +110,7 @@ const greetingServicesRu: GreetingService[] = [
         description: nbsp(
             "Поздравление от графской семьи с самыми теплыми пожеланиями, памятной открыткой с теплыми словами и антипасти с игристым для продолжения вечера.",
         ),
-        includesLabel: "Что включено",
-        includes: ["поздравление", "открытка", "антипасти и игристое"],
+        includes: ["поздравление", "открытка", "игристое и антипасти"],
         price: 10000,
         fromPrice: false,
         image: `${IMG}/wedding.jpg`,
@@ -122,8 +123,11 @@ const greetingServicesRu: GreetingService[] = [
         description: nbsp(
             "Изысканные сценарии предложения руки и сердца в атмосфере графского особняка с участием графской семьи.",
         ),
-        includesLabel: "Что входит",
-        includes: ["ресторан", "сценарий на выбор", "участие графской семьи"],
+        includes: [
+            "бронирование столика в ресторане",
+            "готовый сценарий на выбор",
+            "участие графской семьи",
+        ],
         price: 10000,
         fromPrice: true,
         image: `${IMG}/proposal.jpg`,
@@ -136,8 +140,11 @@ const greetingServicesRu: GreetingService[] = [
         description: nbsp(
             "Роскошный Графский завтрак в аристократической обстановке, дополненный личной экскурсией по особняку от графа Шувалова и сюрпризом на память.",
         ),
-        includesLabel: "Что входит",
-        includes: ["Графский завтрак", "экскурсия", "подарок-сюрприз"],
+        includes: [
+            "Графский завтрак",
+            "экскурсия по особняку",
+            "памятный подарок",
+        ],
         price: 13000,
         fromPrice: true,
         image: `${IMG}/breakfast-tour.jpg`,
@@ -148,56 +155,54 @@ const greetingServicesRu: GreetingService[] = [
 /** Английские тексты карточек; цены, фото и якоря — из русской версии. */
 const greetingServicesEnText: Record<
     string,
-    Pick<
-        GreetingService,
-        "title" | "description" | "includesLabel" | "includes"
-    >
+    Pick<GreetingService, "title" | "description" | "offerName" | "includes">
 > = {
     "birthday-man": {
-        title: "Birthday greeting for him",
+        title: "For him",
+        offerName: "Birthday greeting for him",
         description:
             "Congratulate someone dear to you in an unusual way. The Count or Countess will personally congratulate the birthday man, present a card with personal wishes and a bottle of sparkling wine.",
-        includesLabel: "What's included",
-        includes: ["personal greeting", "card", "sparkling wine"],
+        includes: ["greeting", "card", "sparkling wine"],
     },
     "birthday-woman": {
-        title: "Birthday greeting for her",
+        title: "For her",
+        offerName: "Birthday greeting for her",
         description:
             "Add unexpected emotions to her birthday with a personal greeting from Count Shuvalov, a personalised card with wishes and a bouquet of flowers.",
-        includesLabel: "What's included",
-        includes: ["personal greeting", "card", "bouquet of flowers"],
+        includes: ["greeting", "card", "bouquet of flowers"],
     },
     "birthday-child": {
-        title: "Birthday greeting for a child",
+        title: "For a child",
+        offerName: "Birthday greeting for a child",
         description:
             "Vivid impressions for your child on their birthday: a personal greeting from the Count or Countess, a keepsake card and a cuddly teddy bear as a gift.",
-        includesLabel: "What's included",
-        includes: ["personal greeting", "card", "teddy bear"],
+        includes: ["greeting", "card", "teddy bear"],
     },
     wedding: {
         title: "Wedding or anniversary greeting",
         description:
             "Greetings from the Count's family with the warmest wishes, a keepsake card with heartfelt words, and antipasti with sparkling wine to carry on the evening.",
-        includesLabel: "What's included",
-        includes: ["greeting", "card", "antipasti and sparkling wine"],
+        includes: ["greeting", "card", "sparkling wine and antipasti"],
     },
     proposal: {
         title: "Proposal at the mansion",
         description:
             "Exquisite marriage proposal scenarios in the atmosphere of the Count's mansion, with the Count's family taking part.",
-        includesLabel: "What's included",
         includes: [
-            "restaurant",
-            "scenario of your choice",
-            "the Count's family",
+            "table reservation at the restaurant",
+            "ready-made scenario of your choice",
+            "the Count's family taking part",
         ],
     },
     "breakfast-tour": {
         title: "The Count's breakfast with a tour",
         description:
             "A lavish Count's breakfast in an aristocratic setting, complemented by a private tour of the mansion with Count Shuvalov and a keepsake surprise.",
-        includesLabel: "What's included",
-        includes: ["the Count's breakfast", "tour", "surprise gift"],
+        includes: [
+            "the Count's breakfast",
+            "tour of the mansion",
+            "keepsake gift",
+        ],
     },
 };
 
@@ -214,31 +219,12 @@ export const greetingGroups: Record<
     { id: GreetingGroupId; title: string }[]
 > = {
     ru: [
-        { id: "birthday", title: "День рождения" },
+        { id: "birthday", title: "Поздравление с днем рождения" },
         { id: "special", title: "Особые события" },
     ],
     en: [
-        { id: "birthday", title: "Birthday" },
+        { id: "birthday", title: "Birthday greetings" },
         { id: "special", title: "Special occasions" },
-    ],
-};
-
-/** Кнопки-якоря: «День рождения» ведет на группу, остальные — на карточки. */
-export const greetingAnchors: Record<
-    Locale,
-    { label: string; targetId: string }[]
-> = {
-    ru: [
-        { label: "День рождения", targetId: "birthday" },
-        { label: "Свадьбы или годовщина", targetId: "wedding" },
-        { label: "Предложение", targetId: "proposal" },
-        { label: "Завтрак с экскурсией", targetId: "breakfast-tour" },
-    ],
-    en: [
-        { label: "Birthday", targetId: "birthday" },
-        { label: "Wedding or anniversary", targetId: "wedding" },
-        { label: "Proposal", targetId: "proposal" },
-        { label: "Breakfast with a tour", targetId: "breakfast-tour" },
     ],
 };
 
@@ -246,14 +232,14 @@ export const countsFamilyCopy = {
     ru: {
         hero: {
             title: nbsp("Поздравления от графской семьи"),
-            subtitle: nbsp("Яркое и необычное дополнение к вашему событию"),
-            button: "Выбрать формат",
-            imageAlt: "Граф и графиня Шуваловы в интерьере особняка",
+            imageAlt:
+                "Граф и графиня Шуваловы за столом с десертами в особняке",
         },
         intro: nbsp(
-            "Мы подготовили особые театрализованные форматы с участием графской семьи, чтобы сделать ваш праздник в нашем особняке еще более ярким и запоминающимся.",
+            "Мы подготовили особые форматы поздравления с участием графской семьи, чтобы сделать ваш праздник в особняке Шувалова еще более ярким и запоминающимся.",
         ),
-        anchorsLabel: "Форматы поздравлений",
+        tagline: nbsp("Яркое и необычное дополнение к вашему событию"),
+        priceLabel: "Стоимость",
         breadcrumbHome: "Главная",
         steps: {
             title: "Как это работает?",
@@ -332,12 +318,12 @@ export const countsFamilyCopy = {
     en: {
         hero: {
             title: "Greetings from the Count's Family",
-            subtitle: "A bright and unusual addition to your celebration",
-            button: "Choose a format",
-            imageAlt: "Count and Countess Shuvalov in the mansion interiors",
+            imageAlt:
+                "Count and Countess Shuvalov at a table with desserts in the mansion",
         },
-        intro: "We have prepared special theatrical formats with the Count's family to make your celebration at our mansion even brighter and more memorable.",
-        anchorsLabel: "Greeting formats",
+        intro: "We have prepared special greeting formats with the Count's family to make your celebration at the Shuvaloff Mansion even brighter and more memorable.",
+        tagline: "A bright and unusual addition to your celebration",
+        priceLabel: "Price",
         breadcrumbHome: "Home",
         steps: {
             title: "How it works",
