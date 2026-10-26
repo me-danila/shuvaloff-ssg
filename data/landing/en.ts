@@ -4,7 +4,7 @@ import type { LandingDictionary } from "./types";
 const VISA_FORM_URL =
     "https://www.bpltech.pro/guest_form/add/175a67939d61a46c4228b74d23823863/1/start/english/no#bplformtopiframewindow";
 /** Чат с отелем в WhatsApp: трансфер и консьерж. */
-const WHATSAPP_URL = "https://wa.me/79668342743";
+const WHATSAPP_URL = "https://wa.me/79111966211";
 
 export const en: LandingDictionary = {
     locale: "en",

@@ -10,7 +10,7 @@ export const LANDING_ARROW_CLASS =
 
 /** WhatsApp отеля для блока «Контакты». */
 export const LANDING_WHATSAPP = {
-    href: "https://wa.me/79668342743",
+    href: "https://wa.me/79111966211",
 };
 
 /** Кнопка «Все услуги» под плитками особняка — на всех языках EN-страница. */
