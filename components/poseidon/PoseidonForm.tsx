@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button";
 import {
     POSEIDON_THANKYOU_PATH,
     poseidonCopy,
+    poseidonDocLinkProps,
     poseidonLegal,
 } from "@/data/poseidonData";
 import {
@@ -47,6 +48,13 @@ const INITIAL: FormState = {
 const MAX = { name: 100, email: 120 } as const;
 
 const isEmailValid = (raw: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw);
+
+// ID заявки для внутреннего учета менеджера: время отправки + случайный
+// хвост, чтобы повторные заявки отличались. Сквозная нумерация не нужна.
+const makeRequestId = () =>
+    `${Date.now()}-${Math.floor(Math.random() * 10_000)
+        .toString()
+        .padStart(4, "0")}`;
 
 const fieldClass =
     "w-full rounded-lg border border-[#e8e1d6] bg-transparent px-5 py-3.5 text-base text-neutral-900 placeholder:text-[#797874] outline-none transition focus:border-[#bca589]";
@@ -125,14 +133,16 @@ export default function PoseidonForm() {
         setValidationError(null);
         setStatus("loading");
 
+        const requestId = makeRequestId();
         const ok = await submitWeb3Form(WEB3FORMS_ACCESS_KEY, {
-            subject: "Розыгрыш «Графские выходные» — Посейдон",
+            subject: `Розыгрыш «Графские выходные» — Посейдон, заявка ${requestId}`,
             from_name: "Сайт ACADEMIA — ACADEMIA × Посейдон",
             botcheck,
             Имя: name,
             Телефон: phone,
             Email: email,
             "Согласие на рассылку": form.consentAds ? "Да" : "Нет",
+            "ID заявки": requestId,
         });
         // При успехе кнопка остается в состоянии «Отправка...» до перехода.
         if (ok) router.push(POSEIDON_THANKYOU_PATH);
@@ -210,7 +220,15 @@ export default function PoseidonForm() {
                         className={checkboxClass}
                     />
                     <span className={consentTextClass}>
-                        Выражаю согласие на обработку персональных данных в
+                        Ознакомлен с{" "}
+                        <a
+                            href={poseidonLegal.rules.href}
+                            {...poseidonDocLinkProps(poseidonLegal.rules.href)}
+                            className="underline underline-offset-2 transition-colors hover:text-brand-red"
+                        >
+                            Правилами проведения акции
+                        </a>{" "}
+                        и выражаю согласие на обработку персональных данных в
                         соответствии с{" "}
                         <a
                             href={poseidonLegal.policy.href}

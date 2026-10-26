@@ -7,14 +7,14 @@ import {
 } from "@/data/poseidonData";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 
-// Отдельная группа роутов: страница не оборачивается в SiteShell (хедер и
-// футер основного сайта) — у промо свои хедер и футер.
+// Отдельная группа роутов: страница не оборачивается в SiteShell — у промо
+// свой хедер; в футере баннеры партнеров + общий футер сайта (PoseidonFooter).
 export const metadata: Metadata = buildPageMetadata({
     locale: "ru",
     path: POSEIDON_PATH,
     title: poseidonSeo.title,
     description: poseidonSeo.description,
-    ogImage: poseidonImages.hero,
+    ogImage: poseidonImages.og,
 });
 
 export default function Poseidon() {

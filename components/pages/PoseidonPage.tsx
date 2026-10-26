@@ -14,6 +14,7 @@ import { Parallax } from "@/components/ui/Parallax";
 import {
     POSEIDON_PATH,
     poseidonCopy,
+    poseidonDocLinkProps,
     poseidonImages,
     poseidonLegal,
     poseidonSeo,
@@ -29,6 +30,25 @@ const EYEBROW =
 const H2 =
     "font-normal text-[28px] leading-[1.1] text-neutral-900 xl:text-[40px]";
 const MUTED = "text-[#605f5c]";
+
+const EMAIL_RE = /([^\s@]+@[^\s@]+\.[a-z]{2,})/gi;
+
+/** Почты в тексте ответа FAQ — кликабельные mailto-ссылки. */
+function withEmailLinks(text: string) {
+    return text.split(EMAIL_RE).map((part, index) =>
+        index % 2 === 1 ? (
+            <a
+                key={part}
+                href={`mailto:${part}`}
+                className="underline underline-offset-2 transition-colors hover:text-brand-red"
+            >
+                {part}
+            </a>
+        ) : (
+            part
+        ),
+    );
+}
 
 function CtaButton({ className = "" }: { className?: string }) {
     return (
@@ -48,8 +68,8 @@ function CtaButton({ className = "" }: { className?: string }) {
 /**
  * Промо-страница /poseidon/: розыгрыш «Графских выходных» для гостей
  * ресторана «Посейдон». Своя «рамка» (хедер с логотипами партнеров и
- * футер-баннеры), без SiteShell основного сайта; кнопки, шрифты и цвета —
- * общие.
+ * баннеры партнеров над общим футером сайта), без SiteShell основного сайта;
+ * кнопки, шрифты и цвета — общие.
  */
 export default function PoseidonPage() {
     const { hero, form, prize, steps, faq } = poseidonCopy;
@@ -76,9 +96,11 @@ export default function PoseidonPage() {
                 tabIndex={-1}
                 className="focus:outline-none"
             >
-                {/* Hero: фото особняка, текст внизу кадра. Нижний отступ
-                    оставляет место карточке с формой, которая наезжает на кадр. */}
-                <section className="relative flex min-h-[690px] flex-col justify-end overflow-hidden px-6 pb-[150px] text-center text-white xl:min-h-[842px] xl:pb-[180px]">
+                {/* Hero на высоту экрана: заголовок по центру. Равные отступы
+                    сверху и снизу держат центр на середине экрана, нижний
+                    оставляет место карточке с формой, которая наезжает на кадр
+                    на ту же величину (-mt у секции формы). */}
+                <section className="relative flex min-h-svh flex-col justify-center overflow-hidden px-6 py-[24svh] text-center text-white">
                     <FadeIn
                         mode="mount"
                         duration={0.9}
@@ -132,7 +154,7 @@ export default function PoseidonPage() {
                 {/* Карточка-приглашение с формой. */}
                 <section
                     id={FORM_ID}
-                    className="relative z-10 -mt-[120px] scroll-mt-6 px-5 xl:-mt-[136px] xl:px-6"
+                    className="relative z-10 -mt-[24svh] scroll-mt-6 px-5 xl:px-6"
                 >
                     <FadeUp
                         mode="mount"
@@ -295,6 +317,9 @@ export default function PoseidonPage() {
                             <h2 className={`mt-5 ${H2}`}>{faq.title}</h2>
                             <a
                                 href={poseidonLegal.rules.href}
+                                {...poseidonDocLinkProps(
+                                    poseidonLegal.rules.href,
+                                )}
                                 className="mt-24 hidden w-fit items-center gap-1 border-b border-brand-red pb-0.5 text-lg text-brand-red transition-colors hover:border-brand-red-dark hover:text-brand-red-dark xl:inline-flex"
                             >
                                 {faq.rulesLabel}
@@ -321,13 +346,16 @@ export default function PoseidonPage() {
                                         <p
                                             className={`-mt-2 pb-7 pr-10 text-base/6 ${MUTED}`}
                                         >
-                                            {item.answer}
+                                            {withEmailLinks(item.answer)}
                                         </p>
                                     </details>
                                 ))}
                             </div>
                             <a
                                 href={poseidonLegal.rules.href}
+                                {...poseidonDocLinkProps(
+                                    poseidonLegal.rules.href,
+                                )}
                                 className="mt-10 inline-flex items-center gap-1 border-b border-brand-red pb-0.5 text-lg text-brand-red xl:hidden"
                             >
                                 {faq.rulesLabel}

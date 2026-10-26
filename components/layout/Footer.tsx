@@ -45,7 +45,14 @@ const LEGAL_LINKS = {
     ],
 } as const;
 
-export default function Footer({ locale }: { locale: Locale }) {
+/** `flush` — без верхнего отступа: футер вплотную к блоку над ним (промо /poseidon/). */
+export default function Footer({
+    locale,
+    flush = false,
+}: {
+    locale: Locale;
+    flush?: boolean;
+}) {
     const navLinks = NAV_LINKS[locale];
     const legalLinks = LEGAL_LINKS[locale];
     const homeAria = locale === "ru" ? "На главную" : "Back to homepage";
@@ -135,7 +142,7 @@ export default function Footer({ locale }: { locale: Locale }) {
 
     return (
         <footer
-            className="mt-12 xl:mt-20 bg-[#372A24] w-full font-century-v2"
+            className={`${flush ? "" : "mt-12 xl:mt-20 "}bg-[#372A24] w-full font-century-v2`}
             itemScope
             itemType="https://schema.org/Hotel"
         >
