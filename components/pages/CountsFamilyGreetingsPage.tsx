@@ -112,7 +112,9 @@ export default function CountsFamilyGreetingsPage({
                 image={{
                     src: countsFamilyImages.hero,
                     alt: copy.hero.imageAlt,
-                    className: "object-[50%_40%]!",
+                    // Десктоп: кадр шире фото режется по высоте — фокус у верха,
+                    // чтобы головы графа и графини не уходили под край.
+                    className: "object-[50%_40%]! xl:object-[50%_8%]!",
                 }}
             />
 

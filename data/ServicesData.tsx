@@ -141,6 +141,38 @@ export const AllServices: Record<Locale, Service[]> = {
             ),
         },
         {
+            title: "Поздравления от графской семьи",
+            subtitle:
+                "Театрализованные поздравления от графа и графини Шуваловых: день рождения, свадьба или годовщина, предложение руки и сердца, Графский завтрак с экскурсией.",
+            imgUrl: "/images/counts-family-greetings/hero.jpg",
+            slug: "counts-family-greetings",
+            hideOnHome: true,
+            detailsHref: "/counts-family-greetings/",
+            intro: (
+                <>
+                    Мы подготовили особые форматы поздравления с&nbsp;участием
+                    графской семьи, чтобы сделать ваш праздник в&nbsp;особняке
+                    Шувалова еще более ярким и&nbsp;запоминающимся.
+                </>
+            ),
+            fullDescription: (
+                <>
+                    <strong>Форматы:</strong> поздравление с&nbsp;днем рождения
+                    для мужчины, женщины или ребенка, поздравление с&nbsp;днем
+                    свадьбы или годовщиной, предложение в&nbsp;особняке
+                    и&nbsp;Графский завтрак с&nbsp;экскурсией.
+                </>
+            ),
+            price: "от 5 500 ₽",
+            comment: (
+                <>
+                    <strong>Когда:</strong> графская семья принимает
+                    с&nbsp;пятницы по&nbsp;воскресенье, по&nbsp;предварительному
+                    заказу.
+                </>
+            ),
+        },
+        {
             title: "ACADEMIA СПА",
             subtitle:
                 "Мы создали ACADEMIA СПА для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своем внутреннем комфорте",
@@ -805,6 +837,30 @@ export const AllServices: Record<Locale, Service[]> = {
             ),
         },
         {
+            title: "Greetings from the Count's Family",
+            subtitle:
+                "Theatrical greetings from Count and Countess Shuvalov: birthday, wedding or anniversary, marriage proposal, the Count's breakfast with a tour.",
+            imgUrl: "/images/counts-family-greetings/hero.jpg",
+            slug: "counts-family-greetings",
+            hideOnHome: true,
+            detailsHref: "/counts-family-greetings/",
+            intro: "We have prepared special greeting formats with the Count's family to make your celebration at the Shuvaloff Mansion even brighter and more memorable.",
+            fullDescription: (
+                <>
+                    <strong>Formats:</strong> birthday greeting for him, her or
+                    a child, wedding or anniversary greeting, proposal at the
+                    mansion and the Count's breakfast with a tour.
+                </>
+            ),
+            price: "from 5 500 ₽",
+            comment: (
+                <>
+                    <strong>When:</strong> the Count's family receives guests
+                    from Friday to Sunday, by advance booking.
+                </>
+            ),
+        },
+        {
             title: "ACADEMIA SPA",
             subtitle:
                 "We created ACADEMIA SPA for those who value high service standards, self-care, and their inner comfort.",
@@ -1352,6 +1408,7 @@ const allServicesPagePriority = [
     "transfer",
     "aristocratic-breakfast",
     "tea-party",
+    "counts-family-greetings",
     "https://shuvaloff.academia-spa.ru/",
     "lunch",
     "dinner",

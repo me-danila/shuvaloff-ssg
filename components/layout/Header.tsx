@@ -239,6 +239,10 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Свадьба в особняке", href: "/wedding/" },
                 { label: "Водные прогулки", href: "/services/boat-tours/" },
                 { label: "Рады вашему питомцу", href: "/services/pets/" },
+                {
+                    label: "Поздравления от графской семьи",
+                    href: "/counts-family-greetings/",
+                },
                 { label: "Фотосессия в интерьерах", href: "/photo-shoot/" },
             ],
         },
@@ -304,6 +308,10 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Wedding at the mansion", href: "/wedding/" },
                 { label: "Boat tours", href: "/services/boat-tours/" },
                 { label: "Accomodation with pets", href: "/services/pets/" },
+                {
+                    label: "Greetings from the Count's family",
+                    href: "/counts-family-greetings/",
+                },
                 { label: "Photoshoot in interiors", href: "/photo-shoot/" },
             ],
         },
