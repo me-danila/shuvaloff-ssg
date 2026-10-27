@@ -130,14 +130,16 @@ export const poseidonCopy = {
     },
 };
 
-// Юридические ссылки согласий и блока условий. Правила акции — отдельный
-// документ партнера, пока ведет на якорь блока условий.
+// Юридические ссылки согласий и блока условий.
 export const poseidonLegal = {
     policy: {
         label: "Политика обработки персональных данных",
         href: "/policy/",
     },
-    rules: { label: "Правила акции", href: "#conditions" },
+    rules: {
+        label: "Правила акции",
+        href: "https://static.academia.spb.ru/files/poseidon_rules.pdf",
+    },
     consent: { href: "/consent/" },
 };
 
