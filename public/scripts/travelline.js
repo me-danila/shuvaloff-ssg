@@ -110,8 +110,23 @@
         return commands;
     }
 
+    // true — TL уже запущен и выполнил команды сам, грузить loader не нужно
     function appendQueue(commands) {
         var ti = getIntegration();
+
+        // После старта TL подменяет __cq своим интерфейсом {push, concat}
+        // и выполняет команды сразу. Затирать его массивом нельзя: entry TL
+        // повторно не стартует (entryStarted), и очередь никто не прочтет —
+        // так ломалась форма после клиентского перехода по меню.
+        if (
+            ti.__cq &&
+            !Array.isArray(ti.__cq) &&
+            typeof ti.__cq.concat === "function"
+        ) {
+            ti.__cq.concat(commands);
+            return true;
+        }
+
         var queue = Array.isArray(ti.__cq) ? ti.__cq : [];
 
         if (hasResettableEmbed(commands)) {
@@ -121,6 +136,7 @@
         }
 
         ti.__cq = queue.concat(commands);
+        return false;
     }
 
     function loadFromHosts(hosts) {
@@ -212,8 +228,7 @@
 
         if (commands.length === 1 && !includeMissing) return;
 
-        appendQueue(commands);
-        ensureLoader();
+        if (!appendQueue(commands)) ensureLoader();
         w.setTimeout(function () {
             verify(resolvedLocale);
         }, RETRY_DELAY);
