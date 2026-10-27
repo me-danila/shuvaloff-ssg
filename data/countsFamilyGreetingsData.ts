@@ -12,7 +12,9 @@ export const COUNTS_FAMILY_GREETINGS_PATH = `${COUNTS_FAMILY_SERVICE_PATH}detail
 const IMG = "/images/counts-family-greetings";
 
 export const countsFamilyImages = {
-    hero: `${IMG}/hero.jpg`,
+    // Кадр как в hero /events/: десктопный и отдельный вертикальный для мобилы.
+    hero: `${IMG}/hero.png`,
+    heroMobile: `${IMG}/hero-mobile.png`,
     cta: `${IMG}/cta.jpg`,
 };
 
@@ -23,13 +25,13 @@ export const countsFamilySeo: Record<
     ru: {
         title: "Поздравления от графской семьи — ACADEMIA Особняк Шувалова",
         description:
-            "Театрализованные поздравления от графа и графини Шуваловых для гостей особняка: день рождения, свадьба или годовщина, предложение руки и сердца, Графский завтрак с экскурсией. От 5 500 ₽.",
+            "Форматы поздравления с участием графской семьи для гостей особняка: день рождения, свадьба или годовщина, предложение руки и сердца, Графский завтрак с экскурсией. От 5 500 ₽.",
         name: "Поздравления от графской семьи",
     },
     en: {
         title: "Greetings from the Count's Family — ACADEMIA Mansion Shuvaloff",
         description:
-            "Theatrical greetings from Count and Countess Shuvalov for mansion guests: birthday, wedding or anniversary, marriage proposal, the Count's breakfast with a tour. From 5 500 ₽.",
+            "Greeting formats featuring the Count's family for mansion guests: birthday, wedding or anniversary, marriage proposal, the Count's breakfast with a tour. From 5 500 ₽.",
         name: "Greetings from the Count's Family",
     },
 };
@@ -234,8 +236,7 @@ export const countsFamilyCopy = {
     ru: {
         hero: {
             title: nbsp("Поздравления от графской семьи"),
-            imageAlt:
-                "Граф и графиня Шуваловы за столом с десертами в особняке",
+            imageAlt: "Граф Шувалов читает гостям в салоне особняка",
         },
         intro: nbsp(
             "Мы подготовили особые форматы поздравления с участием графской семьи, чтобы сделать ваш праздник в особняке Шувалова еще более ярким и запоминающимся.",
@@ -322,8 +323,7 @@ export const countsFamilyCopy = {
     en: {
         hero: {
             title: "Greetings from the Count's Family",
-            imageAlt:
-                "Count and Countess Shuvalov at a table with desserts in the mansion",
+            imageAlt: "Count Shuvalov reading to guests in the mansion salon",
         },
         intro: "We have prepared special greeting formats with the Count's family to make your celebration at the Shuvaloff Mansion even brighter and more memorable.",
         tagline: "A bright and unusual addition to your celebration",

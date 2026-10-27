@@ -12,7 +12,13 @@ type HeroFullscreenProps = {
     description?: React.ReactNode;
     /** Строка под описанием (например, дата события). */
     caption?: React.ReactNode;
-    image: { src: string; alt: string; className?: string };
+    /** mobileSrc — отдельный кадр для мобилы (до xl), src тогда только для десктопа. */
+    image: {
+        src: string;
+        mobileSrc?: string;
+        alt: string;
+        className?: string;
+    };
     /** Кнопки под текстом: разметку и раскладку задает страница. */
     actions?: React.ReactNode;
     /** Затемнение к низу кадра — для пестрых фото, где белый текст теряется. */
@@ -73,6 +79,17 @@ export default function HeroFullscreen({
                     className="absolute inset-0 h-full w-full"
                 >
                     <Parallax className="h-full w-full" offset={80}>
+                        {image.mobileSrc && (
+                            <Image
+                                src={image.mobileSrc}
+                                alt={image.alt}
+                                fill
+                                sizes="100vw"
+                                loading="eager"
+                                priority
+                                className={`object-cover object-center xl:hidden ${image.className ?? ""}`}
+                            />
+                        )}
                         <Image
                             src={image.src}
                             alt={image.alt}
@@ -80,7 +97,7 @@ export default function HeroFullscreen({
                             sizes="100vw"
                             loading="eager"
                             priority
-                            className={`object-cover object-center ${image.className ?? ""}`}
+                            className={`object-cover object-center ${image.mobileSrc ? "max-xl:hidden" : ""} ${image.className ?? ""}`}
                         />
                     </Parallax>
                 </FadeIn>

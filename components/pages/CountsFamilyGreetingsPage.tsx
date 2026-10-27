@@ -114,10 +114,10 @@ export default function CountsFamilyGreetingsPage({
                 withBookingForm
                 image={{
                     src: countsFamilyImages.hero,
+                    mobileSrc: countsFamilyImages.heroMobile,
                     alt: copy.hero.imageAlt,
-                    // Десктоп: кадр шире фото режется по высоте — фокус у верха,
-                    // чтобы головы графа и графини не уходили под край.
-                    className: "object-[50%_40%]! xl:object-[50%_8%]!",
+                    // Граф стоит справа — сдвигаем кадр, чтобы он не уходил под край.
+                    className: "object-[95%_50%]! xl:object-[75%_50%]!",
                 }}
             />
 

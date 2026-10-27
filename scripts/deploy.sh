@@ -13,7 +13,16 @@ MODULE_DIR=${MODULE_DIR:-'~/module-price-load-src/'}
 bun run build
 
 # Статика сайта. module-price-load исключён: он не собирается из out/.
-rsync -az --delete --exclude 'module-price-load/' out/ "$REMOTE:$SITE_DIR"
+# Чанки прошлых сборок (_next/static) не удаляем: браузер (Safari) может
+# показать закешированный HTML со старыми именами чанков — при 404 JS не
+# стартует, и форма TravelLine остаётся заглушкой. Чистим их ниже по возрасту.
+rsync -az --delete --filter 'P _next/static/**' --exclude 'module-price-load/' \
+    out/ "$REMOTE:$SITE_DIR"
+
+# Чанки, которых нет в свежих сборках дольше 14 дней. rsync -a выставляет
+# файлам текущей сборки mtime из out/, поэтому живые чанки сюда не попадают.
+ssh "$REMOTE" "find ${SITE_DIR}_next/static -type f -mtime +14 -delete; \
+find ${SITE_DIR}_next/static -mindepth 1 -type d -empty -delete"
 
 # Код модуля цен. Без --delete: на сервере остаются api.json с ключом
 # (его нет в git) и накопленный лог.
