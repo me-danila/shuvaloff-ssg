@@ -106,9 +106,17 @@ export default function EventsCalendar() {
         return map;
     }, [locale]);
 
+    // Стартовый месяц — месяц ближайшего предстоящего мероприятия (как в
+    // EventsGrid: старт не раньше начала сегодня). Если в текущем месяце
+    // актуальных нет, календарь сразу открывается на следующем с событиями.
     const [view, setView] = useState(() => {
-        const now = new Date();
-        return { year: now.getFullYear(), month: now.getMonth() };
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const next = getEventCards(locale).find(
+            (e) => new Date(e.start) >= today,
+        );
+        const base = next ? new Date(next.start) : today;
+        return { year: base.getFullYear(), month: base.getMonth() };
     });
 
     const eventDays =
