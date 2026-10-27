@@ -1,11 +1,13 @@
-// Тексты страницы /counts-family-greetings/ — театрализованные поздравления
+// Тексты страницы /services/counts-family-greetings/details/ — театрализованные поздравления
 // от графской семьи для гостей особняка. Тексты — дословно из ТЗ; неразрывные
 // пробелы навешивает nbsp() при объявлении. Английская версия — перевод.
 
 import type { Locale } from "@/lib/i18n/routing";
 import { nbsp } from "@/lib/typography";
 
-export const COUNTS_FAMILY_GREETINGS_PATH = "/counts-family-greetings/";
+/** Типовая страница услуги (из ServicesData) и вложенная в нее индивидуальная. */
+export const COUNTS_FAMILY_SERVICE_PATH = "/services/counts-family-greetings/";
+export const COUNTS_FAMILY_GREETINGS_PATH = `${COUNTS_FAMILY_SERVICE_PATH}details/`;
 
 const IMG = "/images/counts-family-greetings";
 
@@ -241,6 +243,8 @@ export const countsFamilyCopy = {
         tagline: nbsp("Яркое и необычное дополнение к вашему событию"),
         priceLabel: "Стоимость",
         breadcrumbHome: "Главная",
+        breadcrumbServices: "Услуги",
+        breadcrumbDetails: "Подробнее",
         steps: {
             title: "Как это работает?",
             items: [
@@ -325,6 +329,8 @@ export const countsFamilyCopy = {
         tagline: "A bright and unusual addition to your celebration",
         priceLabel: "Price",
         breadcrumbHome: "Home",
+        breadcrumbServices: "Services",
+        breadcrumbDetails: "Details",
         steps: {
             title: "How it works",
             items: [

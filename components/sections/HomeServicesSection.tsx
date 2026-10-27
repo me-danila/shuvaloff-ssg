@@ -13,6 +13,7 @@ type HomeServiceItem = {
     imgPosition?: string;
     slug?: string;
     externalLink?: string;
+    detailsHref?: string;
 };
 
 const sectionCopy = {
@@ -126,6 +127,7 @@ export default function HomeServicesSection({
                                 imgPosition={service.imgPosition}
                                 slug={service.slug}
                                 externalLink={service.externalLink}
+                                detailsHref={service.detailsHref}
                                 backgroundClassName="bg-stone-100"
                             />
                         </div>

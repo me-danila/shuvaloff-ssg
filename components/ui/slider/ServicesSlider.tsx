@@ -103,6 +103,7 @@ export default function ServicesSlider({ services }: ServicesSliderProps) {
                             imgPosition={service.imgPosition}
                             slug={service.slug}
                             externalLink={service.externalLink}
+                            detailsHref={service.detailsHref}
                         />
                     </div>
                 ))}

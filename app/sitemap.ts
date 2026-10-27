@@ -66,7 +66,6 @@ const staticRuRoutes = [
     "/aristocratic-spb/",
     "/booking/",
     "/counts-autumn/",
-    "/counts-family-greetings/",
     "/consent/",
     "/events/",
     "/history/",
@@ -84,10 +83,12 @@ const staticRuRoutes = [
     "/sales/aeroflot/",
     "/services/",
     "/services/all/",
+    "/services/aristocratic-breakfast/details/",
+    "/services/counts-family-greetings/details/",
+    "/services/tea-party/details/",
     "/smi/",
     "/subscriptions/",
     "/spasibo_wedding/",
-    "/tea-party/",
     "/wedding/",
 ];
 
@@ -110,11 +111,12 @@ const staticEnRoutes = [
     "/sales/aeroflot/",
     "/services/",
     "/services/all/",
+    "/services/aristocratic-breakfast/details/",
+    "/services/counts-family-greetings/details/",
+    "/services/tea-party/details/",
     "/smi/",
     "/subscriptions/",
     "/spasibo_wedding/",
-    "/tea-party/",
-    "/counts-family-greetings/",
     "/wedding/",
 ];
 

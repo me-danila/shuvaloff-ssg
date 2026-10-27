@@ -1,20 +1,13 @@
 import type { Metadata } from "next";
-import CountsFamilyGreetingsPage from "@/components/pages/CountsFamilyGreetingsPage";
-import {
+import MovedPage, { movedPageMetadata } from "@/components/seo/MovedPage";
+import { COUNTS_FAMILY_GREETINGS_PATH } from "@/data/countsFamilyGreetingsData";
+
+// Старый адрес: страница переехала внутрь услуги.
+export const metadata: Metadata = movedPageMetadata(
     COUNTS_FAMILY_GREETINGS_PATH,
-    countsFamilyImages,
-    countsFamilySeo,
-} from "@/data/countsFamilyGreetingsData";
-import { buildPageMetadata } from "@/lib/i18n/metadata";
+    "ru",
+);
 
-export const metadata: Metadata = buildPageMetadata({
-    locale: "ru",
-    path: COUNTS_FAMILY_GREETINGS_PATH,
-    title: countsFamilySeo.ru.title,
-    description: countsFamilySeo.ru.description,
-    ogImage: countsFamilyImages.hero,
-});
-
-export default function CountsFamilyGreetings() {
-    return <CountsFamilyGreetingsPage locale="ru" />;
+export default function CountsFamilyGreetingsMoved() {
+    return <MovedPage target={COUNTS_FAMILY_GREETINGS_PATH} locale="ru" />;
 }

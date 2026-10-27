@@ -10,6 +10,7 @@ import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import {
     COUNTS_FAMILY_GREETINGS_PATH,
+    COUNTS_FAMILY_SERVICE_PATH,
     countsFamilyCopy,
     countsFamilyImages,
     countsFamilySeo,
@@ -88,8 +89,10 @@ export default function CountsFamilyGreetingsPage({
                     image: getAbsoluteUrl(countsFamilyImages.hero),
                     breadcrumbs: [
                         { name: copy.breadcrumbHome, path: "/" },
+                        { name: copy.breadcrumbServices, path: "/services/" },
+                        { name: seo.name, path: COUNTS_FAMILY_SERVICE_PATH },
                         {
-                            name: seo.name,
+                            name: copy.breadcrumbDetails,
                             path: COUNTS_FAMILY_GREETINGS_PATH,
                         },
                     ],

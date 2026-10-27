@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
-import TeaPartyPage from "@/components/pages/TeaPartyPage";
-import {
-    TEA_PARTY_PATH,
-    teaPartyImages,
-    teaPartySeo,
-} from "@/data/teaPartyData";
-import { buildPageMetadata } from "@/lib/i18n/metadata";
+import MovedPage, { movedPageMetadata } from "@/components/seo/MovedPage";
+import { TEA_PARTY_PATH } from "@/data/teaPartyData";
 
-export const metadata: Metadata = buildPageMetadata({
-    locale: "ru",
-    path: TEA_PARTY_PATH,
-    title: teaPartySeo.ru.title,
-    description: teaPartySeo.ru.description,
-    ogImage: teaPartyImages.hero,
-});
+// Старый адрес: страница переехала внутрь услуги.
+export const metadata: Metadata = movedPageMetadata(TEA_PARTY_PATH, "ru");
 
-export default function TeaParty() {
-    return <TeaPartyPage locale="ru" />;
+export default function TeaPartyMoved() {
+    return <MovedPage target={TEA_PARTY_PATH} locale="ru" />;
 }

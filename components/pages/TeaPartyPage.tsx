@@ -10,6 +10,7 @@ import Image from "@/components/ui/OptimizedImage";
 import {
     TEA_PARTY_BOOK_URL,
     TEA_PARTY_PATH,
+    TEA_PARTY_SERVICE_PATH,
     TEA_PARTY_VIDEO,
     teaPartyCopy,
     teaPartyImages,
@@ -23,7 +24,7 @@ import { getAbsoluteUrl, ORDER_URL } from "@/lib/seo/site";
 const DIVIDER_SRC =
     "https://academia.spb.ru/wp-content/uploads/2026/03/divider.png";
 
-/** /tea-party/ и /en/tea-party/ — «Чаепитие у графини», по образцу страницы графского завтрака. */
+/** /services/tea-party/details/ (+ /en/) — «Чаепитие у графини», по образцу страницы графского завтрака. */
 export default function TeaPartyPage({ locale }: { locale: Locale }) {
     const copy = teaPartyCopy[locale];
     const seo = teaPartySeo[locale];
@@ -38,7 +39,9 @@ export default function TeaPartyPage({ locale }: { locale: Locale }) {
                     image: getAbsoluteUrl(teaPartyImages.hero),
                     breadcrumbs: [
                         { name: copy.breadcrumbHome, path: "/" },
-                        { name: seo.name, path: TEA_PARTY_PATH },
+                        { name: copy.breadcrumbServices, path: "/services/" },
+                        { name: seo.name, path: TEA_PARTY_SERVICE_PATH },
+                        { name: copy.breadcrumbDetails, path: TEA_PARTY_PATH },
                     ],
                 })}
             />

@@ -6,7 +6,7 @@ type PhotoStripSectionProps = {
 };
 
 /**
- * Полоса из фото в ряд (/services/aristocratic-breakfast/, /tea-party/).
+ * Полоса из фото в ряд (/services/aristocratic-breakfast/details/, /services/tea-party/details/).
  * Рассчитана на вертикальные кадры; на мобиле третий кадр скрыт.
  */
 export default function PhotoStripSection({ images }: PhotoStripSectionProps) {

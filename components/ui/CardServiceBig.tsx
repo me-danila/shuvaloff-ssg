@@ -17,6 +17,11 @@ type CardServiceBigProps = {
     subtitle?: string;
     slug?: string;
     externalLink?: string;
+    /**
+     * Индивидуальная страница услуги: «Подробнее» ведет сюда, а «Заказать» —
+     * на типовую /services/<slug>/ вместо мессенджера.
+     */
+    detailsHref?: string;
     ctaLabel?: CardServiceBigCtaLabel;
     /** Показывать раздельные действия: «Заказать» (если есть slug) + «Подробнее». */
     showOrder?: boolean;
@@ -56,6 +61,7 @@ export default function CardServiceBig({
     subtitle,
     slug,
     externalLink,
+    detailsHref,
     ctaLabel,
     showOrder = false,
     backgroundClassName = "bg-white",
@@ -86,6 +92,13 @@ export default function CardServiceBig({
         (slug
             ? localizeHref(`/services/${slug}/`, locale)
             : (externalLink ?? "#"));
+
+    // «Подробнее» — индивидуальная страница, если есть; «Заказать» тогда ведет
+    // на типовую страницу услуги (href), а не в мессенджер.
+    const detailsButtonHref = detailsHref
+        ? localizeHref(detailsHref, locale)
+        : href;
+    const orderHref = detailsHref ? href : ORDER_URL;
 
     // Фото над заголовком — через order-first: разметка одна для обоих порядков.
     const imageClass = `relative block ${imageAspectClassName} w-full overflow-hidden ${imageFirst ? "order-first" : ""}`;
@@ -164,8 +177,8 @@ export default function CardServiceBig({
                 <div className="mt-6 flex min-h-[3.25rem] items-center gap-2 px-5">
                     {slug && (
                         <Button
-                            href={ORDER_URL}
-                            target="_blank"
+                            href={orderHref}
+                            target={detailsHref ? undefined : "_blank"}
                             variant="primary"
                             size="sm"
                             className="shrink-0 xl:px-6"
@@ -174,7 +187,7 @@ export default function CardServiceBig({
                         </Button>
                     )}
                     <Button
-                        href={href}
+                        href={detailsButtonHref}
                         target={isExternal ? "_blank" : undefined}
                         variant={slug ? "primary-outline" : "primary"}
                         size="sm"
@@ -186,7 +199,7 @@ export default function CardServiceBig({
             ) : (
                 <div className="mt-6 px-5">
                     <Button
-                        href={href}
+                        href={detailsButtonHref}
                         target={isExternal ? "_blank" : undefined}
                         size="xl"
                         className="xl:px-8 xl:py-3 xl:text-base"

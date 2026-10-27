@@ -333,7 +333,7 @@ const heroButtons = [
             ru: "Графские завтраки",
             en: "Aristocratic breakfasts",
         },
-        href: "/services/aristocratic-breakfast/",
+        href: "/services/aristocratic-breakfast/details/",
         external: false,
         Icon: BreakfastIcon,
     },
@@ -726,6 +726,7 @@ export default function HomePage({
                         imgPosition: s.imgPosition,
                         slug: s.slug,
                         externalLink: s.externalLink,
+                        detailsHref: s.detailsHref,
                     }))}
             />
 

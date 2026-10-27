@@ -67,7 +67,7 @@ export async function serviceDetailMetadata(
         locale,
         path: `/services/${slug}/`,
         title: `${service.title} ${labelsByLocale[locale].brandSuffix}`,
-        description: service.subtitle,
+        description: service.metaDescription ?? service.subtitle,
         ogImage: service.imgUrl,
     });
 }

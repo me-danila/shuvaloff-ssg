@@ -223,9 +223,9 @@ describe("locale round-trip invariant", () => {
         "/history/",
         "/contacts",
         "/restaurant",
-        "/tea-party/",
+        "/services/tea-party/details/",
         "/services/tea-party/",
-        "/counts-family-greetings/",
+        "/services/counts-family-greetings/details/",
     ];
 
     test.each(bilingual)(

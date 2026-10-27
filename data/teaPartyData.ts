@@ -1,7 +1,9 @@
-// Тексты страницы /tea-party/ и /en/tea-party/ — «Чаепитие у графини».
-// Типовая карточка услуги — в data/ServicesData.tsx (slug "tea-party").
+// Тексты индивидуальной страницы «Чаепитие у графини» — вложена в услугу:
+// /services/tea-party/details/. Типовая страница услуги /services/tea-party/ —
+// из data/ServicesData.tsx (slug "tea-party").
 
-export const TEA_PARTY_PATH = "/tea-party/";
+export const TEA_PARTY_SERVICE_PATH = "/services/tea-party/";
+export const TEA_PARTY_PATH = `${TEA_PARTY_SERVICE_PATH}details/`;
 
 /** Бронирование чаепития на сайте бутик-ресторана. */
 export const TEA_PARTY_BOOK_URL =
@@ -175,6 +177,8 @@ export const teaPartyCopy = {
         bookTeaLabel: "Забронировать услугу",
         bookHotelLabel: "Забронировать отель",
         breadcrumbHome: "Главная",
+        breadcrumbServices: "Услуги",
+        breadcrumbDetails: "Подробнее",
     },
     en: {
         title: "Tea with the Countess at ACADEMIA Shuvaloff",
@@ -209,5 +213,7 @@ export const teaPartyCopy = {
         bookTeaLabel: "Book the service",
         bookHotelLabel: "Book a room",
         breadcrumbHome: "Home",
+        breadcrumbServices: "Services",
+        breadcrumbDetails: "Details",
     },
 } satisfies Record<Locale, unknown>;

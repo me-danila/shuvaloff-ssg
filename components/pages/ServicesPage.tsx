@@ -138,6 +138,7 @@ export default function ServicesPage({ locale }: { locale: Locale }) {
                                 imgPosition={service.imgPosition}
                                 slug={service.slug}
                                 externalLink={service.externalLink}
+                                detailsHref={service.detailsHref}
                             />
                         </StaggerItem>
                     ))}

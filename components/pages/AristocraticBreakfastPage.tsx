@@ -10,6 +10,10 @@ import {
     StaggerItem,
 } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import {
+    ARISTOCRATIC_BREAKFAST_PATH,
+    ARISTOCRATIC_BREAKFAST_SERVICE_PATH,
+} from "@/data/aristocraticBreakfastPaths";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
@@ -396,12 +400,14 @@ export default function AristocraticBreakfastPage({
             description:
                 "Гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
             crumbs: ["Главная", "Услуги"],
+            details: "Подробнее",
         },
         en: {
             name: "Aristocratic breakfast",
             description:
                 "Gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
             crumbs: ["Home", "Services"],
+            details: "Details",
         },
     } as const;
 
@@ -412,7 +418,7 @@ export default function AristocraticBreakfastPage({
             <StructuredData
                 data={buildWebPageSchema({
                     locale,
-                    path: "/services/aristocratic-breakfast/",
+                    path: ARISTOCRATIC_BREAKFAST_PATH,
                     name: seo[locale].name,
                     description: seo[locale].description,
                     breadcrumbs: [
@@ -422,7 +428,11 @@ export default function AristocraticBreakfastPage({
                         })),
                         {
                             name: seo[locale].name,
-                            path: "/services/aristocratic-breakfast/",
+                            path: ARISTOCRATIC_BREAKFAST_SERVICE_PATH,
+                        },
+                        {
+                            name: seo[locale].details,
+                            path: ARISTOCRATIC_BREAKFAST_PATH,
                         },
                     ],
                 })}

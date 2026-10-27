@@ -33,6 +33,11 @@ export const OG_IMAGE_OVERRIDES: Record<string, string> = {
         "https://academia.spb.ru/wp-content/uploads/2026/10/MMI2373_maxiimov-scaled.jpg",
     "/rooms/junior-suite-mansarda/":
         "https://academia.spb.ru/wp-content/uploads/2026/10/MMI2375_maxiimov.jpg",
+    // Фото типовой карточки — AVIF; JPG-кадр 1200×630 сделан из него.
+    "/services/aristocratic-breakfast/":
+        "/images/aristocratic-breakfast/og-image.jpg",
+    "/services/aristocratic-breakfast/details/":
+        "/images/aristocratic-breakfast/og-image.jpg",
     "/services/aristocratic-breakfast-in-room/":
         "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_8457-1.jpg",
     "/services/birthday/":

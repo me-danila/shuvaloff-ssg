@@ -12,6 +12,8 @@ type ServiceWithExternal = { externalLink: string; slug?: never };
 export type Service = {
     title: string;
     subtitle: string;
+    /** meta description типовой страницы, если subtitle для нее не годится. */
+    metaDescription?: string;
     imgUrl: string;
     /** object-position фото, если кадрирование по центру режет главное. */
     imgPosition?: string;
@@ -22,7 +24,11 @@ export type Service = {
     /** Несколько цен — через \n: каждая выводится с новой строки. */
     price?: string;
     comment?: ReactNode;
-    /** Отдельная страница услуги: на /services/<slug>/ рядом с «Заказать» кнопка «Подробнее». */
+    /**
+     * Индивидуальная страница услуги (/services/<slug>/details/). Тогда в
+     * карточках «Заказать» ведет на типовую /services/<slug>/, «Подробнее» —
+     * сюда; на типовой рядом с «Заказать» — кнопка «Подробнее».
+     */
     detailsHref?: string;
     /** Не показывать в слайдере услуг на главной (страница без согласованной навигации). */
     hideOnHome?: boolean;
@@ -99,8 +105,37 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Графский завтрак",
             subtitle:
                 "— это гастрономия как искусство. Это традиция и история. Это утро, которое вы запомните надолго!",
+            metaDescription:
+                "Графский завтрак в ACADEMIA Особняк Шувалова: гастрономия как искусство и традиции дворянских домов XIX века. Ежедневно с 13:00 до 15:30, от 5 500 ₽.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
             slug: "aristocratic-breakfast",
+            detailsHref: "/services/aristocratic-breakfast/details/",
+            fullDescription: (
+                <>
+                    Воссоздаем атмосферу эпохи XIX века: по&nbsp;утрам
+                    дворянские семьи собирались за&nbsp;большим столом, вели
+                    неспешные беседы и&nbsp;наслаждались вкусом жизни.
+                    <br />
+                    <br />
+                    <strong>В&nbsp;составе:</strong> пшенная каша
+                    со&nbsp;сливочным маслом, яйца всмятку с&nbsp;черной икрой,
+                    паштет из&nbsp;лососины, хлебная корзина
+                    с&nbsp;мини-круассанами, этажерка с&nbsp;десертами, блины
+                    с&nbsp;лососиной или сырники, пирог с&nbsp;уткой, ягодный
+                    морс, вишневая наливка или бокал шампанского, чай или кофе.
+                </>
+            ),
+            price: "5 500 ₽ — на одну персону\n8 500 ₽ — на две персоны",
+            comment: (
+                <>
+                    <strong>Время подачи:</strong> ежедневно с&nbsp;13:00
+                    до&nbsp;15:30 по&nbsp;предварительному бронированию, при
+                    наличии свободных слотов. В&nbsp;новогодние праздники
+                    (31&nbsp;декабря&nbsp;— 10&nbsp;января)&nbsp;—
+                    6&nbsp;500&nbsp;₽ на&nbsp;одну персону
+                    и&nbsp;10&nbsp;000&nbsp;₽ на&nbsp;две.
+                </>
+            ),
         },
         {
             title: "Чаепитие у графини",
@@ -109,7 +144,7 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "/images/tea-party/card.jpg",
             slug: "tea-party",
             hideOnHome: true,
-            detailsHref: "/tea-party/",
+            detailsHref: "/services/tea-party/details/",
             intro: (
                 <>
                     Приглашаем погрузиться в&nbsp;аристократическую жизнь
@@ -147,7 +182,7 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "/images/counts-family-greetings/hero.jpg",
             slug: "counts-family-greetings",
             hideOnHome: true,
-            detailsHref: "/counts-family-greetings/",
+            detailsHref: "/services/counts-family-greetings/details/",
             intro: (
                 <>
                     Мы подготовили особые форматы поздравления с&nbsp;участием
@@ -805,8 +840,34 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Aristocratic breakfast",
             subtitle:
                 "— It’s gastronomy as an art form. It’s tradition and history. It’s a morning you’ll remember for a long time!",
+            metaDescription:
+                "The Count's breakfast at ACADEMIA Mansion Shuvaloff: gastronomy as an art form and the traditions of 19th-century noble houses. Daily 1:00–3:30 PM, from 5,500 ₽.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/04/IMG_1179-1.avif",
             slug: "aristocratic-breakfast",
+            detailsHref: "/services/aristocratic-breakfast/details/",
+            fullDescription: (
+                <>
+                    We recreate the atmosphere of the 19th century, when noble
+                    families gathered at a large table in the morning, enjoying
+                    unhurried conversations and the taste of life.
+                    <br />
+                    <br />
+                    <strong>Includes:</strong> millet porridge with butter,
+                    soft-boiled eggs with black caviar, salmon pâté, a bread
+                    basket with mini croissants, a tiered dessert stand, salmon
+                    blini or syrniki, duck pie, berry mors, cherry liqueur or a
+                    glass of champagne, tea or coffee.
+                </>
+            ),
+            price: "5 500 ₽ — for one person\n8 500 ₽ — for two persons",
+            comment: (
+                <>
+                    <strong>Serving time:</strong> daily from 1:00 PM to 3:30 PM
+                    by advance booking, subject to availability. During the New
+                    Year holidays (December 31 — January 10): 6 500 ₽ for one
+                    person and 10 000 ₽ for two.
+                </>
+            ),
         },
         {
             title: "Tea with the Countess",
@@ -815,7 +876,7 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "/images/tea-party/card.jpg",
             slug: "tea-party",
             hideOnHome: true,
-            detailsHref: "/tea-party/",
+            detailsHref: "/services/tea-party/details/",
             intro: "We invite you to step into the aristocratic life of 19th-century Saint Petersburg and enjoy a pleasant conversation over an unhurried tea ceremony, far from the bustle.",
             fullDescription: (
                 <>
@@ -843,7 +904,7 @@ export const AllServices: Record<Locale, Service[]> = {
             imgUrl: "/images/counts-family-greetings/hero.jpg",
             slug: "counts-family-greetings",
             hideOnHome: true,
-            detailsHref: "/counts-family-greetings/",
+            detailsHref: "/services/counts-family-greetings/details/",
             intro: "We have prepared special greeting formats with the Count's family to make your celebration at the Shuvaloff Mansion even brighter and more memorable.",
             fullDescription: (
                 <>

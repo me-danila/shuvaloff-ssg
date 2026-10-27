@@ -9,6 +9,7 @@ type ServicesGridItem = {
     imgPosition?: string;
     slug?: string;
     externalLink?: string;
+    detailsHref?: string;
 };
 
 type ServicesGridProps = {
@@ -35,6 +36,7 @@ export default function ServicesGrid({
                         imgPosition={service.imgPosition}
                         slug={service.slug}
                         externalLink={service.externalLink}
+                        detailsHref={service.detailsHref}
                         showOrder
                     />
                 </StaggerItem>

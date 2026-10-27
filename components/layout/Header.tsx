@@ -241,7 +241,7 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Рады вашему питомцу", href: "/services/pets/" },
                 {
                     label: "Поздравления от графской семьи",
-                    href: "/counts-family-greetings/",
+                    href: "/services/counts-family-greetings/details/",
                 },
                 { label: "Фотосессия в интерьерах", href: "/photo-shoot/" },
             ],
@@ -310,7 +310,7 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
                 { label: "Accomodation with pets", href: "/services/pets/" },
                 {
                     label: "Greetings from the Count's family",
-                    href: "/counts-family-greetings/",
+                    href: "/services/counts-family-greetings/details/",
                 },
                 { label: "Photoshoot in interiors", href: "/photo-shoot/" },
             ],
@@ -430,9 +430,9 @@ const FIXED_HEADER_PATHS = new Set([
     "/events",
     "/photo-shoot",
     "/new-year-2027",
-    "/services/aristocratic-breakfast",
-    "/tea-party",
-    "/counts-family-greetings",
+    "/services/aristocratic-breakfast/details",
+    "/services/tea-party/details",
+    "/services/counts-family-greetings/details",
 ]);
 
 export default function Header({ locale }: { locale: Locale }) {
