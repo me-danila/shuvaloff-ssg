@@ -122,7 +122,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                         />
                     </FadeUp>
 
-                    <div className="flex flex-col gap-4 xl:flex-1 xl:gap-3">
+                    <div className="flex flex-col gap-3.5 xl:flex-1">
                         {service.intro && (
                             <FadeUp delay={0.1}>
                                 <p>{service.intro}</p>
@@ -132,7 +132,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             <p>{service.subtitle}</p>
                         </FadeUp>
                         {service.fullDescription && (
-                            <FadeUp delay={0.2} className="mb-2 xl:mb-4">
+                            <FadeUp delay={0.2}>
                                 <p>{service.fullDescription}</p>
                             </FadeUp>
                         )}
@@ -160,9 +160,9 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             </StaggerContainer>
                         )}
 
-                        <FadeUp delay={0.4}>
+                        <FadeUp delay={0.4} className="flex flex-col gap-3.5">
                             {service.price && (
-                                <p className="mt-2 italic">
+                                <p className="italic">
                                     {labels.price}
                                     {service.price.includes("\n")
                                         ? service.price
@@ -178,7 +178,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             )}
                             {service.comment && <p>{service.comment}</p>}
 
-                            <div className="mt-3 flex flex-wrap gap-3">
+                            <div className="mt-1 flex flex-wrap gap-3">
                                 <Button
                                     href={ORDER_URL}
                                     target="_blank"

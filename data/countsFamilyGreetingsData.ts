@@ -66,7 +66,7 @@ const greetingServicesRu: GreetingService[] = [
     {
         id: "birthday-man",
         group: "birthday",
-        title: "Для мужчины",
+        title: "Для господина",
         offerName: "Поздравление с днем рождения для мужчины",
         description: nbsp(
             "Поздравьте дорогого вам человека в необычном формате. Граф или графиня лично поздравит именинника, вручит открытку с персональными пожеланиями и подарит игристое.",
@@ -80,7 +80,7 @@ const greetingServicesRu: GreetingService[] = [
     {
         id: "birthday-woman",
         group: "birthday",
-        title: "Для женщины",
+        title: "Для дамы",
         offerName: "Поздравление с днем рождения для женщины",
         description: nbsp(
             "Добавьте неожиданных эмоций в день рождения с личным поздравлением от графа Шувалова, персональной открыткой с пожеланиями и букетом цветов.",
@@ -89,7 +89,7 @@ const greetingServicesRu: GreetingService[] = [
         price: 9500,
         fromPrice: false,
         image: `${IMG}/birthday-woman.jpg`,
-        imgPosition: "center 30%",
+        imgPosition: "center top",
     },
     {
         id: "birthday-child",

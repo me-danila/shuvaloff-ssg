@@ -34,6 +34,9 @@ export type Service = {
     hideOnHome?: boolean;
 } & (ServiceWithSlug | ServiceWithExternal);
 
+/** Разрыв абзаца внутри описания: отступ как между абзацами страницы услуги, без двойного <br />. */
+const ParagraphGap = () => <span aria-hidden className="block h-3.5" />;
+
 export const AllServices: Record<Locale, Service[]> = {
     ru: [
         {
@@ -50,7 +53,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     с&nbsp;клубничным соусом, овсянка с&nbsp;яблочным конфи или
                     скрембл с&nbsp;трюфелем и&nbsp;креветками&nbsp;&mdash; все
                     приготовлено с&nbsp;любовью и&nbsp;вниманием.
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;заказом&nbsp;&mdash; мы&nbsp;на&nbsp;связи
                     и&nbsp;всегда рады помочь.
@@ -77,7 +80,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     Мы с удовольствием принимаем кошек и собак без ограничения
                     по весу, но не более одного животного в номере. При
                     заселении потребуется ветеринарный паспорт питомца.
-                    <br />
+                    <ParagraphGap />
                     Мы приготовили все необходимое:
                     <br />• удобную лежанку,
                     <br /> • миски для воды и еды,
@@ -85,8 +88,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br /> • лакомства,
                     <br /> • по запросу консьерж организует выгул: с заботой и
                     по расписанию.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Путешествуйте вместе. Мы&nbsp;позаботимся о&nbsp;комфорте
                     каждого.
                 </>
@@ -115,8 +117,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     Воссоздаем атмосферу эпохи XIX века: по&nbsp;утрам
                     дворянские семьи собирались за&nbsp;большим столом, вели
                     неспешные беседы и&nbsp;наслаждались вкусом жизни.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     <strong>В&nbsp;составе:</strong> пшенная каша
                     со&nbsp;сливочным маслом, яйца всмятку с&nbsp;черной икрой,
                     паштет из&nbsp;лососины, хлебная корзина
@@ -160,8 +161,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     и&nbsp;десертами (наполеон, медовик с&nbsp;йогуртовым
                     кремом, шу с&nbsp;кремом тирамису, павлова с&nbsp;клубникой
                     и&nbsp;тарталетки с&nbsp;ягодами).
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Особый чайный купаж на&nbsp;ваш выбор дополняют малиновое
                     и&nbsp;вишневое варенье и&nbsp;сливочное соленое масло.
                 </>
@@ -178,24 +178,19 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Поздравления от графской семьи",
             subtitle:
+                "Мы подготовили особые форматы поздравления с участием графской семьи, чтобы сделать ваш праздник в особняке Шувалова еще более ярким и запоминающимся.",
+            metaDescription:
                 "Театрализованные поздравления от графа и графини Шуваловых: день рождения, свадьба или годовщина, предложение руки и сердца, Графский завтрак с экскурсией.",
-            imgUrl: "/images/counts-family-greetings/hero.jpg",
+            imgUrl: "/images/counts-family-greetings/card.jpg",
+            imgPosition: "50% 85%",
             slug: "counts-family-greetings",
             hideOnHome: true,
             detailsHref: "/services/counts-family-greetings/details/",
-            intro: (
-                <>
-                    Мы подготовили особые форматы поздравления с&nbsp;участием
-                    графской семьи, чтобы сделать ваш праздник в&nbsp;особняке
-                    Шувалова еще более ярким и&nbsp;запоминающимся.
-                </>
-            ),
             fullDescription: (
                 <>
-                    <strong>Форматы:</strong> поздравление с&nbsp;днем рождения
-                    для мужчины, женщины или ребенка, поздравление с&nbsp;днем
-                    свадьбы или годовщиной, предложение в&nbsp;особняке
-                    и&nbsp;Графский завтрак с&nbsp;экскурсией.
+                    <strong>Форматы:</strong> день рождения, свадьба или
+                    годовщина, предложение руки и&nbsp;сердца, Графский завтрак
+                    с&nbsp;экскурсией.
                 </>
             ),
             price: "от 5 500 ₽",
@@ -234,8 +229,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     в&nbsp;старинном особняке с&nbsp;участием графской семьи,
                     которая поможет создать особую атмосферу для самых важных
                     слов.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Для красивого продолжения этого важного дня
                     в&nbsp;аристократической обстановке проведите ночь
                     в&nbsp;одном из&nbsp;исторических люксов особняка.
@@ -268,8 +262,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     на&nbsp;уникальной винтажной посуде превращает завтрак
                     в&nbsp;роскошную и&nbsp;неторопливую трапезу и&nbsp;изящный
                     ритуал, который обеспечит яркие впечатления.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Подарите себе утро в&nbsp;изысканной обстановке без спешки
                     и&nbsp;суеты с&nbsp;завтраком в&nbsp;духе аристократических
                     традиций Петербурга!
@@ -306,7 +299,7 @@ export const AllServices: Record<Locale, Service[]> = {
                 <>
                     Время подачи завтраков в&nbsp;ресторане: с&nbsp;8:00
                     до&nbsp;12:00
-                    <br />
+                    <ParagraphGap />
                     Вы&nbsp;можете заказать детский завтрак от&nbsp;шефа для
                     детей от&nbsp;0 до&nbsp;13 лет включительно
                 </>
@@ -329,7 +322,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     Мы&nbsp;с&nbsp;радостью подберем идеальный букет
                     по&nbsp;вашему настроению и&nbsp;пожеланиям&nbsp;&mdash;
                     от&nbsp;нежной классики до&nbsp;выразительной композиции.
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется
                     помощь&nbsp;&mdash; мы&nbsp;на&nbsp;связи и&nbsp;всегда рады
                     помочь.
@@ -350,19 +343,19 @@ export const AllServices: Record<Locale, Service[]> = {
                     в&nbsp;другой&nbsp;век. В&nbsp;камерной обстановке, среди
                     мрамора, лепнины и&nbsp;ручной мебели, оживает
                     история&nbsp;&mdash; тонко, чувственно, с&nbsp;тактом.
-                    <br />
+                    <ParagraphGap />
                     Вас ждут блюда классической кухни от&nbsp;бренд-шефа Ильи
                     Харченко, и&nbsp;коктейли от&nbsp;Даниила
                     Лемана&nbsp;&mdash; изысканные, с&nbsp;тонкой архитектурой
                     вкуса.
-                    <br />
+                    <ParagraphGap />
                     Это время&nbsp;&mdash; дань глубокому вкусу
                     и&nbsp;удовольствию быть здесь и&nbsp;сейчас.
-                    <br />
+                    <ParagraphGap />
                     И&nbsp;небольшая деталь, о&nbsp;которой хотелось&nbsp;бы
                     предупредить заранее: в&nbsp;ресторане действует легкий
                     дресс-код&nbsp;&mdash; casual & cocktails.
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;бронированием столика&nbsp;&mdash;
                     мы&nbsp;на&nbsp;связи и&nbsp;всегда рады помочь.
@@ -392,7 +385,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     Погрузитесь в&nbsp;атмосферу 18 века&nbsp;&mdash; эпоху
                     величия, где каждый жест был тонким, а&nbsp;каждый
                     момент&nbsp;&mdash; значимым.
-                    <br />
+                    <ParagraphGap />
                     Бутылка шампанского Ruinart&nbsp;&mdash; символ элегантности
                     и&nbsp;традиции, которую основал в&nbsp;1676 году дом
                     Руинарт
@@ -428,8 +421,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br />
                     &bull; Десерт &laquo;Яблочный пирог&raquo;
                     от&nbsp;бренд-шефа Ильи Харченко
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;заказом&nbsp;&mdash; мы&nbsp;на&nbsp;связи
                     и&nbsp;всегда рады помочь.
@@ -447,12 +439,12 @@ export const AllServices: Record<Locale, Service[]> = {
                 <>
                     Такой торт&nbsp;&mdash; не&nbsp;просто десерт,
                     а&nbsp;финальный аккорд важного дня.
-                    <br />
+                    <ParagraphGap />
                     Четыре изысканных варианта на&nbsp;выбор&nbsp;&mdash;
                     от&nbsp;классического Наполеона до&nbsp;Орео
                     с&nbsp;черничным кремю: воздушный бисквит, хрустящие нотки и
                     насыщенное черничное сердце.
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;заказом&nbsp;&mdash; мы на&nbsp;связи и&nbsp;всегда
                     рады помочь.
@@ -477,7 +469,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     Менеджер службы заботы с&nbsp;радостью подскажет, какие
                     варианты доступны, и&nbsp;поможет подобрать ту, что подойдет
                     именно вам.
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;выбором&nbsp;&mdash; мы&nbsp;на&nbsp;связи
                     и&nbsp;всегда рады помочь.
@@ -503,8 +495,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     бронирования или добавьте нужное время выезда на&nbsp;втором
                     шаге бронирования на&nbsp;официальном сайте&nbsp;&mdash;
                     стоимость будет рассчитана автоматически.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Стандартное время выезда: до&nbsp;12:00
                     <br />
                     &bull; Выезд до&nbsp;18:00&nbsp;&mdash; +50%
@@ -528,19 +519,19 @@ export const AllServices: Record<Locale, Service[]> = {
                     в&nbsp;другой&nbsp;век. В&nbsp;камерной обстановке, среди
                     мрамора, лепнины и&nbsp;ручной мебели, оживает
                     история&nbsp;&mdash; тонко, чувственно, с&nbsp;тактом.
-                    <br />
+                    <ParagraphGap />
                     Вас ждут блюда классической кухни от&nbsp;бренд-шефа Ильи
                     Харченко, и&nbsp;коктейли от&nbsp;Даниила
                     Лемана&nbsp;&mdash; изысканные, с&nbsp;тонкой архитектурой
                     вкуса.
-                    <br />
+                    <ParagraphGap />
                     Это время&nbsp;&mdash; дань глубокому вкусу
                     и&nbsp;удовольствию быть здесь и&nbsp;сейчас.
-                    <br />
+                    <ParagraphGap />
                     И&nbsp;небольшая деталь, о&nbsp;которой хотелось&nbsp;бы
                     предупредить заранее: в&nbsp;ресторане действует легкий
                     дресс-код&nbsp;&mdash; casual & cocktails.
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;бронированием столика&nbsp;&mdash;
                     мы&nbsp;на&nbsp;связи и&nbsp;всегда рады помочь.
@@ -571,7 +562,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     о&nbsp;вашем багаже в&nbsp;дни заезда и&nbsp;выезда. Гуляйте
                     по&nbsp;городу, занимайтесь делами или просто наслаждайтесь
                     свободным временем, не&nbsp;беспокоясь о&nbsp;вещах.
-                    <br />
+                    <ParagraphGap />
                     Эту услугу не&nbsp;нужно бронировать заранее. Если
                     у&nbsp;вас будут вопросы или потребуется помощь&nbsp;&mdash;
                     мы&nbsp;на&nbsp;связи и&nbsp;всегда рады помочь.
@@ -615,8 +606,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     или коллекция антипасти с&nbsp;легкими гастрономическими
                     сочетаниями. Идеальный пролог к&nbsp;вашему отдыху, задающий
                     тонкое настроение вечера.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     <i>
                         Приветственный сет с&nbsp;игристым и&nbsp;лепестками
                         роз&nbsp;&mdash; 4 000 ₽
@@ -686,20 +676,19 @@ export const AllServices: Record<Locale, Service[]> = {
                     а&nbsp;до&nbsp;3 лет включительно дети отдыхают у&nbsp;нас
                     бесплатно. Для всех детей мы&nbsp;приготовили специальные
                     халаты и&nbsp;тапочки&nbsp;&mdash; все как у&nbsp;взрослых.
-                    <br />
+                    <ParagraphGap />
                     Малышам до&nbsp;3-х лет мы&nbsp;бесплатно предоставим
                     детскую кроватку и, при необходимости, манеж под запрос.
                     После 3-х лет дети размещаются на&nbsp;диванах
                     в&nbsp;номерах, где это предусмотрено.
-                    <br />
+                    <ParagraphGap />
                     Мы&nbsp;предоставим под запрос ступеньку для раковины,
                     детское сиденье для унитаза и&nbsp;стульчик для кормления.
-                    <br />
+                    <ParagraphGap />
                     А&nbsp;чтобы сделать детский отдых еще более комфортным,
                     рассмотрите наше дополнительное предложение: детский набор,
                     созданный с&nbsp;любовью для маленьких гостей нашего отеля.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     В&nbsp;набор входит:
                     <br />
                     &bull; Мягкая игрушка Академишка&nbsp;&mdash; идеальный
@@ -728,13 +717,12 @@ export const AllServices: Record<Locale, Service[]> = {
                     Планируйте свое время так, как удобно именно вам,
                     а&nbsp;мы&nbsp;подстроимся под ваш ритм. Пожалуйста,
                     сообщите нам заранее о&nbsp;ваших предпочтениях.
-                    <br />
+                    <ParagraphGap />
                     Чтобы оформить ранний заезд, свяжитесь с&nbsp;отделом
                     бронирования или добавьте нужное время заезда на&nbsp;втором
                     шаге бронирования на&nbsp;официальном сайте&nbsp;&mdash;
                     стоимость будет рассчитана автоматически.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Стандартное время заезда: с&nbsp;14:00
                     <br />
                     &bull; Заезд до&nbsp;10:00&nbsp;&mdash; +100%
@@ -760,8 +748,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     &bull; Бутылка охлажденного игристого вина
                     <br />
                     &bull; Фруктовая композиция из&nbsp;свежих сезонных фруктов
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;заказом&nbsp;&mdash; мы&nbsp;на&nbsp;связи
                     и&nbsp;всегда рады помочь.
@@ -786,7 +773,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     beloved and winning options: syrniki with strawberry sauce,
                     oatmeal with apple confit, or scramble with truffle and
                     shrimp — everything is prepared with love and attention.
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with your order — we
                     are here and always happy to help.
                 </>
@@ -812,7 +799,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     We happily accept cats and dogs without weight restrictions,
                     but no more than one pet per room. A pet's veterinary
                     passport is required at check-in.
-                    <br />
+                    <ParagraphGap />
                     We've prepared everything you need:
                     <br />• a comfortable bed,
                     <br /> • bowls for food and water,
@@ -820,8 +807,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br /> • treats,
                     <br /> • upon request, the concierge can organize dog
                     walking: with care and on schedule.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Travel together. We'll take care of everyone's comfort.
                 </>
             ),
@@ -850,8 +836,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     We recreate the atmosphere of the 19th century, when noble
                     families gathered at a large table in the morning, enjoying
                     unhurried conversations and the taste of life.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     <strong>Includes:</strong> millet porridge with butter,
                     soft-boiled eggs with black caviar, salmon pâté, a bread
                     basket with mini croissants, a tiered dessert stand, salmon
@@ -884,9 +869,8 @@ export const AllServices: Record<Locale, Service[]> = {
                     croissants, signature truffles and desserts (Napoleon cake,
                     honey cake with yoghurt cream, choux with tiramisu cream,
                     strawberry pavlova and berry tartlets).
-                    <br />
-                    <br />A special tea blend of your choice comes with
-                    raspberry and cherry jam and salted butter.
+                    <ParagraphGap />A special tea blend of your choice comes
+                    with raspberry and cherry jam and salted butter.
                 </>
             ),
             price: "4 000 ₽ — tea for 2\n7 500 ₽ — tea with champagne for 2",
@@ -900,17 +884,18 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Greetings from the Count's Family",
             subtitle:
+                "We have prepared special greeting formats with the Count's family to make your celebration at the Shuvaloff Mansion even brighter and more memorable.",
+            metaDescription:
                 "Theatrical greetings from Count and Countess Shuvalov: birthday, wedding or anniversary, marriage proposal, the Count's breakfast with a tour.",
-            imgUrl: "/images/counts-family-greetings/hero.jpg",
+            imgUrl: "/images/counts-family-greetings/card.jpg",
+            imgPosition: "50% 85%",
             slug: "counts-family-greetings",
             hideOnHome: true,
             detailsHref: "/services/counts-family-greetings/details/",
-            intro: "We have prepared special greeting formats with the Count's family to make your celebration at the Shuvaloff Mansion even brighter and more memorable.",
             fullDescription: (
                 <>
-                    <strong>Formats:</strong> birthday greeting for him, her or
-                    a child, wedding or anniversary greeting, proposal at the
-                    mansion and the Count's breakfast with a tour.
+                    <strong>Formats:</strong> birthday, wedding or anniversary,
+                    marriage proposal, the Count's breakfast with a tour.
                 </>
             ),
             price: "from 5 500 ₽",
@@ -947,8 +932,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     An unusual scenario for a marriage proposal in a historic
                     mansion, with the count's family taking part to help create
                     a special atmosphere for the most important words.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     For a beautiful continuation of this important day in
                     aristocratic surroundings, spend the night in one of the
                     mansion's historic suites. You can also order romantic room
@@ -980,8 +964,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     setting and presentation on unique vintage tableware
                     transform breakfast into a luxurious, leisurely meal and an
                     elegant ritual that is sure to leave a lasting impression.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Treat yourself to a morning in an elegant setting, free from
                     the hustle and bustle, with a breakfast in the spirit of St.
                     Petersburg’s aristocratic traditions!
@@ -1019,7 +1002,7 @@ export const AllServices: Record<Locale, Service[]> = {
                 <>
                     Breakfast serving hours in the restaurant: 8:00 AM to 12:00
                     PM
-                    <br />
+                    <ParagraphGap />
                     You can order the chef's kids breakfast for children aged 0
                     to 13 inclusive
                 </>
@@ -1043,7 +1026,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     We'll be happy to select the perfect bouquet according to
                     your mood and wishes — from delicate classics to expressive
                     compositions.
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help — we're here and
                     always happy to help.
                 </>
@@ -1062,18 +1045,18 @@ export const AllServices: Record<Locale, Service[]> = {
                     but a real journey to another century. In an intimate
                     setting, amidst marble, stucco, and handmade furniture,
                     history comes alive — subtly, sensually, with tact.
-                    <br />
+                    <ParagraphGap />
                     You'll enjoy classical cuisine dishes from brand chef Ilya
                     Kharchenko and cocktails from Daniil Lehman — exquisite,
                     with a delicate architecture of taste.
-                    <br />
+                    <ParagraphGap />
                     This time is a tribute to deep taste and the pleasure of
                     being here and now.
-                    <br />
+                    <ParagraphGap />
                     And a small detail we'd like to warn you about in advance: a
                     light dress code applies in the restaurant — casual &
                     cocktails.
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with a table
                     reservation — we're here and always happy to help.
                 </>
@@ -1103,8 +1086,9 @@ export const AllServices: Record<Locale, Service[]> = {
                     Immerse yourself in the atmosphere of the 18th century — an
                     era of grandeur, where every gesture was subtle and every
                     moment significant.
-                    <br />A bottle of Ruinart champagne — a symbol of elegance
-                    and tradition founded in 1729 by the House of Ruinart.
+                    <ParagraphGap />A bottle of Ruinart champagne — a symbol of
+                    elegance and tradition founded in 1729 by the House of
+                    Ruinart.
                     <br />
                     Antipasti collection with light gastronomic combinations.
                     <br />
@@ -1134,8 +1118,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     &bull; Fruit composition from fresh seasonal fruits.
                     <br />
                     &bull; "Apple Pie" dessert from brand chef Ilya Kharchenko.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with your order — we
                     are here and always happy to help.
                 </>
@@ -1152,11 +1135,11 @@ export const AllServices: Record<Locale, Service[]> = {
                 <>
                     Such a cake is not just a dessert, but the final chord of an
                     important day.
-                    <br />
+                    <ParagraphGap />
                     Four exquisite options to choose from — from classic
                     Napoleon to Oreo with blueberry cremieux: airy sponge cake,
                     crunchy notes, and a rich blueberry heart.
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with your order — we
                     are here and always happy to help.
                 </>
@@ -1180,7 +1163,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     The guest relations manager will be happy to tell you what
                     options are available and help you choose the one that suits
                     you best.
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with your choice — we
                     are here and always happy to help.
                 </>
@@ -1205,8 +1188,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     department or add the desired check-out time during the
                     second step of booking on the official website — the cost
                     will be calculated automatically.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Standard check-out time: until 12:00 PM
                     <br />
                     &bull; Check-out until 6:00 PM — +50% of the daily rate.
@@ -1227,18 +1209,18 @@ export const AllServices: Record<Locale, Service[]> = {
                     a real journey to another century. In an intimate setting,
                     amidst marble, stucco, and handmade furniture, history comes
                     alive — subtly, sensually, with tact.
-                    <br />
+                    <ParagraphGap />
                     You'll enjoy classical cuisine dishes from brand chef Ilya
                     Kharchenko and cocktails from Daniil Lehman — exquisite,
                     with a delicate architecture of taste.
-                    <br />
+                    <ParagraphGap />
                     This time is a tribute to deep taste and the pleasure of
                     being here and now.
-                    <br />
+                    <ParagraphGap />
                     And a small detail we'd like to warn you about in advance: a
                     light dress code applies in the restaurant — casual &
                     cocktails.
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with a table
                     reservation — we're here and always happy to help.
                 </>
@@ -1269,7 +1251,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     and departure days. Walk around the city, do your business,
                     or simply enjoy your free time without worrying about your
                     things.
-                    <br />
+                    <ParagraphGap />
                     This service does not need to be booked in advance. If you
                     have any questions or need help — we're here and always
                     happy to help.
@@ -1310,8 +1292,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     seasonality, or an antipasti collection with light
                     gastronomic combinations. The perfect prologue to your stay,
                     setting a delicate mood for the evening.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     <i>
                         Welcome set with sparkling wine and rose petals — 4 000
                         ₽
@@ -1379,20 +1360,19 @@ export const AllServices: Record<Locale, Service[]> = {
                     years inclusive stay with us free of charge. We have
                     prepared special robes and slippers for all children — just
                     like for adults.
-                    <br />
+                    <ParagraphGap />
                     For toddlers up to 3 years old, we provide a baby cot and,
                     if necessary, a playpen upon request free of charge. After 3
                     years, children are accommodated on sofa beds in the rooms
                     where provided.
-                    <br />
+                    <ParagraphGap />
                     We provide a step for the sink, a child toilet seat, and a
                     high chair upon request.
-                    <br />
+                    <ParagraphGap />
                     And to make your child's stay even more comfortable,
                     consider our additional offer: a child's kit created with
                     love for the little guests of our hotel.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     The kit includes:
                     <br />
                     &bull; Academishka soft toy — the perfect companion for your
@@ -1418,13 +1398,12 @@ export const AllServices: Record<Locale, Service[]> = {
                 <>
                     Plan your time as it suits you best, and we'll adapt to your
                     rhythm. Please inform us in advance of your preferences.
-                    <br />
+                    <ParagraphGap />
                     To arrange an early check-in, contact the reservations
                     department or add the desired check-in time during the
                     second step of booking on the official website — the cost
                     will be calculated automatically.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     Standard check-in time: from 2:00 PM
                     <br />
                     &bull; Check-in before 10:00 AM — +100% of the daily rate.
@@ -1448,8 +1427,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     &bull; A bottle of chilled sparkling wine.
                     <br />
                     &bull; Fruit composition from fresh seasonal fruits.
-                    <br />
-                    <br />
+                    <ParagraphGap />
                     If you have any questions or need help with your order — we
                     are here and always happy to help.
                 </>

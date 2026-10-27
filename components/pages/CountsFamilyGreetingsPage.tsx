@@ -33,7 +33,7 @@ const buildSteps = (locale: Locale): Step[] =>
         icon: (
             <span
                 aria-hidden="true"
-                className="font-history text-3xl xl:text-4xl"
+                className="font-alistair text-4xl xl:text-5xl"
             >
                 {i + 1}
             </span>
@@ -61,7 +61,7 @@ function ServiceDetails({
             <p className="mt-1 text-lg">
                 {formatRub(service.price, service.fromPrice, locale)}
             </p>
-            <ul className="mt-3 flex flex-col gap-0.5 text-base">
+            <ul className="mt-3 flex list-inside list-disc flex-col gap-0.5 text-base">
                 {service.includes.map((item) => (
                     <li key={item}>{nbsp(item)}</li>
                 ))}
@@ -202,7 +202,7 @@ export default function CountsFamilyGreetingsPage({
 
             {/* 8. Условия. */}
             <section className="px-6 xl:px-0">
-                <FadeUp className="mx-auto max-w-7xl border border-[#ccad6b] px-5 py-8 text-center text-brand-brown xl:px-12 xl:py-10">
+                <FadeUp className="mx-auto max-w-7xl border border-brand-red px-5 py-8 text-center text-brand-brown xl:px-12 xl:py-10">
                     <h2>{copy.terms.title}</h2>
                     <ul className="mt-4 flex flex-col gap-1 leading-snug xl:mt-6">
                         {copy.terms.items.map((item) => (
