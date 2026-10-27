@@ -286,7 +286,7 @@ export const countsFamilyCopy = {
                 "Оставьте заявку, и мы подберем формат и сценарий для вашего праздника",
             ),
             photoAlt: nbsp(
-                "Графиня в кружевном платье аплодирует гостям в зале особняка Шувалова",
+                "Граф читает поздравление графине за чайным столом в особняке Шувалова",
             ),
             name: "Имя*",
             phone: "Телефон*",
@@ -365,7 +365,7 @@ export const countsFamilyCopy = {
             subtitle:
                 "Leave a request and we will choose the format and scenario for your celebration",
             photoAlt:
-                "The Countess in a lace dress applauding guests in the hall of the Shuvaloff Mansion",
+                "The Count reading a greeting to the Countess at a tea table in the Shuvaloff Mansion",
             name: "Name*",
             phone: "Phone*",
             contact: "Preferred contact method",

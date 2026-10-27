@@ -124,7 +124,7 @@ export default function CountsFamilyGreetingsPage({
             {/* 3. Вводный текст и подпись-слоган. */}
             <section className="px-6 text-center text-brand-brown">
                 <FadeUp>
-                    <p className="mx-auto max-w-3xl text-base leading-relaxed xl:text-lg">
+                    <p className="mx-auto max-w-3xl text-base leading-relaxed">
                         {copy.intro}
                     </p>
                 </FadeUp>
