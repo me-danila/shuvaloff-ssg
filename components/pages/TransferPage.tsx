@@ -1,8 +1,4 @@
-import {
-    AirplaneIcon,
-    CarProfileIcon,
-    TrainIcon,
-} from "@phosphor-icons/react/dist/ssr";
+import { AirplaneIcon, TrainIcon } from "@phosphor-icons/react/dist/ssr";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
@@ -47,19 +43,10 @@ const copyByLocale: Record<Locale, TransferCopy> = {
             "Сопровождение с зонтом в случае дождя",
             "Музыка по вашему настроению или из вашего плейлиста",
         ],
-        items2: [
-            "Аэропорт — отель 4 000 ₽",
-            "Вокзал — отель 2 000 ₽",
-            "Аренда авто с водителем 3 500 ₽/час (мин. аренда 3 часа)",
-        ],
+        items2: ["Аэропорт — отель 6 000 ₽", "Вокзал — отель 3 500 ₽"],
         cards: [
-            { label: "Аэропорт — отель", price: "от 4 000 ₽" },
-            { label: "Вокзал — отель", price: "от 2 000 ₽" },
-            {
-                label: "Аренда авто с водителем",
-                price: "от 10 500 ₽",
-                note: "3 500 ₽/час (мин. аренда 3 часа)",
-            },
+            { label: "Аэропорт — отель", price: "от 6 000 ₽" },
+            { label: "Вокзал — отель", price: "от 3 500 ₽" },
         ],
     },
     en: {
@@ -81,23 +68,17 @@ const copyByLocale: Record<Locale, TransferCopy> = {
             "Music to suit your mood or from your playlist",
         ],
         items2: [
-            "Airport to hotel: 4,000 ₽",
-            "Train station to hotel 2,000 ₽",
-            "Car rental with driver 3,500 ₽/hour (minimum rental 3 hours)",
+            "Airport to hotel: 6,000 ₽",
+            "Train station to hotel: 3,500 ₽",
         ],
         cards: [
-            { label: "Airport — Hotel", price: "from 4 000 ₽" },
-            { label: "Train station — Hotel", price: "from 2 000 ₽" },
-            {
-                label: "Car rental with driver",
-                price: "from 10 500 ₽",
-                note: "3 500 ₽/hour (min. rental 3 hours)",
-            },
+            { label: "Airport — Hotel", price: "from 6 000 ₽" },
+            { label: "Train station — Hotel", price: "from 3 500 ₽" },
         ],
     },
 };
 
-const icons = [AirplaneIcon, TrainIcon, CarProfileIcon];
+const icons = [AirplaneIcon, TrainIcon];
 
 const seo = {
     ru: {
