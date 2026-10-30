@@ -1113,6 +1113,8 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
         dates: ["2026-10-01T19:00"],
+        // Скрыто: октябрьскую дату убрали из афиши.
+        published: false,
     },
     {
         baseSlug: "one-night-in-petersburg-1899",
@@ -1120,6 +1122,8 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
         dates: ["2026-10-15T18:00"],
+        // Скрыто: октябрьскую дату убрали из афиши.
+        published: false,
     },
     {
         baseSlug: "count-dinner-benois",
@@ -1141,6 +1145,8 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-october/?utm_source=hotel",
         dates: ["2026-10-22T18:00"],
+        // Скрыто: октябрьскую дату убрали из афиши.
+        published: false,
     },
     {
         baseSlug: "count-dinner-august",
@@ -1213,6 +1219,35 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg/?utm_source=hotel",
         dates: ["2026-11-26T18:00"],
+    },
+    {
+        baseSlug: "noble-investments",
+        slug: "noble-investments-december",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
+        dates: ["2026-12-03T18:00"],
+    },
+    {
+        baseSlug: "income-house",
+        slug: "income-house-december",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
+        dates: ["2026-12-10T18:00"],
+    },
+    {
+        baseSlug: "silver-age-petersburg",
+        slug: "silver-age-petersburg-december",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/serebryaniy-vek/?utm_source=hotel",
+        dates: ["2026-12-17T18:00"],
+    },
+    {
+        baseSlug: "one-night-in-petersburg-1899",
+        slug: "one-night-in-petersburg-1899-december",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
+        dates: ["2026-12-24T18:00"],
+        imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/Лунная-набережная-Петербурга-акварелью.avif",
     },
 ];
 
