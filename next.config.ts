@@ -1,8 +1,21 @@
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
+import { DEVELOPMENT_MEDIA_ORIGINS } from "./lib/developmentMedia";
 
 const nextConfig: NextConfig = {
     output: "export",
+    ...(process.env.NODE_ENV === "development"
+        ? {
+              async rewrites() {
+                  return Object.entries(DEVELOPMENT_MEDIA_ORIGINS).map(
+                      ([key, origin]) => ({
+                          source: `/__preview-media/${key}/:path*`,
+                          destination: `${origin}/:path*`,
+                      }),
+                  );
+              },
+          }
+        : {}),
     pageExtensions: ["ts", "tsx", "mdx"],
     trailingSlash: true,
     transpilePackages: ["next-image-export-optimizer"],

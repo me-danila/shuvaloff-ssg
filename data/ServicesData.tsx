@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { aristocraticBreakfastPricing } from "@/data/aristocraticBreakfastPricing";
 import type { Locale } from "@/lib/i18n/routing";
 
 export type ServiceLink = {
@@ -23,6 +24,8 @@ export type Service = {
     links?: ServiceLink[];
     /** Несколько цен — через \n: каждая выводится с новой строки. */
     price?: string;
+    /** Форматированный блок стоимости вместо стандартного вывода price. */
+    priceDescription?: ReactNode;
     comment?: ReactNode;
     /**
      * Индивидуальная страница услуги (/services/<slug>/details/). Тогда в
@@ -47,11 +50,11 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "breakfast",
             fullDescription: (
                 <>
-                    Специально для гостей отеля бренд-шеф Илья Харченко создал
-                    разнообразное меню завтраков. В&nbsp;нем есть все самые
-                    любимые и&nbsp;беспроигрышные позиции: сырники
-                    с&nbsp;клубничным соусом, овсянка с&nbsp;яблочным конфи или
-                    скрембл с&nbsp;трюфелем и&nbsp;креветками&nbsp;&mdash; все
+                    Специально для гостей отеля концепт-шеф создал разнообразное
+                    меню завтраков. В&nbsp;нем есть все самые любимые
+                    и&nbsp;беспроигрышные позиции: сырники с&nbsp;клубничным
+                    соусом, овсянка с&nbsp;яблочным конфи или скрембл
+                    с&nbsp;трюфелем и&nbsp;креветками&nbsp;&mdash; все
                     приготовлено с&nbsp;любовью и&nbsp;вниманием.
                     <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
@@ -126,15 +129,16 @@ export const AllServices: Record<Locale, Service[]> = {
                     морс, вишневая наливка или бокал шампанского, чай или кофе.
                 </>
             ),
-            price: "5 500 ₽ — на одну персону\n8 500 ₽ — на две персоны",
+            price: "от 5 500 ₽",
+            priceDescription: aristocraticBreakfastPricing.ru,
             comment: (
                 <>
                     <strong>Время подачи:</strong> ежедневно с&nbsp;13:00
-                    до&nbsp;15:30 по&nbsp;предварительному бронированию, при
-                    наличии свободных слотов. В&nbsp;новогодние праздники
-                    (31&nbsp;декабря&nbsp;— 10&nbsp;января)&nbsp;—
-                    6&nbsp;500&nbsp;₽ на&nbsp;одну персону
-                    и&nbsp;10&nbsp;000&nbsp;₽ на&nbsp;две.
+                    до&nbsp;15:30 по&nbsp;предварительному бронированию
+                    <br />
+                    (при наличии свободных слотов):
+                    <br />в 13:00, 13:15, 13:30, 14:00, 14:15, 14:30, 15:00,
+                    15:15, 15:30.
                 </>
             ),
         },
@@ -274,7 +278,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Детский завтрак от шефа",
             subtitle:
-                "Специально для маленьких гостей особняка концепт-шеф Илья Харченко подготовил детское сет-меню вкусных и полезных завтраков, которые одобрят и дети, и родители.",
+                "Специально для маленьких гостей особняка концепт-шеф подготовил детское сет-меню вкусных и полезных завтраков, которые одобрят и дети, и родители.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/ChatGPT-Image-6-%D0%B0%D0%B2%D0%B3.-2026-%D0%B3.-10_56_42.avif",
             slug: "kids-breakfast",
             fullDescription: (
@@ -344,10 +348,9 @@ export const AllServices: Record<Locale, Service[]> = {
                     мрамора, лепнины и&nbsp;ручной мебели, оживает
                     история&nbsp;&mdash; тонко, чувственно, с&nbsp;тактом.
                     <ParagraphGap />
-                    Вас ждут блюда классической кухни от&nbsp;бренд-шефа Ильи
-                    Харченко, и&nbsp;коктейли от&nbsp;Даниила
-                    Лемана&nbsp;&mdash; изысканные, с&nbsp;тонкой архитектурой
-                    вкуса.
+                    Вас ждут блюда классической кухни от&nbsp;концепт-шефа,
+                    и&nbsp;коктейли от&nbsp;Даниила Лемана&nbsp;&mdash;
+                    изысканные, с&nbsp;тонкой архитектурой вкуса.
                     <ParagraphGap />
                     Это время&nbsp;&mdash; дань глубокому вкусу
                     и&nbsp;удовольствию быть здесь и&nbsp;сейчас.
@@ -420,7 +423,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     &bull; Фруктовая композиция из&nbsp;свежих сезонных фруктов
                     <br />
                     &bull; Десерт &laquo;Яблочный пирог&raquo;
-                    от&nbsp;бренд-шефа Ильи Харченко
+                    от&nbsp;концепт-шефа
                     <ParagraphGap />
                     Если у&nbsp;вас будут вопросы или потребуется помощь
                     с&nbsp;заказом&nbsp;&mdash; мы&nbsp;на&nbsp;связи
@@ -520,10 +523,9 @@ export const AllServices: Record<Locale, Service[]> = {
                     мрамора, лепнины и&nbsp;ручной мебели, оживает
                     история&nbsp;&mdash; тонко, чувственно, с&nbsp;тактом.
                     <ParagraphGap />
-                    Вас ждут блюда классической кухни от&nbsp;бренд-шефа Ильи
-                    Харченко, и&nbsp;коктейли от&nbsp;Даниила
-                    Лемана&nbsp;&mdash; изысканные, с&nbsp;тонкой архитектурой
-                    вкуса.
+                    Вас ждут блюда классической кухни от&nbsp;концепт-шефа,
+                    и&nbsp;коктейли от&nbsp;Даниила Лемана&nbsp;&mdash;
+                    изысканные, с&nbsp;тонкой архитектурой вкуса.
                     <ParagraphGap />
                     Это время&nbsp;&mdash; дань глубокому вкусу
                     и&nbsp;удовольствию быть здесь и&nbsp;сейчас.
@@ -768,11 +770,11 @@ export const AllServices: Record<Locale, Service[]> = {
             slug: "breakfast",
             fullDescription: (
                 <>
-                    Specially for hotel guests, brand chef Ilya Kharchenko has
-                    created a diverse breakfast menu. It features all the most
-                    beloved and winning options: syrniki with strawberry sauce,
-                    oatmeal with apple confit, or scramble with truffle and
-                    shrimp — everything is prepared with love and attention.
+                    Specially for hotel guests, the concept chef has created a
+                    diverse breakfast menu. It features all the most beloved and
+                    winning options: syrniki with strawberry sauce, oatmeal with
+                    apple confit, or scramble with truffle and shrimp —
+                    everything is prepared with love and attention.
                     <ParagraphGap />
                     If you have any questions or need help with your order — we
                     are here and always happy to help.
@@ -844,13 +846,17 @@ export const AllServices: Record<Locale, Service[]> = {
                     glass of champagne, tea or coffee.
                 </>
             ),
-            price: "5 500 ₽ — for one person\n8 500 ₽ — for two persons",
+            price: "from 5 500 ₽",
+            priceDescription: aristocraticBreakfastPricing.en,
             comment: (
                 <>
                     <strong>Serving time:</strong> daily from 1:00 PM to 3:30 PM
-                    by advance booking, subject to availability. During the New
-                    Year holidays (December 31 — January 10): 6 500 ₽ for one
-                    person and 10 000 ₽ for two.
+                    by advance booking
+                    <br />
+                    (subject to availability):
+                    <br />
+                    at 13:00, 13:15, 13:30, 14:00, 14:15, 14:30, 15:00, 15:15,
+                    15:30.
                 </>
             ),
         },
@@ -977,7 +983,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Chef's Kids Breakfast",
             subtitle:
-                "Especially for the mansion's little guests, concept chef Ilya Kharchenko has created a children's set menu of tasty and wholesome breakfasts that both kids and parents will approve of.",
+                "Especially for the mansion's little guests, the concept chef has created a children's set menu of tasty and wholesome breakfasts that both kids and parents will approve of.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/08/ChatGPT-Image-6-%D0%B0%D0%B2%D0%B3.-2026-%D0%B3.-10_56_42.avif",
             slug: "kids-breakfast",
             fullDescription: (
@@ -1046,9 +1052,9 @@ export const AllServices: Record<Locale, Service[]> = {
                     setting, amidst marble, stucco, and handmade furniture,
                     history comes alive — subtly, sensually, with tact.
                     <ParagraphGap />
-                    You'll enjoy classical cuisine dishes from brand chef Ilya
-                    Kharchenko and cocktails from Daniil Lehman — exquisite,
-                    with a delicate architecture of taste.
+                    You'll enjoy classical cuisine dishes from the concept chef
+                    and cocktails from Daniil Lehman — exquisite, with a
+                    delicate architecture of taste.
                     <ParagraphGap />
                     This time is a tribute to deep taste and the pleasure of
                     being here and now.
@@ -1117,7 +1123,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br />
                     &bull; Fruit composition from fresh seasonal fruits.
                     <br />
-                    &bull; "Apple Pie" dessert from brand chef Ilya Kharchenko.
+                    &bull; "Apple Pie" dessert from the concept chef.
                     <ParagraphGap />
                     If you have any questions or need help with your order — we
                     are here and always happy to help.
@@ -1210,9 +1216,9 @@ export const AllServices: Record<Locale, Service[]> = {
                     amidst marble, stucco, and handmade furniture, history comes
                     alive — subtly, sensually, with tact.
                     <ParagraphGap />
-                    You'll enjoy classical cuisine dishes from brand chef Ilya
-                    Kharchenko and cocktails from Daniil Lehman — exquisite,
-                    with a delicate architecture of taste.
+                    You'll enjoy classical cuisine dishes from the concept chef
+                    and cocktails from Daniil Lehman — exquisite, with a
+                    delicate architecture of taste.
                     <ParagraphGap />
                     This time is a tribute to deep taste and the pleasure of
                     being here and now.

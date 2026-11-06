@@ -161,7 +161,9 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                         )}
 
                         <FadeUp delay={0.4} className="flex flex-col gap-3.5">
-                            {service.price && (
+                            {service.priceDescription ? (
+                                <p>{service.priceDescription}</p>
+                            ) : service.price ? (
                                 <p className="italic">
                                     {labels.price}
                                     {service.price.includes("\n")
@@ -175,7 +177,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                                               ))
                                         : service.price}
                                 </p>
-                            )}
+                            ) : null}
                             {service.comment && <p>{service.comment}</p>}
 
                             <div className="mt-1 flex flex-wrap gap-3">

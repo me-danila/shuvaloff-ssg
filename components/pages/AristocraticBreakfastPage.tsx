@@ -14,6 +14,8 @@ import {
     ARISTOCRATIC_BREAKFAST_PATH,
     ARISTOCRATIC_BREAKFAST_SERVICE_PATH,
 } from "@/data/aristocraticBreakfastPaths";
+import { aristocraticBreakfastPricing } from "@/data/aristocraticBreakfastPricing";
+import { developmentMediaSrc } from "@/lib/developmentMedia";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
@@ -38,7 +40,6 @@ type BreakfastCopy = {
     graphImage: string;
     graphSections: { heading: string; items: string[] }[];
     graphButtonLabel: string;
-    graphPrice: React.ReactNode;
     quoteTitle1: string;
     quoteDescription1: React.ReactNode;
     quoteTitle2: string;
@@ -166,18 +167,6 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
             },
         ],
         graphButtonLabel: "Открыть меню",
-        graphPrice: (
-            <>
-                Стоимость:
-                <br />5 500 ₽ — на одну персону
-                <br />8 500 ₽ — на две персоны
-                <br />
-                <br />В период новогодних праздников с 31 декабря по 10 января:
-                <br />6 500 ₽ — на одну персону
-                <br />
-                10 000 ₽ — на две персоны
-            </>
-        ),
         quoteTitle1: "Это не подача — это настоящий ритуал.",
         quoteDescription1: (
             <>
@@ -306,23 +295,6 @@ const copyByLocale: Record<Locale, BreakfastCopy> = {
             },
         ],
         graphButtonLabel: "Open a menu",
-        graphPrice: (
-            <>
-                Price:
-                <br />
-                5,500 ₽ — for one person
-                <br />
-                8,500 ₽ — for two persons
-                <br />
-                <br />
-                During the New Year's holiday period, from December 31 through
-                January 10:
-                <br />
-                6,500 ₽ — for one person
-                <br />
-                10,000 ₽ — for two persons
-            </>
-        ),
         quoteTitle1: "It’s not just a serve — it’s a real ritual.",
         quoteDescription1: (
             <>
@@ -444,7 +416,9 @@ export default function AristocraticBreakfastPage({
                         className="absolute inset-0 h-full w-full"
                     >
                         <video
-                            src="https://static.academia.spb.ru/video/count-breakfast-v2.webm"
+                            src={developmentMediaSrc(
+                                "https://static.academia.spb.ru/video/count-breakfast-v2.webm",
+                            )}
                             autoPlay
                             muted
                             loop
@@ -571,31 +545,31 @@ export default function AristocraticBreakfastPage({
                 </div>
             </section>
 
-            <section className="flex flex-col gap-2 xl:flex-row-reverse xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-10">
-                <FadeUp className="flex-1">
+            <section className="flex flex-col gap-2 xl:grid xl:grid-cols-2 xl:w-full xl:max-w-7xl xl:mx-auto xl:gap-x-6 xl:gap-y-2">
+                <FadeUp className="min-w-0 xl:col-start-2 xl:row-start-1">
                     <div className="relative aspect-4/3 h-full min-h-[350px] w-full overflow-hidden rounded">
                         <Image
                             src={copy.graphImage}
                             alt={copy.graphTitle}
                             fill
                             loading="lazy"
-                            sizes="(max-width: 1280px) 100vw, 50vw"
+                            sizes="(max-width: 1199px) 100vw, 50vw"
                             className="object-cover xl:object-[50%_70%]"
                         />
                     </div>
                 </FadeUp>
-                <div className="px-6 py-2 flex flex-col gap-4 xl:my-2 xl:flex-1 xl:gap-4">
+                <div className="px-6 py-2 flex min-w-0 flex-col gap-3 xl:col-start-1 xl:row-start-1 xl:px-0">
                     <FadeUp>
-                        <h3 className="font-alistair font-normal text-blue-800 text-4xl xl:text-5xl">
+                        <h3 className="font-alistair font-normal text-blue-800 text-4xl xl:text-[2.75rem]">
                             {copy.graphTitle}:
                         </h3>
                     </FadeUp>
                     <FadeUp delay={0.1}>
-                        <div className="flex flex-col gap-3">
+                        <div className="grid gap-3 [&_p]:leading-5 xl:[&_p]:text-[15px]">
                             {copy.graphSections.map((group) => (
                                 <div
                                     key={group.heading}
-                                    className="flex flex-col gap-[0.1875rem]"
+                                    className="flex flex-col gap-1"
                                 >
                                     <p className="font-semibold text-blue-800">
                                         {group.heading}:
@@ -609,7 +583,7 @@ export default function AristocraticBreakfastPage({
                     </FadeUp>
                     <FadeUp
                         delay={0.2}
-                        className="flex flex-col items-start gap-2"
+                        className="flex flex-col items-start gap-2 pt-2"
                     >
                         <Button
                             href={copy.breakfastLink2}
@@ -618,9 +592,16 @@ export default function AristocraticBreakfastPage({
                         >
                             {copy.graphButtonLabel}
                         </Button>
-                        <p className="italic">{copy.graphPrice}</p>
                     </FadeUp>
                 </div>
+                <FadeUp
+                    delay={0.2}
+                    className="px-6 pb-2 xl:col-span-2 xl:row-start-2 xl:px-0"
+                >
+                    <p className="w-full leading-5 xl:text-[15px] [&>em]:font-bold [&>em]:text-blue-800 [&>em]:not-italic [&_[data-price-periods]]:mt-1 [&_[data-price-periods]]:gap-3 [&_[data-price-periods]]:md:grid-cols-3 [&_[data-price-note]]:mt-1 [&_[data-price-note]]:italic">
+                        {aristocraticBreakfastPricing[locale]}
+                    </p>
+                </FadeUp>
             </section>
 
             <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0 xl:gap-6">

@@ -1,5 +1,6 @@
 import ExportedImage from "next-image-export-optimizer";
 import type { ComponentProps } from "react";
+import { developmentMediaSrc } from "@/lib/developmentMedia";
 
 type OptimizedImageProps = ComponentProps<typeof ExportedImage>;
 
@@ -34,6 +35,10 @@ export default function OptimizedImage(props: OptimizedImageProps) {
 
     const sharedProps = {
         ...props,
+        src:
+            typeof props.src === "string"
+                ? developmentMediaSrc(props.src)
+                : props.src,
         placeholder: props.placeholder ?? "empty",
         sizes,
         unoptimized:
