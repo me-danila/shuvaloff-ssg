@@ -593,15 +593,12 @@ export default function AristocraticBreakfastPage({
                             {copy.graphButtonLabel}
                         </Button>
                     </FadeUp>
+                    <FadeUp delay={0.2} className="pt-3 pb-2">
+                        <p className="w-full leading-5 xl:text-[15px] [&>em]:font-bold [&>em]:text-blue-800 [&>em]:not-italic [&_[data-price-periods]]:mt-1 [&_[data-price-periods]]:gap-3 [&_[data-price-note]]:mt-1 [&_[data-price-note]]:italic">
+                            {aristocraticBreakfastPricing[locale]}
+                        </p>
+                    </FadeUp>
                 </div>
-                <FadeUp
-                    delay={0.2}
-                    className="px-6 pb-2 xl:col-span-2 xl:row-start-2 xl:px-0"
-                >
-                    <p className="w-full leading-5 xl:text-[15px] [&>em]:font-bold [&>em]:text-blue-800 [&>em]:not-italic [&_[data-price-periods]]:mt-1 [&_[data-price-periods]]:gap-3 [&_[data-price-periods]]:md:grid-cols-3 [&_[data-price-note]]:mt-1 [&_[data-price-note]]:italic">
-                        {aristocraticBreakfastPricing[locale]}
-                    </p>
-                </FadeUp>
             </section>
 
             <section className="flex flex-col gap-4 my-6 px-6 xl:text-center w-full xl:max-w-7xl xl:mx-auto xl:px-0 xl:gap-6">
