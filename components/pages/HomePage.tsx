@@ -35,6 +35,9 @@ import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
 import { buildCollectionPageSchema } from "@/lib/seo/schema";
 
+// Промо ACADEMIA × WAU временно отключено для всех языков.
+const WAU_PROMO_ENABLED = false;
+
 type HomeCopy = {
     heroTitle: React.ReactNode;
     heroHeading: React.ReactNode;
@@ -775,7 +778,7 @@ export default function HomePage({
                 <Divider />
             </div>
             <ContactsSection />
-            <WauPromoModal locale={locale} />
+            {WAU_PROMO_ENABLED && <WauPromoModal locale={locale} />}
         </main>
     );
 }
