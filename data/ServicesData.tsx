@@ -46,7 +46,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Завтрак от шефа",
             subtitle:
                 "Завтрак в Бар-ресторан ACADEMIA Шувалова — это не просто первый прием пищи, а часть изысканного и вкусного ритуала.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/11/shuvaloff-breakfast-collage.avif",
             slug: "breakfast",
             fullDescription: (
                 <>
@@ -766,7 +766,7 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Chef's Breakfast",
             subtitle:
                 "Breakfast at ACADEMIA Shuvaloff Bar-Restaurant is not just the first meal, but part of an exquisite and delicious ritual.",
-            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3.jpg",
+            imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/11/shuvaloff-breakfast-collage.avif",
             slug: "breakfast",
             fullDescription: (
                 <>

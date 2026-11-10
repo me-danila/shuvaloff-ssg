@@ -24,7 +24,7 @@ export const OG_IMAGE_OVERRIDES: Record<string, string> = {
     "/services/late-checkout/":
         "https://academia.spb.ru/wp-content/uploads/2026/10/01d9eae6eceabd4c20d6304e8502e38b55cda58e-2-2.jpg",
     "/services/breakfast/":
-        "https://academia.spb.ru/wp-content/uploads/2026/10/20c4e203934b0b058e0e7ddd774d2fb2a841fdc3-3-2.jpg",
+        "https://academia.spb.ru/wp-content/uploads/2026/11/shuvaloff-breakfast-collage.jpg",
     "/services/welcome-set/":
         "https://academia.spb.ru/wp-content/uploads/2026/10/IMG_5118-1-2-2-2-2-2.jpg",
     "/rooms/superior/":
