@@ -669,7 +669,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 />
                 <Link
                     href="/booking/"
-                    className="border border-black p-4 rounded-md font-history uppercase hover:bg-black hover:border-black hover:text-white duration-200"
+                    className="border border-black p-4 rounded-md uppercase hover:bg-black hover:border-black hover:text-white duration-200"
                 >
                     {copy.bookNowButton}
                 </Link>
@@ -749,6 +749,8 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 </FadeIn>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
+                    width="72"
+                    height="72"
                     viewBox="0 0 72 72"
                     fill="none"
                     className="max-w-[72px]"
