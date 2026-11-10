@@ -10,7 +10,7 @@ export const it: LandingDictionary = {
     meta: {
         title: "ACADEMIA Mansion Shuvaloff — Boutique hotel a San Pietroburgo",
         description:
-            "Boutique hotel in una dimora del XIX secolo restaurata con cura nel centro di San Pietroburgo.",
+            "Hotel in una dimora storica del XIX secolo nel centro di San Pietroburgo. Camere e suite storiche, colazioni aristocratiche",
     },
     ui: {
         skipLink: "Vai al contenuto principale",

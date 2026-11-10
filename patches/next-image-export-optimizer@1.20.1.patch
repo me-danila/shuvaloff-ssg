@@ -1,0 +1,28 @@
+diff --git a/dist/ExportedImage.js b/dist/ExportedImage.js
+index 7e87bfbf8a1e03cfb4c74f6ed20c14d301acfbd4..9a4cb82c3daf3399a65ccd9651492758ed6e7a8f 100644
+--- a/dist/ExportedImage.js
++++ b/dist/ExportedImage.js
+@@ -26,7 +26,7 @@ const generateImageURL = (src, width, basePath, isRemoteImage = false) => {
+     // the extension to WEBP to load them correctly
+     let processedExtension = extension;
+     if (useWebp &&
+-        ["JPG", "JPEG", "PNG", "GIF"].includes(extension.toUpperCase())) {
++        ["JPG", "JPEG", "PNG", "AVIF", "GIF"].includes(extension.toUpperCase())) {
+         processedExtension = "WEBP";
+     }
+     let correctedPath = path;
+diff --git a/dist/optimizeImages.js b/dist/optimizeImages.js
+index 06bbde17a240e47e0b583a9699504a97aa4f0715..98ed0d58363a10208d7eedc9a2e033c0437754d8 100755
+--- a/dist/optimizeImages.js
++++ b/dist/optimizeImages.js
+@@ -512,6 +512,9 @@ const nextImageExportOptimizer = async function () {
+     process.exit(0);
+ };
+ if (require.main === module) {
+-    nextImageExportOptimizer();
++    nextImageExportOptimizer().catch((error) => {
++        console.error(error);
++        process.exit(1);
++    });
+ }
+ module.exports = nextImageExportOptimizer;

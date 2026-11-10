@@ -1200,6 +1200,7 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
         dates: ["2026-11-13T19:00"],
+        published: false,
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ужин-темнее.png",
         overrides: {
             ru: countDinner("ru", "8 500 ₽"),

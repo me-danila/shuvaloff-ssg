@@ -7,7 +7,7 @@ export const metadata: Metadata = buildPageMetadata({
     path: "/",
     title: "ACADEMIA Mansion Shuvaloff Hotel — Saint Petersburg",
     description:
-        "An elegant hotel in a restored 19th-century mansion in central Saint Petersburg",
+        "A hotel in a historic 19th-century mansion in central Saint Petersburg. Historic rooms and suites, aristocratic breakfasts",
 });
 
 export default function EnPage() {

@@ -53,7 +53,8 @@ server/module-price-load/cache/price.json
 server/module-price-load/core/logs/log.txt
 server/module-price-load/cron.log
 
-# Скиллы Claude Code (taste-skill) — локально, не в git
+# Скиллы Claude Code и Codex — локально, не в git
 .claude/skills/
+.agents/skills/
 skills-lock.json
 /public/images/**/nextImageExportOptimizer/

@@ -7,7 +7,7 @@ export const metadata: Metadata = buildPageMetadata({
     path: "/",
     title: "Отель ACADEMIA Особняк Шувалова — Санкт-Петербург",
     description:
-        "Отель в историческом особняке XIX века в центре Санкт-Петербурга",
+        "Отель в историческом особняке XIX века в центре Санкт-Петербурга. Исторические номера и люксы, графские завтраки",
 });
 
 export default function Page() {

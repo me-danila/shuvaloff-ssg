@@ -16,7 +16,7 @@ const FILE_EXTENSIONS = new Set([
 // на 404. Такие картинки лучше не оптимизировать, чем ломать билд —
 // пишите их полными литералами.
 const IMAGE_URL_PATTERN =
-    /https?:\/\/[^\s"'`${}]+?\.(?:gif|jpe?g|png|webp)(?:\?[^\s"'`${}]*)?/gi;
+    /https?:\/\/[^\s"'`${}]+?\.(?:avif|gif|jpe?g|png|webp)(?:\?[^\s"'`${}]*)?/gi;
 
 function walk(dir, collector) {
     if (!fs.existsSync(dir)) {
@@ -43,7 +43,9 @@ function walk(dir, collector) {
         }
 
         for (const match of matches) {
-            collector.add(match);
+            // Sharp's prebuilt decoder cannot read the remote 10-bit AVIF originals.
+            // Optimize their WEBP counterparts prepared on the media server instead.
+            collector.add(match.replace(/\.avif(?=$|\?)/i, ".webp"));
         }
     }
 }

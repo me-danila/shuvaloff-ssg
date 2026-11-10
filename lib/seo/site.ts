@@ -4,7 +4,7 @@ export const SITE_URL = "https://academia-shuvaloff.ru";
 export const SITE_NAME = "ACADEMIA Особняк Шувалова";
 export const SITE_NAME_EN = "ACADEMIA Mansion Shuvaloff";
 export const DEFAULT_OG_IMAGE =
-    "https://academia.spb.ru/wp-content/uploads/2026/10/og.jpg";
+    "https://academia-shuvaloff.ru/images/og-shuvaloff.png";
 
 export const HOTEL_ADDRESS = {
     streetAddress: "Моховая ул., д. 10, стр. 1",

@@ -64,6 +64,23 @@ next-image-export-optimizer   # rewrite <Image> assets → WEBP in out/, fetch +
 node scripts/fix-locale-lang.mjs  # post-process out/{en,it,de,fr,es}/*.html: <html lang>
 ```
 
+AVIF images rendered through `OptimizedImage` use `<picture>`: the original
+AVIF is preferred, with responsive WEBP files from the existing optimizer as
+the fallback. For remote AVIFs, the optimizer reads a `.webp` counterpart at
+the same URL path. Create that counterpart when publishing AVIF media, using
+the media server's existing PHP Imagick (quality 85). Many remote originals
+are 10-bit AVIF, which the prebuilt Sharp decoder cannot read. Local AVIFs
+are decoded by Sharp directly. Remote AVIF URLs are collected and rewritten
+to WEBP URLs by `remoteOptimizedImages.cjs`.
+If a browser recognizes AVIF but fails to decode a particular image, the
+client component removes that source and retries using the WEBP fallback.
+A Bun patch in `patches/` fixes the optimizer's AVIF loader to request `.WEBP`
+files, matching its build output when `storePicturesInWEBP` is enabled. Keep
+this patch until the upstream loader includes that fix. AVIF priority images
+load eagerly without preloading the WEBP fallback, avoiding duplicate downloads.
+The patch also makes optimizer failures exit with a nonzero status, so a build
+cannot succeed with missing fallback assets.
+
 ### Why `fix-locale-lang.mjs` exists
 
 There is a **single shared root layout** (`app/layout.tsx`) that hardcodes
