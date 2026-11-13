@@ -17,10 +17,10 @@ export const shuvalovLotto: Record<
         imgUrl: "/images/shuvalov-lotto/IMG_2160.jpg",
         fullDescription: (
             <>
-                Каждую среду в ресторане ACADEMIA Шувалова вы можете принять
-                участие в традиционном развлечении русских аристократов — игре в
-                лото. Граф Шувалов будет лично вести игру, дополняя ее
-                рассказами о нравах и традициях светского общества XIX века.
+                В ресторане ACADEMIA Шувалова вы можете принять участие в
+                традиционном развлечении русских аристократов — игре в лото.
+                Граф Шувалов будет лично вести игру, дополняя ее рассказами о
+                нравах и традициях светского общества XIX века.
                 <br />
                 <br />
                 Для получения игрового билета необходимо внести депозит на 1 500
@@ -38,10 +38,10 @@ export const shuvalovLotto: Record<
         imgUrl: "/images/shuvalov-lotto/IMG_2160.jpg",
         fullDescription: (
             <>
-                Every Wednesday at ACADEMIA Shuvaloff restaurant, you can take
-                part in a traditional pastime of the Russian aristocracy — a
-                game of lotto. Count Shuvalov will personally host the game,
-                sharing stories about the customs and traditions of 19th-century
+                At ACADEMIA Shuvaloff restaurant, you can take part in a
+                traditional pastime of the Russian aristocracy — a game of
+                lotto. Count Shuvalov will personally host the game, sharing
+                stories about the customs and traditions of 19th-century
                 society.
                 <br />
                 <br />

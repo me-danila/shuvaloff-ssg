@@ -49,15 +49,8 @@ export const AllServices: Record<Locale, Service[]> = {
             ...shuvalovLotto.ru,
             slug: "shuvalov-lotto",
             orderLabel: "Забронировать",
-            comment: (
-                <>
-                    Даты: каждую среду
-                    <br />
-                    Начало игры: 19:00
-                    <br />
-                    Длительность: 1–1,5 часа
-                </>
-            ),
+            price: "1 500 ₽",
+            comment: "Начало игры: 19:00",
         },
         {
             title: "Завтрак от шефа",
@@ -783,15 +776,8 @@ export const AllServices: Record<Locale, Service[]> = {
             ...shuvalovLotto.en,
             slug: "shuvalov-lotto",
             orderLabel: "Book",
-            comment: (
-                <>
-                    Dates: every Wednesday
-                    <br />
-                    Game starts: 19:00
-                    <br />
-                    Duration: 1–1.5 hours
-                </>
-            ),
+            price: "1,500 ₽",
+            comment: "Game starts: 19:00",
         },
         {
             title: "Chef's Breakfast",
