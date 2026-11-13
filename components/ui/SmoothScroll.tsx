@@ -1,8 +1,10 @@
 "use client";
 
+import type { LenisRef } from "lenis/react";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 // Lenis запускается только на десктопе без prefers-reduced-motion. Грузим его
@@ -14,11 +16,27 @@ const ReactLenis = dynamic(
 );
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
+    const pathname = usePathname();
+    const lenisRef = useRef<LenisRef>(null);
     const isDesktop = useMediaQuery("(min-width: 1024px)");
     const prefersReducedMotion = useMediaQuery(
         "(prefers-reduced-motion: reduce)",
     );
     const [hasCert, setHasCert] = useState(false);
+
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Синхронизация нужна при каждой смене маршрута.
+    useLayoutEffect(() => {
+        // Next.js уже восстановил позицию страницы. Останавливаем инерцию
+        // предыдущего маршрута и синхронизируем Lenis с нативной прокруткой.
+        // Саму позицию не задаём: якорями и историей управляет браузер/Next.js.
+        const lenis = lenisRef.current?.lenis;
+        if (lenis) {
+            lenis.scrollTo(lenis.actualScroll, {
+                immediate: true,
+                force: true,
+            });
+        }
+    }, [pathname]);
 
     useEffect(() => {
         const check = () => {
@@ -57,6 +75,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
     return (
         <ReactLenis
+            ref={lenisRef}
             root
             options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
         >

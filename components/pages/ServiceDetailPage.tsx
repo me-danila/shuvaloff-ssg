@@ -187,7 +187,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                                     variant="primary"
                                     size="xl"
                                 >
-                                    {labels.order}
+                                    {service.orderLabel ?? labels.order}
                                 </Button>
                                 {service.detailsHref && (
                                     <Button

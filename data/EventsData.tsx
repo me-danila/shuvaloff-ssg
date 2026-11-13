@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { shuvalovLotto } from "@/data/shuvalovLottoData";
 import type { Locale } from "@/lib/i18n/routing";
+import { ORDER_URL } from "@/lib/seo/site";
 
 /**
  * Описание мероприятия. Одно мероприятие может проходить в несколько дат —
@@ -242,6 +244,20 @@ function benoisDinner(locale: Locale, price: string) {
 
 const BaseEvents: Record<Locale, EventDefinition[]> = {
     ru: [
+        {
+            ...shuvalovLotto.ru,
+            slug: "shuvalov-lotto",
+            bookingUrl: ORDER_URL,
+            dates: [
+                "2026-11-18T19:00",
+                "2026-11-25T19:00",
+                "2026-12-02T19:00",
+                "2026-12-09T19:00",
+                "2026-12-16T19:00",
+                "2026-12-23T19:00",
+                "2026-12-30T19:00",
+            ],
+        },
         {
             slug: "mansion-birthday",
             title: "Граф Шувалов приглашает на день рождения особняка!",
@@ -626,6 +642,20 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
         },
     ],
     en: [
+        {
+            ...shuvalovLotto.en,
+            slug: "shuvalov-lotto",
+            bookingUrl: ORDER_URL,
+            dates: [
+                "2026-11-18T19:00",
+                "2026-11-25T19:00",
+                "2026-12-02T19:00",
+                "2026-12-09T19:00",
+                "2026-12-16T19:00",
+                "2026-12-23T19:00",
+                "2026-12-30T19:00",
+            ],
+        },
         {
             slug: "mansion-birthday",
             title: "Count Shuvalov invites you to the mansion's birthday!",

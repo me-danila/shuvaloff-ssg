@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { getEventOccurrences } from "@/data/EventsData";
+import { getCurrentMonthEventDates } from "@/lib/eventDates";
 import type { Locale } from "@/lib/i18n/routing";
 
 type Props = {
@@ -11,17 +12,24 @@ type Props = {
 };
 
 /**
- * Блок ближайших дат мероприятия. Прошедшие даты скрываем (сравнение с началом
- * сегодня — как в гриде на /events/). Если предстоящих дат нет — блок не рендерим.
+ * Блок ближайших дат мероприятия в текущем месяце по времени Санкт-Петербурга.
+ * Прошедшие дни скрываем; сегодняшнее мероприятие оставляем до конца дня.
+ * Дату определяем в браузере, чтобы статическая сборка не замораживала список.
+ * Если предстоящих дат в этом месяце нет — блок не рендерим.
  */
 export default function EventDates({ dates, locale, title }: Props) {
-    const upcoming = useMemo(() => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return getEventOccurrences(dates, locale).filter(
-            (o) => new Date(o.start) >= today,
-        );
-    }, [dates, locale]);
+    const [now, setNow] = useState<Date | null>(null);
+
+    useEffect(() => {
+        const refresh = () => setNow(new Date());
+        refresh();
+        const interval = window.setInterval(refresh, 60_000);
+        return () => window.clearInterval(interval);
+    }, []);
+
+    const upcoming = now
+        ? getEventOccurrences(getCurrentMonthEventDates(dates, now), locale)
+        : [];
 
     if (upcoming.length === 0) return null;
 

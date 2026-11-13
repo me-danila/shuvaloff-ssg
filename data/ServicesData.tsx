@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { aristocraticBreakfastPricing } from "@/data/aristocraticBreakfastPricing";
+import { shuvalovLotto } from "@/data/shuvalovLottoData";
 import type { Locale } from "@/lib/i18n/routing";
 
 export type ServiceLink = {
@@ -27,6 +28,8 @@ export type Service = {
     /** Форматированный блок стоимости вместо стандартного вывода price. */
     priceDescription?: ReactNode;
     comment?: ReactNode;
+    /** Подпись основной кнопки на странице услуги. */
+    orderLabel?: string;
     /**
      * Индивидуальная страница услуги (/services/<slug>/details/). Тогда в
      * карточках «Заказать» ведет на типовую /services/<slug>/, «Подробнее» —
@@ -42,6 +45,20 @@ const ParagraphGap = () => <span aria-hidden className="block h-3.5" />;
 
 export const AllServices: Record<Locale, Service[]> = {
     ru: [
+        {
+            ...shuvalovLotto.ru,
+            slug: "shuvalov-lotto",
+            orderLabel: "Забронировать",
+            comment: (
+                <>
+                    Даты: каждую среду
+                    <br />
+                    Начало игры: 19:00
+                    <br />
+                    Длительность: 1–1,5 часа
+                </>
+            ),
+        },
         {
             title: "Завтрак от шефа",
             subtitle:
@@ -763,6 +780,20 @@ export const AllServices: Record<Locale, Service[]> = {
     ],
     en: [
         {
+            ...shuvalovLotto.en,
+            slug: "shuvalov-lotto",
+            orderLabel: "Book",
+            comment: (
+                <>
+                    Dates: every Wednesday
+                    <br />
+                    Game starts: 19:00
+                    <br />
+                    Duration: 1–1.5 hours
+                </>
+            ),
+        },
+        {
             title: "Chef's Breakfast",
             subtitle:
                 "Breakfast at ACADEMIA Shuvaloff Bar-Restaurant is not just the first meal, but part of an exquisite and delicious ritual.",
@@ -1453,6 +1484,7 @@ const allServicesPagePriority = [
     "transfer",
     "aristocratic-breakfast",
     "tea-party",
+    "shuvalov-lotto",
     "counts-family-greetings",
     "https://shuvaloff.academia-spa.ru/",
     "lunch",
