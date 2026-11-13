@@ -249,7 +249,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             slug: "shuvalov-lotto",
             bookingUrl: ORDER_URL,
             dates: [
-                "2026-11-18T19:00",
                 "2026-11-25T19:00",
                 "2026-12-02T19:00",
                 "2026-12-09T19:00",
@@ -647,7 +646,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             slug: "shuvalov-lotto",
             bookingUrl: ORDER_URL,
             dates: [
-                "2026-11-18T19:00",
                 "2026-11-25T19:00",
                 "2026-12-02T19:00",
                 "2026-12-09T19:00",
