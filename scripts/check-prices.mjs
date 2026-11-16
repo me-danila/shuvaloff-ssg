@@ -39,7 +39,7 @@ console.log(
 if (ageHours !== null && ageHours > MAX_AGE_HOURS) {
     fail(
         `price.json не обновлялся ${ageHours.toFixed(1)} ч (норма — раз в 4 ч). ` +
-            `Смотреть лог: ssh al.bgt 'tail ~/module-price-load-src/cron.log'`,
+            `Смотреть лог: ssh al.spb 'tail /opt/module-price-load/shuvaloff/cron.log'`,
     );
 }
 

@@ -1,4 +1,6 @@
 #!/bin/sh
+# LEGACY: сценарий старого Beget-хостинга; на al.spb не устанавливать.
+# Текущий production: /opt/module-price-load/shuvaloff/cron.sh, см. README «Deploy».
 # module-price-load: обновление цен TravelLine + самовосстановление модуля.
 #
 # Живёт на проде в ~/module-price-load-src/cron.sh (мастер-копия модуля вне

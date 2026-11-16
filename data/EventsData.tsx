@@ -255,6 +255,10 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                 "2026-12-16T19:00",
                 "2026-12-23T19:00",
                 "2026-12-30T19:00",
+                "2027-01-02T19:00",
+                "2027-01-13T19:00",
+                "2027-01-20T19:00",
+                "2027-01-27T19:00",
             ],
         },
         {
@@ -652,6 +656,10 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                 "2026-12-16T19:00",
                 "2026-12-23T19:00",
                 "2026-12-30T19:00",
+                "2027-01-02T19:00",
+                "2027-01-13T19:00",
+                "2027-01-20T19:00",
+                "2027-01-27T19:00",
             ],
         },
         {
@@ -1277,6 +1285,30 @@ const EVENT_DUPLICATES: {
             "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
         dates: ["2026-12-24T18:00"],
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/Лунная-набережная-Петербурга-акварелью.avif",
+    },
+    {
+        baseSlug: "wine-casino-august",
+        slug: "wine-casino-december",
+        bookingUrl: ORDER_URL,
+        dates: ["2026-12-12T19:00"],
+    },
+    {
+        baseSlug: "masonic-petersburg",
+        slug: "masonic-petersburg-january-2027",
+        bookingUrl: ORDER_URL,
+        dates: ["2027-01-14T19:00"],
+    },
+    {
+        baseSlug: "noble-investments",
+        slug: "noble-investments-january-2027",
+        bookingUrl: ORDER_URL,
+        dates: ["2027-01-21T19:00"],
+    },
+    {
+        baseSlug: "income-house",
+        slug: "income-house-january-2027",
+        bookingUrl: ORDER_URL,
+        dates: ["2027-01-28T19:00"],
     },
 ];
 

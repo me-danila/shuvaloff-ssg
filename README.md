@@ -2,7 +2,7 @@
 
 Marketing/booking site for a boutique hotel in a 19th-century mansion in the
 centre of Saint Petersburg. Statically-exported Next.js site with a Russian
-root and an English sub-tree, deployed as plain HTML to a BeGet host.
+root and an English sub-tree, deployed as plain HTML to OpenLiteSpeed on `al.spb`.
 
 The site content is in Russian; this documentation is for developers and is
 kept in English.
@@ -225,62 +225,60 @@ Loaded from `app/layout.tsx`, sourced from `public/scripts/`:
 
 ## Deploy
 
-**Production (current, authoritative):** one command, always this one:
+**Production:** OpenLiteSpeed on `al.spb`, not `al.bgt` (Beget). Before
+publishing, obtain the user's explicit deployment permission unless already given.
+The supported command is:
 
 ```bash
 bun run deploy
 ```
 
-It builds, rsyncs `out/` to the BeGet host, ships `server/module-price-load/`
-to its master copy outside `public_html`, and refreshes live prices. Then
-optionally `bun run indexnow` to ping IndexNow with blog URLs.
+`scripts/deploy.sh` builds the static export and uploads it to a new directory
+under `/usr/local/lsws/academia-shuvaloff.ru/releases/`. It validates the export,
+retains previous JavaScript chunks for cached pages, and atomically switches the
+`current` symlink. A shared `deploy.lock` protects the switch. If another deploy
+changes `current` during upload, the script stops without replacing that release.
+Failed uploads leave an unpublished release directory for inspection.
 
-**Never deploy with a bare `rsync -az --delete out/ …`.** `public_html` also
-holds `module-price-load/`, a PHP module that is not built from `out/`; a bare
-`--delete` wipes it and live prices freeze (this happened on 2026-08-07 and
-went unnoticed for a month). `scripts/deploy.sh` carries the required
-`--exclude 'module-price-load/'`.
+OpenLiteSpeed serves `/usr/local/lsws/academia-shuvaloff.ru/current/`. No web-server
+restart is required. Previous releases remain available for rollback; cleanup is
+manual. Rollback must take the same `deploy.lock` and atomically switch `current`
+to the selected release. Never rsync directly into `current` or remove live chunks.
 
-`out/` is plain static HTML/JS/assets — any static host will serve it. There is
-no application server in production, apart from the price module's cron job.
+The deploy command publishes only the static site. It does not overwrite the
+price module, credentials, cron configuration, or shared price cache. Optionally
+run `bun run indexnow` after publishing articles.
 
 ### Live prices (module-price-load)
 
-Room prices on the home page are fetched from TravelLine at runtime — the site
-is SSG, so nothing is baked at build time:
-
-- **Server:** `core/execute.php` is run by cron every 4 h, calls the TravelLine
-  API for hotel `41018` and writes `module-price-load/cache/price.json`.
-- **Client:** `assets/public/price-autoload.js` is injected by
-  `components/sections/RoomCategoriesSection.tsx`, fetches that JSON and fills
-  the `data-module-price-load-*` spans.
-
-Layout:
+Room prices come from TravelLine; the SSG build does not bake in prices.
 
 | Where | What |
 | --- | --- |
-| `server/module-price-load/` (repo) | source of truth, vendor code v3.2.1, in git |
-| `~/module-price-load-src/` (prod) | master copy outside `public_html`, safe from `--delete` |
-| `public_html/module-price-load/` (prod) | working copy, served to browsers |
+| `server/module-price-load/` (repo) | Vendor source v3.2.1; server integration is maintained separately |
+| `/opt/module-price-load/shuvaloff/` (`al.spb`) | PHP module, TravelLine credentials, cron script and logs, outside the web root |
+| `/usr/local/lsws/academia-shuvaloff.ru/shared/module-price-load/cache/price.json` | Published price cache, independent of releases |
 
-`cron.sh` in the master copy heals the working copy from the master before every
-run, so a bad deploy self-repairs within 4 h. The BeGet cron entry must point at
-the master copy, never inside `public_html`:
+`/etc/cron.d/academia-shuvaloff-prices` updates hotel `41018` every four hours:
 
-```
-0 */4 * * * /bin/sh /home/d/dorofegk/module-price-load-src/cron.sh
+```cron
+40 */4 * * * root /usr/bin/flock -n /opt/module-price-load/shuvaloff/update.lock /opt/module-price-load/shuvaloff/cron.sh
 ```
 
-`api.json` (the TravelLine key) is deliberately not in git — see
-`api.json.example`; the real file lives on the server and `deploy.sh` never
-deletes it. Check the module from anywhere with `bun run check:prices`; the
-cron log is `~/module-price-load-src/cron.log`.
+The server's `cron.sh` runs `core/execute.php` and atomically publishes the JSON
+cache. OpenLiteSpeed maps `/module-price-load/cache/` to the shared cache directory.
+PHP code and `api.json` remain outside the web root. Do not replace the server's
+integration script with the legacy Beget script from the repository.
 
-**Docker (exists, NOT the current prod path):** the `Dockerfile` builds with
-Bun and serves `out/` from a `busybox` `httpd` on port 5171;
-`bun run docker-build` pushes `ghcr.io/me-danila/shuvaloff-ssg:latest` and
-`docker-compose.yml` runs it. Kept for reference — production is the rsync path
-above.
+The client script `assets/public/price-autoload.js`, injected by
+`components/sections/RoomCategoriesSection.tsx`, fetches the JSON and fills the
+`data-module-price-load-*` spans. Check with `bun run check:prices`.
+The cron log is `/opt/module-price-load/shuvaloff/cron.log` on `al.spb`.
+
+**Docker (not the production path):** `Dockerfile` builds with Bun and serves
+`out/` using BusyBox `httpd` on port 5171. `bun run docker-build` pushes
+`ghcr.io/me-danila/shuvaloff-ssg:latest`; `docker-compose.yml` runs it.
+Production uses the release directories on `al.spb` described above.
 
 ## Testing
 

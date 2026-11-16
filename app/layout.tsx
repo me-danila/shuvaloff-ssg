@@ -121,6 +121,21 @@ export default function RootLayout({
     return (
         <html lang="ru">
             <head>
+                {/* Roistat Counter Start */}
+                <script
+                    id="roistat-counter"
+                    // biome-ignore lint/security/noDangerouslySetInnerHtml: Trusted Roistat counter supplied for site-wide installation.
+                    dangerouslySetInnerHTML={{
+                        __html: `(function(w, d, s, h, id) {
+    w.roistatProjectId = id; w.roistatHost = h; w.roistatPage = d.location.href; w.roistatReferrer = d.referrer;
+    var p = d.location.protocol == "https:" ? "https://" : "http://";
+    var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+    var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+})(window, document, 'script', 'cloud.roistat.com', '8d76bab0f1f7945163258bbd3d0613a8');
+`,
+                    }}
+                />
+                {/* Roistat Counter End */}
                 <link rel="preconnect" href="https://academia.spb.ru" />
                 <link rel="preconnect" href="https://static.academia.spb.ru" />
                 <link rel="preconnect" href="https://mc.yandex.ru" />
