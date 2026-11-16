@@ -211,7 +211,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
             <section className="mx-6 xl:max-w-7xl xl:mx-auto xl:w-full">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                     <FadeUp className="bg-brand-light rounded-md p-6 flex flex-col gap-6">
-                        <div className="flex flex-col gap-4 xl:flex-row grow">
+                        <div className="flex flex-col gap-4 xl:grid xl:grid-cols-[15rem_minmax(0,1fr)] grow">
                             <div className="flex flex-col">
                                 <div className="flex items-center gap-3 xl:flex-row xl:items-start">
                                     <BellIcon
@@ -239,7 +239,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                         key={item}
                                         className="flex items-start gap-2"
                                     >
-                                        <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
+                                        <span className="mt-2 w-1 h-1 shrink-0 rounded-full bg-brand-brown" />
                                         <span>{item}</span>
                                     </li>
                                 ))}
@@ -259,7 +259,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                         delay={0.1}
                         className="bg-brand-light rounded-md p-6 flex flex-col gap-6"
                     >
-                        <div className="flex flex-col gap-4 xl:flex-row grow">
+                        <div className="flex flex-col gap-4 xl:grid xl:grid-cols-[15rem_minmax(0,1fr)] grow">
                             <div className="flex flex-col">
                                 <div className="flex items-center gap-3 xl:flex-row xl:items-start">
                                     <ListHeartIcon
@@ -287,7 +287,7 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                         key={item}
                                         className="flex items-start gap-2"
                                     >
-                                        <span className="mt-2 w-1 h-1 rounded-full bg-brand-brown" />
+                                        <span className="mt-2 w-1 h-1 shrink-0 rounded-full bg-brand-brown" />
                                         <span>{item}</span>
                                     </li>
                                 ))}
