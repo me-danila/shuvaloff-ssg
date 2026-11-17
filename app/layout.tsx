@@ -145,12 +145,14 @@ export default function RootLayout({
                 {/* Обычный <script>, не next/script: beforeInteractive не эмитится в HTML при output: "export" */}
                 <script src="/scripts/travelline.js" defer />
                 {/* smart callback */}
+                {/* SmartCallback временно отключён для всех локалей. Код сохранён для повторного включения.
                 <script
                     type="text/javascript"
                     async
                     src="//smartcallback.ru/api/SmartCallBack.js?t=ULqjqHzuF0KZPHNAFiMo"
                     charSet="utf-8"
                 />
+                */}
             </head>
             <body
                 className={`${alistair.variable} ${historyPro.variable} ${centuryGothic.variable} antialiased`}
