@@ -157,10 +157,12 @@ export default function RootLayout({
             >
                 <HtmlLangSync />
                 <TravelLineManager />
+                {/* Calltracking.ru временно отключён для всех локалей. Код сохранён для повторного включения.
                 <Script
                     src="/scripts/calltracking.js"
                     strategy="afterInteractive"
                 />
+                */}
                 <Script src="/scripts/metrika.js" strategy="lazyOnload" />
                 <SmoothScroll>
                     <LazyMotion features={domAnimation}>{children}</LazyMotion>

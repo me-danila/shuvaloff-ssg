@@ -16,11 +16,11 @@ export const HOTEL_ADDRESS = {
 };
 
 export const HOTEL_CONTACTS = {
-    telephone: "+7-812-565-96-50",
-    telephoneDisplay: "+7 (812) 565-96-50",
+    telephone: "+7-812-566-35-09",
+    telephoneDisplay: "+7 (812) 566-35-09",
     // `tel:` href form (E.164, no separators). Same number as `telephone`,
     // different formatting — kept verbatim so rendered hrefs don't change.
-    telephoneHref: "tel:+78125659650",
+    telephoneHref: "tel:+78125663509",
     email: "reservation@academia.spb.ru",
     legalEmail: "legal@academia-suites.ru",
 };

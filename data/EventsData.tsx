@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { shuvalovLotto } from "@/data/shuvalovLottoData";
 import type { Locale } from "@/lib/i18n/routing";
-import { ORDER_URL } from "@/lib/seo/site";
+import { HOTEL_CONTACTS, ORDER_URL } from "@/lib/seo/site";
 
 /**
  * Описание мероприятия. Одно мероприятие может проходить в несколько дат —
@@ -636,7 +636,9 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     <br />
                     <b>Круглосуточный отдел бронирования:</b>
                     <br />
-                    <a href="tel:+78125659650">+7 (812) 565-96-50</a>
+                    <a href={HOTEL_CONTACTS.telephoneHref}>
+                        {HOTEL_CONTACTS.telephoneDisplay}
+                    </a>
                     <br />
                     <a href="tel:+79111966211">+7 (911) 196-62-11</a>
                 </>
@@ -1041,7 +1043,9 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     <br />
                     <b>24/7 reservations:</b>
                     <br />
-                    <a href="tel:+78125659650">+7 (812) 565-96-50</a>
+                    <a href={HOTEL_CONTACTS.telephoneHref}>
+                        {HOTEL_CONTACTS.telephoneDisplay}
+                    </a>
                     <br />
                     <a href="tel:+79111966211">+7 (911) 196-62-11</a>
                 </>

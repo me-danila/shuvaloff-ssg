@@ -95,7 +95,7 @@ describe("isExternalHref", () => {
         ["https://example.com/x", true],
         ["http://example.com", true],
         ["mailto:a@b.com", true],
-        ["tel:+78125659650", true],
+        ["tel:+78125663509", true],
         ["//cdn.example.com/a.png", true],
         ["/rooms", false],
         ["#anchor", false],
@@ -156,7 +156,7 @@ describe("localizeHref", () => {
         "https://booking.example.com/reserve",
         "http://example.com",
         "mailto:reservation@academia.spb.ru",
-        "tel:+78125659650",
+        "tel:+78125663509",
         "//cdn.example.com/a.png",
     ])("leaves external href %p untouched (en)", (href) => {
         expect(localizeHref(href, "en")).toBe(href);
