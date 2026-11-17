@@ -71,15 +71,18 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         };
     }, []);
 
-    if (!isDesktop || hasCert || prefersReducedMotion) return <>{children}</>;
-
     return (
-        <ReactLenis
-            ref={lenisRef}
-            root
-            options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
-        >
+        <>
+            {/* Keep page nodes stable when the lazy scroll controller changes.
+                Roistat may have attached numbers and handlers to those nodes. */}
+            {isDesktop && !hasCert && !prefersReducedMotion && (
+                <ReactLenis
+                    ref={lenisRef}
+                    root
+                    options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}
+                />
+            )}
             {children}
-        </ReactLenis>
+        </>
     );
 }

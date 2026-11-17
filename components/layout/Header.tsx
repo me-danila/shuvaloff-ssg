@@ -453,6 +453,7 @@ export default function Header({ locale }: { locale: Locale }) {
     const isHeaderFixed = FIXED_HEADER_PATHS.has(normalizedPath);
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [menuContentMounted, setMenuContentMounted] = useState(false);
     const [mobileLangOpen, setMobileLangOpen] = useState(false);
     const mobileLangRef = useRef<HTMLDivElement>(null);
     const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -817,7 +818,10 @@ export default function Header({ locale }: { locale: Locale }) {
                             {copy.loginButton}
                         </a>
                         <BurgerButton
-                            onClick={() => setMenuOpen(true)}
+                            onClick={() => {
+                                setMenuContentMounted(true);
+                                setMenuOpen(true);
+                            }}
                             label={copy.openMenuAria}
                             className={`xl:hidden transition-colors duration-300 ${
                                 isLight ? "text-brand-brown" : "text-white"
@@ -957,232 +961,79 @@ export default function Header({ locale }: { locale: Locale }) {
                 }
             </m.header>
 
+            {/* Keep the original phone nodes for Roistat and its click handlers.
+                Only panel shells and phones exist while the menu is closed. */}
             <AnimatePresence>
                 {menuOpen && (
-                    <>
-                        <m.button
-                            type="button"
-                            initial="hidden"
-                            animate="show"
-                            exit="exit"
-                            variants={overlayVariants}
-                            transition={OVERLAY_TRANSITION}
-                            className="fixed inset-0 z-50 cursor-default bg-[rgba(14,18,24,0.24)] backdrop-blur-[3px]"
-                            onClick={closeMenu}
-                            aria-label={copy.closeMenuAria}
-                        />
-
-                        <m.div
-                            initial="hidden"
-                            animate="show"
-                            exit="exit"
-                            variants={mobilePanelVariants}
-                            transition={PANEL_TRANSITION}
-                            className="xl:hidden fixed top-1 left-1 z-[60] w-72 overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
-                        >
-                            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_22%,rgba(150,144,141,0.06)_100%)]" />
-                            <div className="relative flex h-full flex-col">
-                                <div className="flex h-14 items-center justify-between border-b border-stone-100/80 px-6 shrink-0">
-                                    <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
-                                        {copy.menuLabel}
-                                    </span>
-                                    <button
-                                        type="button"
-                                        onClick={closeMenu}
-                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-brand-brown"
-                                        aria-label={copy.closeMenuAria}
-                                    >
-                                        &times;
-                                    </button>
-                                </div>
-                                <m.nav
-                                    variants={menuListVariants}
-                                    initial="hidden"
-                                    animate="show"
-                                    className="flex flex-1 flex-col overflow-y-auto px-6 py-5"
+                    <m.button
+                        type="button"
+                        initial="hidden"
+                        animate="show"
+                        exit="exit"
+                        variants={overlayVariants}
+                        transition={OVERLAY_TRANSITION}
+                        className="fixed inset-0 z-50 cursor-default bg-[rgba(14,18,24,0.24)] backdrop-blur-[3px]"
+                        onClick={closeMenu}
+                        aria-label={copy.closeMenuAria}
+                    />
+                )}
+            </AnimatePresence>
+            <m.div
+                initial="hidden"
+                animate={menuOpen ? "show" : "exit"}
+                exit="exit"
+                variants={mobilePanelVariants}
+                transition={PANEL_TRANSITION}
+                data-offcanvas-panel="mobile"
+                aria-hidden={!menuOpen}
+                inert={!menuOpen}
+                style={{
+                    visibility: menuContentMounted ? "visible" : "hidden",
+                }}
+                onAnimationComplete={(state) => {
+                    if (state === "exit" && !menuOpen) {
+                        setMenuContentMounted(false);
+                    }
+                }}
+                className="xl:hidden fixed top-1 left-1 z-[60] w-72 overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+            >
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_22%,rgba(150,144,141,0.06)_100%)]" />
+                <div className="relative flex h-full flex-col">
+                    {menuContentMounted && (
+                        <>
+                            <div className="flex h-14 items-center justify-between border-b border-stone-100/80 px-6 shrink-0">
+                                <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
+                                    {copy.menuLabel}
+                                </span>
+                                <button
+                                    type="button"
+                                    onClick={closeMenu}
+                                    className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-brand-brown"
+                                    aria-label={copy.closeMenuAria}
                                 >
-                                    {visibleMobileNavItems.map((item) => {
-                                        const isSubmenuOpen =
-                                            activeSubmenu === item.label;
+                                    &times;
+                                </button>
+                            </div>
+                            <m.nav
+                                variants={menuListVariants}
+                                initial="hidden"
+                                animate={menuOpen ? "show" : "hidden"}
+                                className="flex flex-1 flex-col overflow-y-auto px-6 py-5"
+                            >
+                                {visibleMobileNavItems.map((item) => {
+                                    const isSubmenuOpen =
+                                        activeSubmenu === item.label;
 
-                                        return item.submenu ? (
-                                            <m.div
-                                                key={item.label}
-                                                variants={menuItemVariants}
-                                            >
-                                                <div className="flex w-full items-center justify-between">
-                                                    {renderNavItemLink(
-                                                        item,
-                                                        "py-3 text-sm transition-colors hover:text-brand-brown",
-                                                    )}
-                                                    <button
-                                                        type="button"
-                                                        onClick={() =>
-                                                            setActiveSubmenu(
-                                                                isSubmenuOpen
-                                                                    ? null
-                                                                    : item.label,
-                                                            )
-                                                        }
-                                                        className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-end text-xl leading-none text-[#96908D]"
-                                                        aria-label={item.label}
-                                                    >
-                                                        <span
-                                                            className={`transition-transform duration-300 ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
-                                                        >
-                                                            &rsaquo;
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                                <m.div
-                                                    variants={
-                                                        mobileSubmenuVariants
-                                                    }
-                                                    initial={false}
-                                                    animate={
-                                                        isSubmenuOpen
-                                                            ? "open"
-                                                            : "closed"
-                                                    }
-                                                    className="overflow-hidden"
-                                                >
-                                                    <div className="mb-2 ml-2 flex flex-col border-l border-stone-200/80 pl-4">
-                                                        {item.submenu.map(
-                                                            (sub) => (
-                                                                <div
-                                                                    key={`${item.href}-${sub.label}`}
-                                                                >
-                                                                    {renderNavItemLink(
-                                                                        sub,
-                                                                        "block py-2 text-sm text-[#96908D] transition-colors hover:text-brand-brown",
-                                                                    )}
-                                                                </div>
-                                                            ),
-                                                        )}
-                                                    </div>
-                                                </m.div>
-                                            </m.div>
-                                        ) : (
-                                            <m.div
-                                                key={item.href}
-                                                variants={menuItemVariants}
-                                            >
+                                    return item.submenu ? (
+                                        <m.div
+                                            key={item.label}
+                                            variants={menuItemVariants}
+                                        >
+                                            <div className="flex w-full items-center justify-between">
                                                 {renderNavItemLink(
                                                     item,
-                                                    "block py-3 text-sm transition-colors hover:text-brand-brown",
+                                                    "py-3 text-sm transition-colors hover:text-brand-brown",
                                                 )}
-                                                {item.lineBelow && (
-                                                    <div className="my-1 border-b border-stone-200" />
-                                                )}
-                                            </m.div>
-                                        );
-                                    })}
-                                </m.nav>
-                                <m.div
-                                    initial={{ opacity: 0, y: 14 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    transition={{
-                                        duration: 0.42,
-                                        delay: 0.08,
-                                        ease: GENTLE_EASE,
-                                    }}
-                                    className="flex shrink-0 flex-col gap-3 border-t border-stone-100/80 px-6 py-5"
-                                >
-                                    <a
-                                        href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
-                                    >
-                                        <svg
-                                            width="15"
-                                            height="15"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        >
-                                            <circle cx="12" cy="8" r="4" />
-                                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                                        </svg>
-                                        {copy.loginButton}
-                                    </a>
-                                    <Button
-                                        href={localizeHref("/booking/", locale)}
-                                        variant="primary"
-                                        size="xs"
-                                    >
-                                        {copy.bookButton}
-                                    </Button>
-                                    <a
-                                        href={HOTEL_CONTACTS.telephoneHref}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
-                                    >
-                                        <svg
-                                            width="15"
-                                            height="15"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        >
-                                            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
-                                        </svg>
-                                        {HOTEL_CONTACTS.telephoneDisplay}
-                                    </a>
-                                    <SocialLinks className="justify-center" />
-                                </m.div>
-                            </div>
-                        </m.div>
-
-                        <div className="pointer-events-none fixed inset-y-0 left-0 z-[60] hidden xl:flex items-start gap-2 p-2">
-                            <m.div
-                                initial="hidden"
-                                animate="show"
-                                exit="exit"
-                                variants={desktopPanelVariants}
-                                transition={PANEL_TRANSITION}
-                                className="pointer-events-auto relative mt-1 flex min-h-[34.5rem] w-64 flex-col overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
-                            >
-                                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_24%,rgba(150,144,141,0.06)_100%)]" />
-                                <div className="relative flex h-16 items-center justify-between px-6 shrink-0">
-                                    <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
-                                        {copy.menuLabel}
-                                    </span>
-                                    <button
-                                        type="button"
-                                        onClick={closeMenu}
-                                        className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-brand-brown"
-                                        aria-label={copy.closeMenuAria}
-                                    >
-                                        &times;
-                                    </button>
-                                </div>
-
-                                <m.nav
-                                    variants={menuListVariants}
-                                    initial="hidden"
-                                    animate="show"
-                                    className="relative flex flex-col px-6 pb-6"
-                                >
-                                    {navItems.map((item) => {
-                                        const isSubmenuOpen =
-                                            activeSubmenu === item.label;
-
-                                        return item.submenu ? (
-                                            <m.div
-                                                key={item.label}
-                                                variants={menuItemVariants}
-                                            >
                                                 <button
                                                     type="button"
                                                     onClick={() =>
@@ -1192,161 +1043,355 @@ export default function Header({ locale }: { locale: Locale }) {
                                                                 : item.label,
                                                         )
                                                     }
-                                                    className="flex w-full items-center justify-between py-3 text-left cursor-pointer text-sm transition-colors hover:text-brand-brown"
+                                                    className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-end text-xl leading-none text-[#96908D]"
+                                                    aria-label={item.label}
                                                 >
-                                                    <span>{item.label}</span>
                                                     <span
-                                                        className={`text-xl text-[#96908D] leading-none transition-transform duration-300 ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                        className={`transition-transform duration-300 ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
                                                     >
                                                         &rsaquo;
                                                     </span>
                                                 </button>
-                                            </m.div>
-                                        ) : (
+                                            </div>
                                             <m.div
-                                                key={item.href}
-                                                variants={menuItemVariants}
+                                                variants={mobileSubmenuVariants}
+                                                initial={false}
+                                                animate={
+                                                    isSubmenuOpen
+                                                        ? "open"
+                                                        : "closed"
+                                                }
+                                                className="overflow-hidden"
                                             >
-                                                {renderNavItemLink(
-                                                    item,
-                                                    "block py-3 text-sm transition-colors hover:text-brand-brown",
-                                                )}
-                                                {item.lineBelow && (
-                                                    <div className="border-b border-stone-200" />
-                                                )}
+                                                <div className="mb-2 ml-2 flex flex-col border-l border-stone-200/80 pl-4">
+                                                    {item.submenu.map((sub) => (
+                                                        <div
+                                                            key={`${item.href}-${sub.label}`}
+                                                        >
+                                                            {renderNavItemLink(
+                                                                sub,
+                                                                "block py-2 text-sm text-[#96908D] transition-colors hover:text-brand-brown",
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </m.div>
-                                        );
-                                    })}
-                                </m.nav>
-
-                                <m.div
-                                    initial={{ opacity: 0, y: 14 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    transition={{
-                                        duration: 0.42,
-                                        delay: 0.12,
-                                        ease: GENTLE_EASE,
-                                    }}
-                                    className="relative mt-auto flex flex-col gap-3 px-6 pb-6"
-                                >
-                                    <a
-                                        href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
-                                    >
-                                        <svg
-                                            width="15"
-                                            height="15"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        >
-                                            <circle cx="12" cy="8" r="4" />
-                                            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                                        </svg>
-                                        {copy.loginButton}
-                                    </a>
-                                    <Button
-                                        href={localizeHref("/booking/", locale)}
-                                        variant="primary"
-                                    >
-                                        {copy.bookButton}
-                                    </Button>
-                                    <a
-                                        href={HOTEL_CONTACTS.telephoneHref}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-2 text-sm text-stone-600"
-                                    >
-                                        <svg
-                                            width="15"
-                                            height="15"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        >
-                                            <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
-                                        </svg>
-                                        {HOTEL_CONTACTS.telephoneDisplay}
-                                    </a>
-                                    <SocialLinks className="justify-center" />
-                                </m.div>
-                            </m.div>
-
-                            <AnimatePresence>
-                                {activeSubmenuItems.length > 0 && (
-                                    <m.div
-                                        initial="hidden"
-                                        animate="show"
-                                        exit="exit"
-                                        variants={submenuPanelVariants}
-                                        transition={{
-                                            duration: 0.16,
-                                            ease: GENTLE_EASE,
-                                            delay: 0,
-                                        }}
-                                        className="pointer-events-auto relative mt-20 w-60 self-start overflow-hidden rounded-lg border border-white/70 bg-white/94 px-6 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.16)] backdrop-blur-xl"
-                                        style={{
-                                            marginTop:
-                                                80 +
-                                                Math.max(
-                                                    activeSubmenuIndex,
-                                                    0,
-                                                ) *
-                                                    48,
-                                        }}
-                                    >
-                                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.05)_0%,rgba(255,255,255,0)_100%)]" />
-                                        <m.div
-                                            variants={submenuListVariants}
-                                            initial="hidden"
-                                            animate="show"
-                                            className="relative flex flex-col gap-1"
-                                        >
-                                            {activeSubmenuItems.map((sub) => (
-                                                <m.div
-                                                    key={sub.href}
-                                                    variants={
-                                                        submenuItemVariants
-                                                    }
-                                                >
-                                                    <Link
-                                                        href={localizeHref(
-                                                            sub.href,
-                                                            locale,
-                                                        )}
-                                                        target={sub.target}
-                                                        rel={
-                                                            sub.target ===
-                                                            "_blank"
-                                                                ? "noopener noreferrer"
-                                                                : undefined
-                                                        }
-                                                        onClick={closeMenu}
-                                                        className="block py-2 text-sm transition-colors hover:text-brand-brown"
-                                                    >
-                                                        {sub.label}
-                                                    </Link>
-                                                </m.div>
-                                            ))}
                                         </m.div>
+                                    ) : (
+                                        <m.div
+                                            key={item.href}
+                                            variants={menuItemVariants}
+                                        >
+                                            {renderNavItemLink(
+                                                item,
+                                                "block py-3 text-sm transition-colors hover:text-brand-brown",
+                                            )}
+                                            {item.lineBelow && (
+                                                <div className="my-1 border-b border-stone-200" />
+                                            )}
+                                        </m.div>
+                                    );
+                                })}
+                            </m.nav>
+                        </>
+                    )}
+                    <m.div
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={
+                            menuOpen
+                                ? { opacity: 1, y: 0 }
+                                : { opacity: 0, y: 10 }
+                        }
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{
+                            duration: 0.42,
+                            delay: 0.08,
+                            ease: GENTLE_EASE,
+                        }}
+                        className="flex shrink-0 flex-col gap-3 border-t border-stone-100/80 px-6 py-5"
+                    >
+                        {menuContentMounted && (
+                            <>
+                                <a
+                                    href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                                >
+                                    <svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    >
+                                        <circle cx="12" cy="8" r="4" />
+                                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                                    </svg>
+                                    {copy.loginButton}
+                                </a>
+                                <Button
+                                    href={localizeHref("/booking/", locale)}
+                                    variant="primary"
+                                    size="xs"
+                                >
+                                    {copy.bookButton}
+                                </Button>
+                            </>
+                        )}
+                        <a
+                            data-roistat-menu-phone="mobile"
+                            suppressHydrationWarning
+                            href={HOTEL_CONTACTS.telephoneHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                        >
+                            <svg
+                                width="15"
+                                height="15"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
+                            </svg>
+                            {HOTEL_CONTACTS.telephoneDisplay}
+                        </a>
+                        {menuContentMounted && (
+                            <SocialLinks className="justify-center" />
+                        )}
+                    </m.div>
+                </div>
+            </m.div>
+
+            <div className="pointer-events-none fixed inset-y-0 left-0 z-[60] hidden xl:flex items-start gap-2 p-2">
+                <m.div
+                    initial="hidden"
+                    animate={menuOpen ? "show" : "exit"}
+                    exit="exit"
+                    variants={desktopPanelVariants}
+                    transition={PANEL_TRANSITION}
+                    data-offcanvas-panel="desktop"
+                    aria-hidden={!menuOpen}
+                    inert={!menuOpen}
+                    style={{
+                        visibility: menuContentMounted ? "visible" : "hidden",
+                    }}
+                    onAnimationComplete={(state) => {
+                        if (state === "exit" && !menuOpen) {
+                            setMenuContentMounted(false);
+                        }
+                    }}
+                    className="pointer-events-auto relative mt-1 flex min-h-[34.5rem] w-64 flex-col overflow-hidden rounded-lg border border-white/70 bg-white/95 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                >
+                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.08)_0%,rgba(255,255,255,0)_24%,rgba(150,144,141,0.06)_100%)]" />
+                    {menuContentMounted && (
+                        <>
+                            <div className="relative flex h-16 items-center justify-between px-6 shrink-0">
+                                <span className="text-xs uppercase tracking-[0.28em] text-[#96908D]">
+                                    {copy.menuLabel}
+                                </span>
+                                <button
+                                    type="button"
+                                    onClick={closeMenu}
+                                    className="text-2xl leading-none cursor-pointer text-stone-400 transition-colors duration-200 hover:text-brand-brown"
+                                    aria-label={copy.closeMenuAria}
+                                >
+                                    &times;
+                                </button>
+                            </div>
+
+                            <m.nav
+                                variants={menuListVariants}
+                                initial="hidden"
+                                animate={menuOpen ? "show" : "hidden"}
+                                className="relative flex flex-col px-6 pb-6"
+                            >
+                                {navItems.map((item) => {
+                                    const isSubmenuOpen =
+                                        activeSubmenu === item.label;
+
+                                    return item.submenu ? (
+                                        <m.div
+                                            key={item.label}
+                                            variants={menuItemVariants}
+                                        >
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setActiveSubmenu(
+                                                        isSubmenuOpen
+                                                            ? null
+                                                            : item.label,
+                                                    )
+                                                }
+                                                className="flex w-full items-center justify-between py-3 text-left cursor-pointer text-sm transition-colors hover:text-brand-brown"
+                                            >
+                                                <span>{item.label}</span>
+                                                <span
+                                                    className={`text-xl text-[#96908D] leading-none transition-transform duration-300 ${isSubmenuOpen ? "translate-x-1 rotate-90" : ""}`}
+                                                >
+                                                    &rsaquo;
+                                                </span>
+                                            </button>
+                                        </m.div>
+                                    ) : (
+                                        <m.div
+                                            key={item.href}
+                                            variants={menuItemVariants}
+                                        >
+                                            {renderNavItemLink(
+                                                item,
+                                                "block py-3 text-sm transition-colors hover:text-brand-brown",
+                                            )}
+                                            {item.lineBelow && (
+                                                <div className="border-b border-stone-200" />
+                                            )}
+                                        </m.div>
+                                    );
+                                })}
+                            </m.nav>
+                        </>
+                    )}
+
+                    <m.div
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={
+                            menuOpen
+                                ? { opacity: 1, y: 0 }
+                                : { opacity: 0, y: 10 }
+                        }
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{
+                            duration: 0.42,
+                            delay: 0.12,
+                            ease: GENTLE_EASE,
+                        }}
+                        className="relative mt-auto flex flex-col gap-3 px-6 pb-6"
+                    >
+                        {menuContentMounted && (
+                            <>
+                                <a
+                                    href={`https://guest.travelline.ru/guest-account/41018/profile/login${locale === "en" ? "?lang=en" : ""}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                                >
+                                    <svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.5"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    >
+                                        <circle cx="12" cy="8" r="4" />
+                                        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                                    </svg>
+                                    {copy.loginButton}
+                                </a>
+                                <Button
+                                    href={localizeHref("/booking/", locale)}
+                                    variant="primary"
+                                >
+                                    {copy.bookButton}
+                                </Button>
+                            </>
+                        )}
+                        <a
+                            data-roistat-menu-phone="desktop"
+                            suppressHydrationWarning
+                            href={HOTEL_CONTACTS.telephoneHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 text-sm text-stone-600"
+                        >
+                            <svg
+                                width="15"
+                                height="15"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                                focusable="false"
+                            >
+                                <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
+                            </svg>
+                            {HOTEL_CONTACTS.telephoneDisplay}
+                        </a>
+                        {menuContentMounted && (
+                            <SocialLinks className="justify-center" />
+                        )}
+                    </m.div>
+                </m.div>
+
+                <AnimatePresence>
+                    {activeSubmenuItems.length > 0 && (
+                        <m.div
+                            initial="hidden"
+                            animate="show"
+                            exit="exit"
+                            variants={submenuPanelVariants}
+                            transition={{
+                                duration: 0.16,
+                                ease: GENTLE_EASE,
+                                delay: 0,
+                            }}
+                            className="pointer-events-auto relative mt-20 w-60 self-start overflow-hidden rounded-lg border border-white/70 bg-white/94 px-6 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.16)] backdrop-blur-xl"
+                            style={{
+                                marginTop:
+                                    80 + Math.max(activeSubmenuIndex, 0) * 48,
+                            }}
+                        >
+                            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(54,77,107,0.05)_0%,rgba(255,255,255,0)_100%)]" />
+                            <m.div
+                                variants={submenuListVariants}
+                                initial="hidden"
+                                animate="show"
+                                className="relative flex flex-col gap-1"
+                            >
+                                {activeSubmenuItems.map((sub) => (
+                                    <m.div
+                                        key={sub.href}
+                                        variants={submenuItemVariants}
+                                    >
+                                        <Link
+                                            href={localizeHref(
+                                                sub.href,
+                                                locale,
+                                            )}
+                                            target={sub.target}
+                                            rel={
+                                                sub.target === "_blank"
+                                                    ? "noopener noreferrer"
+                                                    : undefined
+                                            }
+                                            onClick={closeMenu}
+                                            className="block py-2 text-sm transition-colors hover:text-brand-brown"
+                                        >
+                                            {sub.label}
+                                        </Link>
                                     </m.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-                    </>
-                )}
-            </AnimatePresence>
+                                ))}
+                            </m.div>
+                        </m.div>
+                    )}
+                </AnimatePresence>
+            </div>
         </>
     );
 }

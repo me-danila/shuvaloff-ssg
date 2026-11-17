@@ -1281,6 +1281,7 @@ const EVENT_DUPLICATES: {
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/serebryaniy-vek/?utm_source=hotel",
         dates: ["2026-12-17T18:00"],
+        published: false,
     },
     {
         baseSlug: "one-night-in-petersburg-1899",
