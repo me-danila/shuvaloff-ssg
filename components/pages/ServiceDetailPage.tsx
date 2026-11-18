@@ -129,7 +129,9 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             </FadeUp>
                         )}
                         <FadeUp delay={0.1}>
-                            <p>{service.subtitle}</p>
+                            <p className="whitespace-pre-line">
+                                {service.subtitle}
+                            </p>
                         </FadeUp>
                         {service.fullDescription && (
                             <FadeUp delay={0.2}>
@@ -182,7 +184,7 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
 
                             <div className="mt-1 flex flex-wrap gap-3">
                                 <Button
-                                    href={ORDER_URL}
+                                    href={service.orderUrl ?? ORDER_URL}
                                     target="_blank"
                                     variant="primary"
                                     size="xl"

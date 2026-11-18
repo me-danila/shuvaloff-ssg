@@ -22,6 +22,7 @@ type CardServiceBigProps = {
      * на типовую /services/<slug>/ вместо мессенджера.
      */
     detailsHref?: string;
+    orderUrl?: string;
     ctaLabel?: CardServiceBigCtaLabel;
     /** Показывать раздельные действия: «Заказать» (если есть slug) + «Подробнее». */
     showOrder?: boolean;
@@ -62,6 +63,7 @@ export default function CardServiceBig({
     slug,
     externalLink,
     detailsHref,
+    orderUrl,
     ctaLabel,
     showOrder = false,
     backgroundClassName = "bg-white",
@@ -98,7 +100,7 @@ export default function CardServiceBig({
     const detailsButtonHref = detailsHref
         ? localizeHref(detailsHref, locale)
         : href;
-    const orderHref = detailsHref ? href : ORDER_URL;
+    const orderHref = detailsHref ? href : (orderUrl ?? ORDER_URL);
 
     // Фото над заголовком — через order-first: разметка одна для обоих порядков.
     const imageClass = `relative block ${imageAspectClassName} w-full overflow-hidden ${imageFirst ? "order-first" : ""}`;
@@ -164,7 +166,7 @@ export default function CardServiceBig({
             {orderOnly ? (
                 <div className="mt-6 px-5">
                     <Button
-                        href={ORDER_URL}
+                        href={orderUrl ?? ORDER_URL}
                         target="_blank"
                         variant="primary"
                         size="sm"

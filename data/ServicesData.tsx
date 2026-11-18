@@ -30,6 +30,7 @@ export type Service = {
     comment?: ReactNode;
     /** Подпись основной кнопки на странице услуги. */
     orderLabel?: string;
+    orderUrl?: string;
     /**
      * Индивидуальная страница услуги (/services/<slug>/details/). Тогда в
      * карточках «Заказать» ведет на типовую /services/<slug>/, «Подробнее» —
@@ -42,6 +43,13 @@ export type Service = {
 
 /** Разрыв абзаца внутри описания: отступ как между абзацами страницы услуги, без двойного <br />. */
 const ParagraphGap = () => <span aria-hidden className="block h-3.5" />;
+
+const luggageDelivery = {
+    slug: "luggage-delivery",
+    imgUrl: "/images/luggage-delivery.webp",
+    orderUrl: "https://go.baggage.ru/shuvaloff/",
+    hideOnHome: true,
+};
 
 export const AllServices: Record<Locale, Service[]> = {
     ru: [
@@ -581,6 +589,20 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "бесплатно",
+        },
+        {
+            ...luggageDelivery,
+            title: "Доставка багажа",
+            subtitle:
+                "Мы поможем доставить ваш багаж туда, где он понадобится:\nв особняк к моменту заселения или по другому адресу после выезда.",
+            fullDescription: (
+                <>
+                    Вы остаетесь налегке и можете провести день так, как хотите.
+                    <br />
+                    Заказ оформляется заранее на сайте нашего партнера.
+                </>
+            ),
+            price: "уточняйте при оформлении заказа",
         },
         {
             title: "Экскурсия «Во времена графа Шувалова»",
@@ -1281,6 +1303,21 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "free of charge",
+        },
+        {
+            ...luggageDelivery,
+            title: "Luggage Delivery",
+            subtitle:
+                "We can deliver your luggage wherever you need it:\nto the mansion in time for check-in or to another address after check-out.",
+            fullDescription: (
+                <>
+                    Spend the day as you please without having to carry your
+                    bags.
+                    <br />
+                    Please book in advance on our partner’s website.
+                </>
+            ),
+            price: "confirmed when you book",
         },
         {
             title: "Excursion 'In the Times of Count Shuvalov'",
