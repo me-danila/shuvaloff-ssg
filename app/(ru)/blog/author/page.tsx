@@ -5,6 +5,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import Divider from "@/components/ui/Divider";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { buildBlogEditorialSchema } from "@/lib/seo/schema";
+import { HOTEL_CONTACTS } from "@/lib/seo/site";
 
 const TITLE = "О редакции блога — ACADEMIA Особняк Шувалова";
 const DESCRIPTION =
@@ -54,10 +55,10 @@ export default function EditorialPage() {
                     <p>
                         Вопросы и&nbsp;предложения по&nbsp;материалам блога:{" "}
                         <a
-                            href="mailto:reservation@academia.spb.ru"
+                            href={`mailto:${HOTEL_CONTACTS.email}`}
                             className="text-brand-red underline underline-offset-4"
                         >
-                            reservation@academia.spb.ru
+                            {HOTEL_CONTACTS.email}
                         </a>
                     </p>
                     <p>

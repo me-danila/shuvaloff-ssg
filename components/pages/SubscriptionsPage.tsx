@@ -10,6 +10,7 @@ import ImageGallerySlider from "@/components/ui/slider/ImageGallerySlider";
 import { AllRooms } from "@/data/RoomsData";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildSubscriptionPageSchema } from "@/lib/seo/schema";
+import { HOTEL_CONTACTS } from "@/lib/seo/site";
 
 type SubscriptionsCopy = {
     title: ReactNode;
@@ -107,10 +108,10 @@ const copyByLocale: Record<Locale, SubscriptionsCopy> = {
                         Узнать о наличии свободных номеров и забронировать
                         проживание можно через отдел бронирования:{" "}
                         <a
-                            href="mailto:reservation@academia.spb.ru"
+                            href={`mailto:${HOTEL_CONTACTS.email}`}
                             className="underline underline-offset-2"
                         >
-                            reservation@academia.spb.ru
+                            {HOTEL_CONTACTS.email}
                         </a>
                         . При бронировании, пожалуйста, укажите идентификатор
                         абонемента;
@@ -124,10 +125,10 @@ const copyByLocale: Record<Locale, SubscriptionsCopy> = {
                         Если вы потеряли абонемент, его можно восстановить,
                         связавшись с отделом бронирования:{" "}
                         <a
-                            href="mailto:reservation@academia.spb.ru"
+                            href={`mailto:${HOTEL_CONTACTS.email}`}
                             className="underline underline-offset-2"
                         >
-                            reservation@academia.spb.ru
+                            {HOTEL_CONTACTS.email}
                         </a>
                         ;
                     </>
@@ -200,10 +201,10 @@ const copyByLocale: Record<Locale, SubscriptionsCopy> = {
                         To check availability and book your stay, please contact
                         the reservations department:{" "}
                         <a
-                            href="mailto:reservation@academia.spb.ru"
+                            href={`mailto:${HOTEL_CONTACTS.email}`}
                             className="underline underline-offset-2"
                         >
-                            reservation@academia.spb.ru
+                            {HOTEL_CONTACTS.email}
                         </a>
                         . Please include your subscription ID when booking.
                     </>
@@ -216,10 +217,10 @@ const copyByLocale: Record<Locale, SubscriptionsCopy> = {
                         If you lose your subscription, it can be restored by
                         contacting the reservations department:{" "}
                         <a
-                            href="mailto:reservation@academia.spb.ru"
+                            href={`mailto:${HOTEL_CONTACTS.email}`}
                             className="underline underline-offset-2"
                         >
-                            reservation@academia.spb.ru
+                            {HOTEL_CONTACTS.email}
                         </a>
                         .
                     </>

@@ -45,8 +45,8 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
             Icon: PhoneIcon,
         },
         {
-            href: "mailto:reservation@academia.spb.ru",
-            label: "reservation@academia.spb.ru",
+            href: `mailto:${HOTEL_CONTACTS.email}`,
+            label: HOTEL_CONTACTS.email,
             Icon: EnvelopeIcon,
         },
         {
@@ -64,8 +64,8 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
             Icon: PhoneIcon,
         },
         {
-            href: "mailto:reservation@academia.spb.ru",
-            label: "reservation@academia.spb.ru",
+            href: `mailto:${HOTEL_CONTACTS.email}`,
+            label: HOTEL_CONTACTS.email,
             Icon: EnvelopeIcon,
         },
         {
@@ -134,7 +134,7 @@ export default function ContactsSection() {
                                         ? "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>"
                                         : "10 Mokhovaya St, Saint Petersburg<br>Open 24/7<br><br>") +
                                     `${HOTEL_CONTACTS.telephoneDisplay}<br>` +
-                                    "reservation@academia.spb.ru",
+                                    HOTEL_CONTACTS.email,
                                 hintContent:
                                     locale === "ru"
                                         ? "ACADEMIA Особняк Шувалова"
