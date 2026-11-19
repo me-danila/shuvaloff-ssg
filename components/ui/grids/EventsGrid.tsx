@@ -110,7 +110,7 @@ export default function EventsGrid() {
                                 ? event.start.slice(0, 7)
                                 : undefined
                         }
-                        className="flex min-w-full snap-start xl:min-w-0 xl:data-[event-month]:col-start-1 xl:scroll-mt-36"
+                        className="flex min-w-full snap-start xl:min-w-0 xl:scroll-mt-36"
                     >
                         <CardEvent event={event} />
                     </StaggerItem>
