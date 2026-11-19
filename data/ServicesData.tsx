@@ -14,6 +14,8 @@ type ServiceWithExternal = { externalLink: string; slug?: never };
 export type Service = {
     title: string;
     subtitle: string;
+    /** Продолжение первого абзаца на странице услуги. */
+    subtitleContinuation?: string;
     /** meta description типовой страницы, если subtitle для нее не годится. */
     metaDescription?: string;
     imgUrl: string;
@@ -595,13 +597,10 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Доставка багажа",
             subtitle:
                 "Мы поможем доставить ваш багаж туда, где он понадобится:\nв особняк к моменту заселения или по другому адресу после выезда.",
-            fullDescription: (
-                <>
-                    Вы остаетесь налегке и можете провести день так, как хотите.
-                    <br />
-                    Заказ оформляется заранее на сайте нашего партнера.
-                </>
-            ),
+            subtitleContinuation:
+                "Вы остаетесь налегке и можете провести день так, как хотите.",
+            fullDescription:
+                "Заказ оформляется заранее на сайте нашего партнера.",
             price: "уточняйте при оформлении заказа",
         },
         {
@@ -1309,14 +1308,9 @@ export const AllServices: Record<Locale, Service[]> = {
             title: "Luggage Delivery",
             subtitle:
                 "We can deliver your luggage wherever you need it:\nto the mansion in time for check-in or to another address after check-out.",
-            fullDescription: (
-                <>
-                    Spend the day as you please without having to carry your
-                    bags.
-                    <br />
-                    Please book in advance on our partner’s website.
-                </>
-            ),
+            subtitleContinuation:
+                "Spend the day as you please without having to carry your bags.",
+            fullDescription: "Please book in advance on our partner’s website.",
             price: "confirmed when you book",
         },
         {

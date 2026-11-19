@@ -101,10 +101,16 @@ export default function EventsGrid() {
                 onScroll={handleScroll}
                 className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar xl:grid xl:grid-cols-2 xl:overflow-visible"
             >
-                {events.map((event) => (
+                {events.map((event, index) => (
                     <StaggerItem
                         key={`${event.title}-${event.start}`}
-                        className="flex min-w-full snap-start xl:min-w-0"
+                        data-event-month={
+                            event.start.slice(0, 7) !==
+                            events[index - 1]?.start.slice(0, 7)
+                                ? event.start.slice(0, 7)
+                                : undefined
+                        }
+                        className="flex min-w-full snap-start xl:min-w-0 xl:data-[event-month]:col-start-1 xl:scroll-mt-36"
                     >
                         <CardEvent event={event} />
                     </StaggerItem>

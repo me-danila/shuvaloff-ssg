@@ -130,7 +130,12 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                         )}
                         <FadeUp delay={0.1}>
                             <p className="whitespace-pre-line">
-                                {service.subtitle}
+                                {[
+                                    service.subtitle,
+                                    service.subtitleContinuation,
+                                ]
+                                    .filter(Boolean)
+                                    .join(" ")}
                             </p>
                         </FadeUp>
                         {service.fullDescription && (

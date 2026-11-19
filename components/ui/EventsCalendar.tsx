@@ -127,9 +127,22 @@ export default function EventsCalendar() {
     );
 
     const shift = (dir: -1 | 1) => {
-        setView((v) => {
-            const total = v.year * 12 + v.month + dir;
-            return { year: Math.floor(total / 12), month: total % 12 };
+        const next = new Date(view.year, view.month + dir, 1);
+        const year = next.getFullYear();
+        const month = next.getMonth();
+        setView({ year, month });
+
+        if (!window.matchMedia("(min-width: 80rem)").matches) return;
+        const monthKey = `${year}-${String(month + 1).padStart(2, "0")}`;
+        const firstEvent = document.querySelector(
+            `[data-event-month="${monthKey}"]`,
+        );
+        firstEvent?.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                .matches
+                ? "instant"
+                : "smooth",
+            block: "start",
         });
     };
 
