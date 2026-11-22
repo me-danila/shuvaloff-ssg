@@ -5,7 +5,6 @@ import { useState } from "react";
 import ContactsSection from "@/components/sections/ContactsSection";
 import HeroHistoricalRooms from "@/components/sections/HeroHistoricalRooms";
 import StructuredData from "@/components/seo/StructuredData";
-import Button from "@/components/ui/Button";
 import ButtonNotice from "@/components/ui/ButtonNotice";
 import Divider from "@/components/ui/Divider";
 import OffersGrid, {
@@ -13,10 +12,10 @@ import OffersGrid, {
 } from "@/components/ui/grids/OffersGrid";
 import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
-import { ORDER_URL } from "@/lib/seo/site";
 
 const AMENITY_ICONS = [
     {
@@ -377,7 +376,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref: ORDER_URL,
                     price: "от 25 750 ₽",
                 },
             },
@@ -401,7 +399,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref: ORDER_URL,
                     price: "от 20 000 ₽",
                 },
             },
@@ -430,7 +427,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref: ORDER_URL,
                     price: "от 26 450 ₽",
                 },
             },
@@ -454,7 +450,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Заказать",
-                    buttonHref: ORDER_URL,
                     price: "от 20 000 ₽",
                 },
             },
@@ -594,7 +589,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref: ORDER_URL,
                     price: "from 25 750 ₽",
                 },
             },
@@ -619,7 +613,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref: ORDER_URL,
                     price: "from 20 000 ₽",
                 },
             },
@@ -649,7 +642,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref: ORDER_URL,
                     price: "from 26 450 ₽",
                 },
             },
@@ -674,7 +666,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         </>
                     ),
                     buttonText: "Order",
-                    buttonHref: ORDER_URL,
                     price: "from 20 000 ₽",
                 },
             },
@@ -702,7 +693,6 @@ const SEO_PARENT_PATHS = ["/", "/services/"] as const;
 export default function BoatToursPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
     const [routeMap, setRouteMap] = useState<string | null>(null);
-    const bookingHref = ORDER_URL;
 
     const serviceOffers: SpecialOfferItem[] = [
         {
@@ -712,7 +702,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
             modal: {
                 content: copy.service1.description,
                 buttonText: copy.orderLabel,
-                buttonHref: bookingHref,
                 price: `${copy.service1.price} ₽`,
             },
         },
@@ -732,7 +721,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                     </>
                 ),
                 buttonText: copy.orderLabel,
-                buttonHref: bookingHref,
                 price: `${copy.service2.price} ₽`,
             },
         },
@@ -744,7 +732,6 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
             modal: {
                 content: copy.service3.description,
                 buttonText: copy.orderLabel,
-                buttonHref: bookingHref,
                 price: `${copy.service3.price} ₽`,
             },
         },
@@ -857,13 +844,9 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                             </p>
                         </div>
 
-                        <Button
-                            href={ORDER_URL}
-                            target="_blank"
-                            className="max-w-fit mt-2 xl:mt-4"
-                        >
+                        <ServiceOrderButton className="max-w-fit mt-2 xl:mt-4">
                             {copy.bookLabel}
-                        </Button>
+                        </ServiceOrderButton>
                     </div>
                 </div>
 
@@ -941,13 +924,9 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                             </p>
                         </div>
 
-                        <Button
-                            href={ORDER_URL}
-                            target="_blank"
-                            className="max-w-fit mt-2 xl:mt-4"
-                        >
+                        <ServiceOrderButton className="max-w-fit mt-2 xl:mt-4">
                             {copy.bookLabel}
-                        </Button>
+                        </ServiceOrderButton>
                     </div>
                 </div>
 
@@ -1019,13 +998,9 @@ export default function BoatToursPage({ locale }: { locale: Locale }) {
                             </p>
                         </div>
 
-                        <Button
-                            href={ORDER_URL}
-                            target="_blank"
-                            className="max-w-fit mt-2 xl:mt-4"
-                        >
+                        <ServiceOrderButton className="max-w-fit mt-2 xl:mt-4">
                             {copy.bookLabel}
-                        </Button>
+                        </ServiceOrderButton>
                     </div>
                 </div>
             </section>

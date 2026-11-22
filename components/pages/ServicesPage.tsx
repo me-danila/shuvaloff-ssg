@@ -139,6 +139,7 @@ export default function ServicesPage({ locale }: { locale: Locale }) {
                                 slug={service.slug}
                                 externalLink={service.externalLink}
                                 detailsHref={service.detailsHref}
+                                showOrder
                             />
                         </StaggerItem>
                     ))}

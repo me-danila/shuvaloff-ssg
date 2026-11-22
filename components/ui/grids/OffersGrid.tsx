@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { FadeUp } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import type { Locale } from "@/lib/i18n/routing";
-import { localizeHref } from "@/lib/i18n/routing";
 
 type SpecialOfferBaseItem = {
     title: string;
@@ -16,7 +16,6 @@ type SpecialOfferBaseItem = {
     modal: {
         content: React.ReactNode;
         buttonText: string;
-        buttonHref: string;
         price?: string;
     };
 };
@@ -235,18 +234,13 @@ export default function OffersGrid({
                             )}
 
                             <div className="mt-6 flex min-h-[3.25rem] flex-wrap items-center justify-center gap-2 px-5">
-                                <Button
-                                    href={localizeHref(
-                                        offer.modal.buttonHref,
-                                        locale,
-                                    )}
-                                    target="_blank"
+                                <ServiceOrderButton
                                     variant="primary"
                                     size="sm"
                                     className="shrink-0 xl:px-6"
                                 >
                                     {copy.order}
-                                </Button>
+                                </ServiceOrderButton>
                                 <Button
                                     type="button"
                                     onClick={() => setSelectedOffer(offer)}
@@ -301,15 +295,9 @@ export default function OffersGrid({
                             {selectedOffer.modal.content}
                         </div>
                         <div className="flex items-center gap-4 mt-2 xl:mt-4">
-                            <Button
-                                href={localizeHref(
-                                    selectedOffer.modal.buttonHref,
-                                    locale,
-                                )}
-                                target="_blank"
-                            >
+                            <ServiceOrderButton>
                                 {selectedOffer.modal.buttonText}
-                            </Button>
+                            </ServiceOrderButton>
                             {selectedOffer.modal.price && (
                                 <span className="text-sm text-gray-600">
                                     {selectedOffer.modal.price}

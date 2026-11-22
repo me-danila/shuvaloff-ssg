@@ -128,6 +128,7 @@ export default function HomeServicesSection({
                                 slug={service.slug}
                                 externalLink={service.externalLink}
                                 detailsHref={service.detailsHref}
+                                showOrder
                                 backgroundClassName="bg-stone-100"
                             />
                         </div>

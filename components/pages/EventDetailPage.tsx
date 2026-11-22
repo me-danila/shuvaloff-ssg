@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import EventDates from "@/components/ui/EventDates";
 import { FadeUp } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import EventsSlider from "@/components/ui/slider/EventsSlider";
 import {
@@ -16,6 +17,8 @@ import {
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildEventSchema } from "@/lib/seo/schema";
+
+import { ORDER_URL } from "@/lib/seo/site";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -139,19 +142,28 @@ export default async function EventDetailPage({ params, locale }: Props) {
                         </FadeUp>
 
                         <FadeUp delay={0.4}>
-                            <Button
-                                href={event.bookingUrl}
-                                target={
-                                    event.bookingUrl.startsWith("http")
-                                        ? "_blank"
-                                        : undefined
-                                }
-                                variant="primary"
-                                size="xl"
-                                className="self-start mt-3"
-                            >
-                                {labels.book}
-                            </Button>
+                            {event.bookingUrl === ORDER_URL ? (
+                                <ServiceOrderButton
+                                    size="xl"
+                                    className="self-start mt-3"
+                                >
+                                    {labels.book}
+                                </ServiceOrderButton>
+                            ) : (
+                                <Button
+                                    href={event.bookingUrl}
+                                    target={
+                                        event.bookingUrl.startsWith("http")
+                                            ? "_blank"
+                                            : undefined
+                                    }
+                                    variant="primary"
+                                    size="xl"
+                                    className="self-start mt-3"
+                                >
+                                    {labels.book}
+                                </Button>
+                            )}
                         </FadeUp>
                     </div>
                 </div>

@@ -9,10 +9,10 @@ import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import DesktopHeroGrid from "@/components/ui/grids/DesktopHeroGrid";
 import { FadeUp } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
-import { ORDER_URL } from "@/lib/seo/site";
 
 type ConciergeCopy = {
     title: string;
@@ -224,14 +224,12 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                         {copy.bellTitle}
                                     </p>
                                 </div>
-                                <Button
-                                    href={ORDER_URL}
-                                    target="_blank"
+                                <ServiceOrderButton
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
                                 >
                                     {copy.orderLabel}
-                                </Button>
+                                </ServiceOrderButton>
                             </div>
                             <ul className="space-y-1 text-sm xl:text-base">
                                 {copy.bellItems.map((item) => (
@@ -245,14 +243,12 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                 ))}
                             </ul>
                         </div>
-                        <Button
-                            href={ORDER_URL}
-                            target="_blank"
+                        <ServiceOrderButton
                             variant="primary"
                             className="xl:hidden"
                         >
                             {copy.orderLabel}
-                        </Button>
+                        </ServiceOrderButton>
                     </FadeUp>
 
                     <FadeUp
@@ -272,14 +268,12 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                         {copy.heartTitle}
                                     </p>
                                 </div>
-                                <Button
-                                    href={ORDER_URL}
-                                    target="_blank"
+                                <ServiceOrderButton
                                     variant="primary"
                                     className="max-xl:hidden xl:flex xl:mt-auto xl:self-start"
                                 >
                                     {copy.orderLabel}
-                                </Button>
+                                </ServiceOrderButton>
                             </div>
                             <ul className="space-y-1 text-sm xl:text-base">
                                 {copy.heartItems.map((item) => (
@@ -293,14 +287,12 @@ export default function ConciergePage({ locale }: { locale: Locale }) {
                                 ))}
                             </ul>
                         </div>
-                        <Button
-                            href={ORDER_URL}
-                            target="_blank"
+                        <ServiceOrderButton
                             variant="primary"
                             className="xl:hidden"
                         >
                             {copy.orderLabel}
-                        </Button>
+                        </ServiceOrderButton>
                     </FadeUp>
                 </div>
             </section>

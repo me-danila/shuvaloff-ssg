@@ -47,6 +47,7 @@ export type LandingDictionary = {
              * landingHref (/booking/ → /it/booking/ …).
              */
             href?: string;
+            order?: boolean;
         }[];
     };
     /** Номерной фонд: карточки категорий, клик — бронирование. */

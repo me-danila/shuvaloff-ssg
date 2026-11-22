@@ -104,6 +104,7 @@ export default function ServicesSlider({ services }: ServicesSliderProps) {
                             slug={service.slug}
                             externalLink={service.externalLink}
                             detailsHref={service.detailsHref}
+                            showOrder
                         />
                     </div>
                 ))}

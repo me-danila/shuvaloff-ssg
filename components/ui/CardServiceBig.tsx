@@ -2,10 +2,10 @@
 
 import type React from "react";
 import Button from "@/components/ui/Button";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
-import { ORDER_URL } from "@/lib/seo/site";
 
 type CardServiceBigCtaLabel = string | Partial<Record<Locale, string>>;
 
@@ -17,12 +17,8 @@ type CardServiceBigProps = {
     subtitle?: string;
     slug?: string;
     externalLink?: string;
-    /**
-     * Индивидуальная страница услуги: «Подробнее» ведет сюда, а «Заказать» —
-     * на типовую /services/<slug>/ вместо мессенджера.
-     */
+    /** Страница с подробным описанием услуги. */
     detailsHref?: string;
-    orderUrl?: string;
     ctaLabel?: CardServiceBigCtaLabel;
     /** Показывать раздельные действия: «Заказать» (если есть slug) + «Подробнее». */
     showOrder?: boolean;
@@ -50,7 +46,7 @@ type CardServiceBigProps = {
     details?: React.ReactNode;
     /**
      * Карточка без своей страницы: заголовок и фото не ссылки, единственная
-     * кнопка — «Заказать» (ORDER_URL, новая вкладка).
+     * кнопка — «Заказать».
      */
     orderOnly?: boolean;
 };
@@ -63,7 +59,6 @@ export default function CardServiceBig({
     slug,
     externalLink,
     detailsHref,
-    orderUrl,
     ctaLabel,
     showOrder = false,
     backgroundClassName = "bg-white",
@@ -95,12 +90,9 @@ export default function CardServiceBig({
             ? localizeHref(`/services/${slug}/`, locale)
             : (externalLink ?? "#"));
 
-    // «Подробнее» — индивидуальная страница, если есть; «Заказать» тогда ведет
-    // на типовую страницу услуги (href), а не в мессенджер.
     const detailsButtonHref = detailsHref
         ? localizeHref(detailsHref, locale)
         : href;
-    const orderHref = detailsHref ? href : (orderUrl ?? ORDER_URL);
 
     // Фото над заголовком — через order-first: разметка одна для обоих порядков.
     const imageClass = `relative block ${imageAspectClassName} w-full overflow-hidden ${imageFirst ? "order-first" : ""}`;
@@ -165,28 +157,24 @@ export default function CardServiceBig({
             {detailsSlot && <div className="mt-5 px-5">{detailsSlot}</div>}
             {orderOnly ? (
                 <div className="mt-6 px-5">
-                    <Button
-                        href={orderUrl ?? ORDER_URL}
-                        target="_blank"
+                    <ServiceOrderButton
                         variant="primary"
                         size="sm"
                         className="xl:px-8"
                     >
                         {orderLabel}
-                    </Button>
+                    </ServiceOrderButton>
                 </div>
             ) : showOrder ? (
-                <div className="mt-6 flex min-h-[3.25rem] items-center gap-2 px-5">
+                <div className="mt-6 flex min-h-[3.25rem] flex-wrap items-center gap-2 px-5">
                     {slug && (
-                        <Button
-                            href={orderHref}
-                            target={detailsHref ? undefined : "_blank"}
+                        <ServiceOrderButton
                             variant="primary"
                             size="sm"
                             className="shrink-0 xl:px-6"
                         >
                             {orderLabel}
-                        </Button>
+                        </ServiceOrderButton>
                     )}
                     <Button
                         href={detailsButtonHref}

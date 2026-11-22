@@ -32,12 +32,7 @@ export type Service = {
     comment?: ReactNode;
     /** Подпись основной кнопки на странице услуги. */
     orderLabel?: string;
-    orderUrl?: string;
-    /**
-     * Индивидуальная страница услуги (/services/<slug>/details/). Тогда в
-     * карточках «Заказать» ведет на типовую /services/<slug>/, «Подробнее» —
-     * сюда; на типовой рядом с «Заказать» — кнопка «Подробнее».
-     */
+    /** Индивидуальная страница услуги для кнопки «Подробнее». */
     detailsHref?: string;
     /** Не показывать в слайдере услуг на главной (страница без согласованной навигации). */
     hideOnHome?: boolean;
@@ -46,10 +41,10 @@ export type Service = {
 /** Разрыв абзаца внутри описания: отступ как между абзацами страницы услуги, без двойного <br />. */
 const ParagraphGap = () => <span aria-hidden className="block h-3.5" />;
 
+const luggagePartnerUrl = "https://go.baggage.ru/shuvaloff/";
 const luggageDelivery = {
     slug: "luggage-delivery",
     imgUrl: "/images/luggage-delivery.webp",
-    orderUrl: "https://go.baggage.ru/shuvaloff/",
     hideOnHome: true,
 };
 
@@ -594,6 +589,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             ...luggageDelivery,
             title: "Доставка багажа",
+            links: [{ label: "Сайт партнёра", href: luggagePartnerUrl }],
             subtitle:
                 "Мы поможем доставить ваш багаж туда, где он понадобится:\nв особняк к моменту заселения или по другому адресу после выезда.",
             subtitleContinuation:
@@ -1304,6 +1300,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             ...luggageDelivery,
             title: "Luggage Delivery",
+            links: [{ label: "Partner website", href: luggagePartnerUrl }],
             subtitle:
                 "We can deliver your luggage wherever you need it:\nto the mansion in time for check-in or to another address after check-out.",
             subtitleContinuation:

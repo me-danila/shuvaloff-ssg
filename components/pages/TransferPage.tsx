@@ -1,15 +1,14 @@
 import { AirplaneIcon, TrainIcon } from "@phosphor-icons/react/dist/ssr";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
-import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
-import { ORDER_URL } from "@/lib/seo/site";
 
 type TransferCopy = {
     title: string;
@@ -152,14 +151,12 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                                         </p>
                                     ) : null}
                                 </div>
-                                <Button
-                                    href={ORDER_URL}
-                                    target="_blank"
+                                <ServiceOrderButton
                                     className="mt-1"
                                     uppercase={false}
                                 >
                                     {price}
-                                </Button>
+                                </ServiceOrderButton>
                             </StaggerItem>
                         );
                     })}
@@ -177,9 +174,9 @@ export default function TransferPage({ locale }: { locale: Locale }) {
             </section>
 
             <FadeUp className="mx-6 flex justify-center xl:max-w-7xl xl:mx-auto xl:w-full">
-                <Button href={ORDER_URL} target="_blank" variant="primary">
+                <ServiceOrderButton variant="primary">
                     {copy.orderButton}
-                </Button>
+                </ServiceOrderButton>
             </FadeUp>
 
             <section className="mx-6 flex flex-col gap-4 xl:max-w-7xl xl:mx-auto xl:w-full xl:grid xl:grid-cols-[1.1fr_1fr] xl:gap-8 xl:items-start">
@@ -213,9 +210,9 @@ export default function TransferPage({ locale }: { locale: Locale }) {
                         ))}
                     </ul>
                     <p>{copy.description3}</p>
-                    <Button href={ORDER_URL} target="_blank" variant="primary">
+                    <ServiceOrderButton variant="primary">
                         {copy.orderButton}
-                    </Button>
+                    </ServiceOrderButton>
                 </FadeUp>
             </section>
 

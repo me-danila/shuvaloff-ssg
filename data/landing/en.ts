@@ -3,8 +3,6 @@ import type { LandingDictionary } from "./types";
 /** Анкета визовой поддержки (bpltech): пункт меню и колонка «Visa support». */
 const VISA_FORM_URL =
     "https://www.bpltech.pro/guest_form/add/175a67939d61a46c4228b74d23823863/1/start/english/no#bplformtopiframewindow";
-/** Чат с отелем в WhatsApp: трансфер и консьерж. */
-const WHATSAPP_URL = "https://wa.me/79111966211";
 
 export const en: LandingDictionary = {
     locale: "en",
@@ -56,13 +54,13 @@ export const en: LandingDictionary = {
                 icon: "transfer",
                 title: "Transfer",
                 text: "We’ll meet you at the airport and arrange a car to take you anywhere in the city",
-                href: WHATSAPP_URL,
+                order: true,
             },
             {
                 icon: "concierge",
                 title: "24/7 Online Concierge",
                 text: "Let us take care of organising your leisure activities. We can help you book a restaurant, arrange a massage, buy theatre tickets or organise an exclusive tour",
-                href: WHATSAPP_URL,
+                order: true,
             },
             {
                 icon: "gift",

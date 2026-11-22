@@ -3,6 +3,7 @@ import SkipLink from "@/components/a11y/SkipLink";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import StructuredData from "@/components/seo/StructuredData";
+import { ServiceOrderProvider } from "@/components/ui/modals/ServiceOrderButton";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildSiteSchema } from "@/lib/seo/schema";
 
@@ -31,7 +32,9 @@ export default function SiteShell({
                 tabIndex={-1}
                 className="scroll-mt-24 focus:outline-none"
             >
-                <Suspense fallback={null}>{children}</Suspense>
+                <ServiceOrderProvider locale={locale}>
+                    <Suspense fallback={null}>{children}</Suspense>
+                </ServiceOrderProvider>
             </div>
             <Footer locale={locale} />
         </>

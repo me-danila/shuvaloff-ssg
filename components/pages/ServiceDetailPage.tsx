@@ -6,13 +6,13 @@ import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import ServicesSlider from "@/components/ui/slider/ServicesSlider";
 import { AllServices } from "@/data/ServicesData";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { buildServiceSchema } from "@/lib/seo/schema";
-import { ORDER_URL } from "@/lib/seo/site";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -188,14 +188,9 @@ export default async function ServiceDetailPage({ params, locale }: Props) {
                             {service.comment && <p>{service.comment}</p>}
 
                             <div className="mt-1 flex flex-wrap gap-3">
-                                <Button
-                                    href={service.orderUrl ?? ORDER_URL}
-                                    target="_blank"
-                                    variant="primary"
-                                    size="xl"
-                                >
+                                <ServiceOrderButton size="xl">
                                     {service.orderLabel ?? labels.order}
-                                </Button>
+                                </ServiceOrderButton>
                                 {service.detailsHref && (
                                     <Button
                                         href={localizeHref(

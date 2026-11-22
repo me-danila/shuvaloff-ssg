@@ -60,6 +60,8 @@ export function Modal({
         if (!open) return;
 
         const handleKeyDown = (e: KeyboardEvent) => {
+            // A native modal opened above this panel owns Escape and Tab.
+            if (document.querySelector("dialog:modal")) return;
             if (e.key === "Escape") {
                 e.preventDefault();
                 onCloseRef.current();

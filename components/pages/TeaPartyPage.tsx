@@ -6,6 +6,7 @@ import PhotoStripSection from "@/components/sections/PhotoStripSection";
 import StructuredData from "@/components/seo/StructuredData";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
+import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import {
     TEA_PARTY_BOOK_URL,
@@ -18,7 +19,7 @@ import {
 } from "@/data/teaPartyData";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { buildWebPageSchema } from "@/lib/seo/schema";
-import { getAbsoluteUrl, ORDER_URL } from "@/lib/seo/site";
+import { getAbsoluteUrl } from "@/lib/seo/site";
 
 // Орнамент-разделитель сайта (тот же, что в components/ui/Divider).
 const DIVIDER_SRC =
@@ -143,15 +144,13 @@ export default function TeaPartyPage({ locale }: { locale: Locale }) {
                                             </li>
                                         ))}
                                     </ul>
-                                    <Button
-                                        href={ORDER_URL}
-                                        target="_blank"
+                                    <ServiceOrderButton
                                         variant="primary"
                                         size="sm"
                                         className="mt-auto w-full"
                                     >
                                         {copy.orderLabel}
-                                    </Button>
+                                    </ServiceOrderButton>
                                 </div>
                             );
                         })}
@@ -173,14 +172,9 @@ export default function TeaPartyPage({ locale }: { locale: Locale }) {
                     </FadeUp>
 
                     <FadeUp className="flex flex-col justify-center gap-4 xl:flex-row">
-                        <Button
-                            href={ORDER_URL}
-                            target="_blank"
-                            variant="primary"
-                            size="sm"
-                        >
+                        <ServiceOrderButton variant="primary" size="sm">
                             {copy.bookTeaLabel}
-                        </Button>
+                        </ServiceOrderButton>
                         <Button
                             href={localizeHref("/booking/", locale)}
                             variant="primary-outline"

@@ -7,6 +7,10 @@ import {
     StampIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
+import {
+    ServiceOrderProvider,
+    ServiceOrderTileButton,
+} from "@/components/ui/modals/ServiceOrderButton";
 import type { LandingDictionary } from "@/data/landing";
 import type { LandingServiceIcon } from "@/data/landing/types";
 import {
@@ -46,7 +50,7 @@ function serviceLinkProps(href: string, locale: LandingLocale) {
  * даже если какой-то заголовок переносится на две строки.
  * Мобила/планшет: горизонтальный скролл со snap; колонка ~3/4 экрана,
  * чтобы край следующей подсказывал прокрутку.
- * Колонка с href — ссылка целиком (виза, бронирование, WhatsApp).
+ * Колонки трансфера и консьержа открывают выбор способа связи.
  */
 export default function LandingServices({
     dict,
@@ -56,52 +60,65 @@ export default function LandingServices({
     locale: LandingLocale;
 }) {
     return (
-        <section className="py-8 xl:py-10">
-            {/* Видимого заголовка нет по макету; h2 остается для скринридеров. */}
-            <h2 className="sr-only">{dict.title}</h2>
-            <StaggerContainer
-                data-lenis-prevent-horizontal
-                className="no-scrollbar flex snap-x snap-mandatory scroll-px-6 overflow-x-auto px-6 lg:grid lg:snap-none lg:grid-cols-5 lg:grid-rows-[auto_auto_1fr] lg:overflow-visible xl:mx-auto xl:max-w-7xl xl:px-0"
-            >
-                {dict.items.map((item) => {
-                    const ItemIcon = ICONS[item.icon];
-                    const content = (
-                        <>
-                            <ItemIcon
-                                size={28}
-                                weight="light"
-                                className="text-brand-red"
-                                aria-hidden="true"
-                            />
-                            {/* "\n" в заголовке — перенос строки только на десктопе
+        <ServiceOrderProvider locale={locale}>
+            <section className="py-8 xl:py-10">
+                {/* Видимого заголовка нет по макету; h2 остается для скринридеров. */}
+                <h2 className="sr-only">{dict.title}</h2>
+                <StaggerContainer
+                    data-lenis-prevent-horizontal
+                    className="no-scrollbar flex snap-x snap-mandatory scroll-px-6 overflow-x-auto px-6 lg:grid lg:snap-none lg:grid-cols-5 lg:grid-rows-[auto_auto_1fr] lg:overflow-visible xl:mx-auto xl:max-w-7xl xl:px-0"
+                >
+                    {dict.items.map((item) => {
+                        const ItemIcon = ICONS[item.icon];
+                        const content = (
+                            <>
+                                <ItemIcon
+                                    size={28}
+                                    weight="light"
+                                    className="text-brand-red"
+                                    aria-hidden="true"
+                                />
+                                {/* "\n" в заголовке — перенос строки только на десктопе
                                 (lg+); на мобиле текст сплошной. */}
-                            <h3 className="font-history text-lg uppercase leading-tight text-brand-brown transition-colors group-hover:text-brand-red lg:mt-4 lg:whitespace-pre-line xl:text-xl">
-                                {item.title}
-                            </h3>
-                            <p className="text-brand-brown/75 lg:mt-2 xl:text-sm/6">
-                                {item.text}
-                            </p>
-                        </>
-                    );
-                    return (
-                        <StaggerItem
-                            key={item.icon}
-                            className="w-[78%] shrink-0 snap-start border-l border-brand-brown/15 px-5 first:border-l-0 first:pl-0 sm:w-[40%] lg:row-span-3 lg:grid lg:w-auto lg:grid-rows-subgrid lg:px-6 lg:last:pr-0 xl:px-8"
-                        >
-                            {item.href ? (
-                                <a
-                                    {...serviceLinkProps(item.href, locale)}
-                                    className={`group ${ITEM_BODY_CLASS}`}
-                                >
-                                    {content}
-                                </a>
-                            ) : (
-                                <div className={ITEM_BODY_CLASS}>{content}</div>
-                            )}
-                        </StaggerItem>
-                    );
-                })}
-            </StaggerContainer>
-        </section>
+                                <h3 className="font-history text-lg uppercase leading-tight text-brand-brown transition-colors group-hover:text-brand-red lg:mt-4 lg:whitespace-pre-line xl:text-xl">
+                                    {item.title}
+                                </h3>
+                                <p className="text-brand-brown/75 lg:mt-2 xl:text-sm/6">
+                                    {item.text}
+                                </p>
+                            </>
+                        );
+                        return (
+                            <StaggerItem
+                                key={item.icon}
+                                className="w-[78%] shrink-0 snap-start border-l border-brand-brown/15 px-5 first:border-l-0 first:pl-0 sm:w-[40%] lg:row-span-3 lg:grid lg:w-auto lg:grid-rows-subgrid lg:px-6 lg:last:pr-0 xl:px-8"
+                            >
+                                {item.order ? (
+                                    <div
+                                        className={`group relative ${ITEM_BODY_CLASS}`}
+                                    >
+                                        {content}
+                                        <ServiceOrderTileButton
+                                            label={item.title}
+                                        />
+                                    </div>
+                                ) : item.href ? (
+                                    <a
+                                        {...serviceLinkProps(item.href, locale)}
+                                        className={`group ${ITEM_BODY_CLASS}`}
+                                    >
+                                        {content}
+                                    </a>
+                                ) : (
+                                    <div className={ITEM_BODY_CLASS}>
+                                        {content}
+                                    </div>
+                                )}
+                            </StaggerItem>
+                        );
+                    })}
+                </StaggerContainer>
+            </section>
+        </ServiceOrderProvider>
     );
 }
