@@ -42,3 +42,13 @@ export function nbsp(text: string): string {
             .replace(EM_DASH, `${NBSP}—`)
     );
 }
+
+/** Для русской вёрстки с составным названием города и многобуквенными предлогами. */
+export function russianDisplayText(text: string): string {
+    return nbsp(text)
+        .replace(/Санкт-Петербург/gi, (city) => city.replace("-", "‑"))
+        .replace(
+            /(^|[\s("«])(без|для|при|про|под|над|после|перед|через|между|около|вокруг|среди|внутри|кроме|вместо|благодаря|согласно) +/gi,
+            `$1$2${NBSP}`,
+        );
+}

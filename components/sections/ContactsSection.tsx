@@ -51,7 +51,7 @@ const CONTACTS: Record<"ru" | "en", ContactLink[]> = {
         },
         {
             href: "https://yandex.com/maps/org/academia_mansion_shuvaloff/71619247470/",
-            label: "Санкт-Петербург, ул. Моховая, д. 10",
+            label: "Санкт‑Петербург, ул. Моховая, д. 10",
             Icon: MapPinIcon,
             target: "_blank",
             rel: "noopener noreferrer",
@@ -131,7 +131,7 @@ export default function ContactsSection() {
                                         : "ACADEMIA Mansion Shuvaloff",
                                 balloonContentBody:
                                     (locale === "ru"
-                                        ? "Моховая, д. 10, Санкт-Петербург<br>Режим работы: круглосуточно 24/7<br><br>"
+                                        ? "Моховая, д. 10, Санкт‑Петербург<br>Режим работы: круглосуточно 24/7<br><br>"
                                         : "10 Mokhovaya St, Saint Petersburg<br>Open 24/7<br><br>") +
                                     `${HOTEL_CONTACTS.telephoneDisplay}<br>` +
                                     HOTEL_CONTACTS.email,

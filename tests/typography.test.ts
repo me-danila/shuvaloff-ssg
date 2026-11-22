@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { nbsp } from "@/lib/typography";
+import { nbsp, russianDisplayText } from "@/lib/typography";
 
 const NBSP = "\u00A0";
 
@@ -30,4 +30,10 @@ describe("nbsp", () => {
         );
         expect(nbsp("it@academia-group.ru")).toBe("it@academia-group.ru");
     });
+});
+
+test("предлоги и название города остаются целыми в свадебных текстах", () => {
+    expect(russianDisplayText("для свадьбы в Санкт-Петербурге")).toBe(
+        `для${NBSP}свадьбы в${NBSP}Санкт‑Петербурге`,
+    );
 });

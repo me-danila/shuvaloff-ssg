@@ -425,7 +425,7 @@ const MOBILE_LANG_MENU_ID = "header-mobile-languages";
  */
 const FIXED_HEADER_PATHS = new Set([
     "/",
-    //    "/wedding",
+    "/wedding",
     "/spasibo_wedding",
     "/events",
     "/photo-shoot",
@@ -778,7 +778,7 @@ export default function Header({ locale }: { locale: Locale }) {
                                     />
                                     {locale === "en"
                                         ? "Saint Petersburg"
-                                        : "Санкт-Петербург"}
+                                        : "Санкт‑Петербург"}
                                 </button>
                                 <Button
                                     href={localizeHref("/booking/", locale)}

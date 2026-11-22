@@ -1,4 +1,3 @@
-import Link from "next/link";
 import ContactsSection from "@/components/sections/ContactsSection";
 import WeddingHistoricalMapSection from "@/components/sections/WeddingHistoricalMapSection";
 import StructuredData from "@/components/seo/StructuredData";
@@ -24,6 +23,7 @@ import WeddingSlider from "@/components/ui/slider/WeddingSlider";
 import WeddingReviewsWidget from "@/components/ui/WeddingReviewsWidget";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildWeddingPageSchema } from "@/lib/seo/schema";
+import { russianDisplayText } from "@/lib/typography";
 import BookingForm from "../sections/BookingForm";
 
 type WeddingCopy = {
@@ -43,8 +43,8 @@ type WeddingCopy = {
     intimateTitle: string;
     intimateSubTitle: string;
     intimateDescription: string;
-    accommodationTitle: string;
-    accommodationDescription: string;
+    accommodationTitle: [string, string];
+    accommodationDescription: [string, string];
     oneVenueTitle: string;
     mansionTitle: string;
     mansionSubTitle: string;
@@ -93,9 +93,11 @@ const copyByLocale: Record<Locale, WeddingCopy> = {
         intimateSubTitle: "стильно, искренне, душевно и по‑настоящему",
         intimateDescription:
             "Формат камерной свадьбы — это про уютную атмосферу, внимание к каждой детали и возможность провести день только с самыми близкими. Мы создаем особенные, трогательные и очень личные торжества на 10-20 гостей. Все залы бара-ресторана ACADEMIA Шувалова располагают к теплой и душевной атмосфере, где каждый гость чувствует себя желанным.",
-        accommodationTitle: "Проживание в историческом особняке",
-        accommodationDescription:
-            "В день вашей свадьбы каждая деталь имеет значение. Отель-особняк ACADEMIA Шувалова не просто предлагает размещение в номерах, а создает уникальное пространство, где исторический антураж естественно дополняется современным комфортом, создавая особую атмосферу для значимых моментов.",
+        accommodationTitle: ["Проживание", "в историческом особняке"],
+        accommodationDescription: [
+            "В день вашей свадьбы каждая деталь имеет значение.",
+            "Отель-особняк ACADEMIA Шувалова не просто предлагает размещение в номерах, а создает уникальное пространство, где исторический антураж естественно дополняется современным комфортом, создавая особую атмосферу для значимых моментов.",
+        ],
         oneVenueTitle: "Одна площадка — много возможностей",
         mansionTitle: "ACADEMIA Шувалова",
         mansionSubTitle:
@@ -160,9 +162,11 @@ const copyByLocale: Record<Locale, WeddingCopy> = {
         intimateSubTitle: "stylish, sincere, heartfelt and real",
         intimateDescription:
             "The format of an intimate wedding is about a cozy atmosphere, attention to every detail, and the opportunity to spend the day only with those closest to you. We create special, touching, and very personal celebrations for 10-20 guests. All halls of the ACADEMIA Shuvaloff bar-restaurant provide a warm and soulful atmosphere where every guest feels welcome.",
-        accommodationTitle: "Accommodation in a Historic Mansion",
-        accommodationDescription:
-            "On your wedding day, every detail matters. The ACADEMIA Mansion Shuvaloff Hotel doesn't just offer room accommodation; it creates a unique space where historical surroundings are naturally complemented by modern comfort, creating a special atmosphere for significant moments.",
+        accommodationTitle: ["Accommodation", "in a Historic Mansion"],
+        accommodationDescription: [
+            "On your wedding day, every detail matters.",
+            "The ACADEMIA Mansion Shuvaloff Hotel doesn't just offer room accommodation; it creates a unique space where historical surroundings are naturally complemented by modern comfort, creating a special atmosphere for significant moments.",
+        ],
         oneVenueTitle: "One Venue — Many Possibilities",
         mansionTitle: "ACADEMIA Shuvaloff",
         mansionSubTitle:
@@ -209,15 +213,9 @@ const copyByLocale: Record<Locale, WeddingCopy> = {
 const EveryRoomSlides: Record<Locale, WeddingBigSlide[]> = {
     ru: [
         {
-            title: <>Исторический люкс</>,
-            description: (
-                <>
-                    Утро невесты в историческом люксе графини Дашковой, игристое
-                    в бокалах и завтрак в номер. Просторный номер с винтажной
-                    мебелью, антикварными деталями в интерьере и мягким светом
-                    идеально подойдет для сборов невесты, свадебной фотосессии
-                    и, конечно, для романтической ночи.
-                </>
+            title: russianDisplayText("Исторический люкс"),
+            description: russianDisplayText(
+                "Утро невесты в историческом люксе графини Дашковой, игристое в бокалах и завтрак в номер. Просторный номер с винтажной мебелью, антикварными деталями в интерьере и мягким светом идеально подойдет для сборов невесты, свадебной фотосессии и, конечно, для романтической ночи.",
             ),
             button: { label: "Выбрать номер" },
             image: {
@@ -226,16 +224,22 @@ const EveryRoomSlides: Record<Locale, WeddingBigSlide[]> = {
             },
         },
         {
-            title: <>КАЖДЫЙ НОМЕР КАК ДЕКОРАЦИЯ К РОМАНТИЧЕСКОМУ ФИЛЬМУ:</>,
+            title: russianDisplayText(
+                "КАЖДЫЙ НОМЕР КАК ДЕКОРАЦИЯ К РОМАНТИЧЕСКОМУ ФИЛЬМУ:",
+            ),
             description: (
                 <>
-                    Высокие потолки и окна
+                    {russianDisplayText("Высокие потолки и окна")}
                     <br />
-                    Лепнина и изящный декор
+                    {russianDisplayText("Лепнина и изящный декор")}
                     <br />
-                    Изысканный текстиль, винтажные детали и мебель
+                    {russianDisplayText(
+                        "Изысканный текстиль, винтажные детали и мебель",
+                    )}
                     <br />
-                    Атмосфера уюта, приватности и тихой роскоши.
+                    {russianDisplayText(
+                        "Атмосфера уюта, приватности и тихой роскоши.",
+                    )}
                 </>
             ),
             button: { label: "Выбрать номер" },
@@ -245,14 +249,9 @@ const EveryRoomSlides: Record<Locale, WeddingBigSlide[]> = {
             },
         },
         {
-            title: <>РАЗМЕЩЕНИЕ ДЛЯ МОЛОДОЖЕНОВ И ГОСТЕЙ</>,
-            description: (
-                <>
-                    Удобное проживание для вас и ваших гостей в особняке до и
-                    после торжества. Отличная возможность с комфортом
-                    подготовиться к церемонии и просто подняться в номер после
-                    банкета, чтобы отдохнуть.
-                </>
+            title: russianDisplayText("РАЗМЕЩЕНИЕ ДЛЯ МОЛОДОЖЕНОВ И ГОСТЕЙ"),
+            description: russianDisplayText(
+                "Удобное проживание для вас и ваших гостей в особняке до и после торжества. Отличная возможность с комфортом подготовиться к церемонии и просто подняться в номер после банкета, чтобы отдохнуть.",
             ),
             button: { label: "Выбрать номер" },
             image: {
@@ -321,13 +320,9 @@ const EveryRoomSlides: Record<Locale, WeddingBigSlide[]> = {
 const AestheticSlides: Record<Locale, WeddingBigSlide[]> = {
     ru: [
         {
-            title: <>ЭСТЕТИКА ОФОРМЛЕНИЯ</>,
-            description: (
-                <>
-                    Изысканная сервировка, стильные цветовые сочетания,
-                    аксессуары и гармония всех элементов для создания атмосферы
-                    уюта и элегантности.
-                </>
+            title: russianDisplayText("ЭСТЕТИКА ОФОРМЛЕНИЯ"),
+            description: russianDisplayText(
+                "Изысканная сервировка, стильные цветовые сочетания, аксессуары и гармония всех элементов для создания атмосферы уюта и элегантности.",
             ),
             button: { label: "Узнать стоимость" },
             image: {
@@ -336,12 +331,11 @@ const AestheticSlides: Record<Locale, WeddingBigSlide[]> = {
             },
         },
         {
-            title: <>ФУРШЕТНОЕ МЕНЮ ОТ БРЕНД-ШЕФА ИЛЬИ ХАРЧЕНКО</>,
-            description: (
-                <>
-                    Наше меню подойдет как для самых искушенных гостей, так и
-                    для тех, кто предпочитает традиционные вкусы.
-                </>
+            title: russianDisplayText(
+                "ФУРШЕТНОЕ МЕНЮ ОТ БРЕНД-ШЕФА ИЛЬИ ХАРЧЕНКО",
+            ),
+            description: russianDisplayText(
+                "Наше меню подойдет как для самых искушенных гостей, так и для тех, кто предпочитает традиционные вкусы.",
             ),
             button: { label: "Узнать стоимость" },
             image: {
@@ -350,14 +344,9 @@ const AestheticSlides: Record<Locale, WeddingBigSlide[]> = {
             },
         },
         {
-            title: <>ПОЛНОЕ СОПРОВОЖДЕНИЕ ПРАЗДНИКА</>,
-            description: (
-                <>
-                    Мы готовы предложить отличную команду специалистов:
-                    ведущего, диджея, фотографа, флористов, — и обеспечить
-                    координацию их работы во время мероприятия, чтобы вы могли
-                    спокойно наслаждаться отдыхом.
-                </>
+            title: russianDisplayText("ПОЛНОЕ СОПРОВОЖДЕНИЕ ПРАЗДНИКА"),
+            description: russianDisplayText(
+                "Мы готовы предложить отличную команду специалистов: ведущего, диджея, фотографа, флористов, — и обеспечить координацию их работы во время мероприятия, чтобы вы могли спокойно наслаждаться отдыхом.",
             ),
             button: { label: "Узнать стоимость" },
             image: {
@@ -522,13 +511,15 @@ const weddingInSpbImages: Record<Locale, { src: string; alt: string }[]> = {
 
 export default function WeddingPage({ locale }: { locale: Locale }) {
     const copy = copyByLocale[locale];
+    const text = (value: string) =>
+        locale === "ru" ? russianDisplayText(value) : value;
     const roomSlides = EveryRoomSlides[locale];
     const aestheticSlides = AestheticSlides[locale];
     const descImages = descriptionImages[locale];
     const wedInSpbImages = weddingInSpbImages[locale];
 
     return (
-        <main className="flex flex-col gap-8">
+        <main className="flex flex-col gap-8 text-black">
             <StructuredData
                 data={buildWeddingPageSchema({
                     locale,
@@ -539,36 +530,35 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 })}
             />
             <section>
-                <div className="relative overflow-hidden aspect-8/15 xl:aspect-[unset] xl:min-h-screen">
+                <div className="relative isolate overflow-hidden bg-neutral-900">
                     <FadeIn
                         duration={0.9}
-                        className="absolute inset-0 h-full w-full"
+                        className="absolute inset-x-0 top-0 -z-10 h-[135vw] max-h-full md:h-full"
                     >
-                        <Parallax className="h-full w-full" offset={80}>
-                            <Image
-                                src="https://academia.spb.ru/wp-content/uploads/2026/04/wed.jpg"
-                                alt={copy.heroTitle}
-                                fill
-                                sizes="100vw"
-                                loading="eager"
-                                className="object-cover object-center"
-                            />
-                        </Parallax>
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/04/wed.jpg"
+                            alt={copy.heroTitle}
+                            fill
+                            sizes="100vw"
+                            loading="eager"
+                            className="object-cover object-center md:object-top"
+                        />
+                        <div className="absolute inset-0 bg-linear-to-b from-transparent from-45% to-neutral-900 md:to-black/65" />
                     </FadeIn>
 
-                    <StaggerContainer className="flex gap-2 h-65 xl:h-180 xl:gap-4 xl:w-full">
-                        <div className="absolute bottom-10 md:bottom-20 xl:bottom-32 inset-x-0 text-center text-white z-10 flex flex-col gap-3 px-10 xl:max-w-2xl xl:mx-auto xl:gap-6">
-                            <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                    <StaggerContainer className="flex min-h-svh flex-col justify-end pt-[78vw] md:pt-[max(58svh,38vw)]">
+                        <div className="mx-auto flex w-full max-w-2xl flex-col gap-3 px-6 pb-8 text-center text-white md:pb-10 xl:gap-5">
+                            <StaggerItem className="relative min-w-0">
                                 <h1 className="text-4xl xl:text-5xl">
-                                    {copy.heroTitle}
+                                    {text(copy.heroTitle)}
                                 </h1>
                             </StaggerItem>
-                            <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                            <StaggerItem className="relative min-w-0">
                                 <p className="text-base">
-                                    {copy.heroDescription}
+                                    {text(copy.heroDescription)}
                                 </p>
                             </StaggerItem>
-                            <StaggerItem className="relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md">
+                            <StaggerItem className="relative min-w-0">
                                 <div className="flex flex-col gap-4 mt-2 md:flex-row md:justify-center">
                                     <WeddingFormModal
                                         triggerLabel={copy.tourButton}
@@ -589,10 +579,12 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
 
             <section className="flex flex-col gap-8 m-6 text-center xl:max-w-7xl xl:mx-auto xl:my-10">
                 <FadeUp>
-                    <h2 className="text-3xl xl:text-5xl">{copy.whyTitle}</h2>
+                    <h2 className="text-[clamp(1.5rem,7.6vw,1.875rem)] xl:text-5xl">
+                        {text(copy.whyTitle)}
+                    </h2>
                 </FadeUp>
                 <FadeUp
-                    className="relative h-90 w-80 mx-auto xl:w-120"
+                    className="relative h-90 w-80 max-w-full mx-auto xl:w-120"
                     mode="inView"
                 >
                     <Image
@@ -608,22 +600,18 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     className="relative xl:max-w-2xl xl:mx-auto"
                     mode="inView"
                 >
-                    <p className="text-stone-500 leading-6">
-                        {copy.whyParagraph1}
-                    </p>
+                    <p className="leading-6">{text(copy.whyParagraph1)}</p>
                 </FadeUp>
                 <FadeUp className="relative" mode="inView">
                     <h3 className="font-history text-2xl xl:text-4xl xl:max-w-3xl xl:mx-auto uppercase">
-                        {copy.whySubTitle}
+                        {text(copy.whySubTitle)}
                     </h3>
                 </FadeUp>
                 <FadeUp
                     className="relative xl:max-w-2xl xl:mx-auto"
                     mode="inView"
                 >
-                    <p className="text-stone-500 leading-6">
-                        {copy.whyParagraph2}
-                    </p>
+                    <p className="leading-6">{text(copy.whyParagraph2)}</p>
                 </FadeUp>
             </section>
 
@@ -631,7 +619,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 {descImages.map((img, idx) => (
                     <StaggerItem
                         key={img.src}
-                        className={`relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md ${idx === 2 ? "hidden xl:block" : ""}`}
+                        className={`relative min-w-0 ${idx === 2 ? "hidden xl:block" : ""}`}
                     >
                         <Image
                             src={img.src}
@@ -652,11 +640,11 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
             <section className="flex flex-col gap-4 m-6 text-center xl:max-w-2xl xl:mx-auto xl:my-8">
                 <FadeUp>
                     <h2 className="text-3xl xl:text-5xl uppercase">
-                        {copy.centerTitle}
+                        {text(copy.centerTitle)}
                     </h2>
                 </FadeUp>
                 <FadeUp className="relative" mode="inView">
-                    <p className="text-stone-500">{copy.centerDescription}</p>
+                    <p>{text(copy.centerDescription)}</p>
                 </FadeUp>
             </section>
 
@@ -667,12 +655,10 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     triggerLabel={copy.datesButton}
                     variant="dark"
                 />
-                <Link
-                    href="/booking/"
-                    className="border border-black p-4 rounded-md uppercase hover:bg-black hover:border-black hover:text-white duration-200"
-                >
-                    {copy.bookNowButton}
-                </Link>
+                <WeddingFormModal
+                    triggerLabel={copy.bookNowButton}
+                    variant="dark-outline"
+                />
             </section>
 
             <section className="px-6 text-center flex flex-col gap-6 items-center my-4 xl:w-full xl:text-left xl:flex-row xl:max-w-7xl xl:mx-auto xl:gap-10 xl:items-center xl:my-12">
@@ -685,7 +671,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                         fill="none"
                         role="img"
                         aria-label={copy.mansionIconAria}
-                        className="xl:scale-120 xl:ml-1"
+                        className="mx-auto xl:mx-0 xl:ml-1 xl:scale-120"
                     >
                         <title>{copy.mansionIconAria}</title>
                         <rect
@@ -710,10 +696,10 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     </svg>
                     <div className="flex flex-col gap-2 xl:gap-4">
                         <h2 className="xl:text-4.5xl xl:mt-6 uppercase">
-                            {copy.intimateTitle}
+                            {text(copy.intimateTitle)}
                         </h2>
                         <p className="font-history uppercase text-xl xl:text-2xl">
-                            {copy.intimateSubTitle}
+                            {text(copy.intimateSubTitle)}
                         </p>
                     </div>
 
@@ -721,8 +707,8 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                         images={wedInSpbImages}
                         className="xl:hidden"
                     />
-                    <p className="text-stone-500 xl:max-w-md xl:leading-6">
-                        {copy.intimateDescription}
+                    <p className="xl:max-w-md xl:leading-6">
+                        {text(copy.intimateDescription)}
                     </p>
                 </div>
                 <WeddingSlider
@@ -739,7 +725,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     <Parallax className="h-full w-full -z-1" offset={80}>
                         <Image
                             src="https://academia.spb.ru/wp-content/uploads/2026/04/hotel.jpg"
-                            alt={copy.accommodationTitle}
+                            alt={copy.accommodationTitle.join(" ")}
                             fill
                             sizes="100vw"
                             loading="lazy"
@@ -787,9 +773,16 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     </defs>
                 </svg>
                 <h2 className="text-3xl xl:text-5xl xl:max-w-5xl uppercase">
-                    {copy.accommodationTitle}
+                    {copy.accommodationTitle[0]}{" "}
+                    <span className="lg:block lg:whitespace-nowrap">
+                        {text(copy.accommodationTitle[1])}
+                    </span>
                 </h2>
-                <p className="xl:max-w-lg">{copy.accommodationDescription}</p>
+                <p className="xl:max-w-lg">
+                    {text(copy.accommodationDescription[0])}
+                    <br />
+                    {text(copy.accommodationDescription[1])}
+                </p>
             </section>
 
             <WeddingBigSlider slides={roomSlides} />
@@ -836,20 +829,20 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     </defs>
                 </svg>
                 <h2 className="text-3xl xl:text-5xl xl:max-w-2xl uppercase">
-                    {copy.oneVenueTitle}
+                    {text(copy.oneVenueTitle)}
                 </h2>
             </section>
 
             <section className="flex flex-col gap-4 p-6 text-center xl:text-left xl:max-w-7xl xl:w-full xl:mx-auto">
                 <div className="xl:flex xl:items-center xl:my-4">
                     <div className="xl:grow">
-                        <h2 className="uppercase">{copy.mansionTitle}</h2>
-                        <p className="text-stone-500 xl:max-w-xs">
-                            {copy.mansionSubTitle}
+                        <h2 className="uppercase">{text(copy.mansionTitle)}</h2>
+                        <p className="xl:max-w-xs">
+                            {text(copy.mansionSubTitle)}
                         </p>
                     </div>
-                    <p className="hidden text-stone-500 xl:block xl:grow xl:max-w-sm xl:text-right xl:leading-6">
-                        {copy.mansionDescription}
+                    <p className="hidden xl:block xl:grow xl:max-w-sm xl:text-right xl:leading-6">
+                        {text(copy.mansionDescription)}
                     </p>
                 </div>
 
@@ -880,15 +873,13 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                                     className="object-cover rounded-md"
                                 />
                             </div>
-                            <h3 className="uppercase text-2xl text-stone-500">
+                            <h3 className="font-century-v2 text-2xl font-normal uppercase text-black">
                                 {item.label}
                             </h3>
                         </div>
                     ))}
                 </div>
-                <p className="text-stone-500 xl:hidden">
-                    {copy.mansionDescription}
-                </p>
+                <p className="xl:hidden">{text(copy.mansionDescription)}</p>
                 <div className="flex flex-col gap-4 mt-4 xl:flex-row xl:mx-auto xl:my-10">
                     <WeddingFormModal
                         triggerLabel={copy.costButton}
@@ -965,17 +956,19 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     />
                 </svg>
                 <h2 className="text-3xl xl:text-5xl xl:max-w-5xl uppercase">
-                    {copy.cuisineTitle}
+                    {text(copy.cuisineTitle)}
                 </h2>
             </section>
 
-            <section className="flex flex-col gap-6 xl:flex-row xl:items-center xl:min-h-screen xl:-my-8">
+            <section hidden>
                 <div className="flex flex-col gap-4 items-center text-center p-6 xl:max-w-lg xl:mx-auto xl:w-full">
                     <h3 className="font-history text-3xl uppercase xl:text-5xl">
-                        {copy.chefTitle}
+                        {text(copy.chefTitle)}
                     </h3>
-                    <p className="text-stone-500">{copy.chefDescription}</p>
-                    <p className="font-alistair text-3xl/7">{copy.chefQuote}</p>
+                    <p>{text(copy.chefDescription)}</p>
+                    <p className="font-century-v2 text-xl/7 italic">
+                        {text(copy.chefQuote)}
+                    </p>
                 </div>
                 <div className="relative w-full h-110 xl:min-h-screen xl:w-[50%]">
                     <Image
@@ -990,9 +983,9 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
             <section className="bg-neutral-100 px-6 py-10 xl:py-16">
                 <div className="flex flex-col gap-6 xl:max-w-7xl xl:mx-auto xl:gap-8">
                     <h2 className="text-3xl xl:text-4xl uppercase">
-                        {copy.whyChooseUsTitle}
+                        {text(copy.whyChooseUsTitle)}
                     </h2>
-                    <div className="flex gap-4 overflow-y-scroll rounded-md pb-4 no-scrollbar overflow-y-visible">
+                    <div className="flex gap-4 overflow-x-auto rounded-md pb-4 no-scrollbar">
                         {[
                             {
                                 src: "https://academia.spb.ru/wp-content/uploads/2026/04/why1.jpg",
@@ -1026,9 +1019,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                                     height={375}
                                     className="object-cover rounded-md"
                                 />
-                                <p className="text-stone-500 text-lg/6">
-                                    {item.text}
-                                </p>
+                                <p className="text-lg/6">{text(item.text)}</p>
                             </div>
                         ))}
                     </div>
@@ -1076,7 +1067,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     </defs>
                 </svg>
                 <h2 className="text-3xl xl:text-5xl xl:max-w-5xl uppercase">
-                    {copy.celebrationTitle}
+                    {text(copy.celebrationTitle)}
                 </h2>
             </section>
 
@@ -1099,7 +1090,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     </Parallax>
                 </FadeIn>
                 <h2 className="text-center text-3xl mb-4 xl:max-w-2xl xl:text-5xl xl:mb-4 uppercase">
-                    {copy.ifTitle}
+                    {text(copy.ifTitle)}
                 </h2>
                 <div className="flex flex-col gap-2 xl:max-w-md">
                     {copy.ifItems.map((item) => (
@@ -1108,7 +1099,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                             className="flex items-start gap-2 break-inside-avoid"
                         >
                             <span className="mt-2 shrink-0 w-1 h-1 rounded-full bg-current" />
-                            <span>{item}</span>
+                            <span>{text(item)}</span>
                         </StaggerItem>
                     ))}
                 </div>
@@ -1117,7 +1108,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
             <section className="bg-neutral-100 px-6 py-10 xl:py-16">
                 <div className="flex flex-col gap-4 xl:max-w-7xl xl:mx-auto">
                     <h2 className="text-3xl xl:text-4xl uppercase">
-                        {copy.reviewsTitle}
+                        {text(copy.reviewsTitle)}
                     </h2>
                     <WeddingReviewsWidget />
                 </div>
@@ -1125,7 +1116,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
 
             <section className="flex flex-col gap-6 xl:max-w-7xl xl:w-full xl:mx-auto px-6 py-10 xl:gap-8">
                 <h2 className="text-3xl xl:text-4xl uppercase">
-                    {copy.mediaTitle}
+                    {text(copy.mediaTitle)}
                 </h2>
                 <div className="grid xl:grid-cols-3 gap-4">
                     <SmiSobakaRuModal />
@@ -1135,19 +1126,13 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
             <section className="flex flex-col gap-4 m-6 xl:max-w-3xl xl:mx-auto items-center text-center xl:mb-8">
                 <FadeUp>
                     <h2 className="text-3xl xl:text-5xl uppercase">
-                        {copy.organizeTitle}
+                        {text(copy.organizeTitle)}
                     </h2>
                 </FadeUp>
-                <FadeUp
-                    className="relative flex flex-col gap-2 text-stone-500"
-                    mode="inView"
-                >
-                    <p>{copy.organizeDescription}</p>
+                <FadeUp className="relative flex flex-col gap-2" mode="inView">
+                    <p>{text(copy.organizeDescription)}</p>
                 </FadeUp>
-                <FadeUp
-                    className="relative flex flex-col gap-2 text-stone-500"
-                    mode="inView"
-                >
+                <FadeUp className="relative flex flex-col gap-2" mode="inView">
                     <WeddingFormModal
                         triggerLabel={copy.callMeButton}
                         variant="dark"

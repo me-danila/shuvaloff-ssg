@@ -6,6 +6,8 @@ import { Modal } from "@/components/ui/Modal";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
+import { russianDisplayText } from "@/lib/typography";
+
 interface FormState {
     name: string;
     phone: string;
@@ -71,6 +73,8 @@ export default function WeddingFormModal({
     renderTrigger,
 }: Props) {
     const locale = useLocale();
+    const text = (value: string) =>
+        locale === "ru" ? russianDisplayText(value) : value;
     const defaultTrigger =
         locale === "ru" ? "Записаться на экскурсию" : "Book a tour";
     const title = triggerLabel ?? defaultTrigger;
@@ -212,7 +216,7 @@ export default function WeddingFormModal({
                     onClick={() => setOpen(true)}
                     className={`border p-4 rounded-md font-history uppercase duration-200 cursor-pointer ${triggerClassName} ${fillVariants[variant]}`}
                 >
-                    {title}
+                    {text(title)}
                 </button>
             )}
 
@@ -234,9 +238,9 @@ export default function WeddingFormModal({
                                 id="wedding-form-modal-title"
                                 className="font-history uppercase text-xl xl:text-2xl"
                             >
-                                {copy.successTitle}
+                                {text(copy.successTitle)}
                             </h3>
-                            <p>{copy.successText}</p>
+                            <p>{text(copy.successText)}</p>
                         </div>
                     ) : (
                         <>
@@ -244,10 +248,10 @@ export default function WeddingFormModal({
                                 id="wedding-form-modal-title"
                                 className="text-center"
                             >
-                                {title}
+                                {text(title)}
                             </h2>
-                            <p className="text-sm text-neutral-400 text-center mt-1 mb-6 xl:mb-10">
-                                {copy.subtitle}
+                            <p className="text-sm text-black text-center mt-1 mb-6 xl:mb-10">
+                                {text(copy.subtitle)}
                             </p>
 
                             <form
@@ -263,7 +267,7 @@ export default function WeddingFormModal({
                                     maxLength={MAX.name}
                                     value={form.name}
                                     onChange={set("name")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="tel"
@@ -273,7 +277,7 @@ export default function WeddingFormModal({
                                     maxLength={MAX.phone}
                                     value={form.phone}
                                     onChange={set("phone")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="email"
@@ -282,7 +286,7 @@ export default function WeddingFormModal({
                                     maxLength={MAX.email}
                                     value={form.email}
                                     onChange={set("email")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
                                 <input
                                     type="text"
@@ -291,7 +295,7 @@ export default function WeddingFormModal({
                                     maxLength={MAX.telegram}
                                     value={form.telegram}
                                     onChange={set("telegram")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-neutral-400 outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
                                 />
 
                                 <label className="flex items-start gap-3 cursor-pointer mt-1">
@@ -302,8 +306,9 @@ export default function WeddingFormModal({
                                         onChange={set("consent")}
                                         className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-neutral-900"
                                     />
-                                    <span className="text-xs text-neutral-500 leading-relaxed text-left">
-                                        {copy.consentText}{" "}
+                                    <span className="text-xs text-black leading-relaxed text-left">
+                                        {text(copy.consentText)}
+                                        {locale === "ru" ? "\u00a0" : " "}
                                         <Link
                                             href={localizeHref(
                                                 "/policy/",
@@ -311,9 +316,9 @@ export default function WeddingFormModal({
                                             )}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-neutral-900 underline underline-offset-2"
+                                            className="text-black underline underline-offset-2"
                                         >
-                                            {copy.consentLink}
+                                            {text(copy.consentLink)}
                                         </Link>
                                     </span>
                                 </label>
@@ -326,7 +331,7 @@ export default function WeddingFormModal({
                                 >
                                     {status === "loading"
                                         ? copy.loadingLabel
-                                        : title}
+                                        : text(title)}
                                 </button>
 
                                 {validationError && (
@@ -343,7 +348,7 @@ export default function WeddingFormModal({
                                         role="alert"
                                         className="text-center text-xs text-red-500"
                                     >
-                                        {copy.errorLabel}
+                                        {text(copy.errorLabel)}
                                     </p>
                                 )}
                             </form>
