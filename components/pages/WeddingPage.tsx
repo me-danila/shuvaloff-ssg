@@ -619,7 +619,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 {descImages.map((img, idx) => (
                     <StaggerItem
                         key={img.src}
-                        className={`relative min-w-0 ${idx === 2 ? "hidden xl:block" : ""}`}
+                        className={`relative flex-1 min-w-0 overflow-hidden rounded-lg xl:rounded-md ${idx === 2 ? "hidden xl:block" : ""}`}
                     >
                         <Image
                             src={img.src}
