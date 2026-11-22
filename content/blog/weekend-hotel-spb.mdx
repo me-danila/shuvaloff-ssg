@@ -1,3 +1,4 @@
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { nbsp } from "@/lib/typography";
 
 export const meta = {
@@ -34,7 +35,15 @@ ACADEMIA Особняк Шувалова расположен на тихой М
 
 Камерный формат бутик-отеля в особняке позволяет предоставлять гостям исключительно персонализированный сервис с консьерж-службой и личным менеджером заботы, которые всегда готовы помочь с решением любых вопросов и выполнить ваши пожелания. Кроме того, в особняке Шувалова гостям предоставляется широкий перечень дополнительных услуг: от украшения номера и букета цветов до поиска билетов на знаковые спектакли и особых сценариев поздравлений с праздниками от графской семьи.
 
-![Граф и графиня за накрытым столом в особняке Шувалова](/images/counts-family-greetings/card.jpg)
+<figure className="relative my-6 aspect-video overflow-hidden rounded-sm">
+    <OptimizedImage
+        src="/images/counts-family-greetings/card.jpg"
+        alt="Граф и графиня за накрытым столом в особняке Шувалова"
+        fill
+        sizes="(max-width: 768px) 100vw, 768px"
+        className="object-cover object-bottom"
+    />
+</figure>
 
 <Button href="/services/all/">Все услуги особняка</Button>
 
