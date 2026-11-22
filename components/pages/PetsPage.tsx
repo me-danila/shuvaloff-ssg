@@ -27,7 +27,7 @@ type PetsCopy = {
 };
 
 const galleryImages = [
-    "https://academia.spb.ru/wp-content/uploads/2026/03/IMG_0626.avif",
+    "/images/pets/border-collie-at-door.webp",
     "https://academia.spb.ru/wp-content/uploads/2026/03/IMG_5452.avif",
     "https://academia.spb.ru/wp-content/uploads/2026/03/IMG_6527-576x1024.avif",
 ];
@@ -106,8 +106,7 @@ const copyByLocale: Record<Locale, PetsCopy> = {
         ],
         kitTitle: (
             <>
-                Вместе с&nbsp;сетью зоомагазинов «Четыре лапы»
-                мы&nbsp;подготовили наборы со&nbsp;всеми нужными
+                Мы&nbsp;подготовили наборы со&nbsp;всеми нужными
                 принадлежностями,
             </>
         ),
@@ -122,7 +121,7 @@ const copyByLocale: Record<Locale, PetsCopy> = {
             { id: "bowls", text: <>миски для воды и&nbsp;еды,</> },
             {
                 id: "hygiene",
-                text: <>гигиенический набор, лакомства.</>,
+                text: <>гигиенический набор.</>,
             },
         ],
         pricing: (
@@ -211,12 +210,7 @@ const copyByLocale: Record<Locale, PetsCopy> = {
                 ),
             },
         ],
-        kitTitle: (
-            <>
-                Together with the Four Paws pet store chain, we&nbsp;have
-                prepared kits with all the essentials,
-            </>
-        ),
+        kitTitle: <>We have prepared kits with all the essentials,</>,
         kitIntro: (
             <>
                 so&nbsp;you can be&nbsp;sure that a&nbsp;stay with your beloved
@@ -226,7 +220,7 @@ const copyByLocale: Record<Locale, PetsCopy> = {
         kitItems: [
             { id: "bed", text: <>a&nbsp;cozy pet bed,</> },
             { id: "bowls", text: <>water and food bowls,</> },
-            { id: "hygiene", text: <>a&nbsp;hygiene kit and treats.</> },
+            { id: "hygiene", text: <>a&nbsp;hygiene kit.</> },
         ],
         pricing: (
             <>
@@ -301,7 +295,7 @@ export default function PetsPage({ locale }: { locale: Locale }) {
                     className="relative min-h-[320px] overflow-hidden rounded-md xl:min-h-0 xl:w-[92%] xl:justify-self-end"
                 >
                     <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/03/IMG_0594-1.avif"
+                        src="/images/pets/border-collie-in-suite.webp"
                         alt={copy.title}
                         fill
                         sizes="(max-width: 1280px) 100vw, 50vw"

@@ -108,7 +108,6 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br />• удобную лежанку,
                     <br /> • миски для воды и еды,
                     <br /> • гигиенический набор,
-                    <br /> • лакомства,
                     <br /> • по запросу консьерж организует выгул: с заботой и
                     по расписанию.
                     <ParagraphGap />
@@ -844,7 +843,6 @@ export const AllServices: Record<Locale, Service[]> = {
                     <br />• a comfortable bed,
                     <br /> • bowls for food and water,
                     <br /> • a hygiene kit,
-                    <br /> • treats,
                     <br /> • upon request, the concierge can organize dog
                     walking: with care and on schedule.
                     <ParagraphGap />
