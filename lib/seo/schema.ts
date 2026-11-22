@@ -503,6 +503,7 @@ export const buildEventSchema = ({
         title: string;
         subtitle: string;
         imgUrl: string;
+        imagesByDate?: Record<string, string>;
         bookingUrl: string;
         price?: string;
         dates: string[];
@@ -541,14 +542,16 @@ export const buildEventSchema = ({
                 breadcrumb: {
                     "@id": `${url}#breadcrumb`,
                 },
-                primaryImageOfPage: event.imgUrl,
+                primaryImageOfPage: getAbsoluteUrl(event.imgUrl),
             },
             ...event.dates.map((start, index) => ({
                 "@type": "Event",
                 "@id": `${url}#event-${index}`,
                 name: event.title,
                 description: event.subtitle,
-                image: event.imgUrl,
+                image: getAbsoluteUrl(
+                    event.imagesByDate?.[start] ?? event.imgUrl,
+                ),
                 // SPb (МСК, UTC+3); время в данных — локальное.
                 startDate: `${start}:00+03:00`,
                 eventAttendanceMode:

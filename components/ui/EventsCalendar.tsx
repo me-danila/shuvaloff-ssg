@@ -91,6 +91,11 @@ function buildGrid(
     return cells;
 }
 
+function canGoBack(year: number, month: number) {
+    const today = new Date();
+    return new Date(year, month, 1) > today;
+}
+
 export default function EventsCalendar() {
     const locale = useLocale();
 
@@ -127,6 +132,7 @@ export default function EventsCalendar() {
     );
 
     const shift = (dir: -1 | 1) => {
+        if (dir === -1 && !canGoBack(view.year, view.month)) return;
         const next = new Date(view.year, view.month + dir, 1);
         const year = next.getFullYear();
         const month = next.getMonth();
@@ -152,8 +158,9 @@ export default function EventsCalendar() {
                 <button
                     type="button"
                     aria-label={NAV_ARIA[locale].prev}
+                    disabled={!canGoBack(view.year, view.month)}
                     onClick={() => shift(-1)}
-                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-brand-brown/60 transition-colors hover:bg-stone-100 hover:text-brand-brown"
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-brand-brown/60 transition-colors enabled:hover:bg-stone-100 enabled:hover:text-brand-brown disabled:cursor-default disabled:opacity-30"
                 >
                     <CaretLeftIcon size={18} weight="bold" />
                 </button>

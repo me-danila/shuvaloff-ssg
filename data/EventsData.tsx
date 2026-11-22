@@ -23,6 +23,7 @@ export type EventDefinition = {
     title: string;
     subtitle: string;
     imgUrl: string;
+    imagesByDate?: Record<string, string>;
     mediaObjectPosition?: string;
     bookingUrl: string;
     fullDescription?: ReactNode;
@@ -32,7 +33,7 @@ export type EventDefinition = {
 };
 
 /** Одна карточка = одно мероприятие в конкретную дату. */
-export type EventCard = Omit<EventDefinition, "dates"> & {
+export type EventCard = Omit<EventDefinition, "dates" | "imagesByDate"> & {
     /** Исходная дата в ISO ("YYYY-MM-DDTHH:mm") — для сортировки и календаря. */
     start: string;
     /** Готовая подпись даты, напр. "1 июля". */
@@ -242,24 +243,70 @@ function benoisDinner(locale: Locale, price: string) {
     return { price, fullDescription: BenoisDinnerDescription[locale](price) };
 }
 
+const lottoTable = "/images/events/lotto-table.webp";
+const lottoSalon = "/images/events/lotto-salon.webp";
+const lottoPosters = {
+    "2026-11-25T19:00": shuvalovLotto.ru.imgUrl,
+    "2026-12-02T19:00": lottoTable,
+    "2026-12-09T19:00": lottoSalon,
+    "2026-12-16T19:00": lottoTable,
+    "2026-12-23T19:00": lottoSalon,
+    "2026-12-30T19:00": lottoTable,
+    "2027-01-02T19:00": lottoSalon,
+    "2027-01-06T19:00": lottoTable,
+    "2027-01-13T19:00": lottoSalon,
+    "2027-01-20T19:00": lottoTable,
+    "2027-01-27T19:00": lottoSalon,
+};
+
+const lottoSchedule = {
+    slug: "shuvalov-lotto",
+    bookingUrl:
+        "https://shuvaloff.academia-rest.ru/afisha/grafskoe-loto/?utm_source=hotel",
+    imgUrl: lottoTable,
+    imagesByDate: lottoPosters,
+    dates: Object.keys(lottoPosters),
+};
+
+const christmastideLecture = {
+    slug: "christmastide-fortune-telling",
+    imgUrl: "/images/events/christmastide.webp",
+    bookingUrl: ORDER_URL,
+    dates: ["2027-01-04T19:00"],
+};
+
 const BaseEvents: Record<Locale, EventDefinition[]> = {
     ru: [
         {
             ...shuvalovLotto.ru,
-            slug: "shuvalov-lotto",
-            bookingUrl: ORDER_URL,
-            dates: [
-                "2026-11-25T19:00",
-                "2026-12-02T19:00",
-                "2026-12-09T19:00",
-                "2026-12-16T19:00",
-                "2026-12-23T19:00",
-                "2026-12-30T19:00",
-                "2027-01-02T19:00",
-                "2027-01-13T19:00",
-                "2027-01-20T19:00",
-                "2027-01-27T19:00",
-            ],
+            ...lottoSchedule,
+            title: "Графское лото",
+        },
+        {
+            ...christmastideLecture,
+            title: "Лекция с погружением в эпоху: Святочные гадания. От народных корней до дворянских гостиных",
+            subtitle:
+                "Как древние гадания из деревенских быличек попали в дворянские гостиные?",
+            fullDescription: (
+                <>
+                    Святки — время, когда привычный мир становится зыбким, а
+                    граница между реальным и потусторонним почти исчезает. Как
+                    древние гадания из деревенских быличек попали в дворянские
+                    гостиные? Что искали в зимних сумерках те, кто считал себя
+                    просвещенным?
+                    <br />
+                    <br />
+                    Лекция о тайных ритуалах, страхах и очаровании запретного:
+                    от народных корней до салонных вечеров XIX века. Приглашаем
+                    заглянуть в дворянскую гостиную, где при свечах решались
+                    судьбы. В этот вечер нас ждет атмосфера тайны и возможность
+                    понять, как и почему будущее пытались приручить.
+                    <br />
+                    <br />
+                    Для гостей, проживающих в отелях коллекции ACADEMIA,
+                    посещение мероприятия бесплатно.
+                </>
+            ),
         },
         {
             slug: "mansion-birthday",
@@ -649,20 +696,35 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
     en: [
         {
             ...shuvalovLotto.en,
-            slug: "shuvalov-lotto",
-            bookingUrl: ORDER_URL,
-            dates: [
-                "2026-11-25T19:00",
-                "2026-12-02T19:00",
-                "2026-12-09T19:00",
-                "2026-12-16T19:00",
-                "2026-12-23T19:00",
-                "2026-12-30T19:00",
-                "2027-01-02T19:00",
-                "2027-01-13T19:00",
-                "2027-01-20T19:00",
-                "2027-01-27T19:00",
-            ],
+            ...lottoSchedule,
+            title: "The Count's Lotto",
+        },
+        {
+            ...christmastideLecture,
+            title: "Christmastide Fortune-Telling: From Folk Traditions to Aristocratic Drawing Rooms",
+            subtitle:
+                "How did the fortune-telling rituals of village folklore find their way into aristocratic drawing rooms?",
+            fullDescription: (
+                <>
+                    At Christmastide, the familiar world feels uncertain and the
+                    boundary between this world and the next all but disappears.
+                    How did the fortune-telling rituals of village folklore find
+                    their way into aristocratic drawing rooms? What did those
+                    who considered themselves enlightened seek in the winter
+                    twilight?
+                    <br />
+                    <br />
+                    This lecture traces secret rituals, fears and the allure of
+                    the forbidden, from folk traditions to the salons of the
+                    19th century. Step into a drawing room where fates were
+                    decided by candlelight, and discover how and why people
+                    tried to bring the future within their grasp.
+                    <br />
+                    <br />
+                    Admission is free for guests staying at ACADEMIA collection
+                    hotels.
+                </>
+            ),
         },
         {
             slug: "mansion-birthday",
@@ -1055,6 +1117,17 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
     ],
 };
 
+const christmasDinner = {
+    ru: {
+        title: "Рождественский графский ужин",
+        ...countDinner("ru", "8 500 ₽"),
+    },
+    en: {
+        title: "The Count's Christmas Dinner",
+        ...countDinner("en", "8 500 ₽"),
+    },
+};
+
 /**
  * Дубли мероприятий: полная копия исходной карточки (фото, текст, название),
  * но со своей ссылкой бронирования и своими датами. Даты этих дублей вынесены
@@ -1271,6 +1344,7 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "income-house",
         slug: "income-house-december",
+        imgUrl: "/images/events/winter-architecture.webp",
         bookingUrl:
             "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
         dates: ["2026-12-10T18:00"],
@@ -1294,19 +1368,58 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-december",
-        bookingUrl: ORDER_URL,
+        imgUrl: "/images/events/wine-salon.webp",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
         dates: ["2026-12-12T19:00"],
+    },
+    {
+        baseSlug: "wine-casino-august",
+        slug: "wine-casino-january-3-2027",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino-january/?utm_source=hotel",
+        imgUrl: "/images/events/wine-amber.webp",
+        dates: ["2027-01-03T19:00"],
+    },
+    {
+        baseSlug: "wine-casino-august",
+        slug: "wine-casino-january-5-2027",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino-january/?utm_source=hotel",
+        imgUrl: "/images/events/wine-salon.webp",
+        dates: ["2027-01-05T19:00"],
+    },
+    {
+        baseSlug: "count-dinner-august",
+        slug: "christmas-count-dinner-january-7-2027",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
+        imgUrl: "/images/events/christmas-dinner.webp",
+        dates: ["2027-01-07T19:00"],
+        overrides: christmasDinner,
+    },
+    {
+        baseSlug: "count-dinner-august",
+        slug: "christmas-count-dinner-january-8-2027",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
+        imgUrl: "/images/events/count-and-countess.webp",
+        dates: ["2027-01-08T19:00"],
+        overrides: christmasDinner,
     },
     {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-january-2027",
+        imgUrl: "/images/events/masonic-petersburg.webp",
         bookingUrl: ORDER_URL,
         dates: ["2027-01-14T19:00"],
     },
     {
         baseSlug: "noble-investments",
         slug: "noble-investments-january-2027",
-        bookingUrl: ORDER_URL,
+        imgUrl: "/images/events/winter-canal.webp",
+        bookingUrl:
+            "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane-january/?utm_source=hotel",
         dates: ["2027-01-21T19:00"],
     },
     {
@@ -1408,12 +1521,14 @@ export function getPublishedEvents(locale: Locale): EventDefinition[] {
  * по возрастанию даты — от ближних к дальним.
  */
 export function getEventCards(locale: Locale): EventCard[] {
-    const cards = getPublishedEvents(locale).flatMap(({ dates, ...event }) =>
-        dates.map((start) => ({
-            ...event,
-            start,
-            ...formatOccurrence(start, locale),
-        })),
+    const cards = getPublishedEvents(locale).flatMap(
+        ({ dates, imagesByDate, ...event }) =>
+            dates.map((start) => ({
+                ...event,
+                imgUrl: imagesByDate?.[start] ?? event.imgUrl,
+                start,
+                ...formatOccurrence(start, locale),
+            })),
     );
 
     return cards.sort((a, b) => a.start.localeCompare(b.start));
