@@ -165,7 +165,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "В качестве приятного дополнения к пище духовной — легкий изысканный фуршет на катере в французском стиле от Брассери Академиа с традиционными закусками, сырами, десертами и вином.",
         cultureTitle: "Культурный Петербург",
         cultureDescription:
-            "Третий день вашего графского путешествия предлагаем начать с изысканного завтрака в баре-ресторане в особняке по специальному сет-меню от бренд-шефа и посвятить культурной программе.",
+            "Третий день вашего графского путешествия предлагаем начать с изысканного завтрака в баре-ресторане в особняке по специальному сет-меню от концепт-шефа и посвятить культурной программе.",
         cultureConcierge:
             "Консьерж-сервис в Академиа как ваш личный проводник в бескрайнем мире событий и мероприятий Петербурга поможет организовать отдых любого формата: эксклюзивные экскурсии, например, на Императорский фарфоровый завод с мастер-классом, Эрмитаж или Русский музей без очереди, билеты на камерные концерты, знаковые спектакли и актуальные выставки.",
         footerText: (
@@ -294,7 +294,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
             "As a pleasant addition to the spiritual food — a light exquisite buffet on the boat in French style from Brasserie ACADEMIA with traditional snacks, cheeses, desserts, and wine.",
         cultureTitle: "Cultural St. Petersburg",
         cultureDescription:
-            "We suggest starting the third day of your noble journey with an exquisite breakfast in the bar-restaurant in the mansion according to a special set-menu from the brand chef and dedicating it to a cultural program.",
+            "We suggest starting the third day of your noble journey with an exquisite breakfast in the bar-restaurant in the mansion according to a special set-menu from the concept chef and dedicating it to a cultural program.",
         cultureConcierge:
             "The concierge service at ACADEMIA, as your personal guide in the endless world of St. Petersburg events and activities, will help organize a holiday of any format: exclusive excursions, for example, to the Imperial Porcelain Factory with a master class, the Hermitage or the Russian Museum without a queue, tickets for chamber concerts, iconic performances, and relevant exhibitions.",
         footerText: (

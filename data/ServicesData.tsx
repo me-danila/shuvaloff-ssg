@@ -447,9 +447,9 @@ export const AllServices: Record<Locale, Service[]> = {
             price: "13 000 ₽",
         },
         {
-            title: "Торт от бренд-шефа",
+            title: "Торт от концепт-шефа",
             subtitle:
-                "Авторский торт от бренд-шефа, созданный по индивидуальному рецепту: из натуральных ингредиентов и без компромиссов по качеству.",
+                "Авторский торт от концепт-шефа, созданный по индивидуальному рецепту: из натуральных ингредиентов и без компромиссов по качеству.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/cake.avif",
             slug: "cake",
             fullDescription: (
@@ -1166,7 +1166,7 @@ export const AllServices: Record<Locale, Service[]> = {
         {
             title: "Chef's Cake",
             subtitle:
-                "Author's cake from the brand chef, created according to an individual recipe: from natural ingredients and without compromises on quality.",
+                "Author's cake from the concept chef, created according to an individual recipe: from natural ingredients and without compromises on quality.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2025/10/cake.avif",
             slug: "cake",
             fullDescription: (

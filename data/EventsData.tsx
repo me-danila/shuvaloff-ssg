@@ -102,8 +102,8 @@ const CountDinnerDescription: Record<Locale, (price: string) => ReactNode> = {
             в&nbsp;формате частного приема. Формат предполагает ограниченное
             количество гостей, создавая атмосферу закрытого салона
             и&nbsp;личного общения. Гастрономическим сопровождением станет
-            курсовой ужин от&nbsp;бренд-шефа Ильи Харченко и&nbsp;бренд-шеф
-            бармена Даниила Лемана.
+            курсовой ужин от&nbsp;концепт-шефа и&nbsp;бренд-шеф бармена Даниила
+            Лемана.
             <br />
             <br />
             <b>Стоимость: {price}</b>
@@ -125,7 +125,7 @@ const CountDinnerDescription: Record<Locale, (price: string) => ReactNode> = {
             reception. The&nbsp;format assumes a&nbsp;limited number
             of&nbsp;guests, creating the atmosphere of&nbsp;a&nbsp;closed salon
             and&nbsp;personal conversation. The&nbsp;gastronomic accompaniment
-            will be&nbsp;a&nbsp;course dinner by&nbsp;brand-chef Ilya Kharchenko
+            will be&nbsp;a&nbsp;course dinner by&nbsp;the concept chef
             and&nbsp;brand-bar-chef Daniil Leman.
             <br />
             <br />
@@ -505,8 +505,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     <br />
                     Победитель получит в&nbsp;подарок бутылку вина
                     от&nbsp;ресторана. Идеальным дополнением к&nbsp;азартному
-                    вечеру станут фуршетные закуски от&nbsp;бренд-шефа Ильи
-                    Харченко.
+                    вечеру станут фуршетные закуски от&nbsp;концепт-шефа.
                     <br />
                     <br />
                     <b>Стоимость: 5 900 ₽</b>
@@ -886,8 +885,8 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     a&nbsp;limited number of&nbsp;guests, creating the
                     atmosphere of&nbsp;a&nbsp;closed salon and&nbsp;personal
                     conversation. The&nbsp;gastronomic accompaniment will
-                    be&nbsp;a&nbsp;course dinner by&nbsp;brand-chef Ilya
-                    Kharchenko and&nbsp;brand-bar-chef Daniil Leman.
+                    be&nbsp;a&nbsp;course dinner by&nbsp;the concept chef
+                    and&nbsp;brand-bar-chef Daniil Leman.
                     <br />
                     <br />
                     <b>Price: 7 500 ₽</b>
@@ -925,7 +924,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     The&nbsp;winner receives a&nbsp;bottle of&nbsp;wine from the
                     restaurant as&nbsp;a&nbsp;gift. The&nbsp;perfect complement
                     to&nbsp;the thrilling evening will be&nbsp;buffet snacks
-                    by&nbsp;brand-chef Ilya Kharchenko.
+                    by&nbsp;the concept chef.
                     <br />
                     <br />
                     <b>Price: 5 900 ₽</b>

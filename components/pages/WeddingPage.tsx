@@ -108,9 +108,9 @@ const copyByLocale: Record<Locale, WeddingCopy> = {
         cabinetLabel: "Кабинет",
         livingRoomLabel: "Гостиная",
         cuisineTitle: "Кухня",
-        chefTitle: "Бренд-шеф Илья Харченко",
+        chefTitle: "Концепт-шеф",
         chefDescription:
-            "Кухня Ильи Харченко строится на уважении к классике и умении прочитывать ее заново, актуально и честно. Он соединяет элементы классической кулинарной школы и авторский взгляд на гастрономию, акцентируя внимание гостя на локальных ингредиентах, сезонности и культурном контексте.",
+            "Кухня концепт-шефа строится на уважении к классике и умении прочитывать ее заново, актуально и честно. Он соединяет элементы классической кулинарной школы и авторский взгляд на гастрономию, акцентируя внимание гостя на локальных ингредиентах, сезонности и культурном контексте.",
         chefQuote:
             "«Мне важно понимать историю блюда: его философию, как оно готовилось раньше, в каких вариациях, какие традиции за ним стоят. Это глубокий взгляд на процесс, а не просто набор ингредиентов.»",
         whyChooseUsTitle: "Почему выбирают нас:",
@@ -177,9 +177,9 @@ const copyByLocale: Record<Locale, WeddingCopy> = {
         cabinetLabel: "Cabinet",
         livingRoomLabel: "Living Room",
         cuisineTitle: "Cuisine",
-        chefTitle: "Brand Chef Ilya Kharchenko",
+        chefTitle: "Concept Chef",
         chefDescription:
-            "Ilya Kharchenko's cuisine is built on respect for the classics and the ability to reinterpret them in a fresh, relevant, and honest way. He combines elements of the classical culinary school and an author's view on gastronomy, emphasizing local ingredients, seasonality, and cultural context.",
+            "The concept chef's cuisine is built on respect for the classics and the ability to reinterpret them in a fresh, relevant, and honest way. He combines elements of the classical culinary school and an author's view on gastronomy, emphasizing local ingredients, seasonality, and cultural context.",
         chefQuote:
             "“It's important for me to understand the history of a dish: its philosophy, how it was prepared before, in what variations, what traditions stand behind it. This is a deep look at the process, not just a set of ingredients.”",
         whyChooseUsTitle: "Why choose us:",
@@ -331,16 +331,14 @@ const AestheticSlides: Record<Locale, WeddingBigSlide[]> = {
             },
         },
         {
-            title: russianDisplayText(
-                "ФУРШЕТНОЕ МЕНЮ ОТ БРЕНД-ШЕФА ИЛЬИ ХАРЧЕНКО",
-            ),
+            title: russianDisplayText("ФУРШЕТНОЕ МЕНЮ ОТ КОНЦЕПТ-ШЕФА"),
             description: russianDisplayText(
                 "Наше меню подойдет как для самых искушенных гостей, так и для тех, кто предпочитает традиционные вкусы.",
             ),
             button: { label: "Узнать стоимость" },
             image: {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/04/aest2.jpg",
-                alt: "Фуршетное меню от бренд-шефа Ильи Харченко",
+                alt: "Фуршетное меню от концепт-шефа",
             },
         },
         {
@@ -372,7 +370,7 @@ const AestheticSlides: Record<Locale, WeddingBigSlide[]> = {
             },
         },
         {
-            title: <>BUFFET MENU FROM BRAND CHEF ILYA KHARCHENKO</>,
+            title: <>BUFFET MENU FROM THE CONCEPT CHEF</>,
             description: (
                 <>
                     Our menu is suitable for both the most sophisticated guests
@@ -382,7 +380,7 @@ const AestheticSlides: Record<Locale, WeddingBigSlide[]> = {
             button: { label: "Inquire about cost" },
             image: {
                 src: "https://academia.spb.ru/wp-content/uploads/2026/04/aest2.jpg",
-                alt: "Buffet menu from brand chef Ilya Kharchenko",
+                alt: "Buffet menu from the concept chef",
             },
         },
         {
