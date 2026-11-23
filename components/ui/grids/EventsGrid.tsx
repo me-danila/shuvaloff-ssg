@@ -99,6 +99,7 @@ export default function EventsGrid() {
             <StaggerContainer
                 ref={trackRef}
                 onScroll={handleScroll}
+                amount="some"
                 className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar xl:grid xl:grid-cols-2 xl:overflow-visible"
             >
                 {events.map((event, index) => (
