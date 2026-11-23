@@ -233,16 +233,17 @@ The supported command is:
 bun run deploy
 ```
 
-`scripts/deploy.sh` builds the static export and uploads it to a new directory
-under `/usr/local/lsws/academia-shuvaloff.ru/releases/`. It validates the export,
+`scripts/deploy.sh` builds the static export and uploads it to a private staging directory
+under `/usr/local/lsws/academia-shuvaloff.ru/`. It validates the export,
 retains previous JavaScript chunks for cached pages, and atomically switches the
 `current` symlink. A shared `deploy.lock` protects the switch. If another deploy
 changes `current` during upload, the script stops without replacing that release.
-Failed uploads leave an unpublished release directory for inspection.
+The upload directory is cleaned up when the script exits.
 
 OpenLiteSpeed serves `/usr/local/lsws/academia-shuvaloff.ru/current/`. No web-server
-restart is required. Previous releases remain available for rollback; cleanup is
-manual. Rollback must take the same `deploy.lock` and atomically switch `current`
+restart is required. After the switch, the script checks the homepage against the new export over local HTTPS.
+If the check fails, it restores the previous release. On success it retains the current
+release and two earlier published releases using the server’s `published-releases` history. Rollback must take the same `deploy.lock` and atomically switch `current`
 to the selected release. Never rsync directly into `current` or remove live chunks.
 
 The deploy command publishes only the static site. It does not overwrite the

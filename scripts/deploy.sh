@@ -15,37 +15,74 @@ test -s out/404.html
 # Запоминаем текущий релиз до передачи файлов. Параллельная публикация
 # не должна незаметно перезаписать чужой результат.
 PREVIOUS=$(ssh "$REMOTE" "readlink -f '$SITE_ROOT/current'")
-RELEASE=$(ssh "$REMOTE" "mktemp -d '$SITE_ROOT/releases/release-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXX'")
-[[ "$PREVIOUS" == "$SITE_ROOT/releases/"* ]]
-[[ "$RELEASE" == "$SITE_ROOT/releases/"* ]]
+STAGING=$(ssh "$REMOTE" "mktemp -d '$SITE_ROOT/incoming-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXX'")
+[[ "$STAGING" =~ ^"$SITE_ROOT"/incoming-[0-9]{8}T[0-9]{6}Z-[a-zA-Z0-9]{6}$ ]]
+cleanup_upload() { ssh "$REMOTE" "rm -rf --one-file-system -- '$STAGING'"; }
+trap cleanup_upload EXIT
+RELEASE="$SITE_ROOT/releases/release-${STAGING##*/incoming-}"
 
-# Передаём сборку в отдельный каталог: ошибка передачи не затронет current.
-# PHP-модуль цен не входит в сборку; его код, ключи и shared-кэш не трогаем.
-rsync -az --exclude 'module-price-load/' out/ "$REMOTE:$RELEASE/"
-
-ssh "$REMOTE" bash -s -- "$SITE_ROOT" "$PREVIOUS" "$RELEASE" <<'REMOTE_SCRIPT'
+rsync -az --exclude 'module-price-load/' out/ "$REMOTE:$STAGING/"
+ssh "$REMOTE" bash -s -- "$SITE_ROOT" "$PREVIOUS" "$STAGING" "$RELEASE" <<'REMOTE_SCRIPT'
 set -euo pipefail
 root=$1
 previous=$2
-release=$3
+staging=$3
+release=$4
 exec 9>"$root/deploy.lock"
 flock -x 9
 if [[ "$(readlink -f "$root/current")" != "$previous" ]]; then
     echo 'За время загрузки опубликован другой релиз. Повторите деплой.' >&2
     exit 1
 fi
-test -s "$release/index.html"
-test -s "$release/404.html"
+test -s "$staging/index.html"
+test -s "$staging/404.html"
+test ! -e "$release"
+test ! -L "$release"
+history="$root/published-releases"
+published=()
+if [[ -f "$history" ]]; then
+    mapfile -t published < "$history"
+fi
+for name in "${published[@]}" "$(basename "$previous")" "$(basename "$release")"; do
+    [[ "$name" =~ ^[[:alnum:]][[:alnum:]_-]*$ ]]
+done
+[[ "$previous" == "$root/releases/$(basename "$previous")" ]]
 
 # Сохраняем чанки прошлых сборок: браузер (Safari) может показать
 # закешированный HTML со старыми именами файлов. Свежие чанки не заменяем.
 if [[ -d "$previous/_next/static" ]]; then
-    mkdir -p "$release/_next/static"
-    rsync -a --ignore-existing "$previous/_next/static/" "$release/_next/static/"
+    mkdir -p "$staging/_next/static"
+    rsync -a --ignore-existing "$previous/_next/static/" "$staging/_next/static/"
 fi
-chmod 755 "$release"
+chmod 755 "$staging"
+mv -T "$staging" "$release"
 ln -s "$release" "$release/current-link"
 mv -Tf "$release/current-link" "$root/current"
+
+# Проверяем, что именно новая сборка доступна через HTTPS на этом сервере.
+if ! curl --fail --silent --show-error --max-time 15 --retry 1 \
+    --resolve academia-shuvaloff.ru:443:127.0.0.1 https://academia-shuvaloff.ru/ \
+    | cmp -s - "$release/index.html"; then
+    ln -s "$previous" "$release/current-link"
+    mv -Tf "$release/current-link" "$root/current"
+    mv -T "$release" "$staging"
+    echo 'Проверка главной не прошла. Восстановлен предыдущий релиз.' >&2
+    exit 1
+fi
+
+# В истории только опубликованные каталоги. Порядок сохраняется и после отката.
+keep=( "${release##*/}" "${previous##*/}" )
+for name in "${published[@]}"; do
+    [[ " ${keep[*]} " == *" $name "* ]] && continue
+    [[ -d "$root/releases/$name" ]] || continue
+    if (( ${#keep[@]} < 3 )); then
+        keep+=( "$name" )
+    else
+        rm -rf --one-file-system -- "$root/releases/$name"
+    fi
+done
+printf '%s\n' "${keep[@]}" > "$history.next"
+mv -Tf "$history.next" "$history"
 REMOTE_SCRIPT
 
 echo "Готово: $REMOTE:$RELEASE"
