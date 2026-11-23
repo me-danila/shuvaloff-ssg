@@ -468,12 +468,6 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "от 4 000 ₽",
-            links: [
-                {
-                    label: "Коллекция тортов",
-                    href: "https://shuvaloff.academia-rest.ru/torty/",
-                },
-            ],
         },
         {
             title: "Меню подушек",
@@ -1183,12 +1177,6 @@ export const AllServices: Record<Locale, Service[]> = {
                 </>
             ),
             price: "from 4 000 ₽",
-            links: [
-                {
-                    label: "Cake Collection",
-                    href: "https://shuvaloff.academia-rest.ru/torty/",
-                },
-            ],
         },
         {
             title: "Pillow Menu",
