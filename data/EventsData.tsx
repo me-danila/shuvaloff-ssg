@@ -268,6 +268,13 @@ const lottoSchedule = {
     dates: Object.keys(lottoPosters),
 };
 
+const ornamentWorkshop = {
+    slug: "christmas-ornament-painting",
+    imgUrl: "/images/events/ornament-painting.webp",
+    bookingUrl: ORDER_URL,
+    dates: ["2026-12-19T15:00", "2027-01-09T15:00"],
+};
+
 const christmastideLecture = {
     slug: "christmastide-fortune-telling",
     imgUrl: "/images/events/christmastide.webp",
@@ -281,6 +288,44 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ...shuvalovLotto.ru,
             ...lottoSchedule,
             title: "Графское лото",
+        },
+        {
+            ...ornamentWorkshop,
+            title: "Мастер-класс по росписи новогодней игрушки",
+            subtitle:
+                "Распишите ёлочную игрушку с художником в особняке Графини и заберите её с собой.",
+            fullDescription: (
+                <>
+                    В преддверии самого волшебного праздника Графиня приглашает
+                    гостей в свой фамильный особняк на изысканный творческий
+                    вечер.
+                    <br />
+                    <br />В атмосфере старинных рождественских традиций гости
+                    познакомятся с искусством создания авторских елочных
+                    украшений. Под руководством профессионального художника
+                    каждый сможет расписать новогоднюю игрушку, превратив ее в
+                    маленькое произведение искусства.
+                    <br />
+                    <br />
+                    Графиня приоткроет двери своего дома, поделится историями
+                    семейных праздников и расскажет о традициях, которые бережно
+                    передавались из поколения в поколение.
+                    <br />
+                    <br />
+                    Художественный опыт не требуется: все материалы и
+                    инструменты подготовлены, а мастер поможет воплотить даже
+                    самые необычные творческие идеи.
+                    <br />
+                    <br />В завершение вечера каждый гость заберет с собой
+                    уникальную новогоднюю игрушку, которая станет особенным
+                    украшением праздничной елки и памятным воспоминанием о
+                    встрече в доме Графини.
+                    <br />
+                    <br />
+                    Для гостей, проживающих в отелях коллекции ACADEMIA,
+                    посещение мероприятия бесплатно.
+                </>
+            ),
         },
         {
             ...christmastideLecture,
@@ -697,6 +742,42 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             ...shuvalovLotto.en,
             ...lottoSchedule,
             title: "The Count's Lotto",
+        },
+        {
+            ...ornamentWorkshop,
+            title: "Christmas Ornament Painting Workshop",
+            subtitle:
+                "Paint a Christmas ornament with an artist at the Countess's mansion and take it home.",
+            fullDescription: (
+                <>
+                    As the holidays draw near, the Countess invites guests to
+                    her family mansion for an evening of painting.
+                    <br />
+                    <br />
+                    Drawing on old Christmas traditions, guests will learn to
+                    make their own tree decorations. A professional artist will
+                    guide each guest as they paint a bauble and turn it into a
+                    small work of art.
+                    <br />
+                    <br />
+                    The Countess will share stories of her family's celebrations
+                    and the traditions passed down through the generations.
+                    <br />
+                    <br />
+                    No painting experience is needed. All materials and tools
+                    are provided, and the artist will help you bring even your
+                    most unusual ideas to life.
+                    <br />
+                    <br />
+                    Each guest will take home a one-of-a-kind ornament to hang
+                    on the Christmas tree as a keepsake of their visit to the
+                    Countess's home.
+                    <br />
+                    <br />
+                    The workshop is free for guests staying at ACADEMIA
+                    collection hotels.
+                </>
+            ),
         },
         {
             ...christmastideLecture,
@@ -1116,14 +1197,84 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
     ],
 };
 
+const christmasDinnerPrice = "8 500 ₽";
+
 const christmasDinner = {
     ru: {
         title: "Рождественский графский ужин",
-        ...countDinner("ru", "8 500 ₽"),
+        subtitle:
+            "Камерный ужин с Графом и Графиней, рождественские традиции и святочные гадания в особняке.",
+        price: christmasDinnerPrice,
+        fullDescription: (
+            <>
+                В самый волшебный период года двери фамильного особняка
+                распахнутся для гостей особенного рождественского вечера.
+                <br />
+                <br />
+                Граф и Графиня приглашают провести камерный ужин в атмосфере
+                дворянского гостеприимства, познакомиться с историей особняка и
+                прикоснуться к традициям празднования Рождества в эпоху
+                Российской империи.
+                <br />
+                <br />
+                Гостей ждет погружение в старинные рождественские обычаи,
+                душевные беседы, святочные гадания и предсказания, которые
+                приоткроют завесу будущего.
+                <br />
+                <br />
+                Это вечер, в котором оживают семейные истории, рождественские
+                легенды и традиции прошлого. Каждый гость станет частью
+                маленькой истории дома и получит памятный сувенир на добрую
+                память об этом вечере.
+                <br />
+                <br />
+                Подарите себе Рождество, наполненное атмосферой старинного
+                особняка, волшебством и изысканным гостеприимством.
+                <br />
+                <br />
+                <b>Стоимость: {christmasDinnerPrice}</b>
+                <br />
+                <br />В стоимость входит курсовой ужин и участие в программе.
+            </>
+        ),
     },
     en: {
         title: "The Count's Christmas Dinner",
-        ...countDinner("en", "8 500 ₽"),
+        subtitle:
+            "An intimate dinner with the Count and Countess, Christmas traditions and fortune-telling at the mansion.",
+        price: christmasDinnerPrice,
+        fullDescription: (
+            <>
+                At this magical time of year, the family mansion opens its doors
+                for a special Christmas evening.
+                <br />
+                <br />
+                The Count and Countess invite you to an intimate dinner in the
+                tradition of aristocratic hospitality. Discover the mansion's
+                history and how Christmas was celebrated in imperial Russia.
+                <br />
+                <br />
+                Over dinner, guests will explore old Christmas customs, enjoy
+                good conversation and try their hand at Christmastide
+                fortune-telling for a glimpse of what the future might hold.
+                <br />
+                <br />
+                Family stories, Christmas legends and traditions come to life
+                for the evening. Each guest will become part of the mansion's
+                story and take home a keepsake of their visit.
+                <br />
+                <br />
+                Treat yourself to Christmas in a historic mansion, with all the
+                magic and hospitality of the season.
+                <br />
+                <br />
+                <b>Price: {christmasDinnerPrice}</b>
+                <br />
+                <br />
+                The price includes a multi-course dinner and the evening's
+                program.
+            </>
+        ),
     },
 };
 
