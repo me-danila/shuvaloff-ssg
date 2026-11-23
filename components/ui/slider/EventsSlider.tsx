@@ -3,7 +3,7 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useMemo, useRef, useState } from "react";
 import CardEvent from "@/components/ui/CardEvent";
-import type { EventCard } from "@/data/EventsData";
+import { type EventCard, getUpcomingEventCards } from "@/data/EventsData";
 
 type EventsSliderProps = {
     /** Карточки-даты (одна на дату); прошедшие отфильтруются внутри. */
@@ -12,11 +12,7 @@ type EventsSliderProps = {
 
 export default function EventsSlider({ cards }: EventsSliderProps) {
     // Прошедшие даты скрываем — как в гриде на /events/.
-    const events = useMemo(() => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return cards.filter((c) => new Date(c.start) >= today);
-    }, [cards]);
+    const events = useMemo(() => getUpcomingEventCards(cards), [cards]);
 
     const trackRef = useRef<HTMLDivElement>(null);
     const activeIndexRef = useRef(0);

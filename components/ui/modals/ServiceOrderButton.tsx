@@ -7,7 +7,9 @@ import {
     useContext,
     useId,
     useRef,
+    useState,
 } from "react";
+import { flushSync } from "react-dom";
 import Button from "@/components/ui/Button";
 import { serviceOrderCopy } from "@/data/serviceOrderCopy";
 import type { HtmlLang } from "@/lib/i18n/routing";
@@ -16,7 +18,6 @@ import { ORDER_URL } from "@/lib/seo/site";
 const contacts = [
     {
         title: "Telegram",
-        accent: "[--contact-color:#229ED9]",
         href: "https://t.me/ConciergeACADEMIA",
         icon: (
             <img
@@ -29,7 +30,6 @@ const contacts = [
     },
     {
         title: "Max",
-        accent: "[--contact-color:#5066F5]",
         href: ORDER_URL,
         icon: (
             <svg
@@ -47,7 +47,6 @@ const contacts = [
     },
     {
         title: "WhatsApp",
-        accent: "[--contact-color:#25D366]",
         href: "https://wa.me/79668342743",
         icon: (
             <img
@@ -60,21 +59,44 @@ const contacts = [
     },
     {
         title: "Phone",
-        accent: "[--contact-color:var(--color-brand-red)]",
         href: "tel:+79668342743",
         icon: <Phone size={22} />,
     },
 ];
 
-const ServiceOrderContext = createContext<() => void>(() => {
-    throw new Error("Missing ServiceOrderProvider");
-});
+type DialogDetails = { dialogTitle?: string; dialogSummary?: string };
 
-export default function ServiceOrderButton(
-    props: Omit<ComponentProps<typeof Button>, "href" | "target" | "onClick">,
-) {
+const ServiceOrderContext = createContext<(details?: DialogDetails) => void>(
+    () => {
+        throw new Error("Missing ServiceOrderProvider");
+    },
+);
+
+type ServiceOrderButtonProps = Omit<
+    ComponentProps<typeof Button>,
+    "href" | "target" | "onClick"
+> & { dialogTitle?: string; dialogSummary?: string | (() => string) };
+
+export default function ServiceOrderButton({
+    dialogTitle,
+    dialogSummary,
+    ...props
+}: ServiceOrderButtonProps) {
     const open = useContext(ServiceOrderContext);
-    return <Button {...props} onClick={open} />;
+    return (
+        <Button
+            {...props}
+            onClick={() =>
+                open({
+                    dialogTitle,
+                    dialogSummary:
+                        typeof dialogSummary === "function"
+                            ? dialogSummary()
+                            : dialogSummary,
+                })
+            }
+        />
+    );
 }
 
 export function ServiceOrderTileButton({ label }: { label: string }) {
@@ -83,7 +105,7 @@ export function ServiceOrderTileButton({ label }: { label: string }) {
         <button
             type="button"
             aria-label={label}
-            onClick={open}
+            onClick={() => open()}
             className="absolute inset-0 cursor-pointer"
         />
     );
@@ -99,8 +121,14 @@ export function ServiceOrderProvider({
     const dialog = useRef<HTMLDialogElement>(null);
     const titleId = useId();
     const copy = serviceOrderCopy[locale];
+    const [details, setDetails] = useState<DialogDetails>();
+    function open(nextDetails?: DialogDetails) {
+        // Обновляем доступное имя диалога до перевода фокуса в showModal().
+        flushSync(() => setDetails(nextDetails));
+        dialog.current?.showModal();
+    }
     return (
-        <ServiceOrderContext.Provider value={() => dialog.current?.showModal()}>
+        <ServiceOrderContext.Provider value={open}>
             {children}
             <dialog
                 ref={dialog}
@@ -129,11 +157,16 @@ export function ServiceOrderProvider({
                         id={titleId}
                         className="pr-9 text-[24px] leading-tight text-black sm:text-[28px]"
                     >
-                        {copy.title}
+                        {details?.dialogTitle ?? copy.title}
                     </h2>
+                    {details?.dialogSummary && (
+                        <p className="mt-3 text-balance font-semibold leading-tight text-brand-brown">
+                            {details.dialogSummary}
+                        </p>
+                    )}
                     <p className="mt-3 text-pretty text-sm/5">{copy.intro}</p>
                     <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
-                        {contacts.map(({ title, href, icon, accent }) => (
+                        {contacts.map(({ title, href, icon }) => (
                             <a
                                 key={href}
                                 href={href}
@@ -143,11 +176,11 @@ export function ServiceOrderProvider({
                                         : "_blank"
                                 }
                                 rel="noopener noreferrer"
-                                className={`relative flex min-h-14 items-center gap-3 rounded-md border border-neutral-300 p-2 transition-colors hover:border-(--contact-color) focus-visible:outline-(--contact-color) sm:flex-col sm:items-start sm:p-4 ${accent}`}
+                                className="relative flex min-h-14 items-center gap-3 rounded-md border border-neutral-300 p-2 transition-colors hover:border-black focus-visible:outline-black sm:flex-col sm:items-start sm:p-4"
                             >
                                 <span
                                     aria-hidden="true"
-                                    className="grid size-9 shrink-0 place-items-center text-(--contact-color)"
+                                    className="grid size-9 shrink-0 place-items-center text-black"
                                 >
                                     {icon}
                                 </span>

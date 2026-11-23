@@ -1,24 +1,29 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ContactsSection from "@/components/sections/ContactsSection";
 import StructuredData from "@/components/seo/StructuredData";
-import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import EventDates from "@/components/ui/EventDates";
 import { FadeUp } from "@/components/ui/Motion";
-import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
 import EventsSlider from "@/components/ui/slider/EventsSlider";
 import {
     getEventBySlug,
     getEventCards,
+    getEventOccurrences,
     getPublishedEvents,
 } from "@/data/EventsData";
 import { buildPageMetadata } from "@/lib/i18n/metadata";
 import type { Locale } from "@/lib/i18n/routing";
 import { buildEventSchema } from "@/lib/seo/schema";
 
-import { ORDER_URL } from "@/lib/seo/site";
+// Inline the same date resolver used after hydration. Static exports serve one
+// HTML file for every ?date= value, so only the browser knows the requested day.
+const firstPaintScript =
+    readFileSync(join(process.cwd(), "lib/eventDateDisplay.js"), "utf8") +
+    '\nconst root = document.getElementById("event-schedule"); if (root) initializeEventDateDisplay(root);';
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -29,9 +34,7 @@ type EventDetailLabels = {
     brandSuffix: string;
     breadcrumbHome: string;
     breadcrumbEvents: string;
-    book: string;
     otherEvents: string;
-    dates: string;
 };
 
 const labelsByLocale: Record<Locale, EventDetailLabels> = {
@@ -39,17 +42,13 @@ const labelsByLocale: Record<Locale, EventDetailLabels> = {
         brandSuffix: "— ACADEMIA Особняк Шувалова",
         breadcrumbHome: "Главная",
         breadcrumbEvents: "Афиша мероприятий",
-        book: "Забронировать",
         otherEvents: "Другие события",
-        dates: "Ближайшие даты:",
     },
     en: {
         brandSuffix: "— ACADEMIA Shuvaloff Mansion",
         breadcrumbHome: "Home",
         breadcrumbEvents: "Events",
-        book: "Book now",
         otherEvents: "Other events",
-        dates: "Upcoming dates:",
     },
 };
 
@@ -103,11 +102,9 @@ export default async function EventDetailPage({ params, locale }: Props) {
                 })}
             />
             <section className="flex flex-col gap-4 m-6 xl:w-full xl:max-w-7xl xl:mx-auto">
-                <FadeUp className="md:text-center my-4">
-                    <h1>{event.title}</h1>
-                </FadeUp>
+                <h1 className="my-4 md:text-center">{event.title}</h1>
                 <div className="flex flex-col xl:flex-row-reverse xl:items-start gap-6 xl:gap-8">
-                    <FadeUp className="relative w-full aspect-4/3 xl:aspect-square rounded-md overflow-hidden xl:flex-1">
+                    <div className="relative w-full aspect-4/3 xl:aspect-square rounded-md overflow-hidden xl:flex-1">
                         <Image
                             src={event.imgUrl}
                             alt={event.title}
@@ -124,47 +121,32 @@ export default async function EventDetailPage({ params, locale }: Props) {
                                     : undefined
                             }
                         />
-                    </FadeUp>
+                    </div>
 
                     <div className="flex flex-col gap-4 xl:flex-1 xl:gap-3">
                         {event.fullDescription && (
-                            <FadeUp delay={0.1} className="mb-2 xl:mb-4">
-                                <p>{event.fullDescription}</p>
-                            </FadeUp>
+                            <p className="mb-2 xl:mb-4">
+                                {event.fullDescription}
+                            </p>
                         )}
 
-                        <FadeUp delay={0.3}>
-                            <EventDates
-                                dates={event.dates}
-                                locale={locale}
-                                title={labels.dates}
-                            />
-                        </FadeUp>
-
-                        <FadeUp delay={0.4}>
-                            {event.bookingUrl === ORDER_URL ? (
-                                <ServiceOrderButton
-                                    size="xl"
-                                    className="self-start mt-3"
-                                >
-                                    {labels.book}
-                                </ServiceOrderButton>
-                            ) : (
-                                <Button
-                                    href={event.bookingUrl}
-                                    target={
-                                        event.bookingUrl.startsWith("http")
-                                            ? "_blank"
-                                            : undefined
-                                    }
-                                    variant="primary"
-                                    size="xl"
-                                    className="self-start mt-3"
-                                >
-                                    {labels.book}
-                                </Button>
+                        <EventDates
+                            occurrences={getEventOccurrences(
+                                event.dates,
+                                locale,
                             )}
-                        </FadeUp>
+                            locale={locale}
+                            eventTitle={event.title}
+                            bookingUrl={event.bookingUrl}
+                        />
+                        <script
+                            type="module"
+                            async
+                            // biome-ignore lint/security/noDangerouslySetInnerHtml: fixed local module, contains no event or URL interpolation.
+                            dangerouslySetInnerHTML={{
+                                __html: firstPaintScript,
+                            }}
+                        />
                     </div>
                 </div>
             </section>

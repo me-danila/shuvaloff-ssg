@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useMemo, useRef } from "react";
 import CardEvent from "@/components/ui/CardEvent";
 import { StaggerContainer, StaggerItem } from "@/components/ui/Motion";
-import { getEventCards } from "@/data/EventsData";
+import { getEventCards, getUpcomingEventCards } from "@/data/EventsData";
 import { useLocale } from "@/lib/i18n/useLocale";
 
 export default function EventsGrid() {
@@ -12,11 +12,10 @@ export default function EventsGrid() {
 
     // Прошедшие мероприятия скрываем: сравниваем дату старта с началом сегодня.
     // (В календаре они остаются — там фильтра нет.)
-    const events = useMemo(() => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return getEventCards(locale).filter((e) => new Date(e.start) >= today);
-    }, [locale]);
+    const events = useMemo(
+        () => getUpcomingEventCards(getEventCards(locale)),
+        [locale],
+    );
 
     // Слайдер только на мобилке (десктоп — статичный грид, стрелки скрыты).
     const trackRef = useRef<HTMLDivElement>(null);
@@ -102,16 +101,12 @@ export default function EventsGrid() {
                 amount="some"
                 className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar xl:grid xl:grid-cols-2 xl:overflow-visible"
             >
-                {events.map((event, index) => (
+                {events.map((event) => (
                     <StaggerItem
                         key={`${event.title}-${event.start}`}
-                        data-event-month={
-                            event.start.slice(0, 7) !==
-                            events[index - 1]?.start.slice(0, 7)
-                                ? event.start.slice(0, 7)
-                                : undefined
-                        }
-                        className="flex min-w-full snap-start xl:min-w-0 xl:scroll-mt-36"
+                        data-event-slug={event.slug}
+                        data-event-date={event.start.slice(0, 10)}
+                        className="flex min-w-full snap-start scroll-mt-28 xl:min-w-0 xl:scroll-mt-36"
                     >
                         <CardEvent event={event} />
                     </StaggerItem>

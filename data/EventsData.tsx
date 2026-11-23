@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { shuvalovLotto } from "@/data/shuvalovLottoData";
+import { getEventDateParam, getEventToday } from "@/lib/eventDates";
 import type { Locale } from "@/lib/i18n/routing";
-import { HOTEL_CONTACTS, ORDER_URL } from "@/lib/seo/site";
+import { HOTEL_CONTACTS } from "@/lib/seo/site";
 
 /**
  * Описание мероприятия. Одно мероприятие может проходить в несколько дат —
@@ -11,7 +12,7 @@ import { HOTEL_CONTACTS, ORDER_URL } from "@/lib/seo/site";
  * Хранится структурированно (не строкой), чтобы позже отдавать в календарь.
  *
  * `slug` — адрес индивидуальной страницы (`/events/<slug>/`).
- * `bookingUrl` — собственная ссылка бронирования кнопки на этой странице.
+ * `bookingUrl` — отдельная ссылка бронирования. По умолчанию открывается диалог связи.
  *
  * `published` — флаг видимости. `false` полностью скрывает мероприятие:
  * нет карточки в афише, нет своей страницы (404), нет в sitemap и календаре.
@@ -25,7 +26,7 @@ export type EventDefinition = {
     imgUrl: string;
     imagesByDate?: Record<string, string>;
     mediaObjectPosition?: string;
-    bookingUrl: string;
+    bookingUrl?: string;
     fullDescription?: ReactNode;
     price?: string;
     dates: string[];
@@ -33,14 +34,8 @@ export type EventDefinition = {
 };
 
 /** Одна карточка = одно мероприятие в конкретную дату. */
-export type EventCard = Omit<EventDefinition, "dates" | "imagesByDate"> & {
-    /** Исходная дата в ISO ("YYYY-MM-DDTHH:mm") — для сортировки и календаря. */
-    start: string;
-    /** Готовая подпись даты, напр. "1 июля". */
-    dateLabel: string;
-    /** Готовая подпись времени, напр. "17:00". */
-    timeLabel: string;
-};
+export type EventCard = Omit<EventDefinition, "dates" | "imagesByDate"> &
+    EventOccurrence;
 
 // Общий «хвост» для исторических лекций (одинаков во всех трех).
 const LectureOutroRu = (
@@ -261,8 +256,6 @@ const lottoPosters = {
 
 const lottoSchedule = {
     slug: "shuvalov-lotto",
-    bookingUrl:
-        "https://shuvaloff.academia-rest.ru/afisha/grafskoe-loto/?utm_source=hotel",
     imgUrl: lottoTable,
     imagesByDate: lottoPosters,
     dates: Object.keys(lottoPosters),
@@ -271,14 +264,14 @@ const lottoSchedule = {
 const ornamentWorkshop = {
     slug: "christmas-ornament-painting",
     imgUrl: "/images/events/ornament-painting.webp",
-    bookingUrl: ORDER_URL,
+    price: "6500",
     dates: ["2026-12-19T15:00", "2027-01-09T15:00"],
 };
+const ornamentWorkshopPrice = `${Number(ornamentWorkshop.price).toLocaleString("ru-RU")}\u00a0₽`;
 
 const christmastideLecture = {
     slug: "christmastide-fortune-telling",
     imgUrl: "/images/events/christmastide.webp",
-    bookingUrl: ORDER_URL,
     dates: ["2027-01-04T19:00"],
 };
 
@@ -322,8 +315,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     встрече в доме Графини.
                     <br />
                     <br />
-                    Для гостей, проживающих в отелях коллекции ACADEMIA,
-                    посещение мероприятия бесплатно.
+                    <b>Стоимость: {ornamentWorkshopPrice}</b>
                 </>
             ),
         },
@@ -406,8 +398,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "Путешествие в мир балов, светского этикета и дворянских традиций конца XIX века",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Одна-ночь-в-Петербурге-1899.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/one-night?utm_campaign=hotel&utm_term=lecture",
             fullDescription: (
                 <>
                     «Одна ночь в&nbsp;Петербурге 1899 года»&nbsp;&mdash;
@@ -428,8 +418,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "История масонских лож, их символики и легенд, которыми до сих пор окутан город",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Масонский-Петербург.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg?utm_campaign=hotel&utm_term=lecture",
             fullDescription: (
                 <>
                     «Масонский Петербург XIX&nbsp;века: тайные общества, символы
@@ -449,8 +437,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "Как доходные дома формировали облик Петербурга и отражали социальную иерархию города",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Доходный-дом.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom?utm_campaign=hotel&utm_term=lecture",
             fullDescription: (
                 <>
                     «Как был устроен доходный дом и&nbsp;его
@@ -470,8 +456,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "Творческий мастер-класс росписи гребня под руководством художницы с гастрономическим сопровождением",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Роспись-Афиша.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/rospis-grebney?utm_campaign=hotel&utm_term=lecture",
             price: "7 500 ₽",
             fullDescription: (
                 <>
@@ -510,8 +494,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "Камерный гастрономический вечер в ACADEMIA особняке Шувалова",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/Графский-ужин_1-1-scaled.avif",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa?utm_campaign=hotel&utm_term=benua",
             ...benoisDinner("ru", "9 500 ₽"),
             dates: ["2026-07-24T19:00"],
         },
@@ -521,8 +503,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "Камерный гастрономический вечер в ACADEMIA особняке Шувалова",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
             ...countDinner("ru", "7 500 ₽"),
             dates: ["2026-08-14T19:00"],
         },
@@ -531,8 +511,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: "Винное казино «Игорный дом графа Шувалова»",
             subtitle: "Азарт и эстетика в особняке XIX века",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_2064-1.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/vinnoe-kazino-august?utm_campaign=hotel&utm_term=vino",
             price: "5 900 ₽",
             fullDescription: (
                 <>
@@ -567,8 +545,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: "«В гостях у Графини»",
             subtitle: "Мастер-класс по живописи",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/comb.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/grafinya?utm_campaign=hotel&utm_term=grafinya",
             price: "8 000 ₽",
             fullDescription: (
                 <>
@@ -611,8 +587,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "В основе лекции живые истории из писем, дневников и архивов",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/2-1.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
             fullDescription: (
                 <>
                     Как дворяне распоряжались своим состоянием, если торговать
@@ -645,8 +619,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: "Лекция от историка: «Из жизни Петербурга Серебряного века. Между „Башней“ и подвалом „Бродячей собаки“»",
             subtitle: "Серебряный век через реальные судьбы его героев",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ChatGPT-Image-23-сент.-2026-г.-18_03_20.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/peterburg-serebryanogo-veka/?utm_source=hotel",
             fullDescription: (
                 <>
                     Петербург начала XX&nbsp;века&nbsp;&mdash; между двумя
@@ -774,8 +746,7 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
                     Countess's home.
                     <br />
                     <br />
-                    The workshop is free for guests staying at ACADEMIA
-                    collection hotels.
+                    <b>Price: {ornamentWorkshopPrice}</b>
                 </>
             ),
         },
@@ -862,8 +833,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "A journey into the world of balls, high-society etiquette, and noble traditions of the late 19th century",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Одна-ночь-в-Петербурге-1899.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/one-night?utm_campaign=hotel&utm_term=lecture",
             fullDescription: (
                 <>
                     "One night in Saint Petersburg, 1899"&nbsp;&mdash;
@@ -884,8 +853,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "The history of Masonic lodges, their symbolism, and the legends that still shroud the city",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Масонский-Петербург.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg?utm_campaign=hotel&utm_term=lecture",
             fullDescription: (
                 <>
                     "Masonic Petersburg of&nbsp;the 19th&nbsp;century: secret
@@ -906,8 +873,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "How tenement houses shaped the look of Petersburg and reflected the city's social hierarchy",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Доходный-дом.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom?utm_campaign=hotel&utm_term=lecture",
             fullDescription: (
                 <>
                     "How the tenement house worked and&nbsp;its
@@ -928,8 +893,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "A creative comb-painting masterclass led by an artist, with a gastronomic accompaniment",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/Роспись-Афиша.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/rospis-grebney?utm_campaign=hotel&utm_term=lecture",
             ...countDinner("en", "7 500 ₽"),
             dates: ["2026-07-18T14:00"],
         },
@@ -939,8 +902,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "An intimate gastronomic evening at ACADEMIA Shuvaloff Mansion",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/Графский-ужин_1-1-scaled.avif",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa?utm_campaign=hotel&utm_term=benua",
             ...benoisDinner("en", "9 500 ₽"),
             dates: ["2026-07-24T19:00"],
         },
@@ -950,8 +911,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "An intimate gastronomic evening at ACADEMIA Shuvaloff Mansion",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_9662-1.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-august?utm_campaign=hotel&utm_term=benua",
             price: "7 500 ₽",
             fullDescription: (
                 <>
@@ -984,8 +943,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: 'Wine Casino "Count Shuvalov\'s Gambling House"',
             subtitle: "Thrill and aesthetics in a 19th-century mansion",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/IMG_2064-1.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/vinnoe-kazino-august?utm_campaign=hotel&utm_term=vino",
             price: "5 900 ₽",
             fullDescription: (
                 <>
@@ -1022,8 +979,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: '"Visiting the Countess"',
             subtitle: "A painting masterclass",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/07/comb.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/grafinya?utm_campaign=hotel&utm_term=grafinya",
             price: "8 000 ₽",
             fullDescription: (
                 <>
@@ -1067,8 +1022,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             subtitle:
                 "The lecture is built on living stories from letters, diaries, and archives",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/2-1.jpg",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
             fullDescription: (
                 <>
                     How did the&nbsp;nobility manage their fortunes when their
@@ -1101,8 +1054,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
             title: 'Historian\'s lecture: "Life in Silver Age Petersburg. Between the Tower and the Stray Dog cellar"',
             subtitle: "The Silver Age through the real lives of its heroes",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ChatGPT-Image-23-сент.-2026-г.-18_03_20.png",
-            bookingUrl:
-                "https://shuvaloff.academia-rest.ru/afisha/peterburg-serebryanogo-veka/?utm_source=hotel",
             fullDescription: (
                 <>
                     Petersburg in&nbsp;the early 20th&nbsp;century, between two
@@ -1280,11 +1231,11 @@ const christmasDinner = {
 
 /**
  * Дубли мероприятий: полная копия исходной карточки (фото, текст, название),
- * но со своей ссылкой бронирования и своими датами. Даты этих дублей вынесены
+ * но со своими датами. Даты этих дублей вынесены
  * из оригиналов выше, чтобы не задваиваться в афише.
  *
  * `baseSlug` — какое мероприятие клонировать; `slug` — адрес страницы копии;
- * `bookingUrl` — ссылка кнопки «Забронировать»; `dates` — даты копии.
+ * `dates` — даты копии.
  * `imgUrl` — необязательная замена афиши, если у копии свой постер;
  * без него используется фото оригинала.
  * `published` — как у оригинала: `false` полностью скрывает копию.
@@ -1295,7 +1246,6 @@ const christmasDinner = {
 const EVENT_DUPLICATES: {
     baseSlug: string;
     slug: string;
-    bookingUrl: string;
     dates: string[];
     imgUrl?: string;
     published?: boolean;
@@ -1304,50 +1254,36 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-august",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-august?utm_campaign=hotel&utm_term=lecture",
         dates: ["2026-08-06T19:00", "2026-08-27T19:00"],
     },
     {
         baseSlug: "income-house",
         slug: "income-house-august",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-august?utm_campaign=hotel&utm_term=lecture",
         dates: ["2026-08-13T19:00"],
     },
     {
         baseSlug: "one-night-in-petersburg-1899",
         slug: "one-night-in-petersburg-1899-august",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/one-night-august",
         dates: ["2026-08-22T19:00"],
     },
     {
         baseSlug: "one-night-in-petersburg-1899",
         slug: "one-night-in-petersburg-1899-september",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
         dates: ["2026-09-17T19:00"],
     },
     {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-september",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg/?utm_source=hotel",
         dates: ["2026-09-24T19:00"],
     },
     {
         baseSlug: "income-house",
         slug: "income-house-september",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
         dates: ["2026-09-10T19:00"],
     },
     {
         baseSlug: "comb-painting-august",
         slug: "comb-painting-september",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/v-gostyah-grafini/?utm_source=hotel",
         dates: ["2026-09-12T15:00"],
         // Скрыто: не подтверждено, состоится ли мероприятие.
         published: false,
@@ -1355,15 +1291,11 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-september",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
         dates: ["2026-09-25T19:00"],
     },
     {
         baseSlug: "count-dinner-august",
         slug: "count-dinner-september",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
         dates: ["2026-09-26T19:00"],
         overrides: {
             ru: countDinner("ru", "8 500 ₽"),
@@ -1373,8 +1305,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "income-house",
         slug: "income-house-october",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
         dates: ["2026-10-01T19:00"],
         // Скрыто: октябрьскую дату убрали из афиши.
         published: false,
@@ -1382,8 +1312,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "one-night-in-petersburg-1899",
         slug: "one-night-in-petersburg-1899-october",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
         dates: ["2026-10-15T18:00"],
         // Скрыто: октябрьскую дату убрали из афиши.
         published: false,
@@ -1391,8 +1319,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "count-dinner-benois",
         slug: "count-dinner-benois-october",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa/?utm_source=hotel",
         dates: ["2026-10-16T19:00"],
         // Скрыто: мероприятие не состоится.
         published: false,
@@ -1405,8 +1331,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-october",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg-october/?utm_source=hotel",
         dates: ["2026-10-22T18:00"],
         // Скрыто: октябрьскую дату убрали из афиши.
         published: false,
@@ -1414,8 +1338,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "count-dinner-august",
         slug: "count-dinner-october",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/uzhin-u-grafa-october/?utm_source=hotel",
         dates: ["2026-10-23T19:00"],
         // Скрыто: мероприятие не состоится.
         published: false,
@@ -1428,8 +1350,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "noble-investments",
         slug: "noble-investments-october",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
         dates: ["2026-10-29T18:00"],
         // Скрыто: мероприятие не состоится.
         published: false,
@@ -1437,22 +1357,16 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "income-house",
         slug: "income-house-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom-noyabr/?utm_source=hotel",
         dates: ["2026-11-05T18:00"],
     },
     {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
         dates: ["2026-11-07T19:00"],
     },
     {
         baseSlug: "silver-age-petersburg",
         slug: "silver-age-petersburg-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/serebryaniy-vek/?utm_source=hotel",
         dates: ["2026-11-12T18:00"],
         // Скрыто: мероприятие не состоится.
         published: false,
@@ -1460,8 +1374,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "count-dinner-august",
         slug: "count-dinner-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
         dates: ["2026-11-13T19:00"],
         published: false,
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/09/ужин-темнее.png",
@@ -1473,45 +1385,33 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "one-night-in-petersburg-1899",
         slug: "one-night-in-petersburg-1899-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/one-night-noyabr/?utm_source=hotel",
         dates: ["2026-11-19T18:00"],
     },
     {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-november",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/masonskij-peterburg/?utm_source=hotel",
         dates: ["2026-11-26T18:00"],
     },
     {
         baseSlug: "noble-investments",
         slug: "noble-investments-december",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane/?utm_source=hotel",
         dates: ["2026-12-03T18:00"],
     },
     {
         baseSlug: "income-house",
         slug: "income-house-december",
         imgUrl: "/images/events/winter-architecture.webp",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/dohodnyi-dom/?utm_source=hotel",
         dates: ["2026-12-10T18:00"],
     },
     {
         baseSlug: "silver-age-petersburg",
         slug: "silver-age-petersburg-december",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/serebryaniy-vek/?utm_source=hotel",
         dates: ["2026-12-17T18:00"],
         published: false,
     },
     {
         baseSlug: "one-night-in-petersburg-1899",
         slug: "one-night-in-petersburg-1899-december",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/one-night/?utm_source=hotel",
         dates: ["2026-12-24T18:00"],
         imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/10/Лунная-набережная-Петербурга-акварелью.avif",
     },
@@ -1519,31 +1419,23 @@ const EVENT_DUPLICATES: {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-december",
         imgUrl: "/images/events/wine-salon.webp",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino/?utm_source=hotel",
         dates: ["2026-12-12T19:00"],
     },
     {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-january-3-2027",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino-january/?utm_source=hotel",
         imgUrl: "/images/events/wine-amber.webp",
         dates: ["2027-01-03T19:00"],
     },
     {
         baseSlug: "wine-casino-august",
         slug: "wine-casino-january-5-2027",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/wine-cazino-january/?utm_source=hotel",
         imgUrl: "/images/events/wine-salon.webp",
         dates: ["2027-01-05T19:00"],
     },
     {
         baseSlug: "count-dinner-august",
         slug: "christmas-count-dinner-january-7-2027",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
         imgUrl: "/images/events/christmas-dinner.webp",
         dates: ["2027-01-07T19:00"],
         overrides: christmasDinner,
@@ -1551,8 +1443,6 @@ const EVENT_DUPLICATES: {
     {
         baseSlug: "count-dinner-august",
         slug: "christmas-count-dinner-january-8-2027",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/uzhin-grafa/?utm_source=hotel",
         imgUrl: "/images/events/count-and-countess.webp",
         dates: ["2027-01-08T19:00"],
         overrides: christmasDinner,
@@ -1561,21 +1451,17 @@ const EVENT_DUPLICATES: {
         baseSlug: "masonic-petersburg",
         slug: "masonic-petersburg-january-2027",
         imgUrl: "/images/events/masonic-petersburg.webp",
-        bookingUrl: ORDER_URL,
         dates: ["2027-01-14T19:00"],
     },
     {
         baseSlug: "noble-investments",
         slug: "noble-investments-january-2027",
         imgUrl: "/images/events/winter-canal.webp",
-        bookingUrl:
-            "https://shuvaloff.academia-rest.ru/afisha/kuda-investirovali-dvoryane-january/?utm_source=hotel",
         dates: ["2027-01-21T19:00"],
     },
     {
         baseSlug: "income-house",
         slug: "income-house-january-2027",
-        bookingUrl: ORDER_URL,
         dates: ["2027-01-28T19:00"],
     },
 ];
@@ -1584,15 +1470,7 @@ const EVENT_DUPLICATES: {
 function withDuplicates(locale: Locale): EventDefinition[] {
     const base = BaseEvents[locale];
     const dups = EVENT_DUPLICATES.map(
-        ({
-            baseSlug,
-            slug,
-            bookingUrl,
-            dates,
-            imgUrl,
-            published,
-            overrides,
-        }) => {
+        ({ baseSlug, slug, dates, imgUrl, published, overrides }) => {
             const original = base.find((event) => event.slug === baseSlug);
             if (!original) {
                 throw new Error(
@@ -1602,7 +1480,6 @@ function withDuplicates(locale: Locale): EventDefinition[] {
             return {
                 ...original,
                 slug,
-                bookingUrl,
                 dates,
                 ...(imgUrl ? { imgUrl } : {}),
                 ...(published === undefined ? {} : { published }),
@@ -1673,19 +1550,24 @@ export function getPublishedEvents(locale: Locale): EventDefinition[] {
 export function getEventCards(locale: Locale): EventCard[] {
     const cards = getPublishedEvents(locale).flatMap(
         ({ dates, imagesByDate, ...event }) =>
-            dates.map((start) => ({
+            getEventOccurrences(dates, locale).map((occurrence) => ({
                 ...event,
-                imgUrl: imagesByDate?.[start] ?? event.imgUrl,
-                start,
-                ...formatOccurrence(start, locale),
+                ...occurrence,
+                imgUrl: imagesByDate?.[occurrence.start] ?? event.imgUrl,
             })),
     );
 
     return cards.sort((a, b) => a.start.localeCompare(b.start));
 }
 
+export function getUpcomingEventCards(cards: EventCard[]): EventCard[] {
+    const today = getEventToday();
+    return cards.filter((event) => event.start >= today);
+}
+
 /** Одна дата проведения с готовыми подписями. */
 export type EventOccurrence = {
+    dateParam: string;
     start: string;
     dateLabel: string;
     timeLabel: string;
@@ -1701,7 +1583,11 @@ export function getEventOccurrences(
     locale: Locale,
 ): EventOccurrence[] {
     return dates
-        .map((start) => ({ start, ...formatOccurrence(start, locale) }))
+        .map((start) => ({
+            start,
+            dateParam: getEventDateParam(start, dates),
+            ...formatOccurrence(start, locale),
+        }))
         .sort((a, b) => a.start.localeCompare(b.start));
 }
 

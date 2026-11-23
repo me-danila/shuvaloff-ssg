@@ -504,16 +504,16 @@ export const buildEventSchema = ({
         subtitle: string;
         imgUrl: string;
         imagesByDate?: Record<string, string>;
-        bookingUrl: string;
+        bookingUrl?: string;
         price?: string;
         dates: string[];
     };
     breadcrumbs: BreadcrumbItem[];
 }) => {
     const url = getAbsoluteUrl(path, locale);
-    const offerUrl = event.bookingUrl.startsWith("http")
+    const offerUrl = event.bookingUrl?.startsWith("http")
         ? event.bookingUrl
-        : getAbsoluteUrl(event.bookingUrl, locale);
+        : getAbsoluteUrl(event.bookingUrl ?? path, locale);
 
     const place = {
         "@type": "Place",

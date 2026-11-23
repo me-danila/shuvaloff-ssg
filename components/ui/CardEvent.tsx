@@ -5,18 +5,33 @@ import Image from "@/components/ui/OptimizedImage";
 import type { EventCard } from "@/data/EventsData";
 import { localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
+import styles from "./CardEvent.module.css";
 
 const moreLabel = { ru: "Подробнее", en: "Details" } as const;
+const holidayLabels = {
+    ru: { title: "Новый год", subtitle: "в особняке" },
+    en: { title: "New Year", subtitle: "at the mansion" },
+};
 
 export default function CardEvent({ event }: { event: EventCard }) {
     const locale = useLocale();
-    const href = localizeHref(`/events/${event.slug}/`, locale);
+    const href = localizeHref(
+        `/events/${event.slug}/?date=${encodeURIComponent(event.dateParam)}`,
+        locale,
+    );
+    const day = event.start.slice(0, 10);
+    const isHoliday = day >= "2026-12-31" && day <= "2027-01-11";
+    const holiday = holidayLabels[locale];
 
     return (
         <article className="flex h-full w-full flex-col overflow-hidden rounded-[4px] bg-white pb-7 text-center">
             <a
                 href={href}
-                aria-label={event.title}
+                aria-label={
+                    isHoliday
+                        ? `${event.title} — ${holiday.title} ${holiday.subtitle}`
+                        : event.title
+                }
                 className="relative aspect-[85/100] w-full overflow-hidden"
             >
                 <Image
@@ -31,6 +46,14 @@ export default function CardEvent({ event }: { event: EventCard }) {
                             : undefined
                     }
                 />
+                {isHoliday && (
+                    <span aria-hidden="true" className={styles.ornament}>
+                        <span className={styles.title}>{holiday.title}</span>
+                        <span className={styles.subtitle}>
+                            {holiday.subtitle}
+                        </span>
+                    </span>
+                )}
             </a>
             <p className="my-4 xl:my-6 px-4 font-history text-xl font-semibold uppercase leading-tight text-[#372a24] xl:text-[21px]">
                 <time dateTime={event.start}>
