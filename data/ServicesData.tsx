@@ -467,7 +467,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     рады помочь.
                 </>
             ),
-            price: "от 5 800 ₽",
+            price: "от 4 000 ₽",
             links: [
                 {
                     label: "Коллекция тортов",
@@ -1182,7 +1182,7 @@ export const AllServices: Record<Locale, Service[]> = {
                     are here and always happy to help.
                 </>
             ),
-            price: "from 5 800 ₽",
+            price: "from 4 000 ₽",
             links: [
                 {
                     label: "Cake Collection",
