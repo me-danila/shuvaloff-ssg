@@ -57,7 +57,8 @@ function syncPoseidon() {
             }
             // Literal text keeps the phone prefix and prevents user input becoming a formula.
             const cells = values.map(row => row.map(text => SpreadsheetApp.newRichTextValue().setText(text).build()));
-            sheet.getRange(last + 1, 1, cells.length, headers.length).setRichTextValues(cells);
+            const destination = sheet.getRange(last + 1, 1, cells.length, headers.length);
+            destination.setNumberFormat('@').setRichTextValues(cells);
             SpreadsheetApp.flush();
         }
         inboxRequest({action: 'ack', ids: rows.map(row => row.id)}, key);

@@ -67,7 +67,14 @@ try {
     } elseif ($action === 'pull') {
         $rows = [];
         foreach (array_slice(glob("$dir/*.json") ?: [], 0, BATCH_SIZE) as $path) {
-            $rows[] = json_decode(file_get_contents($path), true, 8, JSON_THROW_ON_ERROR);
+            $row = json_decode(file_get_contents($path), true, 8, JSON_THROW_ON_ERROR);
+            // Sheets parses leading signs even when Apps Script writes RichText.
+            foreach (['name', 'phone', 'email'] as $field) {
+                if (preg_match("/^[\s\p{Z}]*[=+@'-]/u", $row[$field])) {
+                    $row[$field] = "'" . $row[$field];
+                }
+            }
+            $rows[] = $row;
         }
         reply(200, ['rows' => $rows]);
     } else {
