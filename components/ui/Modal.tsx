@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useLocale } from "@/lib/i18n/useLocale";
 
 interface Props {
@@ -28,111 +28,47 @@ export function Modal({
     const locale = useLocale();
     const closeLabel = locale === "ru" ? "Закрыть" : "Close";
 
-    const dialogRef = useRef<HTMLDivElement>(null);
-    const previouslyFocused = useRef<HTMLElement | null>(null);
-    const onCloseRef = useRef(onClose);
-    onCloseRef.current = onClose;
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
-    useEffect(() => {
-        document.body.style.overflow = open ? "hidden" : "";
+    useLayoutEffect(() => {
+        const dialog = dialogRef.current;
+        if (!open || !dialog) return;
+
+        const trigger = document.activeElement;
+        dialog.showModal();
+        dialog.focus({ preventScroll: true });
         return () => {
-            document.body.style.overflow = "";
-        };
-    }, [open]);
-
-    // Capture the trigger element, move focus into the dialog, and restore
-    // focus to the trigger on close. tabIndex=-1 + outline-none means this
-    // programmatic focus is invisible to mouse users.
-    useEffect(() => {
-        if (!open) return;
-
-        previouslyFocused.current =
-            document.activeElement as HTMLElement | null;
-        dialogRef.current?.focus({ preventScroll: true });
-
-        return () => {
-            previouslyFocused.current?.focus?.({ preventScroll: true });
-        };
-    }, [open]);
-
-    // Escape to close + Tab/Shift+Tab focus trap.
-    useEffect(() => {
-        if (!open) return;
-
-        const handleKeyDown = (e: KeyboardEvent) => {
-            // A native modal opened above this panel owns Escape and Tab.
-            if (document.querySelector("dialog:modal")) return;
-            if (e.key === "Escape") {
-                e.preventDefault();
-                onCloseRef.current();
-                return;
-            }
-            if (e.key !== "Tab") return;
-
-            const dialog = dialogRef.current;
-            if (!dialog) return;
-
-            const focusable = Array.from(
-                dialog.querySelectorAll<HTMLElement>(
-                    'a[href], button:not([disabled]), textarea, input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-                ),
-            ).filter(
-                (el) =>
-                    el.offsetWidth > 0 ||
-                    el.offsetHeight > 0 ||
-                    el === document.activeElement,
-            );
-            if (focusable.length === 0) {
-                e.preventDefault();
-                return;
-            }
-
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            const active = document.activeElement;
-
-            if (active === dialog) {
-                e.preventDefault();
-                (e.shiftKey ? last : first).focus();
-                return;
-            }
-            if (e.shiftKey) {
-                if (active === first || !dialog.contains(active)) {
-                    e.preventDefault();
-                    last.focus();
-                }
-            } else if (active === last || !dialog.contains(active)) {
-                e.preventDefault();
-                first.focus();
+            dialog.close();
+            if (trigger instanceof HTMLElement) {
+                trigger.focus({ preventScroll: true });
             }
         };
-
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
     }, [open]);
 
     if (!open) return null;
 
     return (
-        <div
+        <dialog
             ref={dialogRef}
             aria-label={ariaLabelledby ? undefined : ariaLabel}
             aria-labelledby={ariaLabelledby}
-            aria-modal="true"
-            // z-index выше сторонних виджетов (ИИ-помощник, «Акции» TravelLine —
-            // у них ~2147483640), иначе они перекрывают содержимое модалки.
-            className="fixed inset-0 z-[2147483646] flex items-center justify-center p-4 outline-none"
-            role="dialog"
-            tabIndex={-1}
+            data-lenis-prevent
+            onCancel={(event) => {
+                event.preventDefault();
+                onClose();
+            }}
+            className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overscroll-contain bg-transparent px-4 py-8 outline-none backdrop:bg-black/70 open:flex open:items-center open:justify-center"
         >
             <button
                 aria-label={closeLabel}
-                className="absolute inset-0 bg-black/70"
+                aria-hidden="true"
+                tabIndex={-1}
+                className="absolute inset-0"
                 onClick={onClose}
                 type="button"
             />
             <div
-                className={`relative z-10 w-full ${bgColor} ${maxWidth} min-h-fit overflow-y-auto rounded-md text-black ${panelClassName}`}
+                className={`relative max-h-full w-full ${bgColor} ${maxWidth} overflow-y-auto overscroll-contain rounded-md text-black ${panelClassName}`}
             >
                 {children}
             </div>
@@ -140,10 +76,10 @@ export function Modal({
                 aria-label={closeLabel}
                 type="button"
                 onClick={onClose}
-                className="absolute top-2 right-3 z-10 cursor-pointer text-neutral-100 hover:text-neutral-200"
+                className="absolute top-2 right-3 cursor-pointer text-neutral-100 hover:text-neutral-200"
             >
                 ✕
             </button>
-        </div>
+        </dialog>
     );
 }

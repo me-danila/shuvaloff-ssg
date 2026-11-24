@@ -168,6 +168,6 @@ html body {
     display: none;
 }
 
-html:has(dialog.service-order[open]) {
+html:has(dialog:modal) {
     overflow: hidden;
 }
