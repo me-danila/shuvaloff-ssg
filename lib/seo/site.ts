@@ -21,7 +21,7 @@ export const HOTEL_CONTACTS = {
     // `tel:` href form (E.164, no separators). Same number as `telephone`,
     // different formatting — kept verbatim so rendered hrefs don't change.
     telephoneHref: "tel:+78125663509",
-    email: "shuvaloff@academia-suites.ru",
+    email: "reservation@academia-suites.ru",
     legalEmail: "legal@academia-suites.ru",
 };
 
