@@ -6,7 +6,7 @@
 
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import {
     POSEIDON_THANKYOU_PATH,
@@ -49,12 +49,28 @@ const MAX = { name: 100, email: 120 } as const;
 
 const isEmailValid = (raw: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw);
 
-// ID заявки для внутреннего учета менеджера: время отправки + случайный
-// хвост, чтобы повторные заявки отличались. Сквозная нумерация не нужна.
-const makeRequestId = () =>
-    `${Date.now()}-${Math.floor(Math.random() * 10_000)
-        .toString()
-        .padStart(4, "0")}`;
+type AcceptedEntry = Omit<FormState, "consentData"> & {
+    id: string;
+};
+
+async function saveEntry(entry: AcceptedEntry) {
+    try {
+        const response = await fetch("/api/poseidon.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                ...entry,
+                consentData: true,
+                botcheck: false,
+            }),
+            keepalive: true,
+            signal: AbortSignal.timeout(10000),
+        });
+        return response.ok && (await response.json()).ok === true;
+    } catch {
+        return false;
+    }
+}
 
 const fieldClass =
     "w-full rounded-lg border border-[#e8e1d6] bg-transparent px-5 py-3.5 text-base text-neutral-900 placeholder:text-[#797874] outline-none transition focus:border-[#bca589]";
@@ -72,6 +88,8 @@ export default function PoseidonForm() {
     const [validationError, setValidationError] = useState<string | null>(null);
     // Honeypot: скрытое поле, Web3Forms молча отклоняет заявку, если оно заполнено.
     const [botcheck, setBotcheck] = useState(false);
+    const [accepted, setAccepted] = useState<AcceptedEntry | null>(null);
+    const sending = useRef(false);
 
     const setText =
         (field: "name" | "email") =>
@@ -113,6 +131,7 @@ export default function PoseidonForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (sending.current) return;
 
         const name = form.name.trim();
         const phone = form.phone.trim();
@@ -133,25 +152,67 @@ export default function PoseidonForm() {
         setValidationError(null);
         setStatus("loading");
 
-        const requestId = makeRequestId();
-        const ok = await submitWeb3Form(WEB3FORMS_ACCESS_KEY, {
-            subject: `Розыгрыш «Графские выходные» — Посейдон, заявка ${requestId}`,
-            from_name: "Сайт ACADEMIA — ACADEMIA × Посейдон",
-            botcheck,
-            Имя: name,
-            Телефон: phone,
-            Email: email,
-            "Согласие на рассылку": form.consentAds ? "Да" : "Нет",
-            "ID заявки": requestId,
-        });
-        // При успехе кнопка остается в состоянии «Отправка...» до перехода.
-        if (ok) router.push(POSEIDON_THANKYOU_PATH);
-        else setStatus("error");
+        sending.current = true;
+        try {
+            const entry = accepted ?? {
+                id: `${Date.now()}-${crypto.randomUUID()}`,
+                name,
+                phone,
+                email,
+                consentAds: form.consentAds,
+            };
+            if (!accepted) {
+                const ok = await submitWeb3Form(WEB3FORMS_ACCESS_KEY, {
+                    subject: `Розыгрыш «Графские выходные» — Посейдон, заявка ${entry.id}`,
+                    from_name: "Сайт ACADEMIA — ACADEMIA × Посейдон",
+                    botcheck,
+                    Имя: name,
+                    Телефон: phone,
+                    Email: email,
+                    "Согласие на рассылку": form.consentAds ? "Да" : "Нет",
+                    "ID заявки": entry.id,
+                });
+                if (!ok) {
+                    setStatus("error");
+                    return;
+                }
+                if (botcheck) {
+                    router.push(POSEIDON_THANKYOU_PATH);
+                    return;
+                }
+                setAccepted(entry);
+            }
+
+            if (await saveEntry(entry)) {
+                router.push(POSEIDON_THANKYOU_PATH);
+            } else {
+                setStatus("error");
+            }
+        } finally {
+            sending.current = false;
+        }
     };
 
     const loading = status === "loading";
     const message =
         validationError ?? (status === "error" ? copy.errSubmit : null);
+
+    if (accepted) {
+        return (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <output aria-live="polite">
+                    {loading
+                        ? "Сохраняем заявку…"
+                        : "Письмо с заявкой отправлено. Повторите сохранение, чтобы завершить регистрацию."}
+                </output>
+                {!loading && (
+                    <Button type="submit" size="sm">
+                        Повторить сохранение
+                    </Button>
+                )}
+            </form>
+        );
+    }
 
     return (
         <form
@@ -174,6 +235,7 @@ export default function PoseidonForm() {
             <input
                 type="text"
                 name="name"
+                disabled={loading}
                 autoComplete="name"
                 value={form.name}
                 onChange={setText("name")}
@@ -187,6 +249,7 @@ export default function PoseidonForm() {
                 <input
                     type="tel"
                     name="phone"
+                    disabled={loading}
                     autoComplete="tel"
                     inputMode="tel"
                     value={form.phone}
@@ -201,6 +264,7 @@ export default function PoseidonForm() {
                 <input
                     type="email"
                     name="email"
+                    disabled={loading}
                     autoComplete="email"
                     value={form.email}
                     onChange={setText("email")}
@@ -216,6 +280,7 @@ export default function PoseidonForm() {
                     <input
                         type="checkbox"
                         checked={form.consentData}
+                        disabled={loading}
                         onChange={setCheck("consentData")}
                         className={checkboxClass}
                     />
@@ -243,6 +308,7 @@ export default function PoseidonForm() {
                     <input
                         type="checkbox"
                         checked={form.consentAds}
+                        disabled={loading}
                         onChange={setCheck("consentAds")}
                         className={checkboxClass}
                     />
