@@ -221,9 +221,9 @@ export const AllServices: Record<Locale, Service[]> = {
             ),
         },
         {
-            title: "ACADEMIA СПА",
+            title: "ACADEMIA МАССАЖ & СПА",
             subtitle:
-                "Мы создали ACADEMIA СПА для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своем внутреннем комфорте",
+                "Мы создали ACADEMIA массаж & спа для тех, кто ценит высокие стандарты сервиса, заботу о себе и о своем внутреннем комфорте",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
             externalLink: "https://shuvaloff.academia-spa.ru/",
         },
@@ -939,9 +939,9 @@ export const AllServices: Record<Locale, Service[]> = {
             ),
         },
         {
-            title: "ACADEMIA SPA",
+            title: "ACADEMIA MASSAGE & SPA",
             subtitle:
-                "We created ACADEMIA SPA for those who value high service standards, self-care, and their inner comfort.",
+                "We created ACADEMIA Massage & Spa for those who value high service standards, self-care, and their inner comfort.",
             imgUrl: "https://academia.spb.ru/wp-content/uploads/2026/03/925be715d60c1f8fa9b77c8c64eedbc37e857989.jpg",
             externalLink: "https://shuvaloff.academia-spa.ru/",
         },
