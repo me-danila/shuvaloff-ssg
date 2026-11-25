@@ -31,6 +31,10 @@ if (!is_array($data)) reply(400);
 
 try {
     $action = $data['action'] ?? 'submit';
+    // Unqualified actions keep the original queue and older clients working.
+    if (!is_string($action)) reply(400);
+    [$action, $campaign] = array_pad(explode(':', $action, 2), 2, null);
+    if ($campaign !== null && !in_array($campaign, ['pinci', 'simamma', 'siberianlights', 'msk-ist'], true)) reply(400);
     if ($action !== 'submit') {
         $hashFile = INBOX . '/sync.sha256';
         $token = $_SERVER['HTTP_X_POSEIDON_TOKEN'] ?? '';
@@ -51,6 +55,10 @@ try {
     }
 
     $dir = INBOX . '/pending';
+    if ($campaign !== null) {
+        $dir .= '/' . $campaign;
+        if (!is_dir($dir) && !@mkdir($dir, 0700) && !is_dir($dir)) reply(503);
+    }
     $lock = fopen($dir . '/.lock', 'c');
     if (!$lock || !flock($lock, LOCK_EX)) reply(503);
 

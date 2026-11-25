@@ -209,6 +209,10 @@ describe("hasEnglishVersion", () => {
             "/legal",
             "/consent",
             "/poseidon",
+            "/simamma",
+            "/pinci",
+            "/siberianlights",
+            "/msk-ist",
         ]);
     });
 });

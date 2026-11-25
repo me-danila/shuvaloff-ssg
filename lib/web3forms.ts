@@ -8,6 +8,9 @@ export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 /** Ключ заявок с сайта (фотосессия, поздравления от графской семьи). */
 export const WEB3FORMS_SITE_ACCESS_KEY = "441c373c-1f8a-4fa5-8b06-92740270235d";
 
+/** Общий публичный ключ заявок на розыгрыш «Графские выходные». */
+export const GIVEAWAY_ACCESS_KEY = "c988da60-7edf-4234-a95b-18ad5e51220d";
+
 /** Отправляет заявку; true — Web3Forms принял ее (`success` в ответе). */
 export async function submitWeb3Form(
     accessKey: string,

@@ -1,31 +1,18 @@
 "use client";
 
-// Форма розыгрыша на /poseidon/. Как и заявка на фотосессию, уходит напрямую
-// в Web3Forms (письмо менеджеру без своего бэкенда): клиентская валидация →
-// submitWeb3Form → переход на /poseidon/thankyou/ с промокодом.
-
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { useGiveawayRulesUrl } from "@/components/giveaway/GiveawayRules";
 import Button from "@/components/ui/Button";
-import {
-    POSEIDON_THANKYOU_PATH,
-    poseidonCopy,
-    poseidonDocLinkProps,
-    poseidonLegal,
-} from "@/data/poseidonData";
+import type { Giveaway } from "@/data/giveaway";
 import {
     isRuPhoneComplete,
     nextRuPhoneValue,
     RU_PHONE_MAX_LENGTH,
     RU_PHONE_PREFIX,
 } from "@/lib/phoneMask";
-import { submitWeb3Form } from "@/lib/web3forms";
-
-// Свой ключ розыгрыша, отдельный от WEB3FORMS_SITE_ACCESS_KEY.
-const WEB3FORMS_ACCESS_KEY = "c988da60-7edf-4234-a95b-18ad5e51220d";
-
-const copy = poseidonCopy.form;
+import { GIVEAWAY_ACCESS_KEY, submitWeb3Form } from "@/lib/web3forms";
 
 type SubmitStatus = "idle" | "loading" | "error";
 
@@ -53,13 +40,14 @@ type AcceptedEntry = Omit<FormState, "consentData"> & {
     id: string;
 };
 
-async function saveEntry(entry: AcceptedEntry) {
+async function saveEntry(slug: string, entry: AcceptedEntry) {
     try {
         const response = await fetch("/api/poseidon.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 ...entry,
+                action: slug === "poseidon" ? "submit" : `submit:${slug}`,
                 consentData: true,
                 botcheck: false,
             }),
@@ -81,7 +69,17 @@ const checkboxClass =
 const consentTextClass =
     "text-xs leading-snug text-[#605f5c] xl:text-[11px] xl:leading-[1.35]";
 
-export default function PoseidonForm() {
+type FormProps = Pick<Giveaway, "partner" | "slug" | "thankYouPath"> & {
+    copy: Giveaway["copy"]["form"];
+};
+export default function GiveawayForm({
+    copy,
+    partner,
+    slug,
+    thankYouPath,
+}: FormProps) {
+    const rulesUrl = useGiveawayRulesUrl();
+    const registrationOpen = Boolean(rulesUrl);
     const router = useRouter();
     const [form, setForm] = useState<FormState>(INITIAL);
     const [status, setStatus] = useState<SubmitStatus>("idle");
@@ -131,7 +129,7 @@ export default function PoseidonForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (sending.current) return;
+        if (sending.current || !rulesUrl) return;
 
         const name = form.name.trim();
         const phone = form.phone.trim();
@@ -162,9 +160,9 @@ export default function PoseidonForm() {
                 consentAds: form.consentAds,
             };
             if (!accepted) {
-                const ok = await submitWeb3Form(WEB3FORMS_ACCESS_KEY, {
-                    subject: `Розыгрыш «Графские выходные» — Посейдон, заявка ${entry.id}`,
-                    from_name: "Сайт ACADEMIA — ACADEMIA × Посейдон",
+                const ok = await submitWeb3Form(GIVEAWAY_ACCESS_KEY, {
+                    subject: `Розыгрыш «Графские выходные» — ${partner}, заявка ${entry.id}`,
+                    from_name: `Сайт ACADEMIA — ACADEMIA × ${partner}`,
                     botcheck,
                     Имя: name,
                     Телефон: phone,
@@ -177,14 +175,14 @@ export default function PoseidonForm() {
                     return;
                 }
                 if (botcheck) {
-                    router.push(POSEIDON_THANKYOU_PATH);
+                    router.push(thankYouPath);
                     return;
                 }
                 setAccepted(entry);
             }
 
-            if (await saveEntry(entry)) {
-                router.push(POSEIDON_THANKYOU_PATH);
+            if (await saveEntry(slug, entry)) {
+                router.push(thankYouPath);
             } else {
                 setStatus("error");
             }
@@ -235,7 +233,7 @@ export default function PoseidonForm() {
             <input
                 type="text"
                 name="name"
-                disabled={loading}
+                disabled={loading || !registrationOpen}
                 autoComplete="name"
                 value={form.name}
                 onChange={setText("name")}
@@ -249,7 +247,7 @@ export default function PoseidonForm() {
                 <input
                     type="tel"
                     name="phone"
-                    disabled={loading}
+                    disabled={loading || !registrationOpen}
                     autoComplete="tel"
                     inputMode="tel"
                     value={form.phone}
@@ -264,7 +262,7 @@ export default function PoseidonForm() {
                 <input
                     type="email"
                     name="email"
-                    disabled={loading}
+                    disabled={loading || !registrationOpen}
                     autoComplete="email"
                     value={form.email}
                     onChange={setText("email")}
@@ -280,25 +278,31 @@ export default function PoseidonForm() {
                     <input
                         type="checkbox"
                         checked={form.consentData}
-                        disabled={loading}
+                        disabled={loading || !registrationOpen}
                         onChange={setCheck("consentData")}
                         className={checkboxClass}
                     />
                     <span className={consentTextClass}>
                         Ознакомлен с{" "}
-                        <a
-                            href={poseidonLegal.rules.href}
-                            {...poseidonDocLinkProps(poseidonLegal.rules.href)}
-                            className="underline underline-offset-2 transition-colors hover:text-brand-red"
-                        >
-                            Правилами проведения акции
-                        </a>{" "}
+                        {rulesUrl ? (
+                            <a
+                                href={rulesUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline underline-offset-2 transition-colors hover:text-brand-red"
+                            >
+                                Правилами проведения акции
+                            </a>
+                        ) : (
+                            "Правилами проведения акции"
+                        )}{" "}
                         и выражаю согласие на обработку персональных данных в
                         соответствии с{" "}
                         <a
-                            href={poseidonLegal.policy.href}
+                            href="/policy/"
                             target="_blank"
                             className="underline underline-offset-2 transition-colors hover:text-brand-red"
+                            rel="noopener"
                         >
                             Политикой по обработке персональных данных
                         </a>
@@ -308,7 +312,7 @@ export default function PoseidonForm() {
                     <input
                         type="checkbox"
                         checked={form.consentAds}
-                        disabled={loading}
+                        disabled={loading || !registrationOpen}
                         onChange={setCheck("consentAds")}
                         className={checkboxClass}
                     />
@@ -316,15 +320,20 @@ export default function PoseidonForm() {
                         Выражаю согласие на получение рекламных и информационных
                         материалов в соответствии с{" "}
                         <a
-                            href={poseidonLegal.consent.href}
+                            href="/consent/"
                             target="_blank"
                             className="underline underline-offset-2 transition-colors hover:text-brand-red"
+                            rel="noopener"
                         >
                             Согласием
                         </a>
                     </span>
                 </label>
             </div>
+
+            {!registrationOpen && (
+                <p className={consentTextClass}>Регистрация пока закрыта.</p>
+            )}
 
             {message && (
                 <p role="alert" className="text-xs text-brand-red xl:-mb-1">
@@ -335,7 +344,7 @@ export default function PoseidonForm() {
             <Button
                 type="submit"
                 size="sm"
-                disabled={loading}
+                disabled={loading || !registrationOpen}
                 className="mt-4 w-full whitespace-nowrap xl:mt-1 xl:text-[15px]"
             >
                 <span className="flex items-center gap-3">

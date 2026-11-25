@@ -1,26 +1,25 @@
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import SkipLink from "@/components/a11y/SkipLink";
+import GiveawayHeader from "@/components/giveaway/GiveawayHeader";
 import Footer from "@/components/layout/Footer";
-import PoseidonHeader from "@/components/poseidon/PoseidonHeader";
 import Button from "@/components/ui/Button";
 import { FadeUp } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
-import { poseidonCopy, poseidonImages } from "@/data/poseidonData";
+import { type Giveaway, giveawayImages } from "@/data/giveaway";
 
-/**
- * /poseidon/thankyou/ — экран после успешной регистрации в розыгрыше: фото
- * вестибюля на весь экран, карточка с промокодом и кнопкой бронирования.
- * Хедер — тот же, что на /poseidon/; ниже экрана — общий футер сайта.
- */
-export default function PoseidonThankYouPage() {
-    const { success } = poseidonCopy;
+export default function GiveawayThankYouPage({
+    campaign,
+}: {
+    campaign: Giveaway;
+}) {
+    const { success } = campaign.copy;
 
     return (
         <>
             <div className="relative flex min-h-dvh flex-col overflow-hidden text-neutral-900">
                 <SkipLink locale="ru" />
                 <Image
-                    src={poseidonImages.successBackground}
+                    src={campaign.successBackground}
                     alt={success.backgroundAlt}
                     fill
                     priority
@@ -32,7 +31,10 @@ export default function PoseidonThankYouPage() {
                     aria-hidden="true"
                     className="absolute inset-0 bg-black/35"
                 />
-                <PoseidonHeader />
+                <GiveawayHeader
+                    logo={campaign.logo}
+                    homeHref={campaign.homeHref}
+                />
 
                 <main
                     id="main-content"
@@ -55,7 +57,7 @@ export default function PoseidonThankYouPage() {
                             >
                                 <div className="h-px flex-1 bg-[#bca589]" />
                                 <Image
-                                    src={poseidonImages.fleur}
+                                    src={giveawayImages.fleur}
                                     alt=""
                                     width={16}
                                     height={17}
