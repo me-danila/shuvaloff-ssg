@@ -280,7 +280,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
         {
             ...shuvalovLotto.ru,
             ...lottoSchedule,
-            title: "Графское лото",
         },
         {
             ...ornamentWorkshop,
@@ -713,7 +712,6 @@ const BaseEvents: Record<Locale, EventDefinition[]> = {
         {
             ...shuvalovLotto.en,
             ...lottoSchedule,
-            title: "The Count's Lotto",
         },
         {
             ...ornamentWorkshop,

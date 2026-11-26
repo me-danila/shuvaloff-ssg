@@ -11,7 +11,7 @@ export const shuvalovLotto: Record<
     }
 > = {
     ru: {
-        title: "Шуваловское лото",
+        title: "Графское лото",
         subtitle:
             "Проведите ужин за игрой в лото с графом Шуваловым в лучших традициях дворянских домов XIX века",
         imgUrl: "/images/shuvalov-lotto/IMG_2160.jpg",
@@ -32,7 +32,7 @@ export const shuvalovLotto: Record<
         ),
     },
     en: {
-        title: "Shuvalov Lotto",
+        title: "The Count's Lotto",
         subtitle:
             "Enjoy dinner and a game of lotto with Count Shuvalov in the finest traditions of 19th-century noble households",
         imgUrl: "/images/shuvalov-lotto/IMG_2160.jpg",
