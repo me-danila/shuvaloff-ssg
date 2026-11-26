@@ -9,6 +9,7 @@ import {
 import Button from "@/components/ui/Button";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import SpaBrandText from "@/components/ui/SpaBrandText";
 import type { LandingDictionary } from "@/data/landing";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useSlider } from "@/hooks/useSlider";
@@ -115,7 +116,7 @@ export default function LandingMansion({
                                     </div>
                                     <div className="flex flex-col gap-1.5 px-3 pt-3 pb-4 xl:gap-2 xl:px-6 xl:pt-5 xl:pb-6">
                                         <h3 className="text-balance font-history text-sm uppercase leading-tight text-[#372a24] transition-colors group-hover:text-brand-red xl:text-xl">
-                                            {tile.title}
+                                            <SpaBrandText text={tile.title} />
                                         </h3>
                                         <p className="text-pretty text-xs leading-5 text-[#372a24]/80 xl:text-sm/6">
                                             {tile.text}

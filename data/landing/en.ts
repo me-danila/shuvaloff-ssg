@@ -87,7 +87,7 @@ export const en: LandingDictionary = {
                 image: "https://academia.spb.ru/wp-content/uploads/2026/10/8508439979846534-opt-1920.webp",
             },
             {
-                title: "ACADEMIA MASSAGE & SPA",
+                title: "ACADEMIA massage & spa",
                 text: "A centre for wellness and professional massage",
                 href: "https://n1533570.yclients.com/company/1383054/personal/menu?o=",
                 external: true,

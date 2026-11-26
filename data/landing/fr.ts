@@ -71,7 +71,7 @@ export const fr: LandingDictionary = {
                 text: "Cuisine d'auteur au restaurant de la Maison de Maître de Shuvaloff",
             },
             {
-                title: "ACADEMIA MASSAGE & SPA",
+                title: "ACADEMIA massage & spa",
                 text: "Studio de remise en forme et de massage professionnel",
             },
             {

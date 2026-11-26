@@ -171,7 +171,7 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         ecosystemTextTop:
             "Мы приглашаем вас не просто остановиться в особняке, а замедлиться, уделить время себе и прочувствовать неспешную атмосферу дворянской жизни позапрошлого века.",
         ecosystemTextBottom:
-            "Отдохнуть в уютном номере после прогулки, оценить классическую кухню и коктейльную карту ресторана Бар-ресторан ACADEMIA Шувалова, расслабиться в руках мастеров массажа и ухода в ACADEMIA SPA, заказать трансфер или сюрприз для дорогого человека. Наша консьерж-служба готова помочь с решением любых вопросов.",
+            "Отдохнуть в уютном номере после прогулки, оценить классическую кухню и коктейльную карту ресторана Бар-ресторан ACADEMIA Шувалова, расслабиться в руках мастеров массажа и ухода в ACADEMIA массаж & спа, заказать трансфер или сюрприз для дорогого человека. Наша консьерж-служба готова помочь с решением любых вопросов.",
     },
     en: {
         heroTitle: (
@@ -233,7 +233,7 @@ const homeCopyByLocale: Record<Locale, HomeCopy> = {
         ecosystemTextTop:
             "We invite you not only to stay in the mansion, but to slow down, dedicate time to yourself, and feel the unhurried atmosphere of noble life from a bygone century.",
         ecosystemTextBottom:
-            "Relax in a cozy room after a walk, enjoy classic cuisine and signature cocktails at ACADEMIA Shuvaloff Bar-Restaurant, unwind in the hands of massage and wellness experts at ACADEMIA SPA, and order a transfer or a surprise for someone special. Our concierge team is ready to help with any request.",
+            "Relax in a cozy room after a walk, enjoy classic cuisine and signature cocktails at ACADEMIA Shuvaloff Bar-Restaurant, unwind in the hands of massage and wellness experts at ACADEMIA massage & spa, and order a transfer or a surprise for someone special. Our concierge team is ready to help with any request.",
     },
 };
 

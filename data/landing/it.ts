@@ -70,7 +70,7 @@ export const it: LandingDictionary = {
                 text: "Cucina d'autore al ristorante ACADEMIA Shuvaloff",
             },
             {
-                title: "ACADEMIA MASSAGGI & SPA",
+                title: "ACADEMIA massaggi & spa",
                 text: "Centro di recupero e massaggi professionali",
             },
             {

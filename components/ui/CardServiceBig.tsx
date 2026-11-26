@@ -4,6 +4,7 @@ import type React from "react";
 import Button from "@/components/ui/Button";
 import ServiceOrderButton from "@/components/ui/modals/ServiceOrderButton";
 import Image from "@/components/ui/OptimizedImage";
+import SpaBrandText from "@/components/ui/SpaBrandText";
 import { type Locale, localizeHref } from "@/lib/i18n/routing";
 import { useLocale } from "@/lib/i18n/useLocale";
 
@@ -117,7 +118,7 @@ export default function CardServiceBig({
                 className={`flex ${titleHeightClassName} items-start justify-center px-4 py-5 font-history text-xl uppercase leading-tight text-[#372a24] xl:text-[21px]`}
             >
                 {orderOnly ? (
-                    title
+                    <SpaBrandText text={title} />
                 ) : (
                     <a
                         href={href}
@@ -125,7 +126,7 @@ export default function CardServiceBig({
                         rel={isExternal ? "noopener noreferrer" : undefined}
                         className="transition-colors hover:text-brand-red"
                     >
-                        {title}
+                        <SpaBrandText text={title} />
                     </a>
                 )}
             </h3>

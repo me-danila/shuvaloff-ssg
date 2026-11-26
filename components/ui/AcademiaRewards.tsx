@@ -75,7 +75,7 @@ const tiersByLocale: Record<Locale, Tier[]> = {
             nights: "from 8 nights",
             perks: [
                 "Late check-out*",
-                "15% off all ACADEMIA SPA services",
+                "15% off all ACADEMIA massage & spa services",
                 "Discount for booking multiple rooms",
             ],
         },
@@ -87,7 +87,7 @@ const tiersByLocale: Record<Locale, Tier[]> = {
             perks: [
                 "Late check-out*",
                 "One-way signature transfer*",
-                "15% off all ACADEMIA SPA services",
+                "15% off all ACADEMIA massage & spa services",
                 "Discount for booking multiple rooms",
             ],
         },
@@ -99,7 +99,7 @@ const tiersByLocale: Record<Locale, Tier[]> = {
             perks: [
                 "Early check-in and late check-out*",
                 "One-way signature transfer*",
-                "20% off all ACADEMIA SPA services",
+                "20% off all ACADEMIA massage & spa services",
                 "Discount for booking multiple rooms",
             ],
         },

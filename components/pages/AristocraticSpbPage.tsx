@@ -8,6 +8,7 @@ import DividerHistory from "@/components/ui/divider/History";
 import ImageGrid from "@/components/ui/grids/ImageGrid";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/Motion";
 import Image from "@/components/ui/OptimizedImage";
+import SpaBrandText from "@/components/ui/SpaBrandText";
 import SliderMobile from "@/components/ui/slider/SliderMobile";
 import type { Locale } from "@/lib/i18n/routing";
 import { localizeHref } from "@/lib/i18n/routing";
@@ -85,8 +86,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         <span className="block h-2 xl:h-4"></span>• Трансфер
                         с&nbsp;вокзала или аэропорта до&nbsp;особняка
                         <br />• Личное приветствие Графом и&nbsp;заселение
-                        <br />• Велнес-ритуал на&nbsp;ваш выбор в&nbsp;Академиа
-                        СПА
+                        <br />• Велнес-ритуал на&nbsp;ваш выбор в&nbsp;ACADEMIA
+                        массаж & спа
                     </>
                 ),
             },
@@ -149,9 +150,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
         specialMeetingTitle: "Особая встреча",
         specialMeetingDescription:
             "Ваш отдых начнется со встречи в аэропорту или на вокзале и индивидуального трансфера представительского класса в Особняк Шувалова. Здесь вас встретит, расскажет об истории особняка, проводит в номер и лично угостит фирменной вишневой настойкой по семейному рецепту сам граф Шувалов с семьей.",
-        spaTitle: "Отдых в АКАДЕМИА СПА",
+        spaTitle: "Отдых в ACADEMIA массаж & спа",
         spaDescription:
-            "Чтобы отдохнуть после дороги и знакомства с особняком, предлагаем завершить ваш первый день расслабляющим массажем в камерном пространстве Академиа СПА на четвертом этаже особняка, где все продумано в деталях: индивидуальный подход и техники массажа, подходящие именно вашему телу и лицу.",
+            "Чтобы отдохнуть после дороги и знакомства с особняком, предлагаем завершить ваш первый день расслабляющим массажем в камерном пространстве ACADEMIA массаж & спа на четвертом этаже особняка, где все продумано в деталях: индивидуальный подход и техники массажа, подходящие именно вашему телу и лицу.",
         breakfastTitle: "ГРАФСКИЙ завтрак",
         breakfastQuote: "Это утро, которое вы запомните надолго!",
         breakfastDescription:
@@ -217,8 +218,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
                         <span className="block h-2 xl:h-4"></span>• Transfer
                         from the train station or airport to the mansion
                         <br />• Personal welcome by the Count and check-in
-                        <br />• A wellness ritual of your choice at the Academia
-                        SPA
+                        <br />• A wellness ritual of your choice at the ACADEMIA
+                        massage & spa
                     </>
                 ),
             },
@@ -278,9 +279,9 @@ const copyByLocale: Record<Locale, PageCopy> = {
         specialMeetingTitle: "Special Meeting",
         specialMeetingDescription:
             "Your vacation will begin with a meeting at the airport or station and an individual executive-class transfer to the Shuvalov Mansion. Here you will be met by Count Shuvalov himself with his family, who will tell you about the history of the mansion, accompany you to your room, and personally treat you to a signature cherry liqueur made according to a family recipe.",
-        spaTitle: "Rest at ACADEMIA SPA",
+        spaTitle: "Rest at ACADEMIA massage & spa",
         spaDescription:
-            "To unwind after your journey and your tour of the mansion, we invite you to end your first day with a relaxing massage in the intimate setting of the Academia SPA on the fourth floor of the mansion, where every detail has been carefully considered: a personalized approach and massage techniques tailored specifically to your body and face.",
+            "To unwind after your journey and your tour of the mansion, we invite you to end your first day with a relaxing massage in the intimate setting of the ACADEMIA massage & spa on the fourth floor of the mansion, where every detail has been carefully considered: a personalized approach and massage techniques tailored specifically to your body and face.",
         breakfastTitle: "COUNT'S Breakfast",
         breakfastQuote: "This is a morning you will remember for a long time!",
         breakfastDescription:
@@ -521,7 +522,9 @@ export default function AristocraticSpbPage({ locale }: { locale: Locale }) {
                     <p className="font-alistair text-center text-2xl text-gray-700 border rounded-2xl border-gray-300 max-w-fit px-4 mx-auto">
                         {copy.day1Title1}
                     </p>
-                    <h2>{copy.spaTitle}</h2>
+                    <h2>
+                        <SpaBrandText text={copy.spaTitle} />
+                    </h2>
                     <p className="xl:max-w-4xl xl:mx-auto">
                         {copy.spaDescription}
                     </p>

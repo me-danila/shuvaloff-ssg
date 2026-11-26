@@ -85,7 +85,7 @@ const copyByLocale: Record<Locale, ConciergeCopy> = {
             "True hospitality is always more than impeccable service. It is a sincere desire to do the best possible, attention to detail and sensitivity to your wishes. The ACADEMIA Shuvaloff Mansion concierge service is always ready to help with any, even the most unexpected, tasks.",
         description2: `We will prepare a full-fledged relaxation scenario for your request, conveniently collect, book and organize a personal relaxation program: from breakfast in the room with a bouquet of fresh flowers to exclusive excursions with the best guides and yacht trips along the Gulf of Finland or a romantic evening with a buffet and sparkling wine on a luxury boat.
 
-We will help you solve any task: from walking your pet and booking an appointment at ACADEMIA SPA to finding theater tickets and special room decoration for a person dear to you. We will provide you with a VIP transfer and help you organize any event — from a photo session and a bachelorette party to an exquisite banquet at the ACADEMIA Shuvaloff Bar-Restaurant.`,
+We will help you solve any task: from walking your pet and booking an appointment at ACADEMIA massage & spa to finding theater tickets and special room decoration for a person dear to you. We will provide you with a VIP transfer and help you organize any event — from a photo session and a bachelorette party to an exquisite banquet at the ACADEMIA Shuvaloff Bar-Restaurant.`,
         orderLabel: "Order",
         bellTitle: "Entrust routine tasks to the concierge manager:",
         heartTitle: "Let us help you with your relaxation scenario:",
@@ -98,7 +98,7 @@ We will help you solve any task: from walking your pet and booking an appointmen
             "Fill the fridge with groceries",
             "Take clothes to the dry cleaners",
             "Book a beauty salon appointment",
-            "Book a massage at ACADEMIA SPA",
+            "Book a massage at ACADEMIA massage & spa",
             "Buy a gym membership",
             "Order an executive transfer",
         ],
