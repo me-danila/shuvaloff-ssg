@@ -581,19 +581,27 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                         {text(copy.whyTitle)}
                     </h2>
                 </FadeUp>
-                <FadeUp
-                    className="relative h-90 w-80 max-w-full mx-auto xl:w-120"
-                    mode="inView"
-                >
-                    <Image
-                        src="https://academia.spb.ru/wp-content/uploads/2026/04/his.jpg"
-                        alt={copy.whyImageAlt}
-                        fill
-                        sizes="33vw"
-                        loading="lazy"
-                        className="rounded object-cover"
-                    />
-                </FadeUp>
+                <div className="relative isolate overflow-hidden">
+                    <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 hidden -translate-y-1/2 select-none whitespace-nowrap text-center font-alistair text-6xl text-brand-brown/25 lg:block"
+                    >
+                        {copy.whyImageAlt} · {copy.whyImageAlt}
+                    </span>
+                    <FadeUp
+                        className="relative h-90 w-80 max-w-full mx-auto xl:w-120"
+                        mode="inView"
+                    >
+                        <Image
+                            src="https://academia.spb.ru/wp-content/uploads/2026/04/his.jpg"
+                            alt={copy.whyImageAlt}
+                            fill
+                            sizes="33vw"
+                            loading="lazy"
+                            className="rounded object-cover"
+                        />
+                    </FadeUp>
+                </div>
                 <FadeUp
                     className="relative xl:max-w-2xl xl:mx-auto"
                     mode="inView"
@@ -715,7 +723,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                 />
             </section>
 
-            <section className="flex flex-col gap-8 items-center w-full min-h-screen relative p-6 justify-center text-center text-white xl:gap-12">
+            <section className="isolate flex flex-col gap-8 items-center w-full min-h-screen relative p-6 justify-center text-center text-white xl:gap-12">
                 <FadeIn
                     duration={0.9}
                     className="absolute inset-0 h-full w-full -z-1"
@@ -730,6 +738,10 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                             className="object-cover object-center"
                         />
                     </Parallax>
+                    <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-black/55"
+                    />
                 </FadeIn>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -983,7 +995,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                     <h2 className="text-3xl xl:text-4xl uppercase">
                         {text(copy.whyChooseUsTitle)}
                     </h2>
-                    <div className="flex gap-4 overflow-x-auto rounded-md pb-4 no-scrollbar">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
                         {[
                             {
                                 src: "https://academia.spb.ru/wp-content/uploads/2026/04/why1.jpg",
@@ -1008,16 +1020,18 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                         ].map((item) => (
                             <div
                                 key={item.text}
-                                className="flex flex-col gap-2 shrink-0 w-3xs"
+                                className="flex min-w-0 flex-col gap-2"
                             >
                                 <Image
                                     src={item.src}
                                     alt={item.text}
                                     width={256}
                                     height={375}
-                                    className="object-cover rounded-md"
+                                    className="h-auto w-full rounded-md"
                                 />
-                                <p className="text-lg/6">{text(item.text)}</p>
+                                <p className="text-base/6 wrap-anywhere">
+                                    {text(item.text)}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -1071,7 +1085,7 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
 
             <WeddingBigSlider slides={aestheticSlides} />
 
-            <section className="flex flex-col gap-2 items-center w-full min-h-screen relative p-6 justify-center text-white xl:gap-4 xl:-my-8">
+            <section className="isolate flex flex-col gap-2 items-center w-full min-h-screen relative p-6 justify-center text-white xl:gap-4 xl:-my-8">
                 <FadeIn
                     duration={0.9}
                     className="absolute inset-0 h-full w-full -z-1"
@@ -1086,6 +1100,10 @@ export default function WeddingPage({ locale }: { locale: Locale }) {
                             className="object-cover object-center"
                         />
                     </Parallax>
+                    <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-linear-to-b from-black/20 to-neutral-900/45"
+                    />
                 </FadeIn>
                 <h2 className="text-center text-3xl mb-4 xl:max-w-2xl xl:text-5xl xl:mb-4 uppercase">
                     {text(copy.ifTitle)}

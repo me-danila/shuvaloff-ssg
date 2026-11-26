@@ -1,5 +1,6 @@
 "use client";
 
+import { CaretDown } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useState } from "react";
 import { Modal } from "@/components/ui/Modal";
@@ -8,25 +9,30 @@ import { useLocale } from "@/lib/i18n/useLocale";
 
 import { russianDisplayText } from "@/lib/typography";
 
+const fieldClass =
+    "ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition";
+
 interface FormState {
     name: string;
     phone: string;
-    email: string;
-    telegram: string;
+    date: string;
+    guests: string;
     consent: boolean;
-    formName: string;
+    replyBy: string;
+    telegram: string;
+    email: string;
 }
 
 const INITIAL: FormState = {
     name: "",
     phone: "",
-    email: "",
-    telegram: "",
+    date: "",
+    guests: "",
     consent: false,
-    formName: "",
+    replyBy: "",
+    telegram: "",
+    email: "",
 };
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // RU-friendly phone check: 10 local digits, or 11 digits starting with 7/8.
 const isPhoneValid = (raw: string) => {
@@ -39,8 +45,6 @@ const isPhoneValid = (raw: string) => {
 const MAX = {
     name: 100,
     phone: 24,
-    email: 254,
-    telegram: 64,
 } as const;
 
 type ButtonVariant = "light" | "light-outline" | "dark" | "dark-outline";
@@ -92,9 +96,15 @@ export default function WeddingFormModal({
                 : "Fill in your contact details",
         namePlaceholder: locale === "ru" ? "Ваше имя" : "Your name",
         phoneLabel: locale === "ru" ? "Ваш телефон" : "Your phone",
-        emailPlaceholder: locale === "ru" ? "Ваш e-mail" : "Your e-mail",
-        tgPlaceholder:
+        dateLabel: locale === "ru" ? "Дата свадьбы" : "Wedding date",
+        guestsLabel: locale === "ru" ? "Количество гостей" : "Number of guests",
+        replyLabel:
+            locale === "ru"
+                ? "Как с вами связаться?"
+                : "How should we contact you?",
+        telegramLabel:
             locale === "ru" ? "Ваш ник в Telegram" : "Your Telegram username",
+        emailLabel: locale === "ru" ? "Ваш e-mail" : "Your email",
         consentText:
             locale === "ru"
                 ? "Выражаю согласие на обработку персональных данных в соответствии с"
@@ -116,16 +126,22 @@ export default function WeddingFormModal({
             locale === "ru"
                 ? "Укажите корректный номер телефона"
                 : "Please enter a valid phone number",
-        errEmail:
+        errGuests:
             locale === "ru"
-                ? "Укажите корректный e-mail"
-                : "Please enter a valid e-mail",
+                ? "Укажите целое число гостей больше нуля"
+                : "Enter a positive whole number of guests",
         errConsent:
             locale === "ru"
                 ? "Подтвердите согласие на обработку персональных данных"
                 : "Please accept the personal data policy",
     } as const;
 
+    const methods = {
+        phone: locale === "ru" ? "Звонок" : "Phone call",
+        telegram: "Telegram",
+        whatsapp: "WhatsApp",
+        email: locale === "ru" ? "Электронная почта" : "Email",
+    };
     const [open, setOpen] = useState(false);
     const [form, setForm] = useState<FormState>(INITIAL);
     const [status, setStatus] = useState<
@@ -135,11 +151,12 @@ export default function WeddingFormModal({
 
     const set =
         (field: keyof FormState) =>
-        (e: React.ChangeEvent<HTMLInputElement>) => {
+        (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
             setValidationError(null);
             setForm((prev) => ({
                 ...prev,
                 [field]:
+                    e.target instanceof HTMLInputElement &&
                     e.target.type === "checkbox"
                         ? e.target.checked
                         : e.target.value,
@@ -158,13 +175,32 @@ export default function WeddingFormModal({
 
         const name = form.name.trim();
         const phone = form.phone.trim();
-        const email = form.email.trim();
-        const telegram = form.telegram.trim();
+
+        const telegram =
+            form.replyBy === "telegram" ? form.telegram.trim() : "";
+        const email = form.replyBy === "email" ? form.email.trim() : "";
 
         let error: string | null = null;
         if (!name) error = copy.errName;
         else if (!isPhoneValid(phone)) error = copy.errPhone;
-        else if (email && !EMAIL_RE.test(email)) error = copy.errEmail;
+        else if (form.guests && !/^[1-9]\d*$/.test(form.guests))
+            error = copy.errGuests;
+        else if (
+            form.replyBy === "telegram" &&
+            !/^@?[A-Za-z0-9_]+$/.test(telegram)
+        )
+            error =
+                locale === "ru"
+                    ? "Укажите ник в Telegram, например @username"
+                    : "Enter your Telegram username, for example @username";
+        else if (
+            form.replyBy === "email" &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        )
+            error =
+                locale === "ru"
+                    ? "Введите корректный e-mail"
+                    : "Enter a valid email address";
         else if (!form.consent) error = copy.errConsent;
 
         if (error) {
@@ -186,7 +222,16 @@ export default function WeddingFormModal({
                         "X-Form-Secret": "cc4d848a1a202d50d74966102e3657db",
                     },
                     body: JSON.stringify({
-                        service: title,
+                        service: [
+                            title,
+                            form.replyBy &&
+                                methods[form.replyBy as keyof typeof methods],
+                            form.date && `${copy.dateLabel}: ${form.date}`,
+                            form.guests &&
+                                `${copy.guestsLabel}: ${form.guests}`,
+                        ]
+                            .filter(Boolean)
+                            .join(" · "),
                         name,
                         phone,
                         email,
@@ -267,7 +312,7 @@ export default function WeddingFormModal({
                                     maxLength={MAX.name}
                                     value={form.name}
                                     onChange={set("name")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className={fieldClass}
                                 />
                                 <input
                                     type="tel"
@@ -277,26 +322,80 @@ export default function WeddingFormModal({
                                     maxLength={MAX.phone}
                                     value={form.phone}
                                     onChange={set("phone")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
+                                    className={fieldClass}
                                 />
-                                <input
-                                    type="email"
-                                    placeholder={copy.emailPlaceholder}
-                                    aria-label={copy.emailPlaceholder}
-                                    maxLength={MAX.email}
-                                    value={form.email}
-                                    onChange={set("email")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder={copy.tgPlaceholder}
-                                    aria-label={copy.tgPlaceholder}
-                                    maxLength={MAX.telegram}
-                                    value={form.telegram}
-                                    onChange={set("telegram")}
-                                    className="ym-disable-keys w-full rounded-xl bg-neutral-100 px-5 py-4 text-sm placeholder:text-black outline-none focus:ring focus:ring-neutral-300 transition"
-                                />
+                                <div className="grid gap-4 lg:grid-cols-2">
+                                    <label className="flex min-w-0 w-full items-center justify-between gap-2 rounded-xl bg-neutral-100 px-5 py-4 text-left text-sm focus-within:ring focus-within:ring-neutral-300 transition">
+                                        <span>{copy.dateLabel}</span>
+                                        <input
+                                            type="date"
+                                            value={form.date}
+                                            onChange={set("date")}
+                                            className="ym-disable-keys min-w-0 max-w-[60%] bg-transparent text-sm outline-none"
+                                        />
+                                    </label>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        step="1"
+                                        placeholder={copy.guestsLabel}
+                                        aria-label={copy.guestsLabel}
+                                        value={form.guests}
+                                        onChange={set("guests")}
+                                        className={fieldClass}
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <select
+                                        aria-label={copy.replyLabel}
+                                        value={form.replyBy}
+                                        onChange={set("replyBy")}
+                                        className={`${fieldClass} block h-[3.25rem] appearance-none cursor-pointer pr-12 text-black`}
+                                    >
+                                        <option value="">
+                                            {copy.replyLabel}
+                                        </option>
+                                        {Object.entries(methods).map(
+                                            ([value, label]) => (
+                                                <option
+                                                    key={value}
+                                                    value={value}
+                                                >
+                                                    {label}
+                                                </option>
+                                            ),
+                                        )}
+                                    </select>
+                                    <CaretDown
+                                        aria-hidden="true"
+                                        size={18}
+                                        className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2"
+                                    />
+                                </div>
+                                {form.replyBy === "telegram" && (
+                                    <input
+                                        type="text"
+                                        required
+                                        maxLength={64}
+                                        placeholder={copy.telegramLabel}
+                                        aria-label={copy.telegramLabel}
+                                        value={form.telegram}
+                                        onChange={set("telegram")}
+                                        className={fieldClass}
+                                    />
+                                )}
+                                {form.replyBy === "email" && (
+                                    <input
+                                        type="email"
+                                        required
+                                        maxLength={254}
+                                        placeholder={copy.emailLabel}
+                                        aria-label={copy.emailLabel}
+                                        value={form.email}
+                                        onChange={set("email")}
+                                        className={fieldClass}
+                                    />
+                                )}
 
                                 <label className="flex items-start gap-3 cursor-pointer mt-1">
                                     <input

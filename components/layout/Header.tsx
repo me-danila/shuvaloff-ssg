@@ -101,14 +101,6 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             ],
         },
         {
-            label: "Графская осень",
-            href: "/counts-autumn/",
-        },
-        {
-            label: "Водные прогулки",
-            href: "/services/boat-tours/",
-        },
-        {
             label: "Бутик-ресторан",
             href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
             target: "_blank",
@@ -130,6 +122,11 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Свадьба в особняке",
             href: "/wedding/",
+        },
+        {
+            label: "Банкеты",
+            href: "https://shuvaloff.academia-rest.ru/banquets/?utm_source=hotels",
+            target: "_blank",
             lineBelow: true,
         },
         {
@@ -158,14 +155,6 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
             ],
         },
         {
-            label: "Count's Autumn",
-            href: "/counts-autumn/",
-        },
-        {
-            label: "Boat tours",
-            href: "/services/boat-tours/",
-        },
-        {
             label: "Boutique restaurant",
             href: "https://shuvaloff.academia-rest.ru/?utm_source=hotels",
             target: "_blank",
@@ -187,6 +176,11 @@ const navItemsByLocale: Record<Locale, NavItem[]> = {
         {
             label: "Wedding at the mansion",
             href: "/wedding/",
+        },
+        {
+            label: "Banquets",
+            href: "https://shuvaloff.academia-rest.ru/banquets/?utm_source=hotels",
+            target: "_blank",
             lineBelow: true,
         },
         {
@@ -227,7 +221,6 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Акции", href: "/sales/" },
-                { label: "Графская осень", href: "/counts-autumn/" },
                 { label: "Мероприятия", href: "/events/" },
                 { label: "Реферальная программа", href: "/rewards/referral/" },
                 {
@@ -237,7 +230,11 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
                 },
                 { label: "Абонементы на проживание", href: "/subscriptions/" },
                 { label: "Свадьба в особняке", href: "/wedding/" },
-                { label: "Водные прогулки", href: "/services/boat-tours/" },
+                {
+                    label: "Банкеты",
+                    href: "https://shuvaloff.academia-rest.ru/banquets/?utm_source=hotels",
+                    target: "_blank",
+                },
                 { label: "Рады вашему питомцу", href: "/services/pets/" },
                 {
                     label: "Поздравления от графской семьи",
@@ -290,10 +287,6 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
             href: "/sales/",
             submenu: [
                 { label: "Offers", href: "/sales/" },
-                {
-                    label: "Count's Autumn",
-                    href: "/counts-autumn/",
-                },
                 { label: "Events", href: "/events/" },
                 { label: "Referral program", href: "/rewards/referral/" },
                 {
@@ -306,7 +299,11 @@ const homeNavItemsByLocale: Record<Locale, NavItem[]> = {
                     href: "/subscriptions/",
                 },
                 { label: "Wedding at the mansion", href: "/wedding/" },
-                { label: "Boat tours", href: "/services/boat-tours/" },
+                {
+                    label: "Banquets",
+                    href: "https://shuvaloff.academia-rest.ru/banquets/?utm_source=hotels",
+                    target: "_blank",
+                },
                 { label: "Accomodation with pets", href: "/services/pets/" },
                 {
                     label: "Greetings from the Count's family",
